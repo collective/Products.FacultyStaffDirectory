@@ -1,0 +1,194 @@
+/* <dtml-with base_properties> */
+/* <dtml-call "REQUEST.set('portal_url', portal_url())">*/
+/* fix the peekaboo issue for IE 6 + 7 */
+
+.headshot  {
+ /* width: 200px;
+ padding-right: 8px; */
+ position: absolute;
+ left: 0px;
+ padding-right: 8px;
+
+} 
+
+#contactInformation {
+margin-left: 212px;
+}
+
+.facultyStaffDirectory {
+   position: relative; /* peekaboo bug fix for IE6 */
+   min-width: 0; /* peekaboo bug fix for IE7 */
+   }
+   
+.facultyStaffDirectory ul.jobTitle
+{
+	margin: 0em 0 1em 212px;
+        list-style: none;
+        
+
+}
+
+.facultyStaffDirectory ul.jobTitle li, .facultyStaffDirectory .websites li
+{
+	margin: 0;
+	padding: 0;
+}
+
+.facultyStaffDirectory .standardView .listing
+{
+	margin: 1em 0 1.5em 0;
+	border: 1px solid transparent;
+	font-size: 1em;
+}
+
+/* .facultyStaffDirectory .standardView .headshot
+{
+	float: left;
+	width: 200px;
+	text-align: center;
+} */
+
+
+.facultyStaffDirectory .standardView .headshot img { border: 1px solid #000; }
+
+.facultyStaffDirectory .standardView .caption { margin-left: 130px; }
+.facultyStaffDirectory .standardView .caption .moreInfo { margin: 1em 0 0 0; }
+
+.facultyStaffDirectory.personView .headshot
+{
+	float: left;
+	margin: 0 2em 2em 0;
+}
+.facultyStaffDirectory.personView .headshot img
+{  
+    /* float:left; */
+    margin-right: 5px; 
+    position:relative; 
+    top: 0; 
+    border: 1px solid #000;
+  }
+
+
+.facultyStaffDirectory.personView ul.jobTitle
+{
+	font-weight: bold;
+}
+
+.facultyStaffDirectory.personView .websites h3
+{
+	margin: 1em 0 1em 212px;
+}
+
+
+.facultyStaffDirectory.personView .websites ul
+{
+	margin: 1em 0 1em 212px;
+        list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+	list-style: none;
+}
+
+.facultyStaffDirectory.personView .education ol
+{
+    list-style: none; 
+    margin: 0 0 1em 0;
+}
+
+.facultyStaffDirectory.personView .education li
+{
+    margin: 0; 
+}
+
+.facultyStaffDirectory.personView .courselisting dl,
+.facultyStaffDirectory.personView .specialties dl
+{
+    margin: 0 0 0 1em;
+}
+
+.facultyStaffDirectory.personView .courselisting dd,
+.facultyStaffDirectory.personView .specialties dd
+{
+    font-size: .85em;
+    margin-left: 0;
+}
+
+.facultyStaffDirectory.personView .courselisting dd p,
+.facultyStaffDirectory.personView .specialties dd p
+{
+    margin:0 0 .25em 0;
+}
+
+.facultyStaffDirectory .tabularView table.listing
+{
+    border-left: none;
+}
+
+.facultyStaffDirectory .tabularView td, .facultyStaffDirectory .tabularView th
+{
+    border-left: 1px solid #8CACBB;
+}
+
+.facultyStaffDirectory .tabularView th.classification
+{
+	font-size: 160%;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	background-color: transparent;
+	text-align: left;
+	padding-top: 2em;
+	padding-left: 0;
+	text-transform: none;
+}
+
+.facultyStaffDirectory .tabularView th.classification a{
+    color:#000;
+    text-decoration: none;
+}
+
+.facultyStaffDirectory .tabularView tbody:first-child tr:first-child th
+{
+    border-top: none;
+    padding-top: 0;
+}
+
+.facultyStaffDirectory.classification .tabularView tbody:first-child tr:first-child th
+{
+    border-top: 1px solid #8CACBB;
+    padding-top: 0;
+}
+.facultyStaffDirectory ol.classificationList
+{
+    margin-left: 0;
+    margin-bottom: 1.4em;
+    padding: .5em;
+    border: thin solid #bcdceb;
+    background-color: #eef3f5;
+}
+
+.facultyStaffDirectory ol.classificationList li
+{
+    display: inline;
+    margin-right: 1em;
+}
+
+.facultyStaffDirectory .atozView .alphabetLinks ol li
+{
+    display: inline;
+}
+
+/* Fix things so ATReferenceBrowserWidget doesn't hide the "insert" link 
+   outside of the viewable area of the popup window
+*/
+body.popup.atrefbrowser
+{
+    min-width: 0;
+}
+
+/* We'd like things like the address fields to display on the same line, yet still be inline-editable. */ 
+.facultyStaffDirectory .inlineFields .inlineEditable{
+    display: inline;
+}
+
+/* </dtml-with> */

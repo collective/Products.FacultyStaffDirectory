@@ -1,0 +1,290 @@
+FacultyStaffDirectory
+
+Versions
+
+  Plone 2.5.x or Plone 3.0.x
+
+Dependencies
+  
+  * "WebLionLibrary":https://weblion.psu.edu/trac/weblion/attachment/wiki/WebLionLibrary/weblionlibrary-1.2.tar.gz?format=raw
+    
+  * Relations, via Subversion at https://svn.plone.org/svn/archetypes/Relations/trunk/
+  
+  * "membrane":http://plone.org/products/membrane
+  
+  * "archetypes.schemaextender":http://pypi.python.org/pypi/archetypes.schemaextender#changelog
+  
+  * If you're using Plone 2.5.x, the branch of Archetypes available via
+    Subversion at
+    http://svn.plone.org/svn/archetypes/Archetypes/branches/1.4-schemaextender-support.
+    (If you're using Plone 3.0.x, the 1.5.x version that comes with it is fine.)
+
+Description
+  
+  FacultyStaffDirectory allows you to keep track of people who should be listed on your website.
+  Add details just once (even import them from an existing listing) and display them wherever
+  you like, however many times you like.
+  
+  FacultyStaffDirectory integrates with  Plone's users and groups infrastructure and supports
+  an extensibility framework for custom requirements.
+
+  FacultyStaffDirectory provides content types for creating and organizing
+  details of people. It has principally been developed for personnel directories in
+  educational institutions, but can be repurposed for use in a variety of settings.
+
+  The core content type is Person. This has a variety of fields (email, telephone number,
+  job title, and so on). You can also easily add your own.
+  
+  Out-of-the box, FacultyStaffDirectory offers 3 Classifications that can be assigned to
+  Person objects: Faculty, Staff and Graduate Students. If these don't work for you, 
+  you can add your own Classifications (e.g. Administrators, Technicians, Board Members or 
+  whatever you like). 
+  
+  FacultyStaffDirectory gives several content types for grouping people: Departments, 
+  Specialties and Committees. If you are not in an institution where these labels make sense,
+  you can easily relabel them. In each case, the association between the Person and the grouping 
+  (e.g. the Person-Specialty relationship) can be given a description. So, for example, if 
+  Person Jane Doe is in the Artificial Intelligence Specialty, you could give the 
+  Jane Doe-Artificial Intelligence relationship a description (e.g. "Interested in the cultural
+  impacts of machine thinkers").
+  
+  FacultyStaffDirectory can be configured so that people added to the directory
+  automatically become Members of your Plone site, so that each person can edit 
+  details of his/her own page. It also adds some new roles, to facilitate management of people. 
+  For instance, the PersonnelManager role can create new specialties and assign people to them.
+
+
+Installation
+
+  1. Install the dependencies:
+  
+     1. Put membrane, Relations, and WebLionLibrary (included) into your
+        Products folder.
+     
+     2. If you're using Plone 2.5.x, put the included copy of Archetypes into
+        your Products folder.
+     
+     3. Install archetypes.schemaextender as follows. Please bear with us, as
+        this will be a bit tricky until it gets included in a future release of
+        Plone:
+        
+        * If you're using buildout, add archetypes.schemaextender to the 'eggs'
+          and 'zcml' lines of the '[instance]' section of your buildout.cfg. For
+          example::
+        
+          [instance]
+          eggs = archetypes.schemaextender
+          zcml = archetypes.schemaextender
+        
+        * If you're not using buildout and are using Plone 2.5.x, open the
+          archetypes.schemaextender-1.0b1 folder (included) and find the
+          "archetypes" folder within. Place the archetypes folder in the
+          lib/python folder within your Zope instance.
+        
+        * If you're not using buildout and are using Plone 3.0.x, find the
+          "archetypes" folder, somewhere in your Zope instance (lowercase "a",
+          not uppercase "A"). It's often in lib/python and should have a "kss"
+          folder in it. On Windows, it's at C:\Program Files\Plone
+          3\Python\Lib\site-packages\archetypes.kss-1.2.6-py2.4.egg\archetypes.
+          Put the archetypes.schemaextender-1.0b1/archetypes/schemaextender
+          folder (included) into the archetypes folder.
+
+  2. Put FacultyStaffDirectory into your Products folder.
+  
+  3. Restart Zope.
+  
+  4. Install the FacultyStaffDirectory using portal_quickinstaller or the Plone
+     Add/Remove Products tool under Site Setup. The dependencies that need to be
+     installed will install themselves automatically.
+
+Upgrading
+    
+    A migration script for using Faculty/Staff Directory 1.x content in
+    Faculty/Staff Directory 2.x is in the Extensions folder of this product.
+    Follow the instructions inside migrate1dot0to2dot0.py.
+    
+    Migrations in Plone 3 require the "contentmigration product":http://svn.plone.org/svn/collective/contentmigration/.
+
+Using FacultyStaffDirectory
+  
+  Adding a Faculty/Staff Directory
+  
+      From the "add" dropdown menu in Plone, select "Faculty/Staff Directory". A
+      Faculty/Staff Directory will be created as well as several default items
+      inside:
+      
+      * Faculty (a Classification)
+      
+      * Staff (a Classification)
+      
+      * Graduate Students (a Classification)
+      
+      * Committees (a Committees Folder, which can hold only Committees)
+      
+      * Specialties (a Specialties Folder, which can hold only Specialties)
+  
+      Any or all of these default items may be safely deleted as needed.
+  
+  Membrane Functionality with FacultyStaffDirectory
+  
+      Out of the box, FacultyStaffDirectory offers the following integration
+      with Plone users and groups:
+      
+      * The Faculty/Staff Directory itself acts as a group
+      
+          All Person objects created in the Faculty/Staff Directory are
+          automatically considered members of this group.  This group also
+          provides the option of assigning a global role to all Persons in the
+          Directory.  This option should be handled with care.  It is generally
+          best to select only the 'Member' role, as this is the most restrictive
+          option.
+          
+      * Departments, Classifications and Committees act as groups
+      
+          Global role assignment is not available for these content types, but
+          the groups they define may be granted local roles throughout the Plone
+          site.  For complex academic units, this can be a great time-saver,
+          since personnel management can be tied closely to site security
+          management.
+      
+      * Person objects act as users
+      
+          The Faculty/Staff Directory configlet in Site Setup allows you to
+          choose whether Person objects provide passwords for authentication. If
+          you are using some other PAS plugin for authentication, such as
+          PloneLDAP, ApachePAS, PubcookiePAS or CAS4PAS, you will want to
+          disable password provision so that authentication will cascade to
+          these other systems.
+          
+      Users defined by Person objects are automatically granted the Owner
+      role locally for that object and its contents.  This allows users to add
+      to and edit their own biographies, contact information, etc.  They also
+      control sharing rights to their object and can thus allow assistants to
+      edit content on their behalf without sharing their own passwords or user
+      preferences.
+
+      The 'My Folder' action, found in the personal toolbar, is altered by the
+      Faculty/Staff Directory product to take users defined by Person objects
+      directly to that object. Users defined through the standard Plone UI will
+      be taken to the usual location (portal/Members/<userid>).  Likewise, the
+      personal preferences link found in the personal toolbar and on the
+      plone_memberprefs_panel or dashboard will take Person users to their
+      Person objects.
+
+      Owners are not granted the rights to add or remove their Person object
+      from Departments, Committees, Classifications and Specialties, since these
+      collections are used as authorization groups. Instead, this right is
+      reserved for site managers and for the newly-created 'Personnel Manager'
+      role, installed with the Faculty/Staff Directory product.  The Personnel
+      Manager is likewise not granted access to the ZMI or to personal
+      preferences for Persons. This allows for fine-grained separation of
+      management concerns.
+
+      Membrane functionality for Person, Department, Classification and
+      Committee objects is configurable.  A switch to turn the function on or
+      off is available on the Faculty/Staff Directory Configlet in Site Setup.
+      It may be necessary to disable membrane functionality for Person objects
+      in systems that have established user bases built on LDAP systems.
+  
+  Extensibility
+  
+      Because every organization has a few unique requirements,
+      FacultyStaffDirectory supports an extension mechanism based on the
+      archetypes.schemaextender library. Using it, you can write plugin products
+      which add fields to or otherwise modify our content types. For an example,
+      see the FacultyStaffDirectory/examples/FacultyStaffDirectoryExtender
+      product and "its README.txt":https://weblion.psu.edu/svn/weblion/weblion/FacultyStaffDirectory/tags/2.0/examples/FacultyStaffDirectoryExtender/README.txt.
+
+  Further reading
+  
+      Further (and more up-to-date) documentation is availiable on the 
+      "WebLion wiki":https://weblion.psu.edu/trac/weblion/wiki/FacultyStaffDirectory
+
+Design Rationale & Thoughts
+    
+    Why the push for just one Directory in a site? Why not just add people to Departments? --
+        The main thought behind this was that People could be members of
+        multiple departments (i.e., faculty member John Smith teaches courses in
+        both MSIS and Computer Science). So where do we put the Person object?
+        We'd like to refrain from making two Persons if possible, and the
+        alternative of making a Department both a container and a referenced
+        object could be nightmarish.
+
+    Why add membrane? --
+        We wanted a relatively simple way to let members modify their own
+        profiles. With membrane, we get that right out of the box since that
+        profile *is* the member. We also get nifty groups like "Faculty" and
+        "Chemistry Department" and "Some Useless Committee".
+
+    How do I manage People across multiple Plone sites? --
+        We wish we knew. Suggestions?
+
+Future Plans
+  
+  * Replacing the templates with Zope 3 views
+  
+  * Integration with CMFBibliographyAT
+  
+  * Vitae templates
+  
+Possible Gotchas
+
+    Skinning plone 2.5.x with DIYPloneStyle 2.5
+        The implementation of Generic Setup installation in DIYPloneStyle 2.5
+        fails to include non-standard skin layers in its skins.  Please note
+        that installing a skin product built with this version will cause
+        skin-based functionality in FSD to break and may cause site-wide
+        template errors due to missing skin layers from the relations product. 
+        You can fix these problems by manually adding the layers
+        'FacultyStaffDirectory', 'relations', and 'relations_images' to any
+        skins defined in ZMI &rarr; plone &rarr; portal_skins &rarr; properties.
+
+Authorship
+
+    This product was developed by the WebLion group at Penn State University.
+  
+    membrane integration by Cris Ewing at the University of Washington.
+
+Thanks
+    
+    Special thanks to Andreas Jung for his early testing and reminding us that,
+    yes, people do live outside the United States.
+
+Support
+
+  * Please report bugs to the
+    "WebLion issue tracker":https://weblion.psu.edu/trac/weblion/newticket?component=FacultyStaffDirectory&version=2.0.
+
+  * More documentation:https://weblion.psu.edu/trac/weblion/wiki/FacultyStaffDirectory
+
+  * Contact us::
+
+    WebLion Project Team
+    Penn State University
+    304 The 300 Building
+    University Park, PA 16802
+    support@weblion.psu.edu
+    814-863-4574
+
+License
+
+    Copyright (c) 2006-2008 The Pennsylvania State University. WebLion is
+    developed and maintained by the WebLion Project Team, its partners, and
+    members of the Penn State Zope Users Group.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the Free
+    Software Foundation; either version 2 of the License, or (at your option)
+    any later version.
+
+    This program is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+    more details.
+
+    You should have received a copy of the GNU General Public License along with
+    this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+    Place, Suite 330, Boston, MA 02111-1307 USA.
+
+    This document is written using the Structured Text format for conversion
+    into alternative formats.

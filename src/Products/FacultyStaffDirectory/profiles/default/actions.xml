@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool">
+ <action-provider name="portal_membership">
+  <action title="My Folder" action_id="fsdmystuff" category="user"
+     condition_expr="python:member is not None and portal.facultystaffdirectory_tool.fsdShowMyFolder()"
+     url_expr="python:portal.facultystaffdirectory_tool.fsdMyFolder()" visible="True">
+   <permission>View</permission>
+  </action>
+ </action-provider>
+</object>

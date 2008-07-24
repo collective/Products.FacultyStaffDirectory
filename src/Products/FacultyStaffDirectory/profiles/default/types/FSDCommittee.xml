@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<object name="Committee" meta_type="Factory-based Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">Committee</property>
+ <property name="description" i18n:translate="description_edit_committee">
+    A simple page describing a committee or working group with the associated committee members.
+ </property>
+ <property name="content_meta_type">FSDCommittee</property>
+ <property name="product">FacultyStaffDirectory</property>
+ <property name="factory">addCommittee</property>
+ <property name="immediate_view">committee_view</property>
+ <property name="default_view">committee_view</property>
+ <property name="global_allow">False</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types">
+   <element value="Document"/>
+   <element value="Image"/>
+   <element value="File"/>
+   <element value="Event"/>
+   <element value="News Item"/>
+ </property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="edit" to="base_edit"/>
+ <alias from="view" to="(dynamic view)"/>
+ <alias from="index.html" to="(dynamic view)"/>
+ <property name="allow_discussion">False</property>
+</object>

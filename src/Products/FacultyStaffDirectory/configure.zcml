@@ -1,0 +1,27 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
+           i18n_domain="FacultyStaffDirectory">
+  
+  <include package="zope.app.annotation" files="configur?.zcml" /><!-- The glob is so it doesn't freak out if configure.zcml is absent, like it is in Plone 3.0. -->
+  <include package=".events" />
+  <include package=".membership" />
+  <include file="profiles.zcml" />
+  <include package="archetypes.schemaextender" />
+  
+  <!-- These should be unnecessary once BaseContent and BaseFolder stop using manage_afterAdd(): -->
+  <five:deprecatedManageAddDelete class=".FacultyStaffDirectory.FacultyStaffDirectory" />
+  <five:deprecatedManageAddDelete class=".Classification.Classification" />
+  <five:deprecatedManageAddDelete class=".Committee.Committee" />
+  <five:deprecatedManageAddDelete class=".CommitteesFolder.CommitteesFolder" />
+  <five:deprecatedManageAddDelete class=".CommitteeMembership.CommitteeMembership" />
+  <five:deprecatedManageAddDelete class=".Department.Department" />
+  <five:deprecatedManageAddDelete class=".DepartmentalMembership.DepartmentalMembership" />
+  <five:deprecatedManageAddDelete class=".Course.Course" />
+  <five:deprecatedManageAddDelete class=".Person.Person" />
+  <five:deprecatedManageAddDelete class=".Specialty.Specialty" />
+  <five:deprecatedManageAddDelete class=".SpecialtiesFolder.SpecialtiesFolder" />
+  <five:deprecatedManageAddDelete class=".SpecialtyInformation.SpecialtyInformation" />
+  <five:deprecatedManageAddDelete class=".tools.FacultyStaffDirectoryTool.FacultyStaffDirectoryTool" />
+  
+</configure>

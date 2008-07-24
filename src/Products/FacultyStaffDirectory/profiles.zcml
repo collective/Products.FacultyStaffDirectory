@@ -1,0 +1,31 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="FacultyStaffDirectory">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="FacultyStaffDirectory install profile"
+      directory="profiles/default"
+      description="Extension profile for FacultyStaffDirectory Product."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+ 
+   <genericsetup:registerProfile
+      name="plone3-actions-fix"
+      title="FacultyStaffDirectory types fix for Plone 3.0.x"
+      directory="profiles/plone3"
+      description="Hides the 'properties' and 'sharing' tabs for FacultyStaffDirectory content types in Plone 3.0.x."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+ 
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="FacultyStaffDirectory Uninstall Profile"
+      directory="profiles/uninstall"
+      description="Removes FacultyStaffDirectory."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      />
+
+</configure>

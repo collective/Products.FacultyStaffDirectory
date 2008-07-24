@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<object name="Specialty" meta_type="Factory-based Type Information with dynamic views"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">Specialty</property>
+ <property name="description" i18n:translate="description_edit_specialty">
+    An area of academic study.
+ </property>
+ <property name="content_meta_type">FSDSpecialty</property>
+ <property name="product">FacultyStaffDirectory</property>
+ <property name="factory">addSpecialty</property>
+ <property name="immediate_view">specialty_standard_view</property>
+ <property name="default_view">specialty_standard_view</property>
+ <property name="view_methods">
+    <element value="specialty_standard_view" />
+    <element value="specialty_tabular_view" />
+ </property>
+ <property name="global_allow">False</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types">
+   <element value="FSDSpecialty"/>
+ </property>
+ <property name="allow_discussion">False</property>
+</object>

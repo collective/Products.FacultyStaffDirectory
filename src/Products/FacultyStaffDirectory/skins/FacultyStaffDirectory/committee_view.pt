@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+  <head><title></title></head>
+
+  <body>
+    <metal:fill fill-slot="main">
+        <div metal:use-macro="here/document_actions/macros/document_actions">
+            Document actions (print, sendto etc)
+        </div>
+
+        <h1 tal:content="object_title" class="documentFirstHeading">
+          Title or id
+        </h1>
+
+        <p class="documentDescription"
+           tal:content="here/Description"
+           tal:condition="here/Description">
+            Description
+        </p>
+        
+        <div tal:content="structure here/getText" />
+
+        <h3>Members:</h3>
+        <ul>
+            <li tal:repeat="member context/getMembers">
+                <tal:block tal:define="membershipData python:context.getMembershipInformation(member);">
+                    <a tal:attributes="href member/absolute_url"
+                       tal:content="member/Title" />
+                    <tal:block tal:condition="membershipData/getPosition">
+                        -
+                        <span tal:replace="membershipData/getPosition" />               
+                    </tal:block>
+                    <span tal:condition="python:checkPermission('Modify portal content', member)"
+                          class="discreet">[
+                        <a tal:attributes="href python:'%s/edit' % membershipData.absolute_url()">
+                           <tal:block tal:condition="membershipData/getPosition">Edit role</tal:block>
+                           <tal:block tal:condition="not:membershipData/getPosition">Assign a role</tal:block>
+                        </a>
+                    ]</span>
+                </tal:block>
+            </li>
+        </ul>
+    </metal:fill>
+  </body>
+</html>

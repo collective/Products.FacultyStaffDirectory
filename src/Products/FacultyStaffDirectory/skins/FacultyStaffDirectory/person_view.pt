@@ -1,0 +1,147 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <head></head>
+  
+  <body>
+  
+    <metal:fill fill-slot="main">
+        <div class="facultyStaffDirectory personView">
+
+            <div class="caption">
+              <div class="headshot"
+                 tal:condition="context/image_normal|nothing">
+                <img src="" alt=""
+                 tal:replace="structure python:context.getWrappedField('image').tag(context, scale='normal')" />
+            </div>
+                <div metal:use-macro="context/document_actions/macros/document_actions">
+                    [Document actions (print, sendto etc)]
+                </div>
+                <h1 tal:content="title_string | context/title_or_id" />
+                <ul tal:condition="context/getJobTitles" class="jobTitle">
+                    <li tal:repeat="jobTitle context/getJobTitles" 
+                        tal:content="jobTitle" />
+                </ul>                
+                <div>
+                    <span tal:replace="structure python:context.getOfficeAddress().replace('\n', '<br />')" /><br />
+                    <span tal:replace="context/getOfficeCity" /><tal:block tal:condition="context/getOfficeState">, </tal:block><span tal:replace="context/getOfficeState" /> <span tal:replace="context/getOfficePostalCode" />
+                </div>
+                <div tal:condition="context/getEmail">
+                    Email:
+                    <span tal:replace="structure python:context.spamProtect(context.getEmail())" />
+                </div>
+                <div tal:condition="context/getOfficePhone" 
+                     class="officePhone">
+                    Phone:
+                    <span tal:replace="context/getOfficePhone"/>
+                </div>
+                <div tal:condition="context/getWebsites" class="websites">
+                    <h3>Websites:</h3>
+                    <ul>
+                        <li tal:repeat="website context/getWebsites">
+                            <a href="" 
+                               tal:attributes="href website"
+                               tal:content="website" />
+                        </li>
+                    </ul>  
+                </div>
+            </div>
+
+            <div class="visualClear"><!-- --></div>
+            
+            <div tal:condition="here/getBiography" class="biography">
+                <h3>Biography:</h3>
+                <span tal:content="structure context/getBiography" />
+            </div>           
+
+            <div tal:condition="context/getEducation" class="education">
+                <h3>Education:</h3>
+                <ol>
+                    <li tal:repeat="degree context/getEducation">
+                        <span tal:content="degree" />
+                    </li>
+                </ol>
+            </div>            
+
+            <div class="specialties" tal:define="specialtyTuples context/getSpecialties" tal:condition="specialtyTuples">
+                <h3>Research Interests:</h3>
+                <dl>
+                    <tal:block tal:repeat="eachSpecialtyTuple specialtyTuples">
+                        <tal:block tal:define="specialtyBrain python:eachSpecialtyTuple[0];
+                                               personSpecialtyData python:eachSpecialtyTuple[1].getContentObject();">
+                            <dt>
+                                <a tal:attributes="href specialtyBrain/getURL">
+                                  <span tal:content="specialtyBrain/Title" />:
+                                </a>
+                            </dt>
+                            <dd tal:define="researchTopic personSpecialtyData/getResearchTopic">
+                                <tal:block tal:condition="researchTopic"
+                                           tal:replace="structure researchTopic">
+                                </tal:block>
+                                <span tal:condition="python:checkPermission('Modify portal content', context)"
+                                      class="discreet">[
+                                    <a tal:attributes="href python:'%s/edit' % personSpecialtyData.absolute_url()">
+                                       <tal:block tal:condition="researchTopic">Edit research topic</tal:block>
+                                       <tal:block tal:condition="not:researchTopic">Assign a research topic</tal:block>
+                                    </a>
+                                ]</span>
+                            </dd>
+                        </tal:block>
+                    </tal:block>
+                </dl>
+            </div>
+
+            <div class="courselisting" 
+                 tal:define="courses context/getCourses"
+                 tal:condition="courses">
+                <h3>Courses:</h3>
+                <dl tal:repeat="course courses">
+                    <dt>
+                        <a tal:attributes="href course/getRemoteUrl"
+                           tal:content="course/Title" 
+                           tal:condition="course/getRemoteUrl" />
+                        <span tal:replace="course/Title"
+                              tal:condition="not: course/getRemoteUrl" />
+                    </dt>
+                    <dd tal:content="structure course/Description" />
+                </dl>
+            </div>
+            <div class="assistants"
+                 tal:define="assistants context/getAssistants;
+                             member python:context.portal_membership.getAuthenticatedMember()"
+                 tal:condition="python:assistants and member.checkPermission('Add portal content', here)">
+              <h3>Assistants:</h3> 
+              <ul tal:repeat="assistant assistants">
+                <li tal:define="url assistant/absolute_url;
+                                name assistant/Title">
+                  <a tal:attributes="href url"
+                     tal:content="name">Assistant's Full Name</a>
+                </li>
+              </ul>
+                 
+            </div>
+            <div class="bosses"
+                 tal:define="bosses python:context.getReferences(relationship='assistants_people');
+                             member python:context.portal_membership.getAuthenticatedMember()"
+                 tal:condition="python:bosses and member.checkPermission('Add portal content', here)">
+              <h3 tal:define="myName context/Title"><span tal:replace="myName">My Name</span> is an assistant to:</h3> 
+              <ul tal:repeat="boss bosses">
+                <li tal:define="url boss/absolute_url;
+                                name boss/Title">
+                  <a tal:attributes="href url"
+                     tal:content="name">Boss' Full Name</a>
+                </li>
+              </ul>
+                 
+            </div>
+        </div>        
+    </metal:fill>
+  
+  </body>
+</html>

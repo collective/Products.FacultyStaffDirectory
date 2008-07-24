@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- the default skin is set back to the plone default skin -->
+<object name="portal_skins" meta_type="Plone Skins Tool" allow_any="False"
+   cookie_persistence="False" default_skin="Plone Default"
+   request_varname="plone_skin">
+    <!-- Remove the FacultyStaffDirectory skin layers -->
+    <object name="FacultyStaffDirectory" meta_type="Filesystem Directory View" remove="True" />
+    <!-- Remove the FacultyStaffDirectory skin -->
+    <skin-path name="FacultyStaffDirectory" remove="True" />
+</object>

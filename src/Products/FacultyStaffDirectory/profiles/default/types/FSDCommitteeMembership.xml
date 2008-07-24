@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<object name="Person" meta_type="Factory-based Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">Committee Membership Information</property>
+ <property name="description">Contains information pertaining to a person's membership in a committee.</property>
+ <property name="content_meta_type">FSDCommitteeMembership</property>
+ <property name="product">FacultyStaffDirectory</property>
+ <property name="factory">addCommitteeMembership</property>
+ <property name="immediate_view">base_view</property>
+ <property name="global_allow">False</property>
+ <property name="filter_content_types">True</property>
+  <property name="allowed_content_types">
+ </property>
+ <property name="allow_discussion">False</property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="edit" to="committeemembership_edit"/>
+ <alias from="view" to="(dynamic view)"/>
+ <alias from="index.html" to="(dynamic view)"/>
+ 
+ <action title="View" action_id="view" category="object" condition_expr=""
+    url_expr="string:${object_url}/" visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit" action_id="edit" category="object" condition_expr=""
+    url_expr="string:${object_url}/edit" visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+
+</object>

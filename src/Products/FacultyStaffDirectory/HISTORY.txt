@@ -1,0 +1,58 @@
+Version History
+
+  ' ' 2.0 -- ' '
+        
+        * Added an A-to-Z listing view for Directories and Departments.
+        
+        * Forced Previous/Next display in the Person editor.
+        
+        * Bug fixes
+        
+  ' ' 2.0a1 -- ' '
+  
+        * Integrated with Plone users and groups.
+        
+        * Switched extensibility framework to archetypes.schemaextender. More
+          than one extender works at once now, and all content types are
+          extensible.
+        
+        * Added Department content type.
+        
+        * Sortable Name is now available as a SmartFolder index (mainly for
+          sorting).
+
+        * Added SmartFolder fields for Departments, Classifications, Committees,
+          Specialties, and People.
+
+        * Templates are faster.
+
+        * Non-ASCII characters in Person titles work.
+
+        * People now have a Middle Name field.
+
+        * Specialties and other types of person groups can now live outside the
+          Faculty/Staff Directory.
+
+        * Specialties are now listed in a sane order.
+
+        * Committees Folders are now addable within Departments.
+
+        * Added a configlet in Site Setup to allow customization of phone number
+          and user ID validation as well as the ability to disable aspects of
+          membrane integration.
+
+        * Silenced some deprecation warnings.
+
+        * Added support for Plone 3's versioning.
+
+        * Renamed content types to avoid collisions with other products.
+
+        * Added oodles of new tests.
+
+        * Ditched ArchGenXML, making our code much cleaner.
+
+        * Made more use of GenericSetup.
+
+  ' ' 1.0.1 -- Minor documentation tweaks
+  
+  ' ' 1.0 -- Initial release

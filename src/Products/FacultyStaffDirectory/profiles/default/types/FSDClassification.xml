@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<object name="Classification" meta_type="Factory-based Type Information with dynamic views"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">Classification</property>
+ <property name="description" i18n:translate="">
+    A grouping of associated people eg "Faculty" or "Staff".
+</property>
+ <property name="content_icon">folder_icon.gif</property>
+ <property name="content_meta_type">FSDClassification</property>
+ <property name="product">FacultyStaffDirectory</property>
+ <property name="factory">addClassification</property>
+ <property name="immediate_view">classification_standard_view</property>
+ <property name="default_view">classification_standard_view</property>
+ <property name="view_methods">
+    <element value="classification_standard_view" />
+    <element value="classification_tabular_view" />
+  </property>
+ <property name="global_allow">False</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types"></property>
+ <property name="allow_discussion">False</property>
+</object>

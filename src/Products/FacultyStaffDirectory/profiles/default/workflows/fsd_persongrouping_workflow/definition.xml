@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="fsd_persongrouping_workflow"
+             title="[FacultyStaffDirectory] Person Grouping workflow"
+             state_variable="review_state"
+             initial_state="active">
+             
+ <permission>Access contents information</permission>
+ <permission>View</permission>
+ <permission>Modify portal content</permission>
+ <permission>Add portal content</permission>
+ <permission>FacultyStaffDirectory: Change roles</permission>
+ <permission>FacultyStaffDirectory: Assign Departments to People</permission>
+ <permission>FacultyStaffDirectory: Assign Committees to People</permission>
+ <permission>FacultyStaffDirectory: Assign Classifications to People</permission>
+ <permission>FacultyStaffDirectory: Assign Specialties to People</permission>
+ <permission>Relations: Manage content relations</permission> 
+ 
+ <state state_id="active" title="Active">
+  <exit-transition transition_id="deactivate"/>
+  <permission-map name="Access contents information" acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal content" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Change roles" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Assign Departments to People" acquired="True">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Assign Committees to People" acquired="True">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Assign Classifications to People" acquired="True">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>  
+  <permission-map name="FacultyStaffDirectory: Assign Specialties to People" acquired="True">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="Relations: Manage content relations" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>   
+  </permission-map>  
+ </state>
+ 
+ <state state_id="inactive" title="Inactive">
+  <exit-transition transition_id="activate"/>
+  <permission-map name="Access contents information" acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
+  </permission-map>
+  <permission-map name="Add portal content" acquired="False">
+   <permission-role>Contributor</permission-role>  
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Change Roles" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Assign Departments to People" acquired="True">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Assign Committees to People" acquired="True">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Assign Classifications to People" acquired="True">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>    
+  <permission-map name="FacultyStaffDirectory: Assign Specialties to People" acquired="True">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="Relations: Manage content relations" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>   
+  </permission-map>  
+ </state>
+
+ <transition transition_id="deactivate"
+             title="De-activate"
+             new_state="inactive" trigger="USER"
+             before_script=""
+             after_script="">
+  <action url="" category="workflow">De-activate</action>
+  <guard>
+   <guard-permission>FacultyStaffDirectory: Change roles</guard-permission>
+  </guard>
+ </transition>
+ 
+ <transition transition_id="activate"
+             title="Activate"
+             new_state="active" trigger="USER"
+             before_script=""
+             after_script="">
+  <action url="" category="workflow">Activate</action>
+  <guard>
+   <guard-permission>FacultyStaffDirectory: Change roles</guard-permission>
+  </guard>
+ </transition>
+ 
+ <worklist worklist_id="reviewer_queue" title="">
+  <description>Reviewer tasks</description>
+  <action url="%(portal_url)s/search?review_state=pending"
+          category="global">Pending (%(count)d)</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist>
+ 
+ <variable variable_id="action" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The last transition</description>
+  <default>
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Comments about the last transition</description>
+  <default>
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False"
+           for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Time of the last transition</description>
+  <default>
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+              
+</dc-workflow>

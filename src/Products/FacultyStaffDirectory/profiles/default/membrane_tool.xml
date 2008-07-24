@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<object name="membrane_tool" meta_type="MembraneTool">
+  <membrane-type name="FSDFacultyStaffDirectory">
+    <active-workflow-state name="published" />
+  </membrane-type>
+  <membrane-type name="FSDPerson">
+    <active-workflow-state name="active" />
+  </membrane-type>
+  <membrane-type name="FSDCommittee">
+    <active-workflow-state name="active" />
+  </membrane-type>
+  <membrane-type name="FSDClassification">
+    <active-workflow-state name="active" />
+  </membrane-type>
+  <membrane-type name="FSDDepartment">
+    <active-workflow-state name="active" />
+  </membrane-type>  
+</object>

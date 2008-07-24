@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="portal_skins" meta_type="Plone Skins Tool">
+  <skin-path name="Plone Default">
+    <layer name="FacultyStaffDirectory" insert-after="custom" />
+  </skin-path>
+  <skin-path name="Plone Tableless">
+    <layer name="FacultyStaffDirectory" insert-after="custom" />
+  </skin-path>
+</object>
