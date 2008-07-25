@@ -25,13 +25,13 @@ from Products.CMFPlone.browser.navtree import buildFolderTree
 from Products.membrane.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
 from Products.Relations.field import RelationField
 from Products.validation import validation
-from Products.WebLionLibrary.validators import SequenceValidator
 from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces.person import IPerson
 from Products.FacultyStaffDirectory.interfaces.person import IPersonModifiedEvent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_DEPARTMENTS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, ASSIGN_SPECIALTIES_TO_PEOPLE, CHANGE_PERSON_IDS
+from Products.FacultyStaffDirectory.validators import SequenceValidator
 
 logger = logging.getLogger('FacultyStaffDirectory')
 

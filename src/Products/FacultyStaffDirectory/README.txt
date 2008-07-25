@@ -58,7 +58,7 @@ Installation
 
   1. Install the dependencies:
   
-     1. Put membrane, Relations, and WebLionLibrary (included) into your
+     1. Put membrane and Relations into your
         Products folder.
      
      2. If you're using Plone 2.5.x, put the included copy of Archetypes into
