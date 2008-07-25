@@ -328,6 +328,11 @@ class testWithoutSpecialties(testPerson):
         self.failIfEqual(val(['http://www.foo.com', 'www.foo.com']), 1, 'Validator should be checking for a full URL (including the http:// prefix) in all values of a lines field.')
         self.failUnlessEqual(val(['http://www.foo.com', 'http://bar.com']), 1, 'Validator should check multiple urls and pass if all are valid.')
     
+    def testVCard(self):
+        self.person.setOfficeCity(u'München')
+        expectedUnicodeOutput = "M\xc3\xbcnchen"
+        self.failUnless(expectedUnicodeOutput in self.person.vcard_view(self.app.REQUEST, self.app.REQUEST.response), "Improperly handled unicode in vCard output.")
+    
     def _testIdWriteAccess(self):
         """ utility function to support testing write access to the ID attribute of a person
             

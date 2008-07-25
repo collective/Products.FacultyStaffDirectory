@@ -515,20 +515,22 @@ class Person(OrderedBaseFolder, ATCTContent):
         RESPONSE.setHeader('Content-Disposition', 'attachment; filename="%s.vcf"' % self.getId())
         out = StringIO()
 
+        # Get the fields using the accessors, so they're properly Unicode encoded.
         out.write("BEGIN:VCARD\nVERSION:3.0\n")
         out.write("FN:%s\n" % self.Title())
-        out.write("N:%s;%s\n" % (self.lastName, self.firstName))
-        out.write(foldLine("TITLE:%s\n" % '\\n'.join(self.jobTitles)))
-        out.write(foldLine("ADR;TYPE=dom,postal,parcel,work:;;%s;%s;%s;%s\n" % (self.officeAddress.replace('\r\n','\\n'), self.officeCity, self.officeState, self.officePostalCode)))
-        out.write("TEL;WORK:%s\n" % self.officePhone)
-        out.write("EMAIL;TYPE=internet:%s\n" % self.email)
+        out.write("N:%s;%s\n" % (self.getLastName(), self.getFirstName()))
+        out.write(foldLine("TITLE:%s\n" % '\\n'.join(self.getJobTitles())))
+        out.write(foldLine("ADR;TYPE=dom,postal,parcel,work:;;%s;%s;%s;%s\n" % (self.getOfficeAddress().replace('\r\n','\\n'), self.getOfficeCity(), self.getOfficeState(), self.getOfficePostalCode())))
+        out.write("TEL;WORK:%s\n" % self.getOfficePhone())
+        out.write("EMAIL;TYPE=internet:%s\n" % self.getEmail())
 
         #Add the Person page to the list of URLs
-        urls = list(self.websites)
+        urls = list(self.getWebsites())
         urls.append(self.absolute_url())
         for url in urls:
           out.write(foldLine("URL:%s\n" % url))
-        out.write(foldLine("PHOTO;ENCODING=BASE64;TYPE=JPEG:%s\n" % self.image_thumb.data.encode('base-64')))
+        if self.getImage():
+            out.write(foldLine("PHOTO;ENCODING=BASE64;TYPE=JPEG:%s\n" % self.image_thumb.data.encode('base-64')))
         out.write("REV:%s\n" % DateTime(self.ModificationDate()).ISO8601())
         out.write("PRODID:WebLion Faculty/Staff Directory\nEND:VCARD")
         return n2rn(out.getvalue())
