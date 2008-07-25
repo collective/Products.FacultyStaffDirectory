@@ -273,7 +273,7 @@ def install(self, reinstall=False):
             category="Products",
             permission="Manage portal",
             appId="FacultyStaffDirectory",
-            imageUrl="/misc_/FacultyStaffDirectory/group.png")
+            imageUrl="group.png")
         
     # Set up revisioning, if available:
     if hasattr(self,'portal_repository'):

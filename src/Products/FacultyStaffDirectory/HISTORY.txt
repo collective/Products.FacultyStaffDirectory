@@ -1,5 +1,13 @@
 Version History
 
+  ' ' 2.1 -- ' '
+        
+        * Removed WebLionLibrary dependency
+        
+        * Eggified product
+        
+        * Configlet icon should now work properly in VirtualHostMonstered sites
+
   ' ' 2.0 -- ' '
         
         * Added an A-to-Z listing view for Directories and Departments.
