@@ -5,9 +5,7 @@ Versions
   Plone 2.5.x or Plone 3.0.x
 
 Dependencies
-  
-  * "WebLionLibrary":https://weblion.psu.edu/trac/weblion/attachment/wiki/WebLionLibrary/weblionlibrary-1.2.tar.gz?format=raw
-    
+
   * Relations, via Subversion at https://svn.plone.org/svn/archetypes/Relations/trunk/
   
   * "membrane":http://plone.org/products/membrane
@@ -58,8 +56,7 @@ Installation
 
   1. Install the dependencies:
   
-     1. Put membrane and Relations into your
-        Products folder.
+     1. Put membrane and Relations into your Products folder.
      
      2. If you're using Plone 2.5.x, put the included copy of Archetypes into
         your Products folder.
