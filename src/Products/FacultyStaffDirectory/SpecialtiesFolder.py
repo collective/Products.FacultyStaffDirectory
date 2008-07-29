@@ -8,16 +8,10 @@ from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
 from Products.FacultyStaffDirectory.config import *
-
-from Products.CMFCore.permissions import View, ManageProperties, ModifyPortalContent
-
 from Products.FacultyStaffDirectory.interfaces.specialtiesfolder import ISpecialtiesFolder
 from zope.interface import implements
 
-schema = ATContentTypeSchema.copy() + Schema((
-
-),
-)
+schema = ATContentTypeSchema.copy() + Schema((),)
 
 SpecialtiesFolder_schema = OrderedBaseFolderSchema.copy() + schema.copy()
 finalizeATCTSchema(SpecialtiesFolder_schema, folderish=True)

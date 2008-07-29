@@ -6,11 +6,10 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
-from Products.Archetypes.ReferenceEngine import ContentReferenceCreator
 from Products.Relations.field import RelationField
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.PersonGrouping import PersonGrouping
-from Products.CMFCore.permissions import View, ModifyPortalContent
+from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
 
 from Products.FacultyStaffDirectory.interfaces.specialty import ISpecialty

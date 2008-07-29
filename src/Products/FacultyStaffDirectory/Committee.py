@@ -8,16 +8,14 @@ from Products.Archetypes.atapi import *
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFCore.permissions import View
 from Products.FacultyStaffDirectory.PersonGrouping import PersonGrouping
-from Products.Archetypes.ReferenceEngine import ContentReferenceCreator
 from Products.Relations.field import RelationField
 from Products.FacultyStaffDirectory.config import *
 from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
-from Products.membrane.interfaces import IPropertiesProvider, ICategoryMapper
+from Products.membrane.interfaces import IPropertiesProvider
 from Products.FacultyStaffDirectory.interfaces.committee import ICommittee
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_COMMITTIES_TO_PEOPLE
-from zope.event import notify
 
 schema = Schema((
 

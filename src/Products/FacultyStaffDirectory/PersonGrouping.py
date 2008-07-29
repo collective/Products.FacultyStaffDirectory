@@ -6,9 +6,9 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content.base import ATCTContent
-from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
+from Products.ATContentTypes.content.schemata import ATContentTypeSchema
 from Products.FacultyStaffDirectory.config import *
-from Products.CMFCore.permissions import View, ModifyPortalContent
+from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
 
 schema =  ATContentTypeSchema.copy() + Schema((

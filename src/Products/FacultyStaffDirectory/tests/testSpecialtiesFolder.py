@@ -10,10 +10,6 @@ __docformat__ = 'plaintext'
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
 
-# Import the tested classes
-from Products.FacultyStaffDirectory.SpecialtiesFolder import SpecialtiesFolder
-
-
 class testSpecialtiesFolder(testPlone):
     """Test-cases for class(es) SpecialtiesFolder."""
 

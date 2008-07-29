@@ -9,10 +9,6 @@ __docformat__ = 'plaintext'
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
-
-# Import the tested classes
-from Products.FacultyStaffDirectory.tools.FacultyStaffDirectoryTool import FacultyStaffDirectoryTool
-from Products.FacultyStaffDirectory.config import MEMBRANE_ABLE_TYPES
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 

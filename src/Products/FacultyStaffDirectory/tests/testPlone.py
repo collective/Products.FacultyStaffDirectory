@@ -11,7 +11,6 @@ import code
 from random import choice, sample
 
 from Globals import package_home
-from Products.CMFCore.utils import getToolByName
 from Products.PloneTestCase import PloneTestCase
 from Testing import ZopeTestCase
 

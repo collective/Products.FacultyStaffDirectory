@@ -19,7 +19,7 @@ from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
 from Products.ATContentTypes.lib.calendarsupport import n2rn, foldLine
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
-from Products.CMFCore.permissions import View, ManageProperties, ModifyPortalContent, SetOwnPassword, SetOwnProperties
+from Products.CMFCore.permissions import View, ModifyPortalContent, SetOwnPassword, SetOwnProperties
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.navtree import buildFolderTree
 from Products.membrane.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger

@@ -13,11 +13,7 @@ from Products.CMFCore.permissions import View, ManageProperties, ModifyPortalCon
 from Products.CMFCore.utils import getToolByName
 from zope.interface import implements
 from Products.CMFCore.permissions import ManageUsers
-from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IPropertiesProvider
-from Products.membrane.interfaces import ICategoryMapper
-from Products.membrane.config import ACTIVE_STATUS_CATEGORY
-from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 from Products.FacultyStaffDirectory.interfaces.classification import IClassification
 from Acquisition import aq_inner, aq_parent
 #from Products.FacultyStaffDirectory.interfaces.person import IPerson

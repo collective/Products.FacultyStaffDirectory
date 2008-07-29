@@ -6,7 +6,7 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.FacultyStaffDirectory.config import *
-from Products.CMFCore.permissions import View, ManageProperties, ModifyPortalContent
+from Products.CMFCore.permissions import View
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
 from Products.FacultyStaffDirectory.interfaces.course import ICourse

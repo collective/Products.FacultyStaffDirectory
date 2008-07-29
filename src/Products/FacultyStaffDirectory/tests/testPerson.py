@@ -8,20 +8,11 @@ __docformat__ = 'plaintext'
 #
 
 import os
-
-# from zope.app.testing.functional import FunctionalTestSetup
-
-from Products.Archetypes.ReferenceEngine import ContentReferenceCreator
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IUserAuthentication
 from Products.Relations.processor import process
-from Products.Five.testbrowser import Browser
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone, PACKAGE_HOME
-from Products.FacultyStaffDirectory.Person import Person
-from Products.FacultyStaffDirectory.config import TOOLNAME
-from Products.FacultyStaffDirectory.SpecialtyInformation import SpecialtyInformation
-from AccessControl.unauthorized import Unauthorized
 
 def loadImage(name, size=0):
     """Load image from testing directory."""
@@ -494,10 +485,7 @@ class testWithSpecialties(testPerson):
 
 def test_suite():
     from unittest import TestSuite, makeSuite
-    from Products.PloneTestCase import PloneTestCase
-    from Testing.ZopeTestCase import FunctionalDocFileSuite
     suite = TestSuite()
     suite.addTest(makeSuite(testWithSpecialties))
     suite.addTest(makeSuite(testWithoutSpecialties))
-    #suite.addTest(FunctionalDocFileSuite('functional-person.txt', test_class=PloneTestCase.FunctionalTestCase))
     return suite

@@ -10,18 +10,6 @@ __docformat__ = 'plaintext'
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
 
-from OFS.IOrderSupport import IOrderedContainer as IZopeOrderedContainer
-from OFS.interfaces import IOrderedContainer as OFSIOrderedContainer
-from Products.CMFPlone.interfaces.OrderedContainer import IOrderedContainer
-from Products.ATContentTypes.content.folder import ATFolder
-from Products.ATContentTypes.interfaces import IATFolder
-from Products.ATContentTypes.interface import IATFolder as Z3IATFolder
-from zope.interface.verify import verifyClass
-from Interface.Verify import verifyObject
-
-# Import the tested classes
-from Products.FacultyStaffDirectory.FacultyStaffDirectory import FacultyStaffDirectory
-
 class testFacultyStaffDirectory(testPlone):
     """Test-cases for class(es) ."""
 

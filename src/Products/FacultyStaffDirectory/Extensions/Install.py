@@ -8,13 +8,9 @@ from StringIO import StringIO
 from sets import Set
 from App.Common import package_home
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.utils import manage_addTool
-from Products.ExternalMethod.ExternalMethod import ExternalMethod
-from zExceptions import NotFound, BadRequest
 
 from Products.Archetypes.Extensions.utils import installTypes
 from Products.Archetypes.Extensions.utils import install_subskin
-from Products.Archetypes.config import TOOL_NAME as ARCHETYPETOOLNAME
 from Products.Archetypes.atapi import listTypes
 from Products.FacultyStaffDirectory.config import PROJECTNAME
 from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
