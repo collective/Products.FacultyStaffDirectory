@@ -1,1 +1,1 @@
-src/Products/FacultyStaffDirectory/README.txt
+See Products/FacultyStaffDirectory/README.txt.
