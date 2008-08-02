@@ -68,11 +68,23 @@ Tool_schema = BaseSchema.copy() +Schema((
         default=u"(555) 555-5555",
     ),
     
+    BooleanField(
+        name='obfuscateEmailAddresses',
+        widget=BooleanWidget(
+            label=u"Custom email obfuscation",
+            description=u"Format email addresses like \"someone AT here DOT com\" rather than using Plone's default spam armoring.",
+            label_msgid='FacultyStaffDirectory_label_obfuscateEmailAddressesDescription',
+            i18n_domain='FacultyStaffDirectory',
+        ),
+        schemata="General",
+        default=False,
+    ),
+
     StringField(
         name='idLabel',
         widget=StringWidget(
             label=u"Person ID Label",
-            description=u"The Name of the ID used by your institution",
+            description=u"The name of the ID used by your institution",
             label_msgid='FacultyStaffDirectory_label_personIdLabel',
             i18n_domain='FacultyStaffDirectory',
         ),
@@ -204,15 +216,6 @@ class FacultyStaffDirectoryTool(UniqueObject, BaseContent):
         except:
             return "Invalid regex string."
 
-    security.declarePublic('getDirectoryRoot')
-    def getDirectoryRoot(self):
-        """ Find the FacultyStaffDirectory instance in the site. """
-        catalog = getToolByName(self, 'portal_catalog')
-        fsdSearch = catalog(portal_type='FSDFacultyStaffDirectory')
-        if fsdSearch:
-            return fsdSearch[0].getObject()
-        return None
-    
     security.declarePublic('fsdMemberProfile')
     def fsdMemberProfile(self):
         """Distinguish between an fsd user and a regular acl_users user and

@@ -76,7 +76,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
         people = self.getPeople()
         if people:
             fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
-            return fsdTool.getDirectoryRoot().getClassifications()
+            return self.getDirectoryRoot().getClassifications()
         else:
             return []
 
@@ -85,9 +85,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
         """ Return a list of people, sorted by SortableName
         """
         people = self.getPeople()
-        pList = [(people[i].getSortableName(), i, people[i]) for i in xrange(len(people))]
-        pList.sort()
-        return [tup[-1] for tup in pList]
+        return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
 
 registerType(PersonGrouping, PROJECTNAME)
 

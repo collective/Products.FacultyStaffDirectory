@@ -30,6 +30,18 @@ schema = ATContentTypeSchema.copy() + Schema((
             description=u"The roles all people in this directory will be granted site-wide",
             ),
         ),
+    IntegerField('personClassificationViewThumbnailWidth',
+        accessor='getClassificationViewThumbnailWidth',
+        mutator='setClassificationViewThumbnailWidth',
+        schemata='Userinterface',
+        languageIndependent=True,
+        default=100,
+        write_permission=ManageUsers,
+        widget=IntegerWidget(
+            label=u'Width for thumbnails in classification view',
+            description=u"Show all person thumbnails with a fixed width (in pixels) within the classification view",
+            ),
+        ),
     ))
 
 FacultyStaffDirectory_schema = OrderedBaseFolderSchema.copy() + schema.copy()  # + on Schemas does only a shallow copy
@@ -76,6 +88,11 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         # Create a specialties folder
         self.invokeFactory('FSDSpecialtiesFolder', id='specialties', title='Specialties')
 
+    security.declareProtected(View, 'getDirectoryRoot')
+    def getDirectoryRoot(self):
+        """Return the current FSD object through acquisition."""
+        return self
+
     security.declareProtected(View, 'getClassifications')
     def getClassifications(self):
         """Return the classifications (in brains form) within this FacultyStaffDirectory."""
@@ -104,9 +121,7 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         """ Return a list of people, sorted by SortableName
         """
         people = self.getPeople()
-        pList = [(people[i].getSortableName(), i, people[i]) for i in xrange(len(people))]
-        pList.sort()
-        return [tup[-1] for tup in pList]
+        return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
 
     security.declareProtected(View, 'getDepartments')
     def getDepartments(self):
@@ -128,6 +143,7 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         allowed_roles = [r for r in portal_roles if r not in INVALID_ROLES]
         return allowed_roles
     
+
     #
     # Validators
     #

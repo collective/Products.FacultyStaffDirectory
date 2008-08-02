@@ -51,7 +51,7 @@
                                                 <span tal:condition="person/getOfficePhone" tal:content="person/getOfficePhone">[phone number]</span>
                                             </td>
                                             <td>
-                                                <span tal:condition="person/getEmail" tal:replace="structure python:person.spamProtect(person.getEmail())" class="emailAddress">[email address]</span>
+                                                <span tal:condition="person/getEmail" tal:replace="structure python:person.spamProtectFSD(person.getEmail())" class="emailAddress">[email address]</span>
                                             </td>
                                         </metal:block>
                                     </tr>

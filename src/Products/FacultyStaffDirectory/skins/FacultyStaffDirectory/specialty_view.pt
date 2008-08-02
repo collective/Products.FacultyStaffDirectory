@@ -41,7 +41,7 @@
                 <h2>People specializing in this area</h2>
                 <metal:block define-slot="listing_section">
                     <metal:block define-macro="list_classifications"
-                                 tal:define="directory context/facultystaffdirectory_tool/getDirectoryRoot;
+                                 tal:define="directory context/getDirectoryRoot;
                                              allClassifications python:[c.getObject() for c in directory.getClassifications()];
                                              classificationsInRequest request/classification|nothing;
                                              classifications python:classificationsInRequest and [directory[c] for c in isinstance(classificationsInRequest, basestring) and [classificationsInRequest] or classificationsInRequest] or allClassifications;

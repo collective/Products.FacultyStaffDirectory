@@ -69,10 +69,9 @@ class Classification(PersonGrouping):
         """ Return a list of people, sorted by SortableName
         """
         people = self.getPeople()
-        pList = [(people[i].getSortableName(), i, people[i]) for i in xrange(len(people))]
-        pList.sort()
-        return [tup[-1] for tup in pList]
+        return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
     
+
     #
     # Validators
     #

@@ -83,12 +83,8 @@ class testFacultyStaffDirectoryTool(testPlone):
         self.failUnless(self.portal.portal_types['FSDFacultyStaffDirectoryTool'].Title() != "AT Content Type")
     
     def testGetDirectoryRoot(self):
-        """ getDirectoryRoot method should return the FSD instance in the site, failing that it should return None. """
-        # Make sure it's returning an FSD object
-        self.failUnlessEqual(self.fsd_tool.getDirectoryRoot().Type(), 'Faculty/Staff Directory')
-        # Remove the directory and make sure we're getting None back from the method
-        self.portal.manage_delObjects([self.directory.id])
-        self.failUnlessEqual(self.fsd_tool.getDirectoryRoot(), None)
+        """Make sure this returns the containing FSD."""
+        self.failUnlessEqual(self.person.getDirectoryRoot(), self.directory)
         
     def testFsdMyFolder(self):
         """fsdMyFolder method should return the appropriate url for non-fsd users or 

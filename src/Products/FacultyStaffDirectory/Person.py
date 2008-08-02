@@ -727,7 +727,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         # that, the root of the FacultyStaffDirectory:
         urlTool = getToolByName(self, 'portal_url')
         fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
-        fsd = fsdTool.getDirectoryRoot()
+        fsd = self.getDirectoryRoot()
         if fsd and fsd.getSpecialtiesFolder():
             url = urlTool.getRelativeContentURL(fsd.getSpecialtiesFolder())
         else:

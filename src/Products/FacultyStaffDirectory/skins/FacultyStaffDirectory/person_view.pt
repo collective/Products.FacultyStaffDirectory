@@ -34,7 +34,7 @@
                 </div>
                 <div tal:condition="context/getEmail">
                     Email:
-                    <span tal:replace="structure python:context.spamProtect(context.getEmail())" />
+                    <span tal:replace="structure python:context.spamProtectFSD(context.getEmail())" />
                 </div>
                 <div tal:condition="context/getOfficePhone" 
                      class="officePhone">
