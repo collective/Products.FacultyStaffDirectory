@@ -22,6 +22,7 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.CMFCore.permissions import View, ModifyPortalContent, SetOwnPassword, SetOwnProperties
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.navtree import buildFolderTree
+from Products.CMFPlone.CatalogTool import getObjPositionInParent
 from Products.membrane.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
 from Products.Relations.field import RelationField
 from Products.validation import validation
@@ -600,7 +601,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         """ Returns a list of the titles of the classifications attached to this person.
             Mainly used for pretty-looking metadata in SmartFolder tables.
         """
-        cList = [(c.getObjPositionInParent()+1, c.Title()) for c in self.getClassifications()]
+        cList = [(getObjPositionInParent(c)+1, c.Title()) for c in self.getClassifications()]
         cList.sort()
         return [c[-1] for c in cList]
     
