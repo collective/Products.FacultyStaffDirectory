@@ -455,16 +455,6 @@ class PersonModifiedEvent(object):
     def __init__(self, context):
         self.context = context
 
-from zope.component import adapter
-from Products.Relations.events import IRelationConnectedEvent
-
-@adapter(IRelationConnectedEvent)
-def connectedsubscriber(event):
-    logger.error("In PersonRelationConnectedEvent")
-    import pdb
-    pdb.set_trace()
-
-
 class Person(OrderedBaseFolder, ATCTContent):
     """A person in the Faculty/Staff directory"""
     meta_type = portal_type = "FSDPerson"    
