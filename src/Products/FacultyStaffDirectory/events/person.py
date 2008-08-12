@@ -49,6 +49,8 @@ def modifyPersonOwnership(event):
             # Grant 'Owner' and 'User Preferences Editor' to the user defined by this object:
             roles = list(context.get_local_roles_for_userid(userId))
             roles.extend(['Owner', 'User Preferences Editor'])
+            # eliminate duplicated roles
+            roles = list(set(roles))
             context.manage_setLocalRoles(userId, roles)
             
             # Grant 'Owner' only to any users listed as 'assistants':

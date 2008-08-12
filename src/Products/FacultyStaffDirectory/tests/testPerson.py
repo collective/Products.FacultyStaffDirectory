@@ -301,6 +301,23 @@ class testWithoutSpecialties(testPerson):
     def testAssistantOwnershipAfterEdit(self):
         """Test that named assistants get ownership of a person object when it is edited"""
         self.failUnless(self._testAssistantOwnershipAfter(task='edit'), "designated assistant is not listed as an owner")
+        
+    def testMultipleUserPrefRoleAssignment(self):
+        """ Test for regression on https://weblion.psu.edu/trac/weblion/ticket/711
+        """
+        self.simulateATGUIInteraction(task='create')
+        self.simulateATGUIInteraction(task='edit')
+        perms = list(self.person.get_local_roles_for_userid('abc123'))
+        self.failUnlessEqual(perms.count('User Preferences Editor'), 1, "the role 'User Preferences Editor' is listed more than once after multiple GUI interactions")
+        
+    def testAssistantDoesNotGetUserPrefRole(self):
+        """ Test to ensure that the assigned assistant does not have the 'User Preferences Editor' role
+        """
+        self._testAssistantOwnershipAfter(task="create")
+        self.failIf('def456' in self.person.users_with_local_role('User Preferences Editor'), "Assistant can edit user prefs after create")
+        self.simulateATGUIInteraction(task="edit")
+        self.failIf('def456' in self.person.users_with_local_role('User Preferences Editor'), "Assistant can edit user prefs after edit") 
+        
     
     def testValidateId(self):
         """Test that the validate_id method enforces uniqueness for person id."""
