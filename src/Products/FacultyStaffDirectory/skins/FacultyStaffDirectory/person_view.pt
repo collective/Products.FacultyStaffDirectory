@@ -12,7 +12,7 @@
   <body>
   
     <metal:fill fill-slot="main">
-        <div class="facultyStaffDirectory personView">
+        <div class="facultyStaffDirectory personView" i18n:domain="FacultyStaffDirectory">
 
             <div class="caption">
               <div class="headshot"
@@ -42,7 +42,7 @@
                     <span tal:replace="context/getOfficePhone"/>
                 </div>
                 <div tal:condition="context/getWebsites" class="websites">
-                    <h3>Websites:</h3>
+                    <h3 i18n:translate="">Websites:</h3>
                     <ul>
                         <li tal:repeat="website context/getWebsites">
                             <a href="" 

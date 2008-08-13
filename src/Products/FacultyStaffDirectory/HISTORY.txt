@@ -2,6 +2,8 @@ Version History
 
   ' ' 2.1 -- ' '
         
+        * Added i18n hooks for all fields
+        
         * Removed a boatload of unused imports
         
         * Removed WebLionLibrary dependency

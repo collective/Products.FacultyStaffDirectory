@@ -80,7 +80,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=u"Suffix",
             description="Academic, professional, honorary, and social suffixes.",
             label_msgid='FacultyStaffDirectory_label_suffix',
-            description_msgid='FacultyStaffDirectory_help_suffix',
+            description_msgid='FacultyStaffDirectory_description_suffix',
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Basic Information",
@@ -106,7 +106,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=u"Job Titles",
             description="One per line",
             label_msgid='FacultyStaffDirectory_label_jobTitles',
-            description_msgid='FacultyStaffDirectory_help_jobTitles',
+            description_msgid='FacultyStaffDirectory_description_jobTitles',
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Professional Information",
@@ -161,7 +161,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=u"Office Phone",
             description="",
             label_msgid='FacultyStaffDirectory_label_officePhone',
-            description_msgid='FacultyStaffDirectory_help_officePhone',
+            description_msgid='FacultyStaffDirectory_description_officePhone',
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Contact Information",
@@ -216,7 +216,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=u"Web Sites",
             description="One per line. Example: http://www.example.com/",
             label_msgid='FacultyStaffDirectory_label_websites',
-            description_msgid='FacultyStaffDirectory_help_websites',
+            description_msgid='FacultyStaffDirectory_description_websites',
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Professional Information",
@@ -229,7 +229,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             description=u"Example: abc123",
             label=u"Access Account ID",
             label_msgid='FacultyStaffDirectory_label_id',
-            description_msgid='FacultyStaffDirectory_help_id',
+            description_msgid='FacultyStaffDirectory_description_id',
             i18n_domain='FacultyStaffDirectory',
         ),
         required=True,
@@ -243,7 +243,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         widget=ComputedField._properties['widget'](
             label=u"Full Name",
             visible={'edit': 'invisible', 'view': 'visible'},
-            label_msgid='FacultyStaffDirectory_label_title',
+            label_msgid='FacultyStaffDirectory_label_fullName',
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Basic Information",
@@ -329,6 +329,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             description=u"Password for this person " \
                          "(Leave blank if you don't want to change the password.)",
             label_msgid='FacultyStaffDirectory_label_password',
+            description_msgid='FacultyStaffDirectory_description_password',
             i18n_domain='FacultyStaffDirectory',
             condition="python:here.facultystaffdirectory_tool.getUseInternalPassword() and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
         ),
@@ -345,6 +346,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             description=u"Please re-enter the password. " \
                          "(Leave blank if you don't want to change the password.)",
             label_msgid='FacultyStaffDirectory_label_confirmPassword',
+            description_msgid='FacultyStaffDirectory_description_confirmPassword',
             i18n_domain='FacultyStaffDirectory',
             condition="python:here.facultystaffdirectory_tool.getUseInternalPassword() and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
         ),
@@ -357,6 +359,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label_msgid="label_language",
             description=u"Your preferred language.",
             description_msgid="help_preferred_language",
+            i18n_domain='plone',
             condition="python:'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
         ),
         write_permission=SetOwnProperties,
@@ -371,7 +374,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label_msgid="label_content_editor",
             description=u"Select the content editor that you would like to use. Note that content editors often have specific browser requirements.",
             description_msgid="help_content_editor",
-            i18n_domain='FacultyStaffDirectory',
+            i18n_domain='plone',
             format="select",
             condition="python:'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
         ),
@@ -388,6 +391,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             description=u"When checked, an icon will be made visible on each page which allows you to edit content with your favorite editor instead of using browser-based editors. This requires an additional application called ExternalEditor installed client-side. " \
                          "Ask your administrator for more information if needed.",
             description_msgid="help_content_ext_editor",
+            i18n_domain='plone',
             condition="python:here.portal_properties.site_properties.ext_editor and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()",
             ),
             write_permission=SetOwnProperties,
@@ -401,7 +405,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label_msgid="label_look",
             description=u"Appearance of the site.",
             description_msgid="help_look",
-            i18n_domain='FacultyStaffDirectory',
+            i18n_domain='plone',
             format="select",
             condition="python:here.portal_skins.allow_any and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()",
         ),
@@ -417,6 +421,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label_msgid="label_edit_short_names",
             description=u"Determines if Short Names (also known as IDs) are changable when editing items. If Short Names are not displayed, they will be generated automatically.",
             description_msgid="help_display_names",
+            i18n_domain='plone',
             condition="python:here.portal_properties.site_properties.visible_ids and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
             ),
             write_permission=SetOwnProperties,
