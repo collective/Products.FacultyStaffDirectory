@@ -37,7 +37,7 @@ from Products.FacultyStaffDirectory.validators import SequenceValidator
 logger = logging.getLogger('FacultyStaffDirectory')
 
 schema = ATContentTypeSchema.copy() + Schema((
-
+    
     StringField(
         name='firstName',
         widget=StringWidget(
@@ -61,7 +61,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="Basic Information",
         searchable=True
     ),
-
+    
     StringField(
         name='lastName',
         widget=StringWidget(
@@ -73,7 +73,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="Basic Information",
         searchable=True
     ),
-
+    
     StringField(
         name='suffix',
         widget=StringWidget(
@@ -86,7 +86,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="Basic Information",
         searchable=True
     ),
-
+    
     StringField(
         name='email',
         user_property=True,
@@ -99,7 +99,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         searchable=True,
         validators=('isEmail',)
     ),
-
+    
     LinesField(
         name='jobTitles',
         widget=LinesField._properties['widget'](
@@ -112,7 +112,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="Professional Information",
         searchable=True
     ),
-
+    
     StringField(
         name='officeAddress',
         widget=TextAreaWidget(
@@ -123,7 +123,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="Contact Information",
         searchable=True
     ),
-
+    
     StringField(
         name='officeCity',
         widget=StringWidget(
@@ -134,7 +134,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="Contact Information",
         searchable=True
     ),
-
+    
     StringField(
         name='officeState',
         widget=StringWidget(
@@ -144,7 +144,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         ),
         schemata="Contact Information"
     ),
-
+    
     StringField(
         name='officePostalCode',
         widget=StringWidget(
@@ -154,7 +154,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         ),
         schemata="Contact Information"
     ),
-
+    
     StringField(
         name='officePhone',
         widget=StringWidget(
@@ -167,7 +167,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="Contact Information",
         searchable=True,
     ),
-
+    
     ImageField(
         name='image',
         schemata="Basic Information",
@@ -183,7 +183,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         default_output_type='image/jpeg',
         allowable_content_types=('image/gif','image/jpeg','image/png'),
     ),
-
+    
     TextField(
         name='biography',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
@@ -198,7 +198,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         default_output_type='text/x-html-safe',
         user_property='description'
     ),
-
+    
     LinesField(
         name='education',
         widget=LinesField._properties['widget'](
@@ -209,7 +209,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="Professional Information",
         searchable=True
     ),
-
+    
     LinesField(
         name='websites',
         widget=LinesField._properties['widget'](
@@ -222,7 +222,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="Professional Information",
         validators = SequenceValidator('isURLs', validation.validatorFor('isURL'))
     ),
-
+    
     StringField(
         name='id',
         widget=StringWidget(
@@ -237,7 +237,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="Basic Information",
         write_permission=CHANGE_PERSON_IDS,
     ),
-
+    
     ComputedField(
         name='title',
         widget=ComputedField._properties['widget'](
@@ -251,7 +251,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         user_property='fullname',
         searchable=True
     ),
-
+    
     RelationField(
         name='classifications',
         vocabulary="_classificationReferences",
@@ -266,7 +266,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         multiValued=True,
         relationship='people_classifications'
     ),
-
+    
     RelationField(
         name='departments',
         widget=ReferenceBrowserWidget(
@@ -284,7 +284,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         multiValued=True,
         relationship='DepartmentalMembership'
     ),
-
+    
     RelationField(
         name='committees',
         widget=ReferenceBrowserWidget(
@@ -303,7 +303,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         relationship='members_committees',
         allowed_types=('Committee')
     ),
-
+    
     RelationField(
         name='specialties',
         widget=ReferenceBrowserWidget
@@ -318,7 +318,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         relationship='people_specialties',
         allowed_types=('FSDSpecialty')
     ),
-               
+    
     StringField('password',
         languageIndependent=True,
         required=False,
@@ -334,7 +334,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         ),
         schemata="Basic Information",
     ),
-     
+    
     StringField('confirmPassword',
         languageIndependent=True,
         required=False,
@@ -379,7 +379,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="User Settings",
         vocabulary="_availableEditors",
         user_property='wysiwyg_editor',
-    ),    
+    ),
     
     BooleanField('userpref_ext_editor',
         widget=BooleanWidget(
@@ -409,7 +409,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         schemata="User Settings",
         vocabulary="_skinSelections",
         user_property='look',
-    ),        
+    ),
     
     BooleanField('userpref_invisible_ids',
         widget=BooleanWidget(
@@ -423,7 +423,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             schemata="User Settings",
             user_property='invisible_ids',
     ),
-
+    
     RelationField(
         name='assistants',
         widget=ReferenceBrowserWidget
@@ -441,7 +441,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         multiValued=True,
         relationship='people_assistants',
         allowed_types=('FSDPerson'),
-    ),    
+    ),
     ))
 
 Person_schema = OrderedBaseFolderSchema.copy() + schema.copy()  # + on Schemas does only a shallow copy
@@ -451,15 +451,15 @@ finalizeATCTSchema(Person_schema, folderish=True)
 class PersonModifiedEvent(object):
     """Event that happens when edits to a Person have been saved"""
     implements(IPersonModifiedEvent)
-
+    
     def __init__(self, context):
         self.context = context
 
 class Person(OrderedBaseFolder, ATCTContent):
     """A person in the Faculty/Staff directory"""
-    meta_type = portal_type = "FSDPerson"    
+    meta_type = portal_type = "FSDPerson"
     security = ClassSecurityInfo()
-    __implements__ = (ATCTContent.__implements__, getattr(OrderedBaseFolder,'__implements__', ()),)    
+    __implements__ = (ATCTContent.__implements__, getattr(OrderedBaseFolder,'__implements__', ()),)
     # zope3 interfaces
     implements(IPerson,
                IUserAuthProvider,
@@ -471,7 +471,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     
     # moved schema setting after finalizeATCTSchema, so the order of the fieldsets
     # is preserved. Also after updateActions is called since it seems to overwrite the schema changes.
-    # Move the description field, but not in Plone 2.5 since it's already in the metadata tab. Although, 
+    # Move the description field, but not in Plone 2.5 since it's already in the metadata tab. Although,
     # decription and relateditems are occasionally showing up in the "default" schemata. Move them
     # to "metadata" just to be safe.
     if 'categorization' in Person_schema.getSchemataNames():
@@ -479,7 +479,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     else:
         Person_schema.changeSchemataForField('description', 'metadata')
         Person_schema.changeSchemataForField('relatedItems', 'metadata')
-
+    
     _at_rename_after_creation = True
     schema = Person_schema
     # Methods
@@ -488,16 +488,16 @@ class Person(OrderedBaseFolder, ATCTContent):
         """Notify that the Person has been modified.
         """
         notify(PersonModifiedEvent(self))
-
+    
     security.declareProtected(View, 'at_post_edit_script')
     def at_post_edit_script(self):
         """Notify that the Person has been modified.
         """
         notify(PersonModifiedEvent(self))
-
+    
     def __call__(self, *args, **kwargs):
         return self.getId()
-
+    
     security.declareProtected(View, 'vcard_view')
     def vcard_view(self, REQUEST, RESPONSE):
         """vCard 3.0 output
@@ -505,7 +505,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         RESPONSE.setHeader('Content-Type', 'text/x-vcard')
         RESPONSE.setHeader('Content-Disposition', 'attachment; filename="%s.vcf"' % self.getId())
         out = StringIO()
-
+        
         # Get the fields using the accessors, so they're properly Unicode encoded.
         out.write("BEGIN:VCARD\nVERSION:3.0\n")
         out.write("FN:%s\n" % self.Title())
@@ -514,7 +514,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         out.write(foldLine("ADR;TYPE=dom,postal,parcel,work:;;%s;%s;%s;%s\n" % (self.getOfficeAddress().replace('\r\n','\\n'), self.getOfficeCity(), self.getOfficeState(), self.getOfficePostalCode())))
         out.write("TEL;WORK:%s\n" % self.getOfficePhone())
         out.write("EMAIL;TYPE=internet:%s\n" % self.getEmail())
-
+        
         #Add the Person page to the list of URLs
         urls = list(self.getWebsites())
         urls.append(self.absolute_url())
@@ -525,7 +525,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         out.write("REV:%s\n" % DateTime(self.ModificationDate()).ISO8601())
         out.write("PRODID:WebLion Faculty/Staff Directory\nEND:VCARD")
         return n2rn(out.getvalue())
-
+    
     security.declareProtected(View, 'getSortableName')
     def getSortableName(self):
         """
@@ -533,7 +533,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         Return them as lowercase so that names like 'von Whatever' sort properly
         """
         return (self.lastName.lower(), self.firstName.lower())
-
+    
     security.declareProtected(View, 'Title')
     def Title(self):
         """Return the Title as firstName middleName(when available) lastName, suffix(when available)"""
@@ -554,38 +554,38 @@ class Person(OrderedBaseFolder, ATCTContent):
         t = fn + mn + ln
         if self.getSuffix():
             t = t + ", " + self.getSuffix()
-            
+        
         return t
-
+    
     security.declarePrivate('_classificationReferences')
     def _classificationReferences(self):
         """Return a list of Classifications this Person can be referenced to."""
         return [(c.UID, c.Title) for c in self.aq_parent.getFolderContents({'portal_type': 'FSDClassification'})]
-
+    
     security.declarePrivate('_availableEditors')
     def _availableEditors(self):
         """ Return a list of the available WYSIWYG editors for the site. """
         props = getToolByName(self, 'portal_properties')
         return props['site_properties'].available_editors
-
+    
     security.declarePrivate('_availableLanguages')
     def _availableLanguages(self):
         """ Return a list of the available languages for the site. """
         props = getToolByName(self, 'portal_properties')
         return props.availableLanguages()
-        
+    
     security.declarePrivate('_skinSelections')
     def _skinSelections(self):
         """ Return a list of the available skins for the site. """
         skins = getToolByName(self, 'portal_skins')
         return skins.getSkinSelections()
-        
+    
     security.declareProtected(View, 'getCourses')
     def getCourses(self):
         """Return a listing of Courses contained by this Person."""
         portal_catalog = getToolByName(self, 'portal_catalog')
         return portal_catalog(path='/'.join(self.getPhysicalPath()), portal_type='FSDCourse', depth=1, sort_on="getObjPositionInParent")
-
+    
     security.declareProtected(View, 'getClassificationNames')
     def getClassificationNames(self):
         """ Returns a list of the titles of the classifications attached to this person.
@@ -657,7 +657,7 @@ class Person(OrderedBaseFolder, ATCTContent):
                 depthFirst(child)
         depthFirst(self.getSpecialtyTree())
         return items
-
+    
     security.declareProtected(View, 'getSpecialtyNames')
     def getSpecialtyNames(self):
         """Return a list of the titles of the specialties explicitly attached to this person.
@@ -667,7 +667,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         Mainly used for pretty-looking metadata in SmartFolder tables.
         """
         return [x.Title for x, _ in self.getSpecialties()]
-
+    
     security.declareProtected(View, 'getResearchTopics')
     def getResearchTopics(self):
         """Return a list of the research topics of the specialties explicitly attached to this person.
@@ -688,25 +688,25 @@ class Person(OrderedBaseFolder, ATCTContent):
     security.declareProtected(View, 'getDepartmentNames')
     def getDepartmentNames(self):
         """ Returns a list of the titles of the departments attached to this person.
-            Mainly used for pretty-looking metadata in SmartFolder tables. Returns an 
+            Mainly used for pretty-looking metadata in SmartFolder tables. Returns an
             alphabetically-sorted list since Departments can be located anywhere within the site,
             which makes using any other sort order somewhat problematic.
         """
         dList = [d.Title() for d in self.getDepartments()]
         dList.sort()
         return dList
-
+    
     security.declareProtected(View, 'getCommitteeNames')
     def getCommitteeNames(self):
         """ Returns a list of the titles of the committees attached to this person.
-            Mainly used for pretty-looking metadata in SmartFolder tables. Returns an 
+            Mainly used for pretty-looking metadata in SmartFolder tables. Returns an
             alphabetically-sorted list since Committees can be located throughout the site,
             which makes using any other sort order somewhat problematic.
         """
         dList = [d.Title() for d in self.getCommittees()]
         dList.sort()
         return dList
-
+    
     security.declareProtected(ModifyPortalContent, 'pre_edit_setup')
     def pre_edit_setup(self):
         """ I hate myself for doing this, but until we can get
@@ -724,25 +724,29 @@ class Person(OrderedBaseFolder, ATCTContent):
         else:
             url = ""
         self.schema['specialties'].widget.startup_directory = '/%s' % url
-
+        
         fsd_tool = getToolByName(self,TOOLNAME)
         if (fsd_tool.getPhoneNumberRegex()):
             self.schema['officePhone'].widget.description = u"Example: %s" % fsd_tool.getPhoneNumberDescription()
         if (fsd_tool.getIdLabel()):
             self.schema['id'].widget.label = u"%s" % fsd_tool.getIdLabel()
+
+        # Make sure the default for the editor field is the same as the site defaut. No idea why this isn't being handled properly.
+        memberProps = getToolByName(self, 'portal_memberdata')
+        self.schema['userpref_wysiwyg_editor'].default = memberProps.wysiwyg_editor
         
         return self.base_edit()
-
+    
     security.declareProtected(View, 'tag')
     def tag(self, **kwargs):
         """Pass along the 'tag' method to the Person's image."""
         return self.getWrappedField('image').tag(self, **kwargs)
-
+    
     security.declareProtected(View, 'getImageOfSize')
     def getImageOfSize(self, height, width, **kwargs):
         """Return the person's image sized to the given dimensions."""
         return self.getWrappedField('image').tag(self, width=width, height=height, **kwargs)
-
+    
     security.declareProtected(View, 'getScaledImageByWidth')
     def getScaledImageByWidth(self, preferredWidth, **kwargs):
         """Return the person's image sized to the given width and a height scaled according to the original image ratio. Fail nicely, returning no image tag. This seems to occur when TIFF images are used."""
@@ -752,7 +756,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         hwratio = float(self.image.height)/float(self.image.width)
         calcHeight = int(preferredWidth * hwratio)
         return self.getImageOfSize(calcHeight, preferredWidth, **kwargs)
-
+    
     security.declareProtected(ModifyPortalContent, 'setImage')
     def setImage(self, value, **kwargs):
         field = self.getField('image')
@@ -761,7 +765,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         md = getToolByName(self, 'portal_memberdata')
         if md.portraits.has_key(self.id):
             md.portraits._delObject(self.id)
-
+        
         # Assign the image to the field
         field.set(self, value)
         
@@ -770,7 +774,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         if value and value != 'DELETE_IMAGE':
             # Add the new portrait
             md.portraits._setObject(id=self.id, object=self.getImage())
-
+    
     security.declareProtected(ModifyPortalContent, 'setBiography')
     def setBiography(self, value, **kwargs):
         """Body text mutator
@@ -779,7 +783,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         """
         field = self.getField('biography')
         # XXX this is ugly
-        # When an object is initialized the first time we have to 
+        # When an object is initialized the first time we have to
         # set the filename and mimetype.
         # In the case the value is empty/None we must not set the value because
         # it will overwrite uploaded data like a pdf file.
@@ -792,14 +796,14 @@ class Person(OrderedBaseFolder, ATCTContent):
                     field.setFilename(self, kwargs['filename'])
             else:
                 return
-
+        
         # hook for mxTidy / isTidyHtmlWithCleanup validator
         tidyOutput = self.getTidyOutput(field)
         if tidyOutput:
             value = tidyOutput
-
-        field.set(self, value, **kwargs) # set is ok    
-
+        
+        field.set(self, value, **kwargs) # set is ok
+    
     security.declarePrivate('getTidyOutput')
     def getTidyOutput(self, field):
         """Get the tidied output for a specific field from the request
@@ -809,25 +813,25 @@ class Person(OrderedBaseFolder, ATCTContent):
         if request is not None and isinstance(request, HTTPRequest):
             tidyAttribute = '%s_tidier_data' % field.getName()
             return request.get(tidyAttribute, None)
-
+    
     security.declareProtected(SetOwnPassword, 'setPassword')
     def setPassword(self, value):
         """"""
         if value:
             annotations = IAnnotations(self)
             annotations[PASSWORD_KEY] = sha(value).digest()
-        
+    
     security.declareProtected(SetOwnPassword, 'setConfirmPassword')
     def setConfirmPassword(self, value):
         """"""
         # Do nothing - this value is used for verification only
         pass
-        
 
+    
     security.declarePrivate('validate_id')
     def validate_id(self, value):
         """
-        """        
+        """
         # Ensure the ID is unique in this folder:
         if value != self.getId():
             parent = aq_parent(aq_inner(self))
@@ -839,7 +843,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         regexString = fsd_tool.getIdRegex()
         if not re.match(regexString, value):
             return fsd_tool.getIdRegexErrorMessage()
-
+    
     security.declarePrivate('validate_officePhone')
     def validate_officePhone(self, value=None):
         """ Make sure the phone number fits the regex defined in the configuration. """
@@ -848,18 +852,18 @@ class Person(OrderedBaseFolder, ATCTContent):
             regexString = fsd_tool.getPhoneNumberRegex()
             if regexString and not re.match(regexString, value):
                 return "Please provide the phone number in the format %s" % fsd_tool.getPhoneNumberDescription()
-        
 
+    
     security.declarePrivate('post_validate')
     def post_validate(self, REQUEST, errors):
         form = REQUEST.form
         if form.has_key('password') or form.has_key('confirmPassword'):
             password = form.get('password', None)
             confirm = form.get('confirmPassword', None)
-
+            
             annotations = IAnnotations(self)
             passwordDigest = annotations.get(PASSWORD_KEY, None)
-           
+            
             if not passwordDigest:
                 if not password and not confirm:
                     errors['password'] = u'An initial password must be set'
@@ -871,7 +875,7 @@ class Person(OrderedBaseFolder, ATCTContent):
 
 # Implementing IMultiPageSchema forces the edit template to render in the more Plone 2.5-ish manner,
 # with actual links at the top of the page instead of Javascript tabs. This allows us to direct people
-# immediately to a specific fieldset with a ?fieldset=somethingorother query string. Plus, it also 
+# immediately to a specific fieldset with a ?fieldset=somethingorother query string. Plus, it also
 # gives the next/previous links at the bottom of the form.
 try:
     from Products.Archetypes.interfaces import IMultiPageSchema

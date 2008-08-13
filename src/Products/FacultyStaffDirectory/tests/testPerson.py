@@ -429,7 +429,14 @@ class testWithoutSpecialties(testPerson):
         except KeyError:
             self.Fail("FacultyStaffDirectory incorrectly tried to find the user attached to a FSPerson while membrane support was disabled.")
 
-    
+    # Err... can't actually test for this since it's being handled in pre_edit_setup. Any ideas?
+    # def testDefaultEditor(self):
+    #     """ Make sure the editor is being set to the site's default. """
+    #     memberProps = getToolByName(self.portal, 'portal_memberdata')
+    #     defaultEditor = memberProps.wysiwyg_editor
+    #     self.assertEquals(self.person.getUserpref_wysiwyg_editor(), defaultEditor, 'The editor set by default for Person does not follow the site default.')
+
+
     ## End tests for membrane stuff
 
 class testWithSpecialties(testPerson):
