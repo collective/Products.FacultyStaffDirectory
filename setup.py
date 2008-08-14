@@ -9,7 +9,7 @@ version = '2.1-dev'
 
 setup(name='Products.FacultyStaffDirectory',
       version=version,
-      description="",
+      description="Provides content types for creating and organizing personnel directories within educational institutions. Integrates with Plone's users and groups infrastructure and supports an extensibility framework for custom requirements.",
       long_description=open("src/Products/FacultyStaffDirectory/HISTORY.txt").read() + "\n\n" +
                        open("src/Products/FacultyStaffDirectory/README.txt").read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
