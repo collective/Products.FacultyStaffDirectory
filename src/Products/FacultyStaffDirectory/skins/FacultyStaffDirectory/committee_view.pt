@@ -26,7 +26,7 @@
         
         <div tal:content="structure here/getText" />
 
-        <h3 i18n:translate="FacultyStaffDirectory_label_members">Members:</h3>
+        <h3><span i18n:translate="FacultyStaffDirectory_label_members">Members</span>:</h3>
         <ul>
             <li tal:repeat="member context/getMembers">
                 <tal:block tal:define="membershipData python:context.getMembershipInformation(member);">

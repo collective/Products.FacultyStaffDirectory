@@ -64,7 +64,7 @@
                                     <span tal:condition="python:checkPermission('Modify portal content', person)"
                                           class="discreet">[
                                         <a tal:attributes="href python:'%s/edit' % personMembershipInformation.absolute_url()">
-                                           <tal:block tal:condition="personMembershipInformation/getPosition i18n:translate="FacultyStaffDirectory_editPosition"">Edit position</tal:block>
+                                           <tal:block tal:condition="personMembershipInformation/getPosition" i18n:translate="FacultyStaffDirectory_editPosition">Edit position</tal:block>
                                            <tal:block tal:condition="not:personMembershipInformation/getPosition" i18n:translate="FacultyStaffDirectory_assignPosition">Assign a position</tal:block>
                                         </a>
                                     ]</span>                                        
