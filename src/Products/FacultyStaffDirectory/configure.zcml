@@ -9,7 +9,7 @@
 
     <i18n:registerTranslations directory="locales"/>
 
-    <utility name="PersonnelManager" factory=".sharing.PersonnelManagerRole"/>
+    <utility name="Personnel Manager" factory=".sharing.PersonnelManagerRole"/>
 
     <!-- These should be unnecessary once BaseContent and BaseFolder stop using manage_afterAdd(): -->
     <five:deprecatedManageAddDelete class=".FacultyStaffDirectory.FacultyStaffDirectory"/>
