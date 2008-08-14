@@ -142,7 +142,9 @@ def install(self, reinstall=False):
     
     #####
     # Catalog Manipulations
-    #  These should be moved to GS profile if possible
+    #  These could be places in a catalog.xml GenericSetup step, but doing so would
+    #  mean that the added indexes would be deleted each time we re-install.  This
+    #  would slow down reinstalls unacceptably.  Leave this code here in install.py
     catalogTool = getToolByName(self, 'portal_catalog')
     
     # Add indexes if they don't exist:
@@ -165,6 +167,9 @@ def install(self, reinstall=False):
             
     #####
     # Smart Folder Manipulations
+    #  These could be places in a catalog.xml GenericSetup step, but doing so would
+    #  mean that the added indexes would be deleted each time we re-install.  This
+    #  would slow down reinstalls unacceptably.  Leave this code here in install.py
     
     # Set up SmartFolder/Topic/Collection fields:
     smart_folder_tool = getToolByName(self, 'portal_atct')           
@@ -211,6 +216,7 @@ def install(self, reinstall=False):
     #####
     # Action Manipulations
     #   These should probably also live in GS profiles, eventually.  Move them there if possible
+    #   This should be movable after we drop support for plone 2.5
         
     # Add action icon for vCards:
     ai=getToolByName(self, 'portal_actionicons')
@@ -361,7 +367,6 @@ def uninstall(self, reinstall=False):
         #  Note:  It appears that these steps do not need to be taken.  Apparently, removing
         #         the indexes and metadata from the catalog tool itself is enough to ensure 
         #         that they are also removed from the smart folder tool.
-        #  We will want to remove all this stuff once we are sure that the uninstall tests pass in plone 3.x
         #  Update: It turns out that this code is needed in plone 3.x  If it is missing, 
         #          the indexes and metadata do not get removed.  there must be some change in 
         #          the relationship between the smart folder tool and the portal catalog
@@ -450,7 +455,10 @@ def uninstall(self, reinstall=False):
     
         # Okay, unregister the membrane_tool from the InstalledProduct.portalobjects property in the QI tool.
         # IMPORTANT!!!
-        # remember that this is all because of the way we are installing membrane in the first place, when the QI tool is improved in all versions to support installing via GS profile alone, this will be moot.  It shouldn't break even then, though, because of the set stuff.
+        # remember that this is all because of the way we are installing membrane in the 
+        # first place, when the QI tool is improved in all versions to support installing 
+        # via GS profile alone, this will be moot.  It shouldn't break even then, though, 
+        # because of the set stuff.
         qt = getToolByName(self, 'portal_quickinstaller')
         fsd_product = getattr(qt, 'FacultyStaffDirectory')
         portal_objects_list = fsd_product.getPortalObjects()
