@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
 	  lang="en"
 	  metal:use-macro="here/specialty_view/macros/master"
-	  i18n:domain="plone">
+	  i18n:domain="FacultyStaffDirectory">
 	<body>
 		<metal:block fill-slot="listing_section">
 			<div class="standardView">   
@@ -23,14 +23,15 @@
                                     <span tal:condition="python:checkPermission('Modify portal content', person)"
                                           class="discreet">[
                                         <a tal:attributes="href python:'%s/edit' % personSpecialtyData.absolute_url()">
-                                           <tal:block tal:condition="personSpecialtyData/getResearchTopic">Edit research topic</tal:block>
-                                           <tal:block tal:condition="not:personSpecialtyData/getResearchTopic">Assign a research topic</tal:block>
+                                           <tal:block tal:condition="personSpecialtyData/getResearchTopic" i18n:translate="FacultyStaffDirectory_editResearchTopic">Edit research topic</tal:block>
+                                           <tal:block tal:condition="not:personSpecialtyData/getResearchTopic" i18n:translate="FacultyStaffDirectory_assignResearchTopic">Assign a research topic</tal:block>
                                         </a>
                                     ]</span>                                        
                                 </div>
                                 
                                 <div class="moreInfo">
-                                    <a tal:attributes="href person/absolute_url">
+                                    <a tal:attributes="href person/absolute_url"
+                                       i18n:translate="FacultyStaffDirectory_moreAbout">
                                         More about 
                                         <span tal:replace="person/Title">[Name]</span>...
                                     </a>

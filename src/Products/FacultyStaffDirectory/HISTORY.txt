@@ -2,7 +2,7 @@ Version History
 
   ' ' 2.1 -- ' '
         
-        * Added i18n hooks for all fields
+        * Added i18n hooks for all fields and templates
         
         * Removed a boatload of unused imports
         

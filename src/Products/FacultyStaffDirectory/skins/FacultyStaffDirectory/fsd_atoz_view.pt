@@ -1,14 +1,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
 	  lang="en"
 	  metal:use-macro="here/directory_view/macros/master"
-	  i18n:domain="plone">
+	  i18n:domain="FacultyStaffDirectory">
 	<body>
         <metal:block fill-slot="classification_links" />
 		<metal:block fill-slot="listing_section">
             <div tal:content="structure here/getText"
                  tal:condition="here/getText|nothing" />
 
-            <h2 tal:condition="not:classificationsInRequest">People</h2>
+            <h2 tal:condition="not:classificationsInRequest" i18n:translate="FacultyStaffDirectory_people">People</h2>
             <div class="atozView">
                 <div tal:define="allLetters string:ABCDEFGHIJKLMNOPQRSTUVWXYZ;
                                  usedLetters python:[person.getLastName().upper()[0] for person in context.getSortedPeople()]"
@@ -29,13 +29,13 @@
                                        tal:condition="people">     
                                 <metal:block define-slot="table_headings">
                                     <tr>
-                                        <th class="column">
+                                        <th class="column" i18n:translate="FacultyStaffDirectory_name">
                                             Name
                                         </th>
-                                        <th class="column">
+                                        <th class="column" i18n:translate="FacultyStaffDirectory_phone">
                                             Phone
                                         </th>
-                                        <th class="column">
+                                        <th class="column" i18n:translate="FacultyStaffDirectory_email">
                                             Email
                                         </th>
                                     </tr>

@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
 	  lang="en"
 	  metal:use-macro="here/department_view/macros/master"
-	  i18n:domain="plone">
+	  i18n:domain="FacultyStaffDirectory">
 	<body>
 		<metal:block fill-slot="listing_section">
 			<div class="tabularView">
@@ -12,16 +12,16 @@
                                 <tal:block metal:use-macro="classification/classification_tabular_view/macros/list_people">
                                     <tal:block metal:fill-slot="table_headings">
                                         <tr>
-                                            <th class="column">
+                                            <th class="column" i18n:translate="FacultyStaffDirectory_name">
                                                 Name
                                             </th>
-                                            <th class="column">
+                                            <th class="column" i18n:translate="FacultyStaffDirectory_phone">
                                                 Phone
                                             </th>
-                                            <th class="column">
+                                            <th class="column" i18n:translate="FacultyStaffDirectory_email">
                                                 Email
                                             </th>
-                                            <th>
+                                            <th i18n:translate="FacultyStaffDirectory_researchTopic">
                                                 Research Topic
                                             </th>
                                         </tr>
@@ -39,8 +39,8 @@
                                             <span tal:condition="python:checkPermission('Modify portal content', person)"
                                                   class="discreet">[
                                                 <a tal:attributes="href python:'%s/edit' % personMembershipInformation.absolute_url()">
-                                                   <tal:block tal:condition="personMembershipInformation/getPosition">Edit position</tal:block>
-                                                   <tal:block tal:condition="not:personMembershipInformation/getPosition">Assign a position</tal:block>
+                                                   <tal:block tal:condition="personMembershipInformation/getPosition" i18n:translate="FacultyStaffDirectory_editPosition">Edit position</tal:block>
+                                                   <tal:block tal:condition="not:personMembershipInformation/getPosition" i18n:translate="FacultyStaffDirectory_assignPosition">Assign a position</tal:block>
                                                 </a>
                                             ]</span>                        
                                         </td>
