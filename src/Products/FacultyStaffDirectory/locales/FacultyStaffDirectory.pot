@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2008-08-13 18:27+0000\n"
+"POT-Creation-Date: 2008-08-14 02:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,16 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: FacultyStaffDirectory\n"
+
+#. Default: "Assign a research topic"
+#: ./skins/FacultyStaffDirectory/person_view.pt:92
+msgid "Assign a research topic"
+msgstr ""
+
+#. Default: "Edit research topic"
+#: ./skins/FacultyStaffDirectory/person_view.pt:91
+msgid "Edit research topic"
+msgstr ""
 
 #. Default: "The roles all people in this directory will be granted site-wide"
 #: Content Type: FSDFacultyStaffDirectory, Field: roles_
@@ -112,14 +122,19 @@ msgstr ""
 msgid "FacultyStaffDirectory_label_abbreviation"
 msgstr ""
 
-#. Default: "Personal Assistant(s)"
-#: Content Type: FSDPerson, Field: assistants
+#. Default: "Assistants:"
+#: ./skins/FacultyStaffDirectory/person_view.pt:120
 msgid "FacultyStaffDirectory_label_assistants"
 msgstr ""
 
-#. Default: "Biography"
-#: Content Type: FSDPerson, Field: biography
+#. Default: "Biography:"
+#: ./skins/FacultyStaffDirectory/person_view.pt:60
 msgid "FacultyStaffDirectory_label_biography"
+msgstr ""
+
+#. Default: "${fullName} is an assistant to:"
+#: ./skins/FacultyStaffDirectory/person_view.pt:134
+msgid "FacultyStaffDirectory_label_bosses"
 msgstr ""
 
 #. Default: "Classifications"
@@ -137,6 +152,11 @@ msgstr ""
 msgid "FacultyStaffDirectory_label_confirmPassword"
 msgstr ""
 
+#. Default: "Courses:"
+#: ./skins/FacultyStaffDirectory/person_view.pt:104
+msgid "FacultyStaffDirectory_label_courses"
+msgstr ""
+
 #. Default: "Departments"
 #: Content Type: FSDPerson, Field: departments
 msgid "FacultyStaffDirectory_label_departments"
@@ -149,8 +169,8 @@ msgstr ""
 msgid "FacultyStaffDirectory_label_description"
 msgstr ""
 
-#. Default: "Education"
-#: Content Type: FSDPerson, Field: education
+#. Default: "Education:"
+#: ./skins/FacultyStaffDirectory/person_view.pt:65
 msgid "FacultyStaffDirectory_label_education"
 msgstr ""
 
@@ -225,8 +245,8 @@ msgstr ""
 msgid "FacultyStaffDirectory_label_officeCity"
 msgstr ""
 
-#. Default: "Office Phone"
-#: Content Type: FSDPerson, Field: officePhone
+#. Default: "Phone: ${DYNAMIC_CONTENT}"
+#: ./skins/FacultyStaffDirectory/person_view.pt:43
 msgid "FacultyStaffDirectory_label_officePhone"
 msgstr ""
 
@@ -287,6 +307,11 @@ msgstr ""
 msgid "FacultyStaffDirectory_label_position"
 msgstr ""
 
+#. Default: "Research Interests:"
+#: ./skins/FacultyStaffDirectory/person_view.pt:74
+msgid "FacultyStaffDirectory_label_researchInterests"
+msgstr ""
+
 #. Default: "Research Topic"
 #: Content Type: FSDSpecialtyInformation, Field: researchTopic
 msgid "FacultyStaffDirectory_label_researchTopic"
@@ -327,13 +352,8 @@ msgstr ""
 msgid "FacultyStaffDirectory_label_website"
 msgstr ""
 
-#. Default: "Web Sites"
-#: Content Type: FSDPerson, Field: websites
-msgid "FacultyStaffDirectory_label_websites"
-msgstr ""
-
 #. Default: "Websites:"
-#: ./skins/FacultyStaffDirectory/person_view.pt:45
-msgid "Websites:"
+#: ./skins/FacultyStaffDirectory/person_view.pt:46
+msgid "FacultyStaffDirectory_label_websites"
 msgstr ""
 

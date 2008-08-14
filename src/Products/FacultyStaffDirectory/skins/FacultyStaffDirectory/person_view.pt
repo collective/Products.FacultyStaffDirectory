@@ -5,14 +5,14 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="FacultyStaffDirectory">
 
   <head></head>
   
   <body>
   
     <metal:fill fill-slot="main">
-        <div class="facultyStaffDirectory personView" i18n:domain="FacultyStaffDirectory">
+        <div class="facultyStaffDirectory personView">
 
             <div class="caption">
               <div class="headshot"
@@ -37,12 +37,13 @@
                     <span tal:replace="structure python:context.spamProtectFSD(context.getEmail())" />
                 </div>
                 <div tal:condition="context/getOfficePhone" 
-                     class="officePhone">
+                     class="officePhone"
+                     i18n:translate="FacultyStaffDirectory_label_officePhone">
                     Phone:
                     <span tal:replace="context/getOfficePhone"/>
                 </div>
                 <div tal:condition="context/getWebsites" class="websites">
-                    <h3 i18n:translate="">Websites:</h3>
+                    <h3 i18n:translate="FacultyStaffDirectory_label_websites">Websites:</h3>
                     <ul>
                         <li tal:repeat="website context/getWebsites">
                             <a href="" 
@@ -56,12 +57,12 @@
             <div class="visualClear"><!-- --></div>
             
             <div tal:condition="here/getBiography" class="biography">
-                <h3>Biography:</h3>
+                <h3 i18n:translate="FacultyStaffDirectory_label_biography">Biography:</h3>
                 <span tal:content="structure context/getBiography" />
             </div>           
 
             <div tal:condition="context/getEducation" class="education">
-                <h3>Education:</h3>
+                <h3 i18n:translate="FacultyStaffDirectory_label_education">Education:</h3>
                 <ol>
                     <li tal:repeat="degree context/getEducation">
                         <span tal:content="degree" />
@@ -70,7 +71,7 @@
             </div>            
 
             <div class="specialties" tal:define="specialtyTuples context/getSpecialties" tal:condition="specialtyTuples">
-                <h3>Research Interests:</h3>
+                <h3 i18n:translate="FacultyStaffDirectory_label_researchInterests">Research Interests:</h3>
                 <dl>
                     <tal:block tal:repeat="eachSpecialtyTuple specialtyTuples">
                         <tal:block tal:define="specialtyBrain python:eachSpecialtyTuple[0];
@@ -87,8 +88,8 @@
                                 <span tal:condition="python:checkPermission('Modify portal content', context)"
                                       class="discreet">[
                                     <a tal:attributes="href python:'%s/edit' % personSpecialtyData.absolute_url()">
-                                       <tal:block tal:condition="researchTopic">Edit research topic</tal:block>
-                                       <tal:block tal:condition="not:researchTopic">Assign a research topic</tal:block>
+                                       <tal:block tal:condition="researchTopic" i18n:translate="">Edit research topic</tal:block>
+                                       <tal:block tal:condition="not:researchTopic" i18n:translate="">Assign a research topic</tal:block>
                                     </a>
                                 ]</span>
                             </dd>
@@ -100,7 +101,7 @@
             <div class="courselisting" 
                  tal:define="courses context/getCourses"
                  tal:condition="courses">
-                <h3>Courses:</h3>
+                <h3 i18n:translate="FacultyStaffDirectory_label_courses">Courses:</h3>
                 <dl tal:repeat="course courses">
                     <dt>
                         <a tal:attributes="href course/getRemoteUrl"
@@ -116,7 +117,7 @@
                  tal:define="assistants context/getAssistants;
                              member python:context.portal_membership.getAuthenticatedMember()"
                  tal:condition="python:assistants and member.checkPermission('Add portal content', here)">
-              <h3>Assistants:</h3> 
+              <h3 i18n:translate="FacultyStaffDirectory_label_assistants">Assistants:</h3> 
               <ul tal:repeat="assistant assistants">
                 <li tal:define="url assistant/absolute_url;
                                 name assistant/Title">
@@ -130,7 +131,7 @@
                  tal:define="bosses python:context.getReferences(relationship='assistants_people');
                              member python:context.portal_membership.getAuthenticatedMember()"
                  tal:condition="python:bosses and member.checkPermission('Add portal content', here)">
-              <h3 tal:define="myName context/Title"><span tal:replace="myName">My Name</span> is an assistant to:</h3> 
+              <h3 tal:define="myName context/Title" i18n:translate="FacultyStaffDirectory_label_bosses"><span tal:replace="myName" i18n:name="fullName">My Name</span> is an assistant to:</h3> 
               <ul tal:repeat="boss bosses">
                 <li tal:define="url boss/absolute_url;
                                 name boss/Title">
