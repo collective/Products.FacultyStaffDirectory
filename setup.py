@@ -1,5 +1,6 @@
 # To build locally: python setup.py egg_info -RDb "" bdist_egg 
 # To release: python setup.py egg_info -RDb "" sdist bdist_egg register upload
+# To release a dev build: python setup.py egg_info -rD sdist bdist_egg register upload
 
 from setuptools import setup, find_packages
 import os
