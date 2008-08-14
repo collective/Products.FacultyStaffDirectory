@@ -2,6 +2,8 @@ Version History
 
   ' ' 2.1 -- ' '
         
+        * Added a "can manage personnel" field to the sharing tab
+        
         * Added i18n hooks for all fields and templates
         
         * Removed a boatload of unused imports
