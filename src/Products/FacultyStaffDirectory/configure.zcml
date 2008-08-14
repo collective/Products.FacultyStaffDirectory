@@ -6,7 +6,11 @@
     <include package=".membership"/>
     <include file="profiles.zcml"/>
     <include package="archetypes.schemaextender"/>
+
     <i18n:registerTranslations directory="locales"/>
+
+    <utility name="PersonnelManager" factory=".sharing.PersonnelManagerRole"/>
+
     <!-- These should be unnecessary once BaseContent and BaseFolder stop using manage_afterAdd(): -->
     <five:deprecatedManageAddDelete class=".FacultyStaffDirectory.FacultyStaffDirectory"/>
     <five:deprecatedManageAddDelete class=".Classification.Classification"/>
