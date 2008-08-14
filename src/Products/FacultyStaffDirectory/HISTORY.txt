@@ -1,6 +1,14 @@
 Version History
 
   ' ' 2.1 -- ' '
+
+        * Added a field to the classification gallery view to control the width of the Person images
+        
+        * Multiple FacultyStaffDirectory objects can now exist in the same site
+        
+        * Improved product reinstallation performance
+        
+        * Added an assistant field to confer profile editing delegation on other users
         
         * Added a "can manage personnel" field to the sharing tab
         
