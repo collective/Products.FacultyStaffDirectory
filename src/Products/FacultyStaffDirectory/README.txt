@@ -244,7 +244,7 @@ Authorship
 
 Thanks
     
-    Special thanks to Andreas Jung for his early testing and reminding us that,
+    Special thanks to Andreas Jung for his early testing, code contributions, and reminding us that,
     yes, people do live outside the United States.
 
 Support

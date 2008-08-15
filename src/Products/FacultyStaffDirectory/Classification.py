@@ -16,8 +16,6 @@ from Products.CMFCore.permissions import ManageUsers
 from Products.membrane.interfaces import IPropertiesProvider
 from Products.FacultyStaffDirectory.interfaces.classification import IClassification
 from Acquisition import aq_inner, aq_parent
-#from Products.FacultyStaffDirectory.interfaces.person import IPerson
-#from Products.FacultyStaffDirectory.membership.person import UserRelated
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE
 
 schema = Schema((
