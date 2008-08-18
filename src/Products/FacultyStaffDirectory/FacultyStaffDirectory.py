@@ -35,7 +35,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     IntegerField('personClassificationViewThumbnailWidth',
         accessor='getClassificationViewThumbnailWidth',
         mutator='setClassificationViewThumbnailWidth',
-        schemata='User Interface',
+        schemata='Display',
         default=100,
         write_permission=ManageUsers,
         widget=IntegerWidget(
