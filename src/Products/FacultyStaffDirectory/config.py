@@ -24,7 +24,7 @@ ADD_CONTENT_PERMISSIONS = {
     'Person': 'FacultyStaffDirectory: Add or Remove People',
 }
 
-setDefaultRoles('FacultyStaffDirectory: Add or Remove People', ('Manager','Owner'))
+setDefaultRoles('FacultyStaffDirectory: Add or Remove People', ('Manager','Owner', 'Personnel Manager'))
 
 product_globals = globals()
 

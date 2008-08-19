@@ -82,6 +82,15 @@ class testWithoutSpecialties(testPerson):
         
         # Check the sortable name
         self.failUnlessEqual(self.person.getSortableName(), ('person', 'test'))
+        
+        # Check that Personnel Managers can add a Person.
+        self.logout()
+        self.login()
+        self.setRoles(['Personnel Manager'])
+        try:
+            self.getPerson(id='zif572', firstName="Test", lastName="Person")
+        except 'Unauthorized': 
+            self.fail("User with the Personnel Manager role was unable to create a Person.")
     
     def testCourses(self):
         """Add and retrieve course objects"""
