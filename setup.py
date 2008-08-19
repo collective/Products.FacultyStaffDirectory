@@ -1,11 +1,14 @@
-# To build locally: python setup.py egg_info -RDb "" bdist_egg 
-# To release: python setup.py egg_info -RDb "" sdist bdist_egg register upload
-# To release a dev build: python setup.py egg_info -rD sdist bdist_egg register upload
-
+"""
+To build locally: python setup.py egg_info -RDb "" bdist_egg 
+To release: python setup.py egg_info -RD sdist bdist_egg register upload
+To create a named release: python setup.py egg_info -RDb "alpha" sdist bdist_egg register upload
+To release a dev build: python setup.py egg_info -rD sdist bdist_egg register upload
+See http://peak.telecommunity.com/DevCenter/setuptools#release-tagging-options for more information.
+"""
 from setuptools import setup, find_packages
 import os
 
-version = '2.1-dev'
+version = '2.1'
 
 setup(name='Products.FacultyStaffDirectory',
       version=version,
@@ -25,7 +28,7 @@ setup(name='Products.FacultyStaffDirectory',
       license='GPL',
       packages=find_packages('src'),
       package_dir={'': 'src'},
-      namespace_packages=['Products'    ],
+      namespace_packages=['Products'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
