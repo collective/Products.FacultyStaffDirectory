@@ -6,7 +6,7 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
-from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFacultyStaffDirectory, IFacultyStaffDirectoryContent, IFacultyStaffDirectoryModifiedEvent
+from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFacultyStaffDirectory
 from Products.FacultyStaffDirectory.config import *
 from Products.CMFCore.permissions import View, ManageUsers
 from Products.CMFCore.utils import getToolByName
@@ -21,13 +21,29 @@ schema = ATContentTypeSchema.copy() + Schema((
         accessor='getRoles',
         mutator='setRoles',
         edit_accessor='getRawRoles',
-        languageIndependent=True,
         vocabulary='getRoleSet',
         multiValued=1,
         write_permission=ManageUsers,
         widget=MultiSelectionWidget(
             label=u'Roles',
             description=u"The roles all people in this directory will be granted site-wide",
+            i18n_domain="FacultyStaffDirectory",
+            label_msgid='FacultyStaffDirectory_label_FacultyStaffDirectoryRoles',
+            description_msgid='FacultyStaffDirectory_description_FacultyStaffDirectoryRoles',
+            ),
+        ),
+    IntegerField('personClassificationViewThumbnailWidth',
+        accessor='getClassificationViewThumbnailWidth',
+        mutator='setClassificationViewThumbnailWidth',
+        schemata='Display',
+        default=100,
+        write_permission=ManageUsers,
+        widget=IntegerWidget(
+            label=u'Width for thumbnails in classification view',
+            description=u"Show all person thumbnails with a fixed width (in pixels) within the classification view",
+            i18n_domain="FacultyStaffDirectory",
+            label_msgid='FacultyStaffDirectory_label_personClassificationViewThumbnailWidth',
+            description_msgid='FacultyStaffDirectory_description_personClassificationViewThumbnailWidth',
             ),
         ),
     ))
@@ -76,6 +92,11 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         # Create a specialties folder
         self.invokeFactory('FSDSpecialtiesFolder', id='specialties', title='Specialties')
 
+    security.declareProtected(View, 'getDirectoryRoot')
+    def getDirectoryRoot(self):
+        """Return the current FSD object through acquisition."""
+        return self
+
     security.declareProtected(View, 'getClassifications')
     def getClassifications(self):
         """Return the classifications (in brains form) within this FacultyStaffDirectory."""
@@ -93,20 +114,24 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
             return None
 
     security.declareProtected(View, 'getPeople')
-    def getPeople(self):
+    def getPeople(self, as_objects=True):
         """Return a list of people contained within this FacultyStaffDirectory."""
         portal_catalog = getToolByName(self, 'portal_catalog')
         results = portal_catalog(path='/'.join(self.getPhysicalPath()), portal_type='FSDPerson', depth=1)
-        return [brain.getObject() for brain in results]
+        if as_objects:
+            return [brain.getObject() for brain in results]
+        else:
+            return results
 
     security.declareProtected(View, 'getSortedPeople')
-    def getSortedPeople(self):
+    def getSortedPeople(self, as_objects=True):
         """ Return a list of people, sorted by SortableName
         """
-        people = self.getPeople()
-        pList = [(people[i].getSortableName(), i, people[i]) for i in xrange(len(people))]
-        pList.sort()
-        return [tup[-1] for tup in pList]
+        people = self.getPeople(as_objects=as_objects)
+        if as_objects:
+            return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
+        else:
+            return sorted(people, cmp=lambda x,y: cmp(x.getSortableName, y.getSortableName))
 
     security.declareProtected(View, 'getDepartments')
     def getDepartments(self):
@@ -128,6 +153,7 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         allowed_roles = [r for r in portal_roles if r not in INVALID_ROLES]
         return allowed_roles
     
+
     #
     # Validators
     #
