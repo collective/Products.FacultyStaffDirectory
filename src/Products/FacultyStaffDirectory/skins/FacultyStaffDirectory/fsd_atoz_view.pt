@@ -1,17 +1,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
 	  lang="en"
 	  metal:use-macro="here/directory_view/macros/master"
-	  i18n:domain="plone">
+	  i18n:domain="FacultyStaffDirectory">
 	<body>
         <metal:block fill-slot="classification_links" />
 		<metal:block fill-slot="listing_section">
             <div tal:content="structure here/getText"
                  tal:condition="here/getText|nothing" />
 
-            <h2 tal:condition="not:classificationsInRequest">People</h2>
-            <div class="atozView">
+            <h2 tal:condition="not:classificationsInRequest" i18n:translate="FacultyStaffDirectory_people">People</h2>
+            <div class="atozView" tal:define="people python:context.getSortedPeople(as_objects=False)">
                 <div tal:define="allLetters string:ABCDEFGHIJKLMNOPQRSTUVWXYZ;
-                                 usedLetters python:[person.getLastName().upper()[0] for person in context.getSortedPeople()]"
+                                 usedLetters python:[person.getLastName.upper()[0] for person in people]"
                      class="alphabetLinks">
                     <ol>
                         <li tal:repeat="letter allLetters">
@@ -25,17 +25,16 @@
                 <table class="listing" id="sortable">
                     <tbody>
                         <metal:block define-macro="list_people">
-                            <tal:block tal:define="people context/getSortedPeople;"
-                                       tal:condition="people">     
+                            <tal:block tal:condition="people">     
                                 <metal:block define-slot="table_headings">
                                     <tr>
-                                        <th class="column">
+                                        <th class="column" i18n:translate="FacultyStaffDirectory_name">
                                             Name
                                         </th>
-                                        <th class="column">
+                                        <th class="column" i18n:translate="FacultyStaffDirectory_phone">
                                             Phone
                                         </th>
-                                        <th class="column">
+                                        <th class="column" i18n:translate="FacultyStaffDirectory_email">
                                             Email
                                         </th>
                                     </tr>
@@ -45,13 +44,13 @@
                                         tal:attributes="class python:test(oddrow, 'even', 'odd')">
                                         <metal:block define-slot="table_cells">
                                             <td class="personName">
-                                                <a href="" tal:attributes="href person/absolute_url; name python:person.getLastName().upper()[0];"><span tal:content="string:${person/getLastName}" class="emphasis">[last name]</span>, <span tal:content="string:${person/getFirstName}">[first-name]</span> </a>
+                                                <a href="" tal:attributes="href person/getURL; name python:person.getLastName.upper()[0];"><span tal:content="string:${person/getLastName}" class="emphasis">[last name]</span>, <span tal:content="string:${person/getFirstName}">[first-name]</span> </a>
                                             </td>
                                             <td class="officePhone">
                                                 <span tal:condition="person/getOfficePhone" tal:content="person/getOfficePhone">[phone number]</span>
                                             </td>
                                             <td>
-                                                <span tal:condition="person/getEmail" tal:replace="structure python:person.spamProtect(person.getEmail())" class="emailAddress">[email address]</span>
+                                                <span tal:condition="person/getEmail" tal:replace="structure python:context.spamProtectFSD(person.getEmail)" class="emailAddress">[email address]</span>
                                             </td>
                                         </metal:block>
                                     </tr>
