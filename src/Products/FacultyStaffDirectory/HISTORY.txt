@@ -1,7 +1,9 @@
 Version History
 
   ' ' 2.1 -- ' '
-  
+        
+        * Corrected some CSS display issues with Person pictures.
+
         * Users with the Personnel Manager role can now add Person objects.
         
         * Added a field to the classification gallery view to control the width of the Person images

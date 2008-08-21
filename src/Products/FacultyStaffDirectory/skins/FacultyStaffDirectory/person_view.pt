@@ -55,11 +55,6 @@
 
             <div class="visualClear"><!-- --></div>
             
-            <div tal:condition="here/getBiography" class="biography">
-                <h3><span i18n:translate="FacultyStaffDirectory_label_biography">Biography</span>:</h3>
-                <span tal:content="structure context/getBiography" />
-            </div>           
-
             <div tal:condition="context/getEducation" class="education">
                 <h3><span i18n:translate="FacultyStaffDirectory_label_education">Education</span>:</h3>
                 <ol>
@@ -67,7 +62,12 @@
                         <span tal:content="degree" />
                     </li>
                 </ol>
-            </div>            
+            </div>
+
+            <div tal:condition="here/getBiography" class="biography">
+                <h3><span i18n:translate="FacultyStaffDirectory_label_biography">Biography</span>:</h3>
+                <span tal:content="structure context/getBiography" />
+            </div>
 
             <div class="specialties" tal:define="specialtyTuples context/getSpecialties" tal:condition="specialtyTuples">
                 <h3><span i18n:translate="FacultyStaffDirectory_label_researchInterests">Research Interests</span>:</h3>
@@ -112,6 +112,7 @@
                     <dd tal:content="structure course/Description" />
                 </dl>
             </div>
+
             <div class="assistants"
                  tal:define="assistants context/getAssistants;
                              member python:context.portal_membership.getAuthenticatedMember()"
@@ -124,8 +125,8 @@
                      tal:content="name">Assistant's Full Name</a>
                 </li>
               </ul>
-                 
             </div>
+
             <div class="bosses"
                  tal:define="bosses python:context.getReferences(relationship='assistants_people');
                              member python:context.portal_membership.getAuthenticatedMember()"
@@ -140,9 +141,9 @@
                      tal:content="name">Boss' Full Name</a>
                 </li>
               </ul>
-                 
             </div>
-        </div>        
+
+        </div>
     </metal:fill>
   
   </body>
