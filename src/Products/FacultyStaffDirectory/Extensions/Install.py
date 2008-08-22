@@ -269,7 +269,7 @@ def install(self, reinstall=False):
     # Register a configlet to control some behaviors of the product:
     if "FacultyStaffDirectory" not in [ c.id for c in cp._actions ]:
         cp.registerConfiglet(
-           	"FacultyStaffDirectory",
+            "FacultyStaffDirectory",
             "Faculty/Staff Directory",
             "string:${portal_url}/facultystaffdirectory_tool/",
             category="Products",
@@ -318,16 +318,16 @@ def install(self, reinstall=False):
 def uninstall(self, reinstall=False):
     out = StringIO()
     def uninstallProfiles(portal):
-    	setup_tool = getToolByName(portal, 'portal_setup')
-    	originalContext = setup_tool.getImportContextID()
-    	setup_tool.setImportContext('profile-FacultyStaffDirectory:uninstall')
-    	setup_tool.runAllImportSteps()
-    	setup_tool.setImportContext(originalContext)
-    	
+        setup_tool = getToolByName(portal, 'portal_setup')
+        originalContext = setup_tool.getImportContextID()
+        setup_tool.setImportContext('profile-FacultyStaffDirectory:uninstall')
+        setup_tool.runAllImportSteps()
+        setup_tool.setImportContext(originalContext)
+        
     # set tag for version greater than 3.0
     migrationTool = getToolByName(self, 'portal_migration')
     isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
-    	
+        
     # don't do things we don't need to do on reinstall
     if not reinstall:
     
