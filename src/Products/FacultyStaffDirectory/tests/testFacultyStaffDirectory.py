@@ -63,6 +63,18 @@ class testFacultyStaffDirectory(testPlone):
         for c in personList:
             self.failUnless(c.portal_type == 'FSDPerson')
         
+    def testGetPeopleAsBrains(self):
+        fsd = self.getPopulatedDirectory()
+        person = self.getPerson(id='abc123', firstName="Test", lastName="Person")        
+        personList = fsd.getPeople(as_objects=False)
+        personmatch = False
+        for c in personList:
+            obj = c.getObject()
+            self.failUnless(o.portal_type == 'FSDPerson')
+            if person==obj:
+                personmatch=True
+        self.failUnless(personmatch==True)        
+        
     def testObjectReorder(self):
         fsd = self.getPopulatedDirectory()
         #Try to move a Classification to the top

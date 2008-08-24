@@ -39,24 +39,24 @@ class YuppieExtender(object):
         return self._fields
 
 
-# Optional stuff to tack on more methods to Person (after you adapt it to IYuppie, anyway):
-
-class IYuppie(Interface):
-    """A Yuppie is any person who eats tofu and has a car phone."""
-    
-    def textMessage(self, spam):
-        """Text message some spam to the yuppie's mobile phone."""
-
-
-class YuppieAdapter(object):
-    """Adapt Persons to Yuppies."""
-    adapts(IPerson)
-    implements(IYuppie)
-    
-    def __init__(self, context):
-        self.context = context  # Phillip Weitershausen says this is canonical.
-    
-    def textMessage(self, spam):
-        print "I just texted %s to the yuppie's mobile phone at %s!" % (spam, self.context.getMobilePhone())
-
-provideAdapter(YuppieAdapter)  # This should be in ZCML. Yuck.
+# # Optional stuff to tack on more methods to Person (after you adapt it to IYuppie, anyway):
+# 
+# class IYuppie(Interface):
+#     """A Yuppie is any person who eats tofu and has a mobile phone."""
+#     
+#     def textMessage(self, spam):
+#         """Text message some spam to the yuppie's mobile phone."""
+# 
+# 
+# class YuppieAdapter(object):
+#     """Adapt Persons to Yuppies."""
+#     adapts(IPerson)
+#     implements(IYuppie)
+#     
+#     def __init__(self, context):
+#         self.context = context  # Phillip Weitershausen says this is canonical.
+#     
+#     def textMessage(self, spam):
+#         print "I just texted %s to the yuppie's mobile phone at %s!" % (spam, self.context.getMobilePhone())
+# 
+# provideAdapter(YuppieAdapter)  # This should be in ZCML. Yuck.
