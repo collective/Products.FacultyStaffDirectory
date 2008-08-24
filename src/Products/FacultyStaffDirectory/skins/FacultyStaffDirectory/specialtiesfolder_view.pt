@@ -5,13 +5,13 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="FacultyStaffDirectory">
 
   <head></head>
 
   <body>
   
-    <metal:fill fill-slot="main" tal:define="specialties python:context.getFolderContents({'portal_type':'FSDSpecialty', 'sort_on':'sortable_title'})">
+    <metal:fill fill-slot="main" tal:define="specialties python:context.getFolderContents({'portal_type':'FSDSpecialty', 'sort_on':'getObjPositionInParent'})">
   
         <h1 tal:content="context/Title"></h1>
         <div class="facultyStaffDirectory specialtiesFolderView">

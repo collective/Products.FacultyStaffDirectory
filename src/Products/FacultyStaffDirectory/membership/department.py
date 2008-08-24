@@ -1,18 +1,8 @@
 from zope.interface import implements
 from zope.component import adapts
 
-from Products.CMFCore.utils import getToolByName
-
 from Products.membrane.interfaces import IGroup
-from Products.membrane.interfaces import IMembraneUserAuth
-from Products.membrane.interfaces import ICategoryMapper
-
-from Products.membrane.config import ACTIVE_STATUS_CATEGORY
-from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
-from Products.membrane.utils import generateCategorySetIdForType
-
 from Products.FacultyStaffDirectory.interfaces.department import IDepartment
-from Products.FacultyStaffDirectory.interfaces.person import IPerson
 from Products.FacultyStaffDirectory.membership.person import UserRelated
 
 class Group(object):

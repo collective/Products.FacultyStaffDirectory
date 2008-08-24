@@ -13,15 +13,9 @@ from Products.CMFCore.permissions import View, ManageProperties, ModifyPortalCon
 from Products.CMFCore.utils import getToolByName
 from zope.interface import implements
 from Products.CMFCore.permissions import ManageUsers
-from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IPropertiesProvider
-from Products.membrane.interfaces import ICategoryMapper
-from Products.membrane.config import ACTIVE_STATUS_CATEGORY
-from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 from Products.FacultyStaffDirectory.interfaces.classification import IClassification
 from Acquisition import aq_inner, aq_parent
-#from Products.FacultyStaffDirectory.interfaces.person import IPerson
-#from Products.FacultyStaffDirectory.membership.person import UserRelated
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE
 
 schema = Schema((
@@ -73,10 +67,9 @@ class Classification(PersonGrouping):
         """ Return a list of people, sorted by SortableName
         """
         people = self.getPeople()
-        pList = [(people[i].getSortableName(), i, people[i]) for i in xrange(len(people))]
-        pList.sort()
-        return [tup[-1] for tup in pList]
+        return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
     
+
     #
     # Validators
     #

@@ -11,9 +11,6 @@ from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
 from Products.CMFCore.utils import getToolByName
 
-# Import the tested classes
-from Products.FacultyStaffDirectory.Classification import Classification
-
 class testClassification(testPlone):
     """Test-cases for class(es) Classification."""
 

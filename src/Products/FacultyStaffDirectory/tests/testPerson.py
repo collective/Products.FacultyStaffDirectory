@@ -8,20 +8,11 @@ __docformat__ = 'plaintext'
 #
 
 import os
-
-# from zope.app.testing.functional import FunctionalTestSetup
-
-from Products.Archetypes.ReferenceEngine import ContentReferenceCreator
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IUserAuthentication
 from Products.Relations.processor import process
-from Products.Five.testbrowser import Browser
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone, PACKAGE_HOME
-from Products.FacultyStaffDirectory.Person import Person
-from Products.FacultyStaffDirectory.config import TOOLNAME
-from Products.FacultyStaffDirectory.SpecialtyInformation import SpecialtyInformation
-from AccessControl.unauthorized import Unauthorized
 
 def loadImage(name, size=0):
     """Load image from testing directory."""
@@ -91,6 +82,15 @@ class testWithoutSpecialties(testPerson):
         
         # Check the sortable name
         self.failUnlessEqual(self.person.getSortableName(), ('person', 'test'))
+        
+        # Check that Personnel Managers can add a Person.
+        self.logout()
+        self.login()
+        self.setRoles(['Personnel Manager'])
+        try:
+            self.getPerson(id='zif572', firstName="Test", lastName="Person")
+        except 'Unauthorized': 
+            self.fail("User with the Personnel Manager role was unable to create a Person.")
     
     def testCourses(self):
         """Add and retrieve course objects"""
@@ -310,6 +310,23 @@ class testWithoutSpecialties(testPerson):
     def testAssistantOwnershipAfterEdit(self):
         """Test that named assistants get ownership of a person object when it is edited"""
         self.failUnless(self._testAssistantOwnershipAfter(task='edit'), "designated assistant is not listed as an owner")
+        
+    def testMultipleUserPrefRoleAssignment(self):
+        """ Test for regression on https://weblion.psu.edu/trac/weblion/ticket/711
+        """
+        self.simulateATGUIInteraction(task='create')
+        self.simulateATGUIInteraction(task='edit')
+        perms = list(self.person.get_local_roles_for_userid('abc123'))
+        self.failUnlessEqual(perms.count('User Preferences Editor'), 1, "the role 'User Preferences Editor' is listed more than once after multiple GUI interactions")
+        
+    def testAssistantDoesNotGetUserPrefRole(self):
+        """ Test to ensure that the assigned assistant does not have the 'User Preferences Editor' role
+        """
+        self._testAssistantOwnershipAfter(task="create")
+        self.failIf('def456' in self.person.users_with_local_role('User Preferences Editor'), "Assistant can edit user prefs after create")
+        self.simulateATGUIInteraction(task="edit")
+        self.failIf('def456' in self.person.users_with_local_role('User Preferences Editor'), "Assistant can edit user prefs after edit") 
+        
     
     def testValidateId(self):
         """Test that the validate_id method enforces uniqueness for person id."""
@@ -421,7 +438,14 @@ class testWithoutSpecialties(testPerson):
         except KeyError:
             self.Fail("FacultyStaffDirectory incorrectly tried to find the user attached to a FSPerson while membrane support was disabled.")
 
-    
+    # Err... can't actually test for this since it's being handled in pre_edit_setup. Any ideas?
+    # def testDefaultEditor(self):
+    #     """ Make sure the editor is being set to the site's default. """
+    #     memberProps = getToolByName(self.portal, 'portal_memberdata')
+    #     defaultEditor = memberProps.wysiwyg_editor
+    #     self.assertEquals(self.person.getUserpref_wysiwyg_editor(), defaultEditor, 'The editor set by default for Person does not follow the site default.')
+
+
     ## End tests for membrane stuff
 
 class testWithSpecialties(testPerson):
@@ -494,10 +518,7 @@ class testWithSpecialties(testPerson):
 
 def test_suite():
     from unittest import TestSuite, makeSuite
-    from Products.PloneTestCase import PloneTestCase
-    from Testing.ZopeTestCase import FunctionalDocFileSuite
     suite = TestSuite()
     suite.addTest(makeSuite(testWithSpecialties))
     suite.addTest(makeSuite(testWithoutSpecialties))
-    #suite.addTest(FunctionalDocFileSuite('functional-person.txt', test_class=PloneTestCase.FunctionalTestCase))
     return suite

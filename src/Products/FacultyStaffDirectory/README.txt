@@ -6,11 +6,11 @@ Versions
 
 Dependencies
 
-  * Relations, via Subversion at https://svn.plone.org/svn/archetypes/Relations/trunk/
+  * Products.Relations
   
-  * "membrane":http://plone.org/products/membrane
+  * Products.membrane
   
-  * "archetypes.schemaextender":http://pypi.python.org/pypi/archetypes.schemaextender#changelog
+  * archetypes.schemaextender
   
   * If you're using Plone 2.5.x, the branch of Archetypes available via
     Subversion at
@@ -23,7 +23,7 @@ Description
   Add details just once (even import them from an existing listing) and display them wherever
   you like, however many times you like.
   
-  FacultyStaffDirectory integrates with  Plone's users and groups infrastructure and supports
+  FacultyStaffDirectory integrates with Plone's users and groups infrastructure and supports
   an extensibility framework for custom requirements.
 
   FacultyStaffDirectory provides content types for creating and organizing
@@ -53,46 +53,59 @@ Description
 
 
 Installation
+    
+    Buildout (recommended)
+    
+        1. Add ''Products.FacultyStaffDirectory'' to the eggs section of your buildout, ie.
+                # Add additional eggs here
+                # elementtree is required by Plone
+                eggs =
+                    elementtree
+                    Products.FacultyStaffDirectory
+                    
+           configuration and run buildout (typically 'bin/buildout').
 
-  1. Install the dependencies:
-  
-     1. Put membrane and Relations into your Products folder.
-     
-     2. If you're using Plone 2.5.x, put the included copy of Archetypes into
-        your Products folder.
-     
-     3. Install archetypes.schemaextender as follows. Please bear with us, as
-        this will be a bit tricky until it gets included in a future release of
-        Plone:
-        
-        * If you're using buildout, add archetypes.schemaextender to the 'eggs'
-          and 'zcml' lines of the '[instance]' section of your buildout.cfg. For
-          example::
-        
-          [instance]
-          eggs = archetypes.schemaextender
-          zcml = archetypes.schemaextender
-        
-        * If you're not using buildout and are using Plone 2.5.x, open the
-          archetypes.schemaextender-1.0b1 folder (included) and find the
-          "archetypes" folder within. Place the archetypes folder in the
-          lib/python folder within your Zope instance.
-        
-        * If you're not using buildout and are using Plone 3.0.x, find the
-          "archetypes" folder, somewhere in your Zope instance (lowercase "a",
-          not uppercase "A"). It's often in lib/python and should have a "kss"
-          folder in it. On Windows, it's at C:\Program Files\Plone
-          3\Python\Lib\site-packages\archetypes.kss-1.2.6-py2.4.egg\archetypes.
-          Put the archetypes.schemaextender-1.0b1/archetypes/schemaextender
-          folder (included) into the archetypes folder.
+        2. Restart Zope.
 
-  2. Put FacultyStaffDirectory into your Products folder.
-  
-  3. Restart Zope.
-  
-  4. Install the FacultyStaffDirectory using portal_quickinstaller or the Plone
-     Add/Remove Products tool under Site Setup. The dependencies that need to be
-     installed will install themselves automatically.
+        3. Install the FacultyStaffDirectory product using portal_quickinstaller or the Plone
+           Add/Remove Products tool under Site Setup. The dependencies that need to be
+           installed will install themselves automatically.
+    
+    Manually
+    
+        1. Install the dependencies:
+
+           1. Put membrane and Relations into your Products folder.
+
+           2. If you're using Plone 2.5.x, put the included copy of Archetypes into
+              your Products folder.
+
+           3. Install archetypes.schemaextender as follows. Please bear with us, as
+              this will be a bit tricky until it gets included in a future release of
+              Plone:
+
+              * If you're using Plone 2.5.x, open the
+                archetypes.schemaextender-1.0b1 folder (included) and find the
+                "archetypes" folder within. Place the archetypes folder in the
+                lib/python folder within your Zope instance.
+
+              * If you're using Plone 3.0.x, find the "archetypes" folder, 
+                somewhere in your Zope instance (lowercase "a", not uppercase "A").
+                It's often in lib/python and should have a "kss" folder in it. 
+                On Windows, it's at C:\Program Files\Plone 3\Python\Lib\
+                site-packages\archetypes.kss-1.2.6-py2.4.egg\archetypes.
+                Put the archetypes.schemaextender-1.0b1/archetypes/schemaextender
+                folder (included) into the archetypes folder.
+
+        2. Put FacultyStaffDirectory into your Products folder.
+
+        3. Restart Zope.
+
+        4. Install the FacultyStaffDirectory using portal_quickinstaller or the Plone
+           Add/Remove Products tool under Site Setup. The dependencies that need to be
+           installed will install themselves automatically.
+    
+         
 
 Upgrading
     
@@ -227,6 +240,7 @@ Future Plans
 Possible Gotchas
 
     Skinning plone 2.5.x with DIYPloneStyle 2.5
+    
         The implementation of Generic Setup installation in DIYPloneStyle 2.5
         fails to include non-standard skin layers in its skins.  Please note
         that installing a skin product built with this version will cause
@@ -244,7 +258,7 @@ Authorship
 
 Thanks
     
-    Special thanks to Andreas Jung for his early testing and reminding us that,
+    Special thanks to Andreas Jung for his early testing, code contributions, and reminding us that,
     yes, people do live outside the United States.
 
 Support

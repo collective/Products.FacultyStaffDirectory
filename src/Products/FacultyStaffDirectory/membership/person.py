@@ -7,12 +7,11 @@ from Products.CMFCore.utils import getToolByName
 
 from zope.app.annotation.interfaces import IAnnotations
 
-from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 from Products.membrane.interfaces import IUserRelated
 from Products.membrane.interfaces import IUserAuthentication
 from Products.membrane.interfaces import IUserRoles
 from Products.membrane.interfaces import IMembraneUserManagement
-from Products.FacultyStaffDirectory.interfaces.person import IPerson, IPersonMembership
+from Products.FacultyStaffDirectory.interfaces.person import IPerson
 from Products.FacultyStaffDirectory.config import PASSWORD_KEY
 from Products.FacultyStaffDirectory.config import TOOLNAME as FSD_TOOL
 

@@ -31,13 +31,12 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.FacultyStaffDirectory.config import *
 from Products.CMFCore.utils import UniqueObject
-from Products.CMFCore.permissions import View, ManageProperties, ModifyPortalContent
+from Products.CMFCore.permissions import ModifyPortalContent
 from Products.FacultyStaffDirectory.interfaces.facultystaffdirectorytool import IFacultyStaffDirectoryTool, IFacultyStaffDirectoryToolModifiedEvent
 from Products.FacultyStaffDirectory.config import MEMBRANE_ABLE_TYPES, MEMBRANE_ABLE_TYPES_VOCAB
 from zope.interface import implements
 from zope.event import notify
 from Products.CMFCore.utils import getToolByName
-from Products.membrane.interfaces.user import IMembraneUser
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 import re
 
@@ -50,6 +49,7 @@ Tool_schema = BaseSchema.copy() +Schema((
             label=u"Phone number format",
             description=u"A regular expression that a Person's phone number must match. Leave blank to disable phone number validation.",
             label_msgid='FacultyStaffDirectory_label_personPhoneNumberFormat',
+            description_msgid='FacultyStaffDirectory_description_personPhoneNumberFormat',
             i18n_domain='FacultyStaffDirectory',
             
         ),
@@ -63,18 +63,33 @@ Tool_schema = BaseSchema.copy() +Schema((
             label=u"Phone number example",
             description=u"Describe the above phone number rule in a human-readable format: for example, (555) 555-5555.",
             label_msgid='FacultyStaffDirectory_label_personPhoneNumberDescription',
+            description_msgid='FacultyStaffDirectory_description_personPhoneNumberDescription',
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="General",
         default=u"(555) 555-5555",
     ),
     
+    BooleanField(
+        name='obfuscateEmailAddresses',
+        widget=BooleanWidget(
+            label=u"Custom email obfuscation",
+            description=u"Format email addresses like \"someone AT here DOT com\" rather than using Plone's default spam armoring.",
+            label_msgid='FacultyStaffDirectory_label_obfuscateEmailAddressesDescription',
+            description_msgid='FacultyStaffDirectory_description_obfuscateEmailAddressesDescription',        
+            i18n_domain='FacultyStaffDirectory',
+        ),
+        schemata="General",
+        default=False,
+    ),
+
     StringField(
         name='idLabel',
         widget=StringWidget(
             label=u"Person ID Label",
-            description=u"The Name of the ID used by your institution",
+            description=u"The name of the ID used by your institution",
             label_msgid='FacultyStaffDirectory_label_personIdLabel',
+            description_msgid='FacultyStaffDirectory_description_personIdLabel',
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Membership",
@@ -88,6 +103,7 @@ Tool_schema = BaseSchema.copy() +Schema((
             label=u"Person ID format",
             description=u"A regular expression that a Person's ID must match. Defaults to the value specified in portal_registration.",
             label_msgid='FacultyStaffDirectory_label_personIdFormat',
+            description_msgid='FacultyStaffDirectory_description_personIdFormat',            
             i18n_domain='FacultyStaffDirectory',
             
         ),
@@ -102,6 +118,7 @@ Tool_schema = BaseSchema.copy() +Schema((
             label=u"Person ID format error message",
             description=u"The error message returned when the Person ID entered does not match the specified format",
             label_msgid='FacultyStaffDirectory_label_personIdFormatErrorMessage',
+            description_msgid='FacultyStaffDirectory_description_personIdFormatErrorMessage',
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Membership",
@@ -114,7 +131,8 @@ Tool_schema = BaseSchema.copy() +Schema((
         widget=InAndOutWidget(
             label="Select the content types to integrate with Plone's users and groups",
             description="Integrated types appear on the right; non-integrated on the left. You may move selected items from one column to the other.",
-            label_msgid='FacultyStaffDirectory_label_EnableMembraneTypes',
+            label_msgid='FacultyStaffDirectory_label_enableMembraneTypes',
+            description_msgid='FacultyStaffDirectory_description_enableMembraneTypes',            
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Membership",
@@ -129,7 +147,8 @@ Tool_schema = BaseSchema.copy() +Schema((
         widget=BooleanWidget(
             label="Person objects provide user passwords",
             description="Should user passwords be stored as part of the Person? If you're using another PAS plugin to handle authorization, you'll want to turn this off.",
-            label_msgid='FacultyStaffDirectory_label_UseInternalPassword',
+            label_msgid='FacultyStaffDirectory_label_useInternalPassword',
+            description_msgid='FacultyStaffDirectory_description_useInternalPassword',
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Membership",
@@ -205,15 +224,6 @@ class FacultyStaffDirectoryTool(UniqueObject, BaseContent):
         except:
             return "Invalid regex string."
 
-    security.declarePublic('getDirectoryRoot')
-    def getDirectoryRoot(self):
-        """ Find the FacultyStaffDirectory instance in the site. """
-        catalog = getToolByName(self, 'portal_catalog')
-        fsdSearch = catalog(portal_type='FSDFacultyStaffDirectory')
-        if fsdSearch:
-            return fsdSearch[0].getObject()
-        return None
-    
     security.declarePublic('fsdMemberProfile')
     def fsdMemberProfile(self):
         """Distinguish between an fsd user and a regular acl_users user and

@@ -24,7 +24,7 @@ ADD_CONTENT_PERMISSIONS = {
     'Person': 'FacultyStaffDirectory: Add or Remove People',
 }
 
-setDefaultRoles('FacultyStaffDirectory: Add or Remove People', ('Manager','Owner'))
+setDefaultRoles('FacultyStaffDirectory: Add or Remove People', ('Manager','Owner', 'Personnel Manager'))
 
 product_globals = globals()
 
@@ -57,7 +57,7 @@ MEMBRANE_TYPE_ACTIVE_STATES = {'FSDPerson': ['active'],
                                'FSDCommittee': ['active']}
 
 # content-types
-ALLOWABLE_CONTENT_TYPES = ('text/plain', 'text/structured', 'text/html', 'application/msword')
+ALLOWABLE_CONTENT_TYPES = ('text/plain', 'text/structured', 'text/html', 'application/msword', 'text/x-rst')
 
 #catalog stuff
 ADDITIONAL_CATALOG_INDEXES = [('getSortableName', 'FieldIndex'), ('getRawClassifications', 'KeywordIndex'), ('getRawSpecialties', 'KeywordIndex'), ('getRawCommittees', 'KeywordIndex'), ('getRawDepartments', 'KeywordIndex'), ('getRawPeople', 'KeywordIndex')]

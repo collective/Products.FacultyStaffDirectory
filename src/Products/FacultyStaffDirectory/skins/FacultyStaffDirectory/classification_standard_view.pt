@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
 	  lang="en"
       metal:use-macro="here/main_template/macros/master"
-	  i18n:domain="plone">
+	  i18n:domain="FacultyStaffDirectory">
 	<body>
         <metal:block fill-slot="main">
             <div class="facultyStaffDirectory classification">
@@ -29,7 +29,8 @@
                 </p>
                 <tal:block tal:define="classificationExists nocall:classification | nothing;
                                        classificationContext python:classificationExists and context.contextualClassification(classification) or context;
-                                       people classificationContext/getSortedPeople;"
+                                       people classificationContext/getSortedPeople;
+                                       width context/getClassificationViewThumbnailWidth"
                            metal:define-macro="list_people">
                     <div class="classificationListing" tal:condition="people">   
                         <metal:block define-slot="classification_header" tal:condition="nocall:classificationExists">
@@ -46,7 +47,7 @@
                                        tal:attributes="href person/absolute_url">
                                         <tal:block condition="person/image_thumb|nothing">
                                             <img src="" alt=""
-                                                 tal:replace="structure python:person.getScaledImageByWidth(100)" />
+                                                 tal:replace="structure python:person.getScaledImageByWidth(width)" />
                                         </tal:block>
                                     </a>
                                 </metal:block>
@@ -63,10 +64,11 @@
                                          tal:content="person/getOfficePhone"
                                          class="officePhone"/>
                                     <div tal:condition="person/getEmail" 
-                                         tal:content="structure python:person.spamProtect(person.getEmail())" 
+                                         tal:content="structure python:person.spamProtectFSD(person.getEmail())" 
                                          class="emailAddress"/>
                                     <div class="moreInfo">
-                                        <a tal:attributes="href person/absolute_url">
+                                        <a tal:attributes="href person/absolute_url"
+                                           i18n:translate="FacultyStaffDirectory_moreAbout">
                                             More about 
                                             <span tal:replace="person/Title">[Name]</span>...
                                         </a>

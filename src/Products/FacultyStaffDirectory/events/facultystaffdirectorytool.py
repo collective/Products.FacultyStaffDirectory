@@ -3,7 +3,6 @@ from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL, ACTIVE_STATUS_CA
 from Products.membrane.utils import generateCategorySetIdForType
 from Products.membrane.interfaces import ICategoryMapper
 from Products.FacultyStaffDirectory import MEMBRANE_ABLE_TYPES, MEMBRANE_TYPE_ACTIVE_STATES
-import transaction
 
 def modifyMembraneTypes(event):
     """Check facultystaffdirectory_tool schemata,

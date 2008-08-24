@@ -38,6 +38,7 @@ class DepartmentalMembership(BaseContent):
     """
     """
     security = ClassSecurityInfo()
+    implements(IDepartmentalMembership)
     __implements__ = (getattr(BaseContent,'__implements__',()),)
     meta_type = portal_type = 'FSDDepartmentalMembership'
     _at_rename_after_creation = True
