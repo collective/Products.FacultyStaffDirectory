@@ -159,12 +159,17 @@ def install(self, reinstall=False):
             
     # Since our content types don't exist on first install, there's nothing to index
     # And even then, we only need to update the FSD objects
-    if reinstall:
-        indexes = [indexName for indexName, indexType in ADDITIONAL_CATALOG_INDEXES]
-        FSDTypes = [t['meta_type'] for t in listTypes(PROJECTNAME)]
-        for brain in catalogTool(portal_type=FSDTypes):
+    # But then again, if we do an uninstall/install, we need to do this. Let's just do it 
+    # all the time since it won't find anything on first installation anyway.
+    indexes = [indexName for indexName, indexType in ADDITIONAL_CATALOG_INDEXES]
+    FSDTypes = [t['meta_type'] for t in listTypes(PROJECTNAME)]
+    for brain in catalogTool(portal_type=FSDTypes):
+        try:
             brain.getObject().reindexObject(indexes)
-            
+        except KeyError:
+            # Relations content objects seem to not be able to handle getObject(), 
+            # but the data doesn't seem to get lost, so just ignore it.
+            pass
     #####
     # Smart Folder Manipulations
     #  These could be places in a catalog.xml GenericSetup step, but doing so would

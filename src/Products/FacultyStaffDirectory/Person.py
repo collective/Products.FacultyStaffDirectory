@@ -635,7 +635,11 @@ class Person(OrderedBaseFolder, ATCTContent):
             tree['children'] = keptChildren
             
             if 'item' in tree:  # 'item' is not in the root node.
-                ref = reffedUids.get(tree['item'].UID)
+                try:
+                    ref = reffedUids.get(tree['item'].UID)
+                except TypeError:
+                    # Catch the 'unhashable type' error we're getting in rare cases (seems to be mostly on uninstall/reinstall when catalog reindexing goes awry).
+                    ref = reffedUids.get(tree['item'].getObject().UID())
                 if ref:
                     tree['reference'] = ref
                     return False  # I don't care if you pruned all my children off. I myself am reffed, so I'm staying.
