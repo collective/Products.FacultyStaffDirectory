@@ -22,6 +22,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         mutator='setRoles',
         edit_accessor='getRawRoles',
         vocabulary='getRoleSet',
+        default = ['Member'], 
         multiValued=1,
         write_permission=ManageUsers,
         widget=MultiSelectionWidget(
