@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="fsd_persongrouping_descriptor_workflow"
+             title="[FacultyStaffDirectory] Person Grouping Descriptor workflow"
+             state_variable="review_state"
+             initial_state="published">
+             
+ <permission>Access contents information</permission>
+ <permission>View</permission>
+ <permission>Modify portal content</permission>
+ <permission>Add portal content</permission>
+ 
+ <state state_id="published" title="Published">
+  <permission-map name="Access contents information" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+ </state> 
+</dc-workflow>
