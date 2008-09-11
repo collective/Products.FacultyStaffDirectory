@@ -5,8 +5,8 @@
 
      <browser:page
          for="...interfaces.person.IPerson"
-         name="person_view"
-         template="person.pt"
+         name="index"
+         template="index.pt"
          class=".person.PersonView"
          permission="zope2.View"
          />
