@@ -82,8 +82,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
 
     security.declareProtected(View, 'getSortedPeople')
     def getSortedPeople(self):
-        """ Return a list of people, sorted by SortableName
-        """
+        """Return a list of people, sorted by SortableName."""
         people = self.getPeople()
         return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
 

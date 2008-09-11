@@ -61,13 +61,6 @@ class Classification(PersonGrouping):
 
         #Return the intersection of people referenced to this classification and people within/referenced to the parent
         return list(set(localPeople) & set(self.aq_parent.getPeople()))
-
-    security.declareProtected(View, 'getSortedPeople')
-    def getSortedPeople(self):
-        """ Return a list of people, sorted by SortableName
-        """
-        people = self.getPeople()
-        return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
     
 
     #
