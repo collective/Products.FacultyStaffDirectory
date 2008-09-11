@@ -3,4 +3,12 @@
            xmlns:five="http://namespaces.zope.org/five"
            i18n_domain="FacultyStaffDirectory">
 
+     <browser:page
+         for="...interfaces.person.IPerson"
+         name="person_view"
+         template="person.pt"
+         class=".person.PersonView"
+         permission="zope2.View"
+         />
+         
 </configure>
