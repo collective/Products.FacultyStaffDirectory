@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="FacultyStaffDirectory">
+
+  <head></head>
+  
+  <body>
+  
+    <metal:fill fill-slot="main">
+      <div class="facultyStaffDirectory courseView">
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+          <h1 tal:content="view/listing" />
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+        
+        <div tal:replace="structure provider:plone.abovecontentbody" />
+          <div class="courseLink"
+               tal:condition="context/getRemoteUrl">
+            <a tal:attributes="href context/getRemoteUrl"
+                           tal:content="context/Title" />
+          </div>
+          <div class="courseDescription"
+               tal:condition="context/Description">
+            <span tal:replace="structure context/Description"/>   
+          </div>     
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+      </div>
+    </metal:fill>
+  </body>  
+</html>

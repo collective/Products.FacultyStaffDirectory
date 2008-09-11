@@ -6,15 +6,15 @@
  <property name="content_meta_type">FSDCourse</property>
  <property name="product">FacultyStaffDirectory</property>
  <property name="factory">addCourse</property>
- <property name="immediate_view">course_view</property>
- <property name="default_view">course_view</property>
+ <property name="immediate_view">index</property>
+ <property name="default_view">index</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>
  <property name="allow_discussion">False</property>
- <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="(Default)" to="index"/>
  <alias from="edit" to="base_edit"/>
- <alias from="view" to="(dynamic view)"/>
- <alias from="index.html" to="(dynamic view)"/>
+ <alias from="view" to="index"/>
+ <alias from="index.html" to="index"/>
 
  
  <action title="View" action_id="view" category="object" condition_expr=""

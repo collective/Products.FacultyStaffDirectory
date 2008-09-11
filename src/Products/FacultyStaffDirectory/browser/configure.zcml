@@ -5,7 +5,11 @@
 
         <!-- Person View -->
         <include package=".person" />
+
         <!-- PersonList View -->
         <include package=".personlist" />
+        
+        <!-- Course View -->
+        <include package=".course" />
 
 </configure>
