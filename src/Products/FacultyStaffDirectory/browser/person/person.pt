@@ -16,25 +16,25 @@
 
             <div class="caption">
               <div class="headshot"
-                 tal:condition="context/image_normal|nothing">
+                 tal:condition="view/portrait">
                 <img src="" alt=""
-                 tal:replace="structure python:context.getWrappedField('image').tag(context, scale='normal')" />
+                 tal:replace="structure view/portrait" />
             </div>
-                <div metal:use-macro="context/document_actions/macros/document_actions">
-                    [Document actions (print, sendto etc)]
-                </div>
+                <div tal:replace="structure provider:plone.abovecontenttitle" />
                 <h1 tal:content="title_string | context/title_or_id" />
+                <div tal:replace="structure provider:plone.belowcontenttitle" />
+                <div tal:replace="structure provider:plone.abovecontentbody" />                
                 <ul tal:condition="context/getJobTitles" class="jobTitle">
                     <li tal:repeat="jobTitle context/getJobTitles" 
                         tal:content="jobTitle" />
                 </ul>                
                 <div>
-                    <span tal:replace="structure python:context.getOfficeAddress().replace('\n', '<br />')" /><br />
+                    <span tal:replace="structure view/officeAddress" /><br />
                     <span tal:replace="context/getOfficeCity" /><tal:block tal:condition="context/getOfficeState">, </tal:block><span tal:replace="context/getOfficeState" /> <span tal:replace="context/getOfficePostalCode" />
                 </div>
-                <div tal:condition="context/getEmail">
+                <div tal:condition="view/email">
                     <span i18n:translate="FacultyStaffDirectory_label_email">Email</span>:
-                    <span tal:replace="structure python:context.spamProtectFSD(context.getEmail())" />
+                    <span tal:replace="structure view/email" />
                 </div>
                 <div tal:condition="context/getOfficePhone" 
                      class="officePhone">
@@ -64,7 +64,7 @@
                 </ol>
             </div>
 
-            <div tal:condition="here/getBiography" class="biography">
+            <div tal:condition="context/getBiography" class="biography">
                 <h3><span i18n:translate="FacultyStaffDirectory_label_biography">Biography</span>:</h3>
                 <span tal:content="structure context/getBiography" />
             </div>
@@ -144,6 +144,7 @@
             </div>
 
         </div>
+        <div tal:replace="structure provider:plone.belowcontentbody" />
     </metal:fill>
   
   </body>
