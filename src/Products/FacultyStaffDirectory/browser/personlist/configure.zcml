@@ -22,6 +22,7 @@
          />
 
     <browser:viewletManager
+        for="...interfaces.persongrouping.IPersonGrouping"
         name="facultystaffdirectory.personlist"
         provides=".interfaces.IPersonListManager"
         permission="zope2.View"

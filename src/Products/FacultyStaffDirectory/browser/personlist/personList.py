@@ -6,7 +6,8 @@ from zope.interface import implements
 from zope.viewlet.interfaces import IViewlet, IViewletManager
 
 class PersonListView(BrowserView):
-    pass
+    viewletOfChoice = u'facultystaffdirectory.personlistitem'
+
 
 class PersonListViewletManager(object):
     implements(IPersonListManager)
@@ -48,7 +49,7 @@ class PersonListViewletManager(object):
             viewlet = getMultiAdapter(
                     (person, self.request, self.__parent__, self),
                     IViewlet,
-                    u'facultystaffdirectory.personlistitem')
+                    self.__parent__.viewletOfChoice)
 
             # wrap the viewlet for security purposes
             viewlet = viewlet.__of__(viewlet.context)
