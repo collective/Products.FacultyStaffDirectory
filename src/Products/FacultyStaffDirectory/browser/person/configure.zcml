@@ -3,7 +3,4 @@
            xmlns:five="http://namespaces.zope.org/five"
            i18n_domain="FacultyStaffDirectory">
 
-        <!-- Person View -->
-        <include package=".person" />
-
 </configure>
