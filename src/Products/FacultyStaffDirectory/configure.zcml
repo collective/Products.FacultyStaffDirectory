@@ -3,6 +3,7 @@
     <include package="zope.app.annotation" files="configur?.zcml"/>
     <!-- The glob is so it doesn't freak out if configure.zcml is absent, like it is in Plone 3.0. -->
     <include package=".events"/>
+    <include package=".browser"/>
     <include package=".membership"/>
     <include file="profiles.zcml"/>
     <include package="archetypes.schemaextender"/>
