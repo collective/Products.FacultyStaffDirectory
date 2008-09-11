@@ -1,0 +1,39 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           i18n_domain="FacultyStaffDirectory">
+
+     <include package="plone.app.contentmenu" />
+
+     <browser:menuItem
+         for="...interfaces.classification.IClassification"
+         menu="plone_displayviews"
+         title="Person List View (Experimental)"
+         action="@@classification_personlist_view"
+         description="Experimental representation of a classification"
+         />
+
+     <browser:page
+         for="...interfaces.classification.IClassification"
+         name="classification_personlist_view"
+         template="personlist.pt"
+         class=".personList.PersonListView"
+         permission="zope2.View"
+         />
+
+    <browser:viewletManager
+        name="facultystaffdirectory.personlist"
+        provides=".interfaces.IPersonListManager"
+        permission="zope2.View"
+        class=".personList.PersonListViewletManager"
+        />
+
+    <browser:viewlet
+        for="...interfaces.person.IPerson"
+        name="facultystaffdirectory.personlistitem"
+        manager=".interfaces.IPersonListManager"
+        template="personlistitem.pt"
+        permission="zope2.View"
+        />
+
+</configure>

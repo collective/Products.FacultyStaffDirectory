@@ -5,5 +5,7 @@
 
         <!-- Person View -->
         <include package=".person" />
+        <!-- PersonList View -->
+        <include package=".personlist" />
 
 </configure>
