@@ -1,1 +1,38 @@
-<p>I'm a gallery person</p>
+<tal:block tal:define="person nocall:context">
+
+    <div class="headshot">
+        <a href=""
+           tal:attributes="href person/absolute_url">
+            <tal:block condition="person/image_thumb|nothing">
+                <img src="" alt=""
+                     tal:replace="structure python:person.getScaledImageByWidth(width)" />
+            </tal:block>
+        </a>
+    </div>
+
+    <div class="caption">
+        <h4 tal:content="person/Title" class="personName">[Name]</h4>
+
+        <ul tal:condition="person/getJobTitles" class="jobTitle">
+            <li tal:repeat="jobTitle person/getJobTitles" tal:content="jobTitle" />
+        </ul>
+
+        <div tal:condition="person/getOfficePhone"
+             tal:content="person/getOfficePhone"
+             class="officePhone"/>
+        <div tal:condition="person/getEmail" 
+             tal:content="structure python:person.spamProtectFSD(person.getEmail())" 
+             class="emailAddress"/>
+        <div class="moreInfo">
+            <a tal:attributes="href person/absolute_url"
+               i18n:translate="FacultyStaffDirectory_moreAbout">
+                More about 
+                <span tal:replace="person/Title">[Name]</span>...
+            </a>
+        </div>
+
+        <div class="visualClear"><!-- --></div>
+
+    </div>
+
+</tal:block>
