@@ -8,7 +8,7 @@
         name="facultystaffdirectory.persongrouping"
         provides="...interfaces.IPersonGroupingViewletManager"
         permission="zope2.View"
-        class=".personList.PersonGroupingViewletManager"
+        class=".persongrouping.PersonGroupingViewletManager"
         view="...interfaces.IPersonGroupingView"
         />
 
