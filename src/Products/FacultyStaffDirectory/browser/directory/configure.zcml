@@ -1,0 +1,38 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           i18n_domain="FacultyStaffDirectory">
+
+    <browser:page
+        for="...interfaces.IFacultyStaffDirectory"
+        name="gallery"
+        template="gallery.pt"
+        permission="zope2.View"
+        />
+
+    <browser:menuItem
+        for="...interfaces.IFacultyStaffDirectory"
+        menu="plone_displayviews"
+        title="Gallery view"
+        action="@@gallery"
+        description="FacultyStaffDirectory gallery view"
+        />
+
+    <browser:page
+        for="...interfaces.IFacultyStaffDirectory"
+        name="tabular"
+        template="tabular.pt"
+        permission="zope2.View"
+        />
+
+    <browser:menuItem
+        for="...interfaces.IFacultyStaffDirectory"
+        menu="plone_displayviews"
+        title="Tabular view"
+        action="@@tabular"
+        description="FacultyStaffDirectory tabular view"
+        />
+    
+    <!-- Put person listing viewlet here, managed by the above viewlet manager -->
+
+</configure>

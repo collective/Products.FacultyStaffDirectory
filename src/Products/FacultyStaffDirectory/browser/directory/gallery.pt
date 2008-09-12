@@ -1,0 +1,99 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="FacultyStaffDirectory">
+  
+    <head></head>
+    <body>
+      
+        <metal:fill fill-slot="main">
+            <div class="facultyStaffDirectory directory gallery">
+                <div tal:replace="structure provider:plone.abovecontenttitle" />
+                <h1 tal:content="object_title" class="documentFirstHeading">
+                  Title or id
+                </h1>
+                <div tal:replace="structure provider:plone.belowcontenttitle" />
+                <div tal:replace="structure provider:plone.abovecontentbody" />
+        
+                <tal:block define="directory context/getDirectoryRoot;
+                            allClassifications python:[c.getObject() for c in directory.getClassifications()];
+                            classificationsInRequest request/classification|nothing;
+                            classifications python:classificationsInRequest and [directory[c] for c in isinstance(classificationsInRequest, basestring) and [classificationsInRequest] or classificationsInRequest] or allClassifications;
+                            contextualClassifications python:[context.contextualClassification(c) for c in classifications]">
+
+                    <ol tal:condition="nocall:contextualClassifications" class="classificationList"> 
+                        <tal:block tal:repeat="classification contextualClassifications">
+                            <li tal:condition="classification/getPeople">
+                                <a tal:content="classification/Title" tal:attributes="href python:'%s#%s' % (context.absolute_url(), normalizeString(classification.Title()));" />
+                            </li>
+                        </tal:block>
+                    </ol>
+                    
+                    <tal:block tal:condition="context/getPeople">
+                        <tal:block tal:define="classificationBrains context/getClassifications" tal:repeat="classification classifications">
+                            
+                            <!-- Huge swath of repeated list_people code from classification_standard_view.pt. TODO: Turn this into a bazillion little provider calls, like provider:portrait. -->
+                            <tal:block tal:define="classificationExists nocall:classification | nothing;
+                                                   classificationContext python:classificationExists and context.contextualClassification(classification) or context;
+                                                   people classificationContext/getSortedPeople;
+                                                   width context/getClassificationViewThumbnailWidth"
+                                        >
+                                <div class="classificationListing" tal:condition="people">   
+                                    <metal:block tal:condition="nocall:classificationExists">
+                                        <h2>
+                                            <a tal:attributes="name python:normalizeString(classificationContext.Title()); href python:'%s?classification=%s' % (here.absolute_url(), classification.id)" tal:content="classificationContext/Title">[classification]</a>
+                                        </h2>
+                                    </metal:block>                    
+                                    <div class="listing" tal:repeat="person people">
+                                        <div class="headshot">
+                                            <a href=""
+                                               tal:attributes="href person/absolute_url">
+                                                <tal:block condition="person/image_thumb|nothing">
+                                                    <img src="" alt=""
+                                                         tal:replace="structure python:person.getScaledImageByWidth(width)" />
+                                                </tal:block>
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="caption">
+                                            <h4 tal:content="person/Title" class="personName">[Name]</h4>
+                                            <ul tal:condition="person/getJobTitles" class="jobTitle">
+                                                <li tal:repeat="jobTitle person/getJobTitles" 
+                                                    tal:content="jobTitle" />
+                                            </ul>
+                                            <div tal:condition="person/getOfficePhone"
+                                                 tal:content="person/getOfficePhone"
+                                                 class="officePhone"/>
+                                            <div tal:condition="person/getEmail" 
+                                                 tal:content="structure python:person.spamProtectFSD(person.getEmail())" 
+                                                 class="emailAddress"/>
+                                            <div class="moreInfo">
+                                                <a tal:attributes="href person/absolute_url"
+                                                   i18n:translate="FacultyStaffDirectory_moreAbout">
+                                                    More about 
+                                                    <span tal:replace="person/Title">[Name]</span>...
+                                                </a>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="visualClear"><!-- --></div>
+            
+                                    </div>   
+                                </div>		
+                            </tal:block>
+
+
+                        </tal:block>    
+                    </tal:block>
+                    
+                </tal:block>
+                
+                <div tal:replace="structure provider:plone.belowcontentbody" />
+            </div>
+        </metal:fill>
+    </body>
+</html>

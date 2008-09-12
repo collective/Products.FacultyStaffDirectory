@@ -8,11 +8,11 @@
  <property name="content_meta_type">FSDFacultyStaffDirectory</property>
  <property name="product">FacultyStaffDirectory</property>
  <property name="factory">addFacultyStaffDirectory</property>
- <property name="immediate_view">directory_standard_view</property>
- <property name="default_view">directory_standard_view</property>
+ <property name="immediate_view">gallery</property>
+ <property name="default_view">gallery</property>
  <property name="view_methods">
-    <element value="directory_standard_view" />
-    <element value="directory_tabular_view" />
+    <element value="gallery" />
+    <element value="tabular" />
     <element value="fsd_atoz_view" />
  </property> 
  <property name="global_allow">True</property>

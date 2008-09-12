@@ -12,5 +12,6 @@
         <include package=".course" />
         <include package=".classification" />
         <include package=".committee" />
+        <include package=".directory" />
 
 </configure>
