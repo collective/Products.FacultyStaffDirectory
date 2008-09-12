@@ -4,6 +4,6 @@
 __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
-from content import IPersonGrouping, IClassification, IDepartment, ISpecialty, ICommittee, ICommitteeMembership, ICommitteesFolder, ICourse, IDepartmentalMembership, IFacultyStaffDirectory, IFacultyStaffDirectoryAddable, IPerson, ISpecialtiesFolder, ISpecialtyInformation, IFacultyStaffDirectoryTool
-from events import ICommitteeModifiedEvent, IFacultyStaffDirectoryModifiedEvent, IPersonModifiedEvent, IFacultyStaffDirectoryToolModifiedEvent
-from membership import IGroupingProvidingMembership
+from Products.FacultyStaffDirectory.interfaces.content import IPersonGrouping, IClassification, IDepartment, ISpecialty, ICommittee, ICommitteeMembership, ICommitteesFolder, ICourse, IDepartmentalMembership, IFacultyStaffDirectory, IFacultyStaffDirectoryAddable, IPerson, ISpecialtiesFolder, ISpecialtyInformation, IFacultyStaffDirectoryTool
+from Products.FacultyStaffDirectory.interfaces.events import ICommitteeModifiedEvent, IFacultyStaffDirectoryModifiedEvent, IPersonModifiedEvent, IFacultyStaffDirectoryToolModifiedEvent
+from Products.FacultyStaffDirectory.interfaces.membership import IGroupingProvidingMembership
