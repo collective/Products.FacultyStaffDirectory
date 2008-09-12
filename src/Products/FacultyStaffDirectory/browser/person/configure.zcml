@@ -11,4 +11,20 @@
          permission="zope2.View"
          />
 
+     <browser:viewlet
+         for="...interfaces.IPerson"
+         name="facultystaffdirectory.persongallery"
+         manager="...interfaces.IPersonGroupingViewletManager"
+         template="personGallery.pt"
+         permission="zope2.View"
+         />
+
+     <browser:viewlet
+         for="...interfaces.IPerson"
+         name="facultystaffdirectory.persontabular"
+         manager="...interfaces.IPersonGroupingViewletManager"
+         template="personTabular.pt"
+         permission="zope2.View"
+         />
+
 </configure>

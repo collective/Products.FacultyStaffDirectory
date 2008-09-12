@@ -36,8 +36,15 @@
          />
 
      <browser:viewletManager
-         name="facultystaffdirectory.specialtyviewletmanager"
-         provides="...interfaces.ISpecialtyViewletManager"
+         name="facultystaffdirectory.specialtytabularviewletmanager"
+         provides="...interfaces.ISpecialtyTabularViewletManager"
+         permission="zope2.View"
+         class="plone.app.viewletmanager.manager.OrderedViewletManager"
+         />
+
+     <browser:viewletManager
+         name="facultystaffdirectory.specialtygalleryviewletmanager"
+         provides="...interfaces.ISpecialtyGalleryViewletManager"
          permission="zope2.View"
          class="plone.app.viewletmanager.manager.OrderedViewletManager"
          />
@@ -49,6 +56,25 @@
          for="...interfaces.ISpecialty"
          permission="zope2.View"
          />
+
+     <browser:viewlet
+         name="facultystaffdirectory.specialtygallerypeople"
+         manager="...interfaces.ISpecialtyGalleryViewletManager"
+         template="specialtyPeople.pt"
+         for="...interfaces.ISpecialty"
+         permission="zope2.View"
+         class=".specialty.SpecialtyGalleryPeople"
+         />
+
+     <browser:viewlet
+         name="facultystaffdirectory.specialtytabularpeople"
+         manager="...interfaces.ISpecialtyTabularViewletManager"
+         template="specialtyPeople.pt"
+         for="...interfaces.ISpecialty"
+         permission="zope2.View"
+         class=".specialty.SpecialtyTabularPeople"
+         />
+
 
      <browser:viewlet
          name="facultystaffdirectory.subspecialties"
