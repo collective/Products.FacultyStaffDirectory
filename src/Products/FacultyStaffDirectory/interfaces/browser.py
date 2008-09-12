@@ -12,4 +12,6 @@ class IPersonGroupingView(IBrowserView):
 
 class ISpecialtyViewletManager(IViewletManager):
     """Ordered viewlet manager that contains and orders parts of a specialty like body text, subspecialties, etc."""
-    pass
+
+class IClassificationViewletManager(IViewletManager):
+    """Ordered viewlet manager that contains and orders parts of a classification like description and person listing."""

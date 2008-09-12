@@ -12,17 +12,17 @@
   <body>
     
     <metal:fill fill-slot="main">
-        <div class="facultyStaffDirectory specialty">
+        <div class="facultyStaffDirectory classification">
             <div tal:replace="structure provider:plone.abovecontenttitle" />
             <h1 tal:content="object_title" class="documentFirstHeading">
               Title or id
             </h1>
             <div tal:replace="structure provider:plone.belowcontenttitle" />
             <div tal:replace="structure provider:plone.abovecontentbody" />
-            <div tal:replace="structure provider:facultystaffdirectory.specialtyviewletmanager" />
+            <div tal:replace="structure provider:facultystaffdirectory.classificationviewletmanager" />
 
             <!--
-                TODO Add the listing of Persons here.
+                TODO: Add the listing of Persons here.
             -->
             
             <div tal:replace="structure provider:plone.belowcontentbody" />

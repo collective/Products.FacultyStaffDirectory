@@ -12,5 +12,4 @@ class TabularView(SpecialtyView):
     
 class SubspecialtiesViewlet(ViewletBase):
     def getSubspecialties(self):
-        return self.context.getFolderContents({'portal_type':'FSDSpecialty', 'sort_on':'sortable_title'})
-    
+        return self.context.getFolderContents({'portal_type':'FSDSpecialty', 'sort_on':'sortable_title'})  # TODO: Use getSpecialtyTree

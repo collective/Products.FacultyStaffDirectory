@@ -10,5 +10,6 @@
         <include package=".specialty" />
         <include package=".persongrouping" />
         <include package=".course" />
+        <include package=".classification" />
 
 </configure>
