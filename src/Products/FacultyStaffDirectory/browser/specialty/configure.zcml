@@ -1,0 +1,23 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           i18n_domain="FacultyStaffDirectory">
+
+     <browser:page
+         for="...interfaces.ISpecialty"
+         name="gallery"
+         template="gallery.pt"
+         class=".specialty.GalleryView"
+         permission="zope2.View"
+         />
+
+     <browser:menuItem
+         for="...interfaces.ISpecialty"
+         menu="plone_displayviews"
+         title="Gallery view"
+         action="@@gallery"
+         description="Specialty gallery view"
+         />
+
+         
+</configure>

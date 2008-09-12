@@ -3,8 +3,6 @@
            xmlns:five="http://namespaces.zope.org/five"
            i18n_domain="FacultyStaffDirectory">
 
-     <include package="plone.app.contentmenu" />
-
      <browser:menuItem
          for="...interfaces.IClassification"
          menu="plone_displayviews"

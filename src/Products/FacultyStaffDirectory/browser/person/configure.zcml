@@ -10,5 +10,5 @@
          class=".person.PersonView"
          permission="zope2.View"
          />
-         
+
 </configure>

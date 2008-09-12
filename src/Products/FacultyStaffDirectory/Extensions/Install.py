@@ -170,6 +170,11 @@ def install(self, reinstall=False):
             # Relations content objects seem to not be able to handle getObject(), 
             # but the data doesn't seem to get lost, so just ignore it.
             pass
+        except AttributeError:
+            # Relations content objects seem to not be able to handle getObject(), 
+            # but the data doesn't seem to get lost, so just ignore it.
+            pass
+
     #####
     # Smart Folder Manipulations
     #  These could be places in a catalog.xml GenericSetup step, but doing so would

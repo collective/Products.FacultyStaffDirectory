@@ -37,6 +37,7 @@
                     </tal:block>        
                 </dl>
             </div>
+            
             <tal:block tal:condition="context/getPeople">
                 <h2 i18n:translate="FacultyStaffDirectory_specialtyMembers">People specializing in this area</h2>
                 <metal:block define-slot="listing_section">

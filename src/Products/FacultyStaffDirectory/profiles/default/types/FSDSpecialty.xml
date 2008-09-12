@@ -8,10 +8,10 @@
  <property name="content_meta_type">FSDSpecialty</property>
  <property name="product">FacultyStaffDirectory</property>
  <property name="factory">addSpecialty</property>
- <property name="immediate_view">specialty_standard_view</property>
- <property name="default_view">specialty_standard_view</property>
+ <property name="immediate_view">gallery</property>
+ <property name="default_view">gallery</property>
  <property name="view_methods">
-    <element value="specialty_standard_view" />
+    <element value="gallery" />
     <element value="specialty_tabular_view" />
  </property>
  <property name="global_allow">False</property>
