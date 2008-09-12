@@ -11,7 +11,7 @@
     <body>
       
         <metal:fill fill-slot="main">
-            <div class="facultyStaffDirectory classificationGallery">
+            <div class="facultyStaffDirectory classification gallery">
                 <div tal:replace="structure provider:plone.abovecontenttitle" />
                 <h1 tal:content="object_title" class="documentFirstHeading">
                   Title or id
