@@ -3,23 +3,11 @@
            xmlns:i18n="http://namespaces.zope.org/i18n"
            i18n_domain="FacultyStaffDirectory">
 
-  <adapter for="..interfaces.person.IPerson"
-           provides="Products.membrane.interfaces.IUserRelated"
-           factory=".person.UserRelated" />
-  <adapter for="..interfaces.person.IPerson"
-           provides="Products.membrane.interfaces.IUserRoles"
-           factory=".person.UserRoles" />
-  <adapter for="..interfaces.person.IPerson"
-           provides="Products.membrane.interfaces.IMembraneUserManagement"
-           factory=".person.UserManagement" />
-  <adapter for="..interfaces.person.IPerson"
-           provides="Products.membrane.interfaces.IUserAuthentication"
-           factory=".person.UserAuthentication" />
-           
-  <adapter for="..interfaces.facultystaffdirectory.IFacultyStaffDirectory"
-           provides="Products.membrane.interfaces.IGroup"
-           factory=".facultystaffdirectory.Group" />
-           
-  <adapter factory=".persongrouping.Group" />
-  
+    <adapter factory=".person.UserRelated" />
+    <adapter factory=".person.UserRoles" />
+    <adapter factory=".person.UserManagement" />
+    <adapter factory=".person.UserAuthentication" />
+    <adapter factory=".facultystaffdirectory.Group" />
+    <adapter factory=".persongrouping.Group" />
+
 </configure>
