@@ -19,5 +19,20 @@
          description="Specialty gallery view"
          />
 
+     <browser:page
+         for="...interfaces.ISpecialty"
+         name="tabular"
+         template="tabular.pt"
+         class=".specialty.TabularView"
+         permission="zope2.View"
+         />
+
+     <browser:menuItem
+         for="...interfaces.ISpecialty"
+         menu="plone_displayviews"
+         title="Tabular view"
+         action="@@tabular"
+         description="Specialty tabular view"
+         />
          
 </configure>

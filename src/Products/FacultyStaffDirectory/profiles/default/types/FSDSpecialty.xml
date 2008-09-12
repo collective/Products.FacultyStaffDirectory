@@ -12,7 +12,7 @@
  <property name="default_view">gallery</property>
  <property name="view_methods">
     <element value="gallery" />
-    <element value="specialty_tabular_view" />
+    <element value="tabular" />
  </property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
