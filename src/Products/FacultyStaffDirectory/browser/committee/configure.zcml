@@ -36,8 +36,15 @@
          />
 
      <browser:viewletManager
-         name="facultystaffdirectory.committeeviewletmanager"
-         provides="...interfaces.ICommitteeViewletManager"
+         name="facultystaffdirectory.committeetabularviewletmanager"
+         provides="...interfaces.ICommitteeTabularViewletManager"
+         permission="zope2.View"
+         class="plone.app.viewletmanager.manager.OrderedViewletManager"
+         />
+
+     <browser:viewletManager
+         name="facultystaffdirectory.committeegalleryviewletmanager"
+         provides="...interfaces.ICommitteeGalleryViewletManager"
          permission="zope2.View"
          class="plone.app.viewletmanager.manager.OrderedViewletManager"
          />
@@ -49,6 +56,32 @@
          for="...interfaces.ICommittee"
          permission="zope2.View"
          />
+
+     <browser:viewlet
+         name="facultystaffdirectory.committeegallerypeople"
+         manager="...interfaces.ICommitteeGalleryViewletManager"
+         template="committeePeople.pt"
+         for="...interfaces.ICommittee"
+         permission="zope2.View"
+         class=".committee.CommitteeGalleryPeople"
+         />
+
+     <browser:viewlet
+         name="facultystaffdirectory.committeetabularpeople"
+         manager="...interfaces.ICommitteeTabularViewletManager"
+         template="committeePeople.pt"
+         for="...interfaces.ICommittee"
+         permission="zope2.View"
+         class=".committee.CommitteeTabularPeople"
+         />
+         
+    <browser:page
+        for="...interfaces.ICommittee"
+        name="manage-viewlets"
+        class="plone.app.viewletmanager.manager.ManageViewlets"
+        template="gallery.pt"
+        permission="cmf.ManagePortal"
+        />
 
          
 </configure>

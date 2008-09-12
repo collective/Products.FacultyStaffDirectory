@@ -27,3 +27,9 @@ class IClassificationViewletManager(IViewletManager):
     
 class ICommitteeViewletManager(IViewletManager):
     """Ordered viewlet manager that contains and orders parts of a committee like body text and committee members"""
+    
+class ICommitteeGalleryViewletManager(ICommitteeViewletManager):
+    """Ordered viewlet manager that calls for gallery views of contained FSDPersons"""
+    
+class ICommitteeTabularViewletManager(ICommitteeViewletManager):
+    """Ordered viewlet manager that calls for tabular views of contained FSDPersons"""

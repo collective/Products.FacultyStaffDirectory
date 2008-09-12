@@ -19,7 +19,7 @@
             </h1>
             <div tal:replace="structure provider:plone.belowcontenttitle" />
             <div tal:replace="structure provider:plone.abovecontentbody" />
-            <div tal:replace="structure provider:facultystaffdirectory.committeeviewletmanager" />
+            <div tal:replace="structure provider:facultystaffdirectory.committeegalleryviewletmanager" />
 
             <!--
                 TODO Add the listing of Persons here.

@@ -4,4 +4,7 @@
         <viewlet name="facultystaffdirectory.specialtytext" />
         <viewlet name="facultystaffdirectory.subspecialties" />
     </order>
+    <order manager="facultystaffdirectory.committeeviewletmanager" skinname="*">
+        <viewlet name="facultystaffdirectory.committeetext" />
+    </order>
 </object>
