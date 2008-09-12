@@ -34,5 +34,30 @@
          action="@@tabular"
          description="Specialty tabular view"
          />
+
+     <browser:viewletManager
+         name="facultystaffdirectory.specialtyviewletmanager"
+         provides="...interfaces.ISpecialtyViewletManager"
+         permission="zope2.View"
+         class="plone.app.viewletmanager.manager.OrderedViewletManager"
+         />
+
+     <browser:viewlet
+         name="facultystaffdirectory.specialtytext"
+         manager="...interfaces.ISpecialtyViewletManager"
+         template="specialtyText.pt"
+         for="...interfaces.ISpecialty"
+         permission="zope2.View"
+         />
+
+     <browser:viewlet
+         name="facultystaffdirectory.subspecialties"
+         manager="...interfaces.ISpecialtyViewletManager"
+         class=".specialty.SubspecialtiesViewlet"
+         template="subspecialties.pt"
+         for="...interfaces.ISpecialty"
+         permission="zope2.View"
+         />
+
          
 </configure>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object>
+    <order manager="facultystaffdirectory.specialtyviewletmanager" skinname="*">
+        <viewlet name="facultystaffdirectory.specialtytext" />
+        <viewlet name="facultystaffdirectory.subspecialties" />
+    </order>
+</object>
