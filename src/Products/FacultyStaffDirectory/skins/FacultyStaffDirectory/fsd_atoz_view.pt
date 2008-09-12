@@ -11,7 +11,7 @@
             <h2 tal:condition="not:classificationsInRequest" i18n:translate="FacultyStaffDirectory_people">People</h2>
             <div class="atozView" tal:define="people python:context.getSortedPeople(as_objects=False)">
                 <div tal:define="allLetters string:ABCDEFGHIJKLMNOPQRSTUVWXYZ;
-                                 usedLetters python:[person.getLastName.upper()[0] for person in people]"
+                                 usedLetters python:[person.getLastName.upper()[0] for person in people if len(person.getLastName)>0]"
                      class="alphabetLinks">
                     <ol>
                         <li tal:repeat="letter allLetters">
@@ -44,7 +44,7 @@
                                         tal:attributes="class python:test(oddrow, 'even', 'odd')">
                                         <metal:block define-slot="table_cells">
                                             <td class="personName">
-                                                <a href="" tal:attributes="href person/getURL; name python:person.getLastName.upper()[0];"><span tal:content="string:${person/getLastName}" class="emphasis">[last name]</span>, <span tal:content="string:${person/getFirstName}">[first-name]</span> </a>
+                                                <a href="" tal:attributes="href person/getURL; name python:person.getLastName and person.getLastName.upper()[0];"><span tal:content="string:${person/getLastName}" class="emphasis">[last name]</span>, <span tal:content="string:${person/getFirstName}">[first-name]</span> </a>
                                             </td>
                                             <td class="officePhone">
                                                 <span tal:condition="person/getOfficePhone" tal:content="person/getOfficePhone">[phone number]</span>
