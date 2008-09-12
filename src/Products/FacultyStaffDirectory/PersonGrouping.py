@@ -14,17 +14,6 @@ from Products.CMFCore.utils import getToolByName
 schema =  ATContentTypeSchema.copy() + Schema((
 
     TextField(
-        name='description',
-        widget=TextAreaWidget(
-            label=u'Description',
-            label_msgid='FacultyStaffDirectory_label_description',
-            i18n_domain='FacultyStaffDirectory',
-        ),
-        accessor="Description",
-        searchable=True
-    ),
-
-    TextField(
         name='text',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
         widget=RichWidget(
