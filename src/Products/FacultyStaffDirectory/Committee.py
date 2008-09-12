@@ -16,6 +16,7 @@ from Products.membrane.interfaces import IPropertiesProvider
 from Products.FacultyStaffDirectory.interfaces.committee import ICommittee
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_COMMITTIES_TO_PEOPLE
+from Products.FacultyStaffDirectory.interfaces import IGroupingProvidingMembership
 
 schema = Schema((
 
@@ -46,7 +47,7 @@ class Committee(PersonGrouping):
     security = ClassSecurityInfo()
     __implements__ = (getattr(PersonGrouping,'__implements__',()),)
     # zope3 interfaces
-    implements(ICommittee, IPropertiesProvider)
+    implements(ICommittee, IPropertiesProvider, IGroupingProvidingMembership)
     meta_type = portal_type = 'FSDCommittee'
     _at_rename_after_creation = True
     schema = Committee_schema

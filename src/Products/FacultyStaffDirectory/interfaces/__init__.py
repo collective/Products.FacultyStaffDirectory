@@ -16,3 +16,5 @@ import person
 import specialtiesfolder
 import specialty
 import specialtyinformation
+from persongrouping import IPersonGrouping
+from membership import IGroupingProvidingMembership

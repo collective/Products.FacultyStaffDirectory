@@ -6,9 +6,10 @@ __docformat__ = 'plaintext'
 from zope.interface import Interface
 
 class IPersonGrouping(Interface):
-    """A grouping of person objects
-    """
+    """A grouping of person objects"""
+
+    def getPeople():
+        """Return a list of people."""
 
     def getSortedPeople():
-        """Return a list of sorted people
-        """
+        """Return a sorted list of people."""

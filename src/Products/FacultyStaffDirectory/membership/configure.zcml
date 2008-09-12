@@ -20,16 +20,6 @@
            provides="Products.membrane.interfaces.IGroup"
            factory=".facultystaffdirectory.Group" />
            
-  <adapter for="..interfaces.committee.ICommittee"
-           provides="Products.membrane.interfaces.IGroup"
-           factory=".committee.Group" />
-           
-  <adapter for="..interfaces.classification.IClassification"
-           provides="Products.membrane.interfaces.IGroup"
-           factory=".classification.Group" />
-           
-  <adapter for="..interfaces.department.IDepartment"
-           provides="Products.membrane.interfaces.IGroup"
-           factory=".department.Group" />
+  <adapter factory=".persongrouping.Group" />
   
 </configure>

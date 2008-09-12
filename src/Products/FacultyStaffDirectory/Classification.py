@@ -17,6 +17,7 @@ from Products.membrane.interfaces import IPropertiesProvider
 from Products.FacultyStaffDirectory.interfaces.classification import IClassification
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE
+from Products.FacultyStaffDirectory.interfaces import IGroupingProvidingMembership
 
 schema = Schema((
 
@@ -47,7 +48,7 @@ class Classification(PersonGrouping):
     security = ClassSecurityInfo()
     meta_type = portal_type = "FSDClassification"
     # zope3 interfaces
-    implements(IClassification, IPropertiesProvider)
+    implements(IClassification, IPropertiesProvider, IGroupingProvidingMembership)
     _at_rename_after_creation = True
     schema = Classification_schema
     # Methods

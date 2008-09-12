@@ -15,6 +15,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.FacultyStaffDirectory.interfaces.department import IDepartment
 from zope.interface import implements
 from Products.FacultyStaffDirectory.permissions import ASSIGN_DEPARTMENTS_TO_PEOPLE
+from Products.FacultyStaffDirectory.interfaces import IGroupingProvidingMembership
 
 schema = Schema((
 
@@ -44,7 +45,7 @@ class Department(PersonGrouping):
     """
     security = ClassSecurityInfo()
     __implements__ = (getattr(PersonGrouping,'__implements__',()),)
-    implements(IDepartment)
+    implements(IDepartment, IGroupingProvidingMembership)
     _at_rename_after_creation = True
     meta_type = portal_type="FSDDepartment"
     schema = Department_schema   
