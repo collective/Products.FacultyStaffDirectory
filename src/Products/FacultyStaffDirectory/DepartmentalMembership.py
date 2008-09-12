@@ -6,7 +6,7 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.interfaces.departmentalmembership import IDepartmentalMembership
+from Products.FacultyStaffDirectory.interfaces import IDepartmentalMembership
 from zope.interface import implements
 
 schema = Schema((

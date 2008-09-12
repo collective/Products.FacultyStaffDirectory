@@ -9,7 +9,7 @@ from Products.FacultyStaffDirectory.config import *
 from Products.CMFCore.permissions import View
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
-from Products.FacultyStaffDirectory.interfaces.course import ICourse
+from Products.FacultyStaffDirectory.interfaces import ICourse
 from zope.interface import implements
 
 schema = ATContentTypeSchema.copy() + Schema((

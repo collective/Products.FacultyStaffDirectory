@@ -7,7 +7,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.FacultyStaffDirectory.config import *
 
-from Products.FacultyStaffDirectory.interfaces.specialtyinformation import ISpecialtyInformation
+from Products.FacultyStaffDirectory.interfaces import ISpecialtyInformation
 from zope.interface import implements
 
 schema = Schema((

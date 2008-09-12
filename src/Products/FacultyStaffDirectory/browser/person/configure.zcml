@@ -4,7 +4,7 @@
            i18n_domain="FacultyStaffDirectory">
 
      <browser:page
-         for="...interfaces.person.IPerson"
+         for="...interfaces.IPerson"
          name="index"
          template="index.pt"
          class=".person.PersonView"

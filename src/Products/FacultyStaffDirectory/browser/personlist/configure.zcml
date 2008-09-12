@@ -6,7 +6,7 @@
      <include package="plone.app.contentmenu" />
 
      <browser:menuItem
-         for="...interfaces.classification.IClassification"
+         for="...interfaces.IClassification"
          menu="plone_displayviews"
          title="Person List View (Experimental)"
          action="@@classification_personlist_view"
@@ -14,7 +14,7 @@
          />
 
      <browser:page
-         for="...interfaces.classification.IClassification"
+         for="...interfaces.IClassification"
          name="classification_personlist_view"
          template="personlist.pt"
          class=".personList.PersonListView"
@@ -22,7 +22,7 @@
          />
 
     <browser:viewletManager
-        for="...interfaces.persongrouping.IPersonGrouping"
+        for="...interfaces.IPersonGrouping"
         name="facultystaffdirectory.personlist"
         provides=".interfaces.IPersonListManager"
         permission="zope2.View"
@@ -30,7 +30,7 @@
         />
 
     <browser:viewlet
-        for="...interfaces.person.IPerson"
+        for="...interfaces.IPerson"
         name="facultystaffdirectory.personlistitem"
         manager=".interfaces.IPersonListManager"
         template="personlistitem.pt"

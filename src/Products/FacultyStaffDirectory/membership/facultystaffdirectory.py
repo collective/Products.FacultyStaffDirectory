@@ -11,7 +11,7 @@ from Products.membrane.config import ACTIVE_STATUS_CATEGORY
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 from Products.membrane.utils import generateCategorySetIdForType
 
-from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFacultyStaffDirectory
+from Products.FacultyStaffDirectory.interfaces import IFacultyStaffDirectory
 
 class Group(object):
     """Allow a FacultyStaffDirectory to act as a group for contained people

@@ -8,7 +8,7 @@ from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.interfaces.specialtiesfolder import ISpecialtiesFolder
+from Products.FacultyStaffDirectory.interfaces import ISpecialtiesFolder
 from zope.interface import implements
 
 schema = ATContentTypeSchema.copy() + Schema((),)

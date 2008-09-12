@@ -13,10 +13,9 @@ from Products.FacultyStaffDirectory.config import *
 from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IPropertiesProvider
-from Products.FacultyStaffDirectory.interfaces.committee import ICommittee
+from Products.FacultyStaffDirectory.interfaces import ICommittee, IGroupingProvidingMembership
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_COMMITTIES_TO_PEOPLE
-from Products.FacultyStaffDirectory.interfaces import IGroupingProvidingMembership
 
 schema = Schema((
 

@@ -12,7 +12,7 @@ from Products.FacultyStaffDirectory.PersonGrouping import PersonGrouping
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
 
-from Products.FacultyStaffDirectory.interfaces.specialty import ISpecialty
+from Products.FacultyStaffDirectory.interfaces import ISpecialty
 from Products.FacultyStaffDirectory.permissions import ASSIGN_SPECIALTIES_TO_PEOPLE
 
 from zope.interface import implements

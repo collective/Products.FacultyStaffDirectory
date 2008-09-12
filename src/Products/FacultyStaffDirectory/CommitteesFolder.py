@@ -11,7 +11,7 @@ from Products.FacultyStaffDirectory.config import *
 
 from Products.CMFCore.permissions import View, ManageProperties, ModifyPortalContent
 
-from Products.FacultyStaffDirectory.interfaces.committeesfolder import ICommitteesFolder
+from Products.FacultyStaffDirectory.interfaces import ICommitteesFolder
 from zope.interface import implements
 
 schema = ATContentTypeSchema.copy() + Schema((

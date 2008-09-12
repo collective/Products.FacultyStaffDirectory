@@ -4,7 +4,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements, Interface
 from zope.component import adapts, provideAdapter
 
-from Products.FacultyStaffDirectory.interfaces.person import IPerson
+from Products.FacultyStaffDirectory.interfaces import IPerson
 
 
 # Any field you tack on must have ExtensionField as its first subclass:

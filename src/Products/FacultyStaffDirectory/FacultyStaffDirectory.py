@@ -6,7 +6,7 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
-from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFacultyStaffDirectory
+from Products.FacultyStaffDirectory.interfaces import IFacultyStaffDirectory
 from Products.FacultyStaffDirectory.config import *
 from Products.CMFCore.permissions import View, ManageUsers
 from Products.CMFCore.utils import getToolByName

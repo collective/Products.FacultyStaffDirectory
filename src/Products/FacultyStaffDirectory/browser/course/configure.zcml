@@ -4,7 +4,7 @@
            i18n_domain="FacultyStaffDirectory">
 
      <browser:page
-         for="...interfaces.course.ICourse"
+         for="...interfaces.ICourse"
          name="index"
          template="index.pt"
          class=".course.CourseView"

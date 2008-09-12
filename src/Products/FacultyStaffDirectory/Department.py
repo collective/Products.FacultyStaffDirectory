@@ -12,10 +12,9 @@ from Products.FacultyStaffDirectory.PersonGrouping import PersonGrouping
 from Products.Relations.field import RelationField
 from Products.FacultyStaffDirectory.config import *
 from Products.CMFCore.utils import getToolByName
-from Products.FacultyStaffDirectory.interfaces.department import IDepartment
+from Products.FacultyStaffDirectory.interfaces import IDepartment, IGroupingProvidingMembership
 from zope.interface import implements
 from Products.FacultyStaffDirectory.permissions import ASSIGN_DEPARTMENTS_TO_PEOPLE
-from Products.FacultyStaffDirectory.interfaces import IGroupingProvidingMembership
 
 schema = Schema((
 

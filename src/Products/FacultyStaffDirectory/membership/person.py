@@ -11,7 +11,7 @@ from Products.membrane.interfaces import IUserRelated
 from Products.membrane.interfaces import IUserAuthentication
 from Products.membrane.interfaces import IUserRoles
 from Products.membrane.interfaces import IMembraneUserManagement
-from Products.FacultyStaffDirectory.interfaces.person import IPerson
+from Products.FacultyStaffDirectory.interfaces import IPerson
 from Products.FacultyStaffDirectory.config import PASSWORD_KEY
 from Products.FacultyStaffDirectory.config import TOOLNAME as FSD_TOOL
 
