@@ -16,7 +16,7 @@
          name="facultystaffdirectory.persongallery"
          manager="...interfaces.IPersonGroupingViewletManager"
          class=".person.PersonGalleryViewlet"
-         template="personGallery.pt"
+         template="gallery.pt"
          permission="zope2.View"
          />
 
@@ -24,7 +24,7 @@
          for="...interfaces.IPerson"
          name="facultystaffdirectory.persontabular"
          manager="...interfaces.IPersonGroupingViewletManager"
-         template="personTabular.pt"
+         template="tabular.pt"
          permission="zope2.View"
          />
 

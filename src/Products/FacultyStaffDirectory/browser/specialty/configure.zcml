@@ -62,7 +62,7 @@
      <browser:viewlet
          name="facultystaffdirectory.specialtytext"
          manager="...interfaces.ISpecialtyViewletManager"
-         template="specialtyText.pt"
+         template="text.pt"
          for="...interfaces.ISpecialty"
          permission="zope2.View"
          />
@@ -70,7 +70,7 @@
      <browser:viewlet
          name="facultystaffdirectory.specialtygallerypeople"
          manager="...interfaces.ISpecialtyGalleryViewletManager"
-         template="specialtyPeople.pt"
+         template="people.pt"
          for="...interfaces.ISpecialty"
          permission="zope2.View"
          class=".specialty.SpecialtyGalleryPeople"
@@ -79,7 +79,7 @@
      <browser:viewlet
          name="facultystaffdirectory.specialtytabularpeople"
          manager="...interfaces.ISpecialtyTabularViewletManager"
-         template="specialtyPeople.pt"
+         template="people.pt"
          for="...interfaces.ISpecialty"
          permission="zope2.View"
          class=".specialty.SpecialtyTabularPeople"

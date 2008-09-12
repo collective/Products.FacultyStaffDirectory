@@ -4,79 +4,79 @@
            i18n_domain="FacultyStaffDirectory">
 
      <browser:page
-         for="...interfaces.ICommittee"
+         for="...interfaces.IDepartment"
          name="gallery"
          template="gallery.pt"
-         class=".committee.GalleryView"
+         class=".department.GalleryView"
          permission="zope2.View"
          />
 
      <browser:menuItem
-         for="...interfaces.ICommittee"
+         for="...interfaces.IDepartment"
          menu="plone_displayviews"
          title="Gallery view"
          action="@@gallery"
-         description="Committee gallery view"
+         description="Department gallery view"
          />
 
      <browser:page
-         for="...interfaces.ICommittee"
+         for="...interfaces.IDepartment"
          name="tabular"
          template="tabular.pt"
-         class=".committee.TabularView"
+         class=".department.TabularView"
          permission="zope2.View"
          />
 
      <browser:menuItem
-         for="...interfaces.ICommittee"
+         for="...interfaces.IDepartment"
          menu="plone_displayviews"
          title="Tabular view"
          action="@@tabular"
-         description="Committee tabular view"
+         description="Department tabular view"
          />
 
      <browser:viewletManager
-         name="facultystaffdirectory.committeetabularviewletmanager"
-         provides="...interfaces.ICommitteeTabularViewletManager"
+         name="facultystaffdirectory.departmenttabularviewletmanager"
+         provides="...interfaces.IDepartmentTabularViewletManager"
          permission="zope2.View"
          class="plone.app.viewletmanager.manager.OrderedViewletManager"
          />
 
      <browser:viewletManager
-         name="facultystaffdirectory.committeegalleryviewletmanager"
-         provides="...interfaces.ICommitteeGalleryViewletManager"
+         name="facultystaffdirectory.departmentgalleryviewletmanager"
+         provides="...interfaces.IDepartmentGalleryViewletManager"
          permission="zope2.View"
          class="plone.app.viewletmanager.manager.OrderedViewletManager"
          />
 
      <browser:viewlet
-         name="facultystaffdirectory.committeetext"
-         manager="...interfaces.ICommitteeViewletManager"
+         name="facultystaffdirectory.departmenttext"
+         manager="...interfaces.IDepartmentViewletManager"
          template="text.pt"
-         for="...interfaces.ICommittee"
+         for="...interfaces.IDepartment"
          permission="zope2.View"
          />
 
      <browser:viewlet
-         name="facultystaffdirectory.committeegallerypeople"
-         manager="...interfaces.ICommitteeGalleryViewletManager"
+         name="facultystaffdirectory.departmentgallerypeople"
+         manager="...interfaces.IDepartmentGalleryViewletManager"
          template="people.pt"
-         for="...interfaces.ICommittee"
+         for="...interfaces.IDepartment"
          permission="zope2.View"
-         class=".committee.CommitteeGalleryPeople"
+         class=".department.DepartmentGalleryPeople"
          />
 
      <browser:viewlet
-         name="facultystaffdirectory.committeetabularpeople"
-         manager="...interfaces.ICommitteeTabularViewletManager"
+         name="facultystaffdirectory.departmenttabularpeople"
+         manager="...interfaces.IDepartmentTabularViewletManager"
          template="people.pt"
-         for="...interfaces.ICommittee"
+         for="...interfaces.IDepartment"
          permission="zope2.View"
-         class=".committee.CommitteeTabularPeople"
+         class=".department.DepartmentTabularPeople"
          />
          
     <browser:page
-        for="...interfaces.ICommittee"
+        for="...interfaces.IDepartment"
         name="manage-viewlets"
         class="plone.app.viewletmanager.manager.ManageViewlets"
         template="gallery.pt"
