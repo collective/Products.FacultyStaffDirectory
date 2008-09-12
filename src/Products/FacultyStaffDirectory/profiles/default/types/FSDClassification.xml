@@ -14,7 +14,6 @@
  <property name="view_methods">
     <element value="classification_standard_view" />
     <element value="classification_tabular_view" />
-    <element value="classification_personlist_view" />
   </property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>

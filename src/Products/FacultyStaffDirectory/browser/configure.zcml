@@ -8,7 +8,7 @@
 
         <include package=".person" />
         <include package=".specialty" />
-        <include package=".personlist" />
+        <include package=".persongrouping" />
         <include package=".course" />
 
 </configure>

@@ -1,1 +1,0 @@
-<p tal:content="title_string | context/title_or_id" />
