@@ -11,6 +11,15 @@
          permission="zope2.View"
          />
 
+     <!-- Adapt @@manage-viewlets to display the viewlets on a Specialty -->
+     <browser:page
+         for="...interfaces.ISpecialty"
+         name="manage-viewlets"
+         class="plone.app.viewletmanager.manager.ManageViewlets"
+         template="gallery.pt"
+         permission="cmf.ManagePortal"
+         />
+
      <browser:menuItem
          for="...interfaces.ISpecialty"
          menu="plone_displayviews"
