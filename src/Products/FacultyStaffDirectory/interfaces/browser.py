@@ -24,3 +24,6 @@ class ISpecialtyGalleryViewletManager(ISpecialtyViewletManager):
 
 class IClassificationViewletManager(IViewletManager):
     """Ordered viewlet manager that contains and orders parts of a classification like description and person listing."""
+    
+class ICommitteeViewletManager(IViewletManager):
+    """Ordered viewlet manager that contains and orders parts of a committee like body text and committee members"""

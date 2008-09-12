@@ -1,0 +1,54 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           i18n_domain="FacultyStaffDirectory">
+
+     <browser:page
+         for="...interfaces.ICommittee"
+         name="gallery"
+         template="gallery.pt"
+         class=".committee.GalleryView"
+         permission="zope2.View"
+         />
+
+     <browser:menuItem
+         for="...interfaces.ICommittee"
+         menu="plone_displayviews"
+         title="Gallery view"
+         action="@@gallery"
+         description="Committee gallery view"
+         />
+
+     <browser:page
+         for="...interfaces.ICommittee"
+         name="tabular"
+         template="tabular.pt"
+         class=".committee.TabularView"
+         permission="zope2.View"
+         />
+
+     <browser:menuItem
+         for="...interfaces.ICommittee"
+         menu="plone_displayviews"
+         title="Tabular view"
+         action="@@tabular"
+         description="Committee tabular view"
+         />
+
+     <browser:viewletManager
+         name="facultystaffdirectory.committeeviewletmanager"
+         provides="...interfaces.ICommitteeViewletManager"
+         permission="zope2.View"
+         class="plone.app.viewletmanager.manager.OrderedViewletManager"
+         />
+
+     <browser:viewlet
+         name="facultystaffdirectory.committeetext"
+         manager="...interfaces.ICommitteeViewletManager"
+         template="committeeText.pt"
+         for="...interfaces.ICommittee"
+         permission="zope2.View"
+         />
+
+         
+</configure>

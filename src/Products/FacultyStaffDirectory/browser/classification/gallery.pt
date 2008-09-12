@@ -8,11 +8,10 @@
       i18n:domain="FacultyStaffDirectory">
   
     <head></head>
-    
     <body>
       
         <metal:fill fill-slot="main">
-            <div class="facultyStaffDirectory classification">
+            <div class="facultyStaffDirectory classificationGallery">
                 <div tal:replace="structure provider:plone.abovecontenttitle" />
                 <h1 tal:content="object_title" class="documentFirstHeading">
                   Title or id

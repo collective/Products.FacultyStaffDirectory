@@ -11,5 +11,6 @@
         <include package=".persongrouping" />
         <include package=".course" />
         <include package=".classification" />
+        <include package=".committee" />
 
 </configure>
