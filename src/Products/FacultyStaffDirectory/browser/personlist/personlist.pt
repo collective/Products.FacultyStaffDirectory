@@ -17,7 +17,7 @@
         <div tal:replace="structure provider:plone.belowcontenttitle" />
         <div tal:replace="structure provider:plone.abovecontentbody" />                
 
-        <div tal:content="structure provider:facultystaffdirectory.personlist" />
+        <div tal:content="structure provider:facultystaffdirectory.persongrouping" />
 
         <div tal:replace="structure provider:plone.belowcontentbody" />
     </metal:fill>

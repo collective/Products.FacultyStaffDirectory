@@ -1,16 +1,18 @@
 from AccessControl.ZopeGuards import guarded_hasattr
 from Products.Five import BrowserView
-from interfaces import IPersonListManager
 from zope.component import getMultiAdapter, ComponentLookupError
 from zope.interface import implements
 from zope.viewlet.interfaces import IViewlet, IViewletManager
+from Products.FacultyStaffDirectory.interfaces import IPersonGroupingViewletManager, IPersonGroupingView
 
 class PersonListView(BrowserView):
+    implements(IPersonGroupingView)
+
     viewletOfChoice = u'facultystaffdirectory.personlistitem'
 
 
-class PersonListViewletManager(object):
-    implements(IPersonListManager)
+class PersonGroupingViewletManager(object):
+    implements(IPersonGroupingViewletManager)
 
     viewlets = []
 

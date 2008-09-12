@@ -21,16 +21,17 @@
 
     <browser:viewletManager
         for="...interfaces.IPersonGrouping"
-        name="facultystaffdirectory.personlist"
-        provides=".interfaces.IPersonListManager"
+        name="facultystaffdirectory.persongrouping"
+        provides="...interfaces.IPersonGroupingViewletManager"
         permission="zope2.View"
-        class=".personList.PersonListViewletManager"
+        class=".personList.PersonGroupingViewletManager"
+        view="...interfaces.IPersonGroupingView"
         />
 
     <browser:viewlet
         for="...interfaces.IPerson"
         name="facultystaffdirectory.personlistitem"
-        manager=".interfaces.IPersonListManager"
+        manager="...interfaces.IPersonGroupingViewletManager"
         template="personlistitem.pt"
         permission="zope2.View"
         />
