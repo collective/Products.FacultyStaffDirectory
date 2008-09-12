@@ -1,4 +1,4 @@
-<tal:block tal:define="person nocall:context">
+<tal:block tal:define="person nocall:context; width context/getClassificationViewThumbnailWidth">
 
     <div class="headshot">
         <a href=""

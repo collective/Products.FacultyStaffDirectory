@@ -45,6 +45,7 @@
      <browser:viewletManager
          name="facultystaffdirectory.specialtygalleryviewletmanager"
          provides="...interfaces.ISpecialtyGalleryViewletManager"
+         template="galleryViewletManager.pt"
          permission="zope2.View"
          class="plone.app.viewletmanager.manager.OrderedViewletManager"
          />
