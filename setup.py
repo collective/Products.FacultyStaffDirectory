@@ -34,7 +34,7 @@ setup(name='Products.FacultyStaffDirectory',
           'setuptools',
           # -*- Extra requirements: -*-
           'archetypes.schemaextender',
-          'Products.Relations',
+          'Products.Relations>=0.8.1',
           'Products.membrane',
       ],
       entry_points="""
