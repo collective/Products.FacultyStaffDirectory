@@ -5,7 +5,7 @@
     <body>
         <div metal:fill-slot="main" 
              id="contentWrapper"
-             tal:define="result         context/person_publications;
+             tal:define="results        context/person_publications;
                          firstname      context/getFirstName;
                          lastname       context/getLastName;
                         ">

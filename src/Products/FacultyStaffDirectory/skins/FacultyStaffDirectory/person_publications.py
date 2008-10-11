@@ -21,8 +21,6 @@ if context.aq_parent.aq_inner.portal_type not in ('FSDPerson', ):
     raise RuntimeError('person_publication_view can only be used within '
                        'the context of a FSDPerson object')
 
-raise 'foo'
-
 # search all bib references first
 fsd = context.getDirectoryRoot()
 fsd_path = '/'.join(fsd.getPhysicalPath())
