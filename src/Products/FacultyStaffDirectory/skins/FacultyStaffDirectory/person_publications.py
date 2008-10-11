@@ -18,9 +18,6 @@ def normalize(s):
     return s
 
 
-if not context.portal_type == 'FSDPerson':
-    raise TypeError('context object must be instance of FSDPerson')
-
 # search all bib references first
 fsd = context.getDirectoryRoot()
 fsd_path = '/'.join(fsd.getPhysicalPath())
