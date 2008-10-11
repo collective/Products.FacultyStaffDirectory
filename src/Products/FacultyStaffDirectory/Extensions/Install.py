@@ -289,6 +289,24 @@ def install(self, reinstall=False):
         new = existing + ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']
         cp.setVersionableContentTypes(new)
 
+
+    # CMFBibliography integration:
+    # making BibliographyFolder available on the FSD and person level
+
+    try:
+        import Products.CMFBibliographyAT
+        have_cmfbibat_ = True
+    except ImportError:
+        have_cmfbibat_ = False
+
+    if have_cmfbib_at:
+        pt = getToolByName(site, 'portal_types', None)
+        for name in ('FSDPerson', 'FSDFacultyStaffDirectory'):
+            types = list(getattr(pt, name).allowed_content_types)
+            types.append('BibliographyFolder')
+            getattr(pt, name).allowed_content_types = types
+
+
     # Refresh the membrane_tool catalog. Otherwise, our content disappears from the user db on refresh
     # however, rebuilding the entire catalog is a bit excessive, and kills installs on sites with large FSDs, let's do the reindex thing instead
     membraneTool = getToolByName(self, 'membrane_tool')
