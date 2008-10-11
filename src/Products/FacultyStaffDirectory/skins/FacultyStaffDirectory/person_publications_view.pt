@@ -5,8 +5,9 @@
     <body>
         <div metal:fill-slot="main" 
              id="contentWrapper"
-             tal:define="firstname          context/getFirstName;
-                         lastname           context/getLastName;
+             tal:define="result         context/person_publications;
+                         firstname      context/getFirstName;
+                         lastname       context/getLastName;
                         ">
 
             <h1>
@@ -15,7 +16,7 @@
             </h1>
 
             <div class="contentContent">
-                <p class="body" tal:repeat="result context/person_publications" >
+                <p class="body" tal:repeat="result results">
                     <span tal:replace="structure python:result.Authors(withURL=1)"  >Authors</span>
                   (<span tal:replace="result/publication_year">1900</span>).
                     <br/>
