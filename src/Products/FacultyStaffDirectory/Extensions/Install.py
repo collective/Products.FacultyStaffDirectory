@@ -305,6 +305,10 @@ def install(self, reinstall=False):
             types.append('BibliographyFolder')
             getattr(pt, name).allowed_content_types = types
 
+        # Add person_publications_view to BibFolder
+        vm = list(pt.BibliographyFolder.view_methods)
+        vm.append('person_publications_view')
+        pt.BibliographyFolder.view_methods = vm
 
     # Refresh the membrane_tool catalog. Otherwise, our content disappears from the user db on refresh
     # however, rebuilding the entire catalog is a bit excessive, and kills installs on sites with large FSDs, let's do the reindex thing instead
