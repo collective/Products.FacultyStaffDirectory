@@ -7,12 +7,13 @@
              id="contentWrapper"
              tal:define="results        context/person_publications;
                          firstname      context/getFirstName;
+                         middlename     context/getMiddleName;
                          lastname       context/getLastName;
                         ">
 
             <h1>
                 <span i18n:translate="label_publications_of">Publications of</span>
-                <span tal:replace="string: $firstname $lastname" />
+                <span tal:replace="string: $firstname $middlename $lastname" />
             </h1>
 
             <div class="contentContent">
