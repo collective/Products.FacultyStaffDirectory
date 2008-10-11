@@ -25,18 +25,29 @@ if not context.portal_type == 'FSDPerson':
 fsd = context.getDirectoryRoot()
 fsd_path = '/'.join(fsd.getPhysicalPath())
 reference_types =   context.portal_bibliography.getReferenceTypes()
+
+# Filter by author name 
+firstname = context.getFirstName().strip()
+lastname = context.getLastName().strip()
+
+# Filter 1: the author names are indexed using 'SearchableText'.
+# So figure out all documents where the first and last name are
+# fulltext indexed
+stext = ' AND '.join([item.strip() for item in (firstname, lastname) if item.strip()])
 results = context.portal_catalog(path=fsd_path,
+                                 SearchableText=stext,
                                  meta_type=reference_types)
+
 
 # sort by year desc
 sort_on = [('publication_year', 'cmp', 'desc')]
 results = sequence.sort(results, sort_on)
 
-# Filter by author name 
-firstname =  normalize(context.getFirstName().strip())
-lastname = normalize(context.getLastName().strip())
+# Filter 2: really check if the lastname of the person can be found
+# within the list of authors
 
 results2 = list()
+lastname = normalize(context.getLastName().strip())
 
 for r in results:
     # This check is lame!
