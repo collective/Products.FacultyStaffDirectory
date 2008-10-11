@@ -524,9 +524,12 @@ class Person(OrderedBaseFolder, ATCTContent):
         urls = list(self.getWebsites())
         urls.append(self.absolute_url())
         for url in urls:
-          out.write(foldLine("URL:%s\n" % url))
+            out.write(foldLine("URL:%s\n" % url))
         if self.getImage():
-            out.write(foldLine("PHOTO;ENCODING=BASE64;TYPE=JPEG:%s\n" % self.image_thumb.data.encode('base-64')))
+            encData = self.image_thumb.data.encode('base-64')
+            # indent the data block:
+            indentedData = '\n  '.join(encData.strip().split('\n'))
+            out.write("PHOTO;ENCODING=BASE64;TYPE=JPEG:\n  %s\n" % indentedData)
         out.write("REV:%s\n" % DateTime(self.ModificationDate()).ISO8601())
         out.write("PRODID:WebLion Faculty/Staff Directory\nEND:VCARD")
         return n2rn(out.getvalue())
