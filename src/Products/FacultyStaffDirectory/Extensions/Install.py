@@ -292,15 +292,14 @@ def install(self, reinstall=False):
 
     # CMFBibliography integration:
     # making BibliographyFolder available on the FSD and person level
-
     try:
         import Products.CMFBibliographyAT
-        have_cmfbibat_ = True
+        have_cmfbib_at = True
     except ImportError:
-        have_cmfbibat_ = False
+        have_cmfbib_at = False
 
     if have_cmfbib_at:
-        pt = getToolByName(site, 'portal_types', None)
+        pt = getToolByName(self, 'portal_types', None)
         for name in ('FSDPerson', 'FSDFacultyStaffDirectory'):
             types = list(getattr(pt, name).allowed_content_types)
             types.append('BibliographyFolder')
