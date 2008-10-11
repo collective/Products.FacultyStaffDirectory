@@ -45,10 +45,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
     # Move the description field, but not in Plone 2.5 since it's already in the metadata tab. Although, 
     # decription and relateditems are occasionally showing up in the "default" schemata. Move them
     # to "metadata" just to be safe.
-    if 'categorization' in PersonGrouping_schema.getSchemataNames():
-        PersonGrouping_schema.changeSchemataForField('description', 'categorization')
-    else:
-        PersonGrouping_schema.changeSchemataForField('description', 'metadata')
+    if 'categorization' not in PersonGrouping_schema.getSchemataNames():
         PersonGrouping_schema.changeSchemataForField('relatedItems', 'metadata')
         
     _at_rename_after_creation = True
