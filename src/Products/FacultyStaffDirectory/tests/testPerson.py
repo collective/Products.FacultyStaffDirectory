@@ -224,15 +224,6 @@ class testWithoutSpecialties(testPerson):
            put one back in."""
         self.failUnless('default' not in self.person.schema.getSchemataNames())
     
-    def testBiographyHTMLOutput(self):
-        """ Make sure the HTML returned by our rich text field is getting cleaned up and we don't
-            get effectively blank output.
-        """
-        field = self.person.getField('biography')
-        field.set(self.person, '\r\n<p><br /></p>\r\n')
-        if self.person.getTidyOutput(field):
-            self.failUnlessEqual(field.getRaw(self.person), self.person.getTidyOutput(field))
-    
     def testFTISetup(self):
         """ Make sure the FTI is pulling info from the GS types profile """
         self.failUnless(self.portal.portal_types['FSDPerson'].Title() != "AT Content Type")

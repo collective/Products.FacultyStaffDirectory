@@ -787,45 +787,6 @@ class Person(OrderedBaseFolder, ATCTContent):
             # Add the new portrait
             md.portraits._setObject(id=self.id, object=self.getImage())
     
-    security.declareProtected(ModifyPortalContent, 'setBiography')
-    def setBiography(self, value, **kwargs):
-        """Body text mutator
-        
-        * hook into mxTidy and replace the value with the tidied value
-        """
-        field = self.getField('biography')
-        # XXX this is ugly
-        # When an object is initialized the first time we have to
-        # set the filename and mimetype.
-        # In the case the value is empty/None we must not set the value because
-        # it will overwrite uploaded data like a pdf file.
-        if (value is None or value == ""):
-            if not field.getRaw(self):
-                # set mimetype and file name although the fi
-                if 'mimetype' in kwargs and kwargs['mimetype']:
-                    field.setContentType(self, kwargs['mimetype'])
-                if 'filename' in kwargs and kwargs['filename']:
-                    field.setFilename(self, kwargs['filename'])
-            else:
-                return
-        
-        # hook for mxTidy / isTidyHtmlWithCleanup validator
-        tidyOutput = self.getTidyOutput(field)
-        if tidyOutput:
-            value = tidyOutput
-        
-        field.set(self, value, **kwargs) # set is ok
-    
-    security.declarePrivate('getTidyOutput')
-    def getTidyOutput(self, field):
-        """Get the tidied output for a specific field from the request
-        if available
-        """
-        request = getattr(self, 'REQUEST', None)
-        if request is not None and isinstance(request, HTTPRequest):
-            tidyAttribute = '%s_tidier_data' % field.getName()
-            return request.get(tidyAttribute, None)
-    
     security.declareProtected(SetOwnPassword, 'setPassword')
     def setPassword(self, value):
         """"""
