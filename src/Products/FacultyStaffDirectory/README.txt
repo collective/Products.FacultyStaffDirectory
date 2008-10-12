@@ -1,36 +1,10 @@
 Description
   
-      FacultyStaffDirectory allows you to keep track of people who should be listed on your website.
-      Add details just once (even import them from an existing listing) and display them wherever
-      you like, however many times you like.
-      
-      FacultyStaffDirectory integrates with Plone's users and groups infrastructure and supports
-      an extensibility framework for custom requirements.
-    
-      FacultyStaffDirectory provides content types for creating and organizing
-      details of people. It has principally been developed for personnel directories in
-      educational institutions but can be repurposed for use in a variety of settings.
-    
-      The core content type is Person. This has a variety of fields (email, telephone number,
-      job title, and so on). You can also easily add your own.
-      
-      Out-of-the box, FacultyStaffDirectory offers 3 Classifications that can be assigned to
-      Person objects: Faculty, Staff and Graduate Students. If these don't work for you, 
-      you can add your own Classifications (e.g. Administrators, Technicians, Board Members or 
-      whatever you like). 
-      
-      FacultyStaffDirectory gives several content types for grouping people: Departments, 
-      Specialties and Committees. If you are not in an institution where these labels make sense,
-      you can easily relabel them. In each case, the association between the Person and the grouping 
-      (e.g. the Person-Specialty relationship) can be given a description. So, for example, if 
-      Person Jane Doe is in the Artificial Intelligence Specialty, you could give the 
-      Jane Doe-Artificial Intelligence relationship a description (e.g. "Interested in the cultural
-      impacts of machine thinkers").
-      
-      FacultyStaffDirectory can be configured so that people added to the directory
-      automatically become Members of your Plone site, so that each person can edit 
-      details of his/her own page. It also adds some new roles, to facilitate management of people. 
-      For instance, the PersonnelManager role can create new specialties and assign people to them.
+    FacultyStaffDirectory is a personnel directory, a provider of shared
+    workspaces for committees, a way of keeping track of people's areas of
+    expertise, a floor wax, and a dessert topping. It integrates with Plone's
+    users and groups infrastructure and supports an extensibility framework for
+    custom requirements.
 
 
 Dependencies
@@ -102,13 +76,12 @@ Installation
             
             1.  Install the dependencies:
             
-                1. Put membrane and Relations into your Products folder.
+                1. Put membrane and Relations (included) into your Products folder.
             
                 2. Put the included copy of Archetypes into your Products
                    folder.
             
-                3. Install archetypes.schemaextender in the following disgusting
-                   way:
+                3. Install archetypes.schemaextender:
                    
                    1. Open the archetypes.schemaextender-1.0 folder (included)
                       and find the "archetypes" folder within.
@@ -161,7 +134,9 @@ Installation
                 column, but is in fact installed.)
      
         Manual
-    
+            
+            Don't do this if you can help it.
+            
             1.  Install the dependencies:
     
                 1. Put membrane and Relations (included) into your Products
@@ -203,9 +178,9 @@ Upgrading
 
 
 Using FacultyStaffDirectory
-  
+
     Adding a Faculty/Staff Directory
-  
+    
         From the "add" dropdown menu in Plone, select "Faculty/Staff Directory". A
         Faculty/Staff Directory will be created as well as several default items
         inside:
@@ -221,69 +196,102 @@ Using FacultyStaffDirectory
             * Specialties (a Specialties Folder, which can hold only Specialties)
         
         Any or all of these default items may be safely deleted as needed.
-
-
-Membrane Functionality with FacultyStaffDirectory
-  
-    Out of the box, FacultyStaffDirectory offers the following integration
-    with Plone users and groups:
     
-        The Faculty/Staff Directory itself acts as a group. -- ' '
-        
-          All Person objects created in the Faculty/Staff Directory are
-          automatically considered members of this group.  This group also
-          provides the option of assigning a global role to all Persons in the
-          Directory.  This option should be handled with care.  It is generally
-          best to select only the 'Member' role, as this is the most restrictive
-          option.
-          
-        Departments, Classifications and Committees act as groups. -- ' '
-        
-          Global role assignment is not available for these content types, but
-          the groups they define may be granted local roles throughout the Plone
-          site.  For complex academic units, this can be a great time-saver,
-          since personnel management can be tied closely to site security
-          management.
-        
-        Person objects act as users. -- ' '
-        
-          The Faculty/Staff Directory configlet in Site Setup allows you to
-          choose whether Person objects provide passwords for authentication. If
-          you are using some other PAS plugin for authentication, such as
-          PloneLDAP, ApachePAS, PubcookiePAS or CAS4PAS, you will want to
-          disable password provision so that authentication will cascade to
-          these other systems.
+    Working with your directory
+
+        FacultyStaffDirectory provides content types for creating and organizing
+        details of people. It has principally been developed for personnel
+        directories in educational institutions but can be repurposed for use in a
+        variety of settings.
+    
+        The core content type is Person. This has a variety of fields (email,
+        telephone number, job title, and so on). You can also easily add your own.
+    
+        Out of the box, FacultyStaffDirectory offers 3 Classifications that can be
+        assigned to Person objects: Faculty, Staff and Graduate Student. If these
+        don't work for you, you can add your own Classifications (e.g.
+        Administrators, Technicians, Board Members, or whatever you like).
+    
+        FacultyStaffDirectory also provides several content types for grouping
+        people: Departments, Specialties and Committees. If these labels don't make
+        sense in your organization, you can easily relabel them. In each case, the
+        association between the Person and the grouping (e.g. the Person-Specialty
+        relationship) can be given a description. So, for example, if Person Jane
+        Doe is in the Artificial Intelligence Specialty, you could give the Jane
+        Doe-Artificial Intelligence relationship a description (e.g. "Interested in
+        the cultural impacts of machine thinkers").
+    
+        FacultyStaffDirectory can be configured so people added to the
+        directory automatically become Members of your Plone site and each person
+        can edit his or her own page. It also adds some new roles, to facilitate
+        management of people. For instance, the PersonnelManager role can create new
+        Specialties and assign people to them.
+
+    Membership integration
       
-    Users defined by Person objects are automatically granted the Owner
-    role locally for that object and its contents.  This allows users to add
-    to and edit their own biographies, contact information, etc.  They also
-    control sharing rights to their object and can thus allow assistants to
-    edit content on their behalf without sharing their own passwords or user
-    preferences.
+        Out of the box, FacultyStaffDirectory offers the following integration
+        with Plone users and groups:
+        
+            The Faculty/Staff Directory itself acts as a group. -- ' '
+            
+              All Person objects created in the Faculty/Staff Directory are
+              automatically considered members of this group.  This group also
+              provides the option of assigning a global role to all Persons in the
+              Directory.  This option should be handled with care.  It is generally
+              best to select only the 'Member' role, as this is the most restrictive
+              option.
+              
+            Departments, Classifications and Committees act as groups. -- ' '
+            
+              Global role assignment is not available for these content types, but
+              the groups they define may be granted local roles throughout the Plone
+              site.  For complex academic units, this can be a great time-saver,
+              since personnel management can be tied closely to site security
+              management.
+            
+            Person objects act as users. -- ' '
+            
+              The Faculty/Staff Directory configlet in Site Setup allows you to
+              choose whether Person objects provide passwords for authentication. If
+              you are using some other PAS plugin for authentication, such as
+              PloneLDAP, ApachePAS, PubcookiePAS or CAS4PAS, you will want to
+              disable password provision so that authentication will cascade to
+              these other systems.
+          
+        Users defined by Person objects are automatically granted the Owner role
+        locally for that object and its contents.  This allows users to add to and
+        edit their own biographies, contact information, etc.  They also control
+        sharing rights to their object and can thus allow assistants to edit content
+        on their behalf without sharing their own passwords or user preferences.
     
-    The 'My Folder' action, found in the personal toolbar, is altered by the
-    Faculty/Staff Directory product to take users defined by Person objects
-    directly to that object. Users defined through the standard Plone UI will
-    be taken to the usual location (portal/Members/<userid>).  Likewise, the
-    personal preferences link found in the personal toolbar and on the
-    plone_memberprefs_panel or dashboard will take Person users to their
-    Person objects.
+        The 'My Folder' action, found on the personal toolbar, is altered by the
+        Faculty/Staff Directory product to take users defined by Person objects
+        directly to them. Users defined through the standard Plone UI will be taken
+        to the usual location (portal/Members/<userid>).  Likewise, the personal
+        preferences link found in the personal toolbar and on the
+        plone_memberprefs_panel or dashboard will take Person users to their Person
+        objects.
     
-    Owners are not granted the rights to add or remove their Person object
-    from Departments, Committees, Classifications and Specialties, since these
-    collections are used as authorization groups. Instead, this right is
-    reserved for site managers and for the newly-created 'Personnel Manager'
-    role, installed with the Faculty/Staff Directory product.  The Personnel
-    Manager is likewise not granted access to the ZMI or to personal
-    preferences for Persons. This allows for fine-grained separation of
-    management concerns.
+        Owners are not granted the rights to add or remove their Person object from
+        Departments, Committees, Classifications and Specialties, since these
+        collections are used as authorization groups. Instead, this right is
+        reserved for site managers and for the newly-created 'Personnel Manager'
+        role, installed with the Faculty/Staff Directory product. The Personnel
+        Manager is likewise not granted access to the ZMI or to personal preferences
+        for Persons. This allows for fine-grained separation of management concerns.
     
-    Membrane functionality for Person, Department, Classification and
-    Committee objects is configurable.  A switch to turn the function on or
-    off is available on the Faculty/Staff Directory Configlet in Site Setup.
-    It may be necessary to disable membrane functionality for Person objects
-    in systems that have established user bases built on LDAP systems.
-  
+        Membership integration for Person, Department, Classification and Committee
+        objects is configurable.  A switch to turn the function on or off is in the
+        Faculty/Staff Directory configuration panel in Site Setup. It may be
+        necessary to disable membership integration for Person objects in systems
+        that have established user bases built on LDAP systems, for instance.
+    
+    Configuring the product
+        
+        Several global settings, such as phone number and user ID formats, can
+        be controlled through the Faculty/Staff Directory configuration panel
+        within Site Setup.
+
     Extensibility
     
         Because every organization has a few unique requirements,
@@ -292,11 +300,6 @@ Membrane Functionality with FacultyStaffDirectory
         which add fields to or otherwise modify our content types. For an example,
         see the FacultyStaffDirectoryExtender
         product and "its README.txt":https://weblion.psu.edu/svn/weblion/weblion/Products.FacultyStaffDirectory/tags/2.1/src/Products/FacultyStaffDirectory/examples/FacultyStaffDirectoryExtender/README.txt.
-    
-    Further reading
-    
-        Further (and more up-to-date) documentation is availiable on the 
-        "WebLion wiki":https://weblion.psu.edu/trac/weblion/wiki/FacultyStaffDirectory
 
 
 Design Rationale & Thoughts
