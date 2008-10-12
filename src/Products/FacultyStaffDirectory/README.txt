@@ -143,7 +143,8 @@ Installation
             3.  Install the FacultyStaffDirectory product using
                 portal_quickinstaller or the Plone Add/Remove Products tool
                 under Site Setup. The necessary dependencies will install
-                themselves automatically.
+                themselves automatically. (Membrane remains in the 'available'
+                column, but is in fact installed.)
       
         Egg-based without buildout
     
@@ -156,7 +157,8 @@ Installation
             3.  Install the FacultyStaffDirectory product using
                 portal_quickinstaller or the Plone Add/Remove Products tool
                 under Site Setup. The necessary dependencies will install
-                themselves automatically.
+                themselves automatically. (Membrane remains in the 'available'
+                column, but is in fact installed.)
      
         Manual
     
@@ -186,7 +188,8 @@ Installation
             4.  Install the FacultyStaffDirectory using portal_quickinstaller or
                 the Plone Add/Remove Products tool under Site Setup. The
                 dependencies that need to be installed will install themselves
-                automatically.
+                automatically. (Membrane remains in the 'available'
+                column, but is in fact installed.)
 
        
 Upgrading
