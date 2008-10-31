@@ -429,6 +429,17 @@ class testWithoutSpecialties(testPerson):
         except KeyError:
             self.Fail("FacultyStaffDirectory incorrectly tried to find the user attached to a FSPerson while membrane support was disabled.")
 
+    def testMemberSearch(self):
+        """ Make sure that membrane is using the right fields for member searches. """
+        self.directory.invokeFactory(type_name="FSDPerson", id="cvf092", firstName="Another", lastName="Testperson")
+        self.directory.invokeFactory(type_name="FSDPerson", id="ope593", firstName="Somebody", lastName="Altogetherdifferent")
+
+        pas = getToolByName(self.portal, "acl_users")
+        searchParams = {'fullname':'Test'}
+        results = pas.searchUsers(**searchParams)
+        self.failUnless(len(results) == 2, "Search did not return the right number of members. Expected 2, got %s." % len(results))
+        self.failUnless('cvf092' in [a['id'] for a in results], "Expected member cvf092 to be in the search results.")
+
     # Err... can't actually test for this since it's being handled in pre_edit_setup. Any ideas?
     # def testDefaultEditor(self):
     #     """ Make sure the editor is being set to the site's default. """
