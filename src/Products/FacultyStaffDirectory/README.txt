@@ -147,15 +147,15 @@ Installation
                    way:
 
                     1. Find the "archetypes" folder, somewhere in your Zope
-                    instance (lowercase "a", not uppercase "A").  It's often in
-                    lib/python and should have a "kss" folder in it.  On
-                    Windows, it's at C:\Program Files\Plone
-                    3\Python\Lib\site-packages\archetypes.kss-1.2.6-py2.4.egg\
-                    archetypes.
+                       instance (lowercase "a", not uppercase "A").  It's often
+                       in lib/python and should have a "kss" folder in it.  On
+                       Windows, it's at C:\Program Files\Plone
+                       3\Python\Lib\site-packages\archetypes.kss-1.2.6-py2.4.egg
+                       \archetypes.
 
                     2. Put the
-                    archetypes.schemaextender-1.0/archetypes/schemaextender
-                    folder (included) into the archetypes folder.
+                       archetypes.schemaextender-1.0/archetypes/schemaextender
+                       folder (included) into the archetypes folder.
     
             2.  Put FacultyStaffDirectory into your Products folder.
             
