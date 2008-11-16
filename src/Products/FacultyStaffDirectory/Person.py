@@ -493,7 +493,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         """Notify that the Person has been modified.
         """
         notify(PersonModifiedEvent(self))
-    
+
     security.declareProtected(View, 'at_post_edit_script')
     def at_post_edit_script(self):
         """Notify that the Person has been modified.
