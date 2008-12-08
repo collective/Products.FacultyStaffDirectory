@@ -59,9 +59,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
             inside of it (see the README for some justification for this).
         """
         
-        people = self.getPeople()
-        if people:
-            fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
+        if self.getPeople():
             return self.getDirectoryRoot().getClassifications()
         else:
             return []
