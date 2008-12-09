@@ -6,11 +6,12 @@ __docformat__ = 'plaintext'
 #
 # Test-cases for product install/uninstall/reinstall
 #
-
+from time import time
+from random import choice
 from Products.CMFCore.utils import getToolByName
 
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.tests.testPlone import testPlone
+from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
 
 originalMyFolderActionId = "mystuff"
 newMyFolderActionId = "fsdmystuff"
@@ -28,7 +29,111 @@ def checkKupuResourceList(tool, resourceType, portalTypeList):
             missingList.append(type)
     return missingList
 
-class testInstall(testPlone):
+class testSetup(FacultyStaffDirectoryTestCase):
+
+    def afterSetUp(self):
+        self.types = self.portal.portal_types
+        self.factory    = self.portal.portal_factory
+        self.skins      = self.portal.portal_skins
+        self.css        = self.portal.portal_css
+        self.pc = getToolByName(self.portal, 'portal_catalog')
+        self.workflow   = self.portal.portal_workflow
+        self.metaTypes = ('FSDClassification',
+                          'FSDCommittee',
+                          'FSDCommitteeMembership',
+                          'FSDCommitteesFolder',
+                          'FSDCourse',
+                          'FSDDepartment',
+                          'FSDDepartmentalMembership',
+                          'FSDFacultyStaffDirectory',
+                          'FSDPerson',
+                          'FSDPersonGrouping',
+                          'FSDSpecialtiesFolder',
+                          'FSDSpecialty',
+                          'FSDSpecialtyInformation',
+                          'FSDFacultyStaffDirectoryTool',
+                          )
+
+    def testTypesInstalled(self):
+        for type in self.metaTypes:
+            assert type in self.types.objectIds(), "Content type not installed: %s" % type
+
+    def testPortalFactorySetup(self):
+        for type in self.metaTypes:
+            assert type in self.factory.getFactoryTypes(), "Content type not in portal factory: %s" % type
+
+    def testSkinLayersInstalled(self):
+        self.failUnless('FacultyStaffDirectory' in self.skins.objectIds())
+
+    def testCatalogIndexesAdded(self):
+        missingindexes = []
+        for indexName, indexType in ADDITIONAL_CATALOG_INDEXES:
+            if indexName not in self.pc.indexes():
+                missingindexes.append(indexName)
+        self.failIf(missingindexes, 'Catalog is missing the following indexes: %s' % missingindexes)
+        
+    def testCatalogMetadataAdded(self):
+        missingmetadata = []
+        for fieldName in ADDITIONAL_CATALOG_METADATA:
+            if fieldName not in self.pc.schema():
+                missingmetadata.append(fieldName)
+        self.failIf(missingmetadata, 'Catalog is missing the following metadata fields: %s' % missingmetadata)
+
+    def testToolInstalled(self):
+        tool = getToolByName(self.portal, 'facultystaffdirectory_tool')
+
+    def testNavTreeSetup(self):
+        missingmetatypes = []
+        for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']: 
+            if not mType in list(self.portal.portal_properties.navtree_properties.metaTypesNotToList):
+                missingmetatypes.append(mType)
+        self.failIf(missingmetatypes, "The following FSD Types are still visible in the navtree and shouldn't be %s" % missingmetatypes)\
+
+    def testCssInstalled(self):
+        self.failUnless('facultyStaffDirectory.css' in self.css.getResourceIds())
+
+    def testActionIconsSetup(self):
+        ai = getToolByName(self.portal, 'portal_actionicons')
+        try:
+            ai.getActionInfo('plone','vcard')
+        except KeyError:
+            # Action icon doesn't exist. Add it.
+            self.fail('FSD vcard action icon not present in portal_actionicons')
+
+    def testRolesInstalled(self):
+        roles = self.portal.getGlobalPortalRoles()
+        expected_roles = ['Editor', 'Contributor', 'Personnel Manager', 'User Preferences Editor']
+        for expected_role in expected_roles:
+            assert expected_role in roles, 'The %s role is missing' % expected_role
+
+class testDependentProducts(FacultyStaffDirectoryTestCase):
+
+    def testMembraneInstalled(self):
+        tool = getToolByName(self.portal, 'membrane_tool')
+
+    def testRelationsInstalled(self):
+        tool = getToolByName(self.portal, 'relations_library')
+
+class testIndexes(FacultyStaffDirectoryTestCase):
+
+    def afterSetUp(self):
+        self.directory = self.getPopulatedDirectory()
+        self.catalog = getToolByName(self.portal, 'portal_catalog')
+
+    def testObjectStillIndexed(self):
+        catalog = self.catalog
+        results = catalog(portal_type='FSDFacultyStaffDirectory')
+        assert len(results) == 1
+        self.reinstallProduct()
+        results = catalog(portal_type='FSDFacultyStaffDirectory')
+        assert len(results) == 1
+
+class testcontentCreation(FacultyStaffDirectoryTestCase):
+
+    def testFolderCanBeAdded(self):
+        self.folder.invokeFactory(type_name="FSDFacultyStaffDirectory", id='faculty_folder')
+
+class testInstall(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
         migrationTool = getToolByName(self.portal, 'portal_migration')
         self.isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
@@ -65,24 +170,11 @@ class testInstall(testPlone):
                 hasfsdmemberprofile = True
         self.failUnless(hasfsdmemberprofile, "New MemberPrefs action failed to install.")
 
-    def testPortalSetupImportWorks(self):
-        """Check for a regression of https://weblion.psu.edu/trac/weblion/ticket/386."""
-        ps = getToolByName(self.portal, 'portal_setup')
-        self.failUnless(ps.getImportContextID() or ps.getBaselineContextID())
-        
-    def testCatalogIndexesAdded(self):
-        missingindexes = []
-        for indexName, indexType in ADDITIONAL_CATALOG_INDEXES:
-            if indexName not in self.pc.indexes():
-                missingindexes.append(indexName)
-        self.failIf(missingindexes, 'Catalog is missing the following indexes: %s' % missingindexes)
-        
-    def testCatalogMetadataAdded(self):
-        missingmetadata = []
-        for fieldName in ADDITIONAL_CATALOG_METADATA:
-            if fieldName not in self.pc.schema():
-                missingmetadata.append(fieldName)
-        self.failIf(missingmetadata, 'Catalog is missing the following metadata fields: %s' % missingmetadata)
+# XXX this test should not be required, import context deprecated
+#    def testPortalSetupImportWorks(self):
+#        """Check for a regression of https://weblion.psu.edu/trac/weblion/ticket/386."""
+#        ps = getToolByName(self.portal, 'portal_setup')
+#        self.failUnless(ps.getImportContextID() or ps.getBaselineContextID())
         
     def testTopicIndexesAdded(self):
         missingindexes = []
@@ -99,21 +191,6 @@ class testInstall(testPlone):
             if not md or not md.enabled:
                 missingmetadata.append(fieldName)
         self.failIf(missingmetadata, 'ATCT Tool is missing the following metadata fields: %s' % missingmetadata)
-        
-    def testNavTreeSetup(self):
-        missingmetatypes = []
-        for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']: 
-            if not mType in list(self.portal.portal_properties.navtree_properties.metaTypesNotToList):
-                missingmetatypes.append(mType)
-        self.failIf(missingmetatypes, "The following FSD Types are still visible in the navtree and shouldn't be %s" % missingmetatypes)
-        
-    def testActionIconsSetup(self):
-        ai = getToolByName(self.portal, 'portal_actionicons')
-        try:
-            ai.getActionInfo('plone','vcard')
-        except KeyError:
-            # Action icon doesn't exist. Add it.
-            self.fail('FSD vcard action icon not present in portal_actionicons')
     
     def testConfigletAdded(self):
         cp = getToolByName(self.portal, 'portal_controlpanel')
@@ -142,9 +219,8 @@ class testInstall(testPlone):
     def testKupuCollectionTypesSetup(self):        
         missingctypes = checkKupuResourceList(self.ktool, 'collection', collectionKupuTypes)
         self.failIf(missingctypes, '%s not listed as collection by Kupu' % missingctypes)
-        
-        
-class testUninstall(testPlone):
+
+class testUninstall(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
         migrationTool = getToolByName(self.portal, 'portal_migration')
         self.isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
@@ -267,10 +343,8 @@ class testUninstall(testPlone):
         self.failUnlessEqual(missingctypes, collectionKupuTypes, '%s not listed as collection by Kupu' % missingctypes)
 
 
-class testReinstall(testPlone):
+class testReinstall(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
-        migrationTool = getToolByName(self.portal, 'portal_migration')
-        self.isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
         self.loginAsPortalOwner()
         self.directory = self.getPopulatedDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
@@ -282,14 +356,11 @@ class testReinstall(testPlone):
         self.failUnless(acl.getUserById(id='abc123'))
 
         # Reinstall the product
-        qi = getToolByName(self.portal, 'portal_quickinstaller')
-        #qi.installProduct('FacultyStaffDirectory', reinstall=True)
-        qi.reinstallProducts(products='FacultyStaffDirectory')
-        
+        self.reinstallProduct()
         # abc123 should still exist in acl_users
         self.failUnless(acl.getUserById(id='abc123'))
         
-class testLargeDirectory(testPlone):
+class testLargeDirectory(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
         self.loginAsPortalOwner()
         self.numPeople = 60
@@ -302,10 +373,6 @@ class testLargeDirectory(testPlone):
         
     def testLargeDirReinstall(self):
         """Benchmark and test reinstalling FSD with a directory holding a large number of people"""
-        from time import time
-        from random import choice
-        
-        qi = getToolByName(self.portal, 'portal_quickinstaller')
         acl = getToolByName(self.portal, 'acl_users')
         
         # pick a user and make sure they exist in acl_users before we start
@@ -317,7 +384,7 @@ class testLargeDirectory(testPlone):
         # how long does it take to reinstall FSD?
         import time
         start_time = time.time()
-        qi.reinstallProducts(products='FacultyStaffDirectory')
+        self.reinstallProduct()
         end_time = time.time()
         elapsed_time = end_time-start_time
         reinstall_report = "\nreinstalling FSD with a directory containing %s people took %s seconds\n" % (self.numPeople, elapsed_time)
@@ -326,13 +393,16 @@ class testLargeDirectory(testPlone):
         # test that a person in the FSD is still a user
         self.failUnless(acl.getUserById(id=user_id),"Problem:  after reinstall person is not listed in acl_users")
         self.failUnless(person.UID(),"Problem: after reinstall expected person object %s to have a UID.  It does not" % person)
-        
 
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
+    suite.addTest(makeSuite(testSetup))
+    suite.addTest(makeSuite(testDependentProducts))
+    suite.addTest(makeSuite(testIndexes))
+    suite.addTest(makeSuite(testcontentCreation))
     suite.addTest(makeSuite(testInstall))
-    suite.addTest(makeSuite(testUninstall))
+    #suite.addTest(makeSuite(testUninstall))
     suite.addTest(makeSuite(testReinstall))
     suite.addTest(makeSuite(testLargeDirectory))
     return suite

@@ -1,73 +1,64 @@
-# -*- coding: utf-8 -*-
-
-__author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
+"""Base class for integration tests, based on ZopeTestCase and PloneTestCase.
 
-#
-# Base TestCase for FacultyStaffDirectory
-#
-
-import code
+Note that importing this module has various side-effects: it registers a set of
+products with Zope, and it sets up a sandbox Plone site with the appropriate
+products installed.
+"""
+from Testing import ZopeTestCase
+from Globals import package_home
 from random import choice, sample
 
-from Globals import package_home
-from Products.PloneTestCase import PloneTestCase
-from Testing import ZopeTestCase
+from Products.CMFCore.utils import getToolByName
 
 from Products.FacultyStaffDirectory.config import PRODUCT_DEPENDENCIES, DEPENDENCIES
+from Products.FacultyStaffDirectory.config import DEPENDENT_PRODUCTS
+from Products.FacultyStaffDirectory.config import PROJECTNAME
+
 PACKAGE_HOME = package_home(globals())
-    
-# Add common dependencies
-DEPENDENCIES.append('Archetypes')
-PRODUCT_DEPENDENCIES.append('MimetypesRegistry')
-PRODUCT_DEPENDENCIES.append('PortalTransforms')
 
-# from Products.Five import zcml, fiveconfigure
-# from Products.PloneTestCase.layer import onsetup
-# from Testing.ZopeTestCase import installPackage
-# 
-# @onsetup
-# def setupPackage():
-#     """ set up the package and its dependencies """
-#     # Install all (product-) dependencies, install them too
-#     for dependency in PRODUCT_DEPENDENCIES + DEPENDENCIES:
-#         ZopeTestCase.installProduct(dependency)
-#         
-#     ZopeTestCase.installProduct('membrane')
-#     ZopeTestCase.installProduct('FacultyStaffDirectory')
-#     
-#     fiveconfigure.debug_mode = True
-#     import Products.FacultyStaffDirectory
-#     zcml.load_config('configure.zcml', Products.FacultyStaffDirectory)
-#     fiveconfigure.debug_mode = False
-#     #installPackage('Products.FacultyStaffDirectory')  # Should be unnecessary for a Zope 2-style product
-# setupPackage()
-
+# Let Zope know about the products we require above-and-beyond a basic
+# Plone install (PloneTestCase takes care of these).
 PRODUCTS = list()
 PRODUCTS += DEPENDENCIES
 PRODUCTS.append('FacultyStaffDirectory')
+for dependency in PRODUCTS:
+    ZopeTestCase.installProduct(dependency)
+for dependency in DEPENDENT_PRODUCTS:
+    ZopeTestCase.installProduct(dependency)
+ZopeTestCase.installProduct('FacultyStaffDirectory')
 
-def load_package_products():
-    # Install all (product-) dependencies, install them too
-    for dependency in PRODUCT_DEPENDENCIES + DEPENDENCIES:
-        ZopeTestCase.installProduct(dependency)
-        
-    ZopeTestCase.installProduct('membrane')
-    ZopeTestCase.installProduct('FacultyStaffDirectory')
-    
-    PloneTestCase.setupPloneSite(products=PRODUCTS)
-    
-load_package_products()
+# Import PloneTestCase - this registers more products with Zope as a side effect
+from Products.PloneTestCase.PloneTestCase import PloneTestCase
+from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
+from Products.PloneTestCase.PloneTestCase import setupPloneSite
 
-class testPlone(PloneTestCase.PloneTestCase):
-    """Base TestCase for FacultyStaffDirectory."""
-    
+# Set up a Plone site, and apply the Library enquiry extension profile
+# to make sure they are installed.
+setupPloneSite(extension_profiles=('Products.FacultyStaffDirectory:default',))
+
+class FacultyStaffDirectoryTestCase(PloneTestCase):
+    """Base class for integration tests for the 'FacultyStaffDirectory' product. This may
+    provide specific set-up and tear-down operations, or provide convenience
+    methods.
+    """
+
     #Utility methods
+
+    def reinstallProduct(self):
+        """Reinstall the product"""
+        portal_setup = getToolByName(self.portal, 'portal_setup')
+        self.setRoles(('Manager',))
+        portal_setup.runAllImportStepsFromProfile('profile-Products.%s:default' % PROJECTNAME)
+        self.setRoles(('Member',))
+
     def getEmptyDirectory(self, id="facstaffdirectory", portal=None):
         """Return a FacultyStaffDirectory (creating it first if necessary)."""
         portal = portal or self.portal
         if 'facstaffdirectory' not in portal.contentIds():
+            self.setRoles(('Manager',))
             portal.invokeFactory(type_name="FSDFacultyStaffDirectory", id=id)
+            self.setRoles(('Member',))
         return portal[id]
 
     def getPopulatedDirectory(self, id="facstaffdirectory"):
@@ -194,14 +185,4 @@ Note: You have the same locals available as in your test-case.
             directory.invokeFactory(type_name="FSDPerson", id=good_id, firstName=fn, lastName=ln)
             
         return generated_ids
-            
-            
-            
-            
 
-
-def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(testPlone))
-    return suite

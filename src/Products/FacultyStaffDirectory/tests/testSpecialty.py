@@ -8,9 +8,9 @@ __docformat__ = 'plaintext'
 #
 
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.tests.testPlone import testPlone
+from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
 
-class testSpecialty(testPlone):
+class testSpecialty(FacultyStaffDirectoryTestCase):
     """Test-cases for class(es) Specialty."""
 
     def afterSetUp(self):

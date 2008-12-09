@@ -8,10 +8,10 @@ __docformat__ = 'plaintext'
 #
 
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.tests.testPlone import testPlone
+from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
 from Products.CMFCore.utils import getToolByName
 
-class testDepartment(testPlone):
+class testDepartment(FacultyStaffDirectoryTestCase):
     """Test-cases for class(es) Department."""
 
     def afterSetUp(self):

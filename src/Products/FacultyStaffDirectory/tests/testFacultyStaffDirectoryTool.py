@@ -8,11 +8,11 @@ __docformat__ = 'plaintext'
 #
 
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.tests.testPlone import testPlone
+from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 
-class testFacultyStaffDirectoryTool(testPlone):
+class testFacultyStaffDirectoryTool(FacultyStaffDirectoryTestCase):
     """Test-cases for FacultyStaffDirectoryTool."""
 
     def afterSetUp(self):

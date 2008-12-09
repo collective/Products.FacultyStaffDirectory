@@ -34,6 +34,9 @@ DEPENDENCIES = ["Relations", "ATReferenceBrowserWidget"]
 # Dependend products - not quick-installed - used in testcase
 PRODUCT_DEPENDENCIES = []
 
+# XXX should really be merged with list above
+DEPENDENT_PRODUCTS = ['membrane',]
+
 # You can overwrite these two in an AppConfig.py:
 # STYLESHEETS = [{'id': 'my_global_stylesheet.css'},
 #                {'id': 'my_contenttype.css',

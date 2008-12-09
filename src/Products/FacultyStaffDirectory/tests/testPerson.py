@@ -12,7 +12,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IUserAuthentication
 from Products.Relations.processor import process
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.tests.testPlone import testPlone, PACKAGE_HOME
+from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
+from Products.FacultyStaffDirectory.tests.base import PACKAGE_HOME
 
 def loadImage(name, size=0):
     """Load image from testing directory."""
@@ -30,7 +31,7 @@ TEST_JPEG_LEN = len(TEST_JPEG)
 TEST_TIFF = loadImage('testUserPhoto.tif')
 TEST_TIFF_LEN = len(TEST_TIFF)
 
-class testPerson(testPlone):
+class testPerson(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
         self.loginAsPortalOwner()
         self.directory = self.getPopulatedDirectory()
