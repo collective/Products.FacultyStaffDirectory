@@ -1,0 +1,8 @@
+<div tal:condition="context/getEducation" class="education">
+    <h3><span i18n:translate="FacultyStaffDirectory_label_education">Education</span>:</h3>
+    <ol>
+        <li tal:repeat="degree context/getEducation">
+            <span tal:content="degree" />
+        </li>
+    </ol>
+</div>

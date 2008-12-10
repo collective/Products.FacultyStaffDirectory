@@ -1,0 +1,15 @@
+<div class="courselisting" 
+     tal:define="courses context/getCourses"
+     tal:condition="courses">
+    <h3><span i18n:translate="FacultyStaffDirectory_label_courses">Courses</span>:</h3>
+    <dl tal:repeat="course courses">
+        <dt>
+            <a tal:attributes="href course/getRemoteUrl"
+               tal:content="course/Title" 
+               tal:condition="course/getRemoteUrl" />
+            <span tal:replace="course/Title"
+                  tal:condition="not: course/getRemoteUrl" />
+        </dt>
+        <dd tal:content="structure course/Description" />
+    </dl>
+</div>

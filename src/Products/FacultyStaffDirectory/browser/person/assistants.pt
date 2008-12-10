@@ -1,0 +1,14 @@
+<div class="assistants"
+     tal:define="assistants context/getAssistants;
+                 member python:context.portal_membership.getAuthenticatedMember()"
+     tal:condition="python:assistants and member.checkPermission('Add portal content', here)">
+  <h3><span i18n:translate="FacultyStaffDirectory_label_assistants">Assistants</span>:</h3> 
+  <ul tal:repeat="assistant assistants">
+    <li tal:define="url assistant/absolute_url;
+                    name assistant/Title">
+      <a tal:attributes="href url"
+         tal:content="name">Assistant's Full Name</a>
+    </li>
+  </ul>
+</div>
+

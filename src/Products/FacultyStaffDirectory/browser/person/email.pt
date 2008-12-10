@@ -1,0 +1,4 @@
+<div tal:condition="context/getEmail" class="email">
+     <span i18n:translate="FacultyStaffDirectory_label_email">Email</span>:
+     <span tal:replace="context/getEmail" />
+</div>

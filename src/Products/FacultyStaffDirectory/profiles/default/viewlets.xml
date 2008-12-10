@@ -7,4 +7,17 @@
     <order manager="facultystaffdirectory.committeeviewletmanager" skinname="*">
         <viewlet name="facultystaffdirectory.committeetext" />
     </order>
+    <order manager="facultystaffdirectory.person" skinname="*">
+        <viewlet name="facultystaffdirectory.personname" />
+        <viewlet name="facultystaffdirectory.personjobtitles" />
+        <viewlet name="facultystaffdirectory.personofficeaddress" />
+        <viewlet name="facultystaffdirectory.personemail" />
+        <viewlet name="facultystaffdirectory.personwebsites" />
+        <viewlet name="facultystaffdirectory.personeducation" />
+        <viewlet name="facultystaffdirectory.personbiography" />
+        <viewlet name="facultystaffdirectory.personspecialities" />
+        <viewlet name="facultystaffdirectory.personassistants" />
+        <viewlet name="facultystaffdirectory.personcourses" />
+        <viewlet name="facultystaffdirectory.personbosses" />
+    </order>
 </object>
