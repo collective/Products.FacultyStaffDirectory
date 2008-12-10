@@ -1,1 +1,1 @@
-<p>I'm a tabular person</p>
+<div tal:content="structure provider:facultystaffdirectory.person" />

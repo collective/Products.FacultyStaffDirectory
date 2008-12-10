@@ -10,7 +10,6 @@
         template="gallery.pt"
         permission="zope2.View"
         />
-    
 
     <!-- Person Grouping Container (viewletmanager) -->
     <browser:viewletManager

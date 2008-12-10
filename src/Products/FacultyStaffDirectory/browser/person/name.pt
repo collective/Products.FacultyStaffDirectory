@@ -1,0 +1,7 @@
+    <h1>
+    <span tal:content="context/firstName" />
+    <span tal:content="context/middleName" />
+    <span tal:content="context/lastName" />
+    <span tal:content="context/suffix" />
+    </h1>
+

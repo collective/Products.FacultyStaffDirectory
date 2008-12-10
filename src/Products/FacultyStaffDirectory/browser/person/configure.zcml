@@ -11,6 +11,23 @@
          permission="zope2.View"
          />
 
+    <!-- Person Container (viewletmanager) -->
+    <browser:viewletManager
+        for="...interfaces.IPerson"
+        name="facultystaffdirectory.person"
+        provides="...interfaces.IPersonViewletManager"
+        permission="zope2.View"
+        class="plone.app.viewletmanager.manager.OrderedViewletManager"
+        />
+
+     <browser:viewlet
+         for="...interfaces.IPerson"
+         name="facultystaffdirectory.personname"
+         manager="...interfaces.IPersonViewletManager"
+         template="name.pt"
+         permission="zope2.View"
+         />
+
      <browser:viewlet
          for="...interfaces.IPerson"
          name="facultystaffdirectory.persongallery"

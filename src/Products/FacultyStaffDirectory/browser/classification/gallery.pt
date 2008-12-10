@@ -18,9 +18,9 @@
                 </h1>
                 <div tal:replace="structure provider:plone.belowcontenttitle" />
                 <div tal:replace="structure provider:plone.abovecontentbody" />
-                <div tal:replace="structure provider:facultystaffdirectory.classificationviewletmanager" />
+                <!--div tal:replace="structure provider:facultystaffdirectory.classificationviewletmanager" /-->
         
-                <div tal:replace="structure provider:facultystaffdirectory.persongrouping" />
+                <!--div tal:replace="structure provider:facultystaffdirectory.persongrouping" /-->
                 
                 <div tal:replace="structure provider:plone.belowcontentbody" />
             </div>

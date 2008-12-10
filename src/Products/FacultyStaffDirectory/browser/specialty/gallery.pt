@@ -19,7 +19,7 @@
                 </h1>
                 <div tal:replace="structure provider:plone.belowcontenttitle" />
                 <div tal:replace="structure provider:plone.abovecontentbody" />
-                <div tal:replace="structure provider:facultystaffdirectory.specialtygalleryviewletmanager" />
+                <!--div tal:replace="structure provider:facultystaffdirectory.specialty.galleryviewletmanager" /-->
         
                 <div tal:replace="structure provider:plone.belowcontentbody" />
             </div>

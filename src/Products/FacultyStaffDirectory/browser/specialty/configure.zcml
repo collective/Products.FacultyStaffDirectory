@@ -45,14 +45,14 @@
          />
 
      <!-- <browser:viewletManager
-         name="facultystaffdirectory.specialtytabularviewletmanager"
+         name="facultystaffdirectory.specialty.tabularviewletmanager"
          provides="...interfaces.ISpecialtyTabularViewletManager"
          permission="zope2.View"
          class="plone.app.viewletmanager.manager.OrderedViewletManager"
          />
 
      <browser:viewletManager
-         name="facultystaffdirectory.specialtygalleryviewletmanager"
+         name="facultystaffdirectory.specialty.galleryviewletmanager"
          provides="...interfaces.ISpecialtyGalleryViewletManager"
          template="galleryViewletManager.pt"
          permission="zope2.View"
@@ -68,7 +68,7 @@
          />
 
      <browser:viewlet
-         name="facultystaffdirectory.specialtygallerypeople"
+         name="facultystaffdirectory.specialty.gallerypeople"
          manager="...interfaces.ISpecialtyGalleryViewletManager"
          template="people.pt"
          for="...interfaces.ISpecialty"
@@ -77,7 +77,7 @@
          />
 
      <browser:viewlet
-         name="facultystaffdirectory.specialtytabularpeople"
+         name="facultystaffdirectory.specialty.tabularpeople"
          manager="...interfaces.ISpecialtyTabularViewletManager"
          template="people.pt"
          for="...interfaces.ISpecialty"

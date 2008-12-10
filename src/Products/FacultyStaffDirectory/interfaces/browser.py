@@ -2,6 +2,13 @@ from zope.publisher.interfaces.browser import IBrowserView
 from zope.viewlet.interfaces import IViewletManager
 from zope.interface import Attribute
 
+
+class IPersonViewletManager(IViewletManager):
+    """A person viewlet manager for every block"""
+
+class IPersonView(IBrowserView):
+    """A view for a person object"""
+
 class IPersonGroupingViewletManager(IViewletManager):
     """A person grouping viewlet manager"""
 
