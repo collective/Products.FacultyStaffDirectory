@@ -3,7 +3,7 @@
            xmlns:five="http://namespaces.zope.org/five"
            i18n_domain="FacultyStaffDirectory">
 
-    <browser:page
+    <!-- <browser:page
         for="...interfaces.IClassification"
         name="gallery"
         template="gallery.pt"
@@ -38,7 +38,7 @@
         provides="...interfaces.IClassificationViewletManager"
         permission="zope2.View"
         class="plone.app.viewletmanager.manager.OrderedViewletManager"
-        />
+        /> -->
     
     <!-- Put person listing viewlet here, managed by the above viewlet manager -->
 

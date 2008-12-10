@@ -51,7 +51,7 @@ class PersonGroupingViewletManager(object):
             viewlet = getMultiAdapter(
                     (person, self.request, self.__parent__, self),
                     IViewlet,
-                    self.__parent__.viewletForPerson)
+                    'facultystaffdirectory.persongroupingitemviewlet')
 
             # wrap the viewlet for security purposes
             viewlet = viewlet.__of__(viewlet.context)

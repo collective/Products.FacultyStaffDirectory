@@ -1,0 +1,2 @@
+<h2>Gallery</h2>:
+<div tal:content="structure provider:facultystaffdirectory.persongroupingcontainer" />

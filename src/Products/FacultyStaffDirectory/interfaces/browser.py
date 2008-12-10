@@ -10,6 +10,9 @@ class IPersonGroupingView(IBrowserView):
 
     viewletForPerson = Attribute("Viewlet to be used for rendering person objects within this view") 
 
+class IPersonGroupingContainerViewletManager(IViewletManager):
+    """A viewlet manager containing the parts of a person grouping's view (page content, person listing, nested person groupings)."""
+
 class ISpecialtyViewletManager(IViewletManager):
     """Ordered viewlet manager that contains and orders parts of a specialty like body text, subspecialties, etc."""
     pass
