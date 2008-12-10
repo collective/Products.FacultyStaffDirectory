@@ -12,44 +12,59 @@
   <body>
   
     <metal:fill fill-slot="main">
-        <div class="facultyStaffDirectory personView">
+        <div id="hcard" class="vcard facultyStaffDirectory personView" >
 
             <div class="caption">
               <div class="headshot"
                  tal:condition="context/image_normal|nothing">
-                <img src="" alt=""
-                 tal:replace="structure python:context.getWrappedField('image').tag(context, scale='normal')" />
+                
+
+	<img src="" alt="" tal:replace="structure python:context.getWrappedField('image').tag(context, scale='normal',  css_class='photo')" />
+    
             </div>
                 <div metal:use-macro="context/document_actions/macros/document_actions">
                     [Document actions (print, sendto etc)]
                 </div>
-                <h1 tal:content="title_string | context/title_or_id" />
-                <ul tal:condition="context/getJobTitles" class="jobTitle">
-                    <li tal:repeat="jobTitle context/getJobTitles" 
-                        tal:content="jobTitle" />
-                </ul>                
-                <div>
-                    <span tal:replace="structure python:context.getOfficeAddress().replace('\n', '<br />')" /><br />
-                    <span tal:replace="context/getOfficeCity" /><tal:block tal:condition="context/getOfficeState">, </tal:block><span tal:replace="context/getOfficeState" /> <span tal:replace="context/getOfficePostalCode" />
-                </div>
+
+
+<h1 class="fn n">
+  <span class="given-name" tal:content="context/getFirstName">[First Name]</span>
+  <span class="additional-name" tal:content="context/getMiddleName | nothing">[Middle Name]</span>
+  <span class="family-name" tal:content="context/getLastName">[Last Name]</span>
+  <span class="honorific-suffix" tal:content="context/getSuffix">[ suffix i.e. Dr]</span>
+</h1>
+<p tal:condition="context/getJobTitles" class="title" tal:repeat="jobTitle context/getJobTitles" tal:content="jobTitle">[job title]</p>
+                             
+<span class="adr">
+	<span class="street-address" tal:content="structure python:context.getOfficeAddress().replace('\n', '<br />')" /><br />
+	<span class="locality" tal:content="context/getOfficeCity" >[office city]</span>
+	<tal:block tal:condition="context/getOfficeState">, </tal:block>
+	<span class="region" tal:content="context/getOfficeState">[office state]</span> 
+	<span class="postal-code" tal:content="context/getOfficePostalCode">[postal zip code]</span>
+</span>
+<tal:comment tal:replace="nothing">***** I put the class=email in a span before the a tag since the microformat spec doesn't say i can't do that </tal:comment>
                 <div tal:condition="context/getEmail">
                     <span i18n:translate="FacultyStaffDirectory_label_email">Email</span>:
-                    <span tal:replace="structure python:context.spamProtectFSD(context.getEmail())" />
+                    <span tal:attributes="class string:email" tal:content="structure python:context.spamProtectFSD(context.getEmail())" />
+               
                 </div>
-                <div tal:condition="context/getOfficePhone" 
-                     class="officePhone">
-                    <span i18n:translate="FacultyStaffDirectory_label_officePhone">Phone</span>:
-                    <span tal:replace="context/getOfficePhone"/>
-                </div>
+ <span tal:condition="context/getOfficePhone" class="tel officePhone">
+	<span class="type" i18n:translate="FacultyStaffDirectory_label_officePhone">Work</span>:
+	<span class="value" tal:content="context/getOfficePhone">[office phone number]</span>
+ </span>
+
+
+
+
                 <div tal:condition="context/getWebsites" class="websites">
                     <h3><span i18n:translate="FacultyStaffDirectory_label_websites">Websites</span>:</h3>
                     <ul>
                         <li tal:repeat="website context/getWebsites">
-                            <a href="" 
+                            <a class='url' href="" 
                                tal:attributes="href website"
                                tal:content="website" />
                         </li>
-                    </ul>  
+                    </ul>              
                 </div>
             </div>
 

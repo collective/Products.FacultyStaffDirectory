@@ -31,7 +31,7 @@
 .facultyStaffDirectory .standardView .caption { margin-left: 120px; padding-left: 11px; }
 .facultyStaffDirectory .standardView .caption .moreInfo { margin: 1em 0 0 0; }
 
-.facultyStaffDirectory.personView .headshot { float: right; width: 180px; margin: 2em 0; }
+.facultyStaffDirectory.personView .headshot { float: right; width: 180px; margin: 5em 2em 0 0; }
 .facultyStaffDirectory.personView .headshot img { margin-right: 5px; border: 1px solid #000; }
 
 .personView div.caption {
