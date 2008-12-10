@@ -35,7 +35,7 @@
          description="Department tabular view"
          />
 
-     <browser:viewletManager
+     <!-- <browser:viewletManager
          name="facultystaffdirectory.departmenttabularviewletmanager"
          provides="...interfaces.IDepartmentTabularViewletManager"
          permission="zope2.View"
@@ -73,7 +73,7 @@
          for="...interfaces.IDepartment"
          permission="zope2.View"
          class=".department.DepartmentTabularPeople"
-         />
+         /> -->
          
     <browser:page
         for="...interfaces.IDepartment"

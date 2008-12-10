@@ -23,3 +23,8 @@ class ICommitteeViewletManager(IViewletManager):
 class IDepartmentViewletManager(IViewletManager):
     """Ordered viewlet manager that contains and orders parts of a committee like body text and committee members"""
     
+class ITabularListing(IBrowserView):
+    """View that provides a tabular listing"""
+    
+class IGalleryListing(IBrowserView):
+    """View that provides a gallery listing"""

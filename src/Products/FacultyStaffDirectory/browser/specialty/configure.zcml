@@ -44,7 +44,7 @@
          description="Specialty tabular view"
          />
 
-     <browser:viewletManager
+     <!-- <browser:viewletManager
          name="facultystaffdirectory.specialtytabularviewletmanager"
          provides="...interfaces.ISpecialtyTabularViewletManager"
          permission="zope2.View"
@@ -94,6 +94,6 @@
          for="...interfaces.ISpecialty"
          permission="zope2.View"
          />
-
+ -->
          
 </configure>

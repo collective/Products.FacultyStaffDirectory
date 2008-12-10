@@ -20,9 +20,7 @@
                 <div tal:replace="structure provider:plone.abovecontentbody" />
                 <div tal:replace="structure provider:facultystaffdirectory.classificationviewletmanager" />
         
-                <!--
-                    TODO: Add the listing of Persons here.
-                -->
+                <div tal:replace="structure provider:facultystaffdirectory.persongrouping" />
                 
                 <div tal:replace="structure provider:plone.belowcontentbody" />
             </div>

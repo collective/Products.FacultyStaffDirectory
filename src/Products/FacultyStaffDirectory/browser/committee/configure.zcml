@@ -35,7 +35,7 @@
          description="Committee tabular view"
          />
 
-     <browser:viewletManager
+<!--      <browser:viewletManager
          name="facultystaffdirectory.committeetabularviewletmanager"
          provides="...interfaces.ICommitteeTabularViewletManager"
          permission="zope2.View"
@@ -73,7 +73,7 @@
          for="...interfaces.ICommittee"
          permission="zope2.View"
          class=".committee.CommitteeTabularPeople"
-         />
+         /> -->
          
     <browser:page
         for="...interfaces.ICommittee"
