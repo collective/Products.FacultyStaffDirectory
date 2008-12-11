@@ -1,0 +1,3 @@
+<div tal:condition="view/context/getOfficePhone"
+     tal:content="view/context/getOfficePhone"
+     class="officePhone"/>

@@ -20,4 +20,13 @@
         <viewlet name="facultystaffdirectory.personcourses" />
         <viewlet name="facultystaffdirectory.personbosses" />
     </order>
+    
+    <order manager="facultystaffdirectory.persongallery" skinname="*">
+        <viewlet name="facultystaffdirectory.personportrait" />
+        <viewlet name="facultystaffdirectory.personname" />
+        <viewlet name="facultystaffdirectory.personjobtitles" />
+        <viewlet name="facultystaffdirectory.personphone" />
+        <viewlet name="facultystaffdirectory.personemail" />
+    </order>    
+    
 </object>

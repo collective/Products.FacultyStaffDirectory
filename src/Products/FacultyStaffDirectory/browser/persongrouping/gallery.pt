@@ -12,7 +12,16 @@
   <body>
   
     <metal:fill fill-slot="main">
-        <div tal:content="structure provider:facultystaffdirectory.persongroupingcontainer" />
+    <h1 tal:content="object_title" class="documentFirstHeading">
+        Title or id
+    </h1>
+    <!--
+        TODO Add stock plone viewletmanagers
+    -->
+    <div class="listing" 
+         tal:content="structure provider:facultystaffdirectory.persongroupingcontainer" />
+    
+    
     </metal:fill>
   
   </body>

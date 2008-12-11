@@ -1,4 +1,4 @@
 <div>
-    <span tal:replace="context/getOfficeCity" /><tal:block tal:condition="context/getOfficeAddress">, </tal:block><span tal:replace="context/getOfficeState" /> <span tal:replace="context/getOfficePostalCode" />
-        <span tal:replace="context/getOfficePhone" />
+    <span tal:replace="view/context/getOfficeCity" /><tal:block tal:condition="view/context/getOfficeAddress">, </tal:block><span tal:replace="view/context/getOfficeState" /> <span tal:replace="view/context/getOfficePostalCode" />
+        <span tal:replace="view/context/getOfficePhone" />
 </div>

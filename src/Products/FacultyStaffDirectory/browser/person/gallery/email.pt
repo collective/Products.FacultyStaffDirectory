@@ -1,4 +1,3 @@
 <div tal:condition="view/context/getEmail" class="email">
-     <span i18n:translate="FacultyStaffDirectory_label_email">Email</span>:
      <span tal:replace="view/context/getEmail" />
 </div>

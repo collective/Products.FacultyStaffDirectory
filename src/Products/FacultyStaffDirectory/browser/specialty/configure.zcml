@@ -7,9 +7,8 @@
          for="...interfaces.ISpecialty"
          name="gallery"
          template="gallery.pt"
-         class=".specialty.GalleryView"
          permission="zope2.View"
-         />
+         />         
 
      <!-- Adapt @@manage-viewlets to display the viewlets on a Specialty -->
      <browser:page

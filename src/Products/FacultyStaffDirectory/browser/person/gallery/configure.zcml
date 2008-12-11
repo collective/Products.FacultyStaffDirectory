@@ -1,0 +1,54 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:five="http://namespaces.zope.org/five"
+           i18n_domain="FacultyStaffDirectory">
+
+    <browser:viewletManager
+       for="....interfaces.IPersonGrouping"
+       name="facultystaffdirectory.persongallery"
+       provides="....interfaces.IPersonViewletManager"
+       permission="zope2.View"
+       class="plone.app.viewletmanager.manager.OrderedViewletManager"
+       />
+
+       <browser:viewlet
+            for="....interfaces.IPersonGrouping"
+            name="facultystaffdirectory.personname"
+            manager="....interfaces.IPersonViewletManager"
+            template="name.pt"
+            permission="zope2.View"
+            />
+
+        <browser:viewlet
+            for="....interfaces.IPersonGrouping"
+            name="facultystaffdirectory.personportrait"
+            manager="....interfaces.IPersonViewletManager"
+            template="portrait.pt"
+            permission="zope2.View"
+            />
+
+        <browser:viewlet
+            for="....interfaces.IPersonGrouping"
+            name="facultystaffdirectory.personofficephone"
+            manager="....interfaces.IPersonViewletManager"
+            template="officephone.pt"
+            permission="zope2.View"
+            />
+
+        <browser:viewlet
+            for="....interfaces.IPersonGrouping"
+            name="facultystaffdirectory.personjobtitles"
+            manager="....interfaces.IPersonViewletManager"
+            template="jobtitles.pt"
+            permission="zope2.View"
+            />
+
+        <browser:viewlet
+            for="....interfaces.IPersonGrouping"
+            name="facultystaffdirectory.personemail"
+            manager="....interfaces.IPersonViewletManager"
+            template="email.pt"
+            permission="zope2.View"
+            />
+
+</configure>

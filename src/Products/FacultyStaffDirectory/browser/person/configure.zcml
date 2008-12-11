@@ -3,7 +3,11 @@
            xmlns:five="http://namespaces.zope.org/five"
            i18n_domain="FacultyStaffDirectory">
 
-     <browser:page
+    <include package=".gallery" />
+
+
+    <!-- The default view for a Person object -->
+    <browser:page
          for="...interfaces.IPerson"
          name="index"
          template="index.pt"
@@ -20,142 +24,110 @@
         class="plone.app.viewletmanager.manager.OrderedViewletManager"
         />
 
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personname"
+             manager="...interfaces.IPersonViewletManager"
+             template="name.pt"
+             permission="zope2.View"
+             />
 
-        <browser:viewletManager
-            for="...interfaces.IClassification"
-            name="facultystaffdirectory.personclassificationgallery"
-            provides="...interfaces.IPersonViewletManager"
-            permission="zope2.View"
-            class="plone.app.viewletmanager.manager.OrderedViewletManager"
-            />
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personjobtitles"
+             manager="...interfaces.IPersonViewletManager"
+             template="jobtitles.pt"
+             permission="zope2.View"
+             />
 
-            <browser:viewlet
-                     for="*"
-                     name="facultystaffdirectory.personclassificationgallery"
-                     manager="...interfaces.IPersonViewletManager"
-                     template="name.pt"
-                     permission="zope2.View"
-                     />
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personofficeaddress"
+             manager="...interfaces.IPersonViewletManager"
+             template="officeaddress.pt"
+             permission="zope2.View"
+             />
 
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personemail"
+             manager="...interfaces.IPersonViewletManager"
+             template="email.pt"
+             permission="zope2.View"
+             />
 
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personwebsites"
+             manager="...interfaces.IPersonViewletManager"
+             template="websites.pt"
+             permission="zope2.View"
+             />
 
-        <browser:viewletManager
-            for="...interfaces.IPersonGrouping"
-            name="facultystaffdirectory.persongallery"
-            provides="...interfaces.IPersonViewletManager"
-            permission="zope2.View"
-            class="plone.app.viewletmanager.manager.OrderedViewletManager"
-            />
-            
-            
-            
- 
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personeducation"
+             manager="...interfaces.IPersonViewletManager"
+             template="education.pt"
+             permission="zope2.View"
+             />
 
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personbiography"
+             manager="...interfaces.IPersonViewletManager"
+             template="biography.pt"
+             permission="zope2.View"
+             />
 
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personname"
-         manager="...interfaces.IPersonViewletManager"
-         template="name.pt"
-         permission="zope2.View"
-         />
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personspecialities"
+             manager="...interfaces.IPersonViewletManager"
+             template="specialities.pt"
+             permission="zope2.View"
+             />
 
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personjobtitles"
-         manager="...interfaces.IPersonViewletManager"
-         template="jobtitles.pt"
-         permission="zope2.View"
-         />
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personassistants"
+             manager="...interfaces.IPersonViewletManager"
+             template="assistants.pt"
+             permission="zope2.View"
+             />
 
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personofficeaddress"
-         manager="...interfaces.IPersonViewletManager"
-         template="officeaddress.pt"
-         permission="zope2.View"
-         />
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personcourses"
+             manager="...interfaces.IPersonViewletManager"
+             template="courses.pt"
+             permission="zope2.View"
+             />
 
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personemail"
-         manager="...interfaces.IPersonViewletManager"
-         template="email.pt"
-         permission="zope2.View"
-         />
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personbosses"
+             manager="...interfaces.IPersonViewletManager"
+             template="bosses.pt"
+             permission="zope2.View"
+             />
 
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personwebsites"
-         manager="...interfaces.IPersonViewletManager"
-         template="websites.pt"
-         permission="zope2.View"
-         />
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.persongallery"
+             manager="...interfaces.IPersonGroupingViewletManager"
+             class=".person.PersonGalleryViewlet"
+             template="gallery/gallery.pt"
+             permission="zope2.View"
+             />
 
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personeducation"
-         manager="...interfaces.IPersonViewletManager"
-         template="education.pt"
-         permission="zope2.View"
-         />
-
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personbiography"
-         manager="...interfaces.IPersonViewletManager"
-         template="biography.pt"
-         permission="zope2.View"
-         />
-
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personspecialities"
-         manager="...interfaces.IPersonViewletManager"
-         template="specialities.pt"
-         permission="zope2.View"
-         />
-
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personassistants"
-         manager="...interfaces.IPersonViewletManager"
-         template="assistants.pt"
-         permission="zope2.View"
-         />
-
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personcourses"
-         manager="...interfaces.IPersonViewletManager"
-         template="courses.pt"
-         permission="zope2.View"
-         />
-
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.personbosses"
-         manager="...interfaces.IPersonViewletManager"
-         template="bosses.pt"
-         permission="zope2.View"
-         />
-
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.persongallery"
-         manager="...interfaces.IPersonGroupingViewletManager"
-         class=".person.PersonGalleryViewlet"
-         template="gallery.pt"
-         permission="zope2.View"
-         />
-
-     <browser:viewlet
-         for="...interfaces.IPerson"
-         name="facultystaffdirectory.persontabular"
-         manager="...interfaces.IPersonGroupingViewletManager"
-         template="tabular.pt"
-         permission="zope2.View"
-         />
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.persontabular"
+             manager="...interfaces.IPersonGroupingViewletManager"
+             template="tabular.pt"
+             permission="zope2.View"
+             />
          
      <!-- <view
          type="zope.publisher.interfaces.browser.IBrowserRequest"
