@@ -10,6 +10,13 @@
         template="gallery.pt"
         permission="zope2.View"
         />
+        
+    <browser:page
+        for="...interfaces.IPersonGrouping"
+        name="tabular"
+        template="tabular.pt"
+        permission="zope2.View"
+        />
 
     <!-- Person Grouping Container (viewletmanager) -->
     <browser:viewletManager
@@ -22,10 +29,10 @@
     
     <!-- Person Grouping Viewlet (viewlet) -->
     <browser:viewlet
-        name="facultystaffdirectory.blah"
+        name="facultystaffdirectory.personlist"
         for="...interfaces.IPersonGrouping"
         manager="...interfaces.IPersonGroupingContainerViewletManager"
-        template="blah.pt"
+        template="personlist.pt"
         permission="zope2.View"
         />
     
@@ -44,9 +51,11 @@
         name="facultystaffdirectory.persongroupingitemviewlet"
         for="...interfaces.IPerson"
         manager="...interfaces.IPersonGroupingViewletManager"
-        template="item.pt"
+        class=".persongrouping.PersonGroupingItemViewlet"
         permission="zope2.View"
         />
 
+
+        
 
 </configure>

@@ -1,3 +1,3 @@
-<h3>Blah!</h3>
+<h3>Persons:</h3>
 
 <div tal:replace="structure provider:facultystaffdirectory.persongrouping" />

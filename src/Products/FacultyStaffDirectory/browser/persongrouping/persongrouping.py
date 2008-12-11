@@ -1,15 +1,11 @@
 from AccessControl.ZopeGuards import guarded_hasattr
 from Products.Five import BrowserView
-from zope.component import getMultiAdapter, ComponentLookupError
+from zope.component import getMultiAdapter, ComponentLookupError, queryMultiAdapter
 from zope.interface import implements
 from zope.viewlet.interfaces import IViewlet, IViewletManager
-from Products.FacultyStaffDirectory.interfaces import IPersonGroupingViewletManager, IPersonGroupingView
-
-class PersonListView(BrowserView):
-    implements(IPersonGroupingView)
-
-    viewletOfChoice = u'facultystaffdirectory.personlistitem'
-
+from Products.FacultyStaffDirectory.interfaces import IPersonGroupingViewletManager, IPersonGroupingView, ITabularListing, IGalleryListing
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.app.layout.viewlets.common import ViewletBase
 
 class PersonGroupingViewletManager(object):
     implements(IPersonGroupingViewletManager)
@@ -52,7 +48,6 @@ class PersonGroupingViewletManager(object):
                     (person, self.request, self.__parent__, self),
                     IViewlet,
                     'facultystaffdirectory.persongroupingitemviewlet')
-
             # wrap the viewlet for security purposes
             viewlet = viewlet.__of__(viewlet.context)
 
@@ -72,3 +67,11 @@ class PersonGroupingViewletManager(object):
         else:
             return u'\n'.join([viewlet.render() for viewlet in self.viewlets])
 
+class PersonGroupingItemViewlet(ViewletBase):
+    def render(self):
+        # TODO self.__parent__.__parent__.__parent__ is completely wrong. Do it right.
+        view =  queryMultiAdapter((self.context, self.__parent__.__parent__.__parent__, self.request), name='view')
+
+        # wrap the viewlet for security purposes
+        view = view.__of__(view.context)
+        return view()

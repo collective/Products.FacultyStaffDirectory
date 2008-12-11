@@ -32,3 +32,20 @@ class PersonGalleryViewlet(ViewletBase, PersonView):
         """
         width = self.context.getClassificationViewThumbnailWidth()
         return self.context.getImage() and self.context.getScaledImageByWidth(width)
+        
+class PersonGalleryView(PersonView):
+    def __init__(self, person, classification, request): # Override __init__ so we have 4 params instead of the usual 3 (since this is called using a multi-view lookup)
+        super(PersonView, self).__init__(person, request)
+
+    def __call__(self):
+        # import pdb; pdb.set_trace( )
+        self.template = ViewPageTemplateFile('gallery.pt')
+        return self.template(self.context, self.request)
+        
+class PersonTabularView(PersonView):
+    def __init__(self, person, classification, request): # Override __init__ so we have 4 params instead of the usual 3 (since this is called using a multi-view lookup)
+        super(PersonView, self).__init__(person, request)
+
+    def __call__(self):
+        self.template = ViewPageTemplateFile('tabular.pt')
+        return self.template(self.context, self.request)

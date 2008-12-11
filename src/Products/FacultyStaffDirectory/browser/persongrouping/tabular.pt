@@ -1,0 +1,2 @@
+<h2>Tabular:</h2>
+<div tal:content="structure provider:facultystaffdirectory.persongroupingcontainer" />
