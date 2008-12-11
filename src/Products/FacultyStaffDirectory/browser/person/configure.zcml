@@ -20,20 +20,36 @@
         class="plone.app.viewletmanager.manager.OrderedViewletManager"
         />
 
+
         <browser:viewletManager
-            for="*"
-            name="facultystaffdirectory.person"
+            for="...interfaces.IClassification"
+            name="facultystaffdirectory.personclassificationgallery"
             provides="...interfaces.IPersonViewletManager"
             permission="zope2.View"
             class="plone.app.viewletmanager.manager.OrderedViewletManager"
             />
+
             <browser:viewlet
-                for="...interfaces.IPersonGrouping"
-                name="facultystaffdirectory.personname"
-                manager="...interfaces.IPersonViewletManager"
-                template="name.pt"
-                permission="zope2.View"
-                />
+                     for="*"
+                     name="facultystaffdirectory.personclassificationgallery"
+                     manager="...interfaces.IPersonViewletManager"
+                     template="name.pt"
+                     permission="zope2.View"
+                     />
+
+
+
+        <browser:viewletManager
+            for="...interfaces.IPersonGrouping"
+            name="facultystaffdirectory.persongallery"
+            provides="...interfaces.IPersonViewletManager"
+            permission="zope2.View"
+            class="plone.app.viewletmanager.manager.OrderedViewletManager"
+            />
+            
+            
+            
+ 
 
 
      <browser:viewlet

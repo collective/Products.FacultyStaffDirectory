@@ -1,7 +1,7 @@
     <h1>
-    <span tal:content="context/firstName" />
-    <span tal:content="context/middleName" />
-    <span tal:content="context/lastName" />
-    <span tal:content="context/suffix" />
+    <span tal:content="view/context/firstName" />
+    <span tal:content="view/context/middleName" />
+    <span tal:content="view/context/lastName" />
+    <span tal:content="view/context/suffix" />
     </h1>
 
