@@ -1,2 +1,0 @@
-item.pt
-<div tal:content="structure provider:facultystaffdirectory.person" />
