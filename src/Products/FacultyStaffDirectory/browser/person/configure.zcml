@@ -27,9 +27,9 @@
 
          <browser:viewlet
              for="...interfaces.IPerson"
-             name="facultystaffdirectory.personname"
+             name="facultystaffdirectory.personportrait"
              manager="...interfaces.IPersonViewletManager"
-             template="name.pt"
+             template="portrait.pt"
              permission="zope2.View"
              />
 
@@ -112,23 +112,6 @@
              template="bosses.pt"
              permission="zope2.View"
              />
-
-<!--          <browser:viewlet
-             for="...interfaces.IPerson"
-             name="facultystaffdirectory.persongallery"
-             manager="...interfaces.IPersonGroupingViewletManager"
-             class=".person.PersonGalleryViewlet"
-             template="gallery/gallery.pt"
-             permission="zope2.View"
-             />
-
-         <browser:viewlet
-             for="...interfaces.IPerson"
-             name="facultystaffdirectory.persontabular"
-             manager="...interfaces.IPersonGroupingViewletManager"
-             template="tabular/tabular.pt"
-             permission="zope2.View"
-             /> -->
          
      <view
          type="zope.publisher.interfaces.browser.IBrowserRequest"

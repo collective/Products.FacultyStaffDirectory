@@ -7,8 +7,9 @@
     <order manager="facultystaffdirectory.committeeviewletmanager" skinname="*">
         <viewlet name="facultystaffdirectory.committeetext" />
     </order>
+    
     <order manager="facultystaffdirectory.person" skinname="*">
-        <viewlet name="facultystaffdirectory.personname" />
+        <viewlet name="facultystaffdirectory.personportrait" />
         <viewlet name="facultystaffdirectory.personjobtitles" />
         <viewlet name="facultystaffdirectory.personofficeaddress" />
         <viewlet name="facultystaffdirectory.personemail" />

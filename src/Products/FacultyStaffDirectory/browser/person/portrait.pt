@@ -1,0 +1,11 @@
+<div class="headshot">
+    <a href=""
+       tal:attributes="href view/context/absolute_url">
+        <tal:block condition="view/context/image_thumb|nothing">
+        <!--
+            TODO pull the portrait width out into the view code
+        -->
+            <img tal:replace="structure view/context/image_normal" />
+        </tal:block>
+    </a>
+</div>
