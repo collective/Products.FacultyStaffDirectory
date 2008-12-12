@@ -48,7 +48,7 @@ class PersonGalleryView(PersonView):
         # Render the manager
         manager.update()
         self.renderedManager = manager.render()
-        self.template = ViewPageTemplateFile('gallery.pt')
+        self.template = ViewPageTemplateFile('gallery/gallery.pt')
         return self.template()
         
 class PersonTabularView(PersonView):
