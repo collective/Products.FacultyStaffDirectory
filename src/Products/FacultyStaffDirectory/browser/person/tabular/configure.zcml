@@ -5,9 +5,9 @@
 
     <browser:viewletManager
        for="....interfaces.IPersonGrouping"
-       name="facultystaffdirectory.persongallery"
+       name="facultystaffdirectory.persontabular"
        provides="....interfaces.IPersonViewletManager"
-       view="....interfaces.IGalleryListingFormat"
+       view="....interfaces.ITabularListingFormat"
        permission="zope2.View"
        class="plone.app.viewletmanager.manager.OrderedViewletManager"
        />
@@ -16,17 +16,8 @@
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personname"
             manager="....interfaces.IPersonViewletManager"
-            view="....interfaces.IGalleryListingFormat"
+            view="....interfaces.ITabularListingFormat"
             template="name.pt"
-            permission="zope2.View"
-            />
-
-        <browser:viewlet
-            for="....interfaces.IPersonGrouping"
-            name="facultystaffdirectory.personportrait"
-            manager="....interfaces.IPersonViewletManager"
-            view="....interfaces.IGalleryListingFormat"
-            template="portrait.pt"
             permission="zope2.View"
             />
 
@@ -34,17 +25,8 @@
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personofficephone"
             manager="....interfaces.IPersonViewletManager"
-            view="....interfaces.IGalleryListingFormat"
+            view="....interfaces.ITabularListingFormat"
             template="officephone.pt"
-            permission="zope2.View"
-            />
-
-        <browser:viewlet
-            for="....interfaces.IPersonGrouping"
-            name="facultystaffdirectory.personjobtitles"
-            manager="....interfaces.IPersonViewletManager"
-            view="....interfaces.IGalleryListingFormat"
-            template="jobtitles.pt"
             permission="zope2.View"
             />
 
@@ -52,7 +34,7 @@
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personemail"
             manager="....interfaces.IPersonViewletManager"
-            view="....interfaces.IGalleryListingFormat"
+            view="....interfaces.ITabularListingFormat"
             template="email.pt"
             permission="zope2.View"
             />

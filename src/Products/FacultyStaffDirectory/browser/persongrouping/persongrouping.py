@@ -3,10 +3,16 @@ from Products.Five import BrowserView
 from zope.component import getMultiAdapter, ComponentLookupError, queryMultiAdapter
 from zope.interface import implements
 from zope.viewlet.interfaces import IViewlet, IViewletManager
-from Products.FacultyStaffDirectory.interfaces import IPersonGroupingViewletManager, IPersonGroupingView, ITabularListing, IGalleryListing
+from Products.FacultyStaffDirectory.interfaces import IPersonGroupingViewletManager, IPersonGroupingView, IListingFormat, ITabularListingFormat, IGalleryListingFormat
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets.common import ViewletBase
 
+class PersonGroupingGalleryView(object):
+    implements(IGalleryListingFormat)
+    
+class PersonGroupingTabularView(object):
+    implements(ITabularListingFormat)
+    
 class PersonGroupingViewletManager(object):
     implements(IPersonGroupingViewletManager)
 
@@ -69,9 +75,11 @@ class PersonGroupingViewletManager(object):
 
 class PersonGroupingItemViewlet(ViewletBase):
     def render(self):
-        # TODO self.__parent__.__parent__.__parent__ is completely wrong. Do it right.
-        view =  queryMultiAdapter((self.context, self.__parent__.__parent__.__parent__, self.request), name='view')
-
+        person = self.context
+        # TODO self.__parent__.__parent__.__parent__ and self.__parent__.__parent__ completely wrong. Do it right.
+        grouping = self.__parent__.__parent__.__parent__
+        format = self.__parent__.__parent__
+        view =  queryMultiAdapter((person, grouping, format, self.request), name='view')
         # wrap the viewlet for security purposes
         view = view.__of__(view.context)
         return view()

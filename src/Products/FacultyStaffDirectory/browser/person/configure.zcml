@@ -4,6 +4,7 @@
            i18n_domain="FacultyStaffDirectory">
 
     <include package=".gallery" />
+    <include package=".tabular" />
 
 
     <!-- The default view for a Person object -->
@@ -112,7 +113,7 @@
              permission="zope2.View"
              />
 
-         <browser:viewlet
+<!--          <browser:viewlet
              for="...interfaces.IPerson"
              name="facultystaffdirectory.persongallery"
              manager="...interfaces.IPersonGroupingViewletManager"
@@ -125,23 +126,25 @@
              for="...interfaces.IPerson"
              name="facultystaffdirectory.persontabular"
              manager="...interfaces.IPersonGroupingViewletManager"
-             template="tabular.pt"
+             template="tabular/tabular.pt"
              permission="zope2.View"
-             />
+             /> -->
          
-     <!-- <view
+     <view
          type="zope.publisher.interfaces.browser.IBrowserRequest"
          for="Products.FacultyStaffDirectory.interfaces.IPerson
-              Products.FacultyStaffDirectory.interfaces.IPersonGrouping"
+              Products.FacultyStaffDirectory.interfaces.IPersonGrouping
+              Products.FacultyStaffDirectory.interfaces.ITabularListingFormat"
          factory=".person.PersonTabularView"
          permission="zope2.View"
          name="view"
          />
- -->
+
      <view
          type="zope.publisher.interfaces.browser.IBrowserRequest"
          for="Products.FacultyStaffDirectory.interfaces.IPerson
-              Products.FacultyStaffDirectory.interfaces.IPersonGrouping"
+              Products.FacultyStaffDirectory.interfaces.IPersonGrouping
+              Products.FacultyStaffDirectory.interfaces.IGalleryListingFormat"
          factory=".person.PersonGalleryView"
          permission="zope2.View"
          name="view"

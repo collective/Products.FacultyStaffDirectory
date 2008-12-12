@@ -27,6 +27,11 @@
         <viewlet name="facultystaffdirectory.personjobtitles" />
         <viewlet name="facultystaffdirectory.personphone" />
         <viewlet name="facultystaffdirectory.personemail" />
-    </order>    
+    </order>
     
+    <order manager="facultystaffdirectory.persontabular" skinname="*">
+        <viewlet name="facultystaffdirectory.personname" />
+        <viewlet name="facultystaffdirectory.personphone" />
+        <viewlet name="facultystaffdirectory.personemail" />
+    </order>
 </object>

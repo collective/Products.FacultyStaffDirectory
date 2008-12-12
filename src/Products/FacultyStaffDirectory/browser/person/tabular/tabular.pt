@@ -1,0 +1,4 @@
+<tr>
+    <tal:row tal:content="structure view/renderedManager" />
+</tr>
+
