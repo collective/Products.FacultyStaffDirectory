@@ -1,13 +1,6 @@
 <?xml version="1.0"?>
 <object>
-    <order manager="facultystaffdirectory.specialtyviewletmanager" skinname="*">
-        <viewlet name="facultystaffdirectory.specialtytext" />
-        <viewlet name="facultystaffdirectory.subspecialties" />
-    </order>
-    <order manager="facultystaffdirectory.committeeviewletmanager" skinname="*">
-        <viewlet name="facultystaffdirectory.committeetext" />
-    </order>
-    
+
     <order manager="facultystaffdirectory.person" skinname="*">
         <viewlet name="facultystaffdirectory.personportrait" />
         <viewlet name="facultystaffdirectory.personjobtitles" />
