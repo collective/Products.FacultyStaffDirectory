@@ -112,6 +112,31 @@
                 </dl>
             </div>
 
+            <div class="departments" tal:define="departmentsList context/getDepartments" tal:condition="departmentsList">
+                <h3><span i18n:translate="FacultyStaffDirectory_label_departments">Departments</span>:</h3>
+                <dl>
+                    <tal:block tal:repeat="eachDepartment departmentsList">
+                        <dt>
+                            <a tal:attributes="href python:eachDepartment.absolute_url()">
+                                <span tal:content="eachDepartment/Title" />:
+                            </a>
+                        </dt>
+                            <dd tal:define="personMembershipInformation python:eachDepartment.getMembershipInformation(context);">
+                                <tal:block tal:condition="personMembershipInformation/getPosition" 
+                                           tal:replace="structure personMembershipInformation/getPosition">               
+                                </tal:block>                                
+                                <span tal:condition="python:checkPermission('Modify portal content', context)"
+                                      class="discreet">[
+                                    <a tal:attributes="href python:'%s/edit' % personMembershipInformation.absolute_url()">
+                                       <tal:block tal:condition="personMembershipInformation/getPosition" i18n:translate="FacultyStaffDirectory_editPosition">Edit position</tal:block>
+                                       <tal:block tal:condition="not:personMembershipInformation/getPosition" i18n:translate="FacultyStaffDirectory_assignPosition">Assign a position</tal:block>
+                                    </a>
+                                ]</span>                           
+                            </dd>
+                    </tal:block>
+                </dl>
+            </div>
+
             <div class="courselisting" 
                  tal:define="courses context/getCourses"
                  tal:condition="courses">
