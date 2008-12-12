@@ -1,3 +1,0 @@
-<div class="listing" tal:repeat="person options/viewlets">
-    <div tal:replace="structure person">[person viewlet goes here]</div>
-</div>

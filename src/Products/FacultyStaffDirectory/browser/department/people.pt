@@ -1,2 +1,0 @@
-<div tal:replace="structure provider:facultystaffdirectory.persongrouping" />
-
