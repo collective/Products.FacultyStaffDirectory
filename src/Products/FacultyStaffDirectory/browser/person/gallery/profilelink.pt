@@ -1,0 +1,7 @@
+<div class="moreInfo">
+    <a tal:attributes="href view/context/profileUrl"
+       i18n:translate="FacultyStaffDirectory_moreAbout">
+        More about 
+        <span tal:replace="view/context/fullName">[Name]</span>...
+    </a>
+</div>

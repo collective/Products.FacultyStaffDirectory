@@ -1,6 +1,3 @@
 <h4 class="personName">
-    <span tal:content="view/context/firstName" />
-    <span tal:content="view/context/middleName" />
-    <span tal:content="view/context/lastName" />
-    <span tal:content="view/context/suffix" />
+    <span tal:content="view/context/fullName" />
 </h4>

@@ -5,6 +5,12 @@ from zope.component import getSiteManager
 from Products.FacultyStaffDirectory.interfaces import IPersonViewletManager
 
 class PersonView(BrowserView):
+
+    def profileUrl(self):
+        return self.context.absolute_url()
+    
+    def fullName(self):
+        return self.context.Title()
     
     @property
     def portrait(self):

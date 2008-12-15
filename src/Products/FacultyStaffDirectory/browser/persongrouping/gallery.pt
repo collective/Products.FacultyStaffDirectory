@@ -18,7 +18,7 @@
     <!--
         TODO Add stock plone viewletmanagers
     -->
-    <div class="listing" 
+    <div class="facultyStaffDirectory" 
          tal:content="structure provider:facultystaffdirectory.persongroupingcontainer" />
     
     

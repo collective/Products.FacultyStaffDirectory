@@ -32,15 +32,6 @@
 
         <browser:viewlet
             for="....interfaces.IPersonGrouping"
-            name="facultystaffdirectory.personofficephone"
-            manager="....interfaces.IPersonViewletManager"
-            view="....interfaces.IGalleryListingFormat"
-            template="officephone.pt"
-            permission="zope2.View"
-            />
-
-        <browser:viewlet
-            for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personjobtitles"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.IGalleryListingFormat"
@@ -50,10 +41,28 @@
 
         <browser:viewlet
             for="....interfaces.IPersonGrouping"
+            name="facultystaffdirectory.personofficephone"
+            manager="....interfaces.IPersonViewletManager"
+            view="....interfaces.IGalleryListingFormat"
+            template="officephone.pt"
+            permission="zope2.View"
+            />
+
+        <browser:viewlet
+            for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personemail"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.IGalleryListingFormat"
             template="email.pt"
+            permission="zope2.View"
+            />
+
+        <browser:viewlet
+            for="....interfaces.IPersonGrouping"
+            name="facultystaffdirectory.personprofilelink"
+            manager="....interfaces.IPersonViewletManager"
+            view="....interfaces.IGalleryListingFormat"
+            template="profilelink.pt"
             permission="zope2.View"
             />
 

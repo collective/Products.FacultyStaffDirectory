@@ -24,12 +24,12 @@
 
 .facultyStaffDirectory .listing { margin: 1em 0 1.5em 0; border: none; font-size: 1em; }
 
-.facultyStaffDirectory .standardView .headshot { float: left; width: 120px; margin-top: 3px; padding: auto 0; }
+.facultyStaffDirectory .gallery .headshot { float: left; width: 120px; margin-top: 3px; padding: auto 0; }
 
-.facultyStaffDirectory .standardView .headshot img { border: 2px solid #000; padding:0; }
+.facultyStaffDirectory .gallery .headshot img { border: 2px solid #000; padding:0; }
 
-.facultyStaffDirectory .standardView .caption { margin-left: 120px; padding-left: 11px; }
-.facultyStaffDirectory .standardView .caption .moreInfo { margin: 1em 0 0 0; }
+.facultyStaffDirectory .gallery { padding-left: 11px; margin-bottom: 1.5em;}
+.facultyStaffDirectory .gallery .moreInfo { margin: 1em 0 0 0; }
 
 .facultyStaffDirectory.personView .headshot { float: right; width: 180px; margin: 2em 0; }
 .facultyStaffDirectory.personView .headshot img { margin-right: 5px; border: 1px solid #000; }
