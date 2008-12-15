@@ -1,4 +1,4 @@
-<div tal:content="structure view/renderedManager" />
+<div tal:content="structure view/renderedManager" class="person gallery" />
 
 <div class="moreInfo">
     <a tal:attributes="href view/context/absolute_url"

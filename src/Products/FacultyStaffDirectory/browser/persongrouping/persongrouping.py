@@ -81,5 +81,5 @@ class PersonGroupingItemViewlet(ViewletBase):
         format = self.__parent__.__parent__
         view =  queryMultiAdapter((person, grouping, format, self.request), name='view')
         # wrap the viewlet for security purposes
-        view = view.__of__(view.context)
+        view = view.__of__(person)
         return view()

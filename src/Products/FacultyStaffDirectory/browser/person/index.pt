@@ -18,7 +18,7 @@
     <!--
         TODO Add stock plone viewletmanagers
     -->
-    <div tal:content="structure provider:facultystaffdirectory.person" />
+    <div tal:content="structure provider:facultystaffdirectory.person" class="listing" />
     
     </metal:fill>
   
