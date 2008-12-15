@@ -19,7 +19,7 @@
         <viewlet name="facultystaffdirectory.personportrait" />
         <viewlet name="facultystaffdirectory.personname" />
         <viewlet name="facultystaffdirectory.personjobtitles" />
-        <viewlet name="facultystaffdirectory.personphone" />
+        <viewlet name="facultystaffdirectory.personofficephone" />
         <viewlet name="facultystaffdirectory.personemail" />
         <viewlet name="facultystaffdirectory.personprofilelink" />
     </order>
