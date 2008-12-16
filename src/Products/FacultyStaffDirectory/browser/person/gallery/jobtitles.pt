@@ -1,5 +1,0 @@
-<ul tal:condition="view/context/getJobTitles" class="jobTitle">
-    <li tal:repeat="jobTitle view/context/getJobTitles" 
-        tal:content="jobTitle">
-    </li>                
-</ul>

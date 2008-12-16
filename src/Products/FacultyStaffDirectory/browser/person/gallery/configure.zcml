@@ -35,7 +35,7 @@
             name="facultystaffdirectory.personjobtitles"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.IGalleryListingFormat"
-            template="jobtitles.pt"
+            template="../jobtitles.pt"
             permission="zope2.View"
             />
 

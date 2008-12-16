@@ -1,8 +1,5 @@
-<div tal:condition="view/context/getJobTitles" class="jobTitles">
-    <h3><span i18n:translate="FacultyStaffDirectory_label_jobtitles">Job Titles</span>:</h3>
-    <ul>
-        <li tal:repeat="jobTitle view/context/getJobTitles" 
-            tal:content="jobTitle">
-        </li>                
-    </ul>
-</div>
+<ul tal:condition="view/context/getJobTitles" class="jobTitle">
+    <li tal:repeat="jobTitle view/context/getJobTitles" 
+        tal:content="jobTitle">
+    </li>                
+</ul>
