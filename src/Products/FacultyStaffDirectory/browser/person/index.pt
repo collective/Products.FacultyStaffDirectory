@@ -29,7 +29,7 @@
               </p>
 
               <div tal:replace="structure provider:plone.abovecontentbody" />
-              <div tal:content="structure provider:facultystaffdirectory.person" class="listing" />
+              <div tal:content="structure provider:facultystaffdirectory.person" class="facultyStaffDirectory personView" />
               
             <div metal:use-macro="here/document_relateditems/macros/relatedItems">
                show related items if they exist
