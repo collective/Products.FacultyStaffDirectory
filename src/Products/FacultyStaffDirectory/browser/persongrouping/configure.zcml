@@ -11,13 +11,29 @@
         template="gallery.pt"
         permission="zope2.View"
         />
-        
+
+    <browser:menuItem
+        for="...interfaces.IPersonGrouping"
+        menu="plone_displayviews"
+        title="Gallery view"
+        action="@@gallery"
+        description="Gallery view"
+        />
+
     <browser:page
         for="...interfaces.IPersonGrouping"
         name="tabular"
         class=".persongrouping.PersonGroupingTabularView"
         template="tabular.pt"
         permission="zope2.View"
+        />
+
+    <browser:menuItem
+        for="...interfaces.IPersonGrouping"
+        menu="plone_displayviews"
+        title="Tabular view"
+        action="@@tabular"
+        description="Tabular view"
         />
 
     <!-- Person Grouping Container (viewletmanager) -->
