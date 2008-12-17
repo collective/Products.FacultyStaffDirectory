@@ -18,14 +18,11 @@ class IPersonGroupingViewletManager(IViewletManager):
 class IPersonGroupingView(IBrowserView):
     """A view for a grouping of person objects"""
 
-    viewletForPerson = Attribute("Viewlet to be used for rendering person objects within this view") 
-
 class IPersonGroupingContainerViewletManager(IViewletManager):
     """A viewlet manager containing the parts of a person grouping's view (page content, person listing, nested person groupings)."""
 
 class ISpecialtyViewletManager(IViewletManager):
     """Ordered viewlet manager that contains and orders parts of a specialty like body text, subspecialties, etc."""
-    pass
     
 class IClassificationViewletManager(IViewletManager):
     """Ordered viewlet manager that contains and orders parts of a classification like description and person listing."""
@@ -35,7 +32,6 @@ class ICommitteeViewletManager(IViewletManager):
         
 class IDepartmentViewletManager(IViewletManager):
     """Ordered viewlet manager that contains and orders parts of a committee like body text and committee members"""
-    
     
 class IListingFormat(IBrowserView):
     """ Determines how a listing should be formatted"""
