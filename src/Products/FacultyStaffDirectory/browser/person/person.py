@@ -29,18 +29,6 @@ class PersonView(BrowserView):
     def email(self):
         return self.context.spamProtectFSD(self.context.getEmail())
     
-
-class PersonGalleryViewlet(ViewletBase, PersonView):
-    @property
-    def portrait(self):
-        """Return None if no image. 
-        
-        (tag() field will return an img tag regardless)
-        
-        """
-        width = self.context.getClassificationViewThumbnailWidth()
-        return self.context.getImage() and self.context.getScaledImageByWidth(width)
-
 class PersonMultiView(PersonView):
     def __init__(self, person, grouping, format, request): # Override __init__ so we have 4 params instead of the usual 3 (since this is called using a multi-view lookup)
         super(PersonMultiView, self).__init__(person, request)
@@ -64,3 +52,4 @@ class PersonGalleryView(PersonMultiView):
 
 class PersonTabularView(PersonMultiView):
     template = ViewPageTemplateFile('tabular/tabular.pt')
+    

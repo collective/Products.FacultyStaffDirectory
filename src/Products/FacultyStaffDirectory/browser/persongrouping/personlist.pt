@@ -1,1 +1,1 @@
-<div tal:content="structure provider:facultystaffdirectory.persongrouping" class="listing"/>
+<div tal:replace="structure provider:facultystaffdirectory.persongrouping" />

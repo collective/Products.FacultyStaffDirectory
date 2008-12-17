@@ -34,7 +34,7 @@
     <!--
         TODO Add stock plone viewletmanagers
     -->
-    <div class="facultyStaffDirectory" 
+    <div class="facultyStaffDirectory listing" 
          tal:content="structure provider:facultystaffdirectory.persongroupingcontainer" />
     
      <div metal:use-macro="here/document_relateditems/macros/relatedItems">

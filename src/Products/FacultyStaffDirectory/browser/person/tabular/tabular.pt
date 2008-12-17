@@ -1,4 +1,3 @@
 <tr class="person tabular">
     <tal:row tal:content="structure view/renderedManager" />
 </tr>
-
