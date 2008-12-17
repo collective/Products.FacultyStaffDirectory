@@ -1,0 +1,1 @@
+<span class="postalCode" tal:content="view/context/getOfficePostalCode" />

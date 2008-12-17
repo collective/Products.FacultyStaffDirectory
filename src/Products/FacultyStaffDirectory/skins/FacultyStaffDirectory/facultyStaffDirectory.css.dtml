@@ -65,6 +65,10 @@
 .facultyStaffDirectory.personView .courselisting dd p,
 .facultyStaffDirectory.personView .specialties dd p { margin:0 0 .25em 0; }
 
+
+.facultyStaffDirectory addr .city:after { content:", "; }
+.facultyStaffDirectory.personView addr .street { display: block; }
+
 .facultyStaffDirectory .tabularView table.listing { border-left: none; }
 
 .facultyStaffDirectory .tabularView td, .facultyStaffDirectory .tabularView th { border-left: 1px solid #8CACBB; }

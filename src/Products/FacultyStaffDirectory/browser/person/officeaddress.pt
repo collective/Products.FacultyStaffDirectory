@@ -1,8 +1,4 @@
-<div>
-    <addr>
-    <span tal:replace="view/context/getOfficeAddress" /><br />
-    <span tal:replace="view/context/getOfficeCity" />, <span tal:replace="view/context/getOfficeState" /> <span tal:replace="view/context/getOfficePostalCode" />
+<div class="officeAddress">
+    <addr tal:content="structure provider:facultystaffdirectory.personofficeaddress" />
 </div>
-<div>
-   <span tal:replace="view/context/getOfficePhone" />
-</div>
+

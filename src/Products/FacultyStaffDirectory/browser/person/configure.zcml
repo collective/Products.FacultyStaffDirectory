@@ -49,6 +49,55 @@
              permission="zope2.View"
              />
 
+             <browser:viewletManager
+                 for="*"
+                 name="facultystaffdirectory.personofficeaddress"
+                 provides="...interfaces.IPersonOfficeAddressViewletManager"
+                 permission="zope2.View"
+                 class="plone.app.viewletmanager.manager.OrderedViewletManager"
+                 />
+
+                 <browser:viewlet
+                     for="...interfaces.IPerson"
+                     name="facultystaffdirectory.personofficeaddress.street"
+                     manager="...interfaces.IPersonOfficeAddressViewletManager"
+                     template="officeaddress_street.pt"
+                     permission="zope2.View"
+                     />
+
+                 <browser:viewlet
+                     for="...interfaces.IPerson"
+                     name="facultystaffdirectory.personofficeaddress.city"
+                     manager="...interfaces.IPersonOfficeAddressViewletManager"
+                     template="officeaddress_city.pt"
+                     permission="zope2.View"
+                     />
+
+                 <browser:viewlet
+                     for="...interfaces.IPerson"
+                     name="facultystaffdirectory.personofficeaddress.state"
+                     manager="...interfaces.IPersonOfficeAddressViewletManager"
+                     template="officeaddress_state.pt"
+                     permission="zope2.View"
+                     />
+
+                 <browser:viewlet
+                     for="...interfaces.IPerson"
+                     name="facultystaffdirectory.personofficeaddress.postalcode"
+                     manager="...interfaces.IPersonOfficeAddressViewletManager"
+                     template="officeaddress_postalcode.pt"
+                     permission="zope2.View"
+                     />
+
+
+         <browser:viewlet
+             for="...interfaces.IPerson"
+             name="facultystaffdirectory.personofficephone"
+             manager="...interfaces.IPersonViewletManager"
+             template="officephone.pt"
+             permission="zope2.View"
+             />
+
          <browser:viewlet
              for="...interfaces.IPerson"
              name="facultystaffdirectory.personemail"

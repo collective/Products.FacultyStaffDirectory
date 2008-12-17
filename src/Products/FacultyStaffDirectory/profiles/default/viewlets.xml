@@ -5,6 +5,7 @@
         <viewlet name="facultystaffdirectory.personportrait" />
         <viewlet name="facultystaffdirectory.personjobtitles" />
         <viewlet name="facultystaffdirectory.personofficeaddress" />
+        <viewlet name="facultystaffdirectory.personofficephone" />
         <viewlet name="facultystaffdirectory.personemail" />
         <viewlet name="facultystaffdirectory.personwebsites" />
         <viewlet name="facultystaffdirectory.personeducation" />
@@ -13,6 +14,13 @@
         <viewlet name="facultystaffdirectory.personassistants" />
         <viewlet name="facultystaffdirectory.personcourses" />
         <viewlet name="facultystaffdirectory.personbosses" />
+    </order>
+    
+    <order manager="facultystaffdirectory.personofficeaddress" skinname="*">
+        <viewlet name="facultystaffdirectory.personofficeaddress.street" />
+        <viewlet name="facultystaffdirectory.personofficeaddress.city" />
+        <viewlet name="facultystaffdirectory.personofficeaddress.state" />
+        <viewlet name="facultystaffdirectory.personofficeaddress.postalcode" />
     </order>
 
     <order manager="facultystaffdirectory.persongallery" skinname="*">

@@ -1,0 +1,1 @@
+<span class="street" tal:content="view/context/getOfficeAddress" />

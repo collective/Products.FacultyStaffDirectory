@@ -9,6 +9,9 @@ class IPersonViewletManager(IViewletManager):
 class IPersonView(IBrowserView):
     """A view for a person object"""
 
+class IPersonOfficeAddressViewletManager(IViewletManager):
+    """ Stores parts of a person's office address """
+
 class IPersonGroupingViewletManager(IViewletManager):
     """A person grouping viewlet manager"""
 

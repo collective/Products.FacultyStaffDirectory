@@ -1,0 +1,4 @@
+<div class="officePhone">
+    <span class="type" i18n:translate="FacultyStaffDirectory_label_officePhone">Work</span>:
+    <span tal:replace="view/context/getOfficePhone" />
+</div>
