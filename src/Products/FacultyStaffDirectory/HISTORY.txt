@@ -1,12 +1,10 @@
 Version History
-
-  ' ' 3.0 (unreleased) -- ' '
-        
-        * 
         
   ' ' 2.1.1 -- ' '
         
         * Corrected a problem causing all FSD persons to be returned when doing a member search.
+        
+        * Corrected a problem with person_view.pt that caused errors when anonymous users viewed a person with an assistant assigned
 
   ' ' 2.1 -- ' '
         

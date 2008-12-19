@@ -7,7 +7,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '3.0'
+version = '2.1'
 
 setup(name='Products.FacultyStaffDirectory',
       version=version,
