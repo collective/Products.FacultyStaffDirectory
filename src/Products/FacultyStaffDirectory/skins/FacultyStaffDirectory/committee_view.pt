@@ -28,7 +28,7 @@
 
         <h3><span i18n:translate="FacultyStaffDirectory_label_members">Members</span>:</h3>
         <ul>
-            <li tal:repeat="member context/getMembers">
+            <li tal:repeat="member context/getPeople">
                 <tal:block tal:define="membershipData python:context.getMembershipInformation(member);">
                     <a tal:attributes="href member/absolute_url"
                        tal:content="member/Title" />

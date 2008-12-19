@@ -7,6 +7,11 @@ from Products.FacultyStaffDirectory.config import PRODUCT_DEPENDENCIES, PROJECTN
 from Products.FacultyStaffDirectory.config import DEPENDENT_PRODUCTS
 from Products.FacultyStaffDirectory.config import ADDITIONAL_CATALOG_INDEXES
 from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
+from Products.FacultyStaffDirectory.adapters.tree import personGroupingTree, classificationTree
+from Products.FacultyStaffDirectory.interfaces.persongrouping import IPersonGrouping
+from Products.FacultyStaffDirectory.interfaces.classification import IClassification
+from Products.FacultyStaffDirectory.interfaces.tree import ITree
+
 
 originalMyFolderActionId = "mystuff"
 newMyFolderActionId = "fsdmystuff"
@@ -108,6 +113,13 @@ def unindexTool(portal, out):
     # TODO this can be removed once the tool is actually a tool
     fsdTool = getToolByName(portal, 'facultystaffdirectory_tool')
     fsdTool.unindexObject()
+    
+def registerTreeAdapters(portal, out):
+    """ Register the adapters for various content types to the ITree interface
+    """
+    sm = portal.getSiteManager()
+    sm.registerAdapter(personGroupingTree, required=(IPersonGrouping,), provided=ITree)
+    sm.registerAdapter(classificationTree, required=(IClassification,), provided=ITree)
 
 def importVarious(context):
     """
@@ -123,3 +135,4 @@ def importVarious(context):
     configureVersioning(portal, out)
     configureKupu(portal, out)
     unindexTool(portal, out)
+    registerTreeAdapters(portal, out)

@@ -16,69 +16,24 @@ class testClassification(FacultyStaffDirectoryTestCase):
 
     def afterSetUp(self):
         self.loginAsPortalOwner()
+        self.acl_users = getToolByName(self.portal, 'acl_users')
         self.directory = self.getPopulatedDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
         self.person2 = self.getPerson(id='def456', firstName="Testy", lastName="Person")
         self.classification = self.directory.getClassifications()[0].getObject()
 
     def testFTISetup(self):
-        """ Make sure the FTI is pulling info from the GS types profile """
+        """ Make sure the FTI is pulling info from the GS types profile 
+        """
         self.failUnless(self.portal.portal_types['FSDClassification'].Title() != "AT Content Type")
-
-    ## membrane tests
-    def testClassificationIsGroup(self):
-        """Verify that a classification is acting as a group
+        
+    def testClassificationIsNestable(self):
+        """ Make sure that classifications can be added inside classifications
         """
-        cls = self.classification
-        self.failUnless(self.portal.portal_groups.getGroupById(cls.id),"unable to find group with id of this fsd: %s" % cls.id)
-        
-    def testIGroupAdapter(self):
-        """Verify all methods of the IGroup adapter to the Classification content type
-        """
-        from Products.membrane.interfaces import IGroup
-        from Products.CMFCore.utils import getToolByName
-        
-        wf = getToolByName(self.classification,'portal_workflow')
-        
-        #adapt to IGroup
-        g = IGroup(self.classification)
-        
-        #group title is the content object title
-        self.classification.setTitle('New Title')
-        self.failUnless(g.Title()=='New Title',"IGroup.getTitle is not finding the correct title:\nexpected: %s\nfound: %s" % (self.classification.Title(),g.Title()))
-        
-        #Let's start off with a deactivated object since we may want to change the default state at some point.
-        if wf.getInfoFor(self.classification, 'review_state') == 'active':
-            wf.doActionFor(self.classification,'deactivate')
-        
-        #### Since roles are not relevant to this content type, this test is probably obsolete, kill it after talking with Erik/c
-        #roles are set on the object, but only available when object is active
-#         self.classification.setRoles(('Reviewer',))
-#         # at first, object is 'visible', but not published, roles should be empty
-#         self.failIf('Reviewer' in g.getRoles(),"roles are active, but content deactivated\nRoles: %s\nReviewState: %s" % (g.getRoles(), wf.getInfoFor(self.classification,'review_state')))
-#         #make object 'active'
-#         wf.doActionFor(self.classification,'activate')
-#         # now check again, role should be there
-#         self.failUnless('Reviewer' in g.getRoles(),"Roles not active, but content active\nRoles: %s\nReviewState: %s" % (g.getRoles(), wf.getInfoFor(self.classification,'review_state')))
-        
-        # group id is set on content object, uniqueness is enforced elsewhere
-        self.failUnless(g.getGroupId()==self.classification.getId(),"getGroupId returning incorrect value:\nExpected: %s\nReceived: %s" % (self.classification.getId(), g.getGroupId()))
-        
-        #members are obtained correctly, regardless of how the classification was added
-        #added from person object
-        self.person.setClassifications((self.classification,))
-        self.person2.setClassifications((self.classification,))
-        members = list(g.getGroupMembers())
-        members.sort()
-        self.failUnless(members == ['abc123','def456'],"incorrect member list: %s" % members)
-        #clear the list
-        self.classification.setPeople(());
-        self.failIf(self.classification.getPeople(),"there are still people listed in this classification: %s" % self.classification.getPeople())
-        #added from classification object
-        self.classification.setPeople((self.person,self.person2))
-        members = list(g.getGroupMembers())
-        members.sort()
-        self.failUnless(members == ['abc123','def456'],"incorrect member list: %s" % members)
+        try:
+            self.classification.invokeFactory('FSDClassification', id='nested-classification', title='Nested Classification')
+        except ValueError:
+            self.fail('Cannot add a classification inside a classification')
         
     def testValidateId(self):
         """Test that the validate_id validator works properly
@@ -98,14 +53,6 @@ class testClassification(FacultyStaffDirectoryTestCase):
         self.failUnless('doc1' in self.classification.validate_id('doc1'),"Allowed id 'doc1', even though there is an object with that id in the portal: %s" % self.classification.validate_id('doc1'))
         # deny id of other group for site
         self.failUnless('group1' in self.classification.validate_id('group1'),"Allowed id 'doc1', even though there is a group with that id in the portal: %s" % self.classification.validate_id('group1'))
-
-    def testInvalidRolesUnavailable(self):
-        from Products.FacultyStaffDirectory.config import INVALID_ROLES
-        my_roles = self.classification.getRoleSet()
-        
-        intersection = set(INVALID_ROLES).intersection(set(my_roles))
-        
-        self.failIf(intersection, "some invalid roles are available to classification: %s" % intersection)
 
     def testGroupTitle(self):
         """ Verify that group titles are being set properly.

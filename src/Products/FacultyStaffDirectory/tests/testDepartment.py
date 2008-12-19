@@ -32,68 +32,14 @@ class testDepartment(FacultyStaffDirectoryTestCase):
     def testCreateDepartment(self): 
         # Make sure Departments can be added within FSDs
         self.failUnless('test-department-inside' in self.directory.contentIds())
-        # getDirectoryRoot() should return the FSD location
-
-    def testGetDepartmentMetadataField(self):
-        self.outDept.setMembers((self.person, self.person2))
-        self.failIf(self.person2.getRawDepartments() == [])
-        self.failIf(self.person2.getDepartmentNames() == [])
-
-    ## membrane tests
-    def testDepartmentIsGroup(self):
-        """Verify that a department is acting as a group
+        
+    def testDepartmentIsNestable(self):
+        """ Make sure that classifications can be added inside classifications
         """
-        
-        # For Departments within FSDs
-        self.failUnless(self.portal.portal_groups.getGroupById(self.inDept.id),"unable to find group with id of this department: %s" % self.inDept.id)
-        
-    def testIGroupAdapter(self):
-        """Verify all methods of the IGroup adapter to the Classification content type
-        """
-        from Products.membrane.interfaces import IGroup
-        from Products.CMFCore.utils import getToolByName
-        
-        wf = getToolByName(self.directory,'portal_workflow')
-        
-        #adapt to IGroup
-        ing = IGroup(self.inDept)
-        
-        #group title is the content object title
-        self.inDept.setTitle('New Title')
-        self.failUnless(ing.Title()=='New Title',"IGroup.getTitle is not finding the correct title:\nexpected: %s\nfound: %s" % (self.inDept.Title(),ing.Title()))
-        
-        #Let's start off with a deactivated object since we may want to change the default state at some point.
-        if wf.getInfoFor(self.inDept, 'review_state') == 'active':
-            wf.doActionFor(self.inDept,'deactivate')
-        
-        #### Since roles are not relevant to this content type, this test is probably obsolete, kill it after talking with Erik/c
-        #roles are set on the object, but only available when object is active
-#         self.inDept.setRoles(('Reviewer',))
-#         # at first, object is 'visible', but not published, roles should be empty
-#         self.failIf('Reviewer' in ing.getRoles(),"roles are active, but content deactivated\nRoles: %s\nReviewState: %s" % (ing.getRoles(), wf.getInfoFor(self.inDept,'review_state')))
-#         #make object 'active'
-#         wf.doActionFor(self.inDept,'activate')
-#         # now check again, role should be there
-#         self.failUnless('Reviewer' in ing.getRoles(),"Roles not active, but content active\nRoles: %s\nReviewState: %s" % (ing.getRoles(), wf.getInfoFor(self.inDept,'review_state')))
-        
-        # group id is set on content object, uniqueness is enforced elsewhere
-        self.failUnless(ing.getGroupId()==self.inDept.getId(),"getGroupId returning incorrect value:\nExpected: %s\nReceived: %s" % (self.inDept.getId(), ing.getGroupId()))
-        
-        #members are obtained correctly, regardless of how the classification was added
-        #added from person object
-        self.person.setDepartments((self.inDept,))
-        self.person2.setDepartments((self.inDept,))
-        members = list(ing.getGroupMembers())
-        members.sort()
-        self.failUnless(members == ['abc123','def456'],"incorrect member list: %s" % members)
-        #clear the list
-        self.inDept.setMembers(());
-        self.failIf(self.inDept.getMembers(),"there are still people listed in this classification: %s" % self.inDept.getPeople())
-        #added from classification object
-        self.inDept.setMembers((self.person,self.person2))
-        members = list(ing.getGroupMembers())
-        members.sort()
-        self.failUnless(members == ['abc123','def456'],"incorrect member list: %s" % members)
+        try:
+            self.inDept.invokeFactory('FSDDepartment', id='nested-dept', title='Nested Department')
+        except ValueError:
+            self.fail('Cannot add a department inside a department')
         
     def testValidateId(self):
         """Test that the validate_id validator works properly

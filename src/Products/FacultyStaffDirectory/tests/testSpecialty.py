@@ -26,17 +26,6 @@ class testSpecialty(FacultyStaffDirectoryTestCase):
         self.specialty.addReference(self.person, relationship='SpecialtyInformation')
         self.failUnless(self.person in self.specialty.getPeople())
         
-    def testGetClassifications(self):
-        # There aren't any people associated with this classification. We should get a [] back.
-        classifications = self.specialty.getClassifications()
-        self.failUnless(classifications == [])
-        # Add a person, we should now get the full list
-        self.specialty.addReference(self.person, 'SpecialtyInformation')
-        # And it should be full of brains. Braaaaains.
-        for cls in self.specialty.getClassifications():
-            self.failUnless(cls.getObject())
-        self.failUnless([brain.getObject() for brain in self.specialty.getClassifications()] == [brain.getObject() for brain in self.directory.getClassifications()])
-        
     def testAddSubSpecialty(self):
         #Make sure we can add a specialty within a specialty
         self.specialty.invokeFactory(type_name="FSDSpecialty", id="test-subspecialty")

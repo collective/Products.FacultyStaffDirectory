@@ -18,6 +18,7 @@
   <element value="File"/>
   <element value="Event"/>
   <element value="News Item"/>
+  <element value="FSDCommittee"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">committee_view</property>

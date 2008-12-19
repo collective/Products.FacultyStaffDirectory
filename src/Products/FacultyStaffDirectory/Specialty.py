@@ -47,9 +47,10 @@ class Specialty(PersonGrouping):
     __implements__ = (getattr(PersonGrouping,'__implements__',()),)
     implements(ISpecialty)
     meta_type = portal_type = 'FSDSpecialty'
-
     _at_rename_after_creation = True
     schema = Specialty_schema
+    relationship = 'SpecialtyInformation'
+    
     # Methods
     security.declareProtected(View, 'getSpecialtyInformation')
     def getSpecialtyInformation(self, person):

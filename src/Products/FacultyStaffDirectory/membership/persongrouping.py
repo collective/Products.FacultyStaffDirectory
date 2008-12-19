@@ -2,14 +2,14 @@ from zope.interface import implements
 from zope.component import adapts
 
 from Products.membrane.interfaces import IGroup
-from Products.FacultyStaffDirectory.interfaces.department import IDepartment
+from Products.FacultyStaffDirectory.interfaces.persongrouping import IPersonGrouping
 from Products.FacultyStaffDirectory.membership.person import UserRelated
 
 class Group(object):
-    """Allow a Department to act as a group for contained people
+    """Allow an FSDPersonGrouping to act as a group for related people
     """
     implements(IGroup)
-    adapts(IDepartment)
+    adapts(IPersonGrouping)
     
     def __init__(self, context):
         self.context = context
@@ -18,8 +18,8 @@ class Group(object):
         return self.context.Title()
     
     def getRoles(self):
-        """We don't actually want a department to provide any global roles to it's members,
-        so let's just return an empty list for this
+        """ We don't actually want person groupings to provide any global roles,
+            so let's just return an empty list for this
         """
         return ()
     
@@ -27,6 +27,6 @@ class Group(object):
         return self.context.getId()
 
     def getGroupMembers(self):
-        members = self.context.getMembers()
+        members = self.context.getDeepPeople()
         mlist = [UserRelated(m).getUserId() for m in members]
         return tuple(mlist)

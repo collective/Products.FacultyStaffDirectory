@@ -33,54 +33,14 @@ class testCommittee(FacultyStaffDirectoryTestCase):
         self.committee.invokeFactory(type_name="Document", id="o3") 
         self.committee.moveObjectsByDelta(['o3'], -100)
         self.failUnless(self.committee.getObjectPosition('o3') == 0, "Document subobject 'o3' should be at position 0.")
-
         
-    ## test membrane stuff
-    def testCommitteeIsGroup(self):
-        """Verify that a classification is acting as a group
+    def testCommitteeIsNestable(self):
+        """ Make sure that classifications can be added inside classifications
         """
-        self.failUnless(self.portal.portal_groups.getGroupById(self.committee.getId()),"unable to find group with id of this committee: %s" % self.committee.getId())
-        
-    def testIGroupAdapter(self):
-        """Verify all methods of the IGroup adapter to the Classification content type
-        """
-        from Products.membrane.interfaces import IGroup
-        from Products.CMFCore.utils import getToolByName
-        
-        wf = getToolByName(self.committee,'portal_workflow')
-        
-        #adapt to IGroup
-        g = IGroup(self.committee)
-        
-        #group title is the content object title
-        self.committee.setTitle('New Title')
-        self.failUnless(g.Title()=='New Title',"IGroup.getTitle is not finding the correct title:\nexpected: %s\nfound: %s" % (self.committee.Title(),g.Title()))
-
-        #Let's start off with a deactivated object since we may want to change the default state at some point.
-        if wf.getInfoFor(self.committee, 'review_state') == 'active':
-            wf.doActionFor(self.committee,'deactivate')
-
-        # group id is set on content object, uniqueness is enforced elsewhere
-        self.failUnless(g.getGroupId()==self.committee.getId(),"getGroupId returning incorrect value:\nExpected: %s\nReceived: %s" % (self.committee.getId(), g.getGroupId()))
-        
-        #members are obtained correctly, regardless of how the classification was added
-        #added from person object
-        self.person.setCommittees((self.committee,))
-        self.person2.setCommittees((self.committee,))
-        members = list(g.getGroupMembers())
-        members.sort()
-        self.failUnless(members == ['abc123','def456'],
-                        "incorrect member list: %s" % members)
-        #clear the list
-        self.committee.setMembers(());
-        self.failIf(self.committee.getMembers(),
-                    "there are still people listed in this committee: %s" % self.committee.getMembers())
-        #added from classification object
-        self.committee.setMembers((self.person,self.person2))
-        members = list(g.getGroupMembers())
-        members.sort()
-        self.failUnless(members == ['abc123','def456'],
-                        "incorrect member list: %s" % members)
+        try:
+            self.committee.invokeFactory('FSDCommittee', id='nested-committee', title='Nested Committee')
+        except ValueError:
+            self.fail('Cannot add a committee inside a committee')
         
     def testValidateId(self):
         """Test that the validate_id validator works properly

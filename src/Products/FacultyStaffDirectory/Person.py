@@ -254,15 +254,19 @@ schema = ATContentTypeSchema.copy() + Schema((
     
     RelationField(
         name='classifications',
-        vocabulary="_classificationReferences",
-        widget=ReferenceWidget
+        widget=ReferenceBrowserWidget
         (
             label=u'Classifications',
             label_msgid='FacultyStaffDirectory_label_classifications',
             i18n_domain='FacultyStaffDirectory',
+            base_query={'portal_type': 'FSDClassification', 'sort_on': 'sortable_title'},
+            allow_browse=0,
+            allow_search=1,
+            show_results_without_query=1,
         ),
         write_permission=ASSIGN_CLASSIFICATIONS_TO_PEOPLE,
         schemata="Basic Information",
+        allowed_types=('FSDClassification'),
         multiValued=True,
         relationship='people_classifications'
     ),
@@ -564,11 +568,6 @@ class Person(OrderedBaseFolder, ATCTContent):
             t = t + ", " + self.getSuffix()
         
         return t
-    
-    security.declarePrivate('_classificationReferences')
-    def _classificationReferences(self):
-        """Return a list of Classifications this Person can be referenced to."""
-        return [(c.UID, c.Title) for c in self.aq_parent.getFolderContents({'portal_type': 'FSDClassification'})]
     
     security.declarePrivate('_availableEditors')
     def _availableEditors(self):

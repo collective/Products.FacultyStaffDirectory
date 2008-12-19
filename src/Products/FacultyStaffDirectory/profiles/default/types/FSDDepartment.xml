@@ -20,6 +20,7 @@
   <element value="Topic"/>
   <element value="News Item"/>
   <element value="Event"/>
+  <element value="FSDDepartment"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">department_standard_view</property>

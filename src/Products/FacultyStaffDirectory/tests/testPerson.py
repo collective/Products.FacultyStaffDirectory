@@ -465,14 +465,12 @@ class testWithSpecialties(testPerson):
     
     def _makeAndAssignSpecialties(self):
         """Make a bunch of specialties, publish them, and assign them all to the test person."""
-        workflowTool = getToolByName(self.portal, 'portal_workflow')
         def makeSpecialties(node, container, explicitSpecialties):
             """Make specialties inside `container` according to the tree-shaped dict `node`. Append the created specialties (unless marked as {'associated': False}) to the list `explicitSpecialties`."""
             for child in node.get('children', []):
                 id = child['id']
                 container.invokeFactory(type_name='FSDSpecialty', id=id, title=child['title'])
                 newSpecialty = container[id]
-                workflowTool.doActionFor(newSpecialty, 'publish')
                 if child.get('associated', True):
                     explicitSpecialties.append(newSpecialty)
                 makeSpecialties(child, newSpecialty, explicitSpecialties)

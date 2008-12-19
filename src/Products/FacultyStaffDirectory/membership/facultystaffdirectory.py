@@ -48,8 +48,8 @@ class Group(object):
     def getGroupMembers(self):
         mt = getToolByName(self.context, MEMBRANE_TOOL)
         usr = mt.unrestrictedSearchResults
-        members = {}
+        members = set()
         for m in usr(object_implements=IMembraneUserAuth.__identifier__,
                      path='/'.join(self.context.getPhysicalPath())):
-            members[m.getUserId] = 1
-        return tuple(members.keys())
+            members.add(m.getUserId)
+        return tuple(members)
