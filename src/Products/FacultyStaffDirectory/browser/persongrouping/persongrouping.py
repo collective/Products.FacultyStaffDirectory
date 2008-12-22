@@ -74,7 +74,7 @@ class PersonGroupingViewletManager(object):
             return u'\n'.join([viewlet.render() for viewlet in self.viewlets])
 
 class PersonGroupingItemViewlet(ViewletBase):
-    def render(self):
+    def index(self):
         person = self.context
         # TODO self.__parent__.__parent__.__parent__ and self.__parent__.__parent__ completely wrong. Do it right.
         grouping = self.__parent__.__parent__.__parent__
