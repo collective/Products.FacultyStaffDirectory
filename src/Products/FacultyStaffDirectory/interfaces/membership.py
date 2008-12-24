@@ -4,8 +4,6 @@
 __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
-from zope.interface import Interface
-
 from Products.FacultyStaffDirectory.interfaces import IPersonGrouping
 
 class IGroupingProvidingMembership(IPersonGrouping):
