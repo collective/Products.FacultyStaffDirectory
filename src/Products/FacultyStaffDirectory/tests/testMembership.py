@@ -116,8 +116,6 @@ class testMembership(FacultyStaffDirectoryTestCase):
         
         # check member list of outer objects
         for obj in [self.classification, self.department, self.committee, self.specialty]:
-            if obj.portal_type == 'FSDSpecialty':
-                import pdb;pdb.set_trace()
             g = IGroup(obj)
             mlist = list(g.getGroupMembers())
             mlist.sort()
