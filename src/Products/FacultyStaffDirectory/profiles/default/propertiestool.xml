@@ -5,7 +5,6 @@
   <property name="metaTypesNotToList" type="lines" purge="False">
    <element value="FSDCourse"/>
    <element value="FSDPerson"/>
-   <element value="FSDFacultyStaffDirectoryTool"/>
   </property>
  </object>
 </object>

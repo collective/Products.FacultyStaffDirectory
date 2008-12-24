@@ -14,6 +14,5 @@
     <type portal_type="FSDSpecialtiesFolder" />
     <type portal_type="FSDSpecialty" />
     <type portal_type="FSDSpecialtyInformation" />
-    <type portal_type="FSDFacultyStaffDirectoryTool" />
   </factorytypes>
 </object>

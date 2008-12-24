@@ -8,12 +8,14 @@ __docformat__ = 'plaintext'
 #
 
 import os
+from zope.component import getUtility
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IUserAuthentication
 from Products.Relations.processor import process
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
 from Products.FacultyStaffDirectory.tests.base import PACKAGE_HOME
+from Products.FacultyStaffDirectory.interfaces import IConfiguration
 
 def loadImage(name, size=0):
     """Load image from testing directory."""
@@ -163,16 +165,16 @@ class testWithoutSpecialties(testPerson):
     def testPhoneNumberValidation(self):
         """ Make sure we're validating the phone number based on the regex in the configlet. """
         
-        fsd_tool = getToolByName(self.portal, TOOLNAME)
-        desc = fsd_tool.getPhoneNumberDescription()
+        fsd_tool = getUtility(IConfiguration)
+        desc = fsd_tool.phoneNumberDescription
         self.failUnless(self.person.validate_officePhone('(555) 555-5555') is None)
-        self.failUnless(self.person.validate_officePhone('555 555-5555') == "Please provide the phone number in the format %s" % desc)
+        self.failUnlessEqual(self.person.validate_officePhone('555 555-5555'), "Please provide the phone number in the format %s" % desc)
         
         # Make sure a blank value for the phone number results in no validation
         self.failUnless(self.person.validate_officePhone('') is None, "A blank value for officePhone should not be validated since officePhone is not a required field.")
         
         # Make sure a blank value for the regex results in no validation.
-        fsd_tool.setPhoneNumberRegex('')
+        fsd_tool.phoneNumberRegex = u''
         self.failUnless(self.person.validate_officePhone('555 555-5555') is None, "A blank value for phoneNumberRegex should result in any value being accepted")
     
     def testNoSpecialties(self):
@@ -264,8 +266,8 @@ class testWithoutSpecialties(testPerson):
         uname = u.getUserName()
         self.failUnlessEqual(uname, 'abc123', "incorrect value for getUserName.")
         
-        fsd_tool = getToolByName(self.portal, TOOLNAME)
-        if fsd_tool.getUseInternalPassword():
+        fsd_tool = getUtility(IConfiguration)
+        if fsd_tool.useInternalPassword:
             self.person.setPassword("chewy1")
             self.failIf(u.verifyCredentials(    {                                    }), "somehow verified empty credentials")
             self.failIf(u.verifyCredentials(    {'login':'abc123','password':''      }), "verified missing password")
@@ -376,17 +378,17 @@ class testWithoutSpecialties(testPerson):
         auth = IUserAuthentication(self.person);
         
         #test setting password directly, verify that verifyCredentials works as expected
-        fsd_tool = getToolByName(self.portal, TOOLNAME)
+        fsd_tool = getUtility(IConfiguration)
         self.person.setPassword('secret1')
-        if fsd_tool.getUseInternalPassword():
+        if fsd_tool.useInternalPassword:
             self.failUnless(auth.verifyCredentials({'login':'abc123','password':'secret1'}), "failed to verify correct login and password, setting password directly")
         else:
             self.failIf(auth.verifyCredentials({'login':'abc123','password':'secret1'}), "internal password not used, method should return none, setting password directly.  Value returned: %s" % returnval)
         
         # now set password using the userChanger method and verify that it worked
         user.doChangeUser('abc123', 'secret2')
-        fsd_tool = getToolByName(self.portal, TOOLNAME)
-        if fsd_tool.getUseInternalPassword():
+        fsd_tool = getUtility(IConfiguration)
+        if fsd_tool.useInternalPassword:
             self.failUnless(auth.verifyCredentials({'login':'abc123','password':'secret2'}), "failed to verify correct login and password, testing doChangeUser()")
         else:
             self.failIf(auth.verifyCredentials({'login':'abc123','password':'secret2'}), "internal password not used, method should return none, testing doChangeUser().  Value returned: %s" % returnval)
@@ -412,11 +414,9 @@ class testWithoutSpecialties(testPerson):
     
     def testTurnOffMembership(self):
         """ Make sure Persons still work after disabling membership support. """
-        fsd_tool = getToolByName(self.portal, TOOLNAME)
+        fsd_tool = getUtility(IConfiguration)
         # Disable membership support for FSDPerson
-        fsd_tool.setEnableMembraneTypes(tuple([t for t in fsd_tool.getEnableMembraneTypes() if t != 'FSDPerson']))
-        # Manually run the at_post_edit_script to fire the FacultyStaffDirectoryModifiedEvent.
-        fsd_tool.at_post_edit_script()
+        fsd_tool.enableMembraneTypes = set([t for t in fsd_tool.enableMembraneTypes if t != 'FSDPerson'])
         # Double check to make sure that FSDPerson is really detatched from membrane
         userFolder = getToolByName(self.portal, 'acl_users')
         self.failIf(userFolder.getUserById('abc123'))

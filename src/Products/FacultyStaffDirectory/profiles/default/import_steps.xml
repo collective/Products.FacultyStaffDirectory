@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
 <import-steps>
- <import-step id="FacultyStaffDirectory_various" version="20081012-01"
+ <import-step id="FacultyStaffDirectory_various" version="20081222-01"
                handler="Products.FacultyStaffDirectory.setuphandlers.importVarious"
                title="Import various Faculty Staff Directory settings">
   <dependency step="catalog"/>
-  <dependency step="toolset"/>
  </import-step>
 </import-steps>

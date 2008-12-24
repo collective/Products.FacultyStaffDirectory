@@ -2,26 +2,18 @@ import os.path
 from App.Common import package_home
 from StringIO import StringIO
 from Products.CMFCore.utils import getToolByName
+from zope.interface import alsoProvides, noLongerProvides
 
-from Products.FacultyStaffDirectory.config import PRODUCT_DEPENDENCIES, PROJECTNAME
-from Products.FacultyStaffDirectory.config import DEPENDENT_PRODUCTS
+from Products.FacultyStaffDirectory.adapters.tree import personGroupingTree, classificationTree
 from Products.FacultyStaffDirectory.config import ADDITIONAL_CATALOG_INDEXES
 from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
-from Products.FacultyStaffDirectory.adapters.tree import personGroupingTree, classificationTree
 from Products.FacultyStaffDirectory.interfaces.persongrouping import IPersonGrouping
 from Products.FacultyStaffDirectory.interfaces.classification import IClassification
 from Products.FacultyStaffDirectory.interfaces.tree import ITree
+from Products.FacultyStaffDirectory.interfaces import IConfiguration, ISiteMarker
+from Products.FacultyStaffDirectory.utilities import ConfigurationUtility
 
-
-originalMyFolderActionId = "mystuff"
-newMyFolderActionId = "fsdmystuff"
-originalProfileActionId = "MemberPrefs"
-newProfileActionId = "fsdMemberPrefs"
-linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDDepartment', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
-mediaKupuTypes = ['FSDPerson']
-collectionKupuTypes = ['FSDFacultyStaffDirectory']
-
-def reindexCatlogIndexes(portal, out):
+def reindexCatalogIndexes(portal):
     """
     Reindex the indexes added in generic setup
     """
@@ -29,7 +21,7 @@ def reindexCatlogIndexes(portal, out):
     for index in ADDITIONAL_CATALOG_INDEXES:
         portal_catalog.manage_reindexIndex(index[0])
 
-def reindexMembrane(portal, out):
+def reindexMembrane(portal):
     """
     Refresh the membrane_tool catalog. Otherwise, our content disappears from the user db on refresh
     however, rebuilding the entire catalog is a bit excessive, and kills installs on sites with large FSDs, let's do the reindex thing instead
@@ -38,18 +30,18 @@ def reindexMembrane(portal, out):
     membraneIndexes = membraneTool.indexes()
     membraneTool.manage_reindexIndex(membraneIndexes)
 
-def configureRelations(portal, out):
+def configureRelations(portal):
     """
     configuration for Relations
     """
-    relations_tool = getToolByName(portal,'relations_library')
-    xmlpath = os.path.join(package_home(GLOBALS),'relations.xml')
+    relations_tool = getToolByName(portal, 'relations_library')
+    xmlpath = os.path.join(package_home(GLOBALS), 'relations.xml')
     f = open(xmlpath)
     xml = f.read()
     f.close()
     relations_tool.importXML(xml)
 
-def fixMemberAction(portal, out):
+def fixMemberAction(portal):
     """
     Fixing the 'MemberPrefs' action
     massage the portal_controlpanel tool to make MemberPrefs invisible
@@ -57,26 +49,10 @@ def fixMemberAction(portal, out):
     cp = getToolByName(portal, 'portal_controlpanel')
     currentActions = cp.listActions()
     for action in currentActions:
-        if action.id == originalProfileActionId:
+        if action.id == "MemberPrefs":  # MemberPrefs is the stock action ID.
             action.visible = False
 
-def configureConfiglet(portal, out):
-    """
-    Register a configlet to control some behaviors of the product:
-    TODO: this can be done in generic setup
-    """
-    cp = getToolByName(portal, 'portal_controlpanel')
-    if "FacultyStaffDirectory" not in [ c.id for c in cp._actions ]:
-        cp.registerConfiglet(
-            "FacultyStaffDirectory",
-            "Faculty/Staff Directory",
-            "string:${portal_url}/facultystaffdirectory_tool/",
-            category="Products",
-            permission="Manage portal",
-            appId="FacultyStaffDirectory",
-            imageUrl="group.png")
-
-def configureVersioning(portal, out):
+def configureVersioning(portal):
     """
     Set up revisioning, if available:
     """
@@ -86,7 +62,7 @@ def configureVersioning(portal, out):
         new = existing + ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']
         cp.setVersionableContentTypes(new)
 
-def configureKupu(portal, out):
+def configureKupu(portal):
     """
     Does Kupu have a GS setup possibility?  If so, we should absolutely use it.
     """
@@ -99,6 +75,10 @@ def configureKupu(portal, out):
             #ems174: Do we actually need to updateResourceTypes? Kupu gets snippy if we try to add more than one linkable type.
             #kupu.updateResourceTypes(resourceType)
         
+    linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDDepartment', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
+    mediaKupuTypes = ['FSDPerson']
+    collectionKupuTypes = ['FSDFacultyStaffDirectory']
+    
     for type in linkableKupuTypes:
         addKupuResource(portal, 'linkable', type)
     for type in mediaKupuTypes:
@@ -106,33 +86,44 @@ def configureKupu(portal, out):
     for type in collectionKupuTypes:
         addKupuResource(portal, 'collection', type)
 
-def unindexTool(portal, out):
-    """
-    Unindex the FSD tool so it doesn't show up in our folder contents
-    """
-    # TODO this can be removed once the tool is actually a tool
-    fsdTool = getToolByName(portal, 'facultystaffdirectory_tool')
-    fsdTool.unindexObject()
+def registerConfigurationUtility(portal):
+    """Register the utility that holds FSD's configuration settings at the root of the Plone site."""
+    portal.getSiteManager().registerUtility(ConfigurationUtility(), provided=IConfiguration)
+    # Is automatically uninstalled by QuickInstaller. Local adapters aren't, oddly enough.
     
-def registerTreeAdapters(portal, out):
+def registerTreeAdapters(portal):
     """ Register the adapters for various content types to the ITree interface
     """
     sm = portal.getSiteManager()
     sm.registerAdapter(personGroupingTree, required=(IPersonGrouping,), provided=ITree)
     sm.registerAdapter(classificationTree, required=(IClassification,), provided=ITree)
 
+def applyMarkerInterface(portal):
+    """Apply a marker interface to the Plone site. Our ++fsdmembership++ traverser uses it to limit itself to sites where FSD is actually installed."""
+    alsoProvides(portal, ISiteMarker)
+
 def importVarious(context):
-    """
-    Import various settings.
-    """
+    """Import various settings."""
     portal = context.getSite()
-    out = StringIO()
-    reindexCatlogIndexes(portal, out)
-    reindexMembrane(portal, out)
-    configureRelations(portal, out)
-    fixMemberAction(portal, out)
-    configureConfiglet(portal, out)
-    configureVersioning(portal, out)
-    configureKupu(portal, out)
-    unindexTool(portal, out)
-    registerTreeAdapters(portal, out)
+    reindexCatalogIndexes(portal)
+    reindexMembrane(portal)
+    configureRelations(portal)
+    fixMemberAction(portal)
+    configureVersioning(portal)
+    configureKupu(portal)
+    registerConfigurationUtility(portal)
+    registerTreeAdapters(portal)
+    applyMarkerInterface(portal)
+    # And just drop `out` on the floor, apparently.
+
+
+# Uninstallation:
+
+def ditchMarkerInterface(portral):
+    """Remove the FSD-is-installed marker interface from the Plone site."""
+    noLongerProvides(portal, ISiteMarker)
+
+def uninstall(context):
+    """Undo what's done in importVarious that GS doesn't automatically undo."""
+    portal = context.getSite()
+    ditchMarkerInterface(portal)

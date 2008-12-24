@@ -51,7 +51,6 @@ class testSetup(FacultyStaffDirectoryTestCase):
                           'FSDSpecialtiesFolder',
                           'FSDSpecialty',
                           'FSDSpecialtyInformation',
-                          'FSDFacultyStaffDirectoryTool',
                           )
 
     def testTypesInstalled(self):
@@ -79,12 +78,9 @@ class testSetup(FacultyStaffDirectoryTestCase):
                 missingmetadata.append(fieldName)
         self.failIf(missingmetadata, 'Catalog is missing the following metadata fields: %s' % missingmetadata)
 
-    def testToolInstalled(self):
-        tool = getToolByName(self.portal, 'facultystaffdirectory_tool')
-
     def testNavTreeSetup(self):
         missingmetatypes = []
-        for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']: 
+        for mType in ['FSDCourse', 'FSDPerson']: 
             if not mType in list(self.portal.portal_properties.navtree_properties.metaTypesNotToList):
                 missingmetatypes.append(mType)
         self.failIf(missingmetatypes, "The following FSD Types are still visible in the navtree and shouldn't be %s" % missingmetatypes)\
@@ -194,7 +190,7 @@ class testInstall(FacultyStaffDirectoryTestCase):
     
     def testConfigletAdded(self):
         cp = getToolByName(self.portal, 'portal_controlpanel')
-        self.failIf("FacultyStaffDirectory" not in [ c.id for c in cp._actions ], 'FacultyStaffDirectory configlet has not been registered with the portal controlpanel')
+        self.failIf("fsdSettings" not in [ c.id for c in cp._actions ], 'FacultyStaffDirectory configlet has not been registered with the portal controlpanel')
         
     def testVersioningSetup(self):
         if hasattr(self.portal, 'portal_repository'):
@@ -271,7 +267,7 @@ class testUninstall(FacultyStaffDirectoryTestCase):
 
     def testNavTreeTeardown(self):
         presentmetatypes = []
-        for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']: 
+        for mType in ['FSDCourse', 'FSDPerson']: 
             if mType in list(self.portal.portal_properties.navtree_properties.metaTypesNotToList):
                 presentmetatypes.append(mType)
         self.failIf(presentmetatypes, "The following FSD Types are still listed in the navtree metatypesNotToList and they shouldn't be" % presentmetatypes)

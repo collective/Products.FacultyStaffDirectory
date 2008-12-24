@@ -6,7 +6,7 @@
   <subscriber for="..interfaces.person.IPersonModifiedEvent"
               handler=".person.modifyPersonOwnership" />
               
-  <subscriber for="..interfaces.facultystaffdirectorytool.IFacultyStaffDirectoryToolModifiedEvent"
+  <subscriber for="..interfaces.IMembraneIntegrationModifiedEvent"
               handler=".facultystaffdirectorytool.modifyMembraneTypes" />
 
   <subscriber for="Products.Relations.events.IRelationConnectedEvent"

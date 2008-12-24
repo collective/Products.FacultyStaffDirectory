@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser">
+    
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="fsd-controlpanel"
+        class=".configuration.ConfigurationForm"
+        permission="cmf.ManagePortal"
+        allowed_attributes="template"
+        />
+
+    <browser:resource
+        name="group.png"
+        image="group.png"
+        />
+
+</configure>

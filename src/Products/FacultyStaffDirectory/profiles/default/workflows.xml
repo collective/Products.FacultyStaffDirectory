@@ -3,7 +3,6 @@
   <object name="fsd_person_workflow" meta_type="Workflow" />
   <object name="fsd_persongrouping_workflow" meta_type="Workflow" />
   <object name="fsd_persongrouping_descriptor_workflow" meta_type="Workflow" />
-  <object name="fsd_tool_workflow" meta_type="Workflow" />  
   <bindings>
     <type type_id="FSDPerson">
       <bound-workflow workflow_id="fsd_person_workflow" />
@@ -19,9 +18,6 @@
     </type>
     <type type_id="FSDSpecialty">
       <bound-workflow workflow_id="fsd_persongrouping_workflow" />
-    </type>
-    <type type_id="FSDFacultyStaffDirectoryTool">
-      <bound-workflow workflow_id="fsd_tool_workflow" />
     </type>
     <type type_id="FSDSpecialtyInformation">
       <bound-workflow workflow_id="fsd_persongrouping_descriptor_workflow"/>

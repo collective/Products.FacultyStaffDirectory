@@ -5,4 +5,10 @@
               title="vCard export" priority="0"
               icon_expr="vcard.png"
               i18n:attributes="title"/>
+
+ <action-icon category="controlpanel" action_id="fsdSettings"
+              title="FSD Settings" priority="0"
+              icon_expr="++resource++group.png"
+              i18n:attributes="title"/>
+
 </action-icons>

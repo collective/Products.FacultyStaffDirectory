@@ -11,9 +11,16 @@ import course
 import department
 import departmentalmembership
 import facultystaffdirectory
-import facultystaffdirectorytool
 import person
 import specialtiesfolder
 import specialty
 import specialtyinformation
 import tree
+
+from zope.interface import Interface
+
+from Products.FacultyStaffDirectory.interfaces.configuration import IConfiguration, IGeneralConfiguration, IMembershipConfiguration
+from Products.FacultyStaffDirectory.interfaces.events import IMembraneIntegrationModifiedEvent
+
+class ISiteMarker(Interface):
+    """Marker interface applied to Plone sites in which FSD is installed"""

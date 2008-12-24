@@ -9,9 +9,11 @@ from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema
 from Products.FacultyStaffDirectory.config import *
+from Products.FacultyStaffDirectory.interfaces import IConfiguration
 from Products.FacultyStaffDirectory.interfaces.persongrouping import IPersonGrouping
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
+from zope.component import getUtility
 from zope.interface import implements
 
 schema =  ATContentTypeSchema.copy() + Schema((
@@ -73,8 +75,8 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
         """
         people = []
         pc = getToolByName(self, 'portal_catalog')
-        fsd_tool = getToolByName(self, TOOLNAME)
-        groupings = pc(path=self.absolute_url_path(), portal_type=fsd_tool.getEnableMembraneTypes())
+        fsd_util = getUtility(IConfiguration)
+        groupings = pc(path=self.absolute_url_path(), portal_type=list(fsd_util.enableMembraneTypes))
         for group in groupings:
             people.extend(group.getObject().getRefs(self.relationship))
         

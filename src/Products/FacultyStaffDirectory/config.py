@@ -6,15 +6,9 @@ __docformat__ = 'plaintext'
 #
 # The contents of this module will be imported into __init__.py, the
 # workflow configuration and every content type module.
-#
-# If you wish to perform custom configuration, you may put a file
-# AppConfig.py in your product's root directory. This will be included
-# in this file if found.
 
-try: # New CMF
-    from Products.CMFCore.permissions import setDefaultRoles 
-except ImportError: # Old CMF
-    from Products.CMFCore.CMFCorePermissions import setDefaultRoles
+from Products.CMFCore.permissions import setDefaultRoles
+
 PROJECTNAME = "FacultyStaffDirectory"
 
 # Permissions
@@ -24,7 +18,7 @@ ADD_CONTENT_PERMISSIONS = {
     'Person': 'FacultyStaffDirectory: Add or Remove People',
 }
 
-setDefaultRoles('FacultyStaffDirectory: Add or Remove People', ('Manager','Owner', 'Personnel Manager'))
+setDefaultRoles('FacultyStaffDirectory: Add or Remove People', ('Manager', 'Owner', 'Personnel Manager'))
 
 product_globals = globals()
 
@@ -49,11 +43,9 @@ JAVASCRIPTS = []
 INVALID_ROLES = ['Manager', 'Owner', 'Anonymous', 'Authenticated', 'User Preferences Editor']
 # Annotation key used for passwords
 PASSWORD_KEY = 'fsd.employee.password'
-# what is the name of the tool for this product?
-TOOLNAME = 'facultystaffdirectory_tool' 
 # what content types are available for membrane functionality?
-MEMBRANE_ABLE_TYPES_VOCAB = [('FSDPerson','People'),('FSDDepartment','Departments'),('FSDClassification','Classifications'),('FSDCommittee','Committees'),('FSDSpecialty','Specialties')]
-MEMBRANE_ABLE_TYPES = ('FSDPerson','FSDDepartment','FSDClassification','FSDCommittee','FSDSpecialty')
+MEMBRANE_ABLE_TYPES_CHOICES = [('People', 'FSDPerson'), ('Departments', 'FSDDepartment'), ('Classifications', 'FSDClassification'), ('Committees', 'FSDCommittee'), ('Specialties', 'FSDSpecialty')]
+MEMBRANE_ABLE_TYPES = set([v for k, v in MEMBRANE_ABLE_TYPES_CHOICES])
 MEMBRANE_TYPE_ACTIVE_STATES = {'FSDPerson': ['active'],
                                'FSDDepartment': ['active'],
                                'FSDClassification': ['active'],
