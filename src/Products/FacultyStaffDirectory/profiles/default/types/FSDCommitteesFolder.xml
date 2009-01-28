@@ -8,14 +8,14 @@
  <property name="content_meta_type">FSDCommitteesFolder</property>
  <property name="product">FacultyStaffDirectory</property>
  <property name="factory">addCommitteesFolder</property>
- <property name="immediate_view">base_view</property>
+ <property name="immediate_view">committeesfolder_view</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
   <element value="FSDCommittee"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">base_view</property>
+ <property name="default_view">committeesfolder_view</property>
  <property name="view_methods">
   <element value="committeesfolder_view"/>
   <element value="base_view"/>
