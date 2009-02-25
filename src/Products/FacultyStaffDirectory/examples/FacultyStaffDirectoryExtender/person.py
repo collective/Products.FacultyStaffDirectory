@@ -27,9 +27,20 @@ class YuppieExtender(object):
                 schemata="Contact Information",
                 widget=StringWidget(
                     label=u"Mobile Phone",
-                    description=u"Demo field added by the FacultyStaffDirectoryExtender product.",
-                )
-            )
+                    description=u"Mobile Phone",
+                ),
+            ),
+			
+			  _StringExtensionField('Fax',
+                required=False,
+                searchable=True,
+                schemata="Contact Information",
+                widget=StringWidget(
+                    label=u"Fax",
+                    description=u"Fax",
+                ),
+            ),
+			
         ]
     
     def __init__(self, context):
