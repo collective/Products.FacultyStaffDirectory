@@ -28,18 +28,8 @@ class YuppieExtender(object):
                 widget=StringWidget(
                     label=u"Mobile Phone",
                     description=u"Mobile Phone",
-                ),
-            ),
-			
-			  _StringExtensionField('Fax',
-                required=False,
-                searchable=True,
-                schemata="Contact Information",
-                widget=StringWidget(
-                    label=u"Fax",
-                    description=u"Fax",
-                ),
-            ),
+                )
+            )
 			
         ]
     

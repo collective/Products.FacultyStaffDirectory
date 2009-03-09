@@ -1,4 +1,4 @@
-FacultyStaffDirectoryExtenderDas: A Customization of FacultyStaffDirectoryExtender, a component of "WebLion CMS":http://weblion.psu.edu/
+FacultyStaffDirectoryExtender: A Component of "WebLion CMS":http://weblion.psu.edu/
 
 Versions
 
@@ -13,19 +13,19 @@ Dependencies
 Description
   
   You can add fields to the FacultyStaffDirectory content types by writing
-  "extender" products. FacultyStaffDirectoryExtenderDas is an example one which
+  "extender" products. FacultyStaffDirectoryExtender is an example one which
   adds a Mobile Phone field to Person objects (on the Contact Information tab).
   
   You can extrapolate from this example to make your own extenders:
   
-  1. Make a copy of FacultyStaffDirectoryExtenderDas, and rename it something
+  1. Make a copy of FacultyStaffDirectoryExtender, and rename it something
      descriptive. For example, if you're writing a product to add a Favorite
      Color field to the Person type, you might call it
      FacultyStaffDirectoryFavoriteColor. (This way, your extender will appear
      near FacultyStaffDirectory in alphabetical listings, making people more
      likely to find it.)
   
-  2. Replace all occurrences of "FacultyStaffDirectoryExtenderDas" in your new
+  2. Replace all occurrences of "FacultyStaffDirectoryExtender" in your new
      product with "FacultyStaffDirectoryFavoriteColor" (or whatever you called
      it). The files you'll need to search are __init__.py, Install.py,
      person.py, and README.txt (which you should, of course, largely rewrite).
@@ -56,7 +56,7 @@ Description
       override the entire view template for whatever content type (or types) you
       extend. For example, if you add a field to Person, you'll need to include
       a person_view.pt with your product and do the usual skin registration
-      dance upon product installation. FacultyStaffDirectoryExtenderDas doesn't
+      dance upon product installation. FacultyStaffDirectoryExtender doesn't
       demonstrate this at the moment, so the Mobile Phone field won't appear
       when viewing a Person, only when editing.
 
@@ -64,12 +64,12 @@ Installing the Example Extender
 
   1. Install FacultyStaffDirectory according to that product's README.txt.
   
-  2. Place FacultyStaffDirectoryExtenderDas folder in the Products folder.
+  2. Place FacultyStaffDirectoryExtender folder in the Products folder.
   
   3. Restart Zope.
   
   4. If you're using Plone 3 or later, go to your-plone-site &rarr; site setup
-     &rarr; Add/Remove Products, and install FacultyStaffDirectoryExtenderDas.
+     &rarr; Add/Remove Products, and install FacultyStaffDirectoryExtender.
      In Plone 2.5, it will be installed simply by virtue of being in the
      Products folder.
     
