@@ -29,7 +29,7 @@
                     <dd>
                         <table tal:define="obj speciality/getObject">
                             <td tal:content="structure obj/getOverviewText" style="vertical-align: top"/>
-                            <td style="vertical-align: top" 
+                            <td style="vertical-align: top; width: 200px" 
                                 tal:define="image obj/getOverviewImage">
                                 <img tal:condition="image"
                                      tal:attributes="src string:${image/absolute_url}" 
