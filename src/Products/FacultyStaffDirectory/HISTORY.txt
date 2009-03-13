@@ -3,6 +3,12 @@ Version History
   ' ' 3.0 (unreleased) -- ' '
         
         * 
+
+  ' ' 2.1.2 -- ' '
+        
+        * a specialty has an extra schemata "Overview" with an image and richtext field
+          Both fields are used for the speciality_overview view.
+          [ajung]
         
   ' ' 2.1.1 -- ' '
         
