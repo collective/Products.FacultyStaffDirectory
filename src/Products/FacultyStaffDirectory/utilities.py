@@ -109,27 +109,33 @@ class ConfigurationUtility(Persistent):
         site = getSite()
         mt = getToolByName(site, 'portal_membership')
         mb = getToolByName(site, MEMBRANE_TOOL)
-        if id:
-            member = mt.getMemberById(id).getUser()
+        # We need to protect against the edge-case of an anonymous viewer opening the author
+        # page directly, which throws an error in this script.
+        if mt.isAnonymousUser():
+            # anonymous user should never see the 'MY Folder' link at all.
+            return False
         else:
-            member = mt.getAuthenticatedMember().getUser()
-        try:
-            user = mb.searchResults(getUserName=member.getUserName())[0]
-            if user.portal_type == 'FSDPerson':
-                # this is an FSDPerson, always return true
-                return True
+            if id:
+                member = mt.getMemberById(id).getUser()
             else:
-                # this is a membrane user, but not an FSDPerson, check conditions before allowing
+                member = mt.getAuthenticatedMember().getUser()
+            try:
+                user = mb.searchResults(getUserName=member.getUserName())[0]
+                if user.portal_type == 'FSDPerson':
+                    # this is an FSDPerson, always return true
+                    return True
+                else:
+                    # this is a membrane user, but not an FSDPerson, check conditions before allowing
+                    if mt.getMemberareaCreationFlag() and mt.getHomeFolder(id) is not None:
+                        return True
+                    else:
+                        return False
+            except (IndexError, AttributeError):
+                # this is not a membrane user at all, let's check some conditions
                 if mt.getMemberareaCreationFlag() and mt.getHomeFolder(id) is not None:
                     return True
                 else:
                     return False
-        except (IndexError, AttributeError):
-            # this is not a membrane user at all, let's check some conditions
-            if mt.getMemberareaCreationFlag() and mt.getHomeFolder(id) is not None:
-                return True
-            else:
-                return False
     
     def __of__(self, parent):
         """Make Zope 2 traverser happy."""
