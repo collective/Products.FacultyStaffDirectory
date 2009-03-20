@@ -284,27 +284,34 @@ class FacultyStaffDirectoryTool(UniqueObject, BaseContent):
         """
         mt = getToolByName(self, 'portal_membership')
         mb = getToolByName(self, MEMBRANE_TOOL)
-        if id:
-            usr = mt.getMemberById(id).getUser()
+        # protect against anonymous viewers, who may be visiting this page directly without an
+        # author id being set (https://weblion.psu.edu/trac/weblion/ticket/1163)
+        if mt.isAnonymousUser():
+            # in any case, the anonymous visitor should never be shown the My Folder link, so just
+            # return false
+            return False
         else:
-            usr = mt.getAuthenticatedMember().getUser()
-        try:
-            foundUser = mb.searchResults(getUserName=usr.getUserName())[0]
-            if (foundUser.portal_type == 'FSDPerson'):
-                # this is an FSDPerson, always return true
-                return True
+            if id:
+                usr = mt.getMemberById(id).getUser()
             else:
-                # this is a membrane user, but not an FSDPerson, check conditions before allowing
+                usr = mt.getAuthenticatedMember().getUser()
+            try:
+                foundUser = mb.searchResults(getUserName=usr.getUserName())[0]
+                if (foundUser.portal_type == 'FSDPerson'):
+                    # this is an FSDPerson, always return true
+                    return True
+                else:
+                    # this is a membrane user, but not an FSDPerson, check conditions before allowing
+                    if (mt.getMemberareaCreationFlag() and (mt.getHomeFolder(id) is not None)):
+                        return True
+                    else:
+                        return False
+            except (IndexError, AttributeError):
+                # this is not a membrane user at all, let's check some conditions
                 if (mt.getMemberareaCreationFlag() and (mt.getHomeFolder(id) is not None)):
                     return True
                 else:
                     return False
-        except (IndexError, AttributeError):
-            # this is not a membrane user at all, let's check some conditions
-            if (mt.getMemberareaCreationFlag() and (mt.getHomeFolder(id) is not None)):
-                return True
-            else:
-                return False
                 
         
 registerType(FacultyStaffDirectoryTool, PROJECTNAME)
