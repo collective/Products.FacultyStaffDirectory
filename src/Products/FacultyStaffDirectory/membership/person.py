@@ -50,7 +50,7 @@ class UserAuthentication(object):
         or pass authentication on to the next PAS plugin
         """
         fsd_tool = getToolByName(self.context,FSD_TOOL)
-        if (fsd_tool.useInternalPassword):
+        if (fsd_tool.getUseInternalPassword()):
             login = credentials.get('login', None)
             password = credentials.get('password', None)
             

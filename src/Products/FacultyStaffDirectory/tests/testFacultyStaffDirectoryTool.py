@@ -9,6 +9,7 @@ __docformat__ = 'plaintext'
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
+from Products.FacultyStaffDirectory.membership.person import UserAuthentication
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 
@@ -40,6 +41,19 @@ class testFacultyStaffDirectoryTool(testPlone):
             self.failIf(u.verifyCredentials({'login':'abc123','password':'chewy1'}),"verification allowed, but shouldn't have been: %s" % self.fsd_tool.getUseInternalPassword())
             self.fsd_tool.setUseInternalPassword(True)
             self.failUnless(u.verifyCredentials({'login':'abc123','password':'chewy1'}), "useInternalPassword not toggled.  verification still disallowed: %s" % self.fsd_tool.getUseInternalPassword())
+            
+    def testAttributeAccessToUseInternalPassword(self):
+        import pdb; pdb.set_trace()
+        try:
+            # we expect this to fail.  If it doesn't, fail and report
+            # this exposes the bug reported here: 
+            #     https://weblion.psu.edu/trac/weblion/ticket/1140
+            self.fsd_tool.useInternalPassword
+            self.fail('Attribute access to fsd_tool.useInternalPassword succeeded unexpectedly')
+        except AttributeError:
+            self.fsd_tool.getUseInternalPassword()
+            self.failUnless(self.fsd_tool.useInternalPassword,
+                            'after using the accessor, attribute access to fsd_tool.useInternalPassword should have succeeded, but did not')
             
     def testIdRegexDefault(self):
         """ Check to make sure the idRegex field is defaulting to the value set in portal_registration
