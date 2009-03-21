@@ -31,6 +31,7 @@ from ZPublisher.HTTPRequest import HTTPRequest
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces.person import IPerson
 from Products.FacultyStaffDirectory.interfaces.person import IPersonModifiedEvent
+from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFacultyStaffDirectory
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_DEPARTMENTS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, ASSIGN_SPECIALTIES_TO_PEOPLE, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 
@@ -273,10 +274,11 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=u'Departments',
             label_msgid='FacultyStaffDirectory_label_departments',
             i18n_domain='FacultyStaffDirectory',
-            base_query={'portal_type': 'FSDDepartment', 'sort_on': 'sortable_title'},
+            base_query="_search_departments_in_this_fsd",
             allow_browse=0,
             allow_search=1,
             show_results_without_query=1,
+            startup_directory_method="_get_parent_fsd_path",
         ),
         write_permission=ASSIGN_DEPARTMENTS_TO_PEOPLE,
         schemata="Basic Information",
@@ -292,10 +294,11 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=u'Committees',
             label_msgid='FacultyStaffDirectory_label_committees',
             i18n_domain='FacultyStaffDirectory',
-            base_query={'portal_type': 'FSDCommittee', 'sort_on': 'sortable_title'},
+            base_query="_search_committees_in_this_fsd",
             allow_browse=0,
             allow_search=1,
             show_results_without_query=1,
+            startup_directory_method="_get_parent_fsd_path",
         ),
         write_permission=ASSIGN_COMMITTIES_TO_PEOPLE,
         schemata="Professional Information",
@@ -436,10 +439,12 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=u'Personal Assistant(s)',
             label_msgid='FacultyStaffDirectory_label_assistants',
             i18n_domain='FacultyStaffDirectory',
-            base_query={'portal_type': 'FSDPerson', 'sort_on': 'sortable_title'},
             allow_browse=0,
             allow_search=1,
             show_results_without_query=1,
+            startup_directory_method="_get_parent_fsd_path",
+            base_query="_search_people_in_this_fsd",
+            restrict_browsing_to_startup_directory=True,
         ),
         write_permission="Modify portal content",
         schemata="Basic Information",
@@ -844,6 +849,50 @@ class Person(OrderedBaseFolder, ATCTContent):
             if password or confirm:
                 if password != confirm:
                     errors['password'] = errors['confirmPassword'] = u'Passwords do not match'
+                    
+    ###
+    # Methods to limit the referenceBrowserWidget start directory and search results    
+    security.declareProtected(ModifyPortalContent, '_get_parent_fsd_path')
+    def _get_parent_fsd_path(self):
+        """ Return the path of the faculty staff directory that contains this person
+            relative to the plone root.  Used to set the start path of the
+            ReferenceBrowserWidget
+        """
+        parent = aq_parent(aq_inner(self))
+        if IFacultyStaffDirectory.providedBy(parent):
+            # we should pretty much always expect this to be true.  People can't be added anywhere but 
+            #   inside an FSD, right at the FSD root, right?  Is this a safe assumption?
+            return parent.absolute_url_path()
+        else:
+            return '/'
+            
+    security.declareProtected(ModifyPortalContent, '_limit_rbw_search_params')
+    def _limit_rbw_search_params(self, portal_type="FSDPerson", sort_on="sortable_title"):
+        """ return a query dictionary to limit the search parameters for a reference browser
+            widget query.  Use as basis for more specific versions below
+        """
+        path = self._get_parent_fsd_path()
+        return {'portal_type': portal_type,
+                'sort_on': sort_on,
+                'path': {'query': path}}
+
+    security.declareProtected(ModifyPortalContent, '_search_people_in_this_fsd')
+    def _search_people_in_this_fsd(self):
+        """ search only parent FSD for only people
+        """
+        return self._limit_rbw_search_params(portal_type="FSDPerson")
+
+    security.declareProtected(ModifyPortalContent, '_search_departments_in_this_fsd')
+    def _search_departments_in_this_fsd(self):
+        """ search only parent FSD for only departments
+        """
+        return self._limit_rbw_search_params(portal_type="FSDDepartment")
+
+    security.declareProtected(ModifyPortalContent, '_search_committees_in_this_fsd')
+    def _search_committees_in_this_fsd(self):
+        """ search only parent FSD for only committees
+        """
+        return self._limit_rbw_search_params(portal_type="FSDCommittee")
 
 
 # Implementing IMultiPageSchema forces the edit template to render in the more Plone 2.5-ish manner,

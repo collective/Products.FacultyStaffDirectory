@@ -43,9 +43,8 @@ class testFacultyStaffDirectoryTool(testPlone):
             self.failUnless(u.verifyCredentials({'login':'abc123','password':'chewy1'}), "useInternalPassword not toggled.  verification still disallowed: %s" % self.fsd_tool.getUseInternalPassword())
             
     def testAttributeAccessToUseInternalPassword(self):
-        import pdb; pdb.set_trace()
         try:
-            # we expect this to fail.  If it doesn't, fail and report
+            # we expect this to throw an attribute error.  If it doesn't, fail and report
             # this exposes the bug reported here: 
             #     https://weblion.psu.edu/trac/weblion/ticket/1140
             self.fsd_tool.useInternalPassword
