@@ -71,6 +71,10 @@ Installation
                 portal_quickinstaller or the Plone Add/Remove Products tool
                 under Site Setup. The necessary dependencies will install
                 themselves automatically.
+                
+                You will see a number of warnings about Syntax Errors.  These may be
+                safely ignored, as they are the result of a problem in setuptools, not
+                the FacultyStaffDirectory product.  
             
         Manual
             
