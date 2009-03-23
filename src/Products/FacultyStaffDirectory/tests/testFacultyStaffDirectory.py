@@ -9,6 +9,7 @@ __docformat__ = 'plaintext'
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
+from Products.CMFCore.utils import getToolByName
 
 class testFacultyStaffDirectory(testPlone):
     """Test-cases for class(es) ."""
@@ -158,6 +159,98 @@ class testFacultyStaffDirectory(testPlone):
         wf.doActionFor(self.directory,'publish')
         user = self.portal.portal_membership.getMemberById('abc123')
         self.failUnless('Reviewer' in user.getRolesInContext(self.portal),"roles from directory unavailable on person, but directory is published %s %s" % (user.getRolesInContext(self.portal),wf.getInfoFor(self.directory,'review_state')))
+        
+class testMultipleFacultyStaffDirectories(testPlone):
+    """ Test that having more than one faculty staff directory in a site does not cause problems
+    """
+
+    def afterSetUp(self):
+        self.loginAsPortalOwner()
+        # set up two directories
+        self.fsd1 = self.getPopulatedDirectory(id="fsd1")
+        self.fsd2 = self.getPopulatedDirectory(id="fsd2")
+        # add a person in each directory
+        self.person1 = self.getPerson(directory=self.fsd1, id='person1', firstName="A", lastName="Person")
+        self.person2 = self.getPerson(directory=self.fsd2, id='person2', firstName="Another", lastName="Person")
+        # add a specialty, department and classification to each
+        self.fsd1.specialties.invokeFactory('FSDSpecialty', id="a-specialty", title="A Specialty")
+        self.fsd1.committees.invokeFactory('FSDCommittee', id='a-committee', title='A Committee')
+        self.fsd1.invokeFactory('FSDDepartment', id='a-department', title='A Department')
+        self.fsd2.specialties.invokeFactory('FSDSpecialty', id="another-specialty", title="Another Specialty")
+        self.fsd2.committees.invokeFactory('FSDCommittee', id='another-committee', title='Another Committee')
+        self.fsd2.invokeFactory('FSDDepartment', id='another-department', title='Another Department')
+    
+    def getBaseQueryForWidget(self, obj, widget_name):
+        """ return the base query for the reference browser widget on the field named by widget_name
+            on the object obj
+        """
+        try:
+            field = obj.schema[widget_name]
+        except KeyError:
+            self.fail('no field provided on %s named %s' % (obj, widget_name))
+        else:
+            widget = obj.schema[widget_name].widget
+            return widget.getBaseQuery(obj, field)
+            
+    def executeBaseQueryAndCompare(self, query, cmpval):
+        """ given a set of query parameters, exectute that query in the portal catalog, and 
+            check the cmpval to verify it is _not_ in the list of things returned.
+        """
+        pc = getToolByName(self.portal, 'portal_catalog')
+        results = pc(**query)
+        id_list = [result.id for result in results]
+        return cmpval in id_list
+        
+    def testFindOwnDirectoryPath(self):
+        """ verify that the _get_parent_fsd_path method works correctly on people and 
+            persongroupings
+        """
+        self.assertEqual('/plone/fsd1', self.person1._get_parent_fsd_path())
+        self.assertEqual('/plone/fsd2', self.person2._get_parent_fsd_path())
+        self.assertEqual('/plone/fsd1', self.fsd1['a-department']._get_parent_fsd_path())
+        self.assertEqual('/plone/fsd2', self.fsd2['another-department']._get_parent_fsd_path())
+        self.assertEqual('/plone/fsd1', self.fsd1.specialties['a-specialty']._get_parent_fsd_path())
+        self.assertEqual('/plone/fsd2', self.fsd2.specialties['another-specialty']._get_parent_fsd_path())
+        
+    def testPersonRBWidgetBaseQuery(self):
+        """ verify that the base query returned by the reference browser widget for various fields
+            returns a query that results in the expected lists of content objects
+        """
+        # test the person specialties field
+        base_query = self.getBaseQueryForWidget(self.person1, 'specialties')
+        self.failUnless(self.executeBaseQueryAndCompare(base_query, 'a-specialty'))
+        self.failIf(self.executeBaseQueryAndCompare(base_query, 'another-specialty'))
+        
+        # test the person departments field
+        base_query = self.getBaseQueryForWidget(self.person1, 'departments')
+        self.failUnless(self.executeBaseQueryAndCompare(base_query, 'a-department'))
+        self.failIf(self.executeBaseQueryAndCompare(base_query, 'another-department'))
+        
+        # test the person committees field
+        base_query = self.getBaseQueryForWidget(self.person1, 'committees')
+        self.failUnless(self.executeBaseQueryAndCompare(base_query, 'a-committee'))
+        self.failIf(self.executeBaseQueryAndCompare(base_query, 'another-committee'))
+        
+        # test the person assistants field
+        base_query = self.getBaseQueryForWidget(self.person1, 'assistants')
+        self.failUnless(self.executeBaseQueryAndCompare(base_query, 'person1'))
+        self.failIf(self.executeBaseQueryAndCompare(base_query, 'person2'))
+        
+        # test the person classifications field (this one is different, should it be?)
+        ### For some reason, the following raises an attribute error.  Any thoughts on why,
+        ### or for that matter on why _classificationReferences doesn't fail when we are running?
+        # import pdb; pdb.set_trace()
+        # classifications = self.person1._classificationReferences()
+        
+    def testPersonGroupingRBWidgetBaseQuery(self):
+        """ verify that the base query returned by the reference browser widget for the people
+            field of a person grouping returns a query that results in the expected list of
+            FSDPerson objects
+        """
+        base_query = self.getBaseQueryForWidget(self.fsd1['a-department'], 'members')
+        self.failUnless(self.executeBaseQueryAndCompare(base_query, 'person1'))
+        self.failIf(self.executeBaseQueryAndCompare(base_query, 'person2'))
+        
 
     # end tests for membrane integration
 
@@ -165,4 +258,5 @@ def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(testFacultyStaffDirectory))
+    suite.addTest(makeSuite(testMultipleFacultyStaffDirectories))
     return suite

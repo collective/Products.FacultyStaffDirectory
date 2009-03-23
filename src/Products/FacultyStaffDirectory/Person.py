@@ -23,6 +23,7 @@ from Products.CMFCore.permissions import View, ModifyPortalContent, SetOwnPasswo
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.navtree import buildFolderTree
 from Products.CMFPlone.CatalogTool import getObjPositionInParent
+from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.membrane.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
 from Products.Relations.field import RelationField
 from Products.validation import validation
@@ -309,11 +310,15 @@ schema = ATContentTypeSchema.copy() + Schema((
     
     RelationField(
         name='specialties',
-        widget=ReferenceBrowserWidget
-        (
+        widget=ReferenceBrowserWidget(
             label=u'Specialties',
             label_msgid='FacultyStaffDirectory_label_specialties',
             i18n_domain='FacultyStaffDirectory',
+            base_query="_search_specialties_in_this_fsd",
+            allow_browse=0,
+            allow_search=1,
+            show_results_without_query=1,
+            startup_directory_method="_get_parent_fsd_path"
         ),
         write_permission=ASSIGN_SPECIALTIES_TO_PEOPLE,
         schemata="Professional Information",
@@ -731,16 +736,16 @@ class Person(OrderedBaseFolder, ATCTContent):
             functions, this is what we get.  Can't do it on __init__ since it
             doesn't recognize any of the portal tools for some reason.
         """
-        # Set the startup directory for the specialties field to the SpecialtiesFolder or, failing
-        # that, the root of the FacultyStaffDirectory:
-        urlTool = getToolByName(self, 'portal_url')
-        fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
-        fsd = self.getDirectoryRoot()
-        if fsd and fsd.getSpecialtiesFolder():
-            url = urlTool.getRelativeContentURL(fsd.getSpecialtiesFolder())
-        else:
-            url = ""
-        self.schema['specialties'].widget.startup_directory = '/%s' % url
+        # # Set the startup directory for the specialties field to the SpecialtiesFolder or, failing
+        # # that, the root of the FacultyStaffDirectory:
+        # urlTool = getToolByName(self, 'portal_url')
+        # fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
+        # fsd = self.getDirectoryRoot()
+        # if fsd and fsd.getSpecialtiesFolder():
+        #     url = urlTool.getRelativeContentURL(fsd.getSpecialtiesFolder())
+        # else:
+        #     url = ""
+        # self.schema['specialties'].widget.startup_directory = '/%s' % url
         
         fsd_tool = getToolByName(self,TOOLNAME)
         if (fsd_tool.getPhoneNumberRegex()):
@@ -852,19 +857,31 @@ class Person(OrderedBaseFolder, ATCTContent):
                     
     ###
     # Methods to limit the referenceBrowserWidget start directory and search results    
+    # security.declareProtected(ModifyPortalContent, '_get_parent_fsd_path')
+    # def _get_parent_fsd_path(self):
+    #     """ wrap the utility method so we can use it in the context of an AT Schema declaration
+    #     """
+    #     parent = aq_parent(aq_inner(self))
+    #     if IFacultyStaffDirectory.providedBy(parent):
+    #         # we should pretty much always expect this to be true.  People can't be added anywhere but 
+    #         #   inside an FSD, right at the FSD root, right?  Is this a safe assumption?
+    #         return parent.absolute_url_path()
+    #     else:
+    #         return '/'
+    
     security.declareProtected(ModifyPortalContent, '_get_parent_fsd_path')
     def _get_parent_fsd_path(self):
-        """ Return the path of the faculty staff directory that contains this person
-            relative to the plone root.  Used to set the start path of the
-            ReferenceBrowserWidget
+        """ given an object of an FSD type, return the path to the parent FSD of that object
         """
+        # Walk up the tree until you find an FSD
         parent = aq_parent(aq_inner(self))
-        if IFacultyStaffDirectory.providedBy(parent):
-            # we should pretty much always expect this to be true.  People can't be added anywhere but 
-            #   inside an FSD, right at the FSD root, right?  Is this a safe assumption?
-            return parent.absolute_url_path()
-        else:
-            return '/'
+        while not IPloneSiteRoot.providedBy(parent):
+            if IFacultyStaffDirectory.providedBy(parent):
+                return parent.absolute_url_path()
+            else:
+                parent = aq_parent(aq_inner(parent))
+
+        return ""            
             
     security.declareProtected(ModifyPortalContent, '_limit_rbw_search_params')
     def _limit_rbw_search_params(self, portal_type="FSDPerson", sort_on="sortable_title"):
@@ -893,6 +910,12 @@ class Person(OrderedBaseFolder, ATCTContent):
         """ search only parent FSD for only committees
         """
         return self._limit_rbw_search_params(portal_type="FSDCommittee")
+
+    security.declareProtected(ModifyPortalContent, '_search_specialties_in_this_fsd')
+    def _search_specialties_in_this_fsd(self):
+        """ search only parent FSD for only specialties
+        """
+        return self._limit_rbw_search_params(portal_type="FSDSpecialty")
 
 
 # Implementing IMultiPageSchema forces the edit template to render in the more Plone 2.5-ish manner,

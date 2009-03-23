@@ -4,12 +4,15 @@ __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_inner, aq_parent
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema
 from Products.FacultyStaffDirectory.config import *
-from Products.CMFCore.permissions import View
+from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFacultyStaffDirectory
+from Products.CMFCore.permissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.interfaces import IPloneSiteRoot
 
 schema =  ATContentTypeSchema.copy() + Schema((
 
@@ -70,6 +73,29 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
         """
         people = self.getPeople()
         return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
+
+    security.declareProtected(ModifyPortalContent, '_get_parent_fsd_path')
+    def _get_parent_fsd_path(self):
+        """ given an object of an FSD type, return the path to the parent FSD of that object
+        """
+        # Walk up the tree until you find an FSD
+        parent = aq_parent(aq_inner(self))
+        while not IPloneSiteRoot.providedBy(parent):
+            if IFacultyStaffDirectory.providedBy(parent):
+                return parent.absolute_url_path()
+            else:
+                parent = aq_parent(aq_inner(parent))
+
+        return ""        
+
+    security.declareProtected(ModifyPortalContent, '_search_people_in_this_fsd')
+    def _search_people_in_this_fsd(self):
+        """ search only parent FSD for only people
+        """
+        path = self._get_parent_fsd_path()
+        return {'portal_type': 'FSDPerson',
+                'sort_on': 'sortable_title',
+                'path': {'query': path}}
 
 registerType(PersonGrouping, PROJECTNAME)
 

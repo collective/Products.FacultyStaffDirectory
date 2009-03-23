@@ -186,7 +186,6 @@ class testFacultyStaffDirectoryTool(testPlone):
         self.failUnless('FSDPerson' in self.fsd_tool.getEnableMembraneTypes() and 'FSDPerson' in mtypes, "FSDPerson should be in both lists: %s, %s" % (self.fsd_tool.getEnableMembraneTypes(), mtypes))
         self.failUnless(uf.getUserById('abc123'), "Person 'abc123' not active as a user after membrane re-activation")
         
-        
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()

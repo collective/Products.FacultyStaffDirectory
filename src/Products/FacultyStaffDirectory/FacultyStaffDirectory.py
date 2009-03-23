@@ -147,7 +147,6 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         portal_roles = getFilteredValidRolesForPortal(self)
         allowed_roles = [r for r in portal_roles if r not in INVALID_ROLES]
         return allowed_roles
-    
 
     #
     # Validators

@@ -29,11 +29,10 @@ __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from Products.FacultyStaffDirectory.config import *
 from Products.CMFCore.utils import UniqueObject
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.FacultyStaffDirectory.interfaces.facultystaffdirectorytool import IFacultyStaffDirectoryTool, IFacultyStaffDirectoryToolModifiedEvent
-from Products.FacultyStaffDirectory.config import MEMBRANE_ABLE_TYPES, MEMBRANE_ABLE_TYPES_VOCAB
+from Products.FacultyStaffDirectory.config import *
 from zope.interface import implements
 from zope.event import notify
 from Products.CMFCore.utils import getToolByName
