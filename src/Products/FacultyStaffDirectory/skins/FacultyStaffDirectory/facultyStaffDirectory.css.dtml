@@ -31,7 +31,7 @@
 .facultyStaffDirectory .standardView .caption { margin-left: 120px; padding-left: 11px; }
 .facultyStaffDirectory .standardView .caption .moreInfo { margin: 1em 0 0 0; }
 
-.facultyStaffDirectory.personView .headshot { float: right; width: 180px; margin: 2em 0; }
+.facultyStaffDirectory.personView .headshot { float: right; width: 180px; margin: 5em 2em 0 0; }
 .facultyStaffDirectory.personView .headshot img { margin-right: 5px; border: 1px solid #000; }
 
 .personView div.caption {
@@ -58,12 +58,17 @@
 
 .facultyStaffDirectory.personView .courselisting dl,
 .facultyStaffDirectory.personView .specialties dl { margin: 0 0 0 1em; }
+.facultyStaffDirectory.personView .departments dl { margin: 0 0 0 1em; }
+
 
 .facultyStaffDirectory.personView .courselisting dd,
 .facultyStaffDirectory.personView .specialties dd { font-size: .85em; margin-left: 0; }
+.facultyStaffDirectory.personView .departments dd { font-size: .85em; margin-left: 0; }
 
 .facultyStaffDirectory.personView .courselisting dd p,
 .facultyStaffDirectory.personView .specialties dd p { margin:0 0 .25em 0; }
+.facultyStaffDirectory.personView .departments dd p { margin:0 0 .25em 0; }
+
 
 .facultyStaffDirectory .tabularView table.listing { border-left: none; }
 

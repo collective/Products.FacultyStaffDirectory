@@ -36,6 +36,37 @@ schema = Schema((
         multiValued=True,
         relationship='SpecialtyInformation'  # weird relationship name is ArchGenXML's fault
     ),
+
+    ImageField(
+        name='overviewImage',
+        schemata='Overview',
+        widget=ImageWidget(
+            label=u"Overview image (used for specialty overview view)",
+            label_msgid='FacultyStaffDirectory_label_overview_image',
+            i18n_domain='FacultyStaffDirectory',
+            default_content_type='image/gif',
+        ),
+        storage=AttributeStorage(),
+        original_size=(200, 200),
+        sizes={'normal': (200, 250)},
+        default_output_type='image/jpeg',
+        allowable_content_types=('image/gif','image/jpeg','image/png'),
+    ),
+
+    TextField(
+        name='overviewText',
+        schemata='Overview',
+        allowable_content_types=ALLOWABLE_CONTENT_TYPES,
+        widget=RichWidget(
+            label=u"Overview text (used for specialty overview view)",
+            label_msgid='FacultyStaffDirectory_label_overview_text',
+            i18n_domain='FacultyStaffDirectory',
+        ),
+        default_output_type="text/x-html-safe",
+        searchable=True,
+        validators=('isTidyHtmlWithCleanup',)
+    )
+
 ),
 )
 
