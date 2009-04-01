@@ -16,6 +16,8 @@ Version History
           richtext field. Both fields are used for the 
           speciality_overview view. [ajung]
         
+        * Added microformats for person_view's address block. [robzonenet] 
+        
         * Added Spanish translation [Gildardo Bautista]
 
         * Added French translation [Benjamin Klups]
@@ -23,7 +25,7 @@ Version History
         * List department in person_view [Gildardo Bautista]
         
         * Corrected a problem with viewing departments located outside
-          of a Directory object. [ems174]
+          of a Directory object. [esteele]
         
   ' ' 2.1 -- ' '
         
