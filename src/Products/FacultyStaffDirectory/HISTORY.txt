@@ -5,7 +5,11 @@ Version History
         * Corrected a problem causing all FSD persons to be returned when doing a member search.
         
         * Corrected a problem with person_view.pt that caused errors when anonymous users viewed a person with an assistant assigned
+        
+        * Added Spanish translation [Gildardo Bautista]
 
+        * Added French translation [Benjamin Klups]
+        
   ' ' 2.1 -- ' '
         
         * Corrected some CSS display issues with Person pictures.
