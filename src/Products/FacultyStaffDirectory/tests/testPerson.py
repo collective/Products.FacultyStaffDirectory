@@ -431,14 +431,22 @@ class testWithoutSpecialties(testPerson):
 
     def testMemberSearch(self):
         """ Make sure that membrane is using the right fields for member searches. """
+        pas = getToolByName(self.portal, "acl_users")
         self.directory.invokeFactory(type_name="FSDPerson", id="cvf092", firstName="Another", lastName="Testperson")
         self.directory.invokeFactory(type_name="FSDPerson", id="ope593", firstName="Somebody", lastName="Altogetherdifferent")
 
-        pas = getToolByName(self.portal, "acl_users")
         searchParams = {'fullname':'Test'}
         results = pas.searchUsers(**searchParams)
         self.failUnless(len(results) == 2, "Search did not return the right number of members. Expected 2, got %s." % len(results))
         self.failUnless('cvf092' in [a['id'] for a in results], "Expected member cvf092 to be in the search results.")
+
+        # We should be able to find a user regardless of case...
+        searchParams = {'fullname':'another'}
+        results = pas.searchUsers(**searchParams)
+        self.failUnless(len(results) == 1, "Search did not return the right number of members. Expected 1, got %s." % len(results))
+        self.failUnless('cvf092' in [a['id'] for a in results], "Expected member cvf092 to be in the search results.")
+
+        
 
     # Err... can't actually test for this since it's being handled in pre_edit_setup. Any ideas?
     # def testDefaultEditor(self):
