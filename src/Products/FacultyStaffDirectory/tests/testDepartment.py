@@ -119,7 +119,7 @@ class testDepartment(testPlone):
         """
         acl = getToolByName(self.portal, 'acl_users')
         ind = acl.getGroupById('test-department-inside')
-        self.failUnless(ind.Title() == 'Inside Department', "KnownFailure: Unexpected value for Title for group 'faculty'. Got '%s', expected 'Inside Department'." % ind.Title())
+        self.failUnless(ind.getGroupName() == 'Inside Department', "KnownFailure: Unexpected value for Title for group 'faculty'. Got '%s', expected 'Inside Department'." % ind.Title())
         
 
         

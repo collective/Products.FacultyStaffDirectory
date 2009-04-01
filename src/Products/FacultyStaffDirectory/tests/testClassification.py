@@ -112,7 +112,7 @@ class testClassification(testPlone):
         """
         acl = getToolByName(self.portal, 'acl_users')
         fac = acl.getGroupById('faculty')
-        self.failUnless(fac.Title() == 'Faculty', "KnownFailure: Unexpected value for Title for group 'faculty'. Got '%s', expected 'Faculty'." % fac.Title())
+        self.failUnless(fac.getGroupName() == 'Faculty', "KnownFailure: Unexpected value for Title for group 'faculty'. Got '%s', expected 'Faculty'." % fac.Title())
         
     ## end membrane tests
 def test_suite():
