@@ -13,9 +13,12 @@ Version History
   ' ' 2.1.1 -- ' '
         
         * Corrected a problem causing all FSD persons to be returned when doing a member search.
+
         * added a dedicated committees folder view (similar to the specialies folder view)
           [ajung]
-
+         
+        * Added French translation [Benjamin Klups]
+        
   ' ' 2.1 -- ' '
         
         * Corrected some CSS display issues with Person pictures.
