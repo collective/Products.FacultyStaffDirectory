@@ -2,25 +2,46 @@ Version History
         
   ' ' 2.1.1 -- ' '
                 
-        * Corrected a problem with person_view.pt that caused errors when anonymous users viewed a person with an assistant assigned
+        * Corrected a problem with person_view.pt that caused errors
+          when anonymous users viewed a person with an assistant
+          assigned. [cewing]
+        
+        * Corrected a problem that prevented versioning of Persons and
+          Committees. [cewing]
+        
+        * Added a dedicated Committees Folder view (similar to the
+          specialies folder view). [ajung]
+        
+        * A Specialty has an extra schemata "Overview" with an image and
+          richtext field. Both fields are used for the 
+          speciality_overview view. [ajung]
         
         * Added Spanish translation [Gildardo Bautista]
 
         * Added French translation [Benjamin Klups]
         
+        * List department in person_view [Gildardo Bautista]
+        
+        * Corrected a problem with viewing departments located outside
+          of a Directory object. [ems174]
+        
   ' ' 2.1 -- ' '
         
         * Corrected some CSS display issues with Person pictures.
 
-        * Users with the Personnel Manager role can now add Person objects.
+        * Users with the Personnel Manager role can now add Person
+          objects.
         
-        * Added a field to the classification gallery view to control the width of the Person images
+        * Added a field to the classification gallery view to control
+          the width of the Person images
         
-        * Multiple FacultyStaffDirectory objects can now exist in the same site
+        * Multiple FacultyStaffDirectory objects can now exist in the
+          same site
         
         * Improved product reinstallation performance
         
-        * Added an assistant field to confer profile editing delegation on other users
+        * Added an assistant field to confer profile editing delegation
+          on other users
         
         * Added a "can manage personnel" field to the sharing tab
         
@@ -32,7 +53,8 @@ Version History
         
         * Eggified product
         
-        * Configlet icon should now work properly in VirtualHostMonstered sites
+        * Configlet icon should now work properly in
+          VirtualHostMonstered sites
         
         * vCard should handle unicode characters properly now
         
@@ -52,17 +74,17 @@ Version History
   
         * Integrated with Plone users and groups.
         
-        * Switched extensibility framework to archetypes.schemaextender. More
-          than one extender works at once now, and all content types are
-          extensible.
+        * Switched extensibility framework to archetypes.schemaextender.
+          More than one extender works at once now, and all content 
+          types are extensible.
         
         * Added Department content type.
         
-        * Sortable Name is now available as a SmartFolder index (mainly for
-          sorting).
+        * Sortable Name is now available as a SmartFolder index (mainly
+          for sorting).
 
-        * Added SmartFolder fields for Departments, Classifications, Committees,
-          Specialties, and People.
+        * Added SmartFolder fields for Departments, Classifications,
+          Committees, Specialties, and People.
 
         * Templates are faster.
 
@@ -70,16 +92,16 @@ Version History
 
         * People now have a Middle Name field.
 
-        * Specialties and other types of person groups can now live outside the
-          Faculty/Staff Directory.
+        * Specialties and other types of person groups can now live
+          outside the Faculty/Staff Directory.
 
         * Specialties are now listed in a sane order.
 
         * Committees Folders are now addable within Departments.
 
-        * Added a configlet in Site Setup to allow customization of phone number
-          and user ID validation as well as the ability to disable aspects of
-          membrane integration.
+        * Added a configlet in Site Setup to allow customization of
+          phone number and user ID validation as well as the ability
+          to disable aspects of membrane integration.
 
         * Silenced some deprecation warnings.
 
