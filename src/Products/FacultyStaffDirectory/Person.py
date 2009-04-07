@@ -870,14 +870,21 @@ class Person(OrderedBaseFolder, ATCTContent):
     #         return '/'
     
     security.declareProtected(ModifyPortalContent, '_get_parent_fsd_path')
-    def _get_parent_fsd_path(self):
+    def _get_parent_fsd_path(self, relative=True):
         """ given an object of an FSD type, return the path to the parent FSD of that object
         """
+        url_tool = getToolByName(self, 'portal_url')
         # Walk up the tree until you find an FSD
         parent = aq_parent(aq_inner(self))
         while not IPloneSiteRoot.providedBy(parent):
             if IFacultyStaffDirectory.providedBy(parent):
-                return parent.absolute_url_path()
+                if relative:
+                    # get the path relative to the portal root
+                    path = '/'.join(url_tool.getRelativeContentPath(parent))
+                else:
+                    # return the path starting with the portal root
+                    path = parent.absolute_url_path()
+                return path
             else:
                 parent = aq_parent(aq_inner(parent))
 
@@ -888,7 +895,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         """ return a query dictionary to limit the search parameters for a reference browser
             widget query.  Use as basis for more specific versions below
         """
-        path = self._get_parent_fsd_path()
+        path = self._get_parent_fsd_path(relative=False)
         return {'portal_type': portal_type,
                 'sort_on': sort_on,
                 'path': {'query': path}}

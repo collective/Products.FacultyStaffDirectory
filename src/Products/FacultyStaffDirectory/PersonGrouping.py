@@ -76,24 +76,31 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
         return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
 
     security.declareProtected(ModifyPortalContent, '_get_parent_fsd_path')
-    def _get_parent_fsd_path(self):
+    def _get_parent_fsd_path(self, relative=True):
         """ given an object of an FSD type, return the path to the parent FSD of that object
         """
+        url_tool = getToolByName(self, 'portal_url')
         # Walk up the tree until you find an FSD
         parent = aq_parent(aq_inner(self))
         while not IPloneSiteRoot.providedBy(parent):
             if IFacultyStaffDirectory.providedBy(parent):
-                return parent.absolute_url_path()
+                if relative:
+                    # get the path relative to the portal root
+                    path = '/'.join(url_tool.getRelativeContentPath(parent))
+                else:
+                    # return the path starting with the portal root
+                    path = parent.absolute_url_path()
+                return path
             else:
                 parent = aq_parent(aq_inner(parent))
 
-        return ""        
+        return ""      
 
     security.declareProtected(ModifyPortalContent, '_search_people_in_this_fsd')
     def _search_people_in_this_fsd(self):
         """ search only parent FSD for only people
         """
-        path = self._get_parent_fsd_path()
+        path = self._get_parent_fsd_path(relative=False)
         return {'portal_type': 'FSDPerson',
                 'sort_on': 'sortable_title',
                 'path': {'query': path}}
