@@ -63,13 +63,14 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
         """
         
         if self.getPeople():
-            return self.getDirectoryRoot().getClassifications()
+            fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
+            return fsdTool.getDirectoryRoot().getClassifications()
         else:
             return []
 
     security.declareProtected(View, 'getSortedPeople')
     def getSortedPeople(self):
-        """ Return a list of people, sorted by SortableName
+        """ Return a list of peoplele, sorted by SortableName
         """
         people = self.getPeople()
         return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))

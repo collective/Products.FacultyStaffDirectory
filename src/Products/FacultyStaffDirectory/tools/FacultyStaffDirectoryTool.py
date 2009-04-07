@@ -223,6 +223,15 @@ class FacultyStaffDirectoryTool(UniqueObject, BaseContent):
         except:
             return "Invalid regex string."
 
+    security.declarePublic('getDirectoryRoot')
+    def getDirectoryRoot(self):
+        """ Find the FacultyStaffDirectory instance in the site. """
+        catalog = getToolByName(self, 'portal_catalog')
+        fsdSearch = catalog(portal_type='FSDFacultyStaffDirectory')
+        if fsdSearch:
+            return fsdSearch[0].getObject()
+        return None            
+
     security.declarePublic('fsdMemberProfile')
     def fsdMemberProfile(self):
         """Distinguish between an fsd user and a regular acl_users user and
