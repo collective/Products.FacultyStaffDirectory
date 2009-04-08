@@ -1,1 +1,1 @@
-recursive-include src/Products/FacultyStaffDirectory/
+recursive-include src/Products/FacultyStaffDirectory/ *
