@@ -205,12 +205,12 @@ class testMultipleFacultyStaffDirectories(testPlone):
         """ verify that the _get_parent_fsd_path method works correctly on people and 
             persongroupings
         """
-        self.assertEqual('/plone/fsd1', self.person1._get_parent_fsd_path())
-        self.assertEqual('/plone/fsd2', self.person2._get_parent_fsd_path())
-        self.assertEqual('/plone/fsd1', self.fsd1['a-department']._get_parent_fsd_path())
-        self.assertEqual('/plone/fsd2', self.fsd2['another-department']._get_parent_fsd_path())
-        self.assertEqual('/plone/fsd1', self.fsd1.specialties['a-specialty']._get_parent_fsd_path())
-        self.assertEqual('/plone/fsd2', self.fsd2.specialties['another-specialty']._get_parent_fsd_path())
+        self.assertEqual('fsd1', self.person1._get_parent_fsd_path())
+        self.assertEqual('fsd2', self.person2._get_parent_fsd_path())
+        self.assertEqual('fsd1', self.fsd1['a-department']._get_parent_fsd_path())
+        self.assertEqual('fsd2', self.fsd2['another-department']._get_parent_fsd_path())
+        self.assertEqual('fsd1', self.fsd1.specialties['a-specialty']._get_parent_fsd_path())
+        self.assertEqual('fsd2', self.fsd2.specialties['another-specialty']._get_parent_fsd_path())
         
     def testPersonRBWidgetBaseQuery(self):
         """ verify that the base query returned by the reference browser widget for various fields
