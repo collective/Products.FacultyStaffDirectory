@@ -1,4 +1,8 @@
 Version History
+
+  ' ' 2.1.1.1 -- ' '
+    
+        * Corrected a problem with missing files in the 2.1.1 distribution. [esteele]
         
   ' ' 2.1.1 -- ' '
                 
