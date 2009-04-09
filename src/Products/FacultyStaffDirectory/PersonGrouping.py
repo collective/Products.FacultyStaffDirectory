@@ -8,9 +8,12 @@ from Acquisition import aq_inner, aq_parent
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.Relations.field import RelationField
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces import IConfiguration
 from Products.FacultyStaffDirectory.interfaces.persongrouping import IPersonGrouping
+from Products.FacultyStaffDirectory.permissions import MANAGE_GROUP_MEMBERSHIP
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
 from zope.component import getUtility
@@ -31,13 +34,45 @@ schema =  ATContentTypeSchema.copy() + Schema((
         validators=('isTidyHtmlWithCleanup',)
     ),
 
+    ImageField(
+        name='image',
+        widget=ImageWidget(
+            label=u"An image or logo that will be used as a graphical representation of this group",
+            label_msgid='FacultyStaffDirectory_label_overview_image',
+            i18n_domain='FacultyStaffDirectory',
+            default_content_type='image/gif',
+        ),
+        storage=AttributeStorage(),
+        original_size=(200, 200),
+        sizes={'normal': (200, 250)},
+        default_output_type='image/jpeg',
+        allowable_content_types=('image/gif','image/jpeg','image/png'),
+    ),
+
+    RelationField(
+        name='people',
+        widget=ReferenceBrowserWidget(
+            label=u'Members',
+            label_msgid='FacultyStaffDirectory_label_members',
+            i18n_domain='FacultyStaffDirectory',
+            base_query={'portal_type':'FSDPerson', 'sort_on':'getSortableName'},
+            allow_browse=0,
+            allow_search=1,
+            show_results_without_query=1,
+        ),
+        write_permission = MANAGE_GROUP_MEMBERSHIP,
+        allowed_types=('FSDPerson',),
+        multiValued=True,
+        relationship='departments_members'
+    ),
+
 ),
 )
 
 PersonGrouping_schema = OrderedBaseFolderSchema.copy() + schema.copy()  # + on Schemas does only a shallow copy
 
 class PersonGrouping(OrderedBaseFolder, ATCTContent):
-    """"""
+    """This is my docstring"""
     security = ClassSecurityInfo()
     __implements__ = (ATCTContent.__implements__,
                       getattr(OrderedBaseFolder,'__implements__', ()),                      

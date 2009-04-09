@@ -4,34 +4,34 @@
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title">Person Grouping</property>
  <property name="description">
-  A FacultyStaffDirectory base class for groups of people.</property>
+  A group of FSD People.</property>
  <property name="content_icon">group.png</property>
  <property name="content_meta_type">FSDPersonGrouping</property>
  <property name="product">FacultyStaffDirectory</property>
  <property name="factory">addPersonGrouping</property>
  <property name="immediate_view">base_view</property>
+ <property name="default_view">base_view</property>
+ <property name="view_methods">
+  <element value="base_view"/>
+ </property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
   <element value="FSDPersonGrouping"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">base_view</property>
- <property name="view_methods">
-  <element value="base_view"/>
- </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="base_edit"/>
- <alias from="index.html" to="(selected layout)"/>
  <alias from="properties" to="base_metadata"/>
  <alias from="sharing" to="folder_localrole_form"/>
  <alias from="view" to="(selected layout)"/>
  <action title="View" action_id="view" category="object" condition_expr=""
-    url_expr="string:${object_url}/" visible="True">
+    url_expr="string:${object_url}/view" visible="True">
   <permission value="View"/>
  </action>
- <action title="Edit" action_id="edit" category="object" condition_expr=""
+ <action title="Edit" action_id="edit" category="object"
+    condition_expr="not:object/@@plone_lock_info/is_locked_for_current_user"
     url_expr="string:${object_url}/edit" visible="True">
   <permission value="Modify portal content"/>
  </action>
