@@ -184,11 +184,6 @@ msgstr "Confirmez votre mot de passe"
 msgid "FacultyStaffDirectory_label_courses"
 msgstr "Cours"
 
-#. Default: "Departments"
-#: Content Type: FSDPerson, Field: departments
-msgid "FacultyStaffDirectory_label_departments"
-msgstr "Départements"
-
 #. Default: "Description"
 #: Content Type: FSDSpecialty, Field: description
 #: Content Type: FSDCourse, Field: description

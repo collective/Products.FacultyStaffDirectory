@@ -10,9 +10,6 @@
     <type type_id="FSDClassification">
       <bound-workflow workflow_id="fsd_persongrouping_workflow" />
     </type>
-    <type type_id="FSDDepartment">
-      <bound-workflow workflow_id="fsd_persongrouping_workflow" />
-    </type>
     <type type_id="FSDCommittee">
       <bound-workflow workflow_id="fsd_persongrouping_workflow" />
     </type>
@@ -20,9 +17,6 @@
       <bound-workflow workflow_id="fsd_persongrouping_workflow" />
     </type>
     <type type_id="FSDSpecialtyInformation">
-      <bound-workflow workflow_id="fsd_persongrouping_descriptor_workflow"/>
-    </type>
-    <type type_id="FSDDepartmentalMembership">
       <bound-workflow workflow_id="fsd_persongrouping_descriptor_workflow"/>
     </type>
     <type type_id="FSDCommitteeMembership">

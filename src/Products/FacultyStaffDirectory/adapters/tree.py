@@ -1,7 +1,7 @@
 from zope.interface import implements
 from zope.component import adapts
 
-from Products.FacultyStaffDirectory.interfaces import IPersonGrouping, IClassification, ICommittee, IDepartment, ISpecialty, ITree
+from Products.FacultyStaffDirectory.interfaces import IPersonGrouping, IClassification, ICommittee, ISpecialty, ITree
                                                       
 
     
@@ -21,12 +21,6 @@ def classificationTree(context):
 #     """
 #     implements(ITree)
 #     adapts(ICommittee)
-#     
-# class DepartmentTree(PersonGroupingTree):
-#     """ build a tree of all departments starting from the adapted object
-#     """
-#     implements(ITree)
-#     adapts(IDepartment)
 #     
 # class SpecialtyTree(PersonGroupingTree):
 #     """ build a tree of all specialties starting from the adapted object

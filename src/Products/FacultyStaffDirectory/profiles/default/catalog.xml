@@ -12,15 +12,11 @@
  <index name="getRawCommittees" meta_type="KeywordIndex">
   <indexed_attr value="getRawCommittees"/>
  </index>
- <index name="getRawDepartments" meta_type="KeywordIndex">
-  <indexed_attr value="getRawDepartments"/>
- </index>
  <index name="getRawPeople" meta_type="KeywordIndex">
   <indexed_attr value="getRawPeople"/>
  </index>
  <column value="UID"/>
  <column value="getCommitteeNames"/>
- <column value="getDepartmentNames"/>
  <column value="getSpecialtyNames"/>
  <column value="getClassificationNames"/>
  <column value="getResearchTopics"/>

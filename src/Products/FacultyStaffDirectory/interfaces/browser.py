@@ -30,9 +30,6 @@ class IClassificationViewletManager(IViewletManager):
 class ICommitteeViewletManager(IViewletManager):
     """Ordered viewlet manager that contains and orders parts of a committee like body text and committee members"""
         
-class IDepartmentViewletManager(IViewletManager):
-    """Ordered viewlet manager that contains and orders parts of a committee like body text and committee members"""
-    
 class IListingFormat(IBrowserView):
     """ Determines how a listing should be formatted"""
     

@@ -21,14 +21,8 @@
    <criteria>ATReferenceCriterion</criteria>
   </index>
   <index name="getRawPeople"
-     description="The people assigned to a person grouping (ie committee, department, specialty, classification)"
+     description="The people assigned to a person grouping (ie committee, specialty, classification)"
      enabled="True" friendlyName="People" 
-     i18n:attributes="description; friendlyName">
-   <criteria>ATReferenceCriterion</criteria>
-  </index>
-  <index name="getRawDepartments"
-     description="The departments assigned to a person"
-     enabled="True" friendlyName="Department" 
      i18n:attributes="description; friendlyName">
    <criteria>ATReferenceCriterion</criteria>
   </index>
@@ -43,10 +37,6 @@
   <metadata name="getCommitteeNames"
      description="The committees with which the person is associated"
      enabled="True" friendlyName="Committees"
-     i18n:attributes="description; friendlyName" />
-  <metadata name="getDepartmentNames"
-     description="The departments with which the person is associated"
-     enabled="True" friendlyName="Departments"
      i18n:attributes="description; friendlyName" />
   <metadata name="getSpecialtyNames"
      description="The specialties with which the person is associated"

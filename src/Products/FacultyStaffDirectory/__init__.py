@@ -52,10 +52,8 @@ def initialize(context):
     import Specialty
     import SpecialtiesFolder
     import PersonGrouping
-    import Department
     import CommitteeMembership
     import SpecialtyInformation
-    import DepartmentalMembership
 
     # Initialize portal content
     all_content_types, all_constructors, all_ftis = process_types(

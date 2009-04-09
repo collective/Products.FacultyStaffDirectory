@@ -31,7 +31,7 @@ from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonModifiedEvent
-from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_DEPARTMENTS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, ASSIGN_SPECIALTIES_TO_PEOPLE, CHANGE_PERSON_IDS
+from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, ASSIGN_SPECIALTIES_TO_PEOPLE, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 
 logger = logging.getLogger('FacultyStaffDirectory')
@@ -269,24 +269,6 @@ schema = ATContentTypeSchema.copy() + Schema((
         allowed_types=('FSDClassification'),
         multiValued=True,
         relationship='people_classifications'
-    ),
-    
-    RelationField(
-        name='departments',
-        widget=ReferenceBrowserWidget(
-            label=u'Departments',
-            label_msgid='FacultyStaffDirectory_label_departments',
-            i18n_domain='FacultyStaffDirectory',
-            base_query={'portal_type': 'FSDDepartment', 'sort_on': 'sortable_title'},
-            allow_browse=0,
-            allow_search=1,
-            show_results_without_query=1,
-        ),
-        write_permission=ASSIGN_DEPARTMENTS_TO_PEOPLE,
-        schemata="Basic Information",
-        allowed_types=('FSDDepartment'),
-        multiValued=True,
-        relationship='DepartmentalMembership'
     ),
     
     RelationField(
@@ -695,17 +677,6 @@ class Person(OrderedBaseFolder, ATCTContent):
                 if researchTopic:
                     topics.append(researchTopic)
         return topics
-    
-    security.declareProtected(View, 'getDepartmentNames')
-    def getDepartmentNames(self):
-        """ Returns a list of the titles of the departments attached to this person.
-            Mainly used for pretty-looking metadata in SmartFolder tables. Returns an
-            alphabetically-sorted list since Departments can be located anywhere within the site,
-            which makes using any other sort order somewhat problematic.
-        """
-        dList = [d.Title() for d in self.getDepartments()]
-        dList.sort()
-        return dList
     
     security.declareProtected(View, 'getCommitteeNames')
     def getCommitteeNames(self):

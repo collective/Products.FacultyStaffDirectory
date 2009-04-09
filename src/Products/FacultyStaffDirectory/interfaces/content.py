@@ -19,9 +19,6 @@ class IPersonGrouping(Interface):
 class IClassification(IPersonGrouping):
     """A classification"""
 
-class IDepartment(IPersonGrouping):
-    """A department"""
-
 class ISpecialty(IPersonGrouping):
     """An academic specialty"""
 
@@ -36,9 +33,6 @@ class ICommitteesFolder(Interface):
 
 class ICourse(Interface):
     """A course"""
-
-class IDepartmentalMembership(Interface):
-    """A departmental membership"""
 
 class IFacultyStaffDirectory(Interface):
     """A FacultyStaffDirectory."""

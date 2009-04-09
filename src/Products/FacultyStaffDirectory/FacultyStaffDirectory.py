@@ -134,6 +134,7 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
     security.declareProtected(View, 'getDepartments')
     def getDepartments(self):
         """Return a list of FSDDepartments contained within this site."""
+        # TODO: rewrite for PersonGrouping homogenization
         portal_catalog = getToolByName(self, 'portal_catalog')
         results = portal_catalog(portal_type='FSDDepartment')
         return [brain.getObject() for brain in results]

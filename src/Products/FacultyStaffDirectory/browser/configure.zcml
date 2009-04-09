@@ -26,7 +26,6 @@
     <include package=".course" />
     <!-- <include package=".classification" /> -->
     <!-- <include package=".committee" /> -->
-    <!-- <include package=".department" /> -->
     <include package=".directory" />
 
 </configure>

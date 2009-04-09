@@ -182,11 +182,6 @@ msgstr ""
 msgid "FacultyStaffDirectory_label_courses"
 msgstr ""
 
-#. Default: "Departments"
-#: Content Type: FSDPerson, Field: departments
-msgid "FacultyStaffDirectory_label_departments"
-msgstr ""
-
 #. Default: "Description"
 #: Content Type: FSDSpecialty, Field: description
 #: Content Type: FSDCourse, Field: description

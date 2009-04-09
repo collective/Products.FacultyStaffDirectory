@@ -71,7 +71,7 @@ def configureKupu(portal):
             #ems174: Do we actually need to updateResourceTypes? Kupu gets snippy if we try to add more than one linkable type.
             #kupu.updateResourceTypes(resourceType)
         
-    linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDDepartment', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
+    linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
     mediaKupuTypes = ['FSDPerson']
     collectionKupuTypes = ['FSDFacultyStaffDirectory']
     

@@ -17,7 +17,7 @@ originalMyFolderActionId = "mystuff"
 newMyFolderActionId = "fsdmystuff"
 originalProfileActionId = "MemberPrefs"
 newProfileActionId = "fsdMemberPrefs"
-linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDDepartment', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
+linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
 mediaKupuTypes = ['FSDPerson']
 collectionKupuTypes = ['FSDFacultyStaffDirectory']
 
@@ -43,8 +43,6 @@ class testSetup(FacultyStaffDirectoryTestCase):
                           'FSDCommitteeMembership',
                           'FSDCommitteesFolder',
                           'FSDCourse',
-                          'FSDDepartment',
-                          'FSDDepartmentalMembership',
                           'FSDFacultyStaffDirectory',
                           'FSDPerson',
                           'FSDPersonGrouping',
@@ -174,7 +172,7 @@ class testInstall(FacultyStaffDirectoryTestCase):
         
     def testTopicIndexesAdded(self):
         missingindexes = []
-        for index in ["getRawClassifications","getRawSpecialties","getRawCommittees","getRawPeople","getRawDepartments","getSortableName"]:
+        for index in ["getRawClassifications","getRawSpecialties","getRawCommittees","getRawPeople","getSortableName"]:
             idx = self.atct_tool.getIndex(index)
             if not idx or not idx.enabled:
                 missingindexes.append(index)
@@ -182,7 +180,7 @@ class testInstall(FacultyStaffDirectoryTestCase):
         
     def testTopicMetadataAdded(self):
         missingmetadata = []
-        for fieldName in ["getCommitteeNames","getDepartmentNames","getSpecialtyNames","getClassificationNames","getResearchTopics"]:
+        for fieldName in ["getCommitteeNames","getSpecialtyNames","getClassificationNames","getResearchTopics"]:
             md = self.atct_tool.getMetadata(fieldName)
             if not md or not md.enabled:
                 missingmetadata.append(fieldName)
@@ -297,7 +295,7 @@ class testUninstall(FacultyStaffDirectoryTestCase):
     def testTopicIndexesTeardown(self):
         presentindexes = []
         allindexes = self.atct_tool.getIndexes()
-        for index in ["getRawClassifications","getRawSpecialties","getRawCommittees","getRawPeople","getRawDepartments","getSortableName"]:
+        for index in ["getRawClassifications","getRawSpecialties","getRawCommittees","getRawPeople","getSortableName"]:
             if index in allindexes:
                 presentindexes.append(index)
         self.failIf(presentindexes, 'ATCT Tool still has the following indexes: %s' % presentindexes)
@@ -305,7 +303,7 @@ class testUninstall(FacultyStaffDirectoryTestCase):
     def testTopicMetadataTeardown(self):
         presentmetadata = []
         allmetadata = self.atct_tool.getAllMetadata()
-        for fieldName in ["getCommitteeNames","getDepartmentNames","getSpecialtyNames","getClassificationNames","getResearchTopics"]:
+        for fieldName in ["getCommitteeNames","getSpecialtyNames","getClassificationNames","getResearchTopics"]:
             if fieldName in allmetadata:
                 presentmetadata.append(fieldName)
         self.failIf(presentmetadata, 'ATCT Tool is missing the following metadata fields: %s' % presentmetadata)

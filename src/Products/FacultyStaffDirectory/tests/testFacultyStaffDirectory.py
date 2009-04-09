@@ -48,13 +48,6 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         for c in classificationsBrains:
             self.failUnless(c.portal_type == 'FSDClassification')
 
-    def testGetDepartments(self):
-        fsd = self.getPopulatedDirectory()
-        classificationsBrains = fsd.getDepartments()
-        for c in classificationsBrains:
-            self.failUnless(c.portal_type == 'FSDDepartment')
-
-
     def testGetPeople(self):
         fsd = self.getPopulatedDirectory()
         person = self.getPerson(id='abc123', firstName="Test", lastName="Person")        

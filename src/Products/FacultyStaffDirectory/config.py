@@ -44,10 +44,9 @@ INVALID_ROLES = ['Manager', 'Owner', 'Anonymous', 'Authenticated', 'User Prefere
 # Annotation key used for passwords
 PASSWORD_KEY = 'fsd.employee.password'
 # what content types are available for membrane functionality?
-MEMBRANE_ABLE_TYPES_CHOICES = [('People', 'FSDPerson'), ('Departments', 'FSDDepartment'), ('Classifications', 'FSDClassification'), ('Committees', 'FSDCommittee'), ('Specialties', 'FSDSpecialty')]
+MEMBRANE_ABLE_TYPES_CHOICES = [('People', 'FSDPerson'), ('Classifications', 'FSDClassification'), ('Committees', 'FSDCommittee'), ('Specialties', 'FSDSpecialty')]
 MEMBRANE_ABLE_TYPES = set([v for k, v in MEMBRANE_ABLE_TYPES_CHOICES])
 MEMBRANE_TYPE_ACTIVE_STATES = {'FSDPerson': ['active'],
-                               'FSDDepartment': ['active'],
                                'FSDClassification': ['active'],
                                'FSDCommittee': ['active'],
                                'FSDSpeciality': ['active']}
@@ -56,5 +55,5 @@ MEMBRANE_TYPE_ACTIVE_STATES = {'FSDPerson': ['active'],
 ALLOWABLE_CONTENT_TYPES = ('text/plain', 'text/structured', 'text/html', 'application/msword', 'text/x-rst')
 
 #catalog stuff
-ADDITIONAL_CATALOG_INDEXES = [('getSortableName', 'FieldIndex'), ('getRawClassifications', 'KeywordIndex'), ('getRawSpecialties', 'KeywordIndex'), ('getRawCommittees', 'KeywordIndex'), ('getRawDepartments', 'KeywordIndex'), ('getRawPeople', 'KeywordIndex')]
-ADDITIONAL_CATALOG_METADATA = ["UID", "getCommitteeNames", "getDepartmentNames", "getSpecialtyNames", "getClassificationNames", "getResearchTopics"]
+ADDITIONAL_CATALOG_INDEXES = [('getSortableName', 'FieldIndex'), ('getRawClassifications', 'KeywordIndex'), ('getRawSpecialties', 'KeywordIndex'), ('getRawCommittees', 'KeywordIndex'), ('getRawPeople', 'KeywordIndex')]
+ADDITIONAL_CATALOG_METADATA = ["UID", "getCommitteeNames", "getSpecialtyNames", "getClassificationNames", "getResearchTopics"]
