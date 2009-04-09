@@ -7,7 +7,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '3.0'
+version = open(os.path.join("src", "Products", "FacultyStaffDirectory", "version.txt")).read().strip()
 
 setup(name='Products.FacultyStaffDirectory',
       version=version,
