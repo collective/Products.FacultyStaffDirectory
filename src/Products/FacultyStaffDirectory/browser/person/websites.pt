@@ -2,7 +2,7 @@
     <h3><span i18n:translate="FacultyStaffDirectory_label_websites">Websites</span>:</h3>
     <ul>
         <li tal:repeat="website context/getWebsites">
-            <a href="" 
+            <a class="url" href="" 
                 tal:attributes="href website"
                 tal:content="website" />
         </li>

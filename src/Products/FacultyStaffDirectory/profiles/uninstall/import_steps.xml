@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<import-steps>
+    <import-step
+        id="FacultyStaffDirectory_various"
+        version="20081224-01"
+        handler="Products.FacultyStaffDirectory.setuphandlers.uninstall"
+        title="Undo various Faculty/Staff Directory setup">
+    </import-step>
+</import-steps>

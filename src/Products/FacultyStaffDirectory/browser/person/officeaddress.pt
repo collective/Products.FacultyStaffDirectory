@@ -1,4 +1,4 @@
 <div class="officeAddress">
-    <addr tal:content="structure provider:facultystaffdirectory.personofficeaddress" />
+    <addr class="adr" tal:content="structure provider:facultystaffdirectory.personofficeaddress" />
 </div>
 

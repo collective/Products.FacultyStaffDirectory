@@ -8,9 +8,9 @@ __docformat__ = 'plaintext'
 #
 
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.tests.testPlone import testPlone
+from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
 
-class testSpecialty(testPlone):
+class testSpecialty(FacultyStaffDirectoryTestCase):
     """Test-cases for class(es) Specialty."""
 
     def afterSetUp(self):
@@ -25,17 +25,6 @@ class testSpecialty(testPlone):
         #Assign a person to a specialty
         self.specialty.addReference(self.person, relationship='SpecialtyInformation')
         self.failUnless(self.person in self.specialty.getPeople())
-        
-    def testGetClassifications(self):
-        # There aren't any people associated with this classification. We should get a [] back.
-        classifications = self.specialty.getClassifications()
-        self.failUnless(classifications == [])
-        # Add a person, we should now get the full list
-        self.specialty.addReference(self.person, 'SpecialtyInformation')
-        # And it should be full of brains. Braaaaains.
-        for cls in self.specialty.getClassifications():
-            self.failUnless(cls.getObject())
-        self.failUnless([brain.getObject() for brain in self.specialty.getClassifications()] == [brain.getObject() for brain in self.directory.getClassifications()])
         
     def testAddSubSpecialty(self):
         #Make sure we can add a specialty within a specialty

@@ -13,14 +13,13 @@ from Products.FacultyStaffDirectory.config import *
 from zope.interface import implements
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IPropertiesProvider
-from Products.FacultyStaffDirectory.interfaces import ICommittee, IGroupingProvidingMembership
-from Acquisition import aq_inner, aq_parent
+from Products.FacultyStaffDirectory.interfaces import ICommittee
 from Products.FacultyStaffDirectory.permissions import ASSIGN_COMMITTIES_TO_PEOPLE
 
 schema = Schema((
 
     RelationField(
-        name='members',
+        name='people',
         widget=ReferenceBrowserWidget(
             label=u'Members',
             label_msgid='FacultyStaffDirectory_label_members',
@@ -46,10 +45,12 @@ class Committee(PersonGrouping):
     security = ClassSecurityInfo()
     __implements__ = (getattr(PersonGrouping,'__implements__',()),)
     # zope3 interfaces
-    implements(ICommittee, IPropertiesProvider, IGroupingProvidingMembership)
+    implements(ICommittee, IPropertiesProvider)
     meta_type = portal_type = 'FSDCommittee'
     _at_rename_after_creation = True
     schema = Committee_schema
+    relationship = 'CommitteeMembership'
+    
     # Methods
     security.declareProtected(View, 'getMembershipInformation')
     def getMembershipInformation(self, person):
@@ -63,35 +64,4 @@ class Committee(PersonGrouping):
         else:
             return refs[0].getContentObject()
 
-    security.declareProtected(View, 'getPeople')
-    def getPeople(self):
-        """ Return the people in this committee.
-            Mainly for context-sensitive classifications
-        """
-        return self.getMembers()
-
-    security.declareProtected(View, 'getRawPeople')
-    def getRawPeople(self):
-        """ Return the people associations associated with this committee
-        """
-        return self.getRawMembers()
-
-    #
-    # Validators
-    #
-    security.declarePrivate('validate_id')
-    def validate_id(self, value):
-        """Ensure the id is unique, also among groups globally
-        """
-        if value != self.getId():
-            parent = aq_parent(aq_inner(self))
-            if value in parent.objectIds():
-                return "An object with id '%s' already exists in this folder" % value
-        
-            groups = getToolByName(self, 'portal_groups')
-            if groups.getGroupById(value) is not None:
-                return "A group with id '%s' already exists in the portal" % value
-
 registerType(Committee, PROJECTNAME)
-# end of class Committee
-

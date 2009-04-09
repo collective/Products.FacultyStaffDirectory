@@ -27,11 +27,12 @@
                    tal:condition="here/Description">
                     Description
                 </p>
-                <tal:block tal:define="classificationExists nocall:classification | nothing;
+                <div tal:define="classificationExists nocall:classification | nothing;
                                        classificationContext python:classificationExists and context.contextualClassification(classification) or context;
                                        people classificationContext/getSortedPeople;
                                        width context/getClassificationViewThumbnailWidth"
-                           metal:define-macro="list_people">
+                           metal:define-macro="list_people"
+                           class="standardView">
                     <div class="classificationListing" tal:condition="people">   
                         <metal:block define-slot="classification_header" tal:condition="nocall:classificationExists">
                             <h2>
@@ -80,7 +81,7 @@
 
                         </div>   
                     </div>		
-                </tal:block>
+                </div>
             </div>
 		</metal:block>
 	</body>

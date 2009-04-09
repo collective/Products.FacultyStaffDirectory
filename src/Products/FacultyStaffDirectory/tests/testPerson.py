@@ -8,11 +8,14 @@ __docformat__ = 'plaintext'
 #
 
 import os
+from zope.component import getUtility
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IUserAuthentication
 from Products.Relations.processor import process
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.tests.testPlone import testPlone, PACKAGE_HOME
+from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
+from Products.FacultyStaffDirectory.tests.base import PACKAGE_HOME
+from Products.FacultyStaffDirectory.interfaces import IConfiguration
 
 def loadImage(name, size=0):
     """Load image from testing directory."""
@@ -30,7 +33,7 @@ TEST_JPEG_LEN = len(TEST_JPEG)
 TEST_TIFF = loadImage('testUserPhoto.tif')
 TEST_TIFF_LEN = len(TEST_TIFF)
 
-class testPerson(testPlone):
+class testPerson(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
         self.loginAsPortalOwner()
         self.directory = self.getPopulatedDirectory()
@@ -162,16 +165,16 @@ class testWithoutSpecialties(testPerson):
     def testPhoneNumberValidation(self):
         """ Make sure we're validating the phone number based on the regex in the configlet. """
         
-        fsd_tool = getToolByName(self.portal, TOOLNAME)
-        desc = fsd_tool.getPhoneNumberDescription()
+        fsd_tool = getUtility(IConfiguration)
+        desc = fsd_tool.phoneNumberDescription
         self.failUnless(self.person.validate_officePhone('(555) 555-5555') is None)
-        self.failUnless(self.person.validate_officePhone('555 555-5555') == "Please provide the phone number in the format %s" % desc)
+        self.failUnlessEqual(self.person.validate_officePhone('555 555-5555'), "Please provide the phone number in the format %s" % desc)
         
         # Make sure a blank value for the phone number results in no validation
         self.failUnless(self.person.validate_officePhone('') is None, "A blank value for officePhone should not be validated since officePhone is not a required field.")
         
         # Make sure a blank value for the regex results in no validation.
-        fsd_tool.setPhoneNumberRegex('')
+        fsd_tool.phoneNumberRegex = u''
         self.failUnless(self.person.validate_officePhone('555 555-5555') is None, "A blank value for phoneNumberRegex should result in any value being accepted")
     
     def testNoSpecialties(self):
@@ -224,15 +227,6 @@ class testWithoutSpecialties(testPerson):
            put one back in."""
         self.failUnless('default' not in self.person.schema.getSchemataNames())
     
-    def testBiographyHTMLOutput(self):
-        """ Make sure the HTML returned by our rich text field is getting cleaned up and we don't
-            get effectively blank output.
-        """
-        field = self.person.getField('biography')
-        field.set(self.person, '\r\n<p><br /></p>\r\n')
-        if self.person.getTidyOutput(field):
-            self.failUnlessEqual(field.getRaw(self.person), self.person.getTidyOutput(field))
-    
     def testFTISetup(self):
         """ Make sure the FTI is pulling info from the GS types profile """
         self.failUnless(self.portal.portal_types['FSDPerson'].Title() != "AT Content Type")
@@ -272,8 +266,8 @@ class testWithoutSpecialties(testPerson):
         uname = u.getUserName()
         self.failUnlessEqual(uname, 'abc123', "incorrect value for getUserName.")
         
-        fsd_tool = getToolByName(self.portal, TOOLNAME)
-        if fsd_tool.getUseInternalPassword():
+        fsd_tool = getUtility(IConfiguration)
+        if fsd_tool.useInternalPassword:
             self.person.setPassword("chewy1")
             self.failIf(u.verifyCredentials(    {                                    }), "somehow verified empty credentials")
             self.failIf(u.verifyCredentials(    {'login':'abc123','password':''      }), "verified missing password")
@@ -384,17 +378,17 @@ class testWithoutSpecialties(testPerson):
         auth = IUserAuthentication(self.person);
         
         #test setting password directly, verify that verifyCredentials works as expected
-        fsd_tool = getToolByName(self.portal, TOOLNAME)
+        fsd_tool = getUtility(IConfiguration)
         self.person.setPassword('secret1')
-        if fsd_tool.getUseInternalPassword():
+        if fsd_tool.useInternalPassword:
             self.failUnless(auth.verifyCredentials({'login':'abc123','password':'secret1'}), "failed to verify correct login and password, setting password directly")
         else:
             self.failIf(auth.verifyCredentials({'login':'abc123','password':'secret1'}), "internal password not used, method should return none, setting password directly.  Value returned: %s" % returnval)
         
         # now set password using the userChanger method and verify that it worked
         user.doChangeUser('abc123', 'secret2')
-        fsd_tool = getToolByName(self.portal, TOOLNAME)
-        if fsd_tool.getUseInternalPassword():
+        fsd_tool = getUtility(IConfiguration)
+        if fsd_tool.useInternalPassword:
             self.failUnless(auth.verifyCredentials({'login':'abc123','password':'secret2'}), "failed to verify correct login and password, testing doChangeUser()")
         else:
             self.failIf(auth.verifyCredentials({'login':'abc123','password':'secret2'}), "internal password not used, method should return none, testing doChangeUser().  Value returned: %s" % returnval)
@@ -420,11 +414,9 @@ class testWithoutSpecialties(testPerson):
     
     def testTurnOffMembership(self):
         """ Make sure Persons still work after disabling membership support. """
-        fsd_tool = getToolByName(self.portal, TOOLNAME)
+        fsd_tool = getUtility(IConfiguration)
         # Disable membership support for FSDPerson
-        fsd_tool.setEnableMembraneTypes(tuple([t for t in fsd_tool.getEnableMembraneTypes() if t != 'FSDPerson']))
-        # Manually run the at_post_edit_script to fire the FacultyStaffDirectoryModifiedEvent.
-        fsd_tool.at_post_edit_script()
+        fsd_tool.enableMembraneTypes = set([t for t in fsd_tool.enableMembraneTypes if t != 'FSDPerson'])
         # Double check to make sure that FSDPerson is really detatched from membrane
         userFolder = getToolByName(self.portal, 'acl_users')
         self.failIf(userFolder.getUserById('abc123'))
@@ -437,6 +429,17 @@ class testWithoutSpecialties(testPerson):
             person.at_post_create_script()
         except KeyError:
             self.Fail("FacultyStaffDirectory incorrectly tried to find the user attached to a FSPerson while membrane support was disabled.")
+
+    def testMemberSearch(self):
+        """ Make sure that membrane is using the right fields for member searches. """
+        self.directory.invokeFactory(type_name="FSDPerson", id="cvf092", firstName="Another", lastName="Testperson")
+        self.directory.invokeFactory(type_name="FSDPerson", id="ope593", firstName="Somebody", lastName="Altogetherdifferent")
+
+        pas = getToolByName(self.portal, "acl_users")
+        searchParams = {'fullname':'Test'}
+        results = pas.searchUsers(**searchParams)
+        self.failUnless(len(results) == 2, "Search did not return the right number of members. Expected 2, got %s." % len(results))
+        self.failUnless('cvf092' in [a['id'] for a in results], "Expected member cvf092 to be in the search results.")
 
     # Err... can't actually test for this since it's being handled in pre_edit_setup. Any ideas?
     # def testDefaultEditor(self):
@@ -462,14 +465,12 @@ class testWithSpecialties(testPerson):
     
     def _makeAndAssignSpecialties(self):
         """Make a bunch of specialties, publish them, and assign them all to the test person."""
-        workflowTool = getToolByName(self.portal, 'portal_workflow')
         def makeSpecialties(node, container, explicitSpecialties):
             """Make specialties inside `container` according to the tree-shaped dict `node`. Append the created specialties (unless marked as {'associated': False}) to the list `explicitSpecialties`."""
             for child in node.get('children', []):
                 id = child['id']
                 container.invokeFactory(type_name='FSDSpecialty', id=id, title=child['title'])
                 newSpecialty = container[id]
-                workflowTool.doActionFor(newSpecialty, 'publish')
                 if child.get('associated', True):
                     explicitSpecialties.append(newSpecialty)
                 makeSpecialties(child, newSpecialty, explicitSpecialties)

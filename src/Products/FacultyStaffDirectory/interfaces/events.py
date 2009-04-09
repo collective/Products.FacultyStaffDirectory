@@ -5,18 +5,9 @@ __docformat__ = 'plaintext'
 
 from zope.interface import Interface, Attribute
 
+class IMembraneIntegrationModifiedEvent(Interface):
+    """Event fired when membrane integration is enabled or disabled for one or more FSD types"""
 
-class ICommitteeModifiedEvent(Interface):
-    """An event fired when a Committee object is saved."""
-    context = Attribute("The content object that was saved.")
-
-class IFacultyStaffDirectoryModifiedEvent(Interface):
-    """An event fired when an FacultyStaffDirectory object is saved."""
-    context = Attribute("The content object that was saved.")
-                               
 class IPersonModifiedEvent(Interface):
     """An event fired when a person object is saved"""
     context = Attribute("The content object that was saved.")
-
-class IFacultyStaffDirectoryToolModifiedEvent(Interface):
-    """An event fired when the facultystaffdirectory_tool is saved."""

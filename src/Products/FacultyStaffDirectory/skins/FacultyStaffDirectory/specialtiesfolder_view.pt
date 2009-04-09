@@ -11,7 +11,7 @@
 
   <body>
   
-    <metal:fill fill-slot="main" tal:define="specialties python:context.getFolderContents({'portal_type':'FSDSpecialty', 'sort_on':'getObjPositionInParent'})">
+    <metal:fill fill-slot="main" tal:define="specialties python:context.getFolderContents({'portal_type': 'FSDSpecialty', 'sort_on': 'sortable_title'})">
   
         <h1 tal:content="context/Title"></h1>
         <div class="facultyStaffDirectory specialtiesFolderView">

@@ -1,3 +1,4 @@
+from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL, ACTIVE_STATUS_CATEGORY
 from Products.membrane.utils import generateCategorySetIdForType
@@ -8,9 +9,8 @@ def modifyMembraneTypes(event):
     """Check facultystaffdirectory_tool schemata,
        switch on/off membrane types based on the information we find there.
     """
-    context = event.context
-    mbtool = getToolByName(context, MEMBRANE_TOOL)
-    enable_types = context.getEnableMembraneTypes()
+    mbtool = getToolByName(getSite(), MEMBRANE_TOOL)
+    enable_types = event.context.enableMembraneTypes
     current_types = mbtool.listMembraneTypes()
     changed_something = False
 

@@ -1,1 +1,1 @@
-<span class="state" tal:content="view/context/getOfficeState" />
+<span class="region" tal:content="view/context/getOfficeState" />

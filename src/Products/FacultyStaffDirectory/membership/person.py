@@ -1,9 +1,7 @@
 from Acquisition import aq_inner, aq_parent
 from zope.interface import implements
-from zope.component import adapts
+from zope.component import adapts, getUtility
 from sha import sha
-
-from Products.CMFCore.utils import getToolByName
 
 from zope.app.annotation.interfaces import IAnnotations
 
@@ -12,8 +10,8 @@ from Products.membrane.interfaces import IUserAuthentication
 from Products.membrane.interfaces import IUserRoles
 from Products.membrane.interfaces import IMembraneUserManagement
 from Products.FacultyStaffDirectory.interfaces import IPerson
+from Products.FacultyStaffDirectory.interfaces import IConfiguration
 from Products.FacultyStaffDirectory.config import PASSWORD_KEY
-from Products.FacultyStaffDirectory.config import TOOLNAME as FSD_TOOL
 
 class UserRelated(object):
     """Provide a user id for persons.
@@ -49,8 +47,7 @@ class UserAuthentication(object):
         """Authenticate against the password stored via attribute on this person,
         or pass authentication on to the next PAS plugin
         """
-        fsd_tool = getToolByName(self.context,FSD_TOOL)
-        if (fsd_tool.useInternalPassword):
+        if getUtility(IConfiguration).useInternalPassword:
             login = credentials.get('login', None)
             password = credentials.get('password', None)
             

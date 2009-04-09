@@ -5,7 +5,7 @@
         <!--
             TODO pull the portrait width out into the view code
         -->
-            <img tal:replace="structure view/context/image_normal" />
+            <img tal:replace="structure python:view.context.getWrappedField('image').tag(view.context, scale='normal', css_class='photo')" />
         </tal:block>
     </a>
 </div>

@@ -1,1 +1,1 @@
-<span class="city" tal:content="view/context/getOfficeCity" />
+<span class="locality" tal:content="view/context/getOfficeCity" />

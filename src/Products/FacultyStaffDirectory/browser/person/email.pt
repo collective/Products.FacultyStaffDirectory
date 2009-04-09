@@ -1,4 +1,4 @@
-<div tal:condition="view/context/getEmail" class="email">
+<div tal:condition="view/context/getEmail">
      <span i18n:translate="FacultyStaffDirectory_label_email">Email</span>:
-     <span tal:replace="view/context/getEmail" />
+     <span class="email" tal:replace="view/context/getEmail" />
 </div>

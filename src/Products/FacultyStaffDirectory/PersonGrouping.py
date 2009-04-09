@@ -4,12 +4,17 @@ __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_inner, aq_parent
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema
 from Products.FacultyStaffDirectory.config import *
+from Products.FacultyStaffDirectory.interfaces import IConfiguration
+from Products.FacultyStaffDirectory.interfaces.persongrouping import IPersonGrouping
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
+from zope.component import getUtility
+from zope.interface import implements
 
 schema =  ATContentTypeSchema.copy() + Schema((
 
@@ -37,6 +42,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
     __implements__ = (ATCTContent.__implements__,
                       getattr(OrderedBaseFolder,'__implements__', ()),                      
                      )
+    implements(IPersonGrouping)
 
     meta_type = portal_type = 'FSDPersonGrouping'
 
@@ -45,35 +51,59 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
     # Move the description field, but not in Plone 2.5 since it's already in the metadata tab. Although, 
     # decription and relateditems are occasionally showing up in the "default" schemata. Move them
     # to "metadata" just to be safe.
-    if 'categorization' in PersonGrouping_schema.getSchemataNames():
-        PersonGrouping_schema.changeSchemataForField('description', 'categorization')
-    else:
-        PersonGrouping_schema.changeSchemataForField('description', 'metadata')
+    if 'categorization' not in PersonGrouping_schema.getSchemataNames():
         PersonGrouping_schema.changeSchemataForField('relatedItems', 'metadata')
         
     _at_rename_after_creation = True
     schema = PersonGrouping_schema
-
-    security.declareProtected(View, 'getClassifications')
-    def getClassifications(self):
-        """ Ignore the default FacultyStaffDirectory getClassifications so that we can use
-            PersonGrouping subclasses outside of a FacultyStaffDirectory object. Making the assumption that there
-            will only be one FacultyStaffDirectory and that all Person objects will be created
-            inside of it (see the README for some justification for this).
+    
+    relationship = None
+    
+    security.declareProtected(View, 'getPeople')
+    def getPeople(self):
+        """ Return a list of the catalog brains of people related to this grouping only
         """
         
-        people = self.getPeople()
-        if people:
-            fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
-            return self.getDirectoryRoot().getClassifications()
-        else:
-            return []
-
-    security.declareProtected(View, 'getSortedPeople')
+        return self.getRefs(self.relationship)
+    
+    def getDeepPeople(self):
+        """ Return a flat list of the catalog brains of people related to this grouping 
+            and all groupings nested inside this one, recursively
+            
+            At this point, the list is in no way asserted to be unique.  Should we 
+            be deleting duplicates?
+        """
+        people = []
+        pc = getToolByName(self, 'portal_catalog')
+        fsd_util = getUtility(IConfiguration)
+        groupings = pc(path=self.absolute_url_path(), portal_type=list(fsd_util.enableMembraneTypes))
+        for group in groupings:
+            people.extend(group.getObject().getRefs(self.relationship))
+        
+        return people
+        
     def getSortedPeople(self):
         """Return a list of people, sorted by SortableName."""
-        people = self.getPeople()
-        return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
+        people = list(self.getPeople())
+        people.sort(key=lambda x: x.getSortableName)
+        
+        return people
+
+    #
+    # Validators
+    #
+    security.declarePrivate('validate_id')
+    def validate_id(self, value):
+        """Ensure the id is unique, also among groups globally
+        """
+        if value != self.getId():
+            parent = aq_parent(aq_inner(self))
+            if value in parent.objectIds():
+                return "An object with id '%s' already exists in this folder" % value
+        
+            groups = getToolByName(self, 'portal_groups')
+            if groups.getGroupById(value) is not None:
+                return "A group with id '%s' already exists in the portal" % value
+        
 
 registerType(PersonGrouping, PROJECTNAME)
-

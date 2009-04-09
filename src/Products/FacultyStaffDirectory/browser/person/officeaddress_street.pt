@@ -1,1 +1,1 @@
-<span class="street" tal:content="view/context/getOfficeAddress" />
+<span class="street-address" tal:content="view/context/getOfficeAddress" />

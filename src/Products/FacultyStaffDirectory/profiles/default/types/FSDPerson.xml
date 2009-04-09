@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
-<object name="Person" meta_type="Factory-based Type Information"
+<object name="FSDPerson"
+   meta_type="Factory-based Type Information with dynamic views"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title">Person</property>
- <property name="description">Holds information about a single person</property>
+ <property
+    name="description">Holds information about a single person</property>
  <property name="content_icon">user_suit.png</property>
  <property name="content_meta_type">FSDPerson</property>
  <property name="product">FacultyStaffDirectory</property>
@@ -12,8 +14,8 @@
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
-   <element value="FSDCourse"/>
-   <element value="BibliographyFolder"/>   
+  <element value="FSDCourse"/>
+  <element value="BibliographyFolder"/>
  </property>
  <property name="allow_discussion">False</property>
  <alias from="(Default)" to="index"/>
@@ -21,9 +23,10 @@
  <alias from="view" to="index"/>
  <alias from="index.html" to="index"/>
  <alias from="object_rename" to="pre_edit_setup"/>
+ <alias from="properties" to="base_metadata"/>
+ <alias from="sharing" to="folder_localrole_form"/>
  <alias from="vCard" to="vcard_view"/>
  <alias from="vcard" to="vcard_view"/>
- 
  <action title="View" action_id="view" category="object" condition_expr=""
     url_expr="string:${object_url}/" visible="True">
   <permission value="View"/>
@@ -32,13 +35,29 @@
     url_expr="string:${object_url}/edit" visible="True">
   <permission value="Modify portal content"/>
  </action>
- <action title="vCard" action_id="vcard" category="document_actions" condition_expr=""
-    url_expr="string:${object_url}/vCard" visible="True">
+ <action title="Properties" action_id="metadata" category="object"
+    condition_expr="python:0" url_expr="string:${object_url}/base_metadata"
+    visible="False">
+  <permission value="Modify portal content"/>
+ </action>
+ <action title="References" action_id="references" category="object"
+    condition_expr="object/archetype_tool/has_graphviz"
+    url_expr="string:${object_url}/reference_graph" visible="True">
+  <permission value="Modify portal content"/>
+  <permission value="Review portal content"/>
+ </action>
+ <action title="vCard" action_id="vcard" category="document_actions"
+    condition_expr="" url_expr="string:${object_url}/vCard" visible="True">
   <permission value="View"/>
  </action>
- <action title="Kupu Preview" action_id="kupupreview" category="object" condition_expr="python:0"
-    url_expr="string:${object_url}/image_thumb" visible="True">
+ <action title="Kupu Preview" action_id="kupupreview" category="object"
+    condition_expr="python:0" url_expr="string:${object_url}/image_thumb"
+    visible="True">
   <permission value="View"/>
  </action>
-
+ <action title="Sharing" action_id="local_roles" category="object"
+    condition_expr="python:0"
+    url_expr="string:${object_url}/folder_localrole_form" visible="False">
+  <permission value="View"/>
+ </action>
 </object>

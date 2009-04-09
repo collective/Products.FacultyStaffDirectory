@@ -1,7 +1,7 @@
 <div class="bosses"
      tal:define="bosses python:context.getReferences(relationship='assistants_people');
-                 member python:context.portal_membership.getAuthenticatedMember()"
-     tal:condition="python:bosses and member.checkPermission('Add portal content', here)">
+                 mtool python:context.portal_membership"
+     tal:condition="python:bosses and mtool.checkPermission('Add portal content', here)">
   <h3 tal:define="myName context/Title">
     <span i18n:translate="FacultyStaffDirectory_label_bosses">
         <span tal:replace="myName" i18n:name="fullName">My Name</span> is an assistant to</span>:</h3> 

@@ -1,7 +1,8 @@
+from zope.component import getUtility
 from Acquisition import aq_parent, aq_inner
-
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IUserRelated
+from Products.FacultyStaffDirectory.interfaces import IConfiguration
 
 def modifyPersonOwnership(event):
     """Let people own their own objects and modify their own user preferences.
@@ -12,8 +13,8 @@ def modifyPersonOwnership(event):
     context = event.context
 
     # Only run this if FSDPerson is an active membrane type.
-    fsd_tool = getToolByName(context, 'facultystaffdirectory_tool')
-    if 'FSDPerson' in fsd_tool.getEnableMembraneTypes():
+    fsd_tool = getUtility(IConfiguration)
+    if 'FSDPerson' in fsd_tool.enableMembraneTypes:
 
         catalog = getToolByName(context, 'portal_catalog')
         userId = IUserRelated(context).getUserId()

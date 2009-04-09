@@ -37,7 +37,6 @@ DirectoryView.registerDirectory('skins', product_globals)
 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.GenericSetup import EXTENSION, profile_registry
-from Products.FacultyStaffDirectory.tools.FacultyStaffDirectoryTool import FacultyStaffDirectoryTool
 
 def initialize(context):
 
@@ -89,11 +88,3 @@ def initialize(context):
         product='FacultyStaffDirectory', 
         profile_type=EXTENSION, 
         for_=Products.CMFPlone.interfaces.IPloneSiteRoot) 
-        
-    # Register the FacultyStaffDirectory tool    
-    cmfutils.ToolInit(
-        'Faculty/Staff Directory Tool',
-		product_name='FacultyStaffDirectory',
-		tools=(FacultyStaffDirectoryTool,),
-        icon='skins/FacultyStaffDirectory/group.png').initialize(context)
-

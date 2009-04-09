@@ -1,18 +1,32 @@
+<?xml version="1.0"?>
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:browser="http://namespaces.zope.org/browser"
            xmlns:five="http://namespaces.zope.org/five"
            i18n_domain="FacultyStaffDirectory">
+    
+    <browser:page
+        for="Products.CMFCore.interfaces.ISiteRoot"
+        name="fsd-controlpanel"
+        class=".configuration.ConfigurationForm"
+        permission="cmf.ManagePortal"
+        allowed_attributes="template"
+        />
 
-        <!-- Add contentmenu so that the menuitem directives in configure.zcmls below this work. -->
-        <include package="plone.app.contentmenu" />
+    <browser:resource
+        name="group.png"
+        image="group.png"
+        />
 
-        <include package=".person" />
-        <!-- <include package=".specialty" /> -->
-        <include package=".persongrouping" />
-        <include package=".course" />
-        <!-- <include package=".classification" /> -->
-        <!-- <include package=".committee" /> -->
-        <!-- <include package=".department" /> -->
-        <include package=".directory" />
+    <!-- Add contentmenu so that the menuitem directives in configure.zcmls below this work. -->
+    <include package="plone.app.contentmenu" />
+
+    <include package=".person" />
+    <!-- <include package=".specialty" /> -->
+    <include package=".persongrouping" />
+    <include package=".course" />
+    <!-- <include package=".classification" /> -->
+    <!-- <include package=".committee" /> -->
+    <!-- <include package=".department" /> -->
+    <include package=".directory" />
 
 </configure>

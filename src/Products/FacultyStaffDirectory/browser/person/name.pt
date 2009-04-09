@@ -1,7 +1,7 @@
-    <h1>
-    <span tal:content="view/context/firstName" />
-    <span tal:content="view/context/middleName" />
-    <span tal:content="view/context/lastName" />
-    <span tal:content="view/context/suffix" />
+    <h1 class="fn n">
+    <span class="given-name" tal:content="view/context/firstName" />
+    <span class="additional-name" tal:content="view/context/middleName" />
+    <span class="family-name" tal:content="view/context/lastName" />
+    <span class="honorific-suffix" tal:content="view/context/suffix" />
     </h1>
 

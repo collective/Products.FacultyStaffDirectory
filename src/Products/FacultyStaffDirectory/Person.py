@@ -12,6 +12,7 @@ from AccessControl import ClassSecurityInfo
 from Acquisition import aq_inner, aq_parent
 from DateTime import DateTime
 from zope.app.annotation.interfaces import IAttributeAnnotatable, IAnnotations
+from zope.component import getUtility
 from zope.event import notify
 from zope.interface import implements, classImplements
 from Products.Archetypes.atapi import *
@@ -29,7 +30,7 @@ from Products.validation import validation
 from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.interfaces import IPerson, IPersonModifiedEvent
+from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonModifiedEvent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_DEPARTMENTS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, ASSIGN_SPECIALTIES_TO_PEOPLE, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 
@@ -253,15 +254,19 @@ schema = ATContentTypeSchema.copy() + Schema((
     
     RelationField(
         name='classifications',
-        vocabulary="_classificationReferences",
-        widget=ReferenceWidget
+        widget=ReferenceBrowserWidget
         (
             label=u'Classifications',
             label_msgid='FacultyStaffDirectory_label_classifications',
             i18n_domain='FacultyStaffDirectory',
+            base_query={'portal_type': 'FSDClassification', 'sort_on': 'sortable_title'},
+            allow_browse=0,
+            allow_search=1,
+            show_results_without_query=1,
         ),
         write_permission=ASSIGN_CLASSIFICATIONS_TO_PEOPLE,
         schemata="Basic Information",
+        allowed_types=('FSDClassification'),
         multiValued=True,
         relationship='people_classifications'
     ),
@@ -330,7 +335,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label_msgid='FacultyStaffDirectory_label_password',
             description_msgid='FacultyStaffDirectory_description_password',
             i18n_domain='FacultyStaffDirectory',
-            condition="python:here.facultystaffdirectory_tool.getUseInternalPassword() and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
+            condition="python:portal.restrictedTraverse('++fsdmembership++snork').useInternalPassword and 'FSDPerson' in portal.restrictedTraverse('++fsdmembership++snork').enableMembraneTypes"
         ),
         schemata="Basic Information",
     ),
@@ -347,7 +352,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label_msgid='FacultyStaffDirectory_label_confirmPassword',
             description_msgid='FacultyStaffDirectory_description_confirmPassword',
             i18n_domain='FacultyStaffDirectory',
-            condition="python:here.facultystaffdirectory_tool.getUseInternalPassword() and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
+            condition="python:portal.restrictedTraverse('++fsdmembership++snork').useInternalPassword and 'FSDPerson' in portal.restrictedTraverse('++fsdmembership++snork').enableMembraneTypes"
         ),
         schemata="Basic Information",
     ),
@@ -359,7 +364,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             description=u"Your preferred language.",
             description_msgid="help_preferred_language",
             i18n_domain='plone',
-            condition="python:'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
+            condition="python:'FSDPerson' in portal.restrictedTraverse('++fsdmembership++snork').enableMembraneTypes"
         ),
         write_permission=SetOwnProperties,
         schemata="User Settings",
@@ -375,7 +380,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             description_msgid="help_content_editor",
             i18n_domain='plone',
             format="select",
-            condition="python:'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
+            condition="python:'FSDPerson' in portal.restrictedTraverse('++fsdmembership++snork').enableMembraneTypes"
         ),
         write_permission=SetOwnProperties,
         schemata="User Settings",
@@ -391,7 +396,7 @@ schema = ATContentTypeSchema.copy() + Schema((
                          "Ask your administrator for more information if needed.",
             description_msgid="help_content_ext_editor",
             i18n_domain='plone',
-            condition="python:here.portal_properties.site_properties.ext_editor and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()",
+            condition="python:here.portal_properties.site_properties.ext_editor and 'FSDPerson' in portal.restrictedTraverse('++fsdmembership++snork').enableMembraneTypes",
             ),
             write_permission=SetOwnProperties,
             schemata="User Settings",
@@ -406,7 +411,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             description_msgid="help_look",
             i18n_domain='plone',
             format="select",
-            condition="python:here.portal_skins.allow_any and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()",
+            condition="python:here.portal_skins.allow_any and 'FSDPerson' in portal.restrictedTraverse('++fsdmembership++snork').enableMembraneTypes",
         ),
         write_permission=SetOwnProperties,
         schemata="User Settings",
@@ -421,7 +426,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             description=u"Determines if Short Names (also known as IDs) are changable when editing items. If Short Names are not displayed, they will be generated automatically.",
             description_msgid="help_display_names",
             i18n_domain='plone',
-            condition="python:here.portal_properties.site_properties.visible_ids and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
+            condition="python:here.portal_properties.site_properties.visible_ids and 'FSDPerson' in portal.restrictedTraverse('++fsdmembership++snork').enableMembraneTypes"
             ),
             write_permission=SetOwnProperties,
             schemata="User Settings",
@@ -492,7 +497,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         """Notify that the Person has been modified.
         """
         notify(PersonModifiedEvent(self))
-    
+
     security.declareProtected(View, 'at_post_edit_script')
     def at_post_edit_script(self):
         """Notify that the Person has been modified.
@@ -523,9 +528,12 @@ class Person(OrderedBaseFolder, ATCTContent):
         urls = list(self.getWebsites())
         urls.append(self.absolute_url())
         for url in urls:
-          out.write(foldLine("URL:%s\n" % url))
+            out.write(foldLine("URL:%s\n" % url))
         if self.getImage():
-            out.write(foldLine("PHOTO;ENCODING=BASE64;TYPE=JPEG:%s\n" % self.image_thumb.data.encode('base-64')))
+            encData = self.image_thumb.data.encode('base-64')
+            # indent the data block:
+            indentedData = '\n  '.join(encData.strip().split('\n'))
+            out.write("PHOTO;ENCODING=BASE64;TYPE=JPEG:\n  %s\n" % indentedData)
         out.write("REV:%s\n" % DateTime(self.ModificationDate()).ISO8601())
         out.write("PRODID:WebLion Faculty/Staff Directory\nEND:VCARD")
         return n2rn(out.getvalue())
@@ -560,11 +568,6 @@ class Person(OrderedBaseFolder, ATCTContent):
             t = t + ", " + self.getSuffix()
         
         return t
-    
-    security.declarePrivate('_classificationReferences')
-    def _classificationReferences(self):
-        """Return a list of Classifications this Person can be referenced to."""
-        return [(c.UID, c.Title) for c in self.aq_parent.getFolderContents({'portal_type': 'FSDClassification'})]
     
     security.declarePrivate('_availableEditors')
     def _availableEditors(self):
@@ -725,7 +728,6 @@ class Person(OrderedBaseFolder, ATCTContent):
         # Set the startup directory for the specialties field to the SpecialtiesFolder or, failing
         # that, the root of the FacultyStaffDirectory:
         urlTool = getToolByName(self, 'portal_url')
-        fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
         fsd = self.getDirectoryRoot()
         if fsd and fsd.getSpecialtiesFolder():
             url = urlTool.getRelativeContentURL(fsd.getSpecialtiesFolder())
@@ -733,15 +735,14 @@ class Person(OrderedBaseFolder, ATCTContent):
             url = ""
         self.schema['specialties'].widget.startup_directory = '/%s' % url
         
-        fsd_tool = getToolByName(self,TOOLNAME)
-        if (fsd_tool.getPhoneNumberRegex()):
-            self.schema['officePhone'].widget.description = u"Example: %s" % fsd_tool.getPhoneNumberDescription()
-        if (fsd_tool.getIdLabel()):
-            self.schema['id'].widget.label = u"%s" % fsd_tool.getIdLabel()
+        fsd_utility = getUtility(IConfiguration)
+        if fsd_utility.phoneNumberRegex:
+            self.schema['officePhone'].widget.description = u"Example: %s" % fsd_utility.phoneNumberDescription
+        if fsd_utility.idLabel:
+            self.schema['id'].widget.label = u"%s" % fsd_utility.idLabel
 
         # Make sure the default for the editor field is the same as the site defaut. No idea why this isn't being handled properly.
-        memberProps = getToolByName(self, 'portal_memberdata')
-        self.schema['userpref_wysiwyg_editor'].default = memberProps.wysiwyg_editor
+        self.schema['userpref_wysiwyg_editor'].default = getToolByName(self, 'portal_memberdata').wysiwyg_editor
         
         return self.base_edit()
     
@@ -783,45 +784,6 @@ class Person(OrderedBaseFolder, ATCTContent):
             # Add the new portrait
             md.portraits._setObject(id=self.id, object=self.getImage())
     
-    security.declareProtected(ModifyPortalContent, 'setBiography')
-    def setBiography(self, value, **kwargs):
-        """Body text mutator
-        
-        * hook into mxTidy and replace the value with the tidied value
-        """
-        field = self.getField('biography')
-        # XXX this is ugly
-        # When an object is initialized the first time we have to
-        # set the filename and mimetype.
-        # In the case the value is empty/None we must not set the value because
-        # it will overwrite uploaded data like a pdf file.
-        if (value is None or value == ""):
-            if not field.getRaw(self):
-                # set mimetype and file name although the fi
-                if 'mimetype' in kwargs and kwargs['mimetype']:
-                    field.setContentType(self, kwargs['mimetype'])
-                if 'filename' in kwargs and kwargs['filename']:
-                    field.setFilename(self, kwargs['filename'])
-            else:
-                return
-        
-        # hook for mxTidy / isTidyHtmlWithCleanup validator
-        tidyOutput = self.getTidyOutput(field)
-        if tidyOutput:
-            value = tidyOutput
-        
-        field.set(self, value, **kwargs) # set is ok
-    
-    security.declarePrivate('getTidyOutput')
-    def getTidyOutput(self, field):
-        """Get the tidied output for a specific field from the request
-        if available
-        """
-        request = getattr(self, 'REQUEST', None)
-        if request is not None and isinstance(request, HTTPRequest):
-            tidyAttribute = '%s_tidier_data' % field.getName()
-            return request.get(tidyAttribute, None)
-    
     security.declareProtected(SetOwnPassword, 'setPassword')
     def setPassword(self, value):
         """"""
@@ -847,19 +809,18 @@ class Person(OrderedBaseFolder, ATCTContent):
                 return "An object with ID '%s' already exists in this folder" % value
         
         # Make sure the ID fits the regex defined in the configuration:
-        fsd_tool = getToolByName(self, TOOLNAME)
-        regexString = fsd_tool.getIdRegex()
-        if not re.match(regexString, value):
-            return fsd_tool.getIdRegexErrorMessage()
+        fsd_utility = getUtility(IConfiguration)
+        if not re.match(fsd_utility.idRegex, value):
+            return fsd_utility.idRegexErrorMessage
     
     security.declarePrivate('validate_officePhone')
     def validate_officePhone(self, value=None):
         """ Make sure the phone number fits the regex defined in the configuration. """
         if value:
-            fsd_tool = getToolByName(self, TOOLNAME)
-            regexString = fsd_tool.getPhoneNumberRegex()
+            fsd_utility = getUtility(IConfiguration)
+            regexString = fsd_utility.phoneNumberRegex
             if regexString and not re.match(regexString, value):
-                return "Please provide the phone number in the format %s" % fsd_tool.getPhoneNumberDescription()
+                return "Please provide the phone number in the format %s" % fsd_utility.phoneNumberDescription
 
     
     security.declarePrivate('post_validate')

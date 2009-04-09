@@ -11,7 +11,8 @@ import Products
 from Products.CMFCore.utils import getToolByName
 from Products.PloneTestCase import PloneTestCase
 
-from Products.FacultyStaffDirectory.tests.testPlone import testPlone, PRODUCTS
+from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
+from Products.FacultyStaffDirectory.tests.base import PRODUCTS
 from Products.FacultyStaffDirectory.extenderInstallation import localAdaptersAreSupported
 
 
@@ -35,7 +36,7 @@ def _personIsExtended(person):
     return person.Schema().get('mobilePhone') is not None
 
 
-class TestExtensibilityBase(testPlone):
+class TestExtensibilityBase(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
         self.installer = getToolByName(self.portal, 'portal_quickinstaller')
         self.installer.installProducts([_extenderName])
