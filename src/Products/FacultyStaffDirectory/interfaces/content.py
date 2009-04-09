@@ -19,9 +19,6 @@ class IPersonGrouping(Interface):
 class IClassification(IPersonGrouping):
     """A classification"""
 
-class ISpecialty(IPersonGrouping):
-    """An academic specialty"""
-
 class ICommittee(IPersonGrouping):
     """A committee"""
     
@@ -42,12 +39,6 @@ class IFacultyStaffDirectoryAddable(Interface):
 
 class IPerson(Interface):
     """A person"""
-                               
-class ISpecialtiesFolder(Interface):
-    """An academic specialties folder"""
-
-class ISpecialtyInformation(Interface):
-    """information about an association of a specialty to a person"""
 
 class IFacultyStaffDirectoryTool(Interface):
     """The FacultyStaffDirectory tool"""

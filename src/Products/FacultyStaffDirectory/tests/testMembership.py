@@ -37,22 +37,17 @@ class testMembership(FacultyStaffDirectoryTestCase):
         self.committee = self.directory['committees'].mycommittee
         self.committee.invokeFactory(type_name="FSDCommittee", id="subcommittee", title="Subcommittee")
         self.nested_committee = self.committee.subcommittee
-        # setup some specialties
-        self.directory['specialties'].invokeFactory('FSDSpecialty',id='myspecialty',title="My Specialty")        
-        self.specialty = self.directory['specialties'].myspecialty
-        self.specialty.invokeFactory(type_name="FSDSpecialty", id="subspecialty", title="Subspecialty")
-        self.nested_specialty = self.specialty.subspecialty
         
     def testTypesAreGroups(self):
         """ Verify that all membrane-able content types are functioning as groups
         """
-        for obj in [self.classification, self.committee, self.specialty, self.directory]:
+        for obj in [self.classification, self.committee, self.directory]:
             self.failUnless(self.acl_users.getGroupById(obj.getId()),"unable to find group with id of this %s: %s" % (obj.portal_type ,obj.getId()))
         
     def testIGroupAdapts(self):
         """ verify that the IGroup interface successfully adapts our membrane content types
         """
-        for obj in [self.classification, self.committee, self.specialty, self.directory]:
+        for obj in [self.classification, self.committee, self.directory]:
             try:
                 IGroup(obj)
             except TypeError:
@@ -61,7 +56,7 @@ class testMembership(FacultyStaffDirectoryTestCase):
     def testGroupTitle(self):
         """ test the Title method of the IGroup adapter
         """
-        for obj in [self.classification, self.committee, self.specialty, self.directory]:
+        for obj in [self.classification, self.committee, self.directory]:
             g = IGroup(obj)
             obj.setTitle('New Title')
             self.failUnlessEqual(g.Title(), 'New Title', "IGroup is returning the incorrect title for %s.  Expected %s, got %s" % (obj.portal_type, obj.Title(), g.Title()))
@@ -70,7 +65,7 @@ class testMembership(FacultyStaffDirectoryTestCase):
         """ test the getGroupRoles method of the IGroup adapter
         """
         # first test the persongrouping types, which should not support roles
-        for obj in [self.classification, self.committee, self.specialty]:
+        for obj in [self.classification, self.committee]:
             g = IGroup(obj)
             # the IGroup adapter should never return roles for these types
             self.failIf(g.getRoles(), "%s should not provide roles" % obj.portal_type)
@@ -95,7 +90,7 @@ class testMembership(FacultyStaffDirectoryTestCase):
     def testGroupID(self):
         """ test the getGroupId method of the IGroup adapter
         """
-        for obj in [self.classification, self.committee, self.specialty, self.directory]:
+        for obj in [self.classification, self.committee, self.directory]:
             g = IGroup(obj)
             self.failUnlessEqual(g.getGroupId(), obj.getId(), "IGroup is returning the incorrect ID for %s.  Expected %s, got %s" % (obj.portal_type, obj.getId(), g.getGroupId()))
     
@@ -103,21 +98,21 @@ class testMembership(FacultyStaffDirectoryTestCase):
         """ test the getGroupMembers method of the IGroup adapter
         """
         # add people to outer groups
-        for obj in [self.classification, self.committee, self.specialty]:
+        for obj in [self.classification, self.committee]:
             obj.setPeople((self.person, self.person2))
         # add people to inner groups
-        for obj in [self.nested_classification, self.nested_committee, self.nested_specialty]:
+        for obj in [self.nested_classification, self.nested_committee]:
             obj.setPeople((self.person3,))
         
         # check member list of outer objects
-        for obj in [self.classification, self.committee, self.specialty]:
+        for obj in [self.classification, self.committee]:
             g = IGroup(obj)
             mlist = list(g.getGroupMembers())
             mlist.sort()
             self.failUnlessEqual(mlist, ['abc123', 'def456', 'ghi789'], 'Incorrect member list for top-level %s: %s' % (obj.portal_type, mlist))
         
         # check member list of inner objects
-        for obj in [self.nested_classification, self.nested_committee, self.nested_specialty]:
+        for obj in [self.nested_classification, self.nested_committee]:
             g = IGroup(obj)
             mlist = list(g.getGroupMembers())
             mlist.sort()

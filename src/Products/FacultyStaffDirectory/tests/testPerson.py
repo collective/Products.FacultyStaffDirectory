@@ -177,10 +177,6 @@ class testWithoutSpecialties(testPerson):
         fsd_tool.phoneNumberRegex = u''
         self.failUnless(self.person.validate_officePhone('555 555-5555') is None, "A blank value for phoneNumberRegex should result in any value being accepted")
     
-    def testNoSpecialties(self):
-        """Make sure getSpecialties() returns [] when the Person has no specialties."""
-        self.failUnlessEqual(self.person.getSpecialties(), [])
-    
     def testImageHandling(self):
         """Make sure that image upload and display are handled properly."""
         
@@ -451,75 +447,9 @@ class testWithoutSpecialties(testPerson):
 
     ## End tests for membrane stuff
 
-class testWithSpecialties(testPerson):
-    def afterSetUp(self):
-        testPerson.afterSetUp(self)  # logs in as portal owner. Yuck.
-        self._makeAndAssignSpecialties()
-        
-        # Make sure stuff is readable by Anonymous, so we can run tests as him:
-        workflowTool = getToolByName(self.portal, 'portal_workflow')
-        for o in [self.directory, self.directory['specialties']]:
-            workflowTool.doActionFor(o, 'publish')
-        
-        self.logout()  # Run as Anonymous to make sure getResearchTopics is anonymously callable. (bug #384)
-    
-    def _makeAndAssignSpecialties(self):
-        """Make a bunch of specialties, publish them, and assign them all to the test person."""
-        def makeSpecialties(node, container, explicitSpecialties):
-            """Make specialties inside `container` according to the tree-shaped dict `node`. Append the created specialties (unless marked as {'associated': False}) to the list `explicitSpecialties`."""
-            for child in node.get('children', []):
-                id = child['id']
-                container.invokeFactory(type_name='FSDSpecialty', id=id, title=child['title'])
-                newSpecialty = container[id]
-                if child.get('associated', True):
-                    explicitSpecialties.append(newSpecialty)
-                makeSpecialties(child, newSpecialty, explicitSpecialties)
-        
-        # Create specialties:
-        explicitSpecialties = []
-        makeSpecialties({'children':
-            [{'id': 'sanitation', 'title': 'Sanitation', 'children':
-                [{'id': 'picking-stuff-up', 'title': 'Picking stuff up'},
-                 {'id': 'hosing-stuff-down', 'title': 'Hosing stuff off'},
-                 {'id': 'keeping-stuff-from-getting-so-messed-up-to-begin-with', 'title': 'Keeping stuff from getting so dirty in the first place'}]},
-             {'id': 'mastication', 'title': 'Mastication', 'associated': False, 'children':
-                [{'id': 'chomping', 'title': 'Chomping'}]}]}, self.directory.getSpecialtiesFolder(), explicitSpecialties)
-        
-        # Assign them to the person:
-        rulesetId = getToolByName(self.portal, 'relations_library').getRuleset('people_specialties').getId()
-        personUid = self.person.UID()
-        explicitSpecialties.reverse()  # Otherwise, testSpecialtiesAreOrdered never fails, because specialties tend to get returned by getSpecialties() in the order they were assigned.
-        for s in explicitSpecialties:
-            process(self.portal, connect=((personUid, s.UID(), rulesetId),))  # You mustmustmust use the Relations API to add references, sayeth Relations/doc/Overview.txt.
-        
-        # Add a research topic for Sanitation:
-        refCatalog = getToolByName(self.portal, 'reference_catalog')
-        sanitationRef = refCatalog.getReferences(self.person, relationship='people_specialties', targetObject=self.directory.getSpecialtiesFolder()['sanitation'])[0]
-        sanitationRef.getContentObject().setResearchTopic('Picking up sprockets from bowls of soup')
-    
-    def testSpecialties(self):
-        """Test various accessors related to the Specialties tree."""
-        # Make sure getSpecialties() returns the specialties in the other they occur in the SpecialtiesFolder(s). Also indirectly (but sufficiently) test getSpecialtyTree():
-        self.failUnlessEqual([x.id for x, _ in self.person.getSpecialties()], ['sanitation', 'picking-stuff-up', 'hosing-stuff-down', 'keeping-stuff-from-getting-so-messed-up-to-begin-with', 'chomping'])
-        
-        # Assert getSpecialtyNames() works:
-        self.failUnlessEqual(self.person.getSpecialtyNames(), ['Sanitation', 'Picking stuff up', 'Hosing stuff off', 'Keeping stuff from getting so dirty in the first place', 'Chomping'])
-        
-        # Make sure getResearchTopics() works and is anonymously callable (that is, #384 hasn't regressed). (testWithSpecialties' tests run as Anonymous.):
-        self.failUnlessEqual(self.person.getResearchTopics(), ['<p>Picking up sprockets from bowls of soup</p>'])
-        
-        # Make sure that the various indexes have been updated (see #325).
-        indexDataBeforeReindex = self.portal.portal_catalog.getIndexDataForUID('/'.join(self.person.getPhysicalPath()))
-        rawSpecialtiesBeforeReindex = indexDataBeforeReindex['getRawSpecialties']
-        self.person.reindexObject()
-        indexDataAfterReindex = self.portal.portal_catalog.getIndexDataForUID('/'.join(self.person.getPhysicalPath()))
-        rawSpecialtiesAfterReindex = indexDataAfterReindex['getRawSpecialties']
-        self.failUnlessEqual(rawSpecialtiesBeforeReindex, rawSpecialtiesAfterReindex)
-
 
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
-    suite.addTest(makeSuite(testWithSpecialties))
     suite.addTest(makeSuite(testWithoutSpecialties))
     return suite

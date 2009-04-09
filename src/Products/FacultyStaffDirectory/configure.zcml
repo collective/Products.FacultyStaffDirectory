@@ -34,7 +34,4 @@
     <five:deprecatedManageAddDelete class=".CommitteeMembership.CommitteeMembership" />
     <five:deprecatedManageAddDelete class=".Course.Course" />
     <five:deprecatedManageAddDelete class=".Person.Person" />
-    <five:deprecatedManageAddDelete class=".Specialty.Specialty" />
-    <five:deprecatedManageAddDelete class=".SpecialtiesFolder.SpecialtiesFolder" />
-    <five:deprecatedManageAddDelete class=".SpecialtyInformation.SpecialtyInformation" />
 </configure>

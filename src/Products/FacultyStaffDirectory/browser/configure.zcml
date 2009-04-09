@@ -21,11 +21,8 @@
     <include package="plone.app.contentmenu" />
 
     <include package=".person" />
-    <!-- <include package=".specialty" /> -->
     <include package=".persongrouping" />
     <include package=".course" />
-    <!-- <include package=".classification" /> -->
-    <!-- <include package=".committee" /> -->
     <include package=".directory" />
 
 </configure>

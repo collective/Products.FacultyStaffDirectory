@@ -93,8 +93,6 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         self.invokeFactory('FSDClassification', id='grad-students', title='Graduate Students')
         # Create a committees folder
         self.invokeFactory('FSDCommitteesFolder', id='committees', title='Committees')
-        # Create a specialties folder
-        self.invokeFactory('FSDSpecialtiesFolder', id='specialties', title='Specialties')
 
     security.declareProtected(View, 'getDirectoryRoot')
     def getDirectoryRoot(self):
@@ -107,15 +105,15 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         portal_catalog = getToolByName(self, 'portal_catalog')
         return portal_catalog(path='/'.join(self.getPhysicalPath()), portal_type='FSDClassification', depth=1, sort_on='getObjPositionInParent')
         
-    security.declareProtected(View, 'getSpecialtiesFolder')
-    def getSpecialtiesFolder(self):
-        """Return a random SpecialtiesFolder contained in this FacultyStaffDirectory.
-           If none exists, return None."""
-        specialtiesFolders = self.getFolderContents({'portal_type': 'FSDSpecialtiesFolder'})
-        if specialtiesFolders:
-            return specialtiesFolders[0].getObject()
-        else:
-            return None
+    # security.declareProtected(View, 'getSpecialtiesFolder')
+    # def getSpecialtiesFolder(self):
+    #     """Return a random SpecialtiesFolder contained in this FacultyStaffDirectory.
+    #        If none exists, return None."""
+    #     specialtiesFolders = self.getFolderContents({'portal_type': 'FSDSpecialtiesFolder'})
+    #     if specialtiesFolders:
+    #         return specialtiesFolders[0].getObject()
+    #     else:
+    #         return None
 
     security.declareProtected(View, 'getPeople')
     def getPeople(self):

@@ -11,7 +11,6 @@
  <permission>FacultyStaffDirectory: Change roles</permission>
  <permission>FacultyStaffDirectory: Assign Committees to People</permission>
  <permission>FacultyStaffDirectory: Assign Classifications to People</permission>
- <permission>FacultyStaffDirectory: Assign Specialties to People</permission>
  <permission>FacultyStaffDirectory: Manage Group Membership</permission>
  <permission>Relations: Manage content relations</permission> 
  
@@ -48,11 +47,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
   </permission-map>  
-  <permission-map name="FacultyStaffDirectory: Assign Specialties to People" acquired="True">
-   <permission-role>Owner</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Personnel Manager</permission-role>
-  </permission-map>
   <permission-map name="FacultyStaffDirectory: Manage Group Membership" acquired="True">
    <permission-role>Owner</permission-role>
    <permission-role>Manager</permission-role>
@@ -95,11 +89,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
   </permission-map>    
-  <permission-map name="FacultyStaffDirectory: Assign Specialties to People" acquired="True">
-   <permission-role>Owner</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Personnel Manager</permission-role>
-  </permission-map>
   <permission-map name="FacultyStaffDirectory: Manage Group Membership" acquired="True">
    <permission-role>Owner</permission-role>
    <permission-role>Manager</permission-role>

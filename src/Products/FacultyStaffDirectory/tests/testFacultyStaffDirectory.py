@@ -20,12 +20,6 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         """ Make sure the FTI is pulling info from the GS types profile """
         self.failUnless(self.portal.portal_types['FSDFacultyStaffDirectory'].Title() != "AT Content Type")
 
-    def testGetSpecialtiesFolder(self):
-        fsd = self.getPopulatedDirectory()
-        specialtiesFolder = fsd.getSpecialtiesFolder()
-        self.failUnless(specialtiesFolder.Title() == 'Specialties')
-        self.failUnless(specialtiesFolder.Type() == 'Specialties Folder')
-
     def testDirectoryCreation(self):
         #Make sure the FacultyStaffDirectory was created
         self.portal.invokeFactory(type_name = "FSDFacultyStaffDirectory", id="test_directory")
@@ -39,7 +33,6 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         self.failUnless('staff' in fsd.contentIds())
         self.failUnless('grad-students' in fsd.contentIds())
         self.failUnless('committees' in fsd.contentIds())
-        self.failUnless('specialties' in fsd.contentIds())
 
     def testGetClassifications(self):
         fsd = self.getPopulatedDirectory()
@@ -63,8 +56,6 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         self.failUnless(fsd.getObjectPosition('staff') == 0, "FSDClassification Subobject 'staff' should be at position 0.")
         fsd.moveObjectsByDelta(['committees'], -100)
         self.failUnless(fsd.getObjectPosition('committees') == 0, "FSDCommitteesFolder Subobject 'committees' should be at position 0.")
-        fsd.moveObjectsByDelta(['specialties'], -100)
-        self.failUnless(fsd.getObjectPosition('specialties') == 0, "FSDSpecialtiesFolder Subobject 'specialties' should be at position 0.")
 
     # tests for membrane integration
     def testFSDIsGroup(self):

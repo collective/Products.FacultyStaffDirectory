@@ -75,54 +75,6 @@
 				<inverseRuleset uidref="-84-28--90--11--540cb6d5:114b1e72e80:-8000:0000000000000C4C"/>
 			</InverseImplicator>
 		</Ruleset>
-		<Ruleset id="SpecialtyInformation" uid="-84-28--90--4-483061cf:1115b3ad549:-8000:0000000000000B42">
-			<TypeConstraint id="type_constraint">
-				<allowedSourceType>
-					FSDSpecialty
-				</allowedSourceType>
-				<allowedTargetType>
-					FSDPerson
-				</allowedTargetType>
-			</TypeConstraint>
-			<ContentReference id="content_reference">
-				<portalType>
-					FSDSpecialtyInformation
-				</portalType>
-				<shareWithInverse>
-					1
-				</shareWithInverse>
-				<primary>
-					1
-				</primary>
-			</ContentReference>
-			<InverseImplicator id="inverse_relation">
-				<inverseRuleset uidref="people_specialties"/>
-			</InverseImplicator>
-		</Ruleset>
-		<Ruleset id="people_specialties" uid="people_specialties">
-			<TypeConstraint id="type_constraint">
-				<allowedSourceType>
-					FSDPerson
-				</allowedSourceType>
-				<allowedTargetType>
-					FSDSpecialty
-				</allowedTargetType>
-			</TypeConstraint>
-			<ContentReference id="content_reference">
-				<portalType>
-					FSDSpecialtyInformation
-				</portalType>
-				<shareWithInverse>
-					1
-				</shareWithInverse>
-				<primary>
-					0
-				</primary>
-			</ContentReference>
-			<InverseImplicator id="inverse_relation">
-				<inverseRuleset uidref="-84-28--90--4-483061cf:1115b3ad549:-8000:0000000000000B42"/>
-			</InverseImplicator>
-		</Ruleset>
 		<Ruleset id="CommitteeMembership" uid="-84-28--90--15--1c25f7cd:110dff54157:-8000:0000000000000AF2">
 			<TypeConstraint id="type_constraint">
 				<allowedSourceType>

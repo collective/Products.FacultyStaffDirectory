@@ -2,24 +2,6 @@
 <atcttool
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <topic_indexes i18n:domain="plone">
-  <index name="getRawClassifications"
-     description="The classification assigned to a person"
-     enabled="True" friendlyName="Classification" 
-     i18n:attributes="description; friendlyName">
-   <criteria>ATReferenceCriterion</criteria>
-  </index>
-  <index name="getRawSpecialties"
-     description="A person's listed specialty areas"
-     enabled="True" friendlyName="Specialty" 
-     i18n:attributes="description; friendlyName">
-   <criteria>ATReferenceCriterion</criteria>
-  </index>
-  <index name="getRawCommittees"
-     description="A person's listed committees"
-     enabled="True" friendlyName="Commitee" 
-     i18n:attributes="description; friendlyName">
-   <criteria>ATReferenceCriterion</criteria>
-  </index>
   <index name="getRawPeople"
      description="The people assigned to a person grouping (ie committee, specialty, classification)"
      enabled="True" friendlyName="People" 
@@ -34,21 +16,5 @@
   </index>
  </topic_indexes>
  <topic_metadata i18n:domain="plone">
-  <metadata name="getCommitteeNames"
-     description="The committees with which the person is associated"
-     enabled="True" friendlyName="Committees"
-     i18n:attributes="description; friendlyName" />
-  <metadata name="getSpecialtyNames"
-     description="The specialties with which the person is associated"
-     enabled="True" friendlyName="Specialties"
-     i18n:attributes="description; friendlyName" />
-  <metadata name="getClassificationNames"
-     description="The classifications with which the person is associated"
-     enabled="True" friendlyName="Classifications"
-     i18n:attributes="description; friendlyName" />
-  <metadata name="getResearchTopics"
-     description="The research topics with which the person is associated"
-     enabled="True" friendlyName="Research Topics"
-     i18n:attributes="description; friendlyName" />
  </topic_metadata>
 </atcttool>

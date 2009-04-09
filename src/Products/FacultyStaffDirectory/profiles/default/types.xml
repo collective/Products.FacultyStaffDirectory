@@ -8,7 +8,4 @@
  <object name="FSDFacultyStaffDirectory" meta_type="Factory-based Type Information with dynamic views"/>
  <object name="FSDPerson" meta_type="Factory-based Type Information with dynamic views"/>
  <object name="FSDPersonGrouping" meta_type="Factory-based Type Information with dynamic views"/>
- <object name="FSDSpecialtiesFolder" meta_type="Factory-based Type Information with dynamic views"/>
- <object name="FSDSpecialty" meta_type="Factory-based Type Information with dynamic views"/>
- <object name="FSDSpecialtyInformation" meta_type="Factory-based Type Information with dynamic views"/>
 </object>

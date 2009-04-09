@@ -3,21 +3,8 @@
  <index name="getSortableName" meta_type="FieldIndex">
   <indexed_attr value="getSortableName"/>
  </index>
- <index name="getRawClassifications" meta_type="KeywordIndex">
-  <indexed_attr value="getRawClassifications"/>
- </index>
- <index name="getRawSpecialties" meta_type="KeywordIndex">
-  <indexed_attr value="getRawSpecialties"/>
- </index>
- <index name="getRawCommittees" meta_type="KeywordIndex">
-  <indexed_attr value="getRawCommittees"/>
- </index>
  <index name="getRawPeople" meta_type="KeywordIndex">
   <indexed_attr value="getRawPeople"/>
  </index>
  <column value="UID"/>
- <column value="getCommitteeNames"/>
- <column value="getSpecialtyNames"/>
- <column value="getClassificationNames"/>
- <column value="getResearchTopics"/>
 </object>

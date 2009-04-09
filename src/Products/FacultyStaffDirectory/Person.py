@@ -31,7 +31,7 @@ from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonModifiedEvent
-from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, ASSIGN_SPECIALTIES_TO_PEOPLE, CHANGE_PERSON_IDS
+from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 
 logger = logging.getLogger('FacultyStaffDirectory')
@@ -288,21 +288,6 @@ schema = ATContentTypeSchema.copy() + Schema((
         multiValued=True,
         relationship='members_committees',
         allowed_types=('Committee')
-    ),
-    
-    RelationField(
-        name='specialties',
-        widget=ReferenceBrowserWidget
-        (
-            label=u'Specialties',
-            label_msgid='FacultyStaffDirectory_label_specialties',
-            i18n_domain='FacultyStaffDirectory',
-        ),
-        write_permission=ASSIGN_SPECIALTIES_TO_PEOPLE,
-        schemata="Professional Information",
-        multiValued=True,
-        relationship='people_specialties',
-        allowed_types=('FSDSpecialty')
     ),
     
     StringField('password',
@@ -584,99 +569,99 @@ class Person(OrderedBaseFolder, ATCTContent):
         cList.sort()
         return [c[-1] for c in cList]
     
-    security.declareProtected(View, 'getSpecialtyTree')
-    def getSpecialtyTree(self):
-        """Return a tree-shaped dict of catalog brains of this person's specialties. The topmost level of the tree consists of SpecialtiesFolders; the remainder, of Specialties.
-        
-        The format of the dict is a superset of what buildFolderTree() returns (see its docstring for details). Consequently you can use a recursive macro similar to portlet_navtree_macro to render the results.
-        
-        Even if a person is mapped to a specialty but not to a superspecialty of it, the superspecialty will be returned. However, it will lack a 'reference' key, where explicitly mapped specialties will have one set to the reference from the Person to the Specialty. (All SpecialtiesFolders also lack 'reference' keys.) Thus, the template author can decide whether to consider people to implicitly belong to superspecialties of their explicitly mapped specialties, simply by deciding how to present the results.
-        """
-        def buildSpecialtiesFolderTree():
-            """Return a buildFolderTree-style tree representing every SpecialtiesFolder and its descendents.
-            
-            More specifically, do a buildFolderTree for each SpecialtiesFolder, then merge the results into one big tree.
-            """
-            portal_catalog = getToolByName(self, 'portal_catalog')
-            tree = {'children': []}
-            for specialtiesFolder in portal_catalog(portal_type='FSDSpecialtiesFolder'):
-                subtree = buildFolderTree(self, query={'path': {'query': specialtiesFolder.getPath()}, 'portal_type': 'FSDSpecialty'})
-                subtree['currentItem'] = False
-                subtree['currentParent'] = False
-                subtree['item'] = specialtiesFolder
-                subtree['depth'] = 0  # Let's see if that drives the stylesheets crazy. Otherwise, I'm going to have to increment the 'depth' keys in the whole rest of the tree.
-                tree['children'].append(subtree)
-            return tree
-        
-        # Walk the tree, killing everything not in reffedUids, except for the ancestors of reffed things.
-        reffedUids = dict([(ref.targetUID, ref) for ref in getToolByName(self, 'reference_catalog').getReferences(self, relationship='people_specialties')])
-        def pruneUnreffed(tree):
-            """Prune all subtrees from `tree` where no descendent is in `reffedUids`. Return whether `tree` itself should be pruned off. While we're at it, add 'reference' keys."""
-            keptChildren = []
-            for child in tree['children']:
-                if not pruneUnreffed(child):  # If that child shouldn't be completely pruned away,
-                    keptChildren.append(child)  # keep it.
-            tree['children'] = keptChildren
-            
-            if 'item' in tree:  # 'item' is not in the root node.
-                try:
-                    ref = reffedUids.get(tree['item'].UID)
-                except TypeError:
-                    # Catch the 'unhashable type' error we're getting in rare cases (seems to be mostly on uninstall/reinstall when catalog reindexing goes awry).
-                    ref = reffedUids.get(tree['item'].getObject().UID())
-                if ref:
-                    tree['reference'] = ref
-                    return False  # I don't care if you pruned all my children off. I myself am reffed, so I'm staying.
-            return not keptChildren  # My children are the only thing keeping me here. Prune me if there aren't any. (Sounds so dramatic, doesn't it?)
-        
-        tree = buildSpecialtiesFolderTree()
-        pruneUnreffed(tree)
-        return tree
+    # security.declareProtected(View, 'getSpecialtyTree')
+    # def getSpecialtyTree(self):
+    #     """Return a tree-shaped dict of catalog brains of this person's specialties. The topmost level of the tree consists of SpecialtiesFolders; the remainder, of Specialties.
+    #     
+    #     The format of the dict is a superset of what buildFolderTree() returns (see its docstring for details). Consequently you can use a recursive macro similar to portlet_navtree_macro to render the results.
+    #     
+    #     Even if a person is mapped to a specialty but not to a superspecialty of it, the superspecialty will be returned. However, it will lack a 'reference' key, where explicitly mapped specialties will have one set to the reference from the Person to the Specialty. (All SpecialtiesFolders also lack 'reference' keys.) Thus, the template author can decide whether to consider people to implicitly belong to superspecialties of their explicitly mapped specialties, simply by deciding how to present the results.
+    #     """
+    #     def buildSpecialtiesFolderTree():
+    #         """Return a buildFolderTree-style tree representing every SpecialtiesFolder and its descendents.
+    #         
+    #         More specifically, do a buildFolderTree for each SpecialtiesFolder, then merge the results into one big tree.
+    #         """
+    #         portal_catalog = getToolByName(self, 'portal_catalog')
+    #         tree = {'children': []}
+    #         for specialtiesFolder in portal_catalog(portal_type='FSDSpecialtiesFolder'):
+    #             subtree = buildFolderTree(self, query={'path': {'query': specialtiesFolder.getPath()}, 'portal_type': 'FSDSpecialty'})
+    #             subtree['currentItem'] = False
+    #             subtree['currentParent'] = False
+    #             subtree['item'] = specialtiesFolder
+    #             subtree['depth'] = 0  # Let's see if that drives the stylesheets crazy. Otherwise, I'm going to have to increment the 'depth' keys in the whole rest of the tree.
+    #             tree['children'].append(subtree)
+    #         return tree
+    #     
+    #     # Walk the tree, killing everything not in reffedUids, except for the ancestors of reffed things.
+    #     reffedUids = dict([(ref.targetUID, ref) for ref in getToolByName(self, 'reference_catalog').getReferences(self, relationship='people_specialties')])
+    #     def pruneUnreffed(tree):
+    #         """Prune all subtrees from `tree` where no descendent is in `reffedUids`. Return whether `tree` itself should be pruned off. While we're at it, add 'reference' keys."""
+    #         keptChildren = []
+    #         for child in tree['children']:
+    #             if not pruneUnreffed(child):  # If that child shouldn't be completely pruned away,
+    #                 keptChildren.append(child)  # keep it.
+    #         tree['children'] = keptChildren
+    #         
+    #         if 'item' in tree:  # 'item' is not in the root node.
+    #             try:
+    #                 ref = reffedUids.get(tree['item'].UID)
+    #             except TypeError:
+    #                 # Catch the 'unhashable type' error we're getting in rare cases (seems to be mostly on uninstall/reinstall when catalog reindexing goes awry).
+    #                 ref = reffedUids.get(tree['item'].getObject().UID())
+    #             if ref:
+    #                 tree['reference'] = ref
+    #                 return False  # I don't care if you pruned all my children off. I myself am reffed, so I'm staying.
+    #         return not keptChildren  # My children are the only thing keeping me here. Prune me if there aren't any. (Sounds so dramatic, doesn't it?)
+    #     
+    #     tree = buildSpecialtiesFolderTree()
+    #     pruneUnreffed(tree)
+    #     return tree
     
-    security.declareProtected(View, 'getSpecialties')
-    def getSpecialties(self):
-        """Return an iterable of tuples representing the specialties explicitly attached to this person. The first item of the tuple is a catalog brain of a specialty; the second, the reference pointing from the Person to the Specialty.
-        
-        Results are ordered by the position of the specialties in their containers (SpecialtiesFolders or other Specialties) and by the order of SpecialtiesFolders themselves if there is more than one.
-        
-        To get a Specialties object from a result, call result.getTargetObject(). To get a SpecialtyInformation object, call result.getContentObject().
-        """
-        items = []
-        def depthFirst(tree):
-            """Append, in depth-first pre order, a tuple of ('item' value, 'reference' value) from `tree` for every node that has a 'reference' value."""
-            if 'reference' in tree:
-                items.append((tree['item'], tree['reference']))  # There's always an 'item' key where there's a 'reference' key. How can you have a reference if there's no item to reference?
-            for child in tree['children']:
-                depthFirst(child)
-        depthFirst(self.getSpecialtyTree())
-        return items
+    # security.declareProtected(View, 'getSpecialties')
+    # def getSpecialties(self):
+    #     """Return an iterable of tuples representing the specialties explicitly attached to this person. The first item of the tuple is a catalog brain of a specialty; the second, the reference pointing from the Person to the Specialty.
+    #     
+    #     Results are ordered by the position of the specialties in their containers (SpecialtiesFolders or other Specialties) and by the order of SpecialtiesFolders themselves if there is more than one.
+    #     
+    #     To get a Specialties object from a result, call result.getTargetObject(). To get a SpecialtyInformation object, call result.getContentObject().
+    #     """
+    #     items = []
+    #     def depthFirst(tree):
+    #         """Append, in depth-first pre order, a tuple of ('item' value, 'reference' value) from `tree` for every node that has a 'reference' value."""
+    #         if 'reference' in tree:
+    #             items.append((tree['item'], tree['reference']))  # There's always an 'item' key where there's a 'reference' key. How can you have a reference if there's no item to reference?
+    #         for child in tree['children']:
+    #             depthFirst(child)
+    #     depthFirst(self.getSpecialtyTree())
+    #     return items
+    # 
+    # security.declareProtected(View, 'getSpecialtyNames')
+    # def getSpecialtyNames(self):
+    #     """Return a list of the titles of the specialties explicitly attached to this person.
+    #     
+    #     Results are ordered as in getSpecialties().
+    #     
+    #     Mainly used for pretty-looking metadata in SmartFolder tables.
+    #     """
+    #     return [x.Title for x, _ in self.getSpecialties()]
     
-    security.declareProtected(View, 'getSpecialtyNames')
-    def getSpecialtyNames(self):
-        """Return a list of the titles of the specialties explicitly attached to this person.
-        
-        Results are ordered as in getSpecialties().
-        
-        Mainly used for pretty-looking metadata in SmartFolder tables.
-        """
-        return [x.Title for x, _ in self.getSpecialties()]
-    
-    security.declareProtected(View, 'getResearchTopics')
-    def getResearchTopics(self):
-        """Return a list of the research topics of the specialties explicitly attached to this person.
-        
-        Results are ordered as in getSpecialties(). Specialties whose references have no content object (which doesn't happen) or where the content object has an empty research topic are omitted.
-        
-        Mainly used for pretty-looking metadata in SmartFolder tables.
-        """
-        topics = []
-        for _, ref in self.getSpecialties():
-            refContent = ref.getContentObject()  # TODO: probably slow: wakes up all those SpecialtyInformation objects
-            if refContent:  # This is usually true, because reference-dwelling objects are always created when the reference is created. However, it's false sometimes; run testSpecialties for an example.
-                researchTopic = refContent.getResearchTopic()
-                if researchTopic:
-                    topics.append(researchTopic)
-        return topics
+    # security.declareProtected(View, 'getResearchTopics')
+    # def getResearchTopics(self):
+    #     """Return a list of the research topics of the specialties explicitly attached to this person.
+    #     
+    #     Results are ordered as in getSpecialties(). Specialties whose references have no content object (which doesn't happen) or where the content object has an empty research topic are omitted.
+    #     
+    #     Mainly used for pretty-looking metadata in SmartFolder tables.
+    #     """
+    #     topics = []
+    #     for _, ref in self.getSpecialties():
+    #         refContent = ref.getContentObject()  # TODO: probably slow: wakes up all those SpecialtyInformation objects
+    #         if refContent:  # This is usually true, because reference-dwelling objects are always created when the reference is created. However, it's false sometimes; run testSpecialties for an example.
+    #             researchTopic = refContent.getResearchTopic()
+    #             if researchTopic:
+    #                 topics.append(researchTopic)
+    #     return topics
     
     security.declareProtected(View, 'getCommitteeNames')
     def getCommitteeNames(self):
@@ -700,11 +685,11 @@ class Person(OrderedBaseFolder, ATCTContent):
         # that, the root of the FacultyStaffDirectory:
         urlTool = getToolByName(self, 'portal_url')
         fsd = self.getDirectoryRoot()
-        if fsd and fsd.getSpecialtiesFolder():
-            url = urlTool.getRelativeContentURL(fsd.getSpecialtiesFolder())
-        else:
-            url = ""
-        self.schema['specialties'].widget.startup_directory = '/%s' % url
+        # if fsd and fsd.getSpecialtiesFolder():
+        #     url = urlTool.getRelativeContentURL(fsd.getSpecialtiesFolder())
+        # else:
+        #     url = ""
+        # self.schema['specialties'].widget.startup_directory = '/%s' % url
         
         fsd_utility = getUtility(IConfiguration)
         if fsd_utility.phoneNumberRegex:

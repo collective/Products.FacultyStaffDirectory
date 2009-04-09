@@ -14,7 +14,6 @@
  <permission>FacultyStaffDirectory: Change Person IDs</permission>
  <permission>FacultyStaffDirectory: Assign Committees to People</permission>
  <permission>FacultyStaffDirectory: Assign Classifications to People</permission>
- <permission>FacultyStaffDirectory: Assign Specialties to People</permission>
  <permission>Relations: Manage content relations</permission> 
  
  <state state_id="active" title="Active">
@@ -60,10 +59,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
   </permission-map>  
-  <permission-map name="FacultyStaffDirectory: Assign Specialties to People" acquired="True">
-   <permission-role>Manager</permission-role>
-   <permission-role>Personnel Manager</permission-role>
-  </permission-map>
   <permission-map name="Relations: Manage content relations" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
@@ -111,10 +106,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
   </permission-map>    
-  <permission-map name="FacultyStaffDirectory: Assign Specialties to People" acquired="True">
-   <permission-role>Manager</permission-role>
-   <permission-role>Personnel Manager</permission-role>
-  </permission-map>
   <permission-map name="Relations: Manage content relations" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>

@@ -17,7 +17,7 @@ originalMyFolderActionId = "mystuff"
 newMyFolderActionId = "fsdmystuff"
 originalProfileActionId = "MemberPrefs"
 newProfileActionId = "fsdMemberPrefs"
-linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
+linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDCommittee', 'FSDCommitteesFolder']
 mediaKupuTypes = ['FSDPerson']
 collectionKupuTypes = ['FSDFacultyStaffDirectory']
 
@@ -46,9 +46,6 @@ class testSetup(FacultyStaffDirectoryTestCase):
                           'FSDFacultyStaffDirectory',
                           'FSDPerson',
                           'FSDPersonGrouping',
-                          'FSDSpecialtiesFolder',
-                          'FSDSpecialty',
-                          'FSDSpecialtyInformation',
                           )
 
     def testTypesInstalled(self):
@@ -172,19 +169,11 @@ class testInstall(FacultyStaffDirectoryTestCase):
         
     def testTopicIndexesAdded(self):
         missingindexes = []
-        for index in ["getRawClassifications","getRawSpecialties","getRawCommittees","getRawPeople","getSortableName"]:
+        for index in ["getRawPeople","getSortableName"]:
             idx = self.atct_tool.getIndex(index)
             if not idx or not idx.enabled:
                 missingindexes.append(index)
         self.failIf(missingindexes, 'ATCT Tool is missing the following indexes: %s' % missingindexes)
-        
-    def testTopicMetadataAdded(self):
-        missingmetadata = []
-        for fieldName in ["getCommitteeNames","getSpecialtyNames","getClassificationNames","getResearchTopics"]:
-            md = self.atct_tool.getMetadata(fieldName)
-            if not md or not md.enabled:
-                missingmetadata.append(fieldName)
-        self.failIf(missingmetadata, 'ATCT Tool is missing the following metadata fields: %s' % missingmetadata)
     
     def testConfigletAdded(self):
         cp = getToolByName(self.portal, 'portal_controlpanel')
@@ -194,7 +183,7 @@ class testInstall(FacultyStaffDirectoryTestCase):
         if hasattr(self.portal, 'portal_repository'):
             missingversionable = []
             pr = getToolByName(self.portal, "portal_repository")
-            for t in ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']:
+            for t in ['FSDPerson', 'FSDCommittee']:
                 if t not in pr.getVersionableContentTypes():
                     missingversionable.append(t)
             self.failIf(missingversionable, "%s are not listed as versionable and they should be" % missingversionable)
@@ -295,18 +284,10 @@ class testUninstall(FacultyStaffDirectoryTestCase):
     def testTopicIndexesTeardown(self):
         presentindexes = []
         allindexes = self.atct_tool.getIndexes()
-        for index in ["getRawClassifications","getRawSpecialties","getRawCommittees","getRawPeople","getSortableName"]:
+        for index in ["getRawPeople","getSortableName"]:
             if index in allindexes:
                 presentindexes.append(index)
         self.failIf(presentindexes, 'ATCT Tool still has the following indexes: %s' % presentindexes)
-        
-    def testTopicMetadataTeardown(self):
-        presentmetadata = []
-        allmetadata = self.atct_tool.getAllMetadata()
-        for fieldName in ["getCommitteeNames","getSpecialtyNames","getClassificationNames","getResearchTopics"]:
-            if fieldName in allmetadata:
-                presentmetadata.append(fieldName)
-        self.failIf(presentmetadata, 'ATCT Tool is missing the following metadata fields: %s' % presentmetadata)
     
     def testConfigletTeardown(self):
         cp = getToolByName(self.portal, 'portal_controlpanel')
@@ -316,7 +297,7 @@ class testUninstall(FacultyStaffDirectoryTestCase):
         if hasattr(self.portal, 'portal_repository'):
             presentversionable = []
             pr = getToolByName(self.portal, "portal_repository")
-            for t in ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']:
+            for t in ['FSDPerson', 'FSDCommittee']:
                 if t in pr.getVersionableContentTypes():
                     presentversionable.append(t)
             self.failIf(presentversionable, "%s are still listed as versionable and they should not be" % presentversionable)

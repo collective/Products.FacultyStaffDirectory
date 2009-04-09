@@ -55,7 +55,7 @@ def configureVersioning(portal):
     if hasattr(portal,'portal_repository'):
         cp = getToolByName(portal, "portal_repository")
         existing = cp.getVersionableContentTypes()
-        new = existing + ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']
+        new = existing + ['FSDPerson', 'FSDCommittee']
         cp.setVersionableContentTypes(new)
 
 def configureKupu(portal):
@@ -71,7 +71,7 @@ def configureKupu(portal):
             #ems174: Do we actually need to updateResourceTypes? Kupu gets snippy if we try to add more than one linkable type.
             #kupu.updateResourceTypes(resourceType)
         
-    linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
+    linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDCommittee', 'FSDCommitteesFolder',]
     mediaKupuTypes = ['FSDPerson']
     collectionKupuTypes = ['FSDFacultyStaffDirectory']
     
