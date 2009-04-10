@@ -2,7 +2,7 @@ from zope.configuration.fields import MessageID
 from zope.schema import TextLine
 from zope.viewlet.metadirectives import IViewletDirective
 from zope.i18nmessageid import MessageFactory
-_ = MessageFactory('Facultystaffdirectory')
+_ = MessageFactory('FacultyStaffDirectory')
 
 class IColumnarViewletDirective(IViewletDirective):
 
