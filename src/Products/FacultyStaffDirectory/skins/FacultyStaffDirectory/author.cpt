@@ -51,7 +51,7 @@
           </li>
           <li>
             <a href=""
-               tal:attributes="href python:portal.facultystaffdirectory_tool.fsdMemberProfile()"
+               tal:attributes="href python:portal.restrictedTraverse('++fsdmembership++snork').fsdMemberProfile()"
                i18n:translate="label_edit">Edit</a>
           </li>
         </ul>
@@ -111,7 +111,7 @@
             <div class="visualClear"><!-- --></div>
             
             <p tal:condition="python:portal.restrictedTraverse('++fsdmembership++snork').fsdShowMyFolder(id=author)">
-            <a href="#" tal:attributes="href python:portal.facultystaffdirectory_tool.fsdMyFolder(id=author)"
+            <a href="#" tal:attributes="href python:portal.restrictedTraverse('++fsdmembership++snork').fsdMyFolder(id=author)"
                i18n:translate="label_author_internal_home_page">Author's home page in this site&hellip;</a>
             </p>
 
