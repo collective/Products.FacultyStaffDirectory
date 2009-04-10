@@ -65,6 +65,12 @@ class PersonGroupingViewletManager(object):
                 # then add it 
                 self.viewlets.append(viewlet)
 
+        # grab the column headers from the first viewlet
+        if self.viewlets:
+            self.columns = self.viewlets[0].columns()
+        else:
+            self.columns = []
+
     def render(self):
         """See zope.contentprovider.interfaces.IContentProvider"""
         # Now render the view
@@ -74,12 +80,20 @@ class PersonGroupingViewletManager(object):
             return u'\n'.join([viewlet.render() for viewlet in self.viewlets])
 
 class PersonGroupingItemViewlet(ViewletBase):
-    def index(self):
+
+    def parentMultiView(self):
+        """Look up the person's multiview (typically a tabular or gallery view)"""
         person = self.context
         # TODO self.__parent__.__parent__.__parent__ and self.__parent__.__parent__ completely wrong. Do it right.
         grouping = self.__parent__.__parent__.__parent__
         format = self.__parent__.__parent__
         view =  queryMultiAdapter((person, grouping, format, self.request), name='view')
-        # wrap the viewlet for security purposes
+        # wrap the view for security purposes
         view = view.__of__(person)
-        return view()
+        return view
+        
+    def index(self):
+        return self.parentMultiView()()
+
+    def columns(self):
+        return self.parentMultiView().columns()

@@ -5,6 +5,8 @@ from zope.interface import Attribute
 
 class IPersonViewletManager(IViewletManager):
     """A person viewlet manager for every block"""
+    def columns():
+        """Return a list of dictionaries necessary to render table header cells"""
 
 class IPersonView(IBrowserView):
     """A view for a person object"""

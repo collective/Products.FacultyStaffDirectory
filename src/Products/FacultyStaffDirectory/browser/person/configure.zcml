@@ -22,7 +22,7 @@
         name="facultystaffdirectory.person"
         provides="...interfaces.IPersonViewletManager"
         permission="zope2.View"
-        class="plone.app.viewletmanager.manager.OrderedViewletManager"
+        class=".person.PersonViewletManager"
         />
 
          <browser:viewlet
@@ -31,6 +31,8 @@
              manager="...interfaces.IPersonViewletManager"
              template="portrait.pt"
              permission="zope2.View"
+             column_heading="[portrait] Portrait"
+             column_css_classes=""
              />
 
          <browser:viewlet
@@ -39,6 +41,8 @@
              manager="...interfaces.IPersonViewletManager"
              template="jobtitles.pt"
              permission="zope2.View"
+             column_heading="[job-titles] Job Titles"
+             column_css_classes="sortable"
              />
 
          <browser:viewlet

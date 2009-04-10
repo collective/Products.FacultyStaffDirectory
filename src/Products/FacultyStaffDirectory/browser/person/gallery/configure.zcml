@@ -9,7 +9,7 @@
        provides="....interfaces.IPersonViewletManager"
        view="....interfaces.IGalleryListingFormat"
        permission="zope2.View"
-       class="plone.app.viewletmanager.manager.OrderedViewletManager"
+       class="..person.PersonViewletManager"
        />
 
        <browser:viewlet
@@ -21,13 +21,15 @@
             permission="zope2.View"
             />
 
-        <browser:viewlet
+        <browser:columnarViewlet
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personportrait"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.IGalleryListingFormat"
             template="portrait.pt"
             permission="zope2.View"
+            column_heading="[gallery-portrait] Portrait"
+            column_css_classes=""
             />
 
         <browser:viewlet
