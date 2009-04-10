@@ -17,7 +17,7 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         self.loginAsPortalOwner()
 
     def testFTISetup(self):
-        """ Make sure the FTI is pulling info from the GS types profile """
+        """Make sure the FTI is pulling info from the GS types profile"""
         self.failUnless(self.portal.portal_types['FSDFacultyStaffDirectory'].Title() != "AT Content Type")
 
     def testDirectoryCreation(self):
@@ -56,15 +56,13 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
 
     # tests for membrane integration
     def testFSDIsGroup(self):
-        """Verify that FSDs are seen as groups
-        """
+        """Verify that FSDs are seen as groups"""
         fsd = self.getPopulatedDirectory()
         self.failUnless(self.portal.portal_groups.getGroupById(fsd.id),"unable to find group with id of this fsd: %s" % fsd.id)
     
     # now test the functionality of the IGroup adapter (membership.facultystaffdirectory.py)
     def testIGroupAdapter(self):
-        """Verify all methods of the IGroup adapter to the FacultyStaffDirectory content type
-        """
+        """Verify all methods of the IGroup adapter to the FacultyStaffDirectory content type"""
         from Products.membrane.interfaces import IGroup
         from Products.CMFCore.utils import getToolByName
         
@@ -99,8 +97,7 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         self.failUnless(members == ['abc123','def456','ghi789'],"incorrect member list: %s" % members)
         
     def testValidateId(self):
-        """Test that the validate_id validator works properly
-        """
+        """Test that the validate_id validator works properly"""
         from Products.CMFCore.utils import getToolByName
         
         # setup some content to test against
@@ -119,8 +116,7 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         self.failUnless('group1' in fsd.validate_id('group1'),"Allowed id 'doc1', even though there is a group with that id in the portal: %s" % fsd.validate_id('group1'))
         
     def testFSDImpliesRoles(self):
-        """Verify that published FSD provides roles to user, where unpublished FSD does not
-        """
+        """Verify that published FSD provides roles to user, where unpublished FSD does not"""
         #set up content
         self.directory = self.getPopulatedDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")

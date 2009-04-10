@@ -23,21 +23,18 @@ class testClassification(FacultyStaffDirectoryTestCase):
         self.classification = self.directory.getClassifications()[0].getObject()
 
     def testFTISetup(self):
-        """ Make sure the FTI is pulling info from the GS types profile 
-        """
+        """Make sure the FTI is pulling info from the GS types profile."""
         self.failUnless(self.portal.portal_types['FSDClassification'].Title() != "AT Content Type")
         
     def testClassificationIsNestable(self):
-        """ Make sure that classifications can be added inside classifications
-        """
+        """Make sure that classifications can be added inside classifications"""
         try:
             self.classification.invokeFactory('FSDClassification', id='nested-classification', title='Nested Classification')
         except ValueError:
             self.fail('Cannot add a classification inside a classification')
         
     def testValidateId(self):
-        """Test that the validate_id validator works properly
-        """
+        """Test that the validate_id validator works properly"""
         from Products.CMFCore.utils import getToolByName
         
         # setup some content to test against
@@ -55,8 +52,7 @@ class testClassification(FacultyStaffDirectoryTestCase):
         self.failUnless('group1' in self.classification.validate_id('group1'),"Allowed id 'doc1', even though there is a group with that id in the portal: %s" % self.classification.validate_id('group1'))
 
     def testGroupTitle(self):
-        """ Verify that group titles are being set properly.
-        """
+        """Verify that group titles are being set properly."""
         acl = getToolByName(self.portal, 'acl_users')
         fac = acl.getGroupById('faculty')
         self.failUnless(fac.Title() == 'Faculty', "KnownFailure: Unexpected value for Title for group 'faculty'. Got '%s', expected 'Faculty'." % fac.Title())

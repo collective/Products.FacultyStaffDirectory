@@ -6,9 +6,7 @@ from Products.membrane.interfaces import ICategoryMapper
 from Products.FacultyStaffDirectory import MEMBRANE_ABLE_TYPES, MEMBRANE_TYPE_ACTIVE_STATES
 
 def modifyMembraneTypes(event):
-    """Check facultystaffdirectory_tool schemata,
-       switch on/off membrane types based on the information we find there.
-    """
+    """Check facultystaffdirectory_tool schemata, and switch on/off membrane types based on the information we find there."""
     mbtool = getToolByName(getSite(), MEMBRANE_TOOL)
     enable_types = event.context.enableMembraneTypes
     current_types = mbtool.listMembraneTypes()

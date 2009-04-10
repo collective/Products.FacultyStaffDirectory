@@ -56,10 +56,10 @@ class ConfigurationUtility(Persistent):
 
     security.declarePublic('fsdMemberProfile')
     def fsdMemberProfile(self):
-        """Distinguish between an fsd user and a regular acl_users user and
-        return the appropriate link for their 'personal profile' page.  For 
-        membrane users, this will be the Person object that defines them.  For acl_users
-        users it will be 'personalize_form'
+        """Distinguish between an fsd user and a regular acl_users user and return the appropriate link for their 'personal profile' page.
+        
+        For membrane users, this will be the Person object that defines them.  For acl_users users it will be 'personalize_form'.
+        
         """
         # TODO: perhaps turn this into an adapter on the user: IPersonalProfileLink(user) or something. Or maybe not--it's called from templates and CMF Expressions all the time.
         site = getSite()
@@ -79,8 +79,7 @@ class ConfigurationUtility(Persistent):
     security.declarePublic('fsdMyFolder')
     def fsdMyFolder(self, id=None):
         """This method attempts to distinguish between a membrane user and a regular
-        acl_users user and send them to the appropriate user folder
-        """
+        acl_users user and send them to the appropriate user folder"""
         site = getSite()
         mt = getToolByName(site, 'portal_membership')
         mb = getToolByName(site, MEMBRANE_TOOL)
@@ -104,8 +103,7 @@ class ConfigurationUtility(Persistent):
     security.declarePublic('fsdShowMyFolder')
     def fsdShowMyFolder(self, id=None):
         """a test to be used as the condition for the fsdMyFolder action, it will distinguish
-        between a membrane user and a non-membrane user, and act accordingly
-        """
+        between a membrane user and a non-membrane user, and act accordingly"""
         site = getSite()
         mt = getToolByName(site, 'portal_membership')
         mb = getToolByName(site, MEMBRANE_TOOL)

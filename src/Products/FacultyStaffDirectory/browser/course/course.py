@@ -2,8 +2,7 @@ from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 class CourseView(BrowserView):
-    """ basic code for viewing a course
-    """
+    """basic code for viewing a course"""
     
     def listing(self):
         context = self.context

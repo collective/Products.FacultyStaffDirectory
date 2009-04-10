@@ -78,8 +78,7 @@ Course_schema = BaseSchema.copy() + schema.copy()  # + on Schemas does only a sh
 finalizeATCTSchema(Course_schema)
 
 class Course(BaseContent, ATCTContent):
-    """
-    """
+    """A course of study, like Anthropology 101"""
     security = ClassSecurityInfo()
     __implements__ = (BaseContent.__implements__ + ATCTContent.__implements__)
     implements(ICourse)

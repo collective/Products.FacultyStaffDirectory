@@ -96,17 +96,17 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
     
     security.declareProtected(View, 'getPeople')
     def getPeople(self):
-        """ Return a list of the catalog brains of people related to this grouping only
-        """
+        """Return a list of the catalog brains of people related to this grouping only"""
         
         return self.getRefs(self.relationship)
     
     def getDeepPeople(self):
-        """ Return a flat list of the catalog brains of people related to this grouping 
+        """Return a flat list of the catalog brains of people related to this grouping 
             and all groupings nested inside this one, recursively
             
             At this point, the list is in no way asserted to be unique.  Should we 
             be deleting duplicates?
+        
         """
         people = []
         pc = getToolByName(self, 'portal_catalog')
@@ -129,8 +129,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
     #
     security.declarePrivate('validate_id')
     def validate_id(self, value):
-        """Ensure the id is unique, also among groups globally
-        """
+        """Ensure the id is unique, also among groups globally"""
         if value != self.getId():
             parent = aq_parent(aq_inner(self))
             if value in parent.objectIds():

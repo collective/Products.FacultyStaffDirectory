@@ -33,6 +33,7 @@ def declareInstallRoutines(globals_, extenderClass, name):
     If this version doesn't support local adapters, installExtenderGloballyIfLocallyIsNotSupported() should kick in.
     
     If you want to do additional stuff on installation or uninstallation, don't call this; do what you have to do, and call installExtender() and uninstallExtender() yourself.
+    
     """
     if localAdaptersAreSupported:
         def install(portal):

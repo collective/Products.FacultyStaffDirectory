@@ -6,6 +6,7 @@ class SequenceValidator(object):
     
     For example, if you have a Lines field that should contain one URL per line, `SequenceValidator` can apply the `isURL` validator individually to each line:
         Person_schema['websites'].validators = SequenceValidator('isURLs', validation.validatorFor('isURL'))
+    
     """
     
     __implements__ = IValidator

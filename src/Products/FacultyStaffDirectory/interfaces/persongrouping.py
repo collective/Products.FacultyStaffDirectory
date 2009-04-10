@@ -6,5 +6,4 @@ __docformat__ = 'plaintext'
 from zope.interface import Interface
 
 class IPersonGrouping(Interface):
-    """ Marker interface for persongroupings
-    """
+    """Marker interface for persongroupings"""

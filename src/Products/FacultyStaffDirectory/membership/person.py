@@ -17,7 +17,8 @@ class UserRelated(object):
     """Provide a user id for persons.
     
     The user id will simply be the id of the member object. This overrides the
-    use of UIDs
+    use of UIDs.
+    
     """
     implements(IUserRelated)
     adapts(IPerson)
@@ -31,8 +32,9 @@ class UserRelated(object):
 class UserAuthentication(object):
     """Provide authentication against persons.
     
-    configurable to use internally-stored passwords, or to pass on verification to
+    Configurable to use internally-stored passwords, or to pass on verification to
     another PAS plugin (perhaps a SSO like apachepas or pubcookiepas)
+    
     """
     implements(IUserAuthentication)
     adapts(IPerson)
@@ -44,9 +46,7 @@ class UserAuthentication(object):
         return self.context.getId()
     
     def verifyCredentials(self, credentials):
-        """Authenticate against the password stored via attribute on this person,
-        or pass authentication on to the next PAS plugin
-        """
+        """Authenticate against the password stored via attribute on this person, or pass authentication on to the next PAS plugin."""
         if getUtility(IConfiguration).useInternalPassword:
             login = credentials.get('login', None)
             password = credentials.get('password', None)
@@ -65,6 +65,7 @@ class UserRoles(object):
     """Provide roles for person users.
     
     Roles may be set (by sufficiently privileged users) on the user object.
+    
     """
     implements(IUserRoles)
     adapts(IPerson)
@@ -79,7 +80,8 @@ class UserRoles(object):
 class UserManagement(object):
     """Provides methods for adding deleting and changing users
 
-    This is an implementation of IUserManagement from PlonePAS
+    This is an implementation of IUserManagement from PlonePAS.
+    
     """
     implements(IMembraneUserManagement)
     adapts(IPerson)
@@ -88,8 +90,10 @@ class UserManagement(object):
         self.context = context
 
     def doAddUser(self, login, password):
-        """This can't be done unless we have a canonical place to store users
-        some implementations may wish to define one and implement this.
+        """This can't be done unless we have a canonical place to store users.
+        
+        Some implementations may wish to define one and implement this.
+        
         """
         raise NotImplementedError
 

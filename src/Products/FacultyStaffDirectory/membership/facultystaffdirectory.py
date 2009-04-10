@@ -14,8 +14,7 @@ from Products.membrane.utils import generateCategorySetIdForType
 from Products.FacultyStaffDirectory.interfaces import IFacultyStaffDirectory
 
 class Group(object):
-    """Allow a FacultyStaffDirectory to act as a group for contained people
-    """
+    """Allow a FacultyStaffDirectory to act as a group for contained people"""
     implements(IGroup)
     adapts(IFacultyStaffDirectory)
     
@@ -30,6 +29,7 @@ class Group(object):
         
         Return an empty list of roles if the directory is in a workflow state
         that is not active in membrane_tool.
+        
         """
         mb = getToolByName(self.context, MEMBRANE_TOOL)
         wf = getToolByName(self.context, 'portal_workflow')

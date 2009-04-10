@@ -442,14 +442,12 @@ class Person(OrderedBaseFolder, ATCTContent):
     # Methods
     security.declareProtected(View, 'at_post_create_script')
     def at_post_create_script(self):
-        """Notify that the Person has been modified.
-        """
+        """Notify that the Person has been modified."""
         notify(PersonModifiedEvent(self))
 
     security.declareProtected(View, 'at_post_edit_script')
     def at_post_edit_script(self):
-        """Notify that the Person has been modified.
-        """
+        """Notify that the Person has been modified."""
         notify(PersonModifiedEvent(self))
     
     def __call__(self, *args, **kwargs):
@@ -457,8 +455,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     
     security.declareProtected(View, 'vcard_view')
     def vcard_view(self, REQUEST, RESPONSE):
-        """vCard 3.0 output
-        """
+        """vCard 3.0 output"""
         RESPONSE.setHeader('Content-Type', 'text/x-vcard')
         RESPONSE.setHeader('Content-Disposition', 'attachment; filename="%s.vcf"' % self.getId())
         out = StringIO()
@@ -488,10 +485,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     
     security.declareProtected(View, 'getSortableName')
     def getSortableName(self):
-        """
-        Return a tuple of the person's name. For sorting purposes
-        Return them as lowercase so that names like 'von Whatever' sort properly
-        """
+        """Return a tuple of the person's name for sorting purposes, as lowercase so that names like 'von Whatever' sort properly."""
         return (self.lastName.lower(), self.firstName.lower())
     
     security.declareProtected(View, 'Title')
@@ -519,19 +513,19 @@ class Person(OrderedBaseFolder, ATCTContent):
     
     security.declarePrivate('_availableEditors')
     def _availableEditors(self):
-        """ Return a list of the available WYSIWYG editors for the site. """
+        """Return a list of the available WYSIWYG editors for the site."""
         props = getToolByName(self, 'portal_properties')
         return props['site_properties'].available_editors
     
     security.declarePrivate('_availableLanguages')
     def _availableLanguages(self):
-        """ Return a list of the available languages for the site. """
+        """Return a list of the available languages for the site."""
         props = getToolByName(self, 'portal_properties')
         return props.availableLanguages()
     
     security.declarePrivate('_skinSelections')
     def _skinSelections(self):
-        """ Return a list of the available skins for the site. """
+        """Return a list of the available skins for the site."""
         skins = getToolByName(self, 'portal_skins')
         return skins.getSkinSelections()
     
@@ -543,8 +537,10 @@ class Person(OrderedBaseFolder, ATCTContent):
     
     security.declareProtected(View, 'getClassificationNames')
     def getClassificationNames(self):
-        """ Returns a list of the titles of the classifications attached to this person.
-            Mainly used for pretty-looking metadata in SmartFolder tables.
+        """Return a list of the titles of the classifications attached to this person.
+        
+        Mainly used for pretty-looking metadata in SmartFolder tables.
+        
         """
         cList = [(getObjPositionInParent(c)+1, c.Title()) for c in self.getClassifications()]
         cList.sort()
@@ -646,7 +642,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     
     # security.declareProtected(View, 'getCommitteeNames')
     # def getCommitteeNames(self):
-    #     """ Returns a list of the titles of the committees attached to this person.
+    #     """Returns a list of the titles of the committees attached to this person.
     #         Mainly used for pretty-looking metadata in SmartFolder tables. Returns an
     #         alphabetically-sorted list since Committees can be located throughout the site,
     #         which makes using any other sort order somewhat problematic.
@@ -657,10 +653,10 @@ class Person(OrderedBaseFolder, ATCTContent):
     
     security.declareProtected(ModifyPortalContent, 'pre_edit_setup')
     def pre_edit_setup(self):
-        """ I hate myself for doing this, but until we can get
-            ReferenceBrowserWidget to accept proper relative paths (../../) or
-            functions, this is what we get.  Can't do it on __init__ since it
-            doesn't recognize any of the portal tools for some reason.
+        """I hate myself for doing this, but until we can get ReferenceBrowserWidget to accept proper relative paths (../../) or functions, this is what we get.
+            
+        Can't do it on __init__ since it doesn't recognize any of the portal tools for some reason.
+        
         """
         # Set the startup directory for the specialties field to the SpecialtiesFolder or, failing
         # that, the root of the FacultyStaffDirectory:
@@ -737,8 +733,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     
     security.declarePrivate('validate_id')
     def validate_id(self, value):
-        """
-        """
+        """Make sure the Person's ID jibes with the regex defined in the configlet and isn't a duplicate."""
         # Ensure the ID is unique in this folder:
         if value != self.getId():
             parent = aq_parent(aq_inner(self))
@@ -752,7 +747,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     
     security.declarePrivate('validate_officePhone')
     def validate_officePhone(self, value=None):
-        """ Make sure the phone number fits the regex defined in the configuration. """
+        """Make sure the phone number fits the regex defined in the configuration."""
         if value:
             fsd_utility = getUtility(IConfiguration)
             regexString = fsd_utility.phoneNumberRegex

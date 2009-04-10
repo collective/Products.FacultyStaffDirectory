@@ -41,8 +41,7 @@ schema = Schema((
 Classification_schema = getattr(PersonGrouping, 'schema', Schema(())).copy() + schema.copy()
 
 class Classification(PersonGrouping):
-    """
-    """
+    """A group of people like Faculty, Staff, or Grad Students"""
     security = ClassSecurityInfo()
     meta_type = portal_type = "FSDClassification"
     # zope3 interfaces

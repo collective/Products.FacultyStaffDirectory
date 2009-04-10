@@ -40,8 +40,7 @@ setupPloneSite(extension_profiles=('Products.FacultyStaffDirectory:default',))
 class FacultyStaffDirectoryTestCase(PloneTestCase):
     """Base class for integration tests for the 'FacultyStaffDirectory' product. This may
     provide specific set-up and tear-down operations, or provide convenience
-    methods.
-    """
+    methods."""
 
     #Utility methods
 
@@ -62,8 +61,7 @@ class FacultyStaffDirectoryTestCase(PloneTestCase):
         return portal[id]
 
     def getPopulatedDirectory(self, id="facstaffdirectory"):
-        """Create a FSD containing some stuff, including...
-        """
+        """Create a FSD containing some stuff, including..."""
         fsd = self.getEmptyDirectory(id)
         # Run the post-create script for some auto-generated content:
         fsd.at_post_create_script()
@@ -97,6 +95,7 @@ class FacultyStaffDirectoryTestCase(PloneTestCase):
             >>> self.interact( locals() )
 
         locals -- passed to InteractiveInterpreter.__init__()
+        
         """
         savestdout = sys.stdout
         sys.stdout = sys.stderr

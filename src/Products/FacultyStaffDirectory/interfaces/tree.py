@@ -6,5 +6,4 @@ __docformat__ = 'plaintext'
 from zope.interface import Interface
 
 class ITree(Interface):
-    """ Adapter interface for tree views of various stuff
-    """
+    """Adapter interface for tree views of various stuff"""

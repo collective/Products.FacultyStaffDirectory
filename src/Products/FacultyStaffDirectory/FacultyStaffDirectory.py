@@ -53,8 +53,7 @@ FacultyStaffDirectory_schema = OrderedBaseFolderSchema.copy() + schema.copy()  #
 finalizeATCTSchema(FacultyStaffDirectory_schema, folderish=True)
 
 class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
-    """
-    """
+    """A container that holds Persons"""
     security = ClassSecurityInfo()
     __implements__ = (ATCTContent.__implements__,
                       getattr(OrderedBaseFolder,'__implements__', ()),                      
@@ -119,8 +118,7 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
 
     security.declareProtected(View, 'getSortedPeople')
     def getSortedPeople(self):
-        """ Return a list of people, sorted by SortableName
-        """
+        """Return a list of people, sorted by SortableName."""
         people = self.getPeople()
         return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
 

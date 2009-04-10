@@ -41,8 +41,7 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
             self.failUnless(u.verifyCredentials({'login':'abc123','password':'chewy1'}), "useInternalPassword not toggled.  verification still disallowed: %s" % self.fsd_utility.useInternalPassword)
             
     def testIdRegexDefault(self):
-        """ Check to make sure the idRegex field is defaulting to the value set in portal_registration
-        """
+        """Check to make sure the idRegex field is defaulting to the value set in portal_registration"""
         # get the value from portal_registration
         pr = getToolByName(self.portal, 'portal_registration')
         regPattern = pr.getIDPattern() or pr.getDefaultIDPattern()
@@ -74,8 +73,7 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
         
     def testFsdMyFolder(self):
         """fsdMyFolder method should return the appropriate url for non-fsd users or 
-        for fsd users
-        """
+        for fsd users"""
         self.login(self.person.id)
         # logged in as an fsd user, the substring <directory_id/user_id> should be in the  return value for the function
         self.failUnless(self.fsd_utility.fsdMyFolder().find(self.directory.id + '/' + self.person.id), "bad url returned for %s: %s" % (self.person.id, self.fsd_utility.fsdMyFolder()))
@@ -92,7 +90,9 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
             
     def testFsdMemberProfile(self):
         """fsdMemberProfile should return the location of the editor for member profile information.
-        This will change depending on whether the member is an fsd person or an acl_users member
+        
+        This will change depending on whether the member is an fsd person or an acl_users member.
+        
         """
         self.login(self.person.id)
         # logged in as an fsd user, the substring <directory_id/user_id/edit> should be in the return value for the function
@@ -107,8 +107,7 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
             
     def testFsdShowMyFolder(self):
         """fsdShowMyFolder tries to intelligently decide whether to show the 'my folder' action
-        button or not.  It tests to see if a member is an fsd person, and acts accordingly
-        """
+        button or not.  It tests to see if a member is an fsd person, and acts accordingly"""
         self.login(self.person.id)
         # logged in as an fsd user, the method should always return true
         self.failUnless(self.fsd_utility.fsdShowMyFolder(), "fsdShowMyFolder returning false for fsd user")
@@ -125,8 +124,7 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
 
     def testMembraneTypeDeactivation(self):
         """test that the fsd_utility's at_post_edit_script calls the modifyMembraneTypes event and
-        that event correctly deals with membrane activation/deactivation
-        """
+        that event correctly deals with membrane activation/deactivation"""
         # Be sure that FSDPerson is still a membrane provider, or the test will be invalid
         self.failUnless('FSDPerson' in MEMBRANE_ABLE_TYPES, "test invalid, FSDPerson is not listed as membrane-able")
 

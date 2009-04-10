@@ -16,6 +16,7 @@ class YuppieExtender(object):
     """Adapter that adds a Mobile Phone field to Person.
     
     You could also change or delete existing fields (though you might violate assumptions made in other code). To do that, implement ISchemaModifier instead of ISchemaExtender.
+    
     """
     adapts(IPerson)
     implements(ISchemaExtender)

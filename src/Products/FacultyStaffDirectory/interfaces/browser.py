@@ -10,7 +10,7 @@ class IPersonView(IBrowserView):
     """A view for a person object"""
 
 class IPersonOfficeAddressViewletManager(IViewletManager):
-    """ Stores parts of a person's office address """
+    """Stores parts of a person's office address"""
 
 class IPersonGroupingViewletManager(IViewletManager):
     """A person grouping viewlet manager"""
@@ -25,7 +25,7 @@ class IClassificationViewletManager(IViewletManager):
     """Ordered viewlet manager that contains and orders parts of a classification like description and person listing."""
         
 class IListingFormat(IBrowserView):
-    """ Determines how a listing should be formatted"""
+    """Determines how a listing should be formatted"""
     
 class ITabularListingFormat(IListingFormat):
     """View that provides a tabular listing"""

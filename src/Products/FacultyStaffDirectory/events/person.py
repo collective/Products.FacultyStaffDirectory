@@ -9,6 +9,7 @@ def modifyPersonOwnership(event):
     
     Stolen from Plone and CMF core, but made less picky about where users are 
     found. (and from borg, thanks, optilude!)
+    
     """
     context = event.context
 

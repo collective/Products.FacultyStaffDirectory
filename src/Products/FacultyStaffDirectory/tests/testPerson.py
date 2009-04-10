@@ -163,7 +163,7 @@ class testWithoutSpecialties(testPerson):
     #    self.failUnlessEqual(self.directory[id].Title(), u'BjÃ¶rk BjÃžrn')
     
     def testPhoneNumberValidation(self):
-        """ Make sure we're validating the phone number based on the regex in the configlet. """
+        """Make sure we're validating the phone number based on the regex in the configlet."""
         
         fsd_tool = getUtility(IConfiguration)
         desc = fsd_tool.phoneNumberDescription
@@ -224,11 +224,11 @@ class testWithoutSpecialties(testPerson):
         self.failUnless('default' not in self.person.schema.getSchemataNames())
     
     def testFTISetup(self):
-        """ Make sure the FTI is pulling info from the GS types profile """
+        """Make sure the FTI is pulling info from the GS types profile"""
         self.failUnless(self.portal.portal_types['FSDPerson'].Title() != "AT Content Type")
     
     def testObjectReorder(self):
-        """ Make sure we can reorder objects within this folderish Person. """
+        """Make sure we can reorder objects within this folderish Person."""
         self.person.invokeFactory(type_name="FSDCourse", id="course1")
         self.person.invokeFactory(type_name="FSDCourse", id="course2")
         self.person.invokeFactory(type_name="FSDCourse", id="course3")
@@ -302,16 +302,14 @@ class testWithoutSpecialties(testPerson):
         self.failUnless(self._testAssistantOwnershipAfter(task='edit'), "designated assistant is not listed as an owner")
         
     def testMultipleUserPrefRoleAssignment(self):
-        """ Test for regression on https://weblion.psu.edu/trac/weblion/ticket/711
-        """
+        """Test for regression on https://weblion.psu.edu/trac/weblion/ticket/711"""
         self.simulateATGUIInteraction(task='create')
         self.simulateATGUIInteraction(task='edit')
         perms = list(self.person.get_local_roles_for_userid('abc123'))
         self.failUnlessEqual(perms.count('User Preferences Editor'), 1, "the role 'User Preferences Editor' is listed more than once after multiple GUI interactions")
         
     def testAssistantDoesNotGetUserPrefRole(self):
-        """ Test to ensure that the assigned assistant does not have the 'User Preferences Editor' role
-        """
+        """Test to ensure that the assigned assistant does not have the 'User Preferences Editor' role"""
         self._testAssistantOwnershipAfter(task="create")
         self.failIf('def456' in self.person.users_with_local_role('User Preferences Editor'), "Assistant can edit user prefs after create")
         self.simulateATGUIInteraction(task="edit")
@@ -328,7 +326,7 @@ class testWithoutSpecialties(testPerson):
         self.failUnless('mydoc' in self.person.validate_id('mydoc'))
     
     def testValidateWebsites(self):
-        """ Test that the url validation is working correctly."""
+        """Test that the url validation is working correctly."""
         # Get the sequence validator used by the 'websites' field
         val = self.person.schema['websites'].validators[1][0]
         self.failIfEqual(val(['www.foo.com']), 1, 'Validator should be checking for a full URL (including the http:// prefix'')')
@@ -341,10 +339,11 @@ class testWithoutSpecialties(testPerson):
         self.failUnless(expectedUnicodeOutput in self.person.vcard_view(self.app.REQUEST, self.app.REQUEST.response), "Improperly handled unicode in vCard output.")
     
     def _testIdWriteAccess(self):
-        """ utility function to support testing write access to the ID attribute of a person
+        """utility function to support testing write access to the ID attribute of a person
             
-            Just login as some user with a given role with respect to self.person and run this
-            Function with no arguments
+        Just log in as some user with a given role with respect to self.person and run this
+        Function with no arguments.
+        
         """
         from Products.CMFCore.utils import getToolByName
         mt = getToolByName(self.portal, 'portal_membership')
@@ -409,7 +408,7 @@ class testWithoutSpecialties(testPerson):
             self.fail("still able to login: %s" % self.portal.portal_membership.getAuthenticatedMember().id)
     
     def testTurnOffMembership(self):
-        """ Make sure Persons still work after disabling membership support. """
+        """Make sure Persons still work after disabling membership support."""
         fsd_tool = getUtility(IConfiguration)
         # Disable membership support for FSDPerson
         fsd_tool.enableMembraneTypes = set([t for t in fsd_tool.enableMembraneTypes if t != 'FSDPerson'])
@@ -427,7 +426,7 @@ class testWithoutSpecialties(testPerson):
             self.Fail("FacultyStaffDirectory incorrectly tried to find the user attached to a FSPerson while membrane support was disabled.")
 
     def testMemberSearch(self):
-        """ Make sure that membrane is using the right fields for member searches. """
+        """Make sure that membrane is using the right fields for member searches."""
         self.directory.invokeFactory(type_name="FSDPerson", id="cvf092", firstName="Another", lastName="Testperson")
         self.directory.invokeFactory(type_name="FSDPerson", id="ope593", firstName="Somebody", lastName="Altogetherdifferent")
 
@@ -439,7 +438,7 @@ class testWithoutSpecialties(testPerson):
 
     # Err... can't actually test for this since it's being handled in pre_edit_setup. Any ideas?
     # def testDefaultEditor(self):
-    #     """ Make sure the editor is being set to the site's default. """
+    #     """Make sure the editor is being set to the site's default."""
     #     memberProps = getToolByName(self.portal, 'portal_memberdata')
     #     defaultEditor = memberProps.wysiwyg_editor
     #     self.assertEquals(self.person.getUserpref_wysiwyg_editor(), defaultEditor, 'The editor set by default for Person does not follow the site default.')
