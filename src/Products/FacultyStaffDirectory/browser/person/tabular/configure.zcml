@@ -8,35 +8,41 @@
        name="facultystaffdirectory.persontabular"
        provides="....interfaces.IPersonViewletManager"
        view="....interfaces.ITabularListingFormat"
-       permission="zope2.View"
-       class="plone.app.viewletmanager.manager.OrderedViewletManager"
+       template="tabularvm.pt"
+       permission="zope.Public"
+       class="..person.PersonViewletManager"
+       allowed_attributes="columns"
        />
 
-       <browser:viewlet
+       <browser:columnarViewlet
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personname"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.ITabularListingFormat"
             template="name.pt"
-            permission="zope2.View"
+            permission="zope.Public"
+            column_heading="Name"
+            column_css_classes="sortable"
             />
 
-        <browser:viewlet
+        <browser:columnarViewlet
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personofficephone"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.ITabularListingFormat"
             template="officephone.pt"
-            permission="zope2.View"
+            permission="zope.Public"
+            column_heading="Phone"
             />
 
-        <browser:viewlet
+        <browser:columnarViewlet
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personemail"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.ITabularListingFormat"
             template="email.pt"
-            permission="zope2.View"
+            permission="zope.Public"
+            column_heading="Email"
             />
 
 </configure>

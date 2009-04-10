@@ -13,7 +13,7 @@
          name="index"
          template="index.pt"
          class=".person.PersonView"
-         permission="zope2.View"
+         permission="zope.Public"
          />
 
     <!-- Person Container (viewletmanager) -->
@@ -21,7 +21,7 @@
         for="...interfaces.IPerson"
         name="facultystaffdirectory.person"
         provides="...interfaces.IPersonViewletManager"
-        permission="zope2.View"
+        permission="zope.Public"
         class=".person.PersonViewletManager"
         />
 
@@ -30,8 +30,8 @@
              name="facultystaffdirectory.personportrait"
              manager="...interfaces.IPersonViewletManager"
              template="portrait.pt"
-             permission="zope2.View"
-             column_heading="[portrait] Portrait"
+             permission="zope.Public"
+             column_heading="Portrait"
              column_css_classes=""
              />
 
@@ -40,8 +40,8 @@
              name="facultystaffdirectory.personjobtitles"
              manager="...interfaces.IPersonViewletManager"
              template="jobtitles.pt"
-             permission="zope2.View"
-             column_heading="[job-titles] Job Titles"
+             permission="zope.Public"
+             column_heading="Job Titles"
              column_css_classes="sortable"
              />
 
@@ -50,14 +50,14 @@
              name="facultystaffdirectory.personofficeaddress"
              manager="...interfaces.IPersonViewletManager"
              template="officeaddress.pt"
-             permission="zope2.View"
+             permission="zope.Public"
              />
 
              <browser:viewletManager
                  for="*"
                  name="facultystaffdirectory.personofficeaddress"
                  provides="...interfaces.IPersonOfficeAddressViewletManager"
-                 permission="zope2.View"
+                 permission="zope.Public"
                  class="plone.app.viewletmanager.manager.OrderedViewletManager"
                  />
 
@@ -66,7 +66,7 @@
                      name="facultystaffdirectory.personofficeaddress.street"
                      manager="...interfaces.IPersonOfficeAddressViewletManager"
                      template="officeaddress_street.pt"
-                     permission="zope2.View"
+                     permission="zope.Public"
                      />
 
                  <browser:viewlet
@@ -74,7 +74,7 @@
                      name="facultystaffdirectory.personofficeaddress.city"
                      manager="...interfaces.IPersonOfficeAddressViewletManager"
                      template="officeaddress_city.pt"
-                     permission="zope2.View"
+                     permission="zope.Public"
                      />
 
                  <browser:viewlet
@@ -82,7 +82,7 @@
                      name="facultystaffdirectory.personofficeaddress.state"
                      manager="...interfaces.IPersonOfficeAddressViewletManager"
                      template="officeaddress_state.pt"
-                     permission="zope2.View"
+                     permission="zope.Public"
                      />
 
                  <browser:viewlet
@@ -90,7 +90,7 @@
                      name="facultystaffdirectory.personofficeaddress.postalcode"
                      manager="...interfaces.IPersonOfficeAddressViewletManager"
                      template="officeaddress_postalcode.pt"
-                     permission="zope2.View"
+                     permission="zope.Public"
                      />
 
 
@@ -99,7 +99,7 @@
              name="facultystaffdirectory.personofficephone"
              manager="...interfaces.IPersonViewletManager"
              template="officephone.pt"
-             permission="zope2.View"
+             permission="zope.Public"
              />
 
          <browser:viewlet
@@ -107,7 +107,7 @@
              name="facultystaffdirectory.personemail"
              manager="...interfaces.IPersonViewletManager"
              template="email.pt"
-             permission="zope2.View"
+             permission="zope.Public"
              />
 
          <browser:viewlet
@@ -115,7 +115,7 @@
              name="facultystaffdirectory.personwebsites"
              manager="...interfaces.IPersonViewletManager"
              template="websites.pt"
-             permission="zope2.View"
+             permission="zope.Public"
              />
 
          <browser:viewlet
@@ -123,7 +123,7 @@
              name="facultystaffdirectory.personeducation"
              manager="...interfaces.IPersonViewletManager"
              template="education.pt"
-             permission="zope2.View"
+             permission="zope.Public"
              />
 
          <browser:viewlet
@@ -131,7 +131,7 @@
              name="facultystaffdirectory.personbiography"
              manager="...interfaces.IPersonViewletManager"
              template="biography.pt"
-             permission="zope2.View"
+             permission="zope.Public"
              />
 
          <browser:viewlet
@@ -139,7 +139,7 @@
              name="facultystaffdirectory.personspecialities"
              manager="...interfaces.IPersonViewletManager"
              template="specialities.pt"
-             permission="zope2.View"
+             permission="zope.Public"
              />
 
          <browser:viewlet
@@ -147,7 +147,7 @@
              name="facultystaffdirectory.personassistants"
              manager="...interfaces.IPersonViewletManager"
              template="assistants.pt"
-             permission="zope2.View"
+             permission="zope.Public"
              />
 
          <browser:viewlet
@@ -155,7 +155,7 @@
              name="facultystaffdirectory.personcourses"
              manager="...interfaces.IPersonViewletManager"
              template="courses.pt"
-             permission="zope2.View"
+             permission="zope.Public"
              />
 
          <browser:viewlet
@@ -163,7 +163,7 @@
              name="facultystaffdirectory.personbosses"
              manager="...interfaces.IPersonViewletManager"
              template="bosses.pt"
-             permission="zope2.View"
+             permission="zope.Public"
              />
          
      <view
@@ -172,7 +172,7 @@
               Products.FacultyStaffDirectory.interfaces.IPersonGrouping
               Products.FacultyStaffDirectory.interfaces.ITabularListingFormat"
          factory=".person.PersonTabularView"
-         permission="zope2.View"
+         permission="zope.Public"
          name="view"
          />
 
@@ -182,7 +182,7 @@
               Products.FacultyStaffDirectory.interfaces.IPersonGrouping
               Products.FacultyStaffDirectory.interfaces.IGalleryListingFormat"
          factory=".person.PersonGalleryView"
-         permission="zope2.View"
+         permission="zope.Public"
          name="view"
          />
          

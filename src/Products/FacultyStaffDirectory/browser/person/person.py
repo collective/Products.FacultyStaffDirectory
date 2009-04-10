@@ -71,8 +71,10 @@ class PersonViewletManager(OrderedViewletManager):
                 (self.context, self.request, self.__parent__, self),
                 IViewlet)
 
+        #the following line doesn't seem to do anything:
+        #viewlets = [(n, v.__of__(v.context)) for n, v in viewlets]
+        
         viewlets = self.sort(viewlets)
-
         
         columns =[{
             'heading': getattr(v, 'column_heading', name),

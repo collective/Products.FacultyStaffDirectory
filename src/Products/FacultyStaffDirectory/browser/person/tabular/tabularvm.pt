@@ -1,0 +1,4 @@
+<p>hello, I'm a viewletmanager</p>
+
+<p tal:content="view/columns" />
+

@@ -9,7 +9,7 @@
         name="gallery"
         class=".persongrouping.PersonGroupingGalleryView"
         template="gallery.pt"
-        permission="zope2.View"
+        permission="zope.Public"
         />
 
     <browser:menuItem
@@ -25,7 +25,7 @@
         name="tabular"
         class=".persongrouping.PersonGroupingTabularView"
         template="tabular.pt"
-        permission="zope2.View"
+        permission="zope.Public"
         />
 
     <browser:menuItem
@@ -41,7 +41,7 @@
         for="...interfaces.IPersonGrouping"
         name="facultystaffdirectory.persongroupingcontainer"
         provides="...interfaces.IPersonGroupingContainerViewletManager"
-        permission="zope2.View"
+        permission="zope.Public"
         class="plone.app.viewletmanager.manager.OrderedViewletManager"
         />
     
@@ -51,7 +51,7 @@
         for="...interfaces.IPersonGrouping"
         manager="...interfaces.IPersonGroupingContainerViewletManager"
         template="personlist.pt"
-        permission="zope2.View"
+        permission="zope.Public"
         />
     
     <!-- Person Grouping -->
@@ -60,7 +60,7 @@
         for="...interfaces.IPersonGrouping"
         name="facultystaffdirectory.persongrouping"
         provides="...interfaces.IPersonGroupingViewletManager"
-        permission="zope2.View"
+        permission="zope.Public"
         class=".persongrouping.PersonGroupingViewletManager"
         />
 
@@ -70,7 +70,7 @@
         for="...interfaces.IPerson"
         manager="...interfaces.IPersonGroupingViewletManager"
         class=".persongrouping.PersonGroupingItemViewlet"
-        permission="zope2.View"
+        permission="zope.Public"
         />
    
 
