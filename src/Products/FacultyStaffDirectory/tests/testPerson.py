@@ -339,7 +339,7 @@ class testWithoutSpecialties(testPerson):
         self.failUnless(expectedUnicodeOutput in self.person.vcard_view(self.app.REQUEST, self.app.REQUEST.response), "Improperly handled unicode in vCard output.")
     
     def _testIdWriteAccess(self):
-        """utility function to support testing write access to the ID attribute of a person
+        """Utility function to support testing write access to the ID attribute of a person
             
         Just log in as some user with a given role with respect to self.person and run this
         Function with no arguments.

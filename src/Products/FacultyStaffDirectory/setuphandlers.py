@@ -26,7 +26,7 @@ def reindexMembrane(portal):
     membraneTool.manage_reindexIndex(membraneIndexes)
 
 def configureRelations(portal):
-    """configuration for Relations"""
+    """Configuration for Relations"""
     relations_tool = getToolByName(portal, 'relations_library')
     xmlpath = os.path.join(package_home(GLOBALS), 'relations.xml')
     f = open(xmlpath)

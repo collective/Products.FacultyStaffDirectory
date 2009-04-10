@@ -112,7 +112,7 @@ Note: You have the same locals available as in your test-case.
         sys.stdout = savestdout
         
     def getLargeDirectory(self, directory=None, numPersons=100):
-        """generate a large number of persons in a directory"""
+        """Generate a large number of persons in a directory."""
         
         firstNames = ("Jacob","Michael","Ethan","Joshua","Daniel","Christopher","Anthony","William",
                       "Matthew","Andrew","Alexander","David","Joseph","Noah","James","Ryan",

@@ -123,8 +123,8 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
             self.fail("Index Error indicates that there are no search results from the membrane tool")
 
     def testMembraneTypeDeactivation(self):
-        """test that the fsd_utility's at_post_edit_script calls the modifyMembraneTypes event and
-        that event correctly deals with membrane activation/deactivation"""
+        """Test that the fsd_utility's at_post_edit_script calls the modifyMembraneTypes event and
+        that event correctly deals with membrane activation/deactivation."""
         # Be sure that FSDPerson is still a membrane provider, or the test will be invalid
         self.failUnless('FSDPerson' in MEMBRANE_ABLE_TYPES, "test invalid, FSDPerson is not listed as membrane-able")
 

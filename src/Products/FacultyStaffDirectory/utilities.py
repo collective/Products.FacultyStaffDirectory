@@ -102,7 +102,7 @@ class ConfigurationUtility(Persistent):
             
     security.declarePublic('fsdShowMyFolder')
     def fsdShowMyFolder(self, id=None):
-        """a test to be used as the condition for the fsdMyFolder action, it will distinguish
+        """A test to be used as the condition for the fsdMyFolder action, it will distinguish
         between a membrane user and a non-membrane user, and act accordingly"""
         site = getSite()
         mt = getToolByName(site, 'portal_membership')

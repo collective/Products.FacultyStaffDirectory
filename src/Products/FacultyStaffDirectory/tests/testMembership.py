@@ -16,7 +16,7 @@ from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestC
 from Products.membrane.interfaces import IGroup
 
 class testMembership(FacultyStaffDirectoryTestCase):
-    """tests for membership functionality in FSD Classes"""
+    """Tests for membership functionality in FSD classes"""
     
     def afterSetUp(self):
         self.loginAsPortalOwner()
@@ -38,7 +38,7 @@ class testMembership(FacultyStaffDirectoryTestCase):
             self.failUnless(self.acl_users.getGroupById(obj.getId()),"unable to find group with id of this %s: %s" % (obj.portal_type ,obj.getId()))
         
     def testIGroupAdapts(self):
-        """verify that the IGroup interface successfully adapts our membrane content types"""
+        """Verify that the IGroup interface successfully adapts our membrane content types"""
         for obj in [self.classification, self.directory]:
             try:
                 IGroup(obj)
@@ -46,14 +46,14 @@ class testMembership(FacultyStaffDirectoryTestCase):
                 self.fail('Unable to adapt %s object to IGroup' % obj.portal_type)
                 
     def testGroupTitle(self):
-        """test the Title method of the IGroup adapter"""
+        """Test the Title method of the IGroup adapter"""
         for obj in [self.classification, self.directory]:
             g = IGroup(obj)
             obj.setTitle('New Title')
             self.failUnlessEqual(g.Title(), 'New Title', "IGroup is returning the incorrect title for %s.  Expected %s, got %s" % (obj.portal_type, obj.Title(), g.Title()))
         
     def testGroupRoles(self):
-        """test the getGroupRoles method of the IGroup adapter"""
+        """Test the getGroupRoles method of the IGroup adapter"""
         # first test the persongrouping types, which should not support roles
         for obj in [self.classification]:
             g = IGroup(obj)
@@ -78,13 +78,13 @@ class testMembership(FacultyStaffDirectoryTestCase):
         self.failUnless('Reviewer' in g.getRoles(),"Roles not active, but content published\nRoles: %s\nReviewState: %s" % (g.getRoles(), self.wf.getInfoFor(self.directory,'review_state')))
         
     def testGroupID(self):
-        """test the getGroupId method of the IGroup adapter"""
+        """Test the getGroupId method of the IGroup adapter"""
         for obj in [self.classification, self.directory]:
             g = IGroup(obj)
             self.failUnlessEqual(g.getGroupId(), obj.getId(), "IGroup is returning the incorrect ID for %s.  Expected %s, got %s" % (obj.portal_type, obj.getId(), g.getGroupId()))
     
     def testGroupMembership(self):
-        """test the getGroupMembers method of the IGroup adapter"""
+        """Test the getGroupMembers method of the IGroup adapter"""
         # add people to outer groups
         for obj in [self.classification]:
             obj.setPeople((self.person, self.person2))
