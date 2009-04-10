@@ -6,7 +6,7 @@
 from Products.CMFCore.utils import getToolByName
 portal = getToolByName(context, 'portal_url').getPortalObject()
 
-if portal.restrictedTraverse('++fsdmembership++snork').getObfuscateEmailAddresses():
+if portal.restrictedTraverse('++fsdmembership++snork').obfuscateEmailAddresses:
     email = email.replace('.', ' [ DOT ] ')
     email = email.replace('@', ' [ AT ] ')
     email = email.replace('-', ' [ DASH ] ')
