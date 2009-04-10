@@ -2,47 +2,24 @@
 
 __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
-# There are three ways to inject custom code here:
-#
-#   - To set global configuration variables, create a file AppConfig.py.
-#       This will be imported in config.py, which in turn is imported in
-#       each generated class and in this file.
-#   - To perform custom initialisation after types have been registered,
-#       use the protected code section at the bottom of initialize().
-#   - To register a customisation policy, create a file CustomizationPolicy.py
-#       with a method register(context) to register the policy.
 
 import logging
 logger = logging.getLogger('FacultyStaffDirectory')
 logger.info('Installing Product')
 
-try:
-    import CustomizationPolicy
-except ImportError:
-    CustomizationPolicy = None
-
-import Products.CMFPlone.interfaces
-import os
-import os.path
-from Globals import package_home
 from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import *
-from Products.Archetypes.utils import capitalize
-from Products.CMFCore import DirectoryView
-from Products.CMFCore import permissions as cmfpermissions
+from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CMFCore import utils as cmfutils
-from Products.CMFPlone.utils import ToolInit
 from config import *
-DirectoryView.registerDirectory('skins', product_globals)
+
+registerDirectory('skins', product_globals)
 
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.GenericSetup import EXTENSION, profile_registry
 
 def initialize(context):
-
-    # imports packages and types for registration
-    import interfaces
-
+    # Register content types with Archetypes
     import FacultyStaffDirectory
     import Classification
     import Person
@@ -79,4 +56,4 @@ def initialize(context):
         path='profiles/default', 
         product='FacultyStaffDirectory', 
         profile_type=EXTENSION, 
-        for_=Products.CMFPlone.interfaces.IPloneSiteRoot) 
+        for_=IPloneSiteRoot) 

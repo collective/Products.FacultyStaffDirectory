@@ -4,7 +4,6 @@ __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
 import os
-import os.path
 import sys
 
 import Products
