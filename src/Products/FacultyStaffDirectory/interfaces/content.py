@@ -19,15 +19,6 @@ class IPersonGrouping(Interface):
 class IClassification(IPersonGrouping):
     """A classification"""
 
-class ICommittee(IPersonGrouping):
-    """A committee"""
-    
-class ICommitteeMembership(Interface):
-    """A committee membership"""
-
-class ICommitteesFolder(Interface):
-    """A committees folder"""
-
 class ICourse(Interface):
     """A course"""
 

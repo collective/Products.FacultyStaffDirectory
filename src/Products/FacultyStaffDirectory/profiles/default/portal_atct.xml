@@ -3,7 +3,7 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <topic_indexes i18n:domain="plone">
   <index name="getRawPeople"
-     description="The people assigned to a person grouping (ie committee, specialty, classification)"
+     description="The people assigned to a person grouping"
      enabled="True" friendlyName="People" 
      i18n:attributes="description; friendlyName">
    <criteria>ATReferenceCriterion</criteria>

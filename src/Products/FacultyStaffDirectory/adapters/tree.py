@@ -1,7 +1,7 @@
 from zope.interface import implements
 from zope.component import adapts
 
-from Products.FacultyStaffDirectory.interfaces import IPersonGrouping, IClassification, ICommittee, ITree
+from Products.FacultyStaffDirectory.interfaces import IPersonGrouping, IClassification, ITree
                                                       
 
     

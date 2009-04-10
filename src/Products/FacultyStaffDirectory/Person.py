@@ -31,7 +31,7 @@ from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonModifiedEvent
-from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, CHANGE_PERSON_IDS
+from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 
 logger = logging.getLogger('FacultyStaffDirectory')
@@ -269,25 +269,6 @@ schema = ATContentTypeSchema.copy() + Schema((
         allowed_types=('FSDClassification'),
         multiValued=True,
         relationship='people_classifications'
-    ),
-    
-    RelationField(
-        name='committees',
-        widget=ReferenceBrowserWidget(
-            visible={'edit': 'visible', 'view': 'visible'},
-            label=u'Committees',
-            label_msgid='FacultyStaffDirectory_label_committees',
-            i18n_domain='FacultyStaffDirectory',
-            base_query={'portal_type': 'FSDCommittee', 'sort_on': 'sortable_title'},
-            allow_browse=0,
-            allow_search=1,
-            show_results_without_query=1,
-        ),
-        write_permission=ASSIGN_COMMITTIES_TO_PEOPLE,
-        schemata="Professional Information",
-        multiValued=True,
-        relationship='members_committees',
-        allowed_types=('Committee')
     ),
     
     StringField('password',
@@ -663,16 +644,16 @@ class Person(OrderedBaseFolder, ATCTContent):
     #                 topics.append(researchTopic)
     #     return topics
     
-    security.declareProtected(View, 'getCommitteeNames')
-    def getCommitteeNames(self):
-        """ Returns a list of the titles of the committees attached to this person.
-            Mainly used for pretty-looking metadata in SmartFolder tables. Returns an
-            alphabetically-sorted list since Committees can be located throughout the site,
-            which makes using any other sort order somewhat problematic.
-        """
-        dList = [d.Title() for d in self.getCommittees()]
-        dList.sort()
-        return dList
+    # security.declareProtected(View, 'getCommitteeNames')
+    # def getCommitteeNames(self):
+    #     """ Returns a list of the titles of the committees attached to this person.
+    #         Mainly used for pretty-looking metadata in SmartFolder tables. Returns an
+    #         alphabetically-sorted list since Committees can be located throughout the site,
+    #         which makes using any other sort order somewhat problematic.
+    #     """
+    #     dList = [d.Title() for d in self.getCommittees()]
+    #     dList.sort()
+    #     return dList
     
     security.declareProtected(ModifyPortalContent, 'pre_edit_setup')
     def pre_edit_setup(self):

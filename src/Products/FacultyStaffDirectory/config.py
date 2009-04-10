@@ -44,11 +44,10 @@ INVALID_ROLES = ['Manager', 'Owner', 'Anonymous', 'Authenticated', 'User Prefere
 # Annotation key used for passwords
 PASSWORD_KEY = 'fsd.employee.password'
 # what content types are available for membrane functionality?
-MEMBRANE_ABLE_TYPES_CHOICES = [('People', 'FSDPerson'), ('Classifications', 'FSDClassification'), ('Committees', 'FSDCommittee'),]
+MEMBRANE_ABLE_TYPES_CHOICES = [('People', 'FSDPerson'), ('Classifications', 'FSDClassification'),]
 MEMBRANE_ABLE_TYPES = set([v for k, v in MEMBRANE_ABLE_TYPES_CHOICES])
 MEMBRANE_TYPE_ACTIVE_STATES = {'FSDPerson': ['active'],
-                               'FSDClassification': ['active'],
-                               'FSDCommittee': ['active']}
+                               'FSDClassification': ['active']}
 
 # content-types
 ALLOWABLE_CONTENT_TYPES = ('text/plain', 'text/structured', 'text/html', 'application/msword', 'text/x-rst')

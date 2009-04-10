@@ -6,9 +6,6 @@
   <membrane-type name="FSDPerson">
     <active-workflow-state name="active" />
   </membrane-type>
-  <membrane-type name="FSDCommittee">
-    <active-workflow-state name="active" />
-  </membrane-type>
   <membrane-type name="FSDClassification">
     <active-workflow-state name="active" />
   </membrane-type>

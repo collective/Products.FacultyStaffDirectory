@@ -17,7 +17,7 @@ originalMyFolderActionId = "mystuff"
 newMyFolderActionId = "fsdmystuff"
 originalProfileActionId = "MemberPrefs"
 newProfileActionId = "fsdMemberPrefs"
-linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDCommittee', 'FSDCommitteesFolder']
+linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification']
 mediaKupuTypes = ['FSDPerson']
 collectionKupuTypes = ['FSDFacultyStaffDirectory']
 
@@ -39,9 +39,6 @@ class testSetup(FacultyStaffDirectoryTestCase):
         self.pc = getToolByName(self.portal, 'portal_catalog')
         self.workflow   = self.portal.portal_workflow
         self.metaTypes = ('FSDClassification',
-                          'FSDCommittee',
-                          'FSDCommitteeMembership',
-                          'FSDCommitteesFolder',
                           'FSDCourse',
                           'FSDFacultyStaffDirectory',
                           'FSDPerson',
@@ -183,7 +180,7 @@ class testInstall(FacultyStaffDirectoryTestCase):
         if hasattr(self.portal, 'portal_repository'):
             missingversionable = []
             pr = getToolByName(self.portal, "portal_repository")
-            for t in ['FSDPerson', 'FSDCommittee']:
+            for t in ['FSDPerson']:
                 if t not in pr.getVersionableContentTypes():
                     missingversionable.append(t)
             self.failIf(missingversionable, "%s are not listed as versionable and they should be" % missingversionable)
@@ -297,7 +294,7 @@ class testUninstall(FacultyStaffDirectoryTestCase):
         if hasattr(self.portal, 'portal_repository'):
             presentversionable = []
             pr = getToolByName(self.portal, "portal_repository")
-            for t in ['FSDPerson', 'FSDCommittee']:
+            for t in ['FSDPerson']:
                 if t in pr.getVersionableContentTypes():
                     presentversionable.append(t)
             self.failIf(presentversionable, "%s are still listed as versionable and they should not be" % presentversionable)

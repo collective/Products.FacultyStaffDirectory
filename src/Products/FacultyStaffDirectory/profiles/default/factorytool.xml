@@ -2,9 +2,6 @@
 <object name="portal_factory" meta_type="Plone Factory Tool">
   <factorytypes>
     <type portal_type="FSDClassification" />
-    <type portal_type="FSDCommittee" />
-    <type portal_type="FSDCommitteeMembership" />
-    <type portal_type="FSDCommitteesFolder" />
     <type portal_type="FSDCourse" />
     <type portal_type="FSDFacultyStaffDirectory" />
     <type portal_type="FSDPerson" />

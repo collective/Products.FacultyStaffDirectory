@@ -6,7 +6,7 @@ from Products.FacultyStaffDirectory.interfaces import IPersonGrouping
 from Products.FacultyStaffDirectory.membership.person import UserRelated
 
 class Group(object):
-    """Allow a Department, Committee, etc. to act as a group for related people."""
+    """Allow a Person Grouping of whatever type to act as a group for related people."""
     adapts(IPersonGrouping)
     implements(IGroup)
     

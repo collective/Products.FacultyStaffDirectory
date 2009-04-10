@@ -32,7 +32,6 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         self.failUnless('faculty' in fsd.contentIds())
         self.failUnless('staff' in fsd.contentIds())
         self.failUnless('grad-students' in fsd.contentIds())
-        self.failUnless('committees' in fsd.contentIds())
 
     def testGetClassifications(self):
         fsd = self.getPopulatedDirectory()
@@ -54,8 +53,6 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         #Try to move a Classification to the top
         fsd.moveObjectsByDelta(['staff'], -100)
         self.failUnless(fsd.getObjectPosition('staff') == 0, "FSDClassification Subobject 'staff' should be at position 0.")
-        fsd.moveObjectsByDelta(['committees'], -100)
-        self.failUnless(fsd.getObjectPosition('committees') == 0, "FSDCommitteesFolder Subobject 'committees' should be at position 0.")
 
     # tests for membrane integration
     def testFSDIsGroup(self):

@@ -63,7 +63,6 @@ class FacultyStaffDirectoryTestCase(PloneTestCase):
 
     def getPopulatedDirectory(self, id="facstaffdirectory"):
         """Create a FSD containing some stuff, including...
-            * A CommitteesFolder with id "committees"
         """
         fsd = self.getEmptyDirectory(id)
         # Run the post-create script for some auto-generated content:

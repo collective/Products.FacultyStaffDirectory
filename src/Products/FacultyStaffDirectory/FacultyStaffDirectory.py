@@ -91,8 +91,6 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         self.invokeFactory('FSDClassification', id='faculty', title='Faculty')
         self.invokeFactory('FSDClassification', id='staff', title='Staff')
         self.invokeFactory('FSDClassification', id='grad-students', title='Graduate Students')
-        # Create a committees folder
-        self.invokeFactory('FSDCommitteesFolder', id='committees', title='Committees')
 
     security.declareProtected(View, 'getDirectoryRoot')
     def getDirectoryRoot(self):

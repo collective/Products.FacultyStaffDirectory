@@ -22,7 +22,6 @@
   <element value="FSDPerson"/>
   <element value="FSDPersonGrouping"/>
   <element value="FSDClassification"/>
-  <element value="FSDCommitteesFolder"/>
   <element value="Document"/>
   <element value="Topic"/>
  </property>
