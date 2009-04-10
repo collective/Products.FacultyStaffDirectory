@@ -29,10 +29,13 @@ class ConfigurationUtility(Persistent):
     # I couldn't get a for loop to do this. I wildly guess that it's due to some metaclass weirdness due to Persistent.
     phoneNumberRegex = FieldProperty(IConfiguration["phoneNumberRegex"])
     phoneNumberDescription = FieldProperty(IConfiguration["phoneNumberDescription"])
-    obfuscateEmailAddresses = FieldProperty(IConfiguration["obfuscateEmailAddresses"])
+    
     idLabel = FieldProperty(IConfiguration["idLabel"])
     idRegex = FieldProperty(IConfiguration["idRegex"])
     idRegexErrorMessage = FieldProperty(IConfiguration["idRegexErrorMessage"])
+    
+    security.declarePublic('obfuscateEmailAddresses')
+    obfuscateEmailAddresses = FieldProperty(IConfiguration["obfuscateEmailAddresses"])
     
     security.declarePublic('useInternalPassword')
     useInternalPassword = FieldProperty(IConfiguration["useInternalPassword"])
