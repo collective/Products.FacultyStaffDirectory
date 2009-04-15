@@ -1,4 +1,6 @@
 <div class="officePhone">
-    <span class="type" i18n:translate="FacultyStaffDirectory_label_officePhone">Work</span>:
+    <span class="type" 
+          tal:condition="view/context/getOfficePhone"
+          i18n:translate="FacultyStaffDirectory_label_officePhone">Work</span>:
     <span class="tel" tal:content="view/context/getOfficePhone" />
 </div>
