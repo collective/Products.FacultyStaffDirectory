@@ -4,8 +4,8 @@
   <meta:directives namespace="http://namespaces.zope.org/browser">
 
     <meta:directive
-        name="columnarViewlet"
-        schema=".metadirectives.IColumnarViewletDirective"
+        name="tabularViewlet"
+        schema=".metadirectives.ITabularViewletDirective"
         handler="Products.Five.viewlet.metaconfigure.viewletDirective"
         />
 

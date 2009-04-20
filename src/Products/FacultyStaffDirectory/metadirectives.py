@@ -4,7 +4,7 @@ from zope.viewlet.metadirectives import IViewletDirective
 from zope.i18nmessageid import MessageFactory
 _ = MessageFactory('FacultyStaffDirectory')
 
-class IColumnarViewletDirective(IViewletDirective):
+class ITabularViewletDirective(IViewletDirective):
 
     column_heading = MessageID(
         title=_("Column heading"),

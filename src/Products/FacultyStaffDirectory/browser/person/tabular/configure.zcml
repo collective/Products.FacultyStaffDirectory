@@ -14,18 +14,18 @@
        allowed_attributes="columns"
        />
 
-       <browser:columnarViewlet
+       <browser:tabularViewlet
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personname"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.ITabularListingFormat"
             template="name.pt"
             permission="zope.Public"
-            column_heading="Name"
+            column_heading="[NAMEID] Name"
             column_css_classes="sortable"
             />
 
-        <browser:columnarViewlet
+        <browser:tabularViewlet
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personofficephone"
             manager="....interfaces.IPersonViewletManager"
@@ -35,7 +35,7 @@
             column_heading="Phone"
             />
 
-        <browser:columnarViewlet
+        <browser:tabularViewlet
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personemail"
             manager="....interfaces.IPersonViewletManager"

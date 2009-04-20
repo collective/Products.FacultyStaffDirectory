@@ -21,7 +21,7 @@
             permission="zope.Public"
             />
 
-        <browser:columnarViewlet
+        <browser:tabularViewlet
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personportrait"
             manager="....interfaces.IPersonViewletManager"

@@ -5,6 +5,7 @@ from zope.component import getSiteManager, getAdapters
 from zope.interface import implements
 from plone.app.viewletmanager.manager import OrderedViewletManager
 from Products.FacultyStaffDirectory.interfaces import IPersonViewletManager
+from zope.i18n import translate
 from zope.viewlet.interfaces import IViewlet
 
 class PersonView(BrowserView):
@@ -77,7 +78,7 @@ class PersonViewletManager(OrderedViewletManager):
         viewlets = self.sort(viewlets)
         
         columns =[{
-            'heading': getattr(v, 'column_heading', name),
+            'heading': hasattr(v, 'column_heading') and translate(getattr(v, 'column_heading'), domain='FacultyStaffDirectory') or name,  # If no column heading is provided in the ZCML, use the viewlet's name as a heading.
             'classes': getattr(v, 'column_css_classes', u'')
             } for name, v in viewlets]
 
