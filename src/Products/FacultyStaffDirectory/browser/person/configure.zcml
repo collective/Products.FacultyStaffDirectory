@@ -31,8 +31,6 @@
              manager="...interfaces.IPersonViewletManager"
              template="portrait.pt"
              permission="zope.Public"
-             column_heading="Portrait"
-             column_css_classes=""
              />
 
          <browser:viewlet
@@ -41,8 +39,6 @@
              manager="...interfaces.IPersonViewletManager"
              template="jobtitles.pt"
              permission="zope.Public"
-             column_heading="Job Titles"
-             column_css_classes="sortable"
              />
 
          <browser:viewlet

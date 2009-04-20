@@ -21,8 +21,8 @@
             view="....interfaces.ITabularListingFormat"
             template="name.pt"
             permission="zope.Public"
-            column_heading="[NAMEID] Name"
-            column_css_classes="sortable"
+            table_heading="[NAMEID] Name"
+            sortable="True"
             />
 
         <browser:tabularViewlet
@@ -32,7 +32,8 @@
             view="....interfaces.ITabularListingFormat"
             template="officephone.pt"
             permission="zope.Public"
-            column_heading="Phone"
+            table_heading="Phone"
+            sortable="False"
             />
 
         <browser:tabularViewlet
@@ -42,7 +43,7 @@
             view="....interfaces.ITabularListingFormat"
             template="email.pt"
             permission="zope.Public"
-            column_heading="Email"
+            table_heading="Email"
             />
 
 </configure>

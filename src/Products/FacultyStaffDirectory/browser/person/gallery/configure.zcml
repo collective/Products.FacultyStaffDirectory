@@ -21,15 +21,13 @@
             permission="zope.Public"
             />
 
-        <browser:tabularViewlet
+        <browser:viewlet
             for="....interfaces.IPersonGrouping"
             name="facultystaffdirectory.personportrait"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.IGalleryListingFormat"
             template="portrait.pt"
             permission="zope.Public"
-            column_heading="Portrait"
-            column_css_classes=""
             />
 
         <browser:viewlet
