@@ -6,7 +6,7 @@
   <membrane-type name="FSDPerson">
     <active-workflow-state name="active" />
   </membrane-type>
-  <membrane-type name="FSDClassification">
+  <membrane-type name="FSDPersonGrouping">
     <active-workflow-state name="active" />
   </membrane-type>
   <query_index_map>

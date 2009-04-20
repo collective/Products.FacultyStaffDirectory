@@ -21,7 +21,6 @@
  <property name="allowed_content_types">
   <element value="FSDPerson"/>
   <element value="FSDPersonGrouping"/>
-  <element value="FSDClassification"/>
   <element value="Document"/>
   <element value="Topic"/>
  </property>

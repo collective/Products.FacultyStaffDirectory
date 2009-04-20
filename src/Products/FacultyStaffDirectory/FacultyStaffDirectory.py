@@ -84,20 +84,28 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         """Actions to perform after a FacultyStaffDirectory is added to a Plone site"""
         # Create some default contents
         # Create some base classifications
-        self.invokeFactory('FSDClassification', id='faculty', title='Faculty')
-        self.invokeFactory('FSDClassification', id='staff', title='Staff')
-        self.invokeFactory('FSDClassification', id='grad-students', title='Graduate Students')
+        self.invokeFactory('FSDPersonGrouping', id='faculty', title='Faculty')
+        self.invokeFactory('FSDPersonGrouping', id='staff', title='Staff')
+        self.invokeFactory('FSDPersonGrouping', id='grad-students', title='Graduate Students')
 
     security.declareProtected(View, 'getDirectoryRoot')
     def getDirectoryRoot(self):
         """Return the current FSD object through acquisition."""
         return self
 
-    security.declareProtected(View, 'getClassifications')
-    def getClassifications(self):
-        """Return the classifications (in brains form) within this FacultyStaffDirectory."""
+    # security.declareProtected(View, 'getClassifications')
+    # def getClassifications(self):
+    #     """Return the classifications (in brains form) within this FacultyStaffDirectory."""
+    #     portal_catalog = getToolByName(self, 'portal_catalog')
+    #     return portal_catalog(path='/'.join(self.getPhysicalPath()), portal_type='FSDClassification', depth=1, sort_on='getObjPositionInParent')
+        
+    security.declareProtected(View, 'getPersonGroupings')
+    def getPersonGroupings(self, type=""):
+        """ return a list of the persongroupings of type='type' defined within this FSD
+            if type is not given (default), provide list of all persongroupings
+        """
         portal_catalog = getToolByName(self, 'portal_catalog')
-        return portal_catalog(path='/'.join(self.getPhysicalPath()), portal_type='FSDClassification', depth=1, sort_on='getObjPositionInParent')
+        return portal_catalog(path="/".join(self.getPhysicalPath()), portal_type="FSDPersonGrouping", sort_on='getObjPositionInParent')
         
     # security.declareProtected(View, 'getSpecialtiesFolder')
     # def getSpecialtiesFolder(self):

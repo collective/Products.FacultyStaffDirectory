@@ -12,7 +12,7 @@
  <permission>Set own password</permission>
  <permission>FacultyStaffDirectory: Change roles</permission>
  <permission>FacultyStaffDirectory: Change Person IDs</permission>
- <permission>FacultyStaffDirectory: Assign Classifications to People</permission>
+ <permission>FacultyStaffDirectory: Manage Group Membership</permission>
  <permission>Relations: Manage content relations</permission> 
  
  <state state_id="active" title="Active">
@@ -50,7 +50,7 @@
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
   </permission-map>
-  <permission-map name="FacultyStaffDirectory: Assign Classifications to People" acquired="True">
+  <permission-map name="FacultyStaffDirectory: Manage Group Membership" acquired="True">
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
   </permission-map>  
@@ -93,7 +93,7 @@
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
   </permission-map>
-  <permission-map name="FacultyStaffDirectory: Assign Classifications to People" acquired="True">
+  <permission-map name="FacultyStaffDirectory: Manage Group Membership" acquired="True">
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
   </permission-map>    

@@ -12,10 +12,11 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.Relations.field import RelationField
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces import IConfiguration
-from Products.FacultyStaffDirectory.interfaces.persongrouping import IPersonGrouping
+from Products.FacultyStaffDirectory.interfaces import IPersonGrouping
 from Products.FacultyStaffDirectory.permissions import MANAGE_GROUP_MEMBERSHIP
 from Products.CMFCore.permissions import View
 from Products.CMFCore.utils import getToolByName
+from Products.membrane.interfaces import IPropertiesProvider
 from zope.component import getUtility
 from zope.interface import implements
 
@@ -63,7 +64,7 @@ schema =  ATContentTypeSchema.copy() + Schema((
         write_permission = MANAGE_GROUP_MEMBERSHIP,
         allowed_types=('FSDPerson',),
         multiValued=True,
-        relationship='departments_members'
+        relationship='has_member'
     ),
 
 ),
@@ -77,7 +78,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
     __implements__ = (ATCTContent.__implements__,
                       getattr(OrderedBaseFolder,'__implements__', ()),                      
                      )
-    implements(IPersonGrouping)
+    implements(IPersonGrouping, IPropertiesProvider)
 
     meta_type = portal_type = 'FSDPersonGrouping'
 

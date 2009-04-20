@@ -4,9 +4,9 @@ from StringIO import StringIO
 from Products.CMFCore.utils import getToolByName
 from zope.interface import alsoProvides, noLongerProvides
 
-from Products.FacultyStaffDirectory.adapters.tree import personGroupingTree, classificationTree
+from Products.FacultyStaffDirectory.adapters.tree import personGroupingTree
 from Products.FacultyStaffDirectory.config import ADDITIONAL_CATALOG_INDEXES, product_globals as GLOBALS
-from Products.FacultyStaffDirectory.interfaces import IPersonGrouping, IClassification, ITree, IConfiguration, ISiteMarker
+from Products.FacultyStaffDirectory.interfaces import IPersonGrouping, ITree, IConfiguration, ISiteMarker
 from Products.FacultyStaffDirectory.utilities import ConfigurationUtility
 
 def reindexCatalogIndexes(portal):
@@ -61,7 +61,7 @@ def configureKupu(portal):
             #ems174: Do we actually need to updateResourceTypes? Kupu gets snippy if we try to add more than one linkable type.
             #kupu.updateResourceTypes(resourceType)
         
-    linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification']
+    linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDPersonGrouping']
     mediaKupuTypes = ['FSDPerson']
     collectionKupuTypes = ['FSDFacultyStaffDirectory']
     
@@ -81,7 +81,6 @@ def registerTreeAdapters(portal):
     """Register the adapters for various content types to the ITree interface."""
     sm = portal.getSiteManager()
     sm.registerAdapter(personGroupingTree, required=(IPersonGrouping,), provided=ITree)
-    sm.registerAdapter(classificationTree, required=(IClassification,), provided=ITree)
 
 def applyMarkerInterface(portal):
     """Apply a marker interface to the Plone site. Our ++fsdmembership++ traverser uses it to limit itself to sites where FSD is actually installed."""

@@ -17,7 +17,7 @@ originalMyFolderActionId = "mystuff"
 newMyFolderActionId = "fsdmystuff"
 originalProfileActionId = "MemberPrefs"
 newProfileActionId = "fsdMemberPrefs"
-linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification']
+linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDPersonGrouping']
 mediaKupuTypes = ['FSDPerson']
 collectionKupuTypes = ['FSDFacultyStaffDirectory']
 
@@ -38,8 +38,7 @@ class testSetup(FacultyStaffDirectoryTestCase):
         self.css        = self.portal.portal_css
         self.pc = getToolByName(self.portal, 'portal_catalog')
         self.workflow   = self.portal.portal_workflow
-        self.metaTypes = ('FSDClassification',
-                          'FSDCourse',
+        self.metaTypes = ('FSDCourse',
                           'FSDFacultyStaffDirectory',
                           'FSDPerson',
                           'FSDPersonGrouping',

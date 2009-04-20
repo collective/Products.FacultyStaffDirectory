@@ -7,7 +7,7 @@
     <type type_id="FSDPerson">
       <bound-workflow workflow_id="fsd_person_workflow" />
     </type>
-    <type type_id="FSDClassification">
+    <type type_id="FSDPersonGrouping">
       <bound-workflow workflow_id="fsd_persongrouping_workflow" />
     </type>
   </bindings>

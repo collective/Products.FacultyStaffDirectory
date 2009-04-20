@@ -33,12 +33,19 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         self.failUnless('staff' in fsd.contentIds())
         self.failUnless('grad-students' in fsd.contentIds())
 
-    def testGetClassifications(self):
+    # def testGetClassifications(self):
+    #     fsd = self.getPopulatedDirectory()
+    #     classificationsBrains = fsd.getClassifications()
+    #     self.failUnless('faculty' in [c.getObject().id for c in classificationsBrains])
+    #     for c in classificationsBrains:
+    #         self.failUnless(c.portal_type == 'FSDClassification')
+            
+    def testGetPersonGroupings(self):
         fsd = self.getPopulatedDirectory()
-        classificationsBrains = fsd.getClassifications()
-        self.failUnless('faculty' in [c.getObject().id for c in classificationsBrains])
-        for c in classificationsBrains:
-            self.failUnless(c.portal_type == 'FSDClassification')
+        groupingBrains = fsd.getPersonGroupings()
+        self.failUnless('faculty' in [g.getObject().id for g in groupingBrains])
+        for g in groupingBrains:
+            self.failUnless(g.portal_type == 'FSDPersonGrouping')
 
     def testGetPeople(self):
         fsd = self.getPopulatedDirectory()
@@ -52,7 +59,7 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         fsd = self.getPopulatedDirectory()
         #Try to move a Classification to the top
         fsd.moveObjectsByDelta(['staff'], -100)
-        self.failUnless(fsd.getObjectPosition('staff') == 0, "FSDClassification Subobject 'staff' should be at position 0.")
+        self.failUnless(fsd.getObjectPosition('staff') == 0, "FSDPersonGrouping Subobject 'staff' should be at position 0.")
 
     # tests for membrane integration
     def testFSDIsGroup(self):

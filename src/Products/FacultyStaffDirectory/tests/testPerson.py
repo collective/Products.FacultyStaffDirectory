@@ -101,13 +101,22 @@ class testWithoutSpecialties(testPerson):
         self.failUnless('test-course' in self.person.contentIds())
         self.failUnless('test-course' in [c.id for c in self.person.getCourses()])
     
-    def testAssignClassifications(self):
-        """Assign classifications to a person"""
-        classifications = [c.UID for c in self.directory.getClassifications()]
-        self.person.setClassifications(classifications)
-        for c in self.person.getClassifications():
-            self.failUnless(c.id in ['faculty', 'staff', 'grad-students'])
-            self.failUnlessEqual(c.Type(), 'Classification')
+    # def testAssignClassifications(self):
+    #     """Assign classifications to a person"""
+    #     classifications = [c.UID for c in self.directory.getClassifications()]
+    #     self.person.setClassifications(classifications)
+    #     for c in self.person.getClassifications():
+    #         self.failUnless(c.id in ['faculty', 'staff', 'grad-students'])
+    #         self.failUnlessEqual(c.Type(), 'Classification')
+            
+    def testAssignPersonGroupings(self):
+        """ assign person groupings to a person
+        """
+        groupings = [g.UID for g in self.directory.getPersonGroupings()]
+        self.person.setPersongroupings(groupings)
+        for g in self.person.getPersongroupings():
+            self.failUnless(g.id in ['faculty', 'staff', 'grad-students'])
+            self.failUnlessEqual(g.Type(), 'Person Grouping')
     
     def testAssignAssistants(self):
         """Assign an assistant to a person"""

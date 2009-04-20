@@ -21,7 +21,6 @@ from Products.GenericSetup import EXTENSION, profile_registry
 def initialize(context):
     # Register content types with Archetypes
     import FacultyStaffDirectory
-    import Classification
     import Person
     import Course
     import PersonGrouping

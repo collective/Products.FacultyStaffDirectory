@@ -31,7 +31,7 @@ from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonModifiedEvent
-from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, CHANGE_PERSON_IDS
+from Products.FacultyStaffDirectory.permissions import MANAGE_GROUP_MEMBERSHIP, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 
 logger = logging.getLogger('FacultyStaffDirectory')
@@ -253,10 +253,10 @@ schema = ATContentTypeSchema.copy() + Schema((
     ),
     
     RelationField(
-        name='classifications',
+        name='persongroupings',
         widget=ReferenceBrowserWidget
         (
-            label=u'Classifications',
+            label=u'Person Groupings',
             label_msgid='FacultyStaffDirectory_label_classifications',
             i18n_domain='FacultyStaffDirectory',
             base_query={'portal_type': 'FSDClassification', 'sort_on': 'sortable_title'},
@@ -264,11 +264,11 @@ schema = ATContentTypeSchema.copy() + Schema((
             allow_search=1,
             show_results_without_query=1,
         ),
-        write_permission=ASSIGN_CLASSIFICATIONS_TO_PEOPLE,
+        write_permission=MANAGE_GROUP_MEMBERSHIP,
         schemata="Basic Information",
-        allowed_types=('FSDClassification'),
+        allowed_types=('FSDPersonGroupings'),
         multiValued=True,
-        relationship='people_classifications'
+        relationship='is_member_of'
     ),
     
     StringField('password',
@@ -535,16 +535,16 @@ class Person(OrderedBaseFolder, ATCTContent):
         portal_catalog = getToolByName(self, 'portal_catalog')
         return portal_catalog(path='/'.join(self.getPhysicalPath()), portal_type='FSDCourse', depth=1, sort_on="getObjPositionInParent")
     
-    security.declareProtected(View, 'getClassificationNames')
-    def getClassificationNames(self):
-        """Return a list of the titles of the classifications attached to this person.
-        
-        Mainly used for pretty-looking metadata in SmartFolder tables.
-        
-        """
-        cList = [(getObjPositionInParent(c)+1, c.Title()) for c in self.getClassifications()]
-        cList.sort()
-        return [c[-1] for c in cList]
+    # security.declareProtected(View, 'getClassificationNames')
+    # def getClassificationNames(self):
+    #     """Return a list of the titles of the classifications attached to this person.
+    #     
+    #     Mainly used for pretty-looking metadata in SmartFolder tables.
+    #     
+    #     """
+    #     cList = [(getObjPositionInParent(c)+1, c.Title()) for c in self.getClassifications()]
+    #     cList.sort()
+    #     return [c[-1] for c in cList]
     
     # security.declareProtected(View, 'getSpecialtyTree')
     # def getSpecialtyTree(self):

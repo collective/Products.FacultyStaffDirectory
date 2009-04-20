@@ -28,7 +28,6 @@
 
     <!-- These should be unnecessary once BaseContent and BaseFolder stop using manage_afterAdd(): -->
     <five:deprecatedManageAddDelete class=".FacultyStaffDirectory.FacultyStaffDirectory" />
-    <five:deprecatedManageAddDelete class=".Classification.Classification" />
     <five:deprecatedManageAddDelete class=".Course.Course" />
     <five:deprecatedManageAddDelete class=".Person.Person" />
 </configure>

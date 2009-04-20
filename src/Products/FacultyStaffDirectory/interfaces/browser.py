@@ -22,9 +22,6 @@ class IPersonGroupingView(IBrowserView):
 
 class IPersonGroupingContainerViewletManager(IViewletManager):
     """A viewlet manager containing the parts of a person grouping's view (page content, person listing, nested person groupings)."""
-    
-class IClassificationViewletManager(IViewletManager):
-    """Ordered viewlet manager that contains and orders parts of a classification like description and person listing."""
         
 class IListingFormat(IBrowserView):
     """Determines how a listing should be formatted"""

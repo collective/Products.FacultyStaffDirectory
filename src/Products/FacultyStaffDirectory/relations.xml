@@ -1,128 +1,32 @@
 <?xml version="1.0" ?>
 <RelationsLibrary>
 	<RulesetCollection id="FacultyStaffDirectory">
-		<Ruleset id="classifications_people" uid="-64--88-1-108-5b695eb6:1107948e86a:-8000:00000000000015FE">
+		<Ruleset id="is_member_of" uid="-84-28--90--11--540cb6d5:114b1e72e80:-8000:0000000000000C4C">
 			<TypeConstraint id="type_constraint">
 				<allowedSourceType>
-					FSDClassification
+					FSDPerson
 				</allowedSourceType>
 				<allowedTargetType>
-					FSDPerson
+					FSDPersonGrouping
 				</allowedTargetType>
 			</TypeConstraint>
 			<InverseImplicator id="inverse_relation">
-				<inverseRuleset uidref="people_classifications"/>
+				<inverseRuleset uidref="has_member"/>
 			</InverseImplicator>
 		</Ruleset>
-		<Ruleset id="people_classifications" uid="people_classifications">
+		<Ruleset id="has_member" uid="has_member">
 			<TypeConstraint id="type_constraint">
 				<allowedSourceType>
-					FSDPerson
-				</allowedSourceType>
-				<allowedTargetType>
-					FSDClassification
-				</allowedTargetType>
-			</TypeConstraint>
-			<InverseImplicator id="inverse_relation">
-				<inverseRuleset uidref="-64--88-1-108-5b695eb6:1107948e86a:-8000:00000000000015FE"/>
-			</InverseImplicator>
-		</Ruleset>
-		<Ruleset id="DepartmentalMembership" uid="-84-28--90--11--540cb6d5:114b1e72e80:-8000:0000000000000C4C">
-			<TypeConstraint id="type_constraint">
-				<allowedSourceType>
-					FSDPerson
-				</allowedSourceType>
-				<allowedTargetType>
-					FSDDepartment
-				</allowedTargetType>
-			</TypeConstraint>
-			<ContentReference id="content_reference">
-				<portalType>
-					FSDDepartmentalMembership
-				</portalType>
-				<shareWithInverse>
-					1
-				</shareWithInverse>
-				<primary>
-					1
-				</primary>
-			</ContentReference>
-			<InverseImplicator id="inverse_relation">
-				<inverseRuleset uidref="departments_members"/>
-			</InverseImplicator>
-		</Ruleset>
-		<Ruleset id="departments_members" uid="departments_members">
-			<TypeConstraint id="type_constraint">
-				<allowedSourceType>
-					FSDDepartment
+					FSDPersonGrouping
 				</allowedSourceType>
 				<allowedTargetType>
 					FSDPerson
 				</allowedTargetType>
 			</TypeConstraint>
-			<ContentReference id="content_reference">
-				<portalType>
-					FSDDepartmentalMembership
-				</portalType>
-				<shareWithInverse>
-					1
-				</shareWithInverse>
-				<primary>
-					0
-				</primary>
-			</ContentReference>
 			<InverseImplicator id="inverse_relation">
 				<inverseRuleset uidref="-84-28--90--11--540cb6d5:114b1e72e80:-8000:0000000000000C4C"/>
 			</InverseImplicator>
 		</Ruleset>
-		<Ruleset id="CommitteeMembership" uid="-84-28--90--15--1c25f7cd:110dff54157:-8000:0000000000000AF2">
-			<TypeConstraint id="type_constraint">
-				<allowedSourceType>
-					FSDCommittee
-				</allowedSourceType>
-				<allowedTargetType>
-					FSDPerson
-				</allowedTargetType>
-			</TypeConstraint>
-			<ContentReference id="content_reference">
-				<portalType>
-					FSDCommitteeMembership
-				</portalType>
-				<shareWithInverse>
-					1
-				</shareWithInverse>
-				<primary>
-					1
-				</primary>
-			</ContentReference>
-			<InverseImplicator id="inverse_relation">
-				<inverseRuleset uidref="members_committees"/>
-			</InverseImplicator>
-		</Ruleset>
-		<Ruleset id="members_committees" uid="members_committees">
-			<TypeConstraint id="type_constraint">
-				<allowedSourceType>
-					FSDPerson
-				</allowedSourceType>
-				<allowedTargetType>
-					FSDCommittee
-				</allowedTargetType>
-			</TypeConstraint>
-			<ContentReference id="content_reference">
-				<portalType>
-					FSDCommitteeMembership
-				</portalType>
-				<shareWithInverse>
-					1
-				</shareWithInverse>
-				<primary>
-					0
-				</primary>
-			</ContentReference>
-			<InverseImplicator id="inverse_relation">
-				<inverseRuleset uidref="-84-28--90--15--1c25f7cd:110dff54157:-8000:0000000000000AF2"/>
-			</InverseImplicator>
-		</Ruleset>	
 		<Ruleset id="people_assistants" title="people_assistants" uid="7626004ee22ce6b68718128f207ef733">
 			<TypeConstraint id="type_constraint" title="type_constraint" uid="b26852604fd0b20c5cf235243281e5b6">
 				<allowedSourceType>

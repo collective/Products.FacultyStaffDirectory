@@ -16,9 +16,6 @@ class IPersonGrouping(Interface):
     def getSortedPeople():
         """Return a sorted list of people."""
 
-class IClassification(IPersonGrouping):
-    """A classification"""
-
 class ICourse(Interface):
     """A course"""
 
