@@ -47,12 +47,3 @@ def initialize(context):
         context.registerClass(meta_type   = all_ftis[i]['meta_type'],
                               constructors= (all_constructors[i],),
                               permission  = ADD_CONTENT_PERMISSIONS[klassname])
-
-    profile_registry.registerProfile( 
-        name='default', 
-        title=PROJECTNAME, 
-        description=u'Profile for FacultyStaffDirectory', 
-        path='profiles/default', 
-        product='FacultyStaffDirectory', 
-        profile_type=EXTENSION, 
-        for_=IPloneSiteRoot) 
