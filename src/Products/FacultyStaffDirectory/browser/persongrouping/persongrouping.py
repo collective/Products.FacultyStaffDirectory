@@ -6,6 +6,7 @@ from zope.viewlet.interfaces import IViewlet, IViewletManager
 from Products.FacultyStaffDirectory.interfaces import IPersonGroupingViewletManager, IPersonGroupingView, IListingFormat, ITabularListingFormat, IGalleryListingFormat
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets.common import ViewletBase
+from Products.Five.viewlet.manager import ViewletManagerBase
 
 class PersonGroupingGalleryView(object):
     implements(IGalleryListingFormat)
@@ -13,7 +14,7 @@ class PersonGroupingGalleryView(object):
 class PersonGroupingTabularView(object):
     implements(ITabularListingFormat)
     
-class PersonGroupingViewletManager(object):
+class PersonGroupingViewletManager(ViewletManagerBase):
     implements(IPersonGroupingViewletManager)
 
     viewlets = []

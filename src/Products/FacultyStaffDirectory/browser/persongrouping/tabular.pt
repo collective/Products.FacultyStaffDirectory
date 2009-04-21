@@ -32,7 +32,7 @@
 
               <table class="listing">
                 <thead />
-                <tbody tal:content="structure provider:facultystaffdirectory.persongroupingcontainer" />
+                <tbody tal:content="structure provider:facultystaffdirectory.persongroupingcontainertabular" />
               </table>
               
               <div metal:use-macro="here/document_relateditems/macros/relatedItems">

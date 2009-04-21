@@ -8,7 +8,6 @@
        name="facultystaffdirectory.persontabular"
        provides="....interfaces.IPersonViewletManager"
        view="....interfaces.ITabularListingFormat"
-       template="tabularvm.pt"
        permission="zope.Public"
        class="..person.PersonViewletManager"
        allowed_attributes="columns"

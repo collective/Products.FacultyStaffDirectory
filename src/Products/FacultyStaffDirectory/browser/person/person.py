@@ -79,7 +79,7 @@ class PersonViewletManager(OrderedViewletManager):
         
         columns =[{
             'heading': hasattr(v, 'table_heading') and translate(getattr(v, 'table_heading'), domain='FacultyStaffDirectory') or name,  # If no column heading is provided in the ZCML, use the viewlet's name as a heading.
-            'sortable': v.sortable
+            'sortable': getattr(v, 'sortable', u'')
             } for name, v in viewlets]
 
         return columns

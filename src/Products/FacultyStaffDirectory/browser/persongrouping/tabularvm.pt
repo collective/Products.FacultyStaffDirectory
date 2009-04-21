@@ -1,0 +1,9 @@
+<p>hello, I'm a viewletmanager</p>
+
+<div tal:content="view/columns" />
+
+<div tal:repeat="viewlet view/viewlets">
+    <div tal:replace="structure viewlet/render" />
+</div>
+
+

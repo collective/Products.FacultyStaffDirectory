@@ -74,4 +74,47 @@
         />
    
 
+
+
+    <!-- Person Grouping Container (viewletmanager) -->
+    <browser:viewletManager
+        for="...interfaces.IPersonGrouping"
+        name="facultystaffdirectory.persongroupingcontainertabular"
+        provides="...interfaces.IPersonGroupingContainerTabularViewletManager"
+        permission="zope.Public"
+        class="plone.app.viewletmanager.manager.OrderedViewletManager"
+        />
+    
+  
+    <!-- Person Grouping Viewlet (viewlet) -->
+    <browser:viewlet
+        name="facultystaffdirectory.persontabularlist"
+        for="...interfaces.IPersonGrouping"
+        manager="...interfaces.IPersonGroupingContainerTabularViewletManager"
+        template="personlisttabular.pt"
+        permission="zope.Public"
+        />
+    
+    <!-- Person Grouping -->
+    <!-- Contains PersonGroupingItemViewlets -->
+    <browser:viewletManager
+        for="...interfaces.IPersonGrouping"
+        name="facultystaffdirectory.persongroupingtabular"
+        provides="...interfaces.IPersonGroupingViewletManager"
+        permission="zope.Public"
+        template="tabularvm.pt"
+        class=".persongrouping.PersonGroupingViewletManager"
+        />
+
+    <!-- PersonGroupingItemViewlet -->
+    <!--
+    <browser:viewlet
+        name="facultystaffdirectory.persongroupingitemviewlettabular"
+        for="...interfaces.IPerson"
+        manager="...interfaces.IPersonGroupingViewletManager"
+        class=".persongrouping.PersonGroupingItemViewlet"
+        permission="zope.Public"
+        />
+    -->
+ 
 </configure>
