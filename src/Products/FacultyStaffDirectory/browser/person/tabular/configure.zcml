@@ -22,7 +22,6 @@
             template="name.pt"
             permission="zope.Public"
             table_heading="[NAMEID] Name"
-            sortable="True"
             />
 
         <browser:tabularViewlet
@@ -33,7 +32,6 @@
             template="officephone.pt"
             permission="zope.Public"
             table_heading="Phone"
-            sortable="False"
             />
 
         <browser:tabularViewlet
