@@ -16,6 +16,7 @@
     <element value="tabular" />
     <element value="fsd_atoz_view" />
  </property> 
+ <property name="default_view_fallback">False</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
@@ -25,13 +26,6 @@
   <element value="Topic"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">directory_standard_view</property>
- <property name="view_methods">
-  <element value="directory_standard_view"/>
-  <element value="directory_tabular_view"/>
-  <element value="fsd_atoz_view"/>
- </property>
- <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="base_edit"/>
  <alias from="index.html" to="(selected layout)"/>
