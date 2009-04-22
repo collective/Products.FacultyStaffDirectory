@@ -38,6 +38,7 @@ setup(name='Products.FacultyStaffDirectory',
           'plone.app.relations',
           'plonerelations.ATField',
           'archetypes.referencebrowserwidget',
+          'Products.GenericSetup>=1.4.3'
       ],
       entry_points="""
       # -*- Entry points: -*-
