@@ -491,7 +491,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     security.declareProtected(View, 'getSortableName')
     def getSortableName(self):
         """Return a tuple of the person's name for sorting purposes, as lowercase so that names like 'von Whatever' sort properly."""
-        return (self.lastName.lower(), self.firstName.lower())
+        return self.lastName.lower(), self.firstName.lower(), self.middleName.lower()
     
     security.declareProtected(View, 'Title')
     def Title(self):

@@ -85,7 +85,7 @@ class testWithoutSpecialties(testPerson):
         self.failUnlessEqual(self.person.Title(), u"Test Person")
         
         # Check the sortable name
-        self.failUnlessEqual(self.person.getSortableName(), ('person', 'test'))
+        self.failUnlessEqual(self.person.getSortableName(), ('person', 'test', ''))
         
         # Check that Personnel Managers can add a Person.
         self.logout()
@@ -129,42 +129,52 @@ class testWithoutSpecialties(testPerson):
             self.failUnlessEqual(a.getReferences(relationship="assistants_people")[0].id, "abc123")
     
     def testMiddleName(self):
-        #add a middle name
+        oldMiddleName = self.person.getMiddleName()
         self.person.setMiddleName('Joe')
-        
-        #title should change
-        self.failUnlessEqual(self.person.Title(), u"Test Joe Person")
-        
-        #but sortable name shouldn't
-        self.failUnlessEqual(self.person.getSortableName(), ('person', 'test'))
+        try:
+            #title should change
+            self.failUnlessEqual(self.person.Title(), u"Test Joe Person")
+            
+            #but sortable name shouldn't
+            self.failUnlessEqual(self.person.getSortableName(), ('person', 'test', 'joe'))
+        finally:
+            self.person.setMiddleName(oldMiddleName)
     
     def testSuffix(self):
-        #Add a suffix
+        oldSuffix = self.person.getSuffix()
         self.person.setSuffix('WTF')
-        
-        #Title should change
-        self.failUnlessEqual(self.person.Title(), u"Test Person, WTF")
-        
-        #But Sortable Name shouldn't
-        self.failUnlessEqual(self.person.getSortableName(), ('person', 'test'))
+        try:
+            #Title should change
+            self.failUnlessEqual(self.person.Title(), u"Test Person, WTF")
+            
+            #But Sortable Name shouldn't
+            self.failUnlessEqual(self.person.getSortableName(), ('person', 'test', ''))
+        finally:
+            self.person.setSuffix(oldSuffix)
     
     def testAllNameParts(self):
-        #Add a suffix
+        oldMiddleName = self.person.getMiddleName()
+        oldSuffix = self.person.getSuffix()
         self.person.setSuffix('WTF')
-        #Add a middle name
-        self.person.setMiddleName('Joe')
-        
-        #Title should change
-        self.failUnlessEqual(self.person.Title(), u"Test Joe Person, WTF")
-        
-        #But Sortable Name shouldn't
-        self.failUnlessEqual(self.person.getSortableName(), ('person', 'test'))
+        try:
+            self.person.setMiddleName('Joe')
+            try:
+                #Title should change
+                self.failUnlessEqual(self.person.Title(), u"Test Joe Person, WTF")
+                
+                #But Sortable Name shouldn't
+                self.failUnlessEqual(self.person.getSortableName(), ('person', 'test', 'joe'))
+            finally:
+                self.person.setMiddleName(oldMiddleName)
+        finally:
+            self.person.setSuffix(oldSuffix)
     
     def testSortableName(self):
-        self.directory.invokeFactory('FSDPerson', id='a1', firstName = 'Albert', lastName='Williams', classifications=['faculty'])
-        self.directory.invokeFactory('FSDPerson', id='b2', firstName = 'Albert', lastName='von Whatsit', classifications=['faculty'])
-        self.directory.invokeFactory('FSDPerson', id='c3', firstName = 'Albert', lastName="d'Example", classifications=['faculty'])
-        sortedPeople = self.directory['faculty'].getSortedPeople()
+        self.directory.invokeFactory('FSDPerson', id='a1', firstName = 'Albert', lastName='Williams')
+        self.directory.invokeFactory('FSDPerson', id='b2', firstName = 'Albert', lastName='von Whatsit')
+        self.directory.invokeFactory('FSDPerson', id='c3', firstName = 'Albert', lastName="d'Example")
+        sortedPeople = self.directory.getSortedPeople()
+        self.failUnlessEqual(sortedPeople, [self.directory['c3'], self.directory['abc123'], self.directory['b2'], self.directory['a1']])
     
     # ems174: I can't get this test to consistently add and check unicode titles. Any thoughts?
     #def testPersonTitleUnicode(self):
