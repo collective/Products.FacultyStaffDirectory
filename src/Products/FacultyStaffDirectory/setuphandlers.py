@@ -25,15 +25,6 @@ def reindexMembrane(portal):
     membraneIndexes = membraneTool.indexes()
     membraneTool.manage_reindexIndex(membraneIndexes)
 
-def configureRelations(portal):
-    """Configuration for Relations"""
-    relations_tool = getToolByName(portal, 'relations_library')
-    xmlpath = os.path.join(package_home(GLOBALS), 'relations.xml')
-    f = open(xmlpath)
-    xml = f.read()
-    f.close()
-    relations_tool.importXML(xml)
-
 def fixMemberAction(portal):
     """Massage the portal_controlpanel tool to make the MemberPrefs action invisible."""
     cp = getToolByName(portal, 'portal_controlpanel')
@@ -91,7 +82,6 @@ def importVarious(context):
     portal = context.getSite()
     reindexCatalogIndexes(portal)
     reindexMembrane(portal)
-    configureRelations(portal)
     fixMemberAction(portal)
     configureVersioning(portal)
     configureKupu(portal)
@@ -103,7 +93,7 @@ def importVarious(context):
 
 # Uninstallation:
 
-def ditchMarkerInterface(portral):
+def ditchMarkerInterface(portal):
     """Remove the FSD-is-installed marker interface from the Plone site."""
     noLongerProvides(portal, ISiteMarker)
 

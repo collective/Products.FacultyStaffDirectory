@@ -1,0 +1,4 @@
+<div tal:repeat="item view/context/associationContent">
+     <span tal:condition="item/getText"
+     tal:content="item/getText" />
+</div>

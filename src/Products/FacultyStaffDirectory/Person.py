@@ -14,25 +14,29 @@ from DateTime import DateTime
 from zope.app.annotation.interfaces import IAttributeAnnotatable, IAnnotations
 from zope.component import getUtility
 from zope.event import notify
-from zope.interface import implements, classImplements
+from zope.interface import implements, classImplements, alsoProvides
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
 from Products.ATContentTypes.lib.calendarsupport import n2rn, foldLine
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFCore.permissions import View, ModifyPortalContent, SetOwnPassword, SetOwnProperties
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.navtree import buildFolderTree
 from Products.CMFPlone.CatalogTool import getObjPositionInParent
 from Products.membrane.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
-from Products.Relations.field import RelationField
 from Products.validation import validation
 from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonModifiedEvent
+from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonModifiedEvent, IPersonToPersonGroupingRelationship
 from Products.FacultyStaffDirectory.permissions import MANAGE_GROUP_MEMBERSHIP, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
+from Products.FacultyStaffDirectory.AssociationContent import AssociationContent
+
+from plonerelations.ATField.ploneRelationsATField import PloneRelationsATField
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+from plone.app.relations.interfaces import IAnnotationsContext, IRelationshipSource
+from plone.relations.interfaces import IContextAwareRelationship
 
 logger = logging.getLogger('FacultyStaffDirectory')
 
@@ -252,25 +256,6 @@ schema = ATContentTypeSchema.copy() + Schema((
         searchable=True
     ),
     
-    RelationField(
-        name='persongroupings',
-        widget=ReferenceBrowserWidget
-        (
-            label=u'Person Groupings',
-            label_msgid='FacultyStaffDirectory_label_classifications',
-            i18n_domain='FacultyStaffDirectory',
-            base_query={'portal_type': 'FSDClassification', 'sort_on': 'sortable_title'},
-            allow_browse=0,
-            allow_search=1,
-            show_results_without_query=1,
-        ),
-        write_permission=MANAGE_GROUP_MEMBERSHIP,
-        schemata="Basic Information",
-        allowed_types=('FSDPersonGroupings'),
-        multiValued=True,
-        relationship='is_member_of'
-    ),
-    
     StringField('password',
         languageIndependent=True,
         required=False,
@@ -381,7 +366,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             user_property='invisible_ids',
     ),
     
-    RelationField(
+    PloneRelationsATField(
         name='assistants',
         widget=ReferenceBrowserWidget
         (
@@ -396,9 +381,29 @@ schema = ATContentTypeSchema.copy() + Schema((
         write_permission="Modify portal content",
         schemata="Basic Information",
         multiValued=True,
-        relationship='people_assistants',
+        relationship='hasAssistant',
         allowed_types=('FSDPerson'),
     ),
+    
+    PloneRelationsATField(
+        name='groupings',
+        widget=ReferenceBrowserWidget
+        (
+            label=u'Group Associations',
+            label_msgid='FacultyStaffDirectory_label_groupassocations',
+            i18n_domain='FacultyStaffDirectory',
+            base_query={'portal_type': 'FSDPersonGrouping', 'sort_on': 'sortable_title'},
+            allow_browse=0,
+            allow_search=1,
+            show_results_without_query=1,
+        ),
+        # write_permission=ASSIGN_GOUPINGS_TO_PEOPLE,
+        schemata="Basic Information",
+        allowed_types=('FSDPersonGrouping'),
+        multiValued=True,
+        relationship='PersonGroupingAssociation',
+        relationship_interface=IPersonToPersonGroupingRelationship,
+        ),
     ))
 
 Person_schema = OrderedBaseFolderSchema.copy() + schema.copy()  # + on Schemas does only a shallow copy
@@ -774,7 +779,20 @@ class Person(OrderedBaseFolder, ATCTContent):
                     errors['password'] = errors['confirmPassword'] = u'Passwords do not match'
 
 
-# Implementing IMultiPageSchema forces the edit template to render in the more Plone 2.5-ish manner,
+    security.declareProtected(View, 'getGroupingAssociationContent')
+    def getGroupingAssociationContent(self, **kwargs):
+        """ Get the AssocationContent objects attached to this person related to all PersonGroupings. 
+            Keywords passed are included in the getRelationships lookup. Typically this would be a 
+            target=, with the relevant object being passed.
+        """
+        source = IRelationshipSource(self)
+        relationshipName = self.schema['groupings'].relationship
+        contexts = []
+        for relationship in source.getRelationships(relation=relationshipName, **kwargs):
+            contexts.append(IContextAwareRelationship(relationship).getContext())
+        return contexts
+        
+# # Implementing IMultiPageSchema forces the edit template to render in the more Plone 2.5-ish manner,
 # with actual links at the top of the page instead of Javascript tabs. This allows us to direct people
 # immediately to a specific fieldset with a ?fieldset=somethingorother query string. Plus, it also
 # gives the next/previous links at the bottom of the form.

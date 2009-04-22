@@ -87,10 +87,10 @@ class testMembership(FacultyStaffDirectoryTestCase):
         """Test the getGroupMembers method of the IGroup adapter"""
         # add people to outer groups
         for obj in [self.personGrouping]:
-            obj.setPeople((self.person, self.person2))
+            obj.setPeople([self.person.UID(), self.person2.UID()])
         # add people to inner groups
         for obj in [self.nested_grouping]:
-            obj.setPeople((self.person3,))
+            obj.setPeople([self.person3.UID()])
         
         # check member list of outer objects
         for obj in [self.personGrouping]:

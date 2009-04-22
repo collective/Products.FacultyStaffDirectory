@@ -2,7 +2,12 @@ from zope.component import getUtility
 from Acquisition import aq_parent, aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IUserRelated
+from Products.FacultyStaffDirectory.AssociationContent import AssociationContent
 from Products.FacultyStaffDirectory.interfaces import IConfiguration
+from plone.app.relations.interfaces import IAnnotationsContext
+from plone.relations.interfaces import IContextAwareRelationship
+from zope.app.annotation.interfaces import IAttributeAnnotatable    
+from zope.interface import alsoProvides
 
 def modifyPersonOwnership(event):
     """Let people own their own objects and modify their own user preferences.
@@ -67,3 +72,21 @@ def modifyPersonOwnership(event):
 
         fixPersonRoles(context, user.getId())
         catalog.reindexObject(context)
+
+def deleteAssociationContent(rel, event):
+    """Delete the AssociationContent object defined for the passed relationship."""
+    obj = IContextAwareRelationship(rel).getContext()
+    if obj and obj.id in obj.aq_parent.objectIds():
+        obj.aq_parent.manage_delObjects([obj.id])
+    
+def addAssociationContent(rel, event):
+    """Create and assign an AssociationContent object to the passed relationship."""
+    sourceObj = list(rel.sources)[0]
+    targetObj = list(rel.targets)[0]
+    uid = targetObj.UID()
+    sourceObj.at_references._setObject(uid, AssociationContent(uid))
+    # For some reason, applying the interfaces above isnt' working. For now...
+    alsoProvides(rel, IAttributeAnnotatable, IAnnotationsContext)
+    IContextAwareRelationship(rel).setContext(sourceObj.at_references[uid])
+    
+    

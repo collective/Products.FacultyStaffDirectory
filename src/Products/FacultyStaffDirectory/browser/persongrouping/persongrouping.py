@@ -91,6 +91,11 @@ class PersonGroupingItemViewlet(ViewletBase):
         view =  queryMultiAdapter((person, grouping, format, self.request), name='view')
         # wrap the view for security purposes
         view = view.__of__(person)
+
+        self.person = person
+        self.grouping = grouping
+        self.format = format
+
         return view
         
     def index(self):
@@ -98,3 +103,10 @@ class PersonGroupingItemViewlet(ViewletBase):
 
     def columns(self):
         return self.parentMultiView().columns()
+
+    def associationContent(self):
+        """ Return the content objects attached to the association between the Person and the PersonGrouping. """
+        return self.person.getGroupingAssociationContent(target=self.grouping)
+
+        
+        

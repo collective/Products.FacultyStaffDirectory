@@ -24,6 +24,7 @@ def initialize(context):
     import Person
     import Course
     import PersonGrouping
+    import AssociationContent
 
     # Initialize portal content
     all_content_types, all_constructors, all_ftis = process_types(

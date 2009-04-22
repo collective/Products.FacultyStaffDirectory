@@ -66,4 +66,13 @@
             permission="zope.Public"
             />
 
+        <browser:viewlet
+            for="....interfaces.IPersonGrouping"
+            name="facultystaffdirectory.groupingassociationtext"
+            manager="....interfaces.IPersonViewletManager"
+            view="....interfaces.IGalleryListingFormat"
+            template="groupingAssociationText.pt"
+            permission="zope.Public"
+            />
+
 </configure>

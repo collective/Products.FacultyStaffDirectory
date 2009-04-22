@@ -6,6 +6,7 @@ __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
 from zope.interface import Interface
+from zc.relationship.interfaces import IRelationship
 
 class IPersonGrouping(Interface):
     """A grouping of person objects"""
@@ -30,3 +31,12 @@ class IPerson(Interface):
 
 class IFacultyStaffDirectoryTool(Interface):
     """The FacultyStaffDirectory tool"""
+
+class IAssociationContent(Interface):
+    """Marker interface for AssociationContent objects"""
+
+class IPersonToPersonGroupingRelationship(IRelationship):
+    """Marker interface for a Person->PersonGrouping relationship."""
+    
+class IPersonToPersonRelationship(IRelationship):
+    """Marker interface for a Person->Person relationship."""

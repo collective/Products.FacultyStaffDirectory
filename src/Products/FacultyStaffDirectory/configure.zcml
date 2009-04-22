@@ -12,6 +12,9 @@
     <include package=".browser" />
     <include file="profiles.zcml" />
     <include package="archetypes.schemaextender" />
+    <include package="plone.app.relations" />
+    <include package="plonerelations.ATField" />
+    <include package="archetypes.referencebrowserwidget" />
 
     <i18n:registerTranslations directory="locales" />
 

@@ -34,8 +34,10 @@ setup(name='Products.FacultyStaffDirectory',
           'setuptools',
           # -*- Extra requirements: -*-
           'archetypes.schemaextender',
-          'Products.Relations>=0.8.1',
           'Products.membrane',
+          'plone.app.relations',
+          'plonerelations.ATField',
+          'archetypes.referencebrowserwidget',
       ],
       entry_points="""
       # -*- Entry points: -*-

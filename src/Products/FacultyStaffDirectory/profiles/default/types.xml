@@ -4,4 +4,5 @@
  <object name="FSDFacultyStaffDirectory" meta_type="Factory-based Type Information with dynamic views"/>
  <object name="FSDPerson" meta_type="Factory-based Type Information with dynamic views"/>
  <object name="FSDPersonGrouping" meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="FSDAssociationContent" meta_type="Factory-based Type Information with dynamic views"/>
 </object>

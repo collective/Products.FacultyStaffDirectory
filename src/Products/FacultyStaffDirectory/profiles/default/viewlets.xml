@@ -29,6 +29,7 @@
         <viewlet name="facultystaffdirectory.personjobtitles" />
         <viewlet name="facultystaffdirectory.personofficephone" />
         <viewlet name="facultystaffdirectory.personemail" />
+        <viewlet name="facultystaffdirectory.groupingassociationtext" />
         <viewlet name="facultystaffdirectory.personprofilelink" />
     </order>
     

@@ -23,13 +23,10 @@ setDefaultRoles('FacultyStaffDirectory: Add or Remove People', ('Manager', 'Owne
 product_globals = globals()
 
 # Dependencies of Products to be installed by quick-installer
-DEPENDENCIES = ["Relations", "ATReferenceBrowserWidget"]
-
-# Dependend products - not quick-installed - used in testcase
-PRODUCT_DEPENDENCIES = []
+DEPENDENCIES = []
 
 # XXX should really be merged with list above
-DEPENDENT_PRODUCTS = ['membrane',]
+DEPENDENT_PRODUCTS = ['membrane']
 
 # You can overwrite these two in an AppConfig.py:
 # STYLESHEETS = [{'id': 'my_global_stylesheet.css'},

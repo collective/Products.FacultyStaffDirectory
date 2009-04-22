@@ -31,14 +31,14 @@
             <metal:block define-slot="classification_links">
                 <ol tal:condition="nocall:contextualClassifications" class="classificationList"> 
                     <tal:block tal:repeat="classification contextualClassifications">
-                    <li tal:condition="classification/getPeople"> 
+                    <li tal:condition="classification/getPeopleAsBrains"> 
                         <a tal:content="classification/Title" tal:attributes="href python:'%s#%s' % (context.absolute_url(), normalizeString(classification.Title()));" /> 
                     </li> 
                     </tal:block>
                 </ol> 
             </metal:block>
 
-            <tal:block tal:condition="context/getPeople">
+            <tal:block tal:condition="nocall:context/getPeople">
                 <metal:block define-slot="listing_section">
                     <metal:block define-macro="list_classifications">
                         <tal:block tal:define="classificationBrains context/getClassifications" tal:repeat="classification classifications">

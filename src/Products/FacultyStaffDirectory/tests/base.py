@@ -11,7 +11,7 @@ from random import choice, sample
 
 from Products.CMFCore.utils import getToolByName
 
-from Products.FacultyStaffDirectory.config import PRODUCT_DEPENDENCIES, DEPENDENCIES
+from Products.FacultyStaffDirectory.config import DEPENDENCIES
 from Products.FacultyStaffDirectory.config import DEPENDENT_PRODUCTS
 from Products.FacultyStaffDirectory.config import PROJECTNAME
 
@@ -28,10 +28,17 @@ for dependency in DEPENDENT_PRODUCTS:
     ZopeTestCase.installProduct(dependency)
 ZopeTestCase.installProduct('FacultyStaffDirectory')
 
+# Manually add plone.app.relations
+from OFS.Application import install_package
+app = ZopeTestCase.app()
+import plone.app.relations
+install_package(app, plone.app.relations, plone.app.relations.initialize)
+
 # Import PloneTestCase - this registers more products with Zope as a side effect
 from Products.PloneTestCase.PloneTestCase import PloneTestCase
 from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
 from Products.PloneTestCase.PloneTestCase import setupPloneSite
+
 
 # Set up a Plone site, and apply the Library enquiry extension profile
 # to make sure they are installed.

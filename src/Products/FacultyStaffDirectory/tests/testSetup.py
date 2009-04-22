@@ -96,11 +96,13 @@ class testSetup(FacultyStaffDirectoryTestCase):
 class testDependentProducts(FacultyStaffDirectoryTestCase):
 
     def testMembraneInstalled(self):
-        tool = getToolByName(self.portal, 'membrane_tool')
+        qi = getToolByName(self.portal, 'portal_quickinstaller')
+        self.failUnless(qi.isProductInstalled('membrane'))
 
-    def testRelationsInstalled(self):
-        tool = getToolByName(self.portal, 'relations_library')
-
+    def testPloneAppRelationsInstalled(self):
+        qi = getToolByName(self.portal, 'portal_quickinstaller')
+        self.failUnless(qi.isProductInstalled('plone.app.relations'))
+        
 class testIndexes(FacultyStaffDirectoryTestCase):
 
     def afterSetUp(self):
@@ -330,6 +332,18 @@ class testReinstall(FacultyStaffDirectoryTestCase):
         self.reinstallProduct()
         # abc123 should still exist in acl_users
         self.failUnless(acl.getUserById(id='abc123'))
+    
+    def testRelationsExistOnReinstall(self):
+        self.directory.invokeFactory(type_name='FSDPersonGrouping', id='blah', title='Blah')
+        self.person.setGroupings([self.directory.blah.UID()])
+
+        from plone.app.relations.interfaces import IRelationshipSource, IRelationshipTarget
+
+        # Reinstall the product
+        self.reinstallProduct()
+        # 'blah' should still be listed as a referenced object.
+        self.failUnless('blah' in [a.id for a in self.person.getGroupings()], "After reinstalling the product, Person -> PersonGrouping relationships are no longer found.")
+        
         
 class testLargeDirectory(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):

@@ -11,11 +11,12 @@ import os
 from zope.component import getUtility
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IUserAuthentication
-from Products.Relations.processor import process
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
 from Products.FacultyStaffDirectory.tests.base import PACKAGE_HOME
 from Products.FacultyStaffDirectory.interfaces import IConfiguration
+from plone.app.relations.interfaces import IRelationshipSource, IRelationshipTarget
+from plone.relations.interfaces import IContextAwareRelationship
 
 def loadImage(name, size=0):
     """Load image from testing directory."""
@@ -113,8 +114,8 @@ class testWithoutSpecialties(testPerson):
         """ assign person groupings to a person
         """
         groupings = [g.UID for g in self.directory.getPersonGroupings()]
-        self.person.setPersongroupings(groupings)
-        for g in self.person.getPersongroupings():
+        self.person.setGroupings(groupings)
+        for g in self.person.getGroupings():
             self.failUnless(g.id in ['faculty', 'staff', 'grad-students'])
             self.failUnlessEqual(g.Type(), 'Person Grouping')
     
@@ -455,9 +456,136 @@ class testWithoutSpecialties(testPerson):
 
     ## End tests for membrane stuff
 
+class testWithSpecialties(testPerson):
+    def afterSetUp(self):
+        testPerson.afterSetUp(self)  # logs in as portal owner. Yuck.
+        self._makeAndAssignSpecialties()
 
+        # Make sure stuff is readable by Anonymous, so we can run tests as him:
+        workflowTool = getToolByName(self.portal, 'portal_workflow')
+        for o in [self.directory]:
+            workflowTool.doActionFor(o, 'publish')
+        self.logout()  # Run as Anonymous to make sure getResearchTopics is anonymously callable. (bug #384)
+
+    def _makeAndAssignSpecialties(self):
+        """Make a bunch of specialties, publish them, and assign them all to the test person."""
+        def makeSpecialties(node, container, explicitSpecialties):
+            """Make specialties inside `container` according to the tree-shaped dict `node`. Append the created specialties (unless marked as {'associated': False}) to the list `explicitSpecialties`."""
+            for child in node.get('children', []):
+                id = child['id']
+                container.invokeFactory(type_name='FSDPersonGrouping', id=id, title=child['title'])
+                newSpecialty = container[id]
+                if child.get('associated', True):
+                    explicitSpecialties.append(newSpecialty)
+                makeSpecialties(child, newSpecialty, explicitSpecialties)
+
+        # Create specialties:
+        explicitSpecialties = []
+        makeSpecialties({'children':
+            [{'id': 'sanitation', 'title': 'Sanitation', 'children':
+                [{'id': 'picking-stuff-up', 'title': 'Picking stuff up'},
+                 {'id': 'hosing-stuff-down', 'title': 'Hosing stuff off'},
+                 {'id': 'keeping-stuff-from-getting-so-messed-up-to-begin-with', 'title': 'Keeping stuff from getting so dirty in the first place'}]},
+             {'id': 'mastication', 'title': 'Mastication', 'associated': False, 'children':
+                [{'id': 'chomping', 'title': 'Chomping'}]}]}, self.directory, explicitSpecialties)
+                
+        
+        # Assign them to the person:
+        self.person.setGroupings([s.UID() for s in explicitSpecialties])
+
+        # Add a research topic for Sanitation:
+        sanitationRefObj = self.person.getGroupingAssociationContent(target=self.directory['sanitation'])[0]
+        sanitationRefObj.setText('Picking up sprockets from bowls of soup.')
+        
+    def testSpecialties(self):
+        """Test various accessors related to the Specialties tree."""
+        # Make sure getSpecialties() returns the specialties in the other they occur in the SpecialtiesFolder(s). Also indirectly (but sufficiently) test getSpecialtyTree():
+        self.failUnlessEqual([x.id for x in self.person.getGroupings()], ['sanitation', 'picking-stuff-up', 'hosing-stuff-down', 'keeping-stuff-from-getting-so-messed-up-to-begin-with', 'chomping'])
+
+        # Assert getSpecialtyNames() works:
+        #self.failUnlessEqual(self.person.getSpecialtyNames(), ['Sanitation', 'Picking stuff up', 'Hosing stuff off', 'Keeping stuff from getting so dirty in the first place', 'Chomping'])
+
+        # Make sure getResearchTopics() works and is anonymously callable (that is, #384 hasn't regressed). (testWithSpecialties' tests run as Anonymous.):
+        #self.failUnlessEqual(self.person.getResearchTopics(), ['<p>Picking up sprockets from bowls of soup</p>'])
+
+        # Make sure that the various indexes have been updated (see #325).
+        #indexDataBeforeReindex = self.portal.portal_catalog.getIndexDataForUID('/'.join(self.person.getPhysicalPath()))
+        #rawSpecialtiesBeforeReindex = indexDataBeforeReindex['getRawSpecialties']
+        #self.person.reindexObject()
+        #indexDataAfterReindex = self.portal.portal_catalog.getIndexDataForUID('/'.join(self.person.getPhysicalPath()))
+        #rawSpecialtiesAfterReindex = indexDataAfterReindex['getRawSpecialties']
+        #self.failUnlessEqual(rawSpecialtiesBeforeReindex, rawSpecialtiesAfterReindex)
+
+    def testAssociationContentCreatedWithGroupingAsTarget(self):
+        """ Ensure that AssociationContent objects are created when the relationship is initiated from the Person end. """
+
+        self.loginAsPortalOwner()
+        self.directory.invokeFactory(type_name='FSDPersonGrouping', id='grpng', title='Useless Grouping')
+        grpng = self.directory.grpng
+        self.person.setGroupings([grpng.UID()])
+
+        source = IRelationshipSource(self.person)
+        rel = list(source.getRelationships(relation='PersonGroupingAssociation', target=grpng))[0]
+        obj = IContextAwareRelationship(rel).getContext()
+        self.failUnless(obj, "AssociationContent object not created when a Person->PersonGrouping relationship was created.")
+        
+    def testAssociationContentCreatedWithPersonAsTarget(self):
+        """ Ensure that AssociationContent objects was are created when the relationship is initiated from the PersonGrouping end. """
+        self.loginAsPortalOwner()
+        self.directory.invokeFactory(type_name='FSDPersonGrouping', id='grpng', title='Useless Grouping')
+        grpng = self.directory.grpng
+        grpng.setPeople([self.person.UID()])
+        source = IRelationshipTarget(grpng)
+        rel = list(source.getRelationships(relation='PersonGroupingAssociation', source=self.person))[0]
+        try:
+            obj = IContextAwareRelationship(rel).getContext()
+        except TypeError:
+            self.fail('Unable to adapt PersonGrouping->Person relationship to IContextAwareRelationship. AssociationContent object not created.')
+        self.failUnless(obj, "AssociationContent object was not created when a PersonGrouping->Person relationship was created.")
+
+    def testAssociationContentDeletedWhenRelationshipRemovedOnGroupingEnd(self):
+        """ Ensure that AssociationContent objects are deleted when the relationship is deleted on the PersonGrouping end. 
+        """
+        # Create a grouping, relate it to our Person.
+        self.loginAsPortalOwner()
+        self.directory.invokeFactory(type_name='FSDPersonGrouping', id='grpng', title='Useless Grouping')
+        grpng = self.directory.grpng
+        self.person.setGroupings([grpng.UID()])
+        
+        # Get the AssocationContent object.
+        source = IRelationshipSource(self.person)
+        rel = list(source.getRelationships(relation='PersonGroupingAssociation', target=grpng))[0]
+        obj = IContextAwareRelationship(rel).getContext()
+        
+        objId = obj.id
+
+        grpng.setPeople([])
+        self.failIf(objId in self.person.at_references.objectIds(), "AssociationContent object not deleted when the relationship is removed from the PersonGrouping end.")
+        
+
+    def testAssociationContentDeletedWhenGroupingDeleted(self):
+        """ Ensure that AssociationContent objects are deleted when the PersonGrouping is deleted. 
+            We can assume that the reverse is true since the AssociationContent is stored within the Person.
+        """
+        # Create a grouping, relate it to our Person.
+        self.loginAsPortalOwner()
+        self.directory.invokeFactory(type_name='FSDPersonGrouping', id='grpng', title='Useless Grouping')
+        grpng = self.directory.grpng
+        self.person.setGroupings([grpng.UID()])
+        
+        # Get the AssocationContent object.
+        source = IRelationshipSource(self.person)
+        rel = list(source.getRelationships(relation='PersonGroupingAssociation', target=grpng))[0]
+        obj = IContextAwareRelationship(rel).getContext()
+        objId = obj.id
+        
+        # Delete the grouping
+        self.directory.manage_delObjects(['grpng'])
+        self.failIf(objId in self.person.at_references.objectIds(), "AssociationContent object not deleted when the related PersonGrouping object is deleted.")
+        
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     suite.addTest(makeSuite(testWithoutSpecialties))
+    suite.addTest(makeSuite(testWithSpecialties))
     return suite

@@ -5,7 +5,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="FacultyStaffDirectory install profile"
+      title="FacultyStaffDirectory Install Profile"
       directory="profiles/default"
       description="Extension profile for FacultyStaffDirectory Product."
       provides="Products.GenericSetup.interfaces.EXTENSION"

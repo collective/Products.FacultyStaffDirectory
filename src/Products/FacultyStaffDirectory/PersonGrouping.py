@@ -8,17 +8,19 @@ from Acquisition import aq_inner, aq_parent
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
-from Products.Relations.field import RelationField
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces import IConfiguration
 from Products.FacultyStaffDirectory.interfaces import IPersonGrouping
+from Products.FacultyStaffDirectory.interfaces import IPersonToPersonGroupingRelationship
 from Products.FacultyStaffDirectory.permissions import MANAGE_GROUP_MEMBERSHIP
-from Products.CMFCore.permissions import View
+from Products.CMFCore.permissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IPropertiesProvider
 from zope.component import getUtility
 from zope.interface import implements
+
+from plonerelations.ATField.ploneRelationsATField import ReversePloneRelationsATField
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 
 schema =  ATContentTypeSchema.copy() + Schema((
 
@@ -50,7 +52,7 @@ schema =  ATContentTypeSchema.copy() + Schema((
         allowable_content_types=('image/gif','image/jpeg','image/png'),
     ),
 
-    RelationField(
+    ReversePloneRelationsATField(
         name='people',
         widget=ReferenceBrowserWidget(
             label=u'Members',
@@ -64,7 +66,8 @@ schema =  ATContentTypeSchema.copy() + Schema((
         write_permission = MANAGE_GROUP_MEMBERSHIP,
         allowed_types=('FSDPerson',),
         multiValued=True,
-        relationship='has_member'
+        relationship='PersonGroupingAssociation', 
+        relationship_interface=IPersonToPersonGroupingRelationship,        
     ),
 
 ),
@@ -73,7 +76,7 @@ schema =  ATContentTypeSchema.copy() + Schema((
 PersonGrouping_schema = OrderedBaseFolderSchema.copy() + schema.copy()  # + on Schemas does only a shallow copy
 
 class PersonGrouping(OrderedBaseFolder, ATCTContent):
-    """This is my docstring"""
+    """ This is my docstring"""
     security = ClassSecurityInfo()
     __implements__ = (ATCTContent.__implements__,
                       getattr(OrderedBaseFolder,'__implements__', ()),                      
@@ -93,14 +96,18 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
     _at_rename_after_creation = True
     schema = PersonGrouping_schema
     
-    relationship = None
+    relationship = schema['people'].relationship
     
-    security.declareProtected(View, 'getPeople')
-    def getPeople(self):
-        """Return a list of the catalog brains of people related to this grouping only"""
+    def getPeopleAsBrains(self):
+        """ Return a list of catalog brains representing the Persons associated with this object. """
+        pc = getToolByName(self, 'portal_catalog')
+        brains = []
+        for uid in self.getRawPeople():
+            result = pc(UID=uid)
+            if result:
+                brains.append(result[0])
+        return brains
         
-        return self.getRefs(self.relationship)
-    
     def getDeepPeople(self):
         """Return a flat list of the catalog brains of people related to this grouping 
             and all groupings nested inside this one, recursively
@@ -114,7 +121,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
         fsd_util = getUtility(IConfiguration)
         groupings = pc(path=self.absolute_url_path(), portal_type=list(fsd_util.enableMembraneTypes))
         for group in groupings:
-            people.extend(group.getObject().getRefs(self.relationship))
+            people.extend(group.getObject().getPeople())
         
         return people
         

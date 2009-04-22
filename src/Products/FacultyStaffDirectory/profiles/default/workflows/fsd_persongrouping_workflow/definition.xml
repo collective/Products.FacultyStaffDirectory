@@ -10,7 +10,6 @@
  <permission>Add portal content</permission>
  <permission>FacultyStaffDirectory: Change roles</permission>
  <permission>FacultyStaffDirectory: Manage Group Membership</permission>
- <permission>Relations: Manage content relations</permission> 
  
  <state state_id="active" title="Active">
   <exit-transition transition_id="deactivate"/>
@@ -40,10 +39,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
   </permission-map>
-  <permission-map name="Relations: Manage content relations" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Personnel Manager</permission-role>   
-  </permission-map>  
  </state>
  
  <state state_id="inactive" title="Inactive">
@@ -72,10 +67,6 @@
    <permission-role>Manager</permission-role>
    <permission-role>Personnel Manager</permission-role>
   </permission-map>
-  <permission-map name="Relations: Manage content relations" acquired="False">
-   <permission-role>Manager</permission-role>
-   <permission-role>Personnel Manager</permission-role>   
-  </permission-map>  
  </state>
 
  <transition transition_id="deactivate"
