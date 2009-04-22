@@ -1,9 +1,14 @@
-<p>hello, I'm a viewletmanager</p>
-
-<div tal:content="view/columns" />
-
-<div tal:repeat="viewlet view/viewlets">
+<table class="listing">
+<thead>
+<tr>
+<th tal:repeat="column view/columns" tal:content="column/heading" />
+</tr>
+</thead>
+<tbody>
+<tr tal:repeat="viewlet view/viewlets">
     <div tal:replace="structure viewlet/render" />
-</div>
+</tr>
+</tbody>
+</table>
 
 

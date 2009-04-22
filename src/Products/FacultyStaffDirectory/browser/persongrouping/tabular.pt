@@ -30,10 +30,7 @@
 
               <div tal:replace="structure provider:plone.abovecontentbody" />
 
-              <table class="listing">
-                <thead />
-                <tbody tal:content="structure provider:facultystaffdirectory.persongroupingcontainertabular" />
-              </table>
+              <div tal:replace="structure provider:facultystaffdirectory.persongroupingcontainertabular" />
               
               <div metal:use-macro="here/document_relateditems/macros/relatedItems">
                  show related items if they exist
