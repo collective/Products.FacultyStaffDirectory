@@ -1,9 +1,10 @@
 <td class="personName">
+    <!-- Hidden content for column sorting purposes. -->
     <div style="display:none">
-    <span tal:content="view/context/lastName" />~
-    <span tal:content="view/context/firstName" />~
-    <span tal:content="view/context/middleName" />~
-    <span tal:content="view/context/suffix" />
+        <span tal:content="view/context/lastName" />~
+        <span tal:content="view/context/firstName" />~
+        <span tal:content="view/context/middleName" />~
+        <span tal:content="view/context/suffix" />
     </div>
     <span tal:content="view/context/firstName" />
     <span tal:content="view/context/middleName" />
