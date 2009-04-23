@@ -1,3 +1,10 @@
-<td
-     tal:content="view/context/getOfficePhone"
-     class="officePhone"/>
+<td class="officePhone">
+    <div metal:define-macro="text"
+         tal:define="psn nocall:view/context/person;
+                     kview python:psn.restrictedTraverse('@@persongrouping_inline_editing_helper');"
+         tal:attributes="id string:${kview/getUniqueIdentifier}-officePhone;
+                         class python:kview.getKssClasses('officePhone', 'widgets/string', 'string-field-view')">
+        <span metal:define-slot="inside"
+             tal:replace="psn/getOfficePhone">phone</span>
+    </div>
+</td> 
