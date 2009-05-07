@@ -89,4 +89,24 @@ def addAssociationContent(rel, event):
     alsoProvides(rel, IAttributeAnnotatable, IAnnotationsContext)
     IContextAwareRelationship(rel).setContext(sourceObj.at_references[uid])
     
+def preEditSetup(self, event):
+    """ Set some edit form values/settings."""
+    # Set the startup directory for the specialties field to the SpecialtiesFolder or, failing
+    # that, the root of the FacultyStaffDirectory:
+    urlTool = getToolByName(self, 'portal_url')
+    fsd = self.getDirectoryRoot()
+    # if fsd and fsd.getSpecialtiesFolder():
+    #     url = urlTool.getRelativeContentURL(fsd.getSpecialtiesFolder())
+    # else:
+    #     url = ""
+    # self.schema['specialties'].widget.startup_directory = '/%s' % url
+    
+    fsd_utility = getUtility(IConfiguration)
+    if fsd_utility.phoneNumberRegex:
+        self.schema['officePhone'].widget.description = u"Example: %s" % fsd_utility.phoneNumberDescription
+    if fsd_utility.idLabel:
+        self.schema['id'].widget.label = u"%s" % fsd_utility.idLabel
+
+    # Make sure the default for the editor field is the same as the site defaut. No idea why this isn't being handled properly.
+    self.schema['userpref_wysiwyg_editor'].default = getToolByName(self, 'portal_memberdata').wysiwyg_editor
     

@@ -9,6 +9,10 @@
   <subscriber for="..interfaces.IMembraneIntegrationModifiedEvent"
               handler=".facultystaffdirectorytool.modifyMembraneTypes" />
 
+  <subscriber for="..interfaces.IPerson
+                   Products.Archetypes.interfaces.IEditBegunEvent"
+              handler=".person.preEditSetup" />
+
 
   <subscriber
       for="..interfaces.IPersonToPersonGroupingRelationship

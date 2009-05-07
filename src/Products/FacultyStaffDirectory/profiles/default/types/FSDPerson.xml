@@ -19,10 +19,10 @@
  </property>
  <property name="allow_discussion">False</property>
  <alias from="(Default)" to="index"/>
- <alias from="edit" to="pre_edit_setup"/>
+ <alias from="edit" to="base_edit"/>
  <alias from="view" to="index"/>
  <alias from="index.html" to="index"/>
- <alias from="object_rename" to="pre_edit_setup"/>
+ <alias from="object_rename" to="base_edit"/>
  <alias from="properties" to="base_metadata"/>
  <alias from="sharing" to="folder_localrole_form"/>
  <alias from="vCard" to="vcard_view"/>
