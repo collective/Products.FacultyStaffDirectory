@@ -1,10 +1,8 @@
 from AccessControl.ZopeGuards import guarded_hasattr
-from Products.Five import BrowserView
 from zope.component import getMultiAdapter, ComponentLookupError, queryMultiAdapter
 from zope.interface import implements
-from zope.viewlet.interfaces import IViewlet, IViewletManager
-from Products.FacultyStaffDirectory.interfaces import IPersonGroupingViewletManager, IPersonGroupingView, IListingFormat, ITabularListingFormat, IGalleryListingFormat
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.FacultyStaffDirectory.interfaces import IPersonGroupingViewletManager, ITabularListingFormat, IGalleryListingFormat, IPersonGroupingItemViewlet
+from zope.viewlet.interfaces import IViewlet
 from plone.app.layout.viewlets.common import ViewletBase
 from Products.Five.viewlet.manager import ViewletManagerBase
 
@@ -81,7 +79,8 @@ class PersonGroupingViewletManager(ViewletManagerBase):
             return u'\n'.join([viewlet.render() for viewlet in self.viewlets])
 
 class PersonGroupingItemViewlet(ViewletBase):
-
+    implements(IPersonGroupingItemViewlet)
+    
     def parentMultiView(self):
         """Look up the person's multiview (typically a tabular or gallery view)"""
         person = self.context

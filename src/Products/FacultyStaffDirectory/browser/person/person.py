@@ -44,7 +44,7 @@ class PersonMultiView(PersonView):
     
     def __call__(self):
         # TODO Catch multiple managers in case two managers of the same specificity exist..
-        # Look up the viewletmanager most specific to this context.
+        # Look up the viewletm anager most specific to this context.
         # We're assuming that getAdapters returns the most specific last. Should this change...yikes!
         name, manager = list(getSiteManager().getAdapters((self.grouping, self.request, self.format), IPersonViewletManager))[-1]
         # Render the manager

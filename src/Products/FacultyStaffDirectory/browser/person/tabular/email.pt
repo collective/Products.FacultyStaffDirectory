@@ -1,10 +1,11 @@
 <td class="email">
-     <div metal:define-macro="text"
+     <span metal:define-macro="email"
           tal:define="psn nocall:view/context/person;
                       kview python:psn.restrictedTraverse('@@persongrouping_inline_editing_helper');"
           tal:attributes="id string:${kview/getUniqueIdentifier}-email;
                           class python:kview.getKssClasses('email', 'widgets/string', 'string-field-view')">
          <span metal:define-slot="inside"
               tal:replace="psn/getEmail">phone</span>
-     </div>
+     </span>
 </td>
+

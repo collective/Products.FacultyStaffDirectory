@@ -1,6 +1,7 @@
 from zope.publisher.interfaces.browser import IBrowserView
-from zope.viewlet.interfaces import IViewletManager
+from zope.viewlet.interfaces import IViewletManager, IViewlet
 from zope.interface import Attribute
+
 
 
 class IPersonViewletManager(IViewletManager):
@@ -16,6 +17,9 @@ class IPersonOfficeAddressViewletManager(IViewletManager):
 
 class IPersonGroupingViewletManager(IViewletManager):
     """A person grouping viewlet manager"""
+
+class IPersonGroupingItemViewlet(IViewlet):
+    """A viewlet containing the parts of a person, displayed within a person grouping"""
 
 class IPersonGroupingView(IBrowserView):
     """A view for a grouping of person objects"""

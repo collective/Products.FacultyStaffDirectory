@@ -28,10 +28,25 @@
 
     <browser:page
      name="persongrouping_inline_editing_helper"
-     for="*"
+     for="..interfaces.IPerson"
      permission="zope.Public"
      class=".kss.KSSHelper"
      allowed_interface=".kss.IKSSHelper"
      />
+     
+     <browser:page
+      name="templateWrapper"
+      for="*"
+      permission="zope.Public"
+      class=".kss.PersonFieldsView"
+      />     
+
+      <!-- <browser:page
+          for="..interfaces.IPerson"
+          class=".kss.PersonFieldsView"
+          name="saveField"
+          attribute="saveField"
+          permission="cmf.ModifyPortalContent"
+        /> -->
 
 </configure>
