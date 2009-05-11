@@ -3,11 +3,16 @@
            xmlns:i18n="http://namespaces.zope.org/i18n"
            i18n_domain="FacultyStaffDirectory">
 
-  <subscriber for="..interfaces.IPersonModifiedEvent"
-              handler=".person.modifyPersonOwnership" />
-              
   <subscriber for="..interfaces.IMembraneIntegrationModifiedEvent"
               handler=".facultystaffdirectorytool.modifyMembraneTypes" />
+
+  <subscriber for="..interfaces.IPerson
+                   zope.app.container.interfaces.IObjectAddedEvent"
+              handler=".person.modifyPersonOwnership" />
+
+  <subscriber for="..interfaces.IPerson
+                   Products.Archetypes.interfaces.IObjectEditedEvent"
+              handler=".person.modifyPersonOwnership" />
 
   <subscriber for="..interfaces.IPerson
                    Products.Archetypes.interfaces.IEditBegunEvent"

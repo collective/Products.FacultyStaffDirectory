@@ -13,8 +13,7 @@ from Acquisition import aq_inner, aq_parent
 from DateTime import DateTime
 from zope.app.annotation.interfaces import IAttributeAnnotatable, IAnnotations
 from zope.component import getUtility
-from zope.event import notify
-from zope.interface import implements, classImplements, alsoProvides
+from zope.interface import implements, classImplements
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
@@ -28,7 +27,7 @@ from Products.validation import validation
 from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonModifiedEvent, IPersonToPersonGroupingRelationship
+from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonToPersonGroupingRelationship
 from Products.FacultyStaffDirectory.permissions import MANAGE_GROUP_MEMBERSHIP, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 from Products.FacultyStaffDirectory.AssociationContent import AssociationContent
@@ -410,13 +409,6 @@ Person_schema = OrderedBaseFolderSchema.copy() + schema.copy()  # + on Schemas d
 
 finalizeATCTSchema(Person_schema, folderish=True)
 
-class PersonModifiedEvent(object):
-    """Event that happens when edits to a Person have been saved"""
-    implements(IPersonModifiedEvent)
-    
-    def __init__(self, context):
-        self.context = context
-
 class Person(OrderedBaseFolder, ATCTContent):
     """A person in the Faculty/Staff directory"""
     meta_type = portal_type = "FSDPerson"
@@ -445,16 +437,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     _at_rename_after_creation = True
     schema = Person_schema
     # Methods
-    security.declareProtected(View, 'at_post_create_script')
-    def at_post_create_script(self):
-        """Notify that the Person has been modified."""
-        notify(PersonModifiedEvent(self))
 
-    security.declareProtected(View, 'at_post_edit_script')
-    def at_post_edit_script(self):
-        """Notify that the Person has been modified."""
-        notify(PersonModifiedEvent(self))
-    
     def __call__(self, *args, **kwargs):
         return self.getId()
     

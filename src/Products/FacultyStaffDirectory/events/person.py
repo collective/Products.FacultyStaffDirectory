@@ -9,22 +9,20 @@ from plone.relations.interfaces import IContextAwareRelationship
 from zope.app.annotation.interfaces import IAttributeAnnotatable    
 from zope.interface import alsoProvides
 
-def modifyPersonOwnership(event):
+def modifyPersonOwnership(self, event):
     """Let people own their own objects and modify their own user preferences.
     
     Stolen from Plone and CMF core, but made less picky about where users are 
     found. (and from borg, thanks, optilude!)
     
     """
-    context = event.context
-
     # Only run this if FSDPerson is an active membrane type.
     fsd_tool = getUtility(IConfiguration)
     if 'FSDPerson' in fsd_tool.enableMembraneTypes:
 
-        catalog = getToolByName(context, 'portal_catalog')
-        userId = IUserRelated(context).getUserId()
-        userFolder = getToolByName(context, 'acl_users')
+        catalog = getToolByName(self, 'portal_catalog')
+        userId = IUserRelated(self).getUserId()
+        userFolder = getToolByName(self, 'acl_users')
         
         user = None
         while userFolder is not None:
@@ -38,40 +36,40 @@ def modifyPersonOwnership(event):
         if user is None:
             raise KeyError, "User %s cannot be found." % userId
         
-        context.changeOwnership(user, False)
+        self.changeOwnership(user, False)
 
-        def fixPersonRoles(context, userId):
+        def fixPersonRoles(self, userId):
             # Remove all other Owners of this Person object. Note that the creator will have an implicit
             # owner role. The User Preferences Editor role allows us to allow the user defined by the Person
             # to manage their own password and user preferences, but prevent the creator of the Person object
             # from modifying those fields.
-            for owner in context.users_with_local_role('Owner'):
-                roles = list(context.get_local_roles_for_userid(owner))
+            for owner in self.users_with_local_role('Owner'):
+                roles = list(self.get_local_roles_for_userid(owner))
                 roles.remove('Owner')
                 if roles:
-                    context.manage_setLocalRoles(owner, roles)
+                    self.manage_setLocalRoles(owner, roles)
                 else:
-                    context.manage_delLocalRoles([owner])
+                    self.manage_delLocalRoles([owner])
                     
             # Grant 'Owner' and 'User Preferences Editor' to the user defined by this object:
-            roles = list(context.get_local_roles_for_userid(userId))
+            roles = list(self.get_local_roles_for_userid(userId))
             roles.extend(['Owner', 'User Preferences Editor'])
             # eliminate duplicated roles
             roles = list(set(roles))
-            context.manage_setLocalRoles(userId, roles)
+            self.manage_setLocalRoles(userId, roles)
             
             # Grant 'Owner' only to any users listed as 'assistants':
-            for assistant in context.getReferences(relationship="people_assistants"):
+            for assistant in self.getReferences(relationship="people_assistants"):
                 pid = assistant.id
                 user = userFolder.getUserById(pid)
                 if user is None:
                     raise KeyError, "User %s cannot be found." % pid
-                roles = list(context.get_local_roles_for_userid(pid))
+                roles = list(self.get_local_roles_for_userid(pid))
                 roles.append('Owner')
-                context.manage_setLocalRoles(pid, roles)
+                self.manage_setLocalRoles(pid, roles)
 
-        fixPersonRoles(context, user.getId())
-        catalog.reindexObject(context)
+        fixPersonRoles(self, user.getId())
+        catalog.reindexObject(self)
 
 def deleteAssociationContent(rel, event):
     """Delete the AssociationContent object defined for the passed relationship."""
