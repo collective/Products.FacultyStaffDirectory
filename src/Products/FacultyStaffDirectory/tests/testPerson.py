@@ -37,7 +37,7 @@ TEST_TIFF_LEN = len(TEST_TIFF)
 class testPerson(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
         self.loginAsPortalOwner()
-        self.directory = self.getPopulatedDirectory()
+        self.directory = self.getDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
     
     def simulateATGUIInteraction(self, person=None, task='create'):

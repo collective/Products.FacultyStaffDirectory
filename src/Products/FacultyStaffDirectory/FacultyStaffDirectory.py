@@ -79,15 +79,6 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
     schema = FacultyStaffDirectory_schema
     
     # Methods
-    security.declarePrivate('at_post_create_script')
-    def at_post_create_script(self):
-        """Actions to perform after a FacultyStaffDirectory is added to a Plone site"""
-        # Create some default contents
-        # Create some base classifications
-        self.invokeFactory('FSDPersonGrouping', id='faculty', title='Faculty')
-        self.invokeFactory('FSDPersonGrouping', id='staff', title='Staff')
-        self.invokeFactory('FSDPersonGrouping', id='grad-students', title='Graduate Students')
-
     security.declareProtected(View, 'getDirectoryRoot')
     def getDirectoryRoot(self):
         """Return the current FSD object through acquisition."""

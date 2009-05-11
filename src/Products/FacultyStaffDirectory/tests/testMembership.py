@@ -22,7 +22,7 @@ class testMembership(FacultyStaffDirectoryTestCase):
         self.loginAsPortalOwner()
         self.acl_users = getToolByName(self.portal, 'acl_users')
         self.wf = getToolByName(self.portal, 'portal_workflow')
-        self.directory = self.getPopulatedDirectory()
+        self.directory = self.getDirectory()
         # setup some people
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
         self.person2 = self.getPerson(id='def456', firstName="Testy", lastName="Person")

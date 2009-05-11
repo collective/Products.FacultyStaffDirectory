@@ -19,7 +19,7 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
 
     def afterSetUp(self):
         self.loginAsPortalOwner()
-        self.directory = self.getPopulatedDirectory()
+        self.directory = self.getDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
         self.fsd_utility = self.portal.getSiteManager().getUtility(IConfiguration)
         # set up an additional, non-fsd user for testing folder and profile methods

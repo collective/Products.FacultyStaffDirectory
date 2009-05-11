@@ -106,7 +106,7 @@ class testDependentProducts(FacultyStaffDirectoryTestCase):
 class testIndexes(FacultyStaffDirectoryTestCase):
 
     def afterSetUp(self):
-        self.directory = self.getPopulatedDirectory()
+        self.directory = self.getDirectory()
         self.catalog = getToolByName(self.portal, 'portal_catalog')
 
     def testObjectStillIndexed(self):
@@ -319,7 +319,7 @@ class testUninstall(FacultyStaffDirectoryTestCase):
 class testReinstall(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
         self.loginAsPortalOwner()
-        self.directory = self.getPopulatedDirectory()
+        self.directory = self.getDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
         
     def testUsersExistOnReinstall(self):
@@ -349,7 +349,7 @@ class testLargeDirectory(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
         self.loginAsPortalOwner()
         self.numPeople = 60
-        self.directory = self.getPopulatedDirectory()
+        self.directory = self.getDirectory()
         self.person_ids = self.getLargeDirectory(self.directory, self.numPeople)
         
     def testLargeDirSetup(self):

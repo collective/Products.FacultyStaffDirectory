@@ -18,7 +18,7 @@ class testPersonGrouping(FacultyStaffDirectoryTestCase):
     def afterSetUp(self):
         self.loginAsPortalOwner()
         self.acl_users = getToolByName(self.portal, 'acl_users')
-        self.directory = self.getPopulatedDirectory()
+        self.directory = self.getDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
         self.person2 = self.getPerson(id='def456', firstName="Testy", lastName="Person")
         self.persongrouping = self.directory.getPersonGroupings()[0].getObject()

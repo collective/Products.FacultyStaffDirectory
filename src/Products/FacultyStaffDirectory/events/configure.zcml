@@ -13,18 +13,16 @@
                    Products.Archetypes.interfaces.IEditBegunEvent"
               handler=".person.preEditSetup" />
 
+  <subscriber for="..interfaces.IPersonToPersonGroupingRelationship
+                   zope.app.intid.interfaces.IIntIdRemovedEvent"
+              handler=".person.deleteAssociationContent" />
 
-  <subscriber
-      for="..interfaces.IPersonToPersonGroupingRelationship
-           zope.app.intid.interfaces.IIntIdRemovedEvent"
-      handler=".person.deleteAssociationContent"
-      />
+  <subscriber for="..interfaces.IPersonToPersonGroupingRelationship
+                   zope.app.intid.interfaces.IIntIdAddedEvent"
+              handler=".person.addAssociationContent" />
 
-  <subscriber
-      for="..interfaces.IPersonToPersonGroupingRelationship
-           zope.app.intid.interfaces.IIntIdAddedEvent"
-      handler=".person.addAssociationContent"
-      />
-
+  <subscriber for="..interfaces.IFacultyStaffDirectory
+                   zope.app.container.interfaces.IObjectAddedEvent"
+              handler=".facultystaffdirectory.addDefaultContent" />
 
 </configure>

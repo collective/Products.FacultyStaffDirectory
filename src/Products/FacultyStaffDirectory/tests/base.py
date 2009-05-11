@@ -58,7 +58,7 @@ class FacultyStaffDirectoryTestCase(PloneTestCase):
         portal_setup.runAllImportStepsFromProfile('profile-Products.%s:default' % PROJECTNAME)
         self.setRoles(('Member',))
 
-    def getEmptyDirectory(self, id="facstaffdirectory", portal=None):
+    def getDirectory(self, id="facstaffdirectory", portal=None):
         """Return a FacultyStaffDirectory (creating it first if necessary)."""
         portal = portal or self.portal
         if 'facstaffdirectory' not in portal.contentIds():
@@ -67,18 +67,11 @@ class FacultyStaffDirectoryTestCase(PloneTestCase):
             self.setRoles(('Member',))
         return portal[id]
 
-    def getPopulatedDirectory(self, id="facstaffdirectory"):
-        """Create a FSD containing some stuff, including..."""
-        fsd = self.getEmptyDirectory(id)
-        # Run the post-create script for some auto-generated content:
-        fsd.at_post_create_script()
-        return fsd
-
     def getPerson(self, directory=None, id="abc123", firstName="Test", lastName="Person", portal=None):
         """Create a Person, using only the required fields."""
         portal = portal or self.portal
         if not directory:
-            directory = self.getEmptyDirectory(portal=portal)
+            directory = self.getDirectory(portal=portal)
         directory.invokeFactory(type_name="FSDPerson", id=id, firstName=firstName, lastName=lastName)
         return directory[id]
 
@@ -168,7 +161,7 @@ Note: You have the same locals available as in your test-case.
         
         if not directory:
             portal = portal or self.portal
-            directory = self.getEmptyDirectory(portal=portal)
+            directory = self.getDirectory(portal=portal)
                
         generated_ids = []
         i = 0
