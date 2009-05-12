@@ -109,17 +109,16 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
     #         return None
 
     security.declareProtected(View, 'getPeople')
-    def getPeople(self):
+    def getPeople(self, **kwargs):
         """Return a list of people contained within this FacultyStaffDirectory."""
         portal_catalog = getToolByName(self, 'portal_catalog')
-        results = portal_catalog(path='/'.join(self.getPhysicalPath()), portal_type='FSDPerson', depth=1)
+        results = portal_catalog(path='/'.join(self.getPhysicalPath()), portal_type='FSDPerson', depth=1, **kwargs)
         return [brain.getObject() for brain in results]
 
     security.declareProtected(View, 'getSortedPeople')
     def getSortedPeople(self):
         """Return a list of people, sorted by SortableName."""
-        people = self.getPeople()
-        return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
+        return self.getPeople(sort_on='sortable_title')
 
     security.declareProtected(View, 'getDepartments')
     def getDepartments(self):

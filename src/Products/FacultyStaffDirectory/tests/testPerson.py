@@ -84,9 +84,6 @@ class testWithoutSpecialties(testPerson):
         # Make sure the Title override is working
         self.failUnlessEqual(self.person.Title(), u"Test Person")
         
-        # Check the sortable name
-        self.failUnlessEqual(self.person.getSortableName(), ('person', 'test', ''))
-        
         # Check that Personnel Managers can add a Person.
         self.logout()
         self.login()
@@ -134,9 +131,6 @@ class testWithoutSpecialties(testPerson):
         try:
             #title should change
             self.failUnlessEqual(self.person.Title(), u"Test Joe Person")
-            
-            #but sortable name shouldn't
-            self.failUnlessEqual(self.person.getSortableName(), ('person', 'test', 'joe'))
         finally:
             self.person.setMiddleName(oldMiddleName)
     
@@ -146,9 +140,6 @@ class testWithoutSpecialties(testPerson):
         try:
             #Title should change
             self.failUnlessEqual(self.person.Title(), u"Test Person, WTF")
-            
-            #But Sortable Name shouldn't
-            self.failUnlessEqual(self.person.getSortableName(), ('person', 'test', ''))
         finally:
             self.person.setSuffix(oldSuffix)
     
@@ -161,16 +152,19 @@ class testWithoutSpecialties(testPerson):
             try:
                 #Title should change
                 self.failUnlessEqual(self.person.Title(), u"Test Joe Person, WTF")
-                
-                #But Sortable Name shouldn't
-                self.failUnlessEqual(self.person.getSortableName(), ('person', 'test', 'joe'))
             finally:
                 self.person.setMiddleName(oldMiddleName)
         finally:
             self.person.setSuffix(oldSuffix)
     
-    def testSortableName(self):
+    def testSortableTitle(self):
         self.directory.invokeFactory('FSDPerson', id='a1', firstName = 'Albert', lastName='Williams')
+        
+        # Is the sortableTitleIndexer returning the correct value?
+        from Products.FacultyStaffDirectory.Person import sortableTitleIndexer
+        self.assertEqual(sortableTitleIndexer(self.directory['a1'])(), u'williams albert')
+        
+        # Is the index working properly as a sort value?
         self.directory.invokeFactory('FSDPerson', id='b2', firstName = 'Albert', lastName='von Whatsit')
         self.directory.invokeFactory('FSDPerson', id='c3', firstName = 'Albert', lastName="d'Example")
         sortedPeople = self.directory.getSortedPeople()

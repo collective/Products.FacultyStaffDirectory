@@ -21,8 +21,7 @@ from Products.ATContentTypes.lib.calendarsupport import n2rn, foldLine
 from Products.CMFCore.permissions import View, ModifyPortalContent, SetOwnPassword, SetOwnProperties
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.navtree import buildFolderTree
-from Products.CMFPlone.CatalogTool import getObjPositionInParent
-from Products.membrane.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
+from Products.CMFPlone.CatalogTool import getObjPositionInParent, registerIndexableAttribute
 from Products.validation import validation
 from ZPublisher.HTTPRequest import HTTPRequest
 
@@ -32,10 +31,12 @@ from Products.FacultyStaffDirectory.permissions import MANAGE_GROUP_MEMBERSHIP, 
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 from Products.FacultyStaffDirectory.AssociationContent import AssociationContent
 
-from plonerelations.ATField.ploneRelationsATField import PloneRelationsATField
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from plone.app.relations.interfaces import IAnnotationsContext, IRelationshipSource
 from plone.relations.interfaces import IContextAwareRelationship
+from plone.indexer import indexer
+from plonerelations.ATField.ploneRelationsATField import PloneRelationsATField
+from Products.membrane.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
 
 logger = logging.getLogger('FacultyStaffDirectory')
 
@@ -470,12 +471,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         out.write("REV:%s\n" % DateTime(self.ModificationDate()).ISO8601())
         out.write("PRODID:WebLion Faculty/Staff Directory\nEND:VCARD")
         return n2rn(out.getvalue())
-    
-    security.declareProtected(View, 'getSortableName')
-    def getSortableName(self):
-        """Return a tuple of the person's name for sorting purposes, as lowercase so that names like 'von Whatever' sort properly."""
-        return self.lastName.lower(), self.firstName.lower(), self.middleName.lower()
-    
+        
     security.declareProtected(View, 'Title')
     def Title(self):
         """Return the Title as firstName middleName(when available) lastName, suffix(when available)"""
@@ -760,3 +756,12 @@ else:
     classImplements(Person, IMultiPageSchema)
 
 registerType(Person, PROJECTNAME)  # generates accessor and mutators, among other things
+
+# @indexer(IPerson)
+def alternate_sortable_title(person, **kwargs):
+    """Return a tuple of the person's name for sorting purposes, as lowercase so that names like 'von Whatever' sort properly."""
+    title = "%s %s %s" % (person.lastName.lower(), person.firstName.lower(), person.middleName.lower())
+    return title.strip()
+# Use this format of registering the indexer instead of the decorator to allow it to work in < Plone 3.3.
+sortableTitleIndexer = indexer(IPerson)(alternate_sortable_title)
+registerIndexableAttribute('sortable_title', alternate_sortable_title)

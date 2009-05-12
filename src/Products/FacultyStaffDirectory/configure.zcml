@@ -29,6 +29,9 @@
         factory=".traversal.MembershipTraverser"
         />
 
+    <adapter name="sortable_title" factory=".Person.sortableTitleIndexer" />
+
+
     <!-- These should be unnecessary once BaseContent and BaseFolder stop using manage_afterAdd(): -->
     <five:deprecatedManageAddDelete class=".FacultyStaffDirectory.FacultyStaffDirectory" />
     <five:deprecatedManageAddDelete class=".Course.Course" />
