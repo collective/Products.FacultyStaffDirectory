@@ -50,5 +50,5 @@ MEMBRANE_TYPE_ACTIVE_STATES = {'FSDPerson': ['active'],
 ALLOWABLE_CONTENT_TYPES = ('text/plain', 'text/structured', 'text/html', 'application/msword', 'text/x-rst')
 
 #catalog stuff
-ADDITIONAL_CATALOG_INDEXES = [('getSortableName', 'FieldIndex'), ('getRawPeople', 'KeywordIndex')]
+ADDITIONAL_CATALOG_INDEXES = [('getRawPeople', 'KeywordIndex')]
 ADDITIONAL_CATALOG_METADATA = ["UID",]

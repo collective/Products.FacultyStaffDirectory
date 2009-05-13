@@ -8,12 +8,6 @@
      i18n:attributes="description; friendlyName">
    <criteria>ATReferenceCriterion</criteria>
   </index>
-  <index name="getSortableName"
-     description="The person's name, last name first"
-     enabled="True" friendlyName="Full Name" 
-     i18n:attributes="description; friendlyName">
-   <criteria>ATListCriterion</criteria>
-  </index>
  </topic_indexes>
  <topic_metadata i18n:domain="plone">
  </topic_metadata>

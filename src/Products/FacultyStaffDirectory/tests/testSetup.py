@@ -167,7 +167,7 @@ class testInstall(FacultyStaffDirectoryTestCase):
         
     def testTopicIndexesAdded(self):
         missingindexes = []
-        for index in ["getRawPeople","getSortableName"]:
+        for index in ["getRawPeople"]:
             idx = self.atct_tool.getIndex(index)
             if not idx or not idx.enabled:
                 missingindexes.append(index)
@@ -282,7 +282,7 @@ class testUninstall(FacultyStaffDirectoryTestCase):
     def testTopicIndexesTeardown(self):
         presentindexes = []
         allindexes = self.atct_tool.getIndexes()
-        for index in ["getRawPeople","getSortableName"]:
+        for index in ["getRawPeople"]:
             if index in allindexes:
                 presentindexes.append(index)
         self.failIf(presentindexes, 'ATCT Tool still has the following indexes: %s' % presentindexes)
