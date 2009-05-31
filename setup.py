@@ -38,6 +38,8 @@ setup(name='Products.FacultyStaffDirectory',
           'Products.membrane>=1.1b1,<=1.1',
       ],
       entry_points="""
+      [zopeskel.zopeskel_sub_template]
+      fsdextender = Products.FacultyStaffDirectory.zopeskel.localcommands.archetype:FSDExtender
       # -*- Entry points: -*-
       """,
       )

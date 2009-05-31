@@ -1,0 +1,15 @@
+from zope import schema
+from zope.interface import Interface
+
+from ${namespace_package}.${package} import ${package}MessageFactory as _
+
+class $(interface_name)(Interface):
+    """ An interface which provides additional methods to the FSDPerson 
+        content type
+    """
+    
+    def text_message(self, spam):
+        """ send 'spam' as a text message to the Mobile Phone number 
+        """
+    
+    # -*- extra stuff goes here -*-

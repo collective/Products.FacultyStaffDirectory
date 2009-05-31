@@ -1,0 +1,7 @@
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="${package_dotted_name} Uninstallation Profile"
+      directory="profiles/uninstall"
+      description="Uninstalls ${package_dotted_name}"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />

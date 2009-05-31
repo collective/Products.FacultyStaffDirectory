@@ -1,0 +1,12 @@
+from Products.FacultyStaffDirectory.extenderInstallation import installExtender, uninstallExtender	
+# -*- additional extender class imports here -*-
+
+def importVarious(context):
+    """Import various settings."""
+    portal = context.getSite()
+# -*- install additional extender classes here -*-
+
+def teardownVarious(context):
+    """Remove settings of this package"""
+    portal = context.getSite()
+# -*- uninstall additional extender classes here -*-

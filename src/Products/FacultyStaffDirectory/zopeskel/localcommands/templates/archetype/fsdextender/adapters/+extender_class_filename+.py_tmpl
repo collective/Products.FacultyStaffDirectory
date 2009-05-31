@@ -1,0 +1,20 @@
+from zope.interface import implements
+from zope.component import adapts, provideAdapter
+
+from Products.FacultyStaffDirectory import interfaces 
+
+class ${adapter_classname}(object):
+    """ Adapts ${interface_to_extend} to ${interface_name}
+    """
+    adapts(interfaces.${interface_to_extend})
+    implements(${interface_name})
+    
+    def __init__(self, context):
+        self.context = context
+        
+    def text_message(self, spam):
+        """ send some spam to the mobile phone number
+        """
+        print "I just texted %s to the person's mobile phone at %s!" % (spam, self.context.getMobilePhone())
+
+    # -*- extra stuff goes here -*-
