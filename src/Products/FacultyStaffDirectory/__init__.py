@@ -12,88 +12,92 @@ __docformat__ = 'plaintext'
 #   - To register a customisation policy, create a file CustomizationPolicy.py
 #       with a method register(context) to register the policy.
 
-import logging
-logger = logging.getLogger('FacultyStaffDirectory')
-logger.info('Installing Product')
+import sys
 
-try:
-    import CustomizationPolicy
-except ImportError:
-    CustomizationPolicy = None
+if 'ZServer' in sys.modules:
 
-import Products.CMFPlone.interfaces
-import os
-import os.path
-from Globals import package_home
-from Products.Archetypes import listTypes
-from Products.Archetypes.atapi import *
-from Products.Archetypes.utils import capitalize
-from Products.CMFCore import DirectoryView
-from Products.CMFCore import permissions as cmfpermissions
-from Products.CMFCore import utils as cmfutils
-from Products.CMFPlone.utils import ToolInit
-from config import *
-DirectoryView.registerDirectory('skins', product_globals)
+    import logging
+    logger = logging.getLogger('FacultyStaffDirectory')
+    logger.info('Installing Product')
 
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.GenericSetup import EXTENSION, profile_registry
-from Products.FacultyStaffDirectory.tools.FacultyStaffDirectoryTool import FacultyStaffDirectoryTool
+    try:
+        import CustomizationPolicy
+    except ImportError:
+        CustomizationPolicy = None
 
-def initialize(context):
+    import Products.CMFPlone.interfaces
+    import os
+    import os.path
+    from Globals import package_home
+    from Products.Archetypes import listTypes
+    from Products.Archetypes.atapi import *
+    from Products.Archetypes.utils import capitalize
+    from Products.CMFCore import DirectoryView
+    from Products.CMFCore import permissions as cmfpermissions
+    from Products.CMFCore import utils as cmfutils
+    from Products.CMFPlone.utils import ToolInit
+    from config import *
+    DirectoryView.registerDirectory('skins', product_globals)
 
-    # imports packages and types for registration
-    import interfaces
+    from Products.CMFPlone.interfaces import IPloneSiteRoot
+    from Products.GenericSetup import EXTENSION, profile_registry
+    from Products.FacultyStaffDirectory.tools.FacultyStaffDirectoryTool import FacultyStaffDirectoryTool
 
-    import FacultyStaffDirectory
-    import Classification
-    import Person
-    import Course
-    import CommitteesFolder
-    import Committee
-    import Specialty
-    import SpecialtiesFolder
-    import PersonGrouping
-    import Department
-    import CommitteeMembership
-    import SpecialtyInformation
-    import DepartmentalMembership
+    def initialize(context):
 
-    # Initialize portal content
-    all_content_types, all_constructors, all_ftis = process_types(
-        listTypes(PROJECTNAME),
-        PROJECTNAME)
+        # imports packages and types for registration
+        import interfaces
 
-    cmfutils.ContentInit(
-        PROJECTNAME + ' Content',
-        content_types      = all_content_types,
-        permission         = DEFAULT_ADD_CONTENT_PERMISSION,
-        extra_constructors = all_constructors,
-        fti                = all_ftis,
-        ).initialize(context)
+        import FacultyStaffDirectory
+        import Classification
+        import Person
+        import Course
+        import CommitteesFolder
+        import Committee
+        import Specialty
+        import SpecialtiesFolder
+        import PersonGrouping
+        import Department
+        import CommitteeMembership
+        import SpecialtyInformation
+        import DepartmentalMembership
 
-    # Give it some extra permissions to control them on a per class limit
-    for i in range(0,len(all_content_types)):
-        klassname=all_content_types[i].__name__
-        if not klassname in ADD_CONTENT_PERMISSIONS:
-            continue
+        # Initialize portal content
+        all_content_types, all_constructors, all_ftis = process_types(
+            listTypes(PROJECTNAME),
+            PROJECTNAME)
 
-        context.registerClass(meta_type   = all_ftis[i]['meta_type'],
-                              constructors= (all_constructors[i],),
-                              permission  = ADD_CONTENT_PERMISSIONS[klassname])
+        cmfutils.ContentInit(
+            PROJECTNAME + ' Content',
+            content_types      = all_content_types,
+            permission         = DEFAULT_ADD_CONTENT_PERMISSION,
+            extra_constructors = all_constructors,
+            fti                = all_ftis,
+            ).initialize(context)
 
-    profile_registry.registerProfile( 
-        name='default', 
-        title=PROJECTNAME, 
-        description=u'Profile for FacultyStaffDirectory', 
-        path='profiles/default', 
-        product='FacultyStaffDirectory', 
-        profile_type=EXTENSION, 
-        for_=Products.CMFPlone.interfaces.IPloneSiteRoot) 
-        
-    # Register the FacultyStaffDirectory tool    
-    cmfutils.ToolInit(
-        'Faculty/Staff Directory Tool',
-		product_name='FacultyStaffDirectory',
-		tools=(FacultyStaffDirectoryTool,),
-        icon='skins/FacultyStaffDirectory/group.png').initialize(context)
+        # Give it some extra permissions to control them on a per class limit
+        for i in range(0,len(all_content_types)):
+            klassname=all_content_types[i].__name__
+            if not klassname in ADD_CONTENT_PERMISSIONS:
+                continue
+
+            context.registerClass(meta_type   = all_ftis[i]['meta_type'],
+                                  constructors= (all_constructors[i],),
+                                  permission  = ADD_CONTENT_PERMISSIONS[klassname])
+
+        profile_registry.registerProfile( 
+            name='default', 
+            title=PROJECTNAME, 
+            description=u'Profile for FacultyStaffDirectory', 
+            path='profiles/default', 
+            product='FacultyStaffDirectory', 
+            profile_type=EXTENSION, 
+            for_=Products.CMFPlone.interfaces.IPloneSiteRoot) 
+            
+        # Register the FacultyStaffDirectory tool    
+        cmfutils.ToolInit(
+            'Faculty/Staff Directory Tool',
+            product_name='FacultyStaffDirectory',
+            tools=(FacultyStaffDirectoryTool,),
+            icon='skins/FacultyStaffDirectory/group.png').initialize(context)
 
