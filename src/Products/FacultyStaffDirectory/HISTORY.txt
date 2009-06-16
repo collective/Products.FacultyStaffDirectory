@@ -1,5 +1,11 @@
 Version History
 
+  ' ' 2.1.2 -- ' '
+        
+        * Corrected a problem with the reference browser widget popup not
+          displaying available items when used on a site using virtual 
+          hosting. [esteele]
+
   ' ' 2.1.1.1 -- ' '
     
         * Corrected a problem with missing files in the 2.1.1 distribution. [esteele]
