@@ -7,7 +7,7 @@
               handler=".facultystaffdirectorytool.modifyMembraneTypes" />
 
   <subscriber for="..interfaces.IPerson
-                   zope.app.container.interfaces.IObjectAddedEvent"
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".person.modifyPersonOwnership" />
 
   <subscriber for="..interfaces.IPerson
