@@ -9,8 +9,10 @@ __docformat__ = 'plaintext'
 
 import os
 from zope.component import getUtility
+from zope.event import notify
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IUserAuthentication
+from Products.Archetypes.event import ObjectInitializedEvent, ObjectEditedEvent
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
 from Products.FacultyStaffDirectory.tests.base import PACKAGE_HOME
@@ -54,9 +56,13 @@ class testPerson(FacultyStaffDirectoryTestCase):
                 raise ValueError, '%s not in list of approved GUI tasks' % task
             
             if my_task==0:
-                person.at_post_edit_script()
+                # old style, no longer works for event-based updates
+                # person.at_post_edit_script()
+                notify(ObjectEditedEvent(person))
             elif my_task==1:
-                person.at_post_create_script()
+                # old style, no longer works for event-based updates
+                # person.at_post_create_script()
+                notify(ObjectInitializedEvent(person))
     
     def _testAssistantOwnershipAfter(self, person=None, task='create'):
         """boilerplate for testing making an assistant owner after a gui task"""
@@ -117,13 +123,13 @@ class testWithoutSpecialties(testPerson):
             self.failUnlessEqual(g.Type(), 'Person Grouping')
     
     def testAssignAssistants(self):
-        """Assign an assistant to a person"""
+        """ Assign an assistant to a person
+        """
         newperson = self.getPerson(id='def456', firstName="Test", lastName="Assistant")
         self.person.setAssistants([newperson.UID(),])
         for a in self.person.getAssistants():
             self.failUnless(a.id == 'def456', 'wrong id for assistant, wanted "def456", got %s' % a.id)
             self.failUnlessEqual(a.Type(), 'Person')
-            self.failUnlessEqual(a.getReferences(relationship="assistants_people")[0].id, "abc123")
     
     def testMiddleName(self):
         oldMiddleName = self.person.getMiddleName()
