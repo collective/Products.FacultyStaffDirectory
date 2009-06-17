@@ -4,7 +4,7 @@
 __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
-from Products.FacultyStaffDirectory.interfaces.content import IPersonGrouping, ICourse, IFacultyStaffDirectory, IFacultyStaffDirectoryAddable, IPerson, IFacultyStaffDirectoryTool, IAssociationContent, IPersonToPersonGroupingRelationship
+from Products.FacultyStaffDirectory.interfaces.content import IPersonGrouping, ICourse, IFacultyStaffDirectory, IFacultyStaffDirectoryAddable, IPerson, IFacultyStaffDirectoryTool, IAssociationContent, IPersonToPersonGroupingRelationship, IPersonToPersonRelationship
 from Products.FacultyStaffDirectory.interfaces.browser import IPersonViewletManager, IPersonOfficeAddressViewletManager, IPersonView, IPersonGroupingViewletManager, IPersonGroupingContainerViewletManager, IPersonGroupingView, IListingFormat, ITabularListingFormat, IGalleryListingFormat, IPersonGroupingContainerTabularViewletManager
 from Products.FacultyStaffDirectory.interfaces.configuration import IConfiguration, IGeneralConfiguration, IMembershipConfiguration
 from Products.FacultyStaffDirectory.interfaces.events import IMembraneIntegrationModifiedEvent

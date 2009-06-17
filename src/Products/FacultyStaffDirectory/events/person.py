@@ -5,6 +5,7 @@ from Products.membrane.interfaces import IUserRelated
 from Products.FacultyStaffDirectory.AssociationContent import AssociationContent
 from Products.FacultyStaffDirectory.interfaces import IConfiguration
 from plone.app.relations.interfaces import IAnnotationsContext
+from plone.app.relations.interfaces import IRelationshipSource
 from plone.relations.interfaces import IContextAwareRelationship
 from zope.app.annotation.interfaces import IAttributeAnnotatable    
 from zope.interface import alsoProvides
@@ -59,7 +60,8 @@ def modifyPersonOwnership(self, event):
             self.manage_setLocalRoles(userId, roles)
             
             # Grant 'Owner' only to any users listed as 'assistants':
-            for assistant in self.getReferences(relationship="people_assistants"):
+            source = IRelationshipSource(self)
+            for assistant in source.getTargets(relation='hasAssistant'):
                 pid = assistant.id
                 user = userFolder.getUserById(pid)
                 if user is None:

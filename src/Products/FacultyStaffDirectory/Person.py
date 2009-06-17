@@ -26,7 +26,7 @@ from Products.validation import validation
 from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
-from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonToPersonGroupingRelationship
+from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration, IPersonToPersonGroupingRelationship, IPersonToPersonRelationship
 from Products.FacultyStaffDirectory.permissions import MANAGE_GROUP_MEMBERSHIP, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 from Products.FacultyStaffDirectory.AssociationContent import AssociationContent
@@ -380,9 +380,10 @@ schema = ATContentTypeSchema.copy() + Schema((
         ),
         write_permission="Modify portal content",
         schemata="Basic Information",
+        allowed_types=('FSDPerson'),
         multiValued=True,
         relationship='hasAssistant',
-        allowed_types=('FSDPerson'),
+        relationship_interface=IPersonToPersonRelationship,
     ),
     
     PloneRelationsATField(
@@ -397,7 +398,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             allow_search=1,
             show_results_without_query=1,
         ),
-        # write_permission=ASSIGN_GOUPINGS_TO_PEOPLE,
+        # write_permission=ASSIGN_GROUPINGS_TO_PEOPLE,
         schemata="Basic Information",
         allowed_types=('FSDPersonGrouping'),
         multiValued=True,
