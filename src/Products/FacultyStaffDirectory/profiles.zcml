@@ -5,9 +5,9 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="FacultyStaffDirectory Install Profile"
+      title="FacultyStaffDirectory"
       directory="profiles/default"
-      description="Extension profile for FacultyStaffDirectory Product."
+      description="A personnel directory, a provider of shared workspaces for committees, a way of keeping track of people's areas of expertise, a floor wax, and a dessert topping."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 

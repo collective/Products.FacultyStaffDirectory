@@ -1,4 +1,5 @@
 from AccessControl import ClassSecurityInfo
+from Acquisition import Implicit
 from Globals import InitializeClass
 from persistent import Persistent
 from zope.app.component.hooks import getSite
@@ -16,7 +17,7 @@ class MembraneTypesModifiedEvent(object):
     def __init__(self, context):
         self.context = context
 
-class ConfigurationUtility(Persistent):
+class ConfigurationUtility(Persistent, Implicit):
     """A mindless rewriting of the FSDTool as a utility.
     
     Next step: break this up into little utilities that can be overridden separately.
@@ -137,9 +138,5 @@ class ConfigurationUtility(Persistent):
                     return True
                 else:
                     return False
-    
-    def __of__(self, parent):
-        """Make Zope 2 traverser happy."""
-        return self  # Replace with ImplicitAcquisitionWrapper(self, parent) if this gives you any trouble.
 
 InitializeClass(ConfigurationUtility)  # Make security declarations work.
