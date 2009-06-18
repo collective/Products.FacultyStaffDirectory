@@ -1,17 +1,9 @@
-# Feel free to reference localAdaptersAreSupported in your code. I promise not to move it for awhile.
-try:
-    from Products.CMFPlone.migrations import v3_0
-except ImportError:  # This is Plone >= 3.0
-    localAdaptersAreSupported = False
-else:
-    localAdaptersAreSupported = True
+# Feel free to reference localAdaptersAreSupported in your code. I promise not to move it for awhile. (This is always true in Plone 3 and above, which is all we support now.)
+localAdaptersAreSupported = True
 
 
 def installExtenderGloballyIfLocallyIsNotSupported(extenderClass, name):
-    """If we're on a version of Plone that doesn't support local adapters, make it so merely putting the extender in the Products folder activates it across on all Plone sites."""
-    if not localAdaptersAreSupported:
-        from zope.component import provideAdapter
-        provideAdapter(extenderClass, name=name)
+    """If we're on a version of Plone that doesn't support local adapters, make it so merely putting the extender in the Products folder activates it across on all Plone sites. But we aren't, so do nothing."""
 
 def installExtender(portal, extenderClass, name, required=None, provided=None):
     """Register a schema extender with a Plone site."""
@@ -35,11 +27,10 @@ def declareInstallRoutines(globals_, extenderClass, name):
     If you want to do additional stuff on installation or uninstallation, don't call this; do what you have to do, and call installExtender() and uninstallExtender() yourself.
     
     """
-    if localAdaptersAreSupported:
-        def install(portal):
-            installExtender(portal, extenderClass, name)
-        globals_['install'] = install
-        
-        def uninstall(portal):
-            uninstallExtender(portal, extenderClass, name)
-        globals_['uninstall'] = uninstall
+    def install(portal):
+        installExtender(portal, extenderClass, name)
+    globals_['install'] = install
+    
+    def uninstall(portal):
+        uninstallExtender(portal, extenderClass, name)
+    globals_['uninstall'] = uninstall

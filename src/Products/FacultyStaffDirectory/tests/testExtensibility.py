@@ -12,7 +12,6 @@ from Products.PloneTestCase import PloneTestCase
 
 from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
 from Products.FacultyStaffDirectory.tests.base import PRODUCTS
-from Products.FacultyStaffDirectory.extenderInstallation import localAdaptersAreSupported
 
 
 _extenderName = 'FacultyStaffDirectoryExtender'
@@ -51,28 +50,28 @@ class TestExtensibility(TestExtensibilityBase):
         person = self.getPerson()
         self.failUnless(_personIsExtended(person), "%s failed to append a Mobile Phone field to the Person." % _extenderName)
     
-    if localAdaptersAreSupported:  # If they aren't, this isn't even supposed to work.
-        def testScopedInstallation(self):
-            """Make sure installing the extender didn't install it on the other Plone site by accident; make sure the local adapters really are local."""
-            person = self.getPerson(portal=self.app.anotherPortal)
-            self.failIf(_personIsExtended(person), "Installing %s on one Plone site caused it to leak over to another accidentally." % _extenderName)
+    def testScopedInstallation(self):
+        """Make sure installing the extender didn't install it on the other Plone site by accident; make sure the local adapters really are local."""
+        person = self.getPerson(portal=self.app.anotherPortal)
+        self.failIf(_personIsExtended(person), "Installing %s on one Plone site caused it to leak over to another accidentally." % _extenderName)
+
+
+class TestUninstallation(TestExtensibilityBase):
+    """Tests to ensure uninstalling the product reverts its schema changes"""
+        
+    def afterSetUp(self):
+        TestExtensibilityBase.afterSetUp(self)
+        self.installer.uninstallProducts([_extenderName])
+    
+    def testUninstallation(self):
+        """Make sure the schema changes go away when the extender product is removed."""
+        person = self.getPerson()
+        self.failIf(_personIsExtended(person), "The Person is still extended, even though the extender has been uninstalled.")
 
 
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
     #suite.addTest(makeSuite(TestExtensibility))  # These tests are invalid (they don't test what they're supposed to). FIXME. (See https://weblion.psu.edu/trac/weblion/ticket/418.)
-    if localAdaptersAreSupported:
-        class TestUninstallation(TestExtensibilityBase):
-            """Tests to ensure uninstalling the product reverts its schema changes"""
-                
-            def afterSetUp(self):
-                TestExtensibilityBase.afterSetUp(self)
-                self.installer.uninstallProducts([_extenderName])
-            
-            def testUninstallation(self):
-                """Make sure the schema changes go away when the extender product is removed."""
-                person = self.getPerson()
-                self.failIf(_personIsExtended(person), "The Person is still extended, even though the extender has been uninstalled.")
-        suite.addTest(makeSuite(TestUninstallation))
+    suite.addTest(makeSuite(TestUninstallation))
     return suite
