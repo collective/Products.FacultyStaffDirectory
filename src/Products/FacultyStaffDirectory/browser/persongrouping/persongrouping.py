@@ -1,20 +1,23 @@
 from AccessControl.ZopeGuards import guarded_hasattr
+from plone.app.layout.viewlets.common import ViewletBase
+from Products.FacultyStaffDirectory.interfaces import IPersonGroupingViewletManager, IPersonGroupingView, IListingFormat, ITabularListingFormat, IGalleryListingFormat
 from Products.Five import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.Five.viewlet.manager import ViewletManagerBase
 from zope.component import getMultiAdapter, ComponentLookupError, queryMultiAdapter
 from zope.interface import implements
 from zope.viewlet.interfaces import IViewlet, IViewletManager
-from Products.FacultyStaffDirectory.interfaces import IPersonGroupingViewletManager, IPersonGroupingView, IListingFormat, ITabularListingFormat, IGalleryListingFormat
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone.app.layout.viewlets.common import ViewletBase
-from Products.Five.viewlet.manager import ViewletManagerBase
 
-class PersonGroupingGalleryView(object):
+class GalleryView(object):
     implements(IGalleryListingFormat)
-    
-class PersonGroupingTabularView(object):
+
+class TabularView(object):
     implements(ITabularListingFormat)
-    
-class PersonGroupingViewletManager(ViewletManagerBase):
+
+class GroupingsOnlyView(object):
+    implements(ITabularListingFormat)
+
+class ViewletManager(ViewletManagerBase):
     implements(IPersonGroupingViewletManager)
 
     viewlets = []
@@ -80,7 +83,7 @@ class PersonGroupingViewletManager(ViewletManagerBase):
         else:
             return u'\n'.join([viewlet.render() for viewlet in self.viewlets])
 
-class PersonGroupingItemViewlet(ViewletBase):
+class ItemViewlet(ViewletBase):
 
     def parentMultiView(self):
         """Look up the person's multiview (typically a tabular or gallery view)"""

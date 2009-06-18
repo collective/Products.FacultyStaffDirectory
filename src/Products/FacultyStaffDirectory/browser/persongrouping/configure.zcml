@@ -7,7 +7,7 @@
     <browser:page
         for="...interfaces.IPersonGrouping"
         name="gallery"
-        class=".persongrouping.PersonGroupingGalleryView"
+        class=".persongrouping.GalleryView"
         template="gallery.pt"
         permission="zope.Public"
         />
@@ -23,7 +23,7 @@
     <browser:page
         for="...interfaces.IPersonGrouping"
         name="tabular"
-        class=".persongrouping.PersonGroupingTabularView"
+        class=".persongrouping.TabularView"
         template="tabular.pt"
         permission="zope.Public"
         />
@@ -55,21 +55,21 @@
         />
     
     <!-- Person Grouping -->
-    <!-- Contains PersonGroupingItemViewlets -->
+    <!-- Contains persongrouping.ItemViewlets -->
     <browser:viewletManager
         for="...interfaces.IPersonGrouping"
         name="facultystaffdirectory.persongrouping"
         provides="...interfaces.IPersonGroupingViewletManager"
         permission="zope.Public"
-        class=".persongrouping.PersonGroupingViewletManager"
+        class=".persongrouping.ViewletManager"
         />
 
-    <!-- PersonGroupingItemViewlet -->
+    <!-- persongrouping.ItemViewlet -->
     <browser:viewlet
         name="facultystaffdirectory.persongroupingitemviewlet"
         for="...interfaces.IPerson"
         manager="...interfaces.IPersonGroupingViewletManager"
-        class=".persongrouping.PersonGroupingItemViewlet"
+        class=".persongrouping.ItemViewlet"
         permission="zope.Public"
         />
    
@@ -96,23 +96,23 @@
         />
     
     <!-- Person Grouping -->
-    <!-- Contains PersonGroupingItemViewlets -->
+    <!-- Contains persongrouping.ItemViewlets -->
     <browser:viewletManager
         for="...interfaces.IPersonGrouping"
         name="facultystaffdirectory.persongroupingtabular"
         provides="...interfaces.IPersonGroupingViewletManager"
         permission="zope.Public"
         template="tabularvm.pt"
-        class=".persongrouping.PersonGroupingViewletManager"
+        class=".persongrouping.ViewletManager"
         />
 
-    <!-- PersonGroupingItemViewlet -->
+    <!-- persongrouping.ItemViewlet -->
     <!--
     <browser:viewlet
         name="facultystaffdirectory.persongroupingitemviewlettabular"
         for="...interfaces.IPerson"
         manager="...interfaces.IPersonGroupingViewletManager"
-        class=".persongrouping.PersonGroupingItemViewlet"
+        class=".persongrouping.ItemViewlet"
         permission="zope.Public"
         />
     -->
