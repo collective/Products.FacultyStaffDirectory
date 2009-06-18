@@ -20,7 +20,7 @@
                 <div tal:replace="structure provider:plone.abovecontentbody" />
         
                 <tal:block define="directory context/getDirectoryRoot;
-                            allClassifications python:[c.getObject() for c in directory.getClassifications()];
+                            allClassifications python:[] and 'SORT OF COMMENTING THIS CRASHY THING OUT UNTIL WE GET DECIDE WHAT THE NEW VIEW SHOULD LOOK LIKE [c.getObject() for c in directory.getClassifications()]';
                             classificationsInRequest request/classification|nothing;
                             classifications python:classificationsInRequest and [directory[c] for c in isinstance(classificationsInRequest, basestring) and [classificationsInRequest] or classificationsInRequest] or allClassifications;
                             contextualClassifications python:[context.contextualClassification(c) for c in classifications]">
