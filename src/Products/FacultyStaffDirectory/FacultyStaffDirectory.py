@@ -63,17 +63,6 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
 
     # Make this permission show up on every containery object in the Zope instance. This is a Good Thing, because it easy to factor up permissions. The Zope Developer's Guide says to put this here, not in the install procedure (http://www.zope.org/Documentation/Books/ZDG/current/Security.stx). This is because it isn't "sticky", in the sense of being persisted through the ZODB. Thus, it has to run every time Zope starts up. Thus, when you uninstall the product, the permission doesn't stop showing up, but when you actually remove it from the Products folder, it does.
     security.setPermissionDefault('FacultyStaffDirectory: Add or Remove People', ['Manager', 'Owner'])
-
-    # moved schema setting after finalizeATCTSchema, so the order of the fieldsets
-    # is preserved. Also after updateActions is called since it seems to overwrite the schema changes.
-    # Move the description field, but not in Plone 2.5 since it's already in the metadata tab. Although, 
-    # decription and relateditems are occasionally showing up in the "default" schemata. Move them
-    # to "metadata" just to be safe.
-    if 'categorization' in FacultyStaffDirectory_schema.getSchemataNames():
-        FacultyStaffDirectory_schema.changeSchemataForField('description', 'categorization')
-    else:
-        FacultyStaffDirectory_schema.changeSchemataForField('description', 'metadata')
-        FacultyStaffDirectory_schema.changeSchemataForField('relatedItems', 'metadata')
     
     _at_rename_after_creation = True
     schema = FacultyStaffDirectory_schema
@@ -84,30 +73,15 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         """Return the current FSD object through acquisition."""
         return self
 
-    # security.declareProtected(View, 'getClassifications')
-    # def getClassifications(self):
-    #     """Return the classifications (in brains form) within this FacultyStaffDirectory."""
-    #     portal_catalog = getToolByName(self, 'portal_catalog')
-    #     return portal_catalog(path='/'.join(self.getPhysicalPath()), portal_type='FSDClassification', depth=1, sort_on='getObjPositionInParent')
-        
     security.declareProtected(View, 'getPersonGroupings')
     def getPersonGroupings(self, type=""):
         """ return a list of the persongroupings of type='type' defined within this FSD
             if type is not given (default), provide list of all persongroupings
         """
+        # TODO: Finish supporting type= or whatever.
         portal_catalog = getToolByName(self, 'portal_catalog')
         return portal_catalog(path="/".join(self.getPhysicalPath()), portal_type="FSDPersonGrouping", sort_on='getObjPositionInParent')
         
-    # security.declareProtected(View, 'getSpecialtiesFolder')
-    # def getSpecialtiesFolder(self):
-    #     """Return a random SpecialtiesFolder contained in this FacultyStaffDirectory.
-    #        If none exists, return None."""
-    #     specialtiesFolders = self.getFolderContents({'portal_type': 'FSDSpecialtiesFolder'})
-    #     if specialtiesFolders:
-    #         return specialtiesFolders[0].getObject()
-    #     else:
-    #         return None
-
     security.declareProtected(View, 'getPeople')
     def getPeople(self, **kwargs):
         """Return a list of people contained within this FacultyStaffDirectory."""
@@ -119,14 +93,6 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
     def getSortedPeople(self):
         """Return a list of people, sorted by SortableName."""
         return self.getPeople(sort_on='sortable_title')
-
-    security.declareProtected(View, 'getDepartments')
-    def getDepartments(self):
-        """Return a list of FSDDepartments contained within this site."""
-        # TODO: rewrite for PersonGrouping homogenization
-        portal_catalog = getToolByName(self, 'portal_catalog')
-        results = portal_catalog(portal_type='FSDDepartment')
-        return [brain.getObject() for brain in results]
 
     security.declareProtected(View, 'getAddableInterfaceSubscribers')
     def getAddableInterfaceSubscribers():
