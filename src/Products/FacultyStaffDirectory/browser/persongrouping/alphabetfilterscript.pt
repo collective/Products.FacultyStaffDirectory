@@ -1,6 +1,13 @@
 <script type="text/javascript" charset="utf-8">
     jq(document).ready(function(){
+
+        function clearPopouts(){
+            jq('table.listing tbody tr.popout').remove();
+            jq('table.listing tbody tr.person.tabular td.personPopout a.active').removeClass('active');
+        }
+
         jq('.alphabetLinks ol li a').click(function(){
+            clearPopouts();
             letter = jq(this).attr('href').charAt(1).toLowerCase();
             jq('table tr:hidden').show();
             jq('.alphabetLinks ol li.activeFilter').removeClass('activeFilter');
@@ -13,6 +20,27 @@
                                          .each(function(){jq(this).hide()});
             }
             return false;
+        });
+        
+        jq('table.listing thead tr').prepend("<th \/>");
+        jq('table.listing tbody tr.person.tabular').each(function(){jq(this).prepend("<td class='personPopout'><a href='#'>&nbsp;<\/><\/td>")});
+        
+        jq('table.listing tbody tr.person.tabular td.personPopout a').click(function(){
+           if(jq(this).hasClass('active')){
+               clearPopouts();
+           }
+           else{
+               clearPopouts();
+
+               jq(this).addClass('active');
+               jq(this).parent().attr('rowspan','2');
+               tableRow = jq(this).parent().parent();
+               cols = tableRow.find('td').size()-1;
+               console.log(cols)
+               tableRow.after("<tr class='popout'><td colspan='" + cols + "'><\/td><\/tr>");
+               //jq('tr.popout td').load('http://localhost:8080/plone/directory/abc123/@@popout');
+            }
+           return false; 
         });
     });
 </script>

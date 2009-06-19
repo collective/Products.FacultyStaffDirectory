@@ -109,7 +109,6 @@ body.popup.atrefbrowser { min-width: 0; }
 
 h4.personName { margin-top: 0px !important; }
 h4.personName a { text-decoration: underline; color: &dtml-linkColor; !important;}
-/* </dtml-with> */
 
 .facultyStaffDirectory .alphabetLinks ol li { float: left; list-style: none; margin: 2px; color: #888; border: 1px solid transparent;}
 
@@ -117,3 +116,8 @@ h4.personName a { text-decoration: underline; color: &dtml-linkColor; !important
 .facultyStaffDirectory .alphabetLinks ol li.activeFilter a,
 .facultyStaffDirectory .alphabetLinks ol li a:hover { border: 1px solid #EEE; background: #DDD; margin: -1px -3px; }
 .facultyStaffDirectory .alphabetLinks ol li.all { margin-right: 1em; }
+.facultyStaffDirectory table.listing tbody tr.person.tabular .personPopout { vertical-align: top; }
+.facultyStaffDirectory table.listing tbody tr.person.tabular .personPopout a { display: block; background:url('user_suit.png') no-repeat; width:15px; }
+.facultyStaffDirectory table.listing tbody tr.popout td { border-top: 1px solid #EEE; }
+
+/* </dtml-with> */
