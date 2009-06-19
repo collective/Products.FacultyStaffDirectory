@@ -119,7 +119,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
         people = []
         pc = getToolByName(self, 'portal_catalog')
         fsd_util = getUtility(IConfiguration)
-        groupings = pc(path=self.absolute_url_path(), portal_type=list(fsd_util.enableMembraneTypes))
+        groupings = pc(path='/'.join(self.getPhysicalPath()), portal_type=list(fsd_util.enableMembraneTypes))
         for group in groupings:
             people.extend(group.getObject().getPeople())
         
