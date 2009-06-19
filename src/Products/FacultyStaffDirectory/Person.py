@@ -743,6 +743,12 @@ class Person(OrderedBaseFolder, ATCTContent):
         for relationship in source.getRelationships(relation=relationshipName, **kwargs):
             contexts.append(IContextAwareRelationship(relationship).getContext())
         return contexts
+
+    security.declareProtected(View, 'getSortableName')
+    def getSortableName(self):
+        """Return a tuple of the person's name for sorting purposes, as lowercase so that names like 'von Whatever' sort properly."""
+        return self.lastName.lower(), self.firstName.lower(), self.middleName.lower()
+
         
 # # Implementing IMultiPageSchema forces the edit template to render in the more Plone 2.5-ish manner,
 # with actual links at the top of the page instead of Javascript tabs. This allows us to direct people

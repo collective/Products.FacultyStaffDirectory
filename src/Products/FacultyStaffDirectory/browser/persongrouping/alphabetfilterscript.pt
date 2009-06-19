@@ -1,0 +1,18 @@
+<script type="text/javascript" charset="utf-8">
+    jq(document).ready(function(){
+        jq('.alphabetLinks ol li a').click(function(){
+            letter = jq(this).attr('href').charAt(1).toLowerCase();
+            jq('table tr:hidden').show();
+            jq('.alphabetLinks ol li.activeFilter').removeClass('activeFilter');
+            jq(this).parent().addClass('activeFilter');
+            if(letter){
+                jq('tbody td.personName').filter(function(){
+                                                   return jq.trim(jq(this).text()).charAt(0).toLowerCase()!=letter
+                                                   })
+                                         .parent()
+                                         .each(function(){jq(this).hide()});
+            }
+            return false;
+        });
+    });
+</script>

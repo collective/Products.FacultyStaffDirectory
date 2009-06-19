@@ -94,6 +94,16 @@
         template="personlisttabular.pt"
         permission="zope.Public"
         />
+
+    <browser:viewlet
+        name="facultystaffdirectory.persontabularlistalphabetlinks"
+        for="...interfaces.IPersonGrouping"
+        manager="...interfaces.IPersonGroupingContainerTabularViewletManager"
+        template="personlisttabularalphabetlinks.pt"
+        permission="zope.Public"
+        />
+
+
     
     <!-- Person Grouping -->
     <!-- Contains persongrouping.ItemViewlets -->
@@ -116,5 +126,15 @@
         permission="zope.Public"
         />
     -->
+    
+    
+ 
+    <browser:viewlet
+        name="glowormHtmlHeadIncludes"
+        for="...interfaces.IPersonGrouping"
+        manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+        template="alphabetfilterscript.pt"
+        permission="zope.Public"
+        />
  
 </configure>

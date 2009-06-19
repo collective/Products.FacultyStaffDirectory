@@ -22,8 +22,8 @@
 
 .facultyStaffDirectory ul.jobTitle li, .facultyStaffDirectory .websites li { margin: 0; padding: 0; }
 
-.facultyStaffDirectory .listing { margin: 1em 0 1.5em 0; border: none; font-size: 1em; }
-
+/*.facultyStaffDirectory .listing { margin: 1em 0 1.5em 0; border: none; font-size: 1em; }
+*/
 .facultyStaffDirectory .gallery .headshot { float: left; width: 120px; margin-top: 3px; padding: auto 0; }
 
 .facultyStaffDirectory .gallery .headshot img { border: 2px solid #000; padding:0; }
@@ -69,7 +69,7 @@
 .facultyStaffDirectory addr .city:after { content:", "; }
 .facultyStaffDirectory.personView addr .street { display: block; }
 
-.facultyStaffDirectory .tabularView table.listing { border-left: none; }
+/*.facultyStaffDirectory .tabularView table.listing { border-left: none; }
 
 .facultyStaffDirectory .tabularView td, .facultyStaffDirectory .tabularView th { border-left: 1px solid #8CACBB; }
 
@@ -87,7 +87,7 @@
 }
 .facultyStaffDirectory .tabularView th.classification a {color:#000; text-decoration: none; }
 .facultyStaffDirectory .tabularView tbody:first-child tr:first-child th { border-top: none; padding-top: 0; }
-.facultyStaffDirectory.classification .tabularView tbody:first-child tr:first-child th { border-top: 1px solid #8CACBB; padding-top: 0; }
+.facultyStaffDirectory.classification .tabularView tbody:first-child tr:first-child th { border-top: 1px solid #8CACBB; padding-top: 0; }*/
 .facultyStaffDirectory ol.classificationList
 {
     margin-left: 0;
@@ -98,8 +98,6 @@
 }
 
 .facultyStaffDirectory ol.classificationList li { display: inline; margin-right: 1em; }
-
-.facultyStaffDirectory .atozView .alphabetLinks ol li { display: inline; }
 
 /* Fix things so ATReferenceBrowserWidget doesn't hide the "insert" link
    outside of the viewable area of the popup window
@@ -112,3 +110,7 @@ body.popup.atrefbrowser { min-width: 0; }
 h4.personName { margin-top: 0px !important; }
 h4.personName a { text-decoration: underline; color: &dtml-linkColor; !important;}
 /* </dtml-with> */
+
+.facultyStaffDirectory .alphabetLinks ol li { float: left; list-style: none; margin: 2px; color: #888;}
+.facultyStaffDirectory .alphabetLinks ol li.activeFilter { background: #CCC; }
+.facultyStaffDirectory .alphabetLinks ol li a { display: block; padding: 0 2px; font-weight: bold; Å}

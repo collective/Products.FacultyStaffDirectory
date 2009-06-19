@@ -38,4 +38,17 @@
         <viewlet name="facultystaffdirectory.personphone" />
         <viewlet name="facultystaffdirectory.personemail" />
     </order>
+
+    <order manager="facultystaffdirectory.persongroupingcontainertabular" skinname="*">
+        <viewlet name="facultystaffdirectory.persontabularlistalphabetlinks" />
+        <viewlet name="facultystaffdirectory.persontabularlist" />
+    </order>
+
+    <order manager="plone.htmlhead" skinname="*">
+        <viewlet name="plone.resourceregistries" />
+        <viewlet name="facultystaffdirectory.alphabetfilterscript" />
+    </order>
+
+
+
 </object>
