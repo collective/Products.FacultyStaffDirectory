@@ -6,12 +6,12 @@ __docformat__ = 'plaintext'
 #
 # Test-cases for product install/uninstall/reinstall
 #
-from time import time
-from random import choice
 from Products.CMFCore.utils import getToolByName
-
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
+from Products.membrane.interfaces import IUserRelated
+from random import choice
+from time import time
 
 originalMyFolderActionId = "mystuff"
 newMyFolderActionId = "fsdmystuff"
@@ -326,12 +326,13 @@ class testReinstall(FacultyStaffDirectoryTestCase):
         
         # Person/Member abc123 should exist in acl_users as a membrane user object
         acl = getToolByName(self.portal, 'acl_users')
-        self.failUnless(acl.getUserById(id='abc123'))
+        personUserId = IUserRelated(self.person).getUserId()
+        self.failUnless(acl.getUserById(id=personUserId))
 
         # Reinstall the product
         self.reinstallProduct()
         # abc123 should still exist in acl_users
-        self.failUnless(acl.getUserById(id='abc123'))
+        self.failUnless(acl.getUserById(id=personUserId))
     
     def testRelationsExistOnReinstall(self):
         self.directory.invokeFactory(type_name='FSDPersonGrouping', id='blah', title='Blah')
@@ -363,21 +364,21 @@ class testLargeDirectory(FacultyStaffDirectoryTestCase):
         # pick a user and make sure they exist in acl_users before we start
         user_id = choice(self.person_ids)
         person = self.directory[user_id]
-        self.failUnless(acl.getUserById(id=user_id),"Problem:  person is not listed in acl_users")
-        self.failUnless(person.UID(),"Problem: expected person object %s to have a UID.  It does not" % person)
+        personUserId = IUserRelated(person).getUserId()
+        self.failUnless(acl.getUserById(id=personUserId), "Problem: person is not listed in acl_users")
+        self.failUnless(person.UID(), "Problem: expected person object %s to have a UID. It does not" % person)
         
         # how long does it take to reinstall FSD?
-        import time
-        start_time = time.time()
+        start_time = time()
         self.reinstallProduct()
-        end_time = time.time()
-        elapsed_time = end_time-start_time
+        end_time = time()
+        elapsed_time = end_time - start_time
         reinstall_report = "\nreinstalling FSD with a directory containing %s people took %s seconds\n" % (self.numPeople, elapsed_time)
         print "\n" + ("*" * 20) + reinstall_report + ("*" * 20)
         
         # test that a person in the FSD is still a user
-        self.failUnless(acl.getUserById(id=user_id),"Problem:  after reinstall person is not listed in acl_users")
-        self.failUnless(person.UID(),"Problem: after reinstall expected person object %s to have a UID.  It does not" % person)
+        self.failUnless(acl.getUserById(id=personUserId), "Problem: after reinstall person is not listed in acl_users")
+        self.failUnless(person.UID(), "Problem: after reinstall expected person object %s to have a UID.  It does not" % person)
 
 def test_suite():
     from unittest import TestSuite, makeSuite

@@ -62,7 +62,7 @@ def modifyPersonOwnership(self, event):
             # Grant 'Owner' only to any users listed as 'assistants':
             source = IRelationshipSource(self)
             for assistant in source.getTargets(relation='hasAssistant'):
-                pid = assistant.id
+                pid = IUserRelated(assistant).getUserId()
                 user = userFolder.getUserById(pid)
                 if user is None:
                     raise KeyError, "User %s cannot be found." % pid

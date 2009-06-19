@@ -9,6 +9,7 @@ from zope.schema import Choice
 from zope.schema.interfaces import ConstraintNotSatisfied
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
+from Products.membrane.interfaces import IUserRelated
 
 from Products.FacultyStaffDirectory.interfaces import IConfiguration
 from Products.FacultyStaffDirectory.config import MEMBRANE_ABLE_TYPES_CHOICES, MEMBRANE_ABLE_TYPES
@@ -74,9 +75,10 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
     def testFsdMyFolder(self):
         """fsdMyFolder method should return the appropriate url for non-fsd users or 
         for fsd users"""
-        self.login(self.person.id)
+        self.login(IUserRelated(self.person).getUserId())
         # logged in as an fsd user, the substring <directory_id/user_id> should be in the  return value for the function
-        self.failUnless(self.fsd_utility.fsdMyFolder().find(self.directory.id + '/' + self.person.id), "bad url returned for %s: %s" % (self.person.id, self.fsd_utility.fsdMyFolder()))
+        profile = self.fsd_utility.fsdMyFolder()
+        self.failUnless(profile.find(self.directory.id + '/' + self.person.id), "bad url returned for %s: %s" % (self.person.id, profile))
         
         self.login('user1')
         # set up a memberarea
@@ -94,9 +96,10 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
         This will change depending on whether the member is an fsd person or an acl_users member.
         
         """
-        self.login(self.person.id)
+        self.login(IUserRelated(self.person).getUserId())
         # logged in as an fsd user, the substring <directory_id/user_id/edit> should be in the return value for the function
-        self.failUnless(self.fsd_utility.fsdMemberProfile().find(self.directory.id + '/' + self.person.id), "bad url returned for %s: %s" % (self.person.id, self.fsd_utility.fsdMemberProfile()))
+        profile = self.fsd_utility.fsdMemberProfile()
+        self.failUnless(profile.find(self.directory.id + '/' + self.person.id), "bad url returned for %s: %s" % (self.person.id, profile))
         
         # now as an acl_users user
         self.login('user1')
@@ -108,7 +111,7 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
     def testFsdShowMyFolder(self):
         """fsdShowMyFolder tries to intelligently decide whether to show the 'my folder' action
         button or not.  It tests to see if a member is an fsd person, and acts accordingly"""
-        self.login(self.person.id)
+        self.login(IUserRelated(self.person).getUserId())
         # logged in as an fsd user, the method should always return true
         self.failUnless(self.fsd_utility.fsdShowMyFolder(), "fsdShowMyFolder returning false for fsd user")
         
@@ -131,10 +134,11 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
         mbt = getToolByName(self.person, MEMBRANE_TOOL)
         uf = getToolByName(self.person, 'acl_users')
         mtypes = mbt.listMembraneTypes()
+        personUserId = IUserRelated(self.person).getUserId()
 
         # FSDPerson should be membrane-active at setup
         self.failUnless('FSDPerson' in self.fsd_utility.enableMembraneTypes and 'FSDPerson' in mtypes, "FSDPerson should be in both lists: %s, %s" % (self.fsd_utility.enableMembraneTypes, mtypes))
-        self.failUnless(uf.getUserById('abc123'), "Person 'abc123' not registered as user via acl_users")
+        self.failUnless(uf.getUserById(personUserId), "Person 'abc123' not registered as user via acl_users")
         
         # Now, let's edit the configuration:
         self.fsd_utility.enableMembraneTypes = MEMBRANE_ABLE_TYPES - set(('FSDPerson',))
@@ -142,7 +146,7 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
         # FSDPerson should not be membrane-active
         mtypes = mbt.listMembraneTypes()
         self.failIf('FSDPerson' in self.fsd_utility.enableMembraneTypes or 'FSDPerson' in mtypes, "FSDPerson should not be in either list: %s, %s" % (self.fsd_utility.enableMembraneTypes, mtypes))
-        self.failIf(uf.getUserById('abc123'), "Person 'abc123' active as a user after membrane de-activation")
+        self.failIf(uf.getUserById(personUserId), "Person 'abc123' active as a user after membrane de-activation")
         
         # Now, put everything back!
         self.fsd_utility.enableMembraneTypes = MEMBRANE_ABLE_TYPES
@@ -150,7 +154,7 @@ class testFacultyStaffDirectoryUtility(FacultyStaffDirectoryTestCase):
         # FSDPerson should be membrane-active again
         mtypes = mbt.listMembraneTypes()
         self.failUnless('FSDPerson' in self.fsd_utility.enableMembraneTypes and 'FSDPerson' in mtypes, "FSDPerson should be in both lists: %s, %s" % (self.fsd_utility.enableMembraneTypes, mtypes))
-        self.failUnless(uf.getUserById('abc123'), "Person 'abc123' not active as a user after membrane re-activation")
+        self.failUnless(uf.getUserById(personUserId), "Person 'abc123' not active as a user after membrane re-activation")
         
         
 def test_suite():

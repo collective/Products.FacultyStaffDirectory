@@ -11,7 +11,7 @@ import os
 from zope.component import getUtility
 from zope.event import notify
 from Products.CMFCore.utils import getToolByName
-from Products.membrane.interfaces import IUserAuthentication
+from Products.membrane.interfaces import IUserAuthentication, IUserRelated
 from Products.Archetypes.event import ObjectInitializedEvent, ObjectEditedEvent
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
@@ -41,6 +41,7 @@ class testPerson(FacultyStaffDirectoryTestCase):
         self.loginAsPortalOwner()
         self.directory = self.getDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
+        self.personUserId = IUserRelated(self.person).getUserId()
     
     def simulateATGUIInteraction(self, person=None, task='create'):
         if not person:
@@ -74,7 +75,7 @@ class testPerson(FacultyStaffDirectoryTestCase):
         self.simulateATGUIInteraction(person=person, task=task)
         owners = person.users_with_local_role('Owner')
         
-        return 'def456' in owners
+        return IUserRelated(newperson).getUserId() in owners
     
 
 class testWithoutSpecialties(testPerson):
@@ -258,22 +259,14 @@ class testWithoutSpecialties(testPerson):
     ## More tests for membrane stuff
     def testPersonIsUser(self):
         """Make sure a person can be found by portal_membership."""
-        member = self.portal.portal_membership.getMemberById('abc123')
-        self.failUnless(member,"%s" % member)
+        member = self.portal.portal_membership.getMemberById(self.personUserId)
+        self.failUnless(member, "%s" % member)
     
     def testIPerson(self):
         """Make sure that the id and fullname returned are correct."""
         # The id is obtained from the person object directly, uniqueness is enforced
         id = self.person.id
         self.failUnlessEqual(id, 'abc123', "Person object returned incorrect id.")
-    
-    def testIUserRelated(self):
-        """Test the functionality of the IUserRelated interface."""
-        from Products.membrane.interfaces import IUserRelated
-        # adapt the person object
-        u = IUserRelated(self.person)
-        uid = u.getUserId()
-        self.failUnlessEqual(uid, 'abc123', "incorrect value for getUserId")
     
     def testIUserAuthentication(self):
         """Test the functionality of the IUserAuthentication interface."""
@@ -299,14 +292,14 @@ class testWithoutSpecialties(testPerson):
         """Test that a Person can log in."""
         mt = self.portal.portal_membership
         self.logout()
-        self.login('abc123')
+        self.login(self.personUserId)
         member = mt.getAuthenticatedMember()
-        self.failUnlessEqual(member.id, 'abc123', msg="incorrect user logged in: %s" % member)
+        self.failUnlessEqual(member.id, self.personUserId, msg="incorrect user logged in: %s" % member)
     
     def testOwnershipAfterCreate(self):
         """Test that a user owns his/her Person object when created."""
         self.simulateATGUIInteraction(task='create')
-        self.failUnlessEqual(self.person.getOwnerTuple()[1], 'abc123')
+        self.failUnlessEqual(self.person.getOwnerTuple()[1], self.personUserId)
     
     def testAssistantOwnershipAfterCreate(self):
         """Test that named assistants get ownership of a person object when it is created"""
@@ -315,7 +308,7 @@ class testWithoutSpecialties(testPerson):
     def testOwnershipAfterEdit(self):
         """Test that a user owns his/her Person object after editing."""
         self.simulateATGUIInteraction(task='edit')
-        self.failUnlessEqual(self.person.getOwnerTuple()[1], 'abc123')
+        self.failUnlessEqual(self.person.getOwnerTuple()[1], self.personUserId)
     
     def testAssistantOwnershipAfterEdit(self):
         """Test that named assistants get ownership of a person object when it is edited"""
@@ -325,7 +318,7 @@ class testWithoutSpecialties(testPerson):
         """Test for regression on https://weblion.psu.edu/trac/weblion/ticket/711"""
         self.simulateATGUIInteraction(task='create')
         self.simulateATGUIInteraction(task='edit')
-        perms = list(self.person.get_local_roles_for_userid('abc123'))
+        perms = list(self.person.get_local_roles_for_userid(self.personUserId))
         self.failUnlessEqual(perms.count('User Preferences Editor'), 1, "the role 'User Preferences Editor' is listed more than once after multiple GUI interactions")
         
     def testAssistantDoesNotGetUserPrefRole(self):
@@ -378,7 +371,7 @@ class testWithoutSpecialties(testPerson):
     
     def testIdWriteAccessForOwner(self):
         self.logout()
-        self.login(self.person.id)
+        self.login(self.personUserId)  # Though the arg is called "name", it expects an ID.
         self.failIf(self._testIdWriteAccess(), 'Owner has write access to ID property of FSDPerson object')
     
     def testIdWriteAccessForAnonymous(self):
@@ -387,7 +380,7 @@ class testWithoutSpecialties(testPerson):
     
     def testIMembraneUserManagement(self):
         """Test the functionality of the IMembraneUserManagement interface."""
-        from Products.membrane.interfaces import IMembraneUserManagement, IUserAuthentication
+        from Products.membrane.interfaces import IMembraneUserManagement
         
         user = IMembraneUserManagement(self.person);
         auth = IUserAuthentication(self.person);
@@ -454,7 +447,7 @@ class testWithoutSpecialties(testPerson):
         searchParams = {'fullname':'Test'}
         results = pas.searchUsers(**searchParams)
         self.failUnless(len(results) == 2, "Search did not return the right number of members. Expected 2, got %s." % len(results))
-        self.failUnless('cvf092' in [a['id'] for a in results], "Expected member cvf092 to be in the search results.")
+        self.failUnless('cvf092' in [a['login'] for a in results], "Expected member cvf092 to be in the search results.")
 
     # Err... can't actually test for this since it's being handled in pre_edit_setup. Any ideas?
     # def testDefaultEditor(self):

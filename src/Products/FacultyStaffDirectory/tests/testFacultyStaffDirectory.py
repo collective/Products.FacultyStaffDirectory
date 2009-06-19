@@ -9,6 +9,7 @@ __docformat__ = 'plaintext'
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
+from Products.membrane.interfaces import IUserRelated
 
 class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
     """Test-cases for class(es) ."""
@@ -99,9 +100,8 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         self.person1 = self.getPerson(id='abc123', firstName="Test", lastName="Person")
         self.person2 = self.getPerson(id='def456', firstName="Testy", lastName="Persons")
         self.person3 = self.getPerson(id='ghi789', firstName="Tester", lastName="Personage")
-        members = list(g.getGroupMembers())
-        members.sort()
-        self.failUnless(members == ['abc123','def456','ghi789'],"incorrect member list: %s" % members)
+        members = set(g.getGroupMembers())
+        self.failUnlessEqual(members, set([IUserRelated(p).getUserId() for p in [self.person1, self.person2, self.person3]]))
         
     def testValidateId(self):
         """Test that the validate_id validator works properly"""
@@ -127,20 +127,21 @@ class testFacultyStaffDirectory(FacultyStaffDirectoryTestCase):
         #set up content
         self.directory = self.getDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
+        personUserId = IUserRelated(self.person).getUserId()
         from Products.CMFCore.utils import getToolByName
         wf = getToolByName(self.directory,'portal_workflow')
         
-        user = self.portal.portal_membership.getMemberById('abc123')
+        user = self.portal.portal_membership.getMemberById(personUserId)
         # no roles on directory yet, should not find one in the global roles for user
         self.failIf('Reviewer' in user.getRolesInContext(self.portal),"roles from directory available on person, but directory roles unset %s" % user.getRolesInContext(self.portal))
         
         self.directory.setRoles(('Reviewer',))
-        user = self.portal.portal_membership.getMemberById('abc123')
+        user = self.portal.portal_membership.getMemberById(personUserId)
         # roles set,but directory is unpublished, should not find roles in global roles for user
         self.failIf('Reviewer' in user.getRolesInContext(self.portal),"roles from directory available on person, but directory unpublished %s" % user.getRolesInContext(self.portal))
 
         wf.doActionFor(self.directory,'publish')
-        user = self.portal.portal_membership.getMemberById('abc123')
+        user = self.portal.portal_membership.getMemberById(personUserId)
         self.failUnless('Reviewer' in user.getRolesInContext(self.portal),"roles from directory unavailable on person, but directory is published %s %s" % (user.getRolesInContext(self.portal),wf.getInfoFor(self.directory,'review_state')))
 
     # end tests for membrane integration

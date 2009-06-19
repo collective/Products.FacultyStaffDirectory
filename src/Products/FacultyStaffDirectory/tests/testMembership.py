@@ -13,7 +13,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.base import FacultyStaffDirectoryTestCase
 
-from Products.membrane.interfaces import IGroup
+from Products.membrane.interfaces import IGroup, IUserRelated
 
 class testMembership(FacultyStaffDirectoryTestCase):
     """Tests for membership functionality in FSD classes"""
@@ -87,30 +87,27 @@ class testMembership(FacultyStaffDirectoryTestCase):
         """Test the getGroupMembers method of the IGroup adapter"""
         # add people to outer groups
         for obj in [self.personGrouping]:
-            obj.setPeople([self.person.UID(), self.person2.UID()])
+            obj.setPeople([IUserRelated(self.person).getUserId(), IUserRelated(self.person2).getUserId()])
         # add people to inner groups
         for obj in [self.nested_grouping]:
-            obj.setPeople([self.person3.UID()])
+            obj.setPeople([IUserRelated(self.person3).getUserId()])
         
         # check member list of outer objects
         for obj in [self.personGrouping]:
             g = IGroup(obj)
-            mlist = list(g.getGroupMembers())
-            mlist.sort()
-            self.failUnlessEqual(mlist, ['abc123', 'def456', 'ghi789'], 'Incorrect member list for top-level %s: %s' % (obj.portal_type, mlist))
+            mlist = set(g.getGroupMembers())
+            self.failUnlessEqual(mlist, set([IUserRelated(p).getUserId() for p in [self.person, self.person2, self.person3]]))  # 'Incorrect member list for top-level %s: %s' % (obj.portal_type, mlist))
         
         # check member list of inner objects
         for obj in [self.nested_grouping]:
             g = IGroup(obj)
-            mlist = list(g.getGroupMembers())
-            mlist.sort()
-            self.failUnlessEqual(mlist, ['ghi789',], 'Incorrect member list for top-level %s: %s' % (obj.portal_type, mlist))
+            mlist = set(g.getGroupMembers())
+            self.failUnlessEqual(mlist, set([IUserRelated(self.person3).getUserId()]), 'Incorrect member list for top-level %s: %s' % (obj.portal_type, mlist))
             
         # check group membership for FSD itself
         g = IGroup(self.directory)
-        mlist = list(g.getGroupMembers())
-        mlist.sort()
-        self.failUnlessEqual(mlist, ['abc123', 'def456', 'ghi789'], 'Incorrect member list for %s: %s' % (self.directory.portal_type, mlist))
+        mlist = set(g.getGroupMembers())
+        self.failUnlessEqual(mlist, set([IUserRelated(p).getUserId() for p in [self.person, self.person2, self.person3]]), 'Incorrect member list for %s: %s' % (self.directory.portal_type, mlist))
 
 def test_suite():
     from unittest import TestSuite, makeSuite

@@ -1,33 +1,24 @@
 from Acquisition import aq_inner, aq_parent
-from zope.interface import implements
-from zope.component import adapts, getUtility
-from sha import sha
-
-from zope.app.annotation.interfaces import IAnnotations
-
-from Products.membrane.interfaces import IUserRelated
-from Products.membrane.interfaces import IUserAuthentication
-from Products.membrane.interfaces import IUserRoles
-from Products.membrane.interfaces import IMembraneUserManagement
-from Products.FacultyStaffDirectory.interfaces import IPerson
-from Products.FacultyStaffDirectory.interfaces import IConfiguration
 from Products.FacultyStaffDirectory.config import PASSWORD_KEY
+from Products.FacultyStaffDirectory.interfaces import IPerson, IConfiguration
+from Products.membrane.factories.useridprovider import UserIdProvider
+from Products.membrane.interfaces import IUserAuthentication, IUserRoles, IMembraneUserManagement
+from sha import sha
+from zope.app.annotation.interfaces import IAnnotations
+from zope.component import adapts, getUtility
+from zope.interface import implements
 
-class UserRelated(object):
+class UserRelated(UserIdProvider):
     """Provide a user id for persons.
     
     The user id will simply be the id of the member object. This overrides the
     use of UIDs.
     
     """
-    implements(IUserRelated)
     adapts(IPerson)
 
     def __init__(self, context):
         self.context = context
-
-    def getUserId(self):
-        return self.context.getId()    
 
 class UserAuthentication(object):
     """Provide authentication against persons.
