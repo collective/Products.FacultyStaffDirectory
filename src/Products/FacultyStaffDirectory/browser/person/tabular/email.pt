@@ -5,6 +5,6 @@
           tal:attributes="id string:${kview/getUniqueIdentifier}-email;
                           class python:kview.getKssClasses('email', 'widgets/string', 'string-field-view')">
          <span metal:define-slot="inside"
-              tal:replace="psn/getEmail">phone</span>
+              tal:replace="psn/getEmail">email</span>
      </div>
 </td>
