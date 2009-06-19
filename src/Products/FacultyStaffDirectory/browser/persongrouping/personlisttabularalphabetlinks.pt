@@ -1,12 +1,12 @@
 <div class="alphabetLinks">
     <ol tal:define="allLetters string:ABCDEFGHIJKLMNOPQRSTUVWXYZ;
                      usedLetters python:[person.getLastName().upper()[0] for person in view.context.getSortedPeople()]">
+        <li class="activeFilter"><a href="#">All</a></li>
         <li tal:repeat="letter allLetters">
             <a tal:content="letter"
                tal:omit-tag="python:letter not in usedLetters"
                tal:attributes="href python:'#%s' % letter;" />
         </li>
-        <li class="activeFilter"><a href="#">All</a></li>
     </ol>                                 
 </div>
 <div class="visualClear"></div>
