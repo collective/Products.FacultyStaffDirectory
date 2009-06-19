@@ -29,9 +29,9 @@ class PersonView(BrowserView):
     def officeAddress(self):
         return self.context.getOfficeAddress().replace('\n', '<br />')
         
-    @property
-    def email(self):
-        return self.context.spamProtectFSD(self.context.getEmail())
+    
+class PopoutView(PersonView):
+    pass
     
 class PersonMultiView(PersonView):
     """A view of a single person in the context of a persongrouping"""
@@ -83,3 +83,8 @@ class PersonViewletManager(OrderedViewletManager):
             } for name, v in viewlets]
 
         return columns
+
+from plone.app.layout.viewlets.common import ViewletBase        
+class EmailViewlet(ViewletBase):
+    def bling(self):
+        return "whee!"

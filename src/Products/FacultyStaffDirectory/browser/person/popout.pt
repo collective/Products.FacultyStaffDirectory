@@ -1,2 +1,2 @@
 Blah
-<span tal:replace="structure provider:facultystaffdirectory.persongallery" />
+<div tal:content="view/blah" />

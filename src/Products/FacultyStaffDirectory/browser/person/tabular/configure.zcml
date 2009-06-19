@@ -38,6 +38,7 @@
             name="facultystaffdirectory.personemail"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.ITabularListingFormat"
+            class="..viewlets.EmailViewlet"
             template="email.pt"
             permission="zope.Public"
             table_heading="Email"

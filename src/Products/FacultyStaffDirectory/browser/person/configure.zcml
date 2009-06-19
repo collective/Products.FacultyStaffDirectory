@@ -16,6 +16,16 @@
          permission="zope.Public"
          />
 
+     <browser:page
+         for="...interfaces.IPerson"
+         name="popout"
+         class=".person.PopoutView"
+         template="popout.pt"
+         permission="zope.Public"
+         />
+
+
+
     <!-- Person Container (viewletmanager) -->
     <browser:viewletManager
         for="...interfaces.IPerson"
@@ -102,6 +112,7 @@
              for="...interfaces.IPerson"
              name="facultystaffdirectory.personemail"
              manager="...interfaces.IPersonViewletManager"
+             class=".viewlets.EmailViewlet"
              template="email.pt"
              permission="zope.Public"
              />

@@ -53,6 +53,7 @@
             name="facultystaffdirectory.personemail"
             manager="....interfaces.IPersonViewletManager"
             view="....interfaces.IGalleryListingFormat"
+            class="..viewlets.EmailViewlet"
             template="email.pt"
             permission="zope.Public"
             />
