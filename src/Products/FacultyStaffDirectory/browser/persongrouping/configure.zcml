@@ -127,13 +127,11 @@
         />
     -->
     
-    
- 
     <browser:viewlet
-        name="glowormHtmlHeadIncludes"
+        name="tabularViewHeadIncludes"
         for="...interfaces.IPersonGrouping"
         manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
-        template="alphabetfilterscript.pt"
+        template="tabularviewscripts.pt"
         permission="zope.Public"
         />
  
