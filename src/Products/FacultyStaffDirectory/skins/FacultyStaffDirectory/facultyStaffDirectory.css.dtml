@@ -111,6 +111,9 @@ h4.personName { margin-top: 0px !important; }
 h4.personName a { text-decoration: underline; color: &dtml-linkColor; !important;}
 /* </dtml-with> */
 
-.facultyStaffDirectory .alphabetLinks ol li { float: left; list-style: none; margin: 2px; color: #888;}
-.facultyStaffDirectory .alphabetLinks ol li.activeFilter { background: #CCC; }
-.facultyStaffDirectory .alphabetLinks ol li a { display: block; padding: 0 2px; font-weight: bold; Å}
+.facultyStaffDirectory .alphabetLinks ol li { float: left; list-style: none; margin: 2px; color: #888; border: 1px solid transparent;}
+
+.facultyStaffDirectory .alphabetLinks ol li a { display: block; padding: 0 4px; margin: 0 -2px; font-weight: bold; }
+.facultyStaffDirectory .alphabetLinks ol li.activeFilter a,
+.facultyStaffDirectory .alphabetLinks ol li a:hover { border: 1px solid #EEE; background: #DDD; margin: -1px -3px; }
+.facultyStaffDirectory .alphabetLinks ol li.all { margin-right: 1em; }
