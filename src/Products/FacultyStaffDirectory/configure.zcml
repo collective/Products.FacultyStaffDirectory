@@ -10,6 +10,7 @@
     <include package=".events" />
     <include package=".membership" />
     <include package=".browser" />
+    <include package=".portlets" />
     <include file="profiles.zcml" />
     <include package="archetypes.schemaextender" />
     <include package="plone.app.relations" />

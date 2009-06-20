@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<portlets>
+  
+  <!-- register new portlets created in this package -->
+  <portlet
+      addview="facultystaffdirectory.SearchPortlet"
+      title="Directory Search"
+      description="This portlet allows search withing the Faculty/Staff/Directory"
+      />
+    
+  <!-- Assignments for portlets -->
+  <assignment
+      manager="plone.leftcolumn"
+      category="content_type"
+      key="FSDFacultyStaffDirectory"
+      type="facultystaffdirectory.SearchPortlet"
+      name="Directory Search"
+      insert-before="*"
+      />
+  <assignment
+      manager="plone.leftcolumn"
+      category="content_type"
+      key="FSDPersonGrouping"
+      type="facultystaffdirectory.SearchPortlet"
+      name="Directory Search"
+      insert-before="*"
+      />
+</portlets>

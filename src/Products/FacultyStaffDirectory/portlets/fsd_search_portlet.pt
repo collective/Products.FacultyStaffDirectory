@@ -1,0 +1,72 @@
+<dl class="portlet portletSearch"
+    i18n:domain="plone">
+
+  <dt class="portletHeader">
+      <span class="portletTopLeft"></span>
+      Directory Search
+      <span class="portletTopRight"></span>
+  </dt>
+
+    <dd class="portletItem">
+      <form name="searchform" action="search"
+            tal:define="return view/_data"
+            tal:attributes="action view/search_action">
+          <input class="searchField inputLabel"
+              name="SearchableText"
+              type="text"
+              size="15"
+              title="Search Site"
+              i18n:attributes="title title_search_title;"
+              tal:attributes="value request/SearchableText|nothing;
+                              class string:inputLabel searchField portlet-search-gadget-nols'"
+              />
+          <input class="searchButton"
+              type="submit"
+              value="Search"
+              i18n:attributes="value label_search;"/>
+
+          <div class="searchGrouping"
+               tal:define="grouping_title view/current_location_title">
+              <input id="searchbox_currentgrouping_only" 
+                     class="noborder"
+                     type="checkbox" 
+                     name="here_only" 
+                     tal:attributes="value string:1"
+                     />
+              <label for="searchbox_currentfolder_only" 
+                     i18n:translate="label_searchbox_currentfolder_only"
+                     style="cursor: pointer">
+                  search only in <span tal:replace="grouping_title"/>
+              </label>
+          </div>
+          
+          <tal:results tal:define="error return/error;
+                                   results return/results">
+            <div class="FSDSearchResults" 
+                 tal:condition="results">
+              <h4>Results:</h4>
+              <ul class="FSDSearchResultSet">
+                <tal:result tal:repeat="result results">
+                 <a href="#" title="view this person"
+                    tal:omit-tag="not: result/url"
+                    tal:attributes="href result/url">
+                  <li tal:define="title result/title"
+                      tal:content="title" />
+                 </a>
+                </tal:result>
+              </ul>
+            </div>
+            <div class="FSDSearchError"
+                 tal:condition="error">
+              <p tal:content="error">[Error Report]</p>
+            </div>
+          </tal:results>
+      </form>
+      <div class="visualClear"><!-- --></div>
+    </dd>
+    
+    <dd class="portletFooter">
+      <span class="portletBottomLeft"></span>
+      <span class="portletBottomRight"></span>
+    </dd>
+</dl>
