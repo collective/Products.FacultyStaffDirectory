@@ -62,7 +62,7 @@ msgstr "Un par ligne"
 #. Default: "Format email addresses like "someone AT here DOT com" rather than using Plone's default spam armoring."
 #: Content Type: FSDFacultyStaffDirectoryTool, Field: obfuscateEmailAddresses
 msgid "FacultyStaffDirectory_description_obfuscateEmailAddressesDescription"
-msgstr "E-mail formatée comme "quelqu'un AT domaine DOT com" pour réduire les risques de spam."
+msgstr "E-mail formatée comme 'quelqu'un AT domaine DOT com' pour réduire les risques de spam."
 
 #. Default: "Password for this person (Leave blank if you don't want to change the password.)"
 #: Content Type: FSDPerson, Field: password
