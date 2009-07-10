@@ -2,8 +2,11 @@ Version History
 
   ' ' 2.1.3 -- ' '
         
-        * Fixed syntax error in the French translation. Included .mo version of
-          it. [ewr119 (Erik Rose)]
+        * Fixed syntax error in the French translation.
+          [ewr119 (Erik Rose)]
+        
+        * Included compiled (.mo) versions of all translations.
+          [ewr119 (Erik Rose)]
 
   ' ' 2.1.2 -- ' '
         
