@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <object name="Classification" meta_type="Factory-based Type Information with dynamic views"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Classification</property>
- <property name="description" i18n:translate="">
-    A grouping of associated people eg "Faculty" or "Staff".
-</property>
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="FacultyStaffDirectory">
+ <property name="title" i18n:translate="">Classification</property>
+ <property name="description" 
+    i18n:translate="">A grouping of associated people eg "Faculty" or "Staff".</property>
  <property name="content_icon">folder_icon.gif</property>
  <property name="content_meta_type">FSDClassification</property>
  <property name="product">FacultyStaffDirectory</property>

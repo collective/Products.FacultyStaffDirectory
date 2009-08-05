@@ -421,3 +421,118 @@ msgstr ""
 msgid "go_to_parent_url"
 msgstr ""
 
+#. Default: "A course taught by this person."
+#: ./profiles/default/types/FSDCourse.xml
+msgid "A course taught by this person."
+msgstr ""
+
+#. Default: "A grouping of associated people eg \"Faculty\" or \"Staff\"."
+#: ./profiles/default/types/FSDClassification.xml
+msgid "A grouping of associated people eg "Faculty" or "Staff"."
+msgstr ""
+
+#. Default: "Classification"
+#: ./profiles/default/types/FSDClassification.xml
+msgid "Classification"
+msgstr ""
+
+#. Default: "Commitees Folder"
+#: ./profiles/default/types/FSDCommitteesFolder.xml
+msgid "Commitees Folder"
+msgstr ""
+
+#. Default: "Committee"
+#: ./profiles/default/types/FSDCommittee.xml
+msgid "Committee"
+msgstr ""
+
+#. Default: "Committee Membership Information"
+#: ./profiles/default/types/FSDCommitteeMembership.xml
+msgid "Committee Membership Information"
+msgstr ""
+
+#. Default: "Contains information pertaining to a person's membership in a committee."
+#: ./profiles/default/types/FSDCommitteeMembership.xml
+msgid "Contains information pertaining to a person's membership in a committee."
+msgstr ""
+
+#. Default: "Course"
+#: ./profiles/default/types/FSDCourse.xml
+msgid "Course"
+msgstr ""
+
+#. Default: "Department"
+#: ./profiles/default/types/FSDDepartment.xml
+msgid "Department"
+msgstr ""
+
+#. Default: "Faculty/Staff Directory"
+#: ./profiles/default/types/FSDFacultyStaffDirectory.xml
+msgid "Faculty/Staff Directory"
+msgstr ""
+
+#. Default: "Holds and displays committees."
+#: ./profiles/default/types/FSDCommitteesFolder.xml
+msgid "Holds and displays committees."
+msgstr ""
+
+#. Default: "Holds and displays specialties."
+#: ./profiles/default/types/FSDSpecialtiesFolder.xml
+msgid "Holds and displays specialties."
+msgstr ""
+
+#. Default: "Holds information about a single person"
+#: ./profiles/default/types/FSDPerson.xml
+msgid "Holds information about a single person"
+msgstr ""
+
+#. Default: "Information pertaining to a person's association with a specialty."
+#: ./profiles/default/types/FSDSpecialtyInformation.xml
+msgid "Information pertaining to a person's association with a specialty."
+msgstr ""
+
+#. Default: "Person"
+#: ./profiles/default/types/FSDPerson.xml
+msgid "Person"
+msgstr ""
+
+#. Default: "Person Grouping"
+#: ./profiles/default/types/FSDPersonGrouping.xml
+msgid "Person Grouping"
+msgstr ""
+
+#. Default: "Specialties Folder"
+#: ./profiles/default/types/FSDSpecialtiesFolder.xml
+msgid "Specialties Folder"
+msgstr ""
+
+#. Default: "Specialty"
+#: ./profiles/default/types/FSDSpecialty.xml
+msgid "Specialty"
+msgstr ""
+
+#. Default: "Specialty Information"
+#: ./profiles/default/types/FSDSpecialtyInformation.xml
+msgid "Specialty Information"
+msgstr ""
+
+#. Default: "A simple page describing a committee or working group with the associated committee members."
+#: ./profiles/default/types/FSDCommittee.xml
+msgid "description_edit_committee"
+msgstr ""
+
+#. Default: "A directory of faculty and staff members"
+#: ./profiles/default/types/FSDFacultyStaffDirectory.xml
+msgid "description_edit_facultystaffdirectory"
+msgstr ""
+
+#. Default: "An academic department."
+#: ./profiles/default/types/FSDDepartment.xml
+#: ./profiles/default/types/FSDPersonGrouping.xml
+msgid "description_edit_persongrouping"
+msgstr ""
+
+#. Default: "An area of academic study."
+#: ./profiles/default/types/FSDSpecialty.xml
+msgid "description_edit_specialty"
+msgstr ""

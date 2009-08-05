@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <object name="FacultyStaffDirectory" meta_type="Factory-based Type Information with dynamic views"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Faculty/Staff Directory</property>
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="FacultyStaffDirectory">
+ <property name="title" i18n:translate="">Faculty/Staff Directory</property>
  <property name="description" i18n:translate="description_edit_facultystaffdirectory">
     A directory of faculty and staff members
  </property>

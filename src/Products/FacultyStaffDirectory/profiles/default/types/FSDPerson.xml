@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <object name="Person" meta_type="Factory-based Type Information"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Person</property>
- <property name="description">Holds information about a single person</property>
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="FacultyStaffDirectory">
+ <property name="title" i18n:translate="">Person</property>
+ <property name="description" i18n:translate="">Holds information about a single person</property>
  <property name="content_icon">user_suit.png</property>
  <property name="content_meta_type">FSDPerson</property>
  <property name="product">FacultyStaffDirectory</property>

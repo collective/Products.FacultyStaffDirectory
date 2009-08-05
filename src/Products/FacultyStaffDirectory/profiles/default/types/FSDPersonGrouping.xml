@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <object name="PersonGrouping" meta_type="Factory-based Type Information"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Person Grouping</property>
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="FacultyStaffDirectory">
+ <property name="title" i18n:translate="">Person Grouping</property>
  <property name="description" i18n:translate="description_edit_persongrouping">
     A FacultyStaffDirectory base class for groups of people.
 </property>
