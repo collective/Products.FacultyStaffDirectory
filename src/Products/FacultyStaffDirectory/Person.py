@@ -609,7 +609,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         """ Returns a list of the titles of the classifications attached to this person.
             Mainly used for pretty-looking metadata in SmartFolder tables.
         """
-        cList = [(getObjPositionInParent(c)+1, c.Title()) for c in self.getClassifications()]
+        cList = [(getObjPositionInParent(c)() + 1, c.Title()) for c in self.getClassifications()]
         cList.sort()
         return [c[-1] for c in cList]
     

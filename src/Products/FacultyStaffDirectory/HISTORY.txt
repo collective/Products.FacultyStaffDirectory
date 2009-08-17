@@ -8,6 +8,10 @@ Version History
         * Included compiled (.mo) versions of all translations.
           [ewr119 (Erik Rose)]
 
+        * Fix the getClassificationNames index method so that it doesn't
+          throw an error trying to concatenate a function and an int
+          [cqp5087 (claytron)]
+
   ' ' 2.1.2 -- ' '
         
         * Corrected a problem with the reference browser widget popup not
