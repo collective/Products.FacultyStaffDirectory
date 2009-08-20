@@ -57,7 +57,7 @@
 
 
                 <div tal:condition="context/getWebsites" class="websites">
-                    <h3><span i18n:translate="FacultyStaffDirectory_label_websites">Websites</span>:</h3>
+                    <h3 i18n:translate="FacultyStaffDirectory_label_websites">Websites:</h3>
                     <ul>
                         <li tal:repeat="website context/getWebsites">
                             <a class='url' href="" 
@@ -71,7 +71,7 @@
             <div class="visualClear"><!-- --></div>
             
             <div tal:condition="context/getEducation" class="education">
-                <h3><span i18n:translate="FacultyStaffDirectory_label_education">Education</span>:</h3>
+                <h3 i18n:translate="FacultyStaffDirectory_label_education">Education:</h3>
                 <ol>
                     <li tal:repeat="degree context/getEducation">
                         <span tal:content="degree" />
@@ -80,12 +80,12 @@
             </div>
 
             <div tal:condition="here/getBiography" class="biography">
-                <h3><span i18n:translate="FacultyStaffDirectory_label_biography">Biography</span>:</h3>
+                <h3 i18n:translate="FacultyStaffDirectory_label_biography">Biography:</h3>
                 <span tal:content="structure context/getBiography" />
             </div>
 
             <div class="specialties" tal:define="specialtyTuples context/getSpecialties" tal:condition="specialtyTuples">
-                <h3><span i18n:translate="FacultyStaffDirectory_label_researchInterests">Research Interests</span>:</h3>
+                <h3 i18n:translate="FacultyStaffDirectory_label_researchInterests">Research Interests:</h3>
                 <dl>
                     <tal:block tal:repeat="eachSpecialtyTuple specialtyTuples">
                         <tal:block tal:define="specialtyBrain python:eachSpecialtyTuple[0];
@@ -113,7 +113,7 @@
             </div>
 
             <div class="departments" tal:define="departmentsList context/getDepartments" tal:condition="departmentsList">
-                <h3><span i18n:translate="FacultyStaffDirectory_label_departments">Departments</span>:</h3>
+                <h3 i18n:translate="FacultyStaffDirectory_label_departments">Departments:</h3>
                 <dl>
                     <tal:block tal:repeat="eachDepartment departmentsList">
                         <dt>
@@ -140,7 +140,7 @@
             <div class="courselisting" 
                  tal:define="courses context/getCourses"
                  tal:condition="courses">
-                <h3><span i18n:translate="FacultyStaffDirectory_label_courses">Courses</span>:</h3>
+                <h3 i18n:translate="FacultyStaffDirectory_label_courses">Courses:</h3>
                 <dl tal:repeat="course courses">
                     <dt>
                         <a tal:attributes="href course/getRemoteUrl"
@@ -157,7 +157,7 @@
                  tal:define="assistants context/getAssistants;
                              mtool python:context.portal_membership"
                  tal:condition="python:assistants and mtool.checkPermission('Add portal content', here)">
-              <h3><span i18n:translate="FacultyStaffDirectory_label_assistants">Assistants</span>:</h3> 
+              <h3 i18n:translate="FacultyStaffDirectory_label_assistants">Assistants:</h3> 
               <ul tal:repeat="assistant assistants">
                 <li tal:define="url assistant/absolute_url;
                                 name assistant/Title">
