@@ -51,6 +51,7 @@ def fixMemberAction(portal):
     for action in currentActions:
         if action.id == "MemberPrefs":  # MemberPrefs is the stock action ID.
             action.visible = False
+            break
 
 def configureVersioning(portal):
     """

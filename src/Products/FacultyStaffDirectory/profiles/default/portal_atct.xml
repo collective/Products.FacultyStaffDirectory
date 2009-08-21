@@ -16,7 +16,7 @@
   </index>
   <index name="getRawCommittees"
      description="A person's listed committees"
-     enabled="True" friendlyName="Commitee" 
+     enabled="True" friendlyName="Committee" 
      i18n:attributes="description; friendlyName">
    <criteria>ATReferenceCriterion</criteria>
   </index>
