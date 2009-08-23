@@ -1,4 +1,4 @@
-FacultyStaffDirectoryExtender: A Component of "WebLion CMS":http://weblion.psu.edu/
+MobilePhoneExtender
 
 Versions
 
@@ -8,27 +8,30 @@ Versions
 
 Dependencies
 
-  * "FacultyStaffDirectory":http://plone.org/products/faculty-staff-directory/ 2.0
+  * "FacultyStaffDirectory":http://plone.org/products/faculty-staff-directory/ 2.x
+  
+  * archetypes.schemaextender 1.x
 
 Description
   
   You can add fields to the FacultyStaffDirectory content types by writing
-  "extender" products. FacultyStaffDirectoryExtender is an example one which
+  "extender" products. MobilePhoneExtender is an example one which
   adds a Mobile Phone field to Person objects (on the Contact Information tab).
   
   You can extrapolate from this example to make your own extenders:
   
-  1. Make a copy of FacultyStaffDirectoryExtender, and rename it something
-     descriptive. For example, if you're writing a product to add a Favorite
-     Color field to the Person type, you might call it
-     FacultyStaffDirectoryFavoriteColor. (This way, your extender will appear
-     near FacultyStaffDirectory in alphabetical listings, making people more
-     likely to find it.)
+  1. Make a copy of MobilePhoneExtender, and rename the folders to reflect the
+     product name of your choice. For example, if you're writing a product to
+     add a Favorite Color field to the Person type, you might call it
+     FacultyStaffDirectoryFavoriteColor, call the egg
+     Products.FacultyStaffDirectoryFavoriteColor and the folder inside the
+     Products folder FacultyStaffDirectoryFavoriteColor. This naming convention
+     makes your extender appear near FacultyStaffDirectory in alphabetical
+     listings, making people more likely to find it.
   
-  2. Replace all occurrences of "FacultyStaffDirectoryExtender" in your new
+  2. Replace all occurrences of "MobilePhoneExtender" in your new
      product with "FacultyStaffDirectoryFavoriteColor" (or whatever you called
-     it). The files you'll need to search are __init__.py, Install.py,
-     person.py, and README.txt (which you should, of course, largely rewrite).
+     it).
   
   3. Customize the '_fields' list in the person.py file to add Favorite Color
      instead of Mobile Phone. Note that any fields you add must be of a type
@@ -56,20 +59,21 @@ Description
       override the entire view template for whatever content type (or types) you
       extend. For example, if you add a field to Person, you'll need to include
       a person_view.pt with your product and do the usual skin registration
-      dance upon product installation. FacultyStaffDirectoryExtender doesn't
+      dance upon product installation. MobilePhoneExtender doesn't
       demonstrate this at the moment, so the Mobile Phone field won't appear
       when viewing a Person, only when editing.
 
 Installing the Example Extender
 
-  1. Install FacultyStaffDirectory according to that product's README.txt.
+  1. Install FacultyStaffDirectory according to its README.txt.
   
-  2. Place FacultyStaffDirectoryExtender folder in the Products folder.
+  2. Place the MobilePhoneExtender folder in the Products folder, or use typical
+     egg installation practice.
   
   3. Restart Zope.
   
   4. If you're using Plone 3 or later, go to your-plone-site &rarr; site setup
-     &rarr; Add/Remove Products, and install FacultyStaffDirectoryExtender.
+     &rarr; Add/Remove Products, and install MobilePhoneExtender.
      In Plone 2.5, it will be installed simply by virtue of being in the
      Products folder.
     
@@ -82,6 +86,15 @@ Using the Example Extender
 
 Version History
   
+  ' ' 2.1 -- ' '
+    
+        * Added egg packaging, since it's nice to declare a dependency on
+          archetypes.schemaextender.
+        
+        * Renamed from FacultyStaffDirectoryExtender to MobilePhoneExtender to
+          make it clearer that this is an example name and should be changed.
+          Lots of people never renamed their products.
+  
   ' ' 2.0 -- Rewrote to work with FacultyStaffDirectory 2.0's new extension
              mechanism and vastly improved this README.
   
@@ -91,7 +104,7 @@ Version History
 
 Future Plans
   
-  * FacultyStaffDirectory 2.1 will have viewlet-based views, which means you'll
+  * FacultyStaffDirectory 3.0 will have viewlet-based views, which means you'll
     no longer need to replace, for example, the entire person_view.pt just to
     add a field.
   
@@ -108,7 +121,7 @@ Authorship
 Support
 
   * Please report bugs to the
-    "WebLion issue tracker":https://weblion.psu.edu/trac/weblion/newticket?component=FacultyStaffDirectory&version=2.0.
+    "WebLion issue tracker":https://weblion.psu.edu/trac/weblion/newticket?component=FacultyStaffDirectory&version=2.1.2.
 
   * More documentation:https://weblion.psu.edu/trac/weblion/wiki/FacultyStaffDirectory
 
@@ -118,12 +131,12 @@ Support
     Penn State University
     304 The 300 Building
     University Park, PA 16802
-    webmaster@weblion.psu.edu
+    support@weblion.psu.edu
     814-863-4574
 
 License
 
-    Copyright (c) 2006-2008 The Pennsylvania State University. WebLion is
+    Copyright (c) 2006-2009 The Pennsylvania State University. WebLion is
     developed and maintained by the WebLion Project Team, its partners, and
     members of the Penn State Zope Users Group.
 

@@ -27,7 +27,7 @@ class YuppieExtender(object):
                 schemata="Contact Information",
                 widget=StringWidget(
                     label=u"Mobile Phone",
-                    description=u"Demo field added by the FacultyStaffDirectoryExtender product.",
+                    description=u"Demo field added by the MobilePhoneExtender product.",
                 )
             )
         ]

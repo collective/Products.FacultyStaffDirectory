@@ -15,16 +15,16 @@ from Products.FacultyStaffDirectory.tests.testPlone import testPlone, PRODUCTS
 from Products.FacultyStaffDirectory.extenderInstallation import localAdaptersAreSupported
 
 
-_extenderName = 'FacultyStaffDirectoryExtender'
+_extenderName = 'MobilePhoneExtender'
 
-# Install FSDE, even if it's not in the Products folder.
+# Install the example extender, even if it's not in the Products folder.
 # This has to be out in module space because ZopeLite.py says PloneTestCase.installProduct has to be called from module level.
 if not PloneTestCase.hasProduct(_extenderName):
     def _pretendExtenderIsInProductsFolder():
-        """Let it be as if FacultyStaffDirectoryExtender is in the Products folder, even if it isn't."""
+        """Let it be as if MobilePhoneExtender is in the Products folder, even if it isn't."""
         
-        _examplesDir = os.path.join(*([os.sep] + __file__.split(os.sep)[:-2] + ['examples']))  # yeeeeehaw!
-        Products.__path__.append(_examplesDir)  # Stick the "examples" dir onto the end of the folders Zope searches for products so it can find FacultyStaffDirectoryExtender.
+        _productsNamespacePackage = os.path.join(*([os.sep] + __file__.split(os.sep)[:-2] + ['examples', 'Products.MobilePhoneExtender', 'Products']))  # yeeeeehaw!
+        Products.__path__.append(_productsNamespacePackage)  # Stick the "Products" dir within the egg onto the end of the folders Zope searches for products so it can find MobilePhoneExtender.
     
     _pretendExtenderIsInProductsFolder()
 
