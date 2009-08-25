@@ -1,6 +1,6 @@
 from Products.CMFCore.utils import getToolByName
 from Products.FacultyStaffDirectory.extenderInstallation import localAdaptersAreSupported, installExtender, uninstallExtender
-from Products.MobilePhoneExtender.person import YuppieExtender
+from Products.MobilePhoneExtender.person import PersonExtender
 
 _adapterName = 'MobilePhoneExtender'
 
@@ -10,10 +10,10 @@ def _runProfile(profile, portal):
 
 def install(portal):
     if localAdaptersAreSupported:
-        installExtender(portal, YuppieExtender, _adapterName)
+        installExtender(portal, PersonExtender, _adapterName)
     _runProfile('profile-Products.MobilePhoneExtender:default', portal)
 
 def uninstall(portal):
     if localAdaptersAreSupported:
-        uninstallExtender(portal, YuppieExtender, _adapterName)
+        uninstallExtender(portal, PersonExtender, _adapterName)
     _runProfile('profile-Products.MobilePhoneExtender:uninstall', portal)

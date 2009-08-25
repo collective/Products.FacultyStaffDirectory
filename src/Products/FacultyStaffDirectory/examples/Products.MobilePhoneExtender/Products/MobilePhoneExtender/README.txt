@@ -40,17 +40,15 @@ Description
   
   4. Test your extender. It should work at this point.
   
-  5. Rename your classes to not be called misleading things like
-     'YuppieExtender'.
-  
   Modifying Other Content Types
   
       To add fields to a content type other than Person, have your extender
-      class (e.g. 'YuppieExtender') adapt something other than 'IPerson'. For
-      example, to extend Department, adapt 'IDepartment'. All the extensible
-      interfaces are defined in FacultyStaffDirectory.interfaces. (You can also
-      extend types that don't define an interface for you: just apply your own
-      interface via ZCML. However, that's outside the scope of this document.)
+      class (e.g. 'PersonExtender') adapt something other than 'IPerson' (and
+      call them something else so as not to be misleading). For example, to
+      extend Department, adapt 'IDepartment'. All the extensible interfaces are
+      defined in FacultyStaffDirectory.interfaces. (You can also extend types
+      that don't define an interface for you: just apply your own interface via
+      ZCML. However, that's outside the scope of this document.)
   
   Showing Fields on View Templates
       

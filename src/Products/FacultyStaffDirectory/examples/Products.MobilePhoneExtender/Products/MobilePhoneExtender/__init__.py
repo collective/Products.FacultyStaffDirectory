@@ -3,9 +3,9 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.FacultyStaffDirectory.extenderInstallation import installExtenderGloballyIfLocallyIsNotSupported
 from Products.GenericSetup import EXTENSION, profile_registry
 
-from Products.MobilePhoneExtender.person import YuppieExtender
+from Products.MobilePhoneExtender.person import PersonExtender
 
-installExtenderGloballyIfLocallyIsNotSupported(YuppieExtender, 'Products.MobilePhoneExtender')  # Put the name of your product here.
+installExtenderGloballyIfLocallyIsNotSupported(PersonExtender, 'Products.MobilePhoneExtender')  # Put the name of your product here.
 
 registerDirectory('skins', globals())
 

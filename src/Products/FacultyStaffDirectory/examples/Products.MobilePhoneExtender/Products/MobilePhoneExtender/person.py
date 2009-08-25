@@ -12,7 +12,7 @@ class _StringExtensionField(ExtensionField, StringField):
     pass
 
 
-class YuppieExtender(object):
+class PersonExtender(object):
     """Adapter that adds a Mobile Phone field to Person.
     
     You could also change or delete existing fields (though you might violate assumptions made in other code). To do that, implement ISchemaModifier instead of ISchemaExtender.
