@@ -24,7 +24,7 @@
 
 .facultyStaffDirectory .listing { margin: 1em 0 1.5em 0; border: none; font-size: 1em; }
 
-.facultyStaffDirectory .standardView .headshot { float: left; width: 120px; margin-top: 3px; padding: auto 0; }
+.facultyStaffDirectory .standardView .headshot { float: left; width: 120px; margin-top: 3px; padding: 0; }
 
 .facultyStaffDirectory .standardView .headshot img { border: 2px solid #000; padding:0; }
 
