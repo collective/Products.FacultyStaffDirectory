@@ -89,7 +89,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
                     path = '/'.join(url_tool.getRelativeContentPath(parent))
                 else:
                     # return the path starting with the portal root
-                    path = parent.absolute_url_path()
+                    path = '/'.join(parent.getPhysicalPath())
                 return path
             else:
                 parent = aq_parent(aq_inner(parent))
