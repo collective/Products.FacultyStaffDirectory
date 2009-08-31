@@ -36,6 +36,39 @@ from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFac
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_DEPARTMENTS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, ASSIGN_SPECIALTIES_TO_PEOPLE, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 
+def resolvedGetObjPositionInParent(obj):
+    """ since a chane was introduced in plone 3.3 via plone.indexer that causes
+        the 'getObjPositionInParent function from Products.CMFPlone.CatalogTool
+        to return a callable 'DelegatingIndexer' object instead of a nice, sensible
+        integer, we need to create a little wrapper function to protect us against
+        the insanity.  
+        
+        This function takes an object (for us it will be a classification) and 
+        returns that object's position in its parent, regardless of the version of
+        plone that is being used currently.  
+        
+        It's nearly total and complete bullshit that we have to do something this
+        ugly to maintain functioning code within a single major release, but we do 
+        not question the release manager.  His word is law!
+    """
+    pos = getObjPositionInParent(obj)
+    try:
+        from plone.indexer.interfaces import IIndexer
+    except ImportError:
+        # if we cannot import the above, then we are in a system without
+        # plone.indexer.  This means that the current value of pos is what we
+        # wanted in the first place, an integer.  Return it.
+        return pos
+    else:
+        # we can import IIndexer, so let's see if pos provides that interface
+        # if so, we can return the value of pos(), which will be the integer 
+        # we were looking for.
+        if IIndexer.providedBy(pos):
+            return pos()
+        else:
+            return pos
+    
+
 logger = logging.getLogger('FacultyStaffDirectory')
 
 schema = ATContentTypeSchema.copy() + Schema((
@@ -609,14 +642,10 @@ class Person(OrderedBaseFolder, ATCTContent):
         """ Returns a list of the titles of the classifications attached to this person.
             Mainly used for pretty-looking metadata in SmartFolder tables.
         """
-        cList = []
-        for c in self.getClassifications():
-            pos = getObjPositionInParent(c)
-            # in Plone 3.3 getObjPosition is decorated with an indexer
-            # This maintains compatibility between 3.2 and 3.3+
-            if not isinstance(pos, int):
-                pos = pos()
-            cList.append((pos + 1, c.Title()))
+        import pdb; pdb.set_trace()
+        # protect a call to getObjPositionInParent against the insanity introduced 
+        #  in plone 3.3 by plone.indexer
+        cList = [(resolvedGetObjPositionInParent(c) + 1, c.Title()) for c in self.getClassifications()]
         cList.sort()
         return [c[-1] for c in cList]
     
