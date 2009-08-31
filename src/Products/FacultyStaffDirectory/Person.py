@@ -642,7 +642,6 @@ class Person(OrderedBaseFolder, ATCTContent):
         """ Returns a list of the titles of the classifications attached to this person.
             Mainly used for pretty-looking metadata in SmartFolder tables.
         """
-        import pdb; pdb.set_trace()
         # protect a call to getObjPositionInParent against the insanity introduced 
         #  in plone 3.3 by plone.indexer
         cList = [(resolvedGetObjPositionInParent(c) + 1, c.Title()) for c in self.getClassifications()]
