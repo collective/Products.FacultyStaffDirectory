@@ -1,6 +1,11 @@
 from Products.CMFCore.utils import getToolByName
 
 def install(portal):
+    # install FacultyStaffDirectory, if needed
+    quickinstaller = getToolByName(portal, 'portal_quickinstaller')
+    if not quickinstaller.isProductInstalled('FacultyStaffDirectory'):
+        quickinstaller.installProduct('FacultyStaffDirectory')
+
     setup_tool = getToolByName(portal, 'portal_setup')
     setup_tool.runAllImportStepsFromProfile('profile-${package_dotted_name}:default')
     return "Ran all import steps"

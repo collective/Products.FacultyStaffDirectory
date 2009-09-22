@@ -4,6 +4,7 @@ Local templates for the archetype zopeskel project
 import os
 from zopeskel.base import var
 from zopeskel.localcommands.archetype import ArchetypeSubTemplate
+from paste.script import pluginlib
 
 class FSDExtender(ArchetypeSubTemplate):
     """
@@ -43,6 +44,12 @@ class FSDExtender(ArchetypeSubTemplate):
     def post(self, command, output_dir, vars):
         """ Do some post-processing to insert to multiple points in a single template
         """
+        insert_string = "                        'archetypes.schemaextender < 2.0',\n" + \
+            "                        'Products.FacultyStaffDirectory < 3.0',\n"
+        command.insert_into_file(os.path.join(os.path.dirname(pluginlib.find_egg_info_dir(os.getcwd())), 'setup.py'),
+                'Extra requirements:',
+                insert_string)
+
         insert_string = "from %s.extenders.%s import %s\n" % (vars['package_dotted_name'], 
                                                               vars['extender_class_filename'], 
                                                               vars['extendertype_classname'])
