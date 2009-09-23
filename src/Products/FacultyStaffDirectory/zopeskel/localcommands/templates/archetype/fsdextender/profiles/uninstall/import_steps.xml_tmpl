@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <import-steps>
- <import-step id="FacultyStaffDirectory_extender" version="20090530-01"
+  <import-step id="FacultyStaffDirectory_${package_underscored_name}" version="${import_step_version}"
                handler="${package_dotted_name}.setuphandlers.teardownVarious"
                title="Extends Faculty Staff Directory settings">
-  <dependency step="catalog"/>
- </import-step>
+    <dependency step="catalog"/>
+  </import-step>
 </import-steps>

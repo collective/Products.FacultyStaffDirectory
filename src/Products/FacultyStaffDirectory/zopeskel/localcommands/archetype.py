@@ -1,6 +1,7 @@
 """
 Local templates for the archetype zopeskel project
 """
+import datetime
 import os
 from zopeskel.base import var
 from zopeskel.localcommands.archetype import ArchetypeSubTemplate
@@ -40,6 +41,18 @@ class FSDExtender(ArchetypeSubTemplate):
         vars['interface_name'] = 'I' + extendertype_canonical_name
         vars['adapter_classname'] = extendertype_canonical_name + 'Adapter'
         vars['at_field_types'] = self.ATFieldTypes
+        vars['import_step_version'] = datetime.date.today().strftime('%Y%m%d') + '-01'
+        if vars['namespace_package2']:
+            vars['package_underscored_name'] = "%s_%s_%s" % \
+                (vars['namespace_package'],
+                vars['namespace_package2'],
+                vars['package'])
+        else:
+            vars['package_underscored_name'] = "%s_%s" % \
+                (vars['namespace_package'],
+                 vars['package'])
+
+ 
         
     def post(self, command, output_dir, vars):
         """ Do some post-processing to insert to multiple points in a single template
