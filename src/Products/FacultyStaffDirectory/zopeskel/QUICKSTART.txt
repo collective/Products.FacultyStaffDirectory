@@ -1,0 +1,115 @@
+QUICK EXAMPLES
+
+=====
+To make an extender for FacultyStaffDirectory that IS NOT in the Products namespace:
+
+$ paster create -t archetype my.fsdfields
+Selected and implied templates:
+  ZopeSkel#basic_namespace  A project with a namespace package
+  ZopeSkel#plone            A Plone project
+  ZopeSkel#archetype        A Plone project that uses Archetypes
+
+Variables:
+  egg:      my.fsdfields
+  package:  myfsdfields
+  project:  my.fsdfields
+Enter title (The title of the project) ['Plone Example']: My FSD Fields Extender
+Enter namespace_package (Namespace package (like plone)) ['plone']: my
+Enter package (The package contained namespace package (like example)) ['example']: fsdfields
+Enter zope2product (Are you creating a Zope 2 Product?) [True]: 
+Enter version (Version) ['1.0']: 
+Enter description (One-line description of the package) ['']: 
+Enter long_description (Multi-line description (in reST)) ['']: 
+Enter author (Author name) ['Plone Foundation']: 
+Enter author_email (Author email) ['plone-developers@lists.sourceforge.net']: 
+Enter keywords (Space-separated keywords/tags) ['']: 
+Enter url (URL of homepage) ['http://svn.plone.org/svn/plone/plone.example']: 
+Enter license_name (License name) ['GPL']: 
+Enter zip_safe (True/False: if the package can be distributed as a .zip file) [False]: 
+[paster output removed]
+
+$ cd my.fsdextender
+$ paster addcontent fsdextender
+
+Enter extendertype_name (Name of the Extender) ['MobilePhone']: LocalFields
+Enter interface_to_extend (Interface to extend (person.IPerson, committee.ICommittee, etc.)) ['person.IPerson']: 
+[paster output removed]
+
+For ZopeSkel 2.11.1 and earlier:
+
+You should examine your setup.py for the following code:
+
+      entry_points="""
+      # -*- entry_points -*- 
+      [distutils.setup_keywords]
+      paster_plugins = setuptools.dist:assert_string_list
+
+      [egg_info.writers]
+      paster_plugins.txt = setuptools.command.egg_info:write_arg
+      """,
+
+You should remove the distutils.setup_keywords and egg_info.writers entry points to avoid buildout-related problems when you use your product:
+
+      entry_points="""
+      # -*- entry_points -*- 
+      """,
+
+To avoid having to include your product's ZCML manually or via a zcml= slug in buildout, you should add an entry_point for the z3c.autoinclude.plugin (note, this is new for Plone 3.3 and greater):
+
+      entry_points="""
+      # -*- entry_points -*- 
+      [z3c.autoinclude.plugin]
+      target = plone
+      """,
+
+=====
+To make an extender for FacultyStaffDirectory that IS in the Products namespace:
+
+$ paster create -t archetype Products.xtend
+Selected and implied templates:
+  ZopeSkel#basic_namespace  A project with a namespace package
+  ZopeSkel#plone            A Plone project
+  ZopeSkel#archetype        A Plone project that uses Archetypes
+
+Variables:
+  egg:      Products.xtend
+  package:  productsxtend
+  project:  Products.xtend
+Enter title (The title of the project) ['Plone Example']: Xtend FSD Extender
+Enter namespace_package (Namespace package (like plone)) ['plone']: Products
+Enter package (The package contained namespace package (like example)) ['example']: xtend
+Enter zope2product (Are you creating a Zope 2 Product?) [True]: False
+Enter version (Version) ['1.0']: 
+Enter description (One-line description of the package) ['']: 
+Enter long_description (Multi-line description (in reST)) ['']: 
+Enter author (Author name) ['Plone Foundation']: 
+Enter author_email (Author email) ['plone-developers@lists.sourceforge.net']: 
+Enter keywords (Space-separated keywords/tags) ['']: 
+Enter url (URL of homepage) ['http://svn.plone.org/svn/plone/plone.example']: 
+Enter license_name (License name) ['GPL']: 
+Enter zip_safe (True/False: if the package can be distributed as a .zip file) [False]: 
+[paster output removed]
+
+$ cd Products.xtend
+$ paster addcontent fsdextender
+Enter extendertype_name (Name of the Extender) ['MobilePhone']: ExtendedFields
+Enter interface_to_extend (Interface to extend (person.IPerson, committee.ICommittee, etc.)) ['person.IPerson']: 
+
+For ZopeSkel 2.11.1 and earlier:
+
+You should examine your setup.py for the following code:
+
+      entry_points="""
+      # -*- entry_points -*- 
+      [distutils.setup_keywords]
+      paster_plugins = setuptools.dist:assert_string_list
+
+      [egg_info.writers]
+      paster_plugins.txt = setuptools.command.egg_info:write_arg
+      """,
+
+You should remove the distutils.setup_keywords and egg_info.writers entry points to avoid buildout-related problems when you use your product:
+
+      entry_points="""
+      # -*- entry_points -*- 
+      """,

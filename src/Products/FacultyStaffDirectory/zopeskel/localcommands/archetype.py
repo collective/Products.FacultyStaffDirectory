@@ -29,8 +29,8 @@ class FSDExtender(ArchetypeSubTemplate):
                     'TextField')
     
     vars = [
-        var('extendertype_name', 'Name of the Extender ', default='MobilePhone'),
-        var('interface_to_extend', 'Interface to extend (person.IPerson, committee.ICommittee, etc.) ', default='person.IPerson'),
+        var('extendertype_name', 'Name of the Extender', default='MobilePhone'),
+        var('interface_to_extend', 'Interface to extend (person.IPerson, committee.ICommittee, etc.)', default='person.IPerson'),
         ]
         
     def pre(self, command, output_dir, vars):
