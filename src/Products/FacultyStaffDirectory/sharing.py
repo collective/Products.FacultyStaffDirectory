@@ -12,5 +12,4 @@ except ImportError:
 class PersonnelManagerRole(object):
     implements(interfaceToImplement)
     title = _(u"title_can_manage_personnel", default=u"Can manage personnel")
-    required_permission = 'Manage portal content'
-    
+    required_permission = 'Manage portal'
