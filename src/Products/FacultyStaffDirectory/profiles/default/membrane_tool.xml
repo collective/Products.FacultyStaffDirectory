@@ -5,6 +5,7 @@
   </membrane-type>
   <membrane-type name="FSDPerson">
     <active-workflow-state name="active" />
+    <active-workflow-state name="hiddenactive" />
   </membrane-type>
   <membrane-type name="FSDCommittee">
     <active-workflow-state name="active" />

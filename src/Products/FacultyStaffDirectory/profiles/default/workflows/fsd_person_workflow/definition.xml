@@ -18,8 +18,9 @@
  <permission>FacultyStaffDirectory: Assign Specialties to People</permission>
  <permission>Relations: Manage content relations</permission> 
  
- <state state_id="active" title="Active">
+ <state state_id="active" title="Visible Member">
   <exit-transition transition_id="deactivate"/>
+  <exit-transition transition_id="hide"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>
   <permission-map name="View" acquired="True">
@@ -75,7 +76,7 @@
   </permission-map>
  </state>
  
- <state state_id="inactive" title="Inactive">
+ <state state_id="inactive" title="Visible Non-member">
   <exit-transition transition_id="activate"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>
@@ -130,28 +131,105 @@
   </permission-map>  
  </state>
 
+ <state state_id="hiddenactive" title="Invisible Member">
+  <exit-transition transition_id="show"/>
+  <permission-map name="Access contents information" acquired="True">
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal content" acquired="False">
+   <permission-role>Contributor</permission-role>  
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Owner</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="Set own password" acquired="False">
+   <permission-role>User Preferences Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Set own properties" acquired="False">
+   <permission-role>User Preferences Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Change Roles" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Change Person IDs" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Assign Departments to People" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Assign Committees to People" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Assign Classifications to People" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>    
+  <permission-map name="FacultyStaffDirectory: Assign Specialties to People" acquired="True">
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>
+  <permission-map name="Relations: Manage content relations" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Personnel Manager</permission-role>
+  </permission-map>  
+ </state>
+
  <transition transition_id="deactivate"
-             title="De-activate"
+             title="Revoke Membership"
              new_state="inactive" trigger="USER"
              before_script=""
              after_script="">
-  <action url="" category="workflow">De-activate</action>
+  <action url="" category="workflow">Revoke Membership</action>
   <guard>
    <guard-permission>FacultyStaffDirectory: Change roles</guard-permission>
   </guard>
  </transition>
- 
+
  <transition transition_id="activate"
-             title="Activate"
+             title="Restore Membership"
              new_state="active" trigger="USER"
              before_script=""
              after_script="">
-  <action url="" category="workflow">Activate</action>
+  <action url="" category="workflow">Restore Membership</action>
   <guard>
    <guard-permission>FacultyStaffDirectory: Change roles</guard-permission>
   </guard>
  </transition>
  
+ <transition transition_id="show"
+             title="Show"
+             new_state="active" trigger="USER"
+             before_script=""
+             after_script="">
+  <action url="" category="workflow">Show</action>
+  <guard>
+   <guard-permission>FacultyStaffDirectory: Change roles</guard-permission>
+  </guard>
+ </transition>
+
+ <transition transition_id="hide"
+             title="Hide"
+             new_state="hiddenactive" trigger="USER"
+             before_script=""
+             after_script="">
+  <action url="" category="workflow">Hide</action>
+  <guard>
+   <guard-permission>FacultyStaffDirectory: Change roles</guard-permission>
+  </guard>
+ </transition>
+
  <worklist worklist_id="reviewer_queue" title="">
   <description>Reviewer tasks</description>
   <action url="%(portal_url)s/search?review_state=pending"
