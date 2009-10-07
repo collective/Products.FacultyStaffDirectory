@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <object name="Person" meta_type="Factory-based Type Information"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Commitees Folder</property>
+ <property name="title">Committees Folder</property>
  <property name="description">Holds and displays committees.</property>
  <property name="content_meta_type">FSDCommitteesFolder</property>
  <property name="product">FacultyStaffDirectory</property>

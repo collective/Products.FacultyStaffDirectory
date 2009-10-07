@@ -189,7 +189,7 @@ def install(self, reinstall=False):
     
     addSmartFolderIndex("getRawClassifications", "Classification", "The classification assigned to a person", criteria=['ATReferenceCriterion'])
     addSmartFolderIndex("getRawSpecialties", "Specialty", "A person's listed specialty areas", criteria=['ATReferenceCriterion'])
-    addSmartFolderIndex("getRawCommittees", "Commitee", "A person's listed committees", criteria=['ATReferenceCriterion'])
+    addSmartFolderIndex("getRawCommittees", "Committee", "A person's listed committees", criteria=['ATReferenceCriterion'])
     addSmartFolderIndex("getRawPeople", "People", "The people assigned to a person grouping (ie committee, department, specialty, classification)", criteria=['ATReferenceCriterion'])
     addSmartFolderIndex("getRawDepartments", "Department", "The departments assigned to a person", criteria=['ATReferenceCriterion'])
     addSmartFolderIndex("getSortableName", "Full Name", "The person's name, last name first", criteria=['ATListCriterion'])
