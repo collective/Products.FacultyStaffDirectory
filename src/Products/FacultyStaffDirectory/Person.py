@@ -24,6 +24,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.browser.navtree import buildFolderTree
 from Products.CMFPlone.CatalogTool import getObjPositionInParent
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from Products.CMFPlone.utils import safe_unicode
 from Products.membrane.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
 from Products.Relations.field import RelationField
 from Products.validation import validation
@@ -611,7 +612,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     security.declarePrivate('_classificationReferences')
     def _classificationReferences(self):
         """Return a list of Classifications this Person can be referenced to."""
-        return [(c.UID, c.Title) for c in self.aq_parent.getFolderContents({'portal_type': 'FSDClassification'})]
+        return [(c.UID, safe_unicode(c.Title)) for c in self.aq_parent.getFolderContents({'portal_type': 'FSDClassification'})]
     
     security.declarePrivate('_availableEditors')
     def _availableEditors(self):
