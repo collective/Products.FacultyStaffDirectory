@@ -1,4 +1,6 @@
-# To build locally: python setup.py egg_info -RDb "" bdist_egg 
+# Before releasing, make sure to update the translations:
+# $ for po in `find . -name "*.po"` ; do msgfmt -o `dirname $po`/`basename $po .po`.mo $po; done
+# # To build locally: python setup.py egg_info -RDb "" bdist_egg 
 # To release: python setup.py egg_info -RD sdist bdist_egg register upload
 # To create a named release: python setup.py egg_info -RDb "a1" sdist bdist_egg register upload
 # To release a dev build: python setup.py egg_info -rD sdist bdist_egg register upload
