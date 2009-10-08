@@ -149,6 +149,11 @@ msgstr "Abréviation"
 msgid "FacultyStaffDirectory_label_assistants"
 msgstr "Assistants"
 
+#. Default: "Assistants can edit your directory entry."
+#: Person.py:481
+msgid "FacultyStaffDirectory_description_assistants"
+msgstr ""
+
 #. Default: "Biography"
 #: ./skins/FacultyStaffDirectory/person_view.pt
 msgid "FacultyStaffDirectory_label_biography"

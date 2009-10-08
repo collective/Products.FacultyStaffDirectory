@@ -477,6 +477,8 @@ schema = ATContentTypeSchema.copy() + Schema((
         (
             label=u'Personal Assistant(s)',
             label_msgid='FacultyStaffDirectory_label_assistants',
+            description=u"Assistants can edit your directory entry.",
+            description_msgid="FacultyStaffDirectory_description_assistants",
             i18n_domain='FacultyStaffDirectory',
             allow_browse=0,
             allow_search=1,
