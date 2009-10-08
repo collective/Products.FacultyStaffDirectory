@@ -9,7 +9,13 @@
 from setuptools import setup, find_packages
 import os
 
-version = open(os.path.join("src", "Products", "FacultyStaffDirectory", "version.txt")).read().strip()
+try:
+    version_file = open(os.path.join("Products", "FacultyStaffDirectory", "version.txt"))
+except IOError:
+    # For development. When the egg is built, the src folder disappears.
+    version_file = open(os.path.join("src", "Products", "FacultyStaffDirectory", "version.txt"))
+
+version = version_file.read().strip()
 
 setup(name='Products.FacultyStaffDirectory',
       version=version,
