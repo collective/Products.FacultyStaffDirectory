@@ -1,0 +1,421 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FacultyStaffDirectory\n"
+"POT-Creation-Date: 2008-08-14 02:52+0000\n"
+"PO-Revision-Date: 2008-08-14 02:52+0000\n"
+"Last-Translator: H. Turgut Uyar <uyar@itu.edu.tr>\n"
+"Language-Team: H. Turgut Uyar <uyar@itu.edu.tr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: tr\n"
+"Language-Name: Türkçe\n"
+"Preferred-Encodings: utf-8 latin5\n"
+"Domain: FacultyStaffDirectory\n"
+"X-Is-Fallback-For: tr-tr\n"
+
+#. Default: "Assign a position"
+#: ./skins/FacultyStaffDirectory/department_standard_view.pt:26
+msgid "FacultyStaffDirectory_assignPosition"
+msgstr "Bir pozisyon ata"
+
+#. Default: "Assign a research topic"
+#: ./skins/FacultyStaffDirectory/person_view.pt:91
+msgid "FacultyStaffDirectory_assignResearchTopic"
+msgstr "Bir araştırma konusu ata"
+
+#. Default: "Assign a role"
+#: ./skins/FacultyStaffDirectory/committee_view.pt:43
+msgid "FacultyStaffDirectory_assignrole"
+msgstr "Bir rol ata"
+
+#. Default: "The roles all people in this directory will be granted site-wide"
+#: Content Type: FSDFacultyStaffDirectory, Field: roles_
+msgid "FacultyStaffDirectory_description_FacultyStaffDirectoryRoles"
+msgstr "Bu rehberdeki herkese bütün sitede geçerli olmak üzere  verilecek rol"
+
+#. Default: "Please re-enter the password. (Leave blank if you don't want to change the password.)"
+#: Content Type: FSDPerson, Field: confirmPassword
+msgid "FacultyStaffDirectory_description_confirmPassword"
+msgstr "Lütfen parolayı yeniden yazın. (Parolayı değiştirmek istemiyorsanız boş bırakın.)"
+
+#. Default: "Integrated types appear on the right; non-integrated on the left. You may move selected items from one column to the other."
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: enableMembraneTypes
+msgid "FacultyStaffDirectory_description_enableMembraneTypes"
+msgstr "Bütünleştirilen tipler sağda, bütünleştirilmeyenler solda görünür. Seçilen nesneleri bir sütundan diğerine aktarabilirsiniz."
+
+#. Default: "Example: abc123"
+#: Content Type: FSDPerson, Field: id
+msgid "FacultyStaffDirectory_description_id"
+msgstr "Örnek: abc123"
+
+#. Default: "One per line"
+#: Content Type: FSDPerson, Field: jobTitles
+msgid "FacultyStaffDirectory_description_jobTitles"
+msgstr "Her satıra bir tane"
+
+#. Default: "Format email addresses like "someone AT here DOT com" rather than using Plone's default spam armoring."
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: obfuscateEmailAddresses
+msgid "FacultyStaffDirectory_description_obfuscateEmailAddressesDescription"
+msgstr "E-posta adresleri Plone'un kendi spam koruması yerine \"birisi AT burası DOT com\" gibi düzenlensin."
+
+#. Default: "Password for this person (Leave blank if you don't want to change the password.)"
+#: Content Type: FSDPerson, Field: password
+msgid "FacultyStaffDirectory_description_password"
+msgstr "Bu kişinin parolası. (Parolayı değiştirmek istemiyorsanız boş bırakın.)"
+
+#. Default: "Show all person thumbnails with a fixed width (in pixels) within the classification view"
+#: Content Type: FSDFacultyStaffDirectory, Field: personClassificationViewThumbnailWidth
+msgid "FacultyStaffDirectory_description_personClassificationViewThumbnailWidth"
+msgstr "Sınıflandırma görünümünde herkesin küçük resmi sabit bir genişlikte (benek cinsinden) gösterilsin."
+
+#. Default: "A regular expression that a Person's ID must match. Defaults to the value specified in portal_registration."
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: idRegex
+msgid "FacultyStaffDirectory_description_personIdFormat"
+msgstr "Bir kişinin kimlik bilgisinin uyması gereken bir düzenli deyim. Varsayılan değeri portal_registration aracında belirtildiği şekildedir."
+
+#. Default: "The error message returned when the Person ID entered does not match the specified format"
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: idRegexErrorMessage
+msgid "FacultyStaffDirectory_description_personIdFormatErrorMessage"
+msgstr "Yazılan kişi kimlik değeri belirtilen şekle uymuyorsa döndürülecek hata iletisi"
+
+#. Default: "The name of the ID used by your institution"
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: idLabel
+msgid "FacultyStaffDirectory_description_personIdLabel"
+msgstr "Kurumunuzun kullandığı kimlik ismi"
+
+#. Default: "Describe the above phone number rule in a human-readable format: for example, (555) 555-5555."
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: phoneNumberDescription
+msgid "FacultyStaffDirectory_description_personPhoneNumberDescription"
+msgstr "Yukarıdaki telefon numarası kuralını insanların anlayabileceği bir şekilde tanımlayın: örneğin (555) 555-5555."
+
+#. Default: "A regular expression that a Person's phone number must match. Leave blank to disable phone number validation."
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: phoneNumberRegex
+msgid "FacultyStaffDirectory_description_personPhoneNumberFormat"
+msgstr "Bir kişinin telefon numarasının uyması gereken bir düzenli deyim. Telefon numaralarının doğrulanmasına gerek görmüyorsanız boş bırakın."
+
+#. Default: "Academic, professional, honorary, and social suffixes."
+#: Content Type: FSDPerson, Field: suffix
+msgid "FacultyStaffDirectory_description_suffix"
+msgstr "Akademik, mesleki, onursal ve sosyal sonekler."
+
+#. Default: "Should user passwords be stored as part of the Person? If you're using another PAS plugin to handle authorization, you'll want to turn this off."
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: useInternalPassword
+msgid "FacultyStaffDirectory_description_useInternalPassword"
+msgstr "Kullanıcı parolaları kişi bilgileriyle birlikte kaydedilsin mi? Asıllama için başka bir PAS eklentisi kullanıyorsanız bunu istemezsiniz."
+
+#. Default: "One per line. Example: http://www.example.com/"
+#: Content Type: FSDPerson, Field: websites
+msgid "FacultyStaffDirectory_description_websites"
+msgstr "Her satıra bir tane. Sözgelimi: http://www.example.com/"
+
+#. Default: "Edit position"
+#: ./skins/FacultyStaffDirectory/department_standard_view.pt:25
+msgid "FacultyStaffDirectory_editPosition"
+msgstr "Pozisyon düzenle"
+
+#. Default: "Edit research topic"
+#: ./skins/FacultyStaffDirectory/person_view.pt:90
+msgid "FacultyStaffDirectory_editResearchTopic"
+msgstr "Araştırma konusu düzenle"
+
+#. Default: "Edit role"
+#: ./skins/FacultyStaffDirectory/committee_view.pt:42
+msgid "FacultyStaffDirectory_editrole"
+msgstr "Rol düzenle"
+
+#. Default: "Email"
+#: ./skins/FacultyStaffDirectory/classification_tabular_view.pt:56
+msgid "FacultyStaffDirectory_email"
+msgstr "E-posta"
+
+#. Default: "Example: http://www.example.com/"
+#: Content Type: FSDCourse, Field: website
+msgid "FacultyStaffDirectory_help_website"
+msgstr "Örneğin: http://www.example.com/"
+
+#. Default: "Roles"
+#: Content Type: FSDFacultyStaffDirectory, Field: roles_
+msgid "FacultyStaffDirectory_label_FacultyStaffDirectoryRoles"
+msgstr "Roller"
+
+#. Default: "Abbreviation"
+#: Content Type: FSDCourse, Field: abbreviation
+msgid "FacultyStaffDirectory_label_abbreviation"
+msgstr "Kısaltma"
+
+#. Default: "Assistants"
+#: ./skins/FacultyStaffDirectory/person_view.pt:119
+msgid "FacultyStaffDirectory_label_assistants"
+msgstr "Yardımcılar"
+
+#. Default: "Biography"
+#: ./skins/FacultyStaffDirectory/person_view.pt:59
+msgid "FacultyStaffDirectory_label_biography"
+msgstr "Biyografi"
+
+#. Default: "${fullName} is an assistant to"
+#: ./skins/FacultyStaffDirectory/person_view.pt:135
+msgid "FacultyStaffDirectory_label_bosses"
+msgstr "${fullname} şu kişinin asistanıdır:"
+
+#. Default: "Classifications"
+#: Content Type: FSDPerson, Field: classifications
+msgid "FacultyStaffDirectory_label_classifications"
+msgstr "Sınıflandırmalar"
+
+#. Default: "Committees"
+#: Content Type: FSDPerson, Field: committees
+msgid "FacultyStaffDirectory_label_committees"
+msgstr "Komisyonlar"
+
+#. Default: "Confirm password"
+#: Content Type: FSDPerson, Field: confirmPassword
+msgid "FacultyStaffDirectory_label_confirmPassword"
+msgstr "Parolayı onayla"
+
+#. Default: "Courses"
+#: ./skins/FacultyStaffDirectory/person_view.pt:103
+msgid "FacultyStaffDirectory_label_courses"
+msgstr "Dersler"
+
+#. Default: "Departments"
+#: Content Type: FSDPerson, Field: departments
+msgid "FacultyStaffDirectory_label_departments"
+msgstr "Bölümler"
+
+#. Default: "Description"
+#: Content Type: FSDSpecialty, Field: description
+#: Content Type: FSDCourse, Field: description
+#: Content Type: FSDCommittee, Field: description
+msgid "FacultyStaffDirectory_label_description"
+msgstr "Tanım"
+
+#. Default: "Education"
+#: ./skins/FacultyStaffDirectory/person_view.pt:64
+msgid "FacultyStaffDirectory_label_education"
+msgstr "Eğitim"
+
+#. Default: "Email"
+#: ./skins/FacultyStaffDirectory/person_view.pt:36
+msgid "FacultyStaffDirectory_label_email"
+msgstr "E-posta"
+
+#. Default: "Select the content types to integrate with Plone's users and groups"
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: enableMembraneTypes
+msgid "FacultyStaffDirectory_label_enableMembraneTypes"
+msgstr "Plone'un kullanıcı ve gruplarına bütünleşecek içerik tiplerini seçin"
+
+#. Default: "First Name"
+#: Content Type: FSDPerson, Field: firstName
+msgid "FacultyStaffDirectory_label_firstName"
+msgstr "Önadı"
+
+#. Default: "Full Name"
+#: Content Type: FSDPerson, Field: title
+msgid "FacultyStaffDirectory_label_fullName"
+msgstr "Tam Adı"
+
+#. Default: "Access Account ID"
+#: Content Type: FSDPerson, Field: id
+msgid "FacultyStaffDirectory_label_id"
+msgstr "Kullanıcı Hesap Kimliği"
+
+#. Default: "Image"
+#: Content Type: FSDPerson, Field: image
+msgid "FacultyStaffDirectory_label_image"
+msgstr "Resim"
+
+#. Default: "Job Titles"
+#: Content Type: FSDPerson, Field: jobTitles
+msgid "FacultyStaffDirectory_label_jobTitles"
+msgstr "İş Ünvanları"
+
+#. Default: "Last Name"
+#: Content Type: FSDPerson, Field: lastName
+msgid "FacultyStaffDirectory_label_lastName"
+msgstr "Soyadı"
+
+#. Default: "Members"
+#: ./skins/FacultyStaffDirectory/committee_view.pt:29
+msgid "FacultyStaffDirectory_label_members"
+msgstr "Üyeler"
+
+#. Default: "Middle Name"
+#: Content Type: FSDPerson, Field: middleName
+msgid "FacultyStaffDirectory_label_middleName"
+msgstr "Orta Adı"
+
+#. Default: "Number"
+#: Content Type: FSDCourse, Field: number
+msgid "FacultyStaffDirectory_label_number"
+msgstr "Numara"
+
+#. Default: "Custom email obfuscation"
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: obfuscateEmailAddresses
+msgid "FacultyStaffDirectory_label_obfuscateEmailAddressesDescription"
+msgstr "Özel e-posta koruması"
+
+#. Default: "Office Street Address"
+#: Content Type: FSDPerson, Field: officeAddress
+msgid "FacultyStaffDirectory_label_officeAddress"
+msgstr "Ofis Adresi"
+
+#. Default: "Office City"
+#: Content Type: FSDPerson, Field: officeCity
+msgid "FacultyStaffDirectory_label_officeCity"
+msgstr "Ofis Şehri"
+
+#. Default: "Phone"
+#: ./skins/FacultyStaffDirectory/person_view.pt:41
+msgid "FacultyStaffDirectory_label_officePhone"
+msgstr "Telefon"
+
+#. Default: "Office Postal Code"
+#: Content Type: FSDPerson, Field: officePostalCode
+msgid "FacultyStaffDirectory_label_officePostalCode"
+msgstr "Ofis Posta Kodu"
+
+#. Default: "Office State"
+#: Content Type: FSDPerson, Field: officeState
+msgid "FacultyStaffDirectory_label_officeState"
+msgstr "Ofis Eyaleti"
+
+#. Default: "Password"
+#: Content Type: FSDPerson, Field: password
+msgid "FacultyStaffDirectory_label_password"
+msgstr "Parola"
+
+#. Default: "People"
+#: Content Type: FSDSpecialty, Field: people
+#: Content Type: FSDClassification, Field: people
+msgid "FacultyStaffDirectory_label_people"
+msgstr "Kişiler"
+
+#. Default: "Width for thumbnails in classification view"
+#: Content Type: FSDFacultyStaffDirectory, Field: personClassificationViewThumbnailWidth
+msgid "FacultyStaffDirectory_label_personClassificationViewThumbnailWidth"
+msgstr "Sınıflandırma görünümünde küçük resimlerin genişliği"
+
+#. Default: "Person ID format"
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: idRegex
+msgid "FacultyStaffDirectory_label_personIdFormat"
+msgstr "Kişi kimlik formatı"
+
+#. Default: "Person ID format error message"
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: idRegexErrorMessage
+msgid "FacultyStaffDirectory_label_personIdFormatErrorMessage"
+msgstr "Kişi kimlik formatı hata iletisi"
+
+#. Default: "Person ID Label"
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: idLabel
+msgid "FacultyStaffDirectory_label_personIdLabel"
+msgstr "Kişi kimlik etiketi"
+
+#. Default: "Phone number example"
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: phoneNumberDescription
+msgid "FacultyStaffDirectory_label_personPhoneNumberDescription"
+msgstr "Telefon numarası örneği"
+
+#. Default: "Phone number format"
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: phoneNumberRegex
+msgid "FacultyStaffDirectory_label_personPhoneNumberFormat"
+msgstr "Telefon numarası formatı"
+
+#. Default: "Position"
+#: Content Type: FSDDepartmentalMembership, Field: position
+#: Content Type: FSDCommitteeMembership, Field: position
+msgid "FacultyStaffDirectory_label_position"
+msgstr "Pozisyon"
+
+#. Default: "Research Interests"
+#: ./skins/FacultyStaffDirectory/person_view.pt:73
+msgid "FacultyStaffDirectory_label_researchInterests"
+msgstr "Araştırma Alanları"
+
+#. Default: "Research Topic"
+#: Content Type: FSDSpecialtyInformation, Field: researchTopic
+msgid "FacultyStaffDirectory_label_researchTopic"
+msgstr "Araştırma Konuları"
+
+#. Default: "Specialties"
+#: Content Type: FSDPerson, Field: specialties
+msgid "FacultyStaffDirectory_label_specialties"
+msgstr "Uzmanlık Alanları"
+
+#. Default: "Suffix"
+#: Content Type: FSDCourse, Field: suffix
+#: Content Type: FSDPerson, Field: suffix
+msgid "FacultyStaffDirectory_label_suffix"
+msgstr "Sonek"
+
+#. Default: "Body Text"
+#: Content Type: FSDSpecialty, Field: text
+#: Content Type: FSDCommittee, Field: text
+#: Content Type: FSDClassification, Field: text
+msgid "FacultyStaffDirectory_label_text"
+msgstr "Gövde Metni"
+
+#. Default: "Title"
+#: Content Type: FSDDepartmentalMembership, Field: title
+#: Content Type: FSDCommitteeMembership, Field: title
+#: Content Type: FSDSpecialtyInformation, Field: title
+msgid "FacultyStaffDirectory_label_title"
+msgstr "Başlık"
+
+#. Default: "Person objects provide user passwords"
+#: Content Type: FSDFacultyStaffDirectoryTool, Field: useInternalPassword
+msgid "FacultyStaffDirectory_label_useInternalPassword"
+msgstr "Kişi nesneleri kullanıcı parolası sağlasın"
+
+#. Default: "Course Website"
+#: Content Type: FSDCourse, Field: website
+msgid "FacultyStaffDirectory_label_website"
+msgstr "Dersin Web Sitesi"
+
+#. Default: "Websites"
+#: ./skins/FacultyStaffDirectory/person_view.pt:45
+msgid "FacultyStaffDirectory_label_websites"
+msgstr "Web Siteleri"
+
+#. Default: "More about ${DYNAMIC_CONTENT}..."
+#: ./skins/FacultyStaffDirectory/classification_standard_view.pt:73
+msgid "FacultyStaffDirectory_moreAbout"
+msgstr "Daha fazla bilgi..."
+
+#. Default: "Name"
+#: ./skins/FacultyStaffDirectory/classification_tabular_view.pt:50
+msgid "FacultyStaffDirectory_name"
+msgstr "İsim"
+
+#. Default: "People"
+#: ./skins/FacultyStaffDirectory/fsd_atoz_view.pt:11
+msgid "FacultyStaffDirectory_people"
+msgstr "Kişiler"
+
+#. Default: "Phone"
+#: ./skins/FacultyStaffDirectory/classification_tabular_view.pt:53
+msgid "FacultyStaffDirectory_phone"
+msgstr "Telefon"
+
+#. Default: "Research Topic"
+#: ./skins/FacultyStaffDirectory/department_tabular_view.pt:24
+msgid "FacultyStaffDirectory_researchTopic"
+msgstr "Araştırma Konusu"
+
+#. Default: "People specializing in this area"
+#: ./skins/FacultyStaffDirectory/specialty_view.pt:41
+msgid "FacultyStaffDirectory_specialtyMembers"
+msgstr "Bu alanda uzmanlaşan kişiler"
+
+#. Default: "Subspecialties"
+#: ./skins/FacultyStaffDirectory/specialty_view.pt:27
+msgid "FacultyStaffDirectory_subspecialties"
+msgstr "Altuzmanlıklar"
+
+#. Default: "Up one level"
+#: ./skins/FacultyStaffDirectory/classification_standard_view.pt:16
+msgid "go_to_parent_url"
+msgstr "Bir düzey yukarı"
+
