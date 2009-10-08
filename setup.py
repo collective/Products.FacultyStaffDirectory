@@ -9,7 +9,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '2.1.2'
+version = open(os.path.join("src", "Products", "FacultyStaffDirectory", "version.txt")).read().strip()
 
 setup(name='Products.FacultyStaffDirectory',
       version=version,

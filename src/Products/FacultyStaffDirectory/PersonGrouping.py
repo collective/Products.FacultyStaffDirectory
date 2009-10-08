@@ -94,7 +94,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
             else:
                 parent = aq_parent(aq_inner(parent))
 
-        return ""      
+        return ""
 
     security.declareProtected(ModifyPortalContent, '_search_people_in_this_fsd')
     def _search_people_in_this_fsd(self):
