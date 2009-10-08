@@ -9,6 +9,9 @@ from Products.FacultyStaffDirectory.config import *
 
 from Products.FacultyStaffDirectory.interfaces.specialtyinformation import ISpecialtyInformation
 from zope.interface import implements
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 schema = Schema((
 
@@ -16,8 +19,7 @@ schema = Schema((
         name='researchTopic',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',),
         widget=RichWidget(
-            label=u"Research Topic",
-            label_msgid='FacultyStaffDirectory_label_researchTopic',
+            label=_(u"FacultyStaffDirectory_label_researchTopic", default=u"Research Topic"),
             i18n_domain='FacultyStaffDirectory',
             allow_file_upload=False,
             rows=5,
@@ -30,8 +32,7 @@ schema = Schema((
         default="Research Topic",
         widget=StringWidget(
             visible={'edit': 'invisible', 'view': 'visible'},
-            label=u'Title',
-            label_msgid='FacultyStaffDirectory_label_title',
+            label=_(u"FacultyStaffDirectory_label_title", default=u"Title"),
             i18n_domain='FacultyStaffDirectory',
         ),
         accessor="Title"

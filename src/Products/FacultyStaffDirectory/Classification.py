@@ -17,14 +17,16 @@ from Products.membrane.interfaces import IPropertiesProvider
 from Products.FacultyStaffDirectory.interfaces.classification import IClassification
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 schema = Schema((
 
     RelationField(
         name='people',
         widget=ReferenceBrowserWidget(
-            label=u'People',
-            label_msgid='FacultyStaffDirectory_label_people',
+            label=_(u"FacultyStaffDirectory_label_people", default=u"People"),
             i18n_domain='FacultyStaffDirectory',
             allow_browse=0,
             allow_search=1,

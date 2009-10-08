@@ -15,14 +15,16 @@ from Products.CMFCore.utils import getToolByName
 from Products.FacultyStaffDirectory.interfaces.department import IDepartment
 from zope.interface import implements
 from Products.FacultyStaffDirectory.permissions import ASSIGN_DEPARTMENTS_TO_PEOPLE
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 schema = Schema((
 
     RelationField(
         name='members',
         widget=ReferenceBrowserWidget(
-            label=u'Members',
-            label_msgid='FacultyStaffDirectory_label_members',
+            label=_(u"FacultyStaffDirectory_label_members", default=u"Members"),
             i18n_domain='FacultyStaffDirectory',
             allow_browse=0,
             allow_search=1,

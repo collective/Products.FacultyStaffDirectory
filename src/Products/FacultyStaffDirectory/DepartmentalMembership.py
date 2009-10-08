@@ -8,14 +8,16 @@ from Products.Archetypes.atapi import *
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces.departmentalmembership import IDepartmentalMembership
 from zope.interface import implements
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 schema = Schema((
 
     StringField(
         name='position',
         widget=StringWidget(
-            label=u'Position',
-            label_msgid='FacultyStaffDirectory_label_position',
+            label=_(u"FacultyStaffDirectory_label_position", default=u"Position"),
             i18n_domain='FacultyStaffDirectory',
         )
     ),
@@ -23,8 +25,7 @@ schema = Schema((
     StringField(
         name='title',
         widget=StringWidget(
-            label=u'Title',
-            label_msgid='FacultyStaffDirectory_label_title',
+            label=_(u"FacultyStaffDirectory_label_title", default=u"Title"),
             i18n_domain='FacultyStaffDirectory',
             visible={'edit': 'invisible', 'view': 'invisible' },
         )

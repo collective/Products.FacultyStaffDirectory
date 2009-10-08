@@ -13,6 +13,9 @@ from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFac
 from Products.CMFCore.permissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 schema =  ATContentTypeSchema.copy() + Schema((
 
@@ -20,8 +23,7 @@ schema =  ATContentTypeSchema.copy() + Schema((
         name='text',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
         widget=RichWidget(
-            label=u"Body Text",
-            label_msgid='FacultyStaffDirectory_label_text',
+            label=_(u"FacultyStaffDirectory_label_text", default=u"Body Text"),
             i18n_domain='FacultyStaffDirectory',
         ),
         default_output_type="text/x-html-safe",

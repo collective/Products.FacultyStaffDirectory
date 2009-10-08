@@ -15,6 +15,9 @@ from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finali
 from Products.membrane.interfaces import IPropertiesProvider
 from Products.membrane.utils import getFilteredValidRolesForPortal
 from Acquisition import aq_inner, aq_parent
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 schema = ATContentTypeSchema.copy() + Schema((
     LinesField('roles_',
@@ -26,11 +29,9 @@ schema = ATContentTypeSchema.copy() + Schema((
         multiValued=1,
         write_permission=ManageUsers,
         widget=MultiSelectionWidget(
-            label=u'Roles',
-            description=u"The roles all people in this directory will be granted site-wide",
+            label=_(u"FacultyStaffDirectory_label_FacultyStaffDirectoryRoles", default=u"Roles"),
+            description=_(u"FacultyStaffDirectory_description_FacultyStaffDirectoryRoles", default=u"The roles all people in this directory will be granted site-wide"),
             i18n_domain="FacultyStaffDirectory",
-            label_msgid='FacultyStaffDirectory_label_FacultyStaffDirectoryRoles',
-            description_msgid='FacultyStaffDirectory_description_FacultyStaffDirectoryRoles',
             ),
         ),
     IntegerField('personClassificationViewThumbnailWidth',
@@ -40,11 +41,9 @@ schema = ATContentTypeSchema.copy() + Schema((
         default=100,
         write_permission=ManageUsers,
         widget=IntegerWidget(
-            label=u'Width for thumbnails in classification view',
-            description=u"Show all person thumbnails with a fixed width (in pixels) within the classification view",
+            label=_(u"FacultyStaffDirectory_label_personClassificationViewThumbnailWidth", default=u"Width for thumbnails in classification view"),
+            description=_(u"FacultyStaffDirectory_description_personClassificationViewThumbnailWidth", default=u"Show all person thumbnails with a fixed width (in pixels) within the classification view"),
             i18n_domain="FacultyStaffDirectory",
-            label_msgid='FacultyStaffDirectory_label_personClassificationViewThumbnailWidth',
-            description_msgid='FacultyStaffDirectory_description_personClassificationViewThumbnailWidth',
             ),
         ),
     ))

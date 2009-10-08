@@ -10,14 +10,16 @@ from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finali
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces.committeemembership import ICommitteeMembership
 from zope.interface import implements
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 schema = ATContentTypeSchema.copy() + Schema((
 
     StringField(
         name='position',
         widget=StringWidget(
-            label=u'Position',
-            label_msgid='FacultyStaffDirectory_label_position',
+            label=_(u"FacultyStaffDirectory_label_position", default=u"Position"),
             i18n_domain='FacultyStaffDirectory',
         )
     ),
@@ -27,8 +29,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         default="Position",
         widget=StringWidget(
             visible={'edit':'invisible', 'view':'visible'},
-            label=u'Title',
-            label_msgid='FacultyStaffDirectory_label_title',
+            label=_(u"FacultyStaffDirectory_label_title", default=u"Title"),
             i18n_domain='FacultyStaffDirectory',
         ),
         accessor="Title"

@@ -16,14 +16,16 @@ from Products.FacultyStaffDirectory.interfaces.specialty import ISpecialty
 from Products.FacultyStaffDirectory.permissions import ASSIGN_SPECIALTIES_TO_PEOPLE
 
 from zope.interface import implements
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 schema = Schema((
 
     RelationField(
         name='people',
         widget=ReferenceBrowserWidget(
-            label=u'People',
-            label_msgid='FacultyStaffDirectory_label_people',
+            label=_(u"FacultyStaffDirectory_label_people", default=u"People"),
             i18n_domain='FacultyStaffDirectory',
             allow_browse=0,
             allow_search=1,
@@ -41,8 +43,7 @@ schema = Schema((
         name='overviewImage',
         schemata='Overview',
         widget=ImageWidget(
-            label=u"Overview image (used for specialty overview view)",
-            label_msgid='FacultyStaffDirectory_label_overview_image',
+            label=_(u"FacultyStaffDirectory_label_overview_image", default=u"Overview image (used for specialty overview view)"),
             i18n_domain='FacultyStaffDirectory',
             default_content_type='image/gif',
         ),
@@ -58,8 +59,7 @@ schema = Schema((
         schemata='Overview',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
         widget=RichWidget(
-            label=u"Overview text (used for specialty overview view)",
-            label_msgid='FacultyStaffDirectory_label_overview_text',
+            label=_(u"FacultyStaffDirectory_label_overview_text", default=u"Overview text (used for specialty overview view)"),
             i18n_domain='FacultyStaffDirectory',
         ),
         default_output_type="text/x-html-safe",

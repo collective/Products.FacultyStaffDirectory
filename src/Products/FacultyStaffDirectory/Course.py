@@ -11,6 +11,9 @@ from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
 from Products.FacultyStaffDirectory.interfaces.course import ICourse
 from zope.interface import implements
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 schema = ATContentTypeSchema.copy() + Schema((
 
@@ -18,8 +21,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         name='abbreviation',
         widget=StringWidget(
             size="5",
-            label=u'Abbreviation',
-            label_msgid='FacultyStaffDirectory_label_abbreviation',
+            label=_(u"FacultyStaffDirectory_label_abbreviation", default=u"Abbreviation"),
             i18n_domain='FacultyStaffDirectory',
         ),
         searchable=True
@@ -28,8 +30,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='number',
         widget=StringWidget(
-            label=u'Number',
-            label_msgid='FacultyStaffDirectory_label_number',
+            label=_(u"FacultyStaffDirectory_label_number", default=u"Number"),
             i18n_domain='FacultyStaffDirectory',
         ),
         searchable=True
@@ -39,8 +40,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         name='description',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
         widget=RichWidget(
-            label=u'Description',
-            label_msgid='FacultyStaffDirectory_label_description',
+            label=_(u"FacultyStaffDirectory_label_description", default=u"Description"),
             i18n_domain='FacultyStaffDirectory',
         ),
         searchable=True,
@@ -53,8 +53,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         name='suffix',
         widget=StringWidget(
             size="1",
-            label=u'Suffix',
-            label_msgid='FacultyStaffDirectory_label_suffix',
+            label=_(u"FacultyStaffDirectory_label_suffix", default=u"Suffix"),
             i18n_domain='FacultyStaffDirectory',
         )
     ),
@@ -62,10 +61,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='website',
         widget=StringWidget(
-            label=u"Course Website",
-            description="Example: http://www.example.com/",
-            label_msgid='FacultyStaffDirectory_label_website',
-            description_msgid='FacultyStaffDirectory_help_website',
+            label=_(u"FacultyStaffDirectory_label_website", default=u"Course Website"),
+            description=_(u"FacultyStaffDirectory_help_website", default=u"Example: http://www.example.com/"),
             i18n_domain='FacultyStaffDirectory',
         ),
         validators=('isURL',)

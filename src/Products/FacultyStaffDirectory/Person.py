@@ -28,6 +28,7 @@ from Products.CMFPlone.utils import safe_unicode
 from Products.membrane.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
 from Products.Relations.field import RelationField
 from Products.validation import validation
+from zope.i18nmessageid import MessageFactory
 from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
@@ -36,6 +37,8 @@ from Products.FacultyStaffDirectory.interfaces.person import IPersonModifiedEven
 from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFacultyStaffDirectory
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_DEPARTMENTS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, ASSIGN_SPECIALTIES_TO_PEOPLE, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 def resolvedGetObjPositionInParent(obj):
     """ since a chane was introduced in plone 3.3 via plone.indexer that causes
@@ -77,8 +80,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='firstName',
         widget=StringWidget(
-            label=u"First Name",
-            label_msgid='FacultyStaffDirectory_label_firstName',
+            label=_(u"FacultyStaffDirectory_label_firstName", default=u"First Name"),
             i18n_domain='FacultyStaffDirectory',
         ),
         required=True,
@@ -89,8 +91,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='middleName',
         widget=StringWidget(
-            label=u"Middle Name",
-            label_msgid='FacultyStaffDirectory_label_middleName',
+            label=_(u"FacultyStaffDirectory_label_middleName", default=u"Middle Name"),
             i18n_domain='FacultyStaffDirectory',
         ),
         required=False,
@@ -101,8 +102,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='lastName',
         widget=StringWidget(
-            label=u"Last Name",
-            label_msgid='FacultyStaffDirectory_label_lastName',
+            label=_(u"FacultyStaffDirectory_label_lastName", default=u"Last Name"),
             i18n_domain='FacultyStaffDirectory',
         ),
         required=True,
@@ -113,10 +113,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='suffix',
         widget=StringWidget(
-            label=u"Suffix",
-            description="Academic, professional, honorary, and social suffixes.",
-            label_msgid='FacultyStaffDirectory_label_suffix',
-            description_msgid='FacultyStaffDirectory_description_suffix',
+            label=_(u"FacultyStaffDirectory_label_suffix", default=u"Suffix"),
+            description=_(u"FacultyStaffDirectory_description_suffix", default=u"Academic, professional, honorary, and social suffixes."),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Basic Information",
@@ -127,8 +125,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         name='email',
         user_property=True,
         widget=StringWidget(
-            label=u'Email',
-            label_msgid='FacultyStaffDirectory_label_email',
+            label=_(u"FacultyStaffDirectory_label_email", default=u"Email"),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Contact Information",
@@ -139,10 +136,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     LinesField(
         name='jobTitles',
         widget=LinesField._properties['widget'](
-            label=u"Job Titles",
-            description="One per line",
-            label_msgid='FacultyStaffDirectory_label_jobTitles',
-            description_msgid='FacultyStaffDirectory_description_jobTitles',
+            label=_(u"FacultyStaffDirectory_label_jobTitles", default=u"Job Titles"),
+            description=_(u"FacultyStaffDirectory_description_jobTitles", default=u"One per line"),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Professional Information",
@@ -152,8 +147,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='officeAddress',
         widget=TextAreaWidget(
-            label=u"Office Street Address",
-            label_msgid='FacultyStaffDirectory_label_officeAddress',
+            label=_(u"FacultyStaffDirectory_label_officeAddress", default=u"Office Street Address"),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Contact Information",
@@ -163,8 +157,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='officeCity',
         widget=StringWidget(
-            label=u"Office City",
-            label_msgid='FacultyStaffDirectory_label_officeCity',
+            label=_(u"FacultyStaffDirectory_label_officeCity", default=u"Office City"),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Contact Information",
@@ -174,8 +167,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='officeState',
         widget=StringWidget(
-            label=u"Office State",
-            label_msgid='FacultyStaffDirectory_label_officeState',
+            label=_(u"FacultyStaffDirectory_label_officeState", default=u"Office State"),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Contact Information"
@@ -184,8 +176,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='officePostalCode',
         widget=StringWidget(
-            label=u"Office Postal Code",
-            label_msgid='FacultyStaffDirectory_label_officePostalCode',
+            label=_(u"FacultyStaffDirectory_label_officePostalCode", default=u"Office Postal Code"),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Contact Information"
@@ -194,10 +185,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='officePhone',
         widget=StringWidget(
-            label=u"Office Phone",
-            description="",
-            label_msgid='FacultyStaffDirectory_label_officePhone',
-            description_msgid='FacultyStaffDirectory_description_officePhone',
+            label=_(u"FacultyStaffDirectory_label_officePhone", default=u"Office Phone"),
+            description=_(u"FacultyStaffDirectory_description_officePhone", default=u""),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Contact Information",
@@ -208,8 +197,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         name='image',
         schemata="Basic Information",
         widget=ImageWidget(
-            label=u'Image',
-            label_msgid='FacultyStaffDirectory_label_image',
+            label=_(u"FacultyStaffDirectory_label_image", default=u"Image"),
             i18n_domain='FacultyStaffDirectory',
             default_content_type='image/gif',
         ),
@@ -224,8 +212,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         name='biography',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
         widget=RichWidget(
-            label=u'Biography',
-            label_msgid='FacultyStaffDirectory_label_biography',
+            label=_(u"FacultyStaffDirectory_label_biography", default=u"Biography"),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Professional Information",
@@ -238,8 +225,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     LinesField(
         name='education',
         widget=LinesField._properties['widget'](
-            label=u'Education',
-            label_msgid='FacultyStaffDirectory_label_education',
+            label=_(u"FacultyStaffDirectory_label_education", default=u"Education"),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Professional Information",
@@ -249,10 +235,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     LinesField(
         name='websites',
         widget=LinesField._properties['widget'](
-            label=u"Web Sites",
-            description="One per line. Example: http://www.example.com/",
-            label_msgid='FacultyStaffDirectory_label_websites',
-            description_msgid='FacultyStaffDirectory_description_websites',
+            label=_(u"FacultyStaffDirectory_label_websites", default=u"Web Sites"),
+            description=_(u"FacultyStaffDirectory_description_websites", default=u"One per line. Example: http://www.example.com/"),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Professional Information",
@@ -262,11 +246,9 @@ schema = ATContentTypeSchema.copy() + Schema((
     StringField(
         name='id',
         widget=StringWidget(
-            description=u"Example: abc123",
-            label=u"Access Account ID",
-            label_msgid='FacultyStaffDirectory_label_id',
-            description_msgid='FacultyStaffDirectory_description_id',
+            label=_(u"FacultyStaffDirectory_label_id", default=u"Access Account ID"),
             i18n_domain='FacultyStaffDirectory',
+            description=_(u"FacultyStaffDirectory_description_id", default=u"Example: abc123"),
         ),
         required=True,
         user_property=True,
@@ -277,9 +259,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     ComputedField(
         name='title',
         widget=ComputedField._properties['widget'](
-            label=u"Full Name",
+            label=_(u"FacultyStaffDirectory_label_fullName", default=u"Full Name"),
             visible={'edit': 'invisible', 'view': 'visible'},
-            label_msgid='FacultyStaffDirectory_label_fullName',
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Basic Information",
@@ -293,8 +274,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         vocabulary="_classificationReferences",
         widget=ReferenceWidget
         (
-            label=u'Classifications',
-            label_msgid='FacultyStaffDirectory_label_classifications',
+            label=_(u"FacultyStaffDirectory_label_classifications", default=u"Classifications"),
             i18n_domain='FacultyStaffDirectory',
         ),
         write_permission=ASSIGN_CLASSIFICATIONS_TO_PEOPLE,
@@ -306,8 +286,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     RelationField(
         name='departments',
         widget=ReferenceBrowserWidget(
-            label=u'Departments',
-            label_msgid='FacultyStaffDirectory_label_departments',
+            label=_(u"FacultyStaffDirectory_label_departments", default=u"Departments"),
             i18n_domain='FacultyStaffDirectory',
             base_query="_search_departments_in_this_fsd",
             allow_browse=0,
@@ -326,8 +305,7 @@ schema = ATContentTypeSchema.copy() + Schema((
         name='committees',
         widget=ReferenceBrowserWidget(
             visible={'edit': 'visible', 'view': 'visible'},
-            label=u'Committees',
-            label_msgid='FacultyStaffDirectory_label_committees',
+            label=_(u"FacultyStaffDirectory_label_committees", default=u"Committees"),
             i18n_domain='FacultyStaffDirectory',
             base_query="_search_committees_in_this_fsd",
             allow_browse=0,
@@ -345,8 +323,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     RelationField(
         name='specialties',
         widget=ReferenceBrowserWidget(
-            label=u'Specialties',
-            label_msgid='FacultyStaffDirectory_label_specialties',
+            label=_(u"FacultyStaffDirectory_label_specialties", default=u"Specialties"),
             i18n_domain='FacultyStaffDirectory',
             base_query="_search_specialties_in_this_fsd",
             allow_browse=0,
@@ -367,11 +344,8 @@ schema = ATContentTypeSchema.copy() + Schema((
         mode='w',
         write_permission=SetOwnPassword,
         widget=PasswordWidget(
-            label=u'Password',
-            description=u"Password for this person " \
-                         "(Leave blank if you don't want to change the password.)",
-            label_msgid='FacultyStaffDirectory_label_password',
-            description_msgid='FacultyStaffDirectory_description_password',
+            label=_(u"FacultyStaffDirectory_label_password", default=u"Password"),
+            description=_(u"FacultyStaffDirectory_description_password", default=u"Password for this person (Leave blank if you don't want to change the password.)"),
             i18n_domain='FacultyStaffDirectory',
             condition="python:here.facultystaffdirectory_tool.getUseInternalPassword() and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
         ),
@@ -384,11 +358,8 @@ schema = ATContentTypeSchema.copy() + Schema((
         mode='w',
         write_permission=SetOwnPassword,
         widget=PasswordWidget(
-            label=u'Confirm password',
-            description=u"Please re-enter the password. " \
-                         "(Leave blank if you don't want to change the password.)",
-            label_msgid='FacultyStaffDirectory_label_confirmPassword',
-            description_msgid='FacultyStaffDirectory_description_confirmPassword',
+            label=_(u"FacultyStaffDirectory_label_confirmPassword", default=u"Confirm password"),
+            description=_(u"FacultyStaffDirectory_description_confirmPassword", default=u"Please re-enter the password. (Leave blank if you don't want to change the password.)"),
             i18n_domain='FacultyStaffDirectory',
             condition="python:here.facultystaffdirectory_tool.getUseInternalPassword() and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
         ),
@@ -397,10 +368,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     
     StringField('userpref_language',
         widget=SelectionWidget(
-            label=u"Language",
-            label_msgid="label_language",
-            description=u"Your preferred language.",
-            description_msgid="help_preferred_language",
+            label=_(u"label_language", default=u"Language"),
+            description=_(u"help_preferred_language", default=u"Your preferred language."),
             i18n_domain='plone',
             condition="python:'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
         ),
@@ -412,10 +381,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     
     StringField('userpref_wysiwyg_editor',
         widget=SelectionWidget(
-            label=u"Content editor",
-            label_msgid="label_content_editor",
-            description=u"Select the content editor that you would like to use. Note that content editors often have specific browser requirements.",
-            description_msgid="help_content_editor",
+            label=_(u"label_content_editor", default=u"Content editor"),
+            description=_(u"help_content_editor", default=u"Select the content editor that you would like to use. Note that content editors often have specific browser requirements."),
             i18n_domain='plone',
             format="select",
             condition="python:'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
@@ -428,11 +395,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     
     BooleanField('userpref_ext_editor',
         widget=BooleanWidget(
-            label=u"Enable external editing",
-            label_msgid="label_ext_editor",
-            description=u"When checked, an icon will be made visible on each page which allows you to edit content with your favorite editor instead of using browser-based editors. This requires an additional application called ExternalEditor installed client-side. " \
-                         "Ask your administrator for more information if needed.",
-            description_msgid="help_content_ext_editor",
+            label=_(u"label_ext_editor", default=u"Enable external editing"),
+            description=_(u"help_content_ext_editor", default=u"When checked, an icon will be made visible on each page which allows you to edit content with your favorite editor instead of using browser-based editors. This requires an additional application called ExternalEditor installed client-side. Ask your administrator for more information if needed."),
             i18n_domain='plone',
             condition="python:here.portal_properties.site_properties.ext_editor and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()",
             ),
@@ -443,10 +407,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     
     StringField('userpref_portal_skin',
         widget=SelectionWidget(
-            label=u"Look",
-            label_msgid="label_look",
-            description=u"Appearance of the site.",
-            description_msgid="help_look",
+            label=_(u"label_look", default=u"Look"),
+            description=_(u"help_look", default=u"Appearance of the site."),
             i18n_domain='plone',
             format="select",
             condition="python:here.portal_skins.allow_any and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()",
@@ -459,10 +421,8 @@ schema = ATContentTypeSchema.copy() + Schema((
     
     BooleanField('userpref_invisible_ids',
         widget=BooleanWidget(
-            label=u"Allow editing of Short Names",
-            label_msgid="label_edit_short_names",
-            description=u"Determines if Short Names (also known as IDs) are changable when editing items. If Short Names are not displayed, they will be generated automatically.",
-            description_msgid="help_display_names",
+            label=_(u"label_edit_short_names", default=u"Allow editing of Short Names"),
+            description=_(u"help_display_names", default=u"Determines if Short Names (also known as IDs) are changable when editing items. If Short Names are not displayed, they will be generated automatically."),
             i18n_domain='plone',
             condition="python:here.portal_properties.site_properties.visible_ids and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
             ),
@@ -475,10 +435,8 @@ schema = ATContentTypeSchema.copy() + Schema((
         name='assistants',
         widget=ReferenceBrowserWidget
         (
-            label=u'Personal Assistant(s)',
-            label_msgid='FacultyStaffDirectory_label_assistants',
-            description=u"Assistants can edit your directory entry.",
-            description_msgid="FacultyStaffDirectory_description_assistants",
+            label=_(u"FacultyStaffDirectory_label_assistants", default=u"Personal Assistant(s)"),
+            description=_(u"FacultyStaffDirectory_description_assistants", default=u"Assistants can edit your directory entry."),
             i18n_domain='FacultyStaffDirectory',
             allow_browse=0,
             allow_search=1,

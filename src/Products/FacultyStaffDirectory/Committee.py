@@ -16,14 +16,16 @@ from Products.membrane.interfaces import IPropertiesProvider
 from Products.FacultyStaffDirectory.interfaces.committee import ICommittee
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_COMMITTIES_TO_PEOPLE
+from zope.i18nmessageid import MessageFactory
+
+_ = MessageFactory('FacultyStaffDirectory')
 
 schema = Schema((
 
     RelationField(
         name='members',
         widget=ReferenceBrowserWidget(
-            label=u'Members',
-            label_msgid='FacultyStaffDirectory_label_members',
+            label=_(u"FacultyStaffDirectory_label_members", default=u"Members"),
             i18n_domain='FacultyStaffDirectory',
             allow_browse=0,
             allow_search=1,
