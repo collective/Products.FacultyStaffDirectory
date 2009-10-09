@@ -9,19 +9,14 @@
 from setuptools import setup, find_packages
 import os
 
-try:
-    version_file = open(os.path.join("Products", "FacultyStaffDirectory", "version.txt"))
-except IOError:
-    # For development. When the egg is built, the src folder disappears.
-    version_file = open(os.path.join("src", "Products", "FacultyStaffDirectory", "version.txt"))
-
-version = version_file.read().strip()
+fsd_base = os.path.join("Products", "FacultyStaffDirectory")
+version = open(os.path.join(fsd_base, "version.txt")).read().strip()
 
 setup(name='Products.FacultyStaffDirectory',
       version=version,
       description="Provides content types for creating and organizing personnel directories within educational institutions. Integrates with Plone's users and groups infrastructure and supports an extensibility framework for custom requirements.",
-      long_description=open("src/Products/FacultyStaffDirectory/HISTORY.txt").read() + "\n\n" +
-                       open("src/Products/FacultyStaffDirectory/README.txt").read(),
+      long_description=open(os.path.join(fsd_base, "HISTORY.txt")).read() + "\n\n" +
+                       open(os.path.join(fsd_base, "README.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
@@ -33,8 +28,7 @@ setup(name='Products.FacultyStaffDirectory',
       author_email='support@weblion.psu.edu',
       url='https://weblion.psu.edu/svn/weblion/weblion/Products.FacultyStaffDirectory',
       license='GPL',
-      packages=find_packages('src'),
-      package_dir={'': 'src'},
+      packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['Products'],
       include_package_data=True,
       zip_safe=False,

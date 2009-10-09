@@ -1,0 +1,446 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FacultyStaffDirectory\n"
+"POT-Creation-Date: 2009-10-08 21:42+0000\n"
+"PO-Revision-Date: 2008-08-14 02:52+0000\n"
+"Last-Translator: H. Turgut Uyar <uyar@itu.edu.tr>\n"
+"Language-Team: H. Turgut Uyar <uyar@itu.edu.tr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: tr\n"
+"Language-Name: Türkçe\n"
+"Preferred-Encodings: utf-8 latin5\n"
+"Domain: FacultyStaffDirectory\n"
+"X-Is-Fallback-For: tr-tr\n"
+
+#. Default: "Assign a position"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+msgid "FacultyStaffDirectory_assignPosition"
+msgstr "Bir pozisyon ata"
+
+#. Default: "Assign a research topic"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+msgid "FacultyStaffDirectory_assignResearchTopic"
+msgstr "Bir araştırma konusu ata"
+
+#. Default: "Assign a role"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/committee_view.pt:43
+msgid "FacultyStaffDirectory_assignrole"
+msgstr "Bir rol ata"
+
+#. Default: "The roles all people in this directory will be granted site-wide"
+#: FacultyStaffDirectory/FacultyStaffDirectory.py:33
+msgid "FacultyStaffDirectory_description_FacultyStaffDirectoryRoles"
+msgstr "Bu rehberdeki herkese bütün sitede geçerli olmak üzere  verilecek rol"
+
+#. Default: "Assistants can edit your directory entry."
+#: FacultyStaffDirectory/Person.py:439
+msgid "FacultyStaffDirectory_description_assistants"
+msgstr ""
+
+#. Default: "Please re-enter the password. (Leave blank if you don't want to change the password.)"
+#: FacultyStaffDirectory/Person.py:362
+msgid "FacultyStaffDirectory_description_confirmPassword"
+msgstr "Lütfen parolayı yeniden yazın. (Parolayı değiştirmek istemiyorsanız boş bırakın.)"
+
+#. Default: "Integrated types appear on the right; non-integrated on the left. You may move selected items from one column to the other."
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:123
+msgid "FacultyStaffDirectory_description_enableMembraneTypes"
+msgstr "Bütünleştirilen tipler sağda, bütünleştirilmeyenler solda görünür. Seçilen nesneleri bir sütundan diğerine aktarabilirsiniz."
+
+#. Default: "Example: abc123"
+#: FacultyStaffDirectory/Person.py:251
+msgid "FacultyStaffDirectory_description_id"
+msgstr "Örnek: abc123"
+
+#. Default: "One per line"
+#: FacultyStaffDirectory/Person.py:140
+msgid "FacultyStaffDirectory_description_jobTitles"
+msgstr "Her satıra bir tane"
+
+#. Default: "Format email addresses like \"someone AT here DOT com\" rather than using Plone's default spam armoring."
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:75
+#, fuzzy
+msgid "FacultyStaffDirectory_description_obfuscateEmailAddressesDescription"
+msgstr "E-posta adresleri Plone'un kendi spam koruması yerine \"birisi AT burası DOT com\" gibi düzenlensin."
+
+#: FacultyStaffDirectory/Person.py:189
+msgid "FacultyStaffDirectory_description_officePhone"
+msgstr ""
+
+#. Default: "Password for this person (Leave blank if you don't want to change the password.)"
+#: FacultyStaffDirectory/Person.py:348
+msgid "FacultyStaffDirectory_description_password"
+msgstr "Bu kişinin parolası. (Parolayı değiştirmek istemiyorsanız boş bırakın.)"
+
+#. Default: "Show all person thumbnails with a fixed width (in pixels) within the classification view"
+#: FacultyStaffDirectory/FacultyStaffDirectory.py:45
+msgid "FacultyStaffDirectory_description_personClassificationViewThumbnailWidth"
+msgstr "Sınıflandırma görünümünde herkesin küçük resmi sabit bir genişlikte (benek cinsinden) gösterilsin."
+
+#. Default: "A regular expression that a Persons ID must match. Defaults to the value specified in portal_registration."
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:98
+#, fuzzy
+msgid "FacultyStaffDirectory_description_personIdFormat"
+msgstr "Bir kişinin kimlik bilgisinin uyması gereken bir düzenli deyim. Varsayılan değeri portal_registration aracında belirtildiği şekildedir."
+
+#. Default: "The error message returned when the Person ID entered does not match the specified format"
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:111
+msgid "FacultyStaffDirectory_description_personIdFormatErrorMessage"
+msgstr "Yazılan kişi kimlik değeri belirtilen şekle uymuyorsa döndürülecek hata iletisi"
+
+#. Default: "The name of the ID used by your institution"
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:86
+msgid "FacultyStaffDirectory_description_personIdLabel"
+msgstr "Kurumunuzun kullandığı kimlik ismi"
+
+#. Default: "Describe the above phone number rule in a human-readable format: for example, (555) 555-5555."
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:64
+msgid "FacultyStaffDirectory_description_personPhoneNumberDescription"
+msgstr "Yukarıdaki telefon numarası kuralını insanların anlayabileceği bir şekilde tanımlayın: örneğin (555) 555-5555."
+
+#. Default: "A regular expression that a Person's phone number must match. Leave blank to disable phone number validation."
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:52
+msgid "FacultyStaffDirectory_description_personPhoneNumberFormat"
+msgstr "Bir kişinin telefon numarasının uyması gereken bir düzenli deyim. Telefon numaralarının doğrulanmasına gerek görmüyorsanız boş bırakın."
+
+#. Default: "Academic, professional, honorary, and social suffixes."
+#: FacultyStaffDirectory/Person.py:117
+msgid "FacultyStaffDirectory_description_suffix"
+msgstr "Akademik, mesleki, onursal ve sosyal sonekler."
+
+#. Default: "Should user passwords be stored as part of the Person? If you're using another PAS plugin to handle authorization, you'll want to turn this off."
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:137
+msgid "FacultyStaffDirectory_description_useInternalPassword"
+msgstr "Kullanıcı parolaları kişi bilgileriyle birlikte kaydedilsin mi? Asıllama için başka bir PAS eklentisi kullanıyorsanız bunu istemezsiniz."
+
+#. Default: "One per line. Example: http://www.example.com/"
+#: FacultyStaffDirectory/Person.py:239
+msgid "FacultyStaffDirectory_description_websites"
+msgstr "Her satıra bir tane. Sözgelimi: http://www.example.com/"
+
+#. Default: "Edit position"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+msgid "FacultyStaffDirectory_editPosition"
+msgstr "Pozisyon düzenle"
+
+#. Default: "Edit research topic"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+msgid "FacultyStaffDirectory_editResearchTopic"
+msgstr "Araştırma konusu düzenle"
+
+#. Default: "Edit role"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/committee_view.pt:42
+msgid "FacultyStaffDirectory_editrole"
+msgstr "Rol düzenle"
+
+#. Default: "Email"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/classification_tabular_view.pt:56
+msgid "FacultyStaffDirectory_email"
+msgstr "E-posta"
+
+#. Default: "Example: http://www.example.com/"
+#: FacultyStaffDirectory/Course.py:65
+msgid "FacultyStaffDirectory_help_website"
+msgstr "Örneğin: http://www.example.com/"
+
+#. Default: "Roles"
+#: FacultyStaffDirectory/FacultyStaffDirectory.py:32
+msgid "FacultyStaffDirectory_label_FacultyStaffDirectoryRoles"
+msgstr "Roller"
+
+#. Default: "Abbreviation"
+#: FacultyStaffDirectory/Course.py:24
+msgid "FacultyStaffDirectory_label_abbreviation"
+msgstr "Kısaltma"
+
+#. Default: "Assistants:"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+#, fuzzy
+msgid "FacultyStaffDirectory_label_assistants"
+msgstr "Yardımcılar"
+
+#. Default: "Biography:"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+#, fuzzy
+msgid "FacultyStaffDirectory_label_biography"
+msgstr "Biyografi"
+
+#. Default: "${fullName} is an assistant to"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+msgid "FacultyStaffDirectory_label_bosses"
+msgstr "${fullname} şu kişinin asistanıdır:"
+
+#. Default: "Classifications"
+#: FacultyStaffDirectory/Person.py:277
+msgid "FacultyStaffDirectory_label_classifications"
+msgstr "Sınıflandırmalar"
+
+#. Default: "Committees"
+#: FacultyStaffDirectory/Person.py:308
+msgid "FacultyStaffDirectory_label_committees"
+msgstr "Komisyonlar"
+
+#. Default: "Confirm password"
+#: FacultyStaffDirectory/Person.py:361
+msgid "FacultyStaffDirectory_label_confirmPassword"
+msgstr "Parolayı onayla"
+
+#. Default: "Courses:"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+#, fuzzy
+msgid "FacultyStaffDirectory_label_courses"
+msgstr "Dersler"
+
+#. Default: "Departments:"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+#, fuzzy
+msgid "FacultyStaffDirectory_label_departments"
+msgstr "Bölümler"
+
+#. Default: "Description"
+#: FacultyStaffDirectory/Course.py:43
+msgid "FacultyStaffDirectory_label_description"
+msgstr "Tanım"
+
+#. Default: "Education:"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+#, fuzzy
+msgid "FacultyStaffDirectory_label_education"
+msgstr "Eğitim"
+
+#. Default: "Email"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+msgid "FacultyStaffDirectory_label_email"
+msgstr "E-posta"
+
+#. Default: "Select the content types to integrate with Plone's users and groups"
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:122
+msgid "FacultyStaffDirectory_label_enableMembraneTypes"
+msgstr "Plone'un kullanıcı ve gruplarına bütünleşecek içerik tiplerini seçin"
+
+#. Default: "First Name"
+#: FacultyStaffDirectory/Person.py:83
+msgid "FacultyStaffDirectory_label_firstName"
+msgstr "Önadı"
+
+#. Default: "Full Name"
+#: FacultyStaffDirectory/Person.py:262
+msgid "FacultyStaffDirectory_label_fullName"
+msgstr "Tam Adı"
+
+#. Default: "Access Account ID"
+#: FacultyStaffDirectory/Person.py:249
+msgid "FacultyStaffDirectory_label_id"
+msgstr "Kullanıcı Hesap Kimliği"
+
+#. Default: "Image"
+#: FacultyStaffDirectory/Person.py:200
+msgid "FacultyStaffDirectory_label_image"
+msgstr "Resim"
+
+#. Default: "Job Titles"
+#: FacultyStaffDirectory/Person.py:139
+msgid "FacultyStaffDirectory_label_jobTitles"
+msgstr "İş Ünvanları"
+
+#. Default: "Last Name"
+#: FacultyStaffDirectory/Person.py:105
+msgid "FacultyStaffDirectory_label_lastName"
+msgstr "Soyadı"
+
+#. Default: "Members"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/committee_view.pt:29
+msgid "FacultyStaffDirectory_label_members"
+msgstr "Üyeler"
+
+#. Default: "Middle Name"
+#: FacultyStaffDirectory/Person.py:94
+msgid "FacultyStaffDirectory_label_middleName"
+msgstr "Orta Adı"
+
+#. Default: "Number"
+#: FacultyStaffDirectory/Course.py:33
+msgid "FacultyStaffDirectory_label_number"
+msgstr "Numara"
+
+#. Default: "Custom email obfuscation"
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:74
+msgid "FacultyStaffDirectory_label_obfuscateEmailAddressesDescription"
+msgstr "Özel e-posta koruması"
+
+#. Default: "Office Street Address"
+#: FacultyStaffDirectory/Person.py:150
+msgid "FacultyStaffDirectory_label_officeAddress"
+msgstr "Ofis Adresi"
+
+#. Default: "Office City"
+#: FacultyStaffDirectory/Person.py:160
+msgid "FacultyStaffDirectory_label_officeCity"
+msgstr "Ofis Şehri"
+
+#. Default: "Work"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+#, fuzzy
+msgid "FacultyStaffDirectory_label_officePhone"
+msgstr "Telefon"
+
+#. Default: "Office Postal Code"
+#: FacultyStaffDirectory/Person.py:179
+msgid "FacultyStaffDirectory_label_officePostalCode"
+msgstr "Ofis Posta Kodu"
+
+#. Default: "Office State"
+#: FacultyStaffDirectory/Person.py:170
+msgid "FacultyStaffDirectory_label_officeState"
+msgstr "Ofis Eyaleti"
+
+#. Default: "Overview image (used for specialty overview view)"
+#: FacultyStaffDirectory/Specialty.py:46
+msgid "FacultyStaffDirectory_label_overview_image"
+msgstr ""
+
+#. Default: "Overview text (used for specialty overview view)"
+#: FacultyStaffDirectory/Specialty.py:62
+msgid "FacultyStaffDirectory_label_overview_text"
+msgstr ""
+
+#. Default: "Password"
+#: FacultyStaffDirectory/Person.py:347
+msgid "FacultyStaffDirectory_label_password"
+msgstr "Parola"
+
+#. Default: "People"
+#: FacultyStaffDirectory/Classification.py:29
+msgid "FacultyStaffDirectory_label_people"
+msgstr "Kişiler"
+
+#. Default: "Width for thumbnails in classification view"
+#: FacultyStaffDirectory/FacultyStaffDirectory.py:44
+msgid "FacultyStaffDirectory_label_personClassificationViewThumbnailWidth"
+msgstr "Sınıflandırma görünümünde küçük resimlerin genişliği"
+
+#. Default: "Person ID format"
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:97
+msgid "FacultyStaffDirectory_label_personIdFormat"
+msgstr "Kişi kimlik formatı"
+
+#. Default: "Person ID format error message"
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:110
+msgid "FacultyStaffDirectory_label_personIdFormatErrorMessage"
+msgstr "Kişi kimlik formatı hata iletisi"
+
+#. Default: "Person ID Label"
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:85
+msgid "FacultyStaffDirectory_label_personIdLabel"
+msgstr "Kişi kimlik etiketi"
+
+#. Default: "Phone number example"
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:63
+msgid "FacultyStaffDirectory_label_personPhoneNumberDescription"
+msgstr "Telefon numarası örneği"
+
+#. Default: "Phone number format"
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:51
+msgid "FacultyStaffDirectory_label_personPhoneNumberFormat"
+msgstr "Telefon numarası formatı"
+
+#. Default: "Position"
+#: FacultyStaffDirectory/CommitteeMembership.py:22
+msgid "FacultyStaffDirectory_label_position"
+msgstr "Pozisyon"
+
+#. Default: "Research Interests:"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+#, fuzzy
+msgid "FacultyStaffDirectory_label_researchInterests"
+msgstr "Araştırma Alanları"
+
+#. Default: "Research Topic"
+#: FacultyStaffDirectory/SpecialtyInformation.py:22
+msgid "FacultyStaffDirectory_label_researchTopic"
+msgstr "Araştırma Konuları"
+
+#. Default: "Specialties"
+#: FacultyStaffDirectory/Person.py:326
+msgid "FacultyStaffDirectory_label_specialties"
+msgstr "Uzmanlık Alanları"
+
+#. Default: "Suffix"
+#: FacultyStaffDirectory/Course.py:56
+msgid "FacultyStaffDirectory_label_suffix"
+msgstr "Sonek"
+
+#. Default: "Body Text"
+#: FacultyStaffDirectory/PersonGrouping.py:26
+msgid "FacultyStaffDirectory_label_text"
+msgstr "Gövde Metni"
+
+#. Default: "Title"
+#: FacultyStaffDirectory/CommitteeMembership.py:32
+msgid "FacultyStaffDirectory_label_title"
+msgstr "Başlık"
+
+#. Default: "Person objects provide user passwords"
+#: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:136
+msgid "FacultyStaffDirectory_label_useInternalPassword"
+msgstr "Kişi nesneleri kullanıcı parolası sağlasın"
+
+#. Default: "Course Website"
+#: FacultyStaffDirectory/Course.py:64
+msgid "FacultyStaffDirectory_label_website"
+msgstr "Dersin Web Sitesi"
+
+#. Default: "Websites:"
+#: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
+#, fuzzy
+msgid "FacultyStaffDirectory_label_websites"
+msgstr "Web Siteleri"
+
+#. Default: "More about ${DYNAMIC_CONTENT}..."
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/classification_standard_view.pt:75
+msgid "FacultyStaffDirectory_moreAbout"
+msgstr "Daha fazla bilgi..."
+
+#. Default: "Name"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/classification_tabular_view.pt:50
+msgid "FacultyStaffDirectory_name"
+msgstr "İsim"
+
+#. Default: "People"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/fsd_atoz_view.pt:11
+msgid "FacultyStaffDirectory_people"
+msgstr "Kişiler"
+
+#. Default: "Phone"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/classification_tabular_view.pt:53
+msgid "FacultyStaffDirectory_phone"
+msgstr "Telefon"
+
+#. Default: "Research Topic"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/department_tabular_view.pt:24
+msgid "FacultyStaffDirectory_researchTopic"
+msgstr "Araştırma Konusu"
+
+#. Default: "People specializing in this area"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/specialty_view.pt:41
+msgid "FacultyStaffDirectory_specialtyMembers"
+msgstr "Bu alanda uzmanlaşan kişiler"
+
+#. Default: "Subspecialties"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/specialty_view.pt:27
+msgid "FacultyStaffDirectory_subspecialties"
+msgstr "Altuzmanlıklar"
+
+#. Default: "Up one level"
+#: FacultyStaffDirectory/skins/FacultyStaffDirectory/classification_standard_view.pt:16
+msgid "go_to_parent_url"
+msgstr "Bir düzey yukarı"
+
+#. Default: "Can manage personnel"
+#: FacultyStaffDirectory/sharing.py:14
+msgid "title_can_manage_personnel"
+msgstr ""
+
