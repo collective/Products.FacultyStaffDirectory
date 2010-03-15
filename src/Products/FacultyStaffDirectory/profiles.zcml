@@ -1,6 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="FacultyStaffDirectory">
 
   <genericsetup:registerProfile
@@ -9,6 +10,8 @@
       directory="profiles/default"
       description="Extension profile for FacultyStaffDirectory Product."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      i18n:attributes="title gs_profiles_default_title;
+                       description gs_profiles_default_description;"
       />
 
   <genericsetup:registerProfile
@@ -18,6 +21,8 @@
       description="Removes FacultyStaffDirectory."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      i18n:attributes="title gs_profiles_uninstall_title;
+                       description gs_profiles_uninstall_description;"
       />
 
 </configure>
