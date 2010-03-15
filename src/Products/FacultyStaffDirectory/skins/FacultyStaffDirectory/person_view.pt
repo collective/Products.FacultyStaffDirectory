@@ -28,21 +28,21 @@
 
 
 <h1 class="fn n">
-  <span class="given-name" tal:content="context/getFirstName">[First Name]</span>
-  <span class="additional-name" tal:content="context/getMiddleName | nothing">[Middle Name]</span>
-  <span class="family-name" tal:content="context/getLastName">[Last Name]</span>
-  <span class="honorific-suffix" tal:content="context/getSuffix">[ suffix i.e. Dr]</span>
+  <span class="given-name" tal:content="context/getFirstName"><tal:comment replace="nothing">[First Name]</tal:comment></span>
+  <span class="additional-name" tal:content="context/getMiddleName | nothing"><tal:comment replace="nothing">[Middle Name]</tal:comment></span>
+  <span class="family-name" tal:content="context/getLastName"><tal:comment replace="nothing">[Last Name]</tal:comment></span>
+  <span class="honorific-suffix" tal:content="context/getSuffix"><tal:comment replace="nothing">[ suffix i.e. Dr]</tal:comment></span>
 </h1>
-<p tal:condition="context/getJobTitles" class="title" tal:repeat="jobTitle context/getJobTitles" tal:content="jobTitle">[job title]</p>
+<p tal:condition="context/getJobTitles" class="title" tal:repeat="jobTitle context/getJobTitles" tal:content="jobTitle"><tal:comment replace="nothing">[job title]</tal:comment></p>
                              
 <span class="adr">
 	<span class="street-address" tal:content="structure python:context.getOfficeAddress().replace('\n', '<br />')" /><br />
-	<span class="locality" tal:content="context/getOfficeCity" >[office city]</span>
+	<span class="locality" tal:content="context/getOfficeCity" ><tal:comment replace="nothing">[office city]</tal:comment></span>
 	<tal:block tal:condition="context/getOfficeState">, </tal:block>
-	<span class="region" tal:content="context/getOfficeState">[office state]</span> 
-	<span class="postal-code" tal:content="context/getOfficePostalCode">[postal zip code]</span>
+	<span class="region" tal:content="context/getOfficeState"><tal:comment replace="nothing">[office state]</tal:comment></span> 
+	<span class="postal-code" tal:content="context/getOfficePostalCode"><tal:comment replace="nothing">[postal zip code]</tal:comment></span>
 </span>
-<tal:comment tal:replace="nothing">***** I put the class=email in a span before the a tag since the microformat spec doesn't say i can't do that </tal:comment>
+<tal:comment replace="nothing">***** I put the class=email in a span before the a tag since the microformat spec doesn't say i can't do that </tal:comment>
                 <div tal:condition="context/getEmail">
                     <span i18n:translate="FacultyStaffDirectory_label_email">Email</span>:
                     <span tal:attributes="class string:email" tal:content="structure python:context.spamProtectFSD(context.getEmail())" />
@@ -50,7 +50,7 @@
                 </div>
  <span tal:condition="context/getOfficePhone" class="tel officePhone">
 	<span class="type" i18n:translate="FacultyStaffDirectory_label_officePhone">Work</span>:
-	<span class="value" tal:content="context/getOfficePhone">[office phone number]</span>
+	<span class="value" tal:content="context/getOfficePhone"><tal:comment replace="nothing">[office phone number]</tal:comment></span>
  </span>
 
 
@@ -162,7 +162,7 @@
                 <li tal:define="url assistant/absolute_url;
                                 name assistant/Title">
                   <a tal:attributes="href url"
-                     tal:content="name">Assistant's Full Name</a>
+                     tal:content="name"><tal:comment replace="nothing">Assistant's Full Name</tal:comment></a>
                 </li>
               </ul>
             </div>
@@ -178,7 +178,7 @@
                 <li tal:define="url boss/absolute_url;
                                 name boss/Title">
                   <a tal:attributes="href url"
-                     tal:content="name">Boss' Full Name</a>
+                     tal:content="name"><tal:comment replace="nothing">Boss' Full Name</tal:comment></a>
                 </li>
               </ul>
             </div>

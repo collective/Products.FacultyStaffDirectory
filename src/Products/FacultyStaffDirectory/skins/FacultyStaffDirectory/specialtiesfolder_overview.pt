@@ -1,18 +1,25 @@
 <metal:block define-macro="master">
-    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-          lang="en"
+
+    <html xmlns="http://www.w3.org/1999/xhtml" 
+          xml:lang="en" lang="en"
           metal:use-macro="here/main_template/macros/master"
+          xmlns:tal="http://xml.zope.org/namespaces/tal"
+          xmlns:i18n="http://xml.zope.org/namespaces/i18n"
           i18n:domain="FacultyStaffDirectory">
-        <head />
-        <body>
-    <metal:fill fill-slot="main">
+     <head />
+
+     <body>
+
+      <metal:fill fill-slot="main">
+
         <div class="facultyStaffDirectory">
+
             <div metal:use-macro="here/document_actions/macros/document_actions">
                 Document actions (print, sendto etc)
             </div>
     
             <h1 tal:content="object_title" class="documentFirstHeading">
-              Title or id
+              <tal:comment replace="nothing">Title or id</tal:comment>
             </h1>
     
             <p class="documentDescription"
@@ -28,20 +35,25 @@
                     </dt>
                     <dd>
                         <table tal:define="obj speciality/getObject">
-                            <td tal:content="structure obj/getOverviewText" style="vertical-align: top"/>
-                            <td style="vertical-align: top; width: 200px" 
-                                tal:define="image obj/getOverviewImage">
-                                <img tal:condition="image"
-                                     tal:attributes="src string:${image/absolute_url}" 
-                                />
-
-                            </td>
+                            <tr>
+                                <td tal:content="structure obj/getOverviewText" style="vertical-align: top" />
+                                <td style="vertical-align: top; width: 200px" 
+                                    tal:define="image obj/getOverviewImage">
+                                    <img tal:condition="image"
+                                         tal:attributes="src string:${image/absolute_url}" />
+                                </td>
+                            </tr>
                         </table>
-                    <dd>
+                    </dd>
                 </tal:loop>
             </dl>
-    
-    </metal:fill>
-    </body>
+
+        </div>
+       
+      </metal:fill>
+
+     </body>
+
     </html>
+
 </metal:block>

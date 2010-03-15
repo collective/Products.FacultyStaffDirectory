@@ -105,7 +105,7 @@
                       
 
             <div class="documentDescription" tal:content="structure authorinfo/description">
-                Author description.
+                <tal:comment replace="nothing">Author description.</tal:comment>
             </div>
 
             <div class="visualClear"><!-- --></div>
@@ -245,10 +245,10 @@
                             <tr>
                                 <td>
                                     <a href="" tal:attributes="href item/getURL"
-                                       tal:content="item/pretty_title_or_id">title</a>
+                                       tal:content="item/pretty_title_or_id"><tal:comment replace="nothing">title</tal:comment></a>
                                 </td>
                                 <td tal:content="python:toLocalizedTime(item.Date)">
-                                    Date
+                                    <tal:comment replace="nothing">Date</tal:comment>
                                 </td>
                             </tr>
                         </tal:repeat>

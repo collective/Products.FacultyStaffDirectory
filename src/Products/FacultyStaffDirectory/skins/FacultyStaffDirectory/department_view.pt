@@ -6,7 +6,8 @@
         <head />
         <body>
     <metal:fill fill-slot="main"
-                tal:define="directory context/facultystaffdirectory_tool/getDirectoryRoot;                             allClassifications python:[c.getObject() for c in directory.getClassifications()];
+                tal:define="directory context/facultystaffdirectory_tool/getDirectoryRoot;
+                            allClassifications python:[c.getObject() for c in directory.getClassifications()];
                             classificationsInRequest request/classification|nothing;
                             classifications python:classificationsInRequest and [directory[c] for c in isinstance(classificationsInRequest, basestring) and [classificationsInRequest] or classificationsInRequest] or allClassifications; 
                            ">
@@ -16,7 +17,7 @@
             </div>
     
             <h1 tal:content="object_title" class="documentFirstHeading">
-              Title or id
+              <tal:comment replace="nothing">Title or id</tal:comment>
             </h1>
     
             <p class="documentDescription" 
