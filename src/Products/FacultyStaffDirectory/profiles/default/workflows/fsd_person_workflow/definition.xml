@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="fsd_person_workflow"
+<dc-workflow xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+             i18n:domain="plone"
+             workflow_id="fsd_person_workflow"
              title="[FacultyStaffDirectory] Person workflow"
+             description=""
              state_variable="review_state"
-             initial_state="active">
+             initial_state="active"
+             i18n:attributes="title; description">
              
  <permission>Access contents information</permission>
  <permission>View</permission>
@@ -18,7 +22,7 @@
  <permission>FacultyStaffDirectory: Assign Specialties to People</permission>
  <permission>Relations: Manage content relations</permission> 
  
- <state state_id="active" title="Active">
+ <state state_id="active" title="Active" i18n:attributes="title">
   <exit-transition transition_id="deactivate"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>
