@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
-<object name="portal_controlpanel" meta_type="Plone Control Panel Tool">
+<object name="portal_controlpanel"
+        meta_type="Plone Control Panel Tool"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="plone">
      <configlet title="Personal Preferences" action_id="fsdMemberPrefs" appId="FacultyStaffDirctory"
-        category="Member" condition_expr=""
+        category="Member" condition_expr="" i18n:attributes="title"
         url_expr="python:portal.facultystaffdirectory_tool.fsdMemberProfile()" visible="True">
         <permission>Set own properties</permission>
      </configlet>
@@ -9,7 +12,7 @@
      <configlet title="Faculty/Staff Directory settings" action_id="fsdSettings"
         appId="FacultyStaffDirctory" category="Products" condition_expr=""
         url_expr="string:${portal_url}/@@fsd-controlpanel"
-        visible="True">
+        visible="True" i18n:attributes="title">
         <permission>Manage portal</permission>
      </configlet>
 </object>
