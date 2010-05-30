@@ -35,7 +35,7 @@ setup(name='Products.FacultyStaffDirectory',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
-          'archetypes.schemaextender<2.0',
+          'archetypes.schemaextender<3.0',
           'Products.Relations==0.8.1',
           'Products.membrane>=1.1b1,<=1.1',
       ],

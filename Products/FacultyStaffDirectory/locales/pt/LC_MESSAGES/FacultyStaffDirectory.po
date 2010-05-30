@@ -20,7 +20,7 @@ msgstr ""
 #. Default: "Assign a position"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
 msgid "FacultyStaffDirectory_assignPosition"
-msgstr "Indique a funcÆo"
+msgstr "Indique a funcío"
 
 #. Default: "Assign a research topic"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
@@ -35,7 +35,7 @@ msgstr "Indique um papel"
 #. Default: "The roles all people in this directory will be granted site-wide"
 #: FacultyStaffDirectory/FacultyStaffDirectory.py:33
 msgid "FacultyStaffDirectory_description_FacultyStaffDirectoryRoles"
-msgstr "Os papis, abrangendo todo o s¡tio, que serÆo atribu¡dos a todos nesta directoria"
+msgstr "Os papéis, abrangendo todo o sítio, que serão atribuídos a todos nesta directoria"
 
 #. Default: "Assistants can edit your directory entry."
 #: FacultyStaffDirectory/Person.py:439
@@ -45,12 +45,12 @@ msgstr "Os assistentes podem modificar o seu perfil na directoria"
 #. Default: "Please re-enter the password. (Leave blank if you don't want to change the password.)"
 #: FacultyStaffDirectory/Person.py:362
 msgid "FacultyStaffDirectory_description_confirmPassword"
-msgstr "Por favor, re-introduza a senha (Deixe em branco se nÆo desejar alterar a senha)."
+msgstr "Por favor, re-introduza a senha (Deixe em branco se não desejar alterar a senha)."
 
 #. Default: "Integrated types appear on the right; non-integrated on the left. You may move selected items from one column to the other."
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:123
 msgid "FacultyStaffDirectory_description_enableMembraneTypes"
-msgstr "Os tipos integrados aparecem   direita: Os nÆo-integrados   esquerda. Pode seleccionar elementos de uma coluna para a outra."
+msgstr "Os tipos integrados aparecem   direita: Os não-integrados   esquerda. Pode seleccionar elementos de uma coluna para a outra."
 
 #. Default: "Example: abc123"
 #: FacultyStaffDirectory/Person.py:251
@@ -65,56 +65,56 @@ msgstr "Um por linha"
 #. Default: "Format email addresses like \"someone AT here DOT com\" rather than using Plone's default spam armoring."
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:75
 msgid "FacultyStaffDirectory_description_obfuscateEmailAddressesDescription"
-msgstr "Formata os enedreos email como \"algum AT algures PONTO com\" em vez de usar a formataÆo aversa a SPAM's por defeito do Plone"
+msgstr "Formata os enedreços email como \"alguém AT algures PONTO com\" em vez de usar a formataío aversa a SPAM's por defeito do Plone"
 
 #: FacultyStaffDirectory/Person.py:189
 msgid "FacultyStaffDirectory_description_officePhone"
-msgstr "Telefone (ExtensÆo)"
+msgstr "Telefone (Extensão)"
 
 #. Default: "Password for this person (Leave blank if you don't want to change the password.)"
 #: FacultyStaffDirectory/Person.py:348
 msgid "FacultyStaffDirectory_description_password"
-msgstr "Senha para esta pessoa Deixe em branco se nÆo desejar alterar a senha)."
+msgstr "Senha para esta pessoa Deixe em branco se não desejar alterar a senha)."
 
 #. Default: "Show all person thumbnails with a fixed width (in pixels) within the classification view"
 #: FacultyStaffDirectory/FacultyStaffDirectory.py:45
 msgid "FacultyStaffDirectory_description_personClassificationViewThumbnailWidth"
-msgstr "Mostrar as fotos pessoais, com uma largura fixa (Em pixis) dentro da vista de classificaÆo "
+msgstr "Mostrar as fotos pessoais, com uma largura fixa (Em pixéis) dentro da vista de classificaío "
 
 #. Default: "A regular expression that a Persons ID must match. Defaults to the value specified in portal_registration."
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:98
 msgid "FacultyStaffDirectory_description_personIdFormat"
-msgstr "Uma expressÆo Regular que valida o ID da Pessoa. Por defeito, assume o valor especificado em portal_registration"
+msgstr "Uma expressão Regular que valida o ID da Pessoa. Por defeito, assume o valor especificado em portal_registration"
 
 #. Default: "The error message returned when the Person ID entered does not match the specified format"
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:111
 msgid "FacultyStaffDirectory_description_personIdFormatErrorMessage"
-msgstr "A mensagem de erro afixada quando o ID da Pessoa nÆo iguala o formato especificado"
+msgstr "A mensagem de erro afixada quando o ID da Pessoa não iguala o formato especificado"
 
 #. Default: "The name of the ID used by your institution"
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:86
 msgid "FacultyStaffDirectory_description_personIdLabel"
-msgstr "O nome do ID utilizado pela sua organizaÆo"
+msgstr "O nome do ID utilizado pela sua organizaío"
 
 #. Default: "Describe the above phone number rule in a human-readable format: for example, (555) 555-5555."
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:64
 msgid "FacultyStaffDirectory_description_personPhoneNumberDescription"
-msgstr "Descreve a regra de n£mero de telefone acima indicada, mas em formato leg¡vel : Por exemplo 123456789 (1234)"
+msgstr "Descreve a regra de número de telefone acima indicada, mas em formato legível : Por exemplo 123456789 (1234)"
 
 #. Default: "A regular expression that a Person's phone number must match. Leave blank to disable phone number validation."
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:52
 msgid "FacultyStaffDirectory_description_personPhoneNumberFormat"
-msgstr "Uma expressÆo regular que valida o n£mero de telefone da Pessoa. Deixar em branco para desactivar a validaÆo do n£mero de telefone."
+msgstr "Uma expressão regular que valida o número de telefone da Pessoa. Deixar em branco para desactivar a validaío do número de telefone."
 
 #. Default: "Academic, professional, honorary, and social suffixes."
 #: FacultyStaffDirectory/Person.py:117
 msgid "FacultyStaffDirectory_description_suffix"
-msgstr "Sufixos acadmicos, profissionais, honor rios e sociais."
+msgstr "Sufixos académicos, profissionais, honor rios e sociais."
 
 #. Default: "Should user passwords be stored as part of the Person? If you're using another PAS plugin to handle authorization, you'll want to turn this off."
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:137
 msgid "FacultyStaffDirectory_description_useInternalPassword"
-msgstr "Devem as senhas ser conservadas como sendo parte da Pessoa ? (Se estiver a utilizar o PAS Plugin para gerir as autorizaäes, vai desejar deixar esta funÆo desligada)."
+msgstr "Devem as senhas ser conservadas como sendo parte da Pessoa ? (Se estiver a utilizar o PAS Plugin para gerir as autorizaçöes, vai desejar deixar esta funío desligada)."
 
 #. Default: "One per line. Example: http://www.example.com/"
 #: FacultyStaffDirectory/Person.py:239
@@ -124,7 +124,7 @@ msgstr "Um por linha. Exemplo : http://www.exemplo.com/"
 #. Default: "Edit position"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
 msgid "FacultyStaffDirectory_editPosition"
-msgstr "Alterar a funÆo"
+msgstr "Alterar a funío"
 
 #. Default: "Edit research topic"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
@@ -139,7 +139,7 @@ msgstr "Alterar o papel"
 #. Default: "Email"
 #: FacultyStaffDirectory/skins/FacultyStaffDirectory/classification_tabular_view.pt:56
 msgid "FacultyStaffDirectory_email"
-msgstr "Endereo email"
+msgstr "Endereço email"
 
 #. Default: "Example: http://www.example.com/"
 #: FacultyStaffDirectory/Course.py:65
@@ -149,12 +149,12 @@ msgstr "Exemplo : http://www.exemplo.com/"
 #. Default: "Roles"
 #: FacultyStaffDirectory/FacultyStaffDirectory.py:32
 msgid "FacultyStaffDirectory_label_FacultyStaffDirectoryRoles"
-msgstr "Papis"
+msgstr "Papéis"
 
 #. Default: "Abbreviation"
 #: FacultyStaffDirectory/Course.py:24
 msgid "FacultyStaffDirectory_label_abbreviation"
-msgstr "AbreviaÆo"
+msgstr "Abreviaío"
 
 #. Default: "Assistants:"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
@@ -169,17 +169,17 @@ msgstr "Biografia :"
 #. Default: "${fullName} is an assistant to"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
 msgid "FacultyStaffDirectory_label_bosses"
-msgstr "${fullName}  assistente de"
+msgstr "${fullName} é assistente de"
 
 #. Default: "Classifications"
 #: FacultyStaffDirectory/Person.py:277
 msgid "FacultyStaffDirectory_label_classifications"
-msgstr "Classificaäes"
+msgstr "Classificaçöes"
 
 #. Default: "Committees"
 #: FacultyStaffDirectory/Person.py:308
 msgid "FacultyStaffDirectory_label_committees"
-msgstr "Comit"
+msgstr "Comité"
 
 #. Default: "Confirm password"
 #: FacultyStaffDirectory/Person.py:361
@@ -199,12 +199,12 @@ msgstr "Departamentos :"
 #. Default: "Description"
 #: FacultyStaffDirectory/Course.py:43
 msgid "FacultyStaffDirectory_label_description"
-msgstr "DescriÆo"
+msgstr "Descriío"
 
 #. Default: "Education:"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
 msgid "FacultyStaffDirectory_label_education"
-msgstr "EducaÆo :"
+msgstr "Educaío :"
 
 #. Default: "Email"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
@@ -214,12 +214,12 @@ msgstr "Email"
 #. Default: "Select the content types to integrate with Plone's users and groups"
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:122
 msgid "FacultyStaffDirectory_label_enableMembraneTypes"
-msgstr "Escolha o tipo de conte£dos a integrar com os Utilizadores e Grupos do Plone"
+msgstr "Escolha o tipo de conteúdos a integrar com os Utilizadores e Grupos do Plone"
 
 #. Default: "First Name"
 #: FacultyStaffDirectory/Person.py:83
 msgid "FacultyStaffDirectory_label_firstName"
-msgstr "Nome pr¢prio"
+msgstr "Nome próprio"
 
 #. Default: "Full Name"
 #: FacultyStaffDirectory/Person.py:262
@@ -239,7 +239,7 @@ msgstr "Foto"
 #. Default: "Job Titles"
 #: FacultyStaffDirectory/Person.py:139
 msgid "FacultyStaffDirectory_label_jobTitles"
-msgstr "T¡tulos profissionais"
+msgstr "Títulos profissionais"
 
 #. Default: "Last Name"
 #: FacultyStaffDirectory/Person.py:105
@@ -259,7 +259,7 @@ msgstr "Nome do meio"
 #. Default: "Number"
 #: FacultyStaffDirectory/Course.py:33
 msgid "FacultyStaffDirectory_label_number"
-msgstr "N£mero"
+msgstr "Número"
 
 #. Default: "Custom email obfuscation"
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:74
@@ -279,17 +279,17 @@ msgstr "Localidade do local de trabalho"
 #. Default: "Work"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
 msgid "FacultyStaffDirectory_label_officePhone"
-msgstr "Telefone (ExtensÆo)"
+msgstr "Telefone (Extensão)"
 
 #. Default: "Office Postal Code"
 #: FacultyStaffDirectory/Person.py:179
 msgid "FacultyStaffDirectory_label_officePostalCode"
-msgstr "C¢digo postal do local de trabalho"
+msgstr "Código postal do local de trabalho"
 
 #. Default: "Office State"
 #: FacultyStaffDirectory/Person.py:170
 msgid "FacultyStaffDirectory_label_officeState"
-msgstr "Estado/regiÆo do local de trabalho"
+msgstr "Estado/região do local de trabalho"
 
 #. Default: "Overview image (used for specialty overview view)"
 #: FacultyStaffDirectory/Specialty.py:46
@@ -314,7 +314,7 @@ msgstr "Pessoa"
 #. Default: "Width for thumbnails in classification view"
 #: FacultyStaffDirectory/FacultyStaffDirectory.py:44
 msgid "FacultyStaffDirectory_label_personClassificationViewThumbnailWidth"
-msgstr "Largura (Em pixis) das fotos na vista de classificaÆo"
+msgstr "Largura (Em pixéis) das fotos na vista de classificaío"
 
 #. Default: "Person ID format"
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:97
@@ -334,17 +334,17 @@ msgstr "Nome do ID da Pessoa"
 #. Default: "Phone number example"
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:63
 msgid "FacultyStaffDirectory_label_personPhoneNumberDescription"
-msgstr "Exemplo de n£mero de telefone"
+msgstr "Exemplo de número de telefone"
 
 #. Default: "Phone number format"
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:51
 msgid "FacultyStaffDirectory_label_personPhoneNumberFormat"
-msgstr "Formato do n£mero de telefone"
+msgstr "Formato do número de telefone"
 
 #. Default: "Position"
 #: FacultyStaffDirectory/CommitteeMembership.py:22
 msgid "FacultyStaffDirectory_label_position"
-msgstr "FuncÆo"
+msgstr "Funcío"
 
 #. Default: "Research Interests:"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
@@ -374,7 +374,7 @@ msgstr "Texto do Corpo"
 #. Default: "Title"
 #: FacultyStaffDirectory/CommitteeMembership.py:32
 msgid "FacultyStaffDirectory_label_title"
-msgstr "T¡tulo"
+msgstr "Título"
 
 #. Default: "Person objects provide user passwords"
 #: FacultyStaffDirectory/tools/FacultyStaffDirectoryTool.py:136
@@ -384,17 +384,17 @@ msgstr "Os objectos Pessoa fornecem as senhas utilizador"
 #. Default: "Course Website"
 #: FacultyStaffDirectory/Course.py:64
 msgid "FacultyStaffDirectory_label_website"
-msgstr "S¡tio Web do Curso"
+msgstr "Sítio Web do Curso"
 
 #. Default: "Websites:"
 #: FacultyStaffDirectory/examples/Products.MobilePhoneExtender/
 msgid "FacultyStaffDirectory_label_websites"
-msgstr "S¡tios Web :"
+msgstr "Sítios Web :"
 
 #. Default: "More about ${DYNAMIC_CONTENT}..."
 #: FacultyStaffDirectory/skins/FacultyStaffDirectory/classification_standard_view.pt:75
 msgid "FacultyStaffDirectory_moreAbout"
-msgstr "Acerca de ${DYNAMIC_CONTENT}..."
+msgstr "Acerca de..."
 
 #. Default: "Name"
 #: FacultyStaffDirectory/skins/FacultyStaffDirectory/classification_tabular_view.pt:50
@@ -429,7 +429,7 @@ msgstr "Sub-especialidades"
 #. Default: "Up one level"
 #: FacultyStaffDirectory/skins/FacultyStaffDirectory/classification_standard_view.pt:16
 msgid "go_to_parent_url"
-msgstr "Subir um n¡vel"
+msgstr "Subir um nível"
 
 #. Default: "Can manage personnel"
 #: FacultyStaffDirectory/sharing.py:14
