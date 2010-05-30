@@ -3,6 +3,7 @@
 __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
+from OFS.Image import Image
 from cStringIO import StringIO
 import logging
 import re
@@ -791,7 +792,13 @@ class Person(OrderedBaseFolder, ATCTContent):
         # and it's not a delete command, create a member portrait
         if value and value != 'DELETE_IMAGE':
             # Add the new portrait
-            md.portraits._setObject(id=self.id, object=self.getImage())
+            #md.portraits._setObject(id=self.id, object=self.getImage())
+            raw_image = StringIO()
+            raw_image.write( str(self.getRawImage().data) )
+            raw_image.seek(0)
+            md.portraits._setObject(id=self.id, object=Image(id=self.id, file=raw_image, title=''))
+            raw_image.close()
+
     
     security.declareProtected(SetOwnPassword, 'setPassword')
     def setPassword(self, value):

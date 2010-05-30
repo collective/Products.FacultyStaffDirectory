@@ -6,6 +6,11 @@ Version History
           (https://weblion.psu.edu/trac/weblion/ticket/1266).
           [cah190 (Craig Haynal)]
 
+        * Updated portal_memberdata image generation based on suggestions
+          from michael.lindig and updated tests accordingly
+          (https://weblion.psu.edu/trac/weblion/ticket/1204).
+          [cah190 (Craig Haynal)]
+
   ' ' 2.1.4 -- ' '
   
         * Owner role should be able to edit Persons in Hidden state. 

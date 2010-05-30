@@ -194,7 +194,7 @@ class testWithoutSpecialties(testPerson):
         # Try to get a 10x10 version of the image
         imageOfSizeTag = self.person.getImageOfSize(10, 10)
         self.failUnlessEqual(imageOfSizeTag, '<img src="http://nohost/plone/facstaffdirectory/abc123/image" alt="Test Person" title="Test Person" height="10" width="10" />')
-        self.failUnlessEqual(pm.getPersonalPortrait('abc123').__name__, 'image')
+        self.failUnlessEqual(pm.getPersonalPortrait('abc123').__name__, 'abc123')
         
         # Try to get a scaled-by-ratio image with a width of 100.
         scaledImageTag = self.person.getScaledImageByWidth(100)
