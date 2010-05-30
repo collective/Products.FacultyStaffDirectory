@@ -2,7 +2,9 @@ Version History
 
   ' ' 2.1.5 -- ' '
   
-
+        * Italian translation merged
+          (https://weblion.psu.edu/trac/weblion/ticket/1266).
+          [cah190 (Craig Haynal)]
 
   ' ' 2.1.4 -- ' '
   
