@@ -5,6 +5,9 @@ Version History
         * Owner role should be able to edit Persons in Hidden state. 
           [ems174 (Eric Steele)]
 
+        * Portuguese translation merged.
+          [cah190 (Craig Haynal)]
+
   ' ' 2.1.3 -- ' '
         
         * Fixed the overzealous user search
