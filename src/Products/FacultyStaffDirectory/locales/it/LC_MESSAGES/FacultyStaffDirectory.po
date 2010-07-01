@@ -1,0 +1,552 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-07-01 15:43+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: Franco Milicchio <milicchio@dia.uniroma3.it>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: it\n"
+"Language-Name: Italian\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: FacultyStaffDirectory\n"
+
+#: ../interfaces/configuration.py:63
+msgid "A regular expression that a Person's ID must match. Defaults to the expression Plone uses for user IDs."
+msgstr ""
+
+#: ../interfaces/configuration.py:37
+msgid "A regular expression that a Person's phone number must match. Leave blank to disable phone number validation."
+msgstr ""
+
+#. Default: "A-to-Z Listing"
+#: dynamic view name template fsd_atoz_view on type FacultyStaffDirectory
+msgid "A-to-Z Listing"
+msgstr ""
+
+#: ../interfaces/configuration.py:57
+msgid "Access Account ID"
+msgstr ""
+
+#. Default: "Base View"
+#: dynamic view name template base_view on type FSDCommittee
+#: dynamic view name template base_view on type FSDCommitteesFolder
+#: dynamic view name template base_view on type Person
+msgid "Base View"
+msgstr ""
+
+#: ../Person.py:52
+msgid "Basic Information"
+msgstr ""
+
+#. Default: "Categorization"
+#: ../Person.py
+msgid "Categorization"
+msgstr ""
+
+#. Default: "Committees"
+#: dynamic view name template committee_view on type FSDCommittee
+#: dynamic view name template committeesfolder_view on type FSDCommitteesFolder
+msgid "Committees"
+msgstr ""
+
+#: ../Person.py:101
+msgid "Contact Information"
+msgstr ""
+
+#: ../interfaces/configuration.py:76
+msgid "Content types to integrate with Plone's users and groups"
+msgstr ""
+
+#: ../interfaces/configuration.py:48
+msgid "Custom email obfuscation"
+msgstr ""
+
+#. Default: "Dates"
+#: ../Person.py
+msgid "Dates"
+msgstr ""
+
+#: ../interfaces/configuration.py:43
+msgid "Describe the above phone number rule in a human-readable format: for example, (555) 555-5555."
+msgstr ""
+
+#: ../FacultyStaffDirectory.py:44
+msgid "Display"
+msgstr ""
+
+#: ../browser/configuration.py:16
+msgid "Faculty/Staff Directory settings"
+msgstr ""
+
+#. Default: "Assign a position"
+#: ../skins/FacultyStaffDirectory/department_standard_view.pt:26
+#: ../skins/FacultyStaffDirectory/department_tabular_view.pt:43
+#: ../skins/FacultyStaffDirectory/department_textual_view.pt:68
+msgid "FacultyStaffDirectory_assignPosition"
+msgstr "Assegna una posizione"
+
+#. Default: "Assign a research topic"
+#: ../skins/FacultyStaffDirectory/person_view.pt:106
+#: ../skins/FacultyStaffDirectory/specialty_standard_view.pt:27
+#: ../skins/FacultyStaffDirectory/specialty_tabular_view.pt:43
+msgid "FacultyStaffDirectory_assignResearchTopic"
+msgstr "Assegna una area di ricerca"
+
+#. Default: "Assign a role"
+#: ../skins/FacultyStaffDirectory/committee_view.pt:43
+msgid "FacultyStaffDirectory_assignrole"
+msgstr "Assegna un ruolo"
+
+#. Default: "The roles all people in this directory will be granted site-wide"\n#: Content Type: FSDFacultyStaffDirectory, Field: roles_
+#, fuzzy
+msgid "FacultyStaffDirectory_description_FacultyStaffDirectoryRoles"
+msgstr "Ruolo che le persone in questa cartella otterranno per tutto il sito"
+
+#. Default: "Please re-enter the password. (Leave blank if you don't want to change the password.)"\n#: Content Type: FSDPerson, Field: confirmPassword
+#, fuzzy
+msgid "FacultyStaffDirectory_description_confirmPassword"
+msgstr "Per favore, ri-inserire la password. (Lasciare in bianco se non si vuole cambiare)"
+
+#. Default: "Example: abc123"\n#: Content Type: FSDPerson, Field: id
+#, fuzzy
+msgid "FacultyStaffDirectory_description_id"
+msgstr "Esempio: abc123"
+
+#. Default: "One per line"\n#: Content Type: FSDPerson, Field: jobTitles
+#, fuzzy
+msgid "FacultyStaffDirectory_description_jobTitles"
+msgstr "Uno per riga"
+
+#. Default: "Password for this person (Leave blank if you don't want to change the password.)"\n#: Content Type: FSDPerson, Field: password
+#, fuzzy
+msgid "FacultyStaffDirectory_description_password"
+msgstr "Password per questa persona. (Lasciare in bianco se non si vuole cambiare)"
+
+#. Default: "Show all person thumbnails with a fixed width (in pixels) within the classification view"\n#: Content Type: FSDFacultyStaffDirectory, Field: personClassificationViewThumbnailWidth
+#, fuzzy
+msgid "FacultyStaffDirectory_description_personClassificationViewThumbnailWidth"
+msgstr "Mostra tutte le miniature delle foto con una dimensione fissa (in pixel) dentro la vista di classificazione"
+
+#. Default: "Academic, professional, honorary, and social suffixes."\n#: Content Type: FSDPerson, Field: suffix
+#, fuzzy
+msgid "FacultyStaffDirectory_description_suffix"
+msgstr "Suffissi accademici, professionali, onirifici e sociali."
+
+#. Default: "One per line. Example: http://www.example.com/"\n#: Content Type: FSDPerson, Field: websites
+#, fuzzy
+msgid "FacultyStaffDirectory_description_websites"
+msgstr "Uno per linea. Esempio: http://www.sito.com/"
+
+#. Default: "Edit position"
+#: ../skins/FacultyStaffDirectory/department_standard_view.pt:25
+#: ../skins/FacultyStaffDirectory/department_tabular_view.pt:42
+#: ../skins/FacultyStaffDirectory/department_textual_view.pt:67
+msgid "FacultyStaffDirectory_editPosition"
+msgstr "Modifica posizione"
+
+#. Default: "Edit research topic"
+#: ../skins/FacultyStaffDirectory/person_view.pt:105
+#: ../skins/FacultyStaffDirectory/specialty_standard_view.pt:26
+#: ../skins/FacultyStaffDirectory/specialty_tabular_view.pt:42
+msgid "FacultyStaffDirectory_editResearchTopic"
+msgstr "Modifica area di ricerca"
+
+#. Default: "Edit role"
+#: ../skins/FacultyStaffDirectory/committee_view.pt:42
+msgid "FacultyStaffDirectory_editrole"
+msgstr "Modifica ruolo"
+
+#. Default: "Email"
+#: ../skins/FacultyStaffDirectory/classification_tabular_view.pt:56
+#: ../skins/FacultyStaffDirectory/department_tabular_view.pt:21
+#: ../skins/FacultyStaffDirectory/fsd_atoz_view.pt:38
+msgid "FacultyStaffDirectory_email"
+msgstr "Email"
+
+#. Default: "Example: http://www.example.com/"\n#: Content Type: FSDCourse, Field: website
+#, fuzzy
+msgid "FacultyStaffDirectory_help_website"
+msgstr "Esempio: http://www.sito.com/"
+
+#. Default: "Roles"\n#: Content Type: FSDFacultyStaffDirectory, Field: roles_
+#, fuzzy
+msgid "FacultyStaffDirectory_label_FacultyStaffDirectoryRoles"
+msgstr "Ruoli"
+
+#. Default: "Abbreviation"\n#: Content Type: FSDCourse, Field: abbreviation
+#, fuzzy
+msgid "FacultyStaffDirectory_label_abbreviation"
+msgstr "Abbreviazioni"
+
+#. Default: "Assistants:"
+#: ../skins/FacultyStaffDirectory/person_view.pt:160
+#, fuzzy
+msgid "FacultyStaffDirectory_label_assistants"
+msgstr "Assistenti"
+
+#. Default: "Biography:"
+#: ../skins/FacultyStaffDirectory/person_view.pt:83
+#, fuzzy
+msgid "FacultyStaffDirectory_label_biography"
+msgstr "Biografia"
+
+#. Default: "${fullName} is an assistant to"
+#: ../skins/FacultyStaffDirectory/person_view.pt:176
+msgid "FacultyStaffDirectory_label_bosses"
+msgstr "assistente di"
+
+#. Default: "Classifications"\n#: Content Type: FSDPerson, Field: classifications
+#, fuzzy
+msgid "FacultyStaffDirectory_label_classifications"
+msgstr "Classificazioni"
+
+#. Default: "Committees"\n#: Content Type: FSDPerson, Field: committees
+#, fuzzy
+msgid "FacultyStaffDirectory_label_committees"
+msgstr "Comitati"
+
+#. Default: "Confirm password"\n#: Content Type: FSDPerson, Field: confirmPassword
+#, fuzzy
+msgid "FacultyStaffDirectory_label_confirmPassword"
+msgstr "Conferma la password"
+
+#. Default: "Courses:"
+#: ../skins/FacultyStaffDirectory/person_view.pt:143
+#, fuzzy
+msgid "FacultyStaffDirectory_label_courses"
+msgstr "Corsi"
+
+#. Default: "Departments:"
+#: ../skins/FacultyStaffDirectory/person_view.pt:116
+#, fuzzy
+msgid "FacultyStaffDirectory_label_departments"
+msgstr "Dipartimenti"
+
+#. Default: "Description"\n#: Content Type: FSDCourse, Field: description
+#, fuzzy
+msgid "FacultyStaffDirectory_label_description"
+msgstr "Descrizione"
+
+#. Default: "Education:"
+#: ../skins/FacultyStaffDirectory/person_view.pt:74
+#, fuzzy
+msgid "FacultyStaffDirectory_label_education"
+msgstr "Titoli di studio"
+
+#. Default: "Email"
+#: ../skins/FacultyStaffDirectory/person_view.pt:47
+msgid "FacultyStaffDirectory_label_email"
+msgstr "Email"
+
+#. Default: "First Name"\n#: Content Type: FSDPerson, Field: firstName
+#, fuzzy
+msgid "FacultyStaffDirectory_label_firstName"
+msgstr "Nome"
+
+#. Default: "Full Name"\n#: Content Type: FSDPerson, Field: title
+#, fuzzy
+msgid "FacultyStaffDirectory_label_fullName"
+msgstr "Nome completo"
+
+#. Default: "Access Account ID"\n#: Content Type: FSDPerson, Field: id
+#, fuzzy
+msgid "FacultyStaffDirectory_label_id"
+msgstr "Nome utente"
+
+#. Default: "Image"\n#: Content Type: FSDPerson, Field: image
+#, fuzzy
+msgid "FacultyStaffDirectory_label_image"
+msgstr "Immagine"
+
+#. Default: "Job Titles"\n#: Content Type: FSDPerson, Field: jobTitles
+#, fuzzy
+msgid "FacultyStaffDirectory_label_jobTitles"
+msgstr "Titoli"
+
+#. Default: "Last Name"\n#: Content Type: FSDPerson, Field: lastName
+#, fuzzy
+msgid "FacultyStaffDirectory_label_lastName"
+msgstr "Cognome"
+
+#. Default: "Members"
+#: ../skins/FacultyStaffDirectory/committee_view.pt:29
+msgid "FacultyStaffDirectory_label_members"
+msgstr "Membri"
+
+#. Default: "Middle Name"\n#: Content Type: FSDPerson, Field: middleName
+#, fuzzy
+msgid "FacultyStaffDirectory_label_middleName"
+msgstr "Secondo nome"
+
+#. Default: "Number"\n#: Content Type: FSDCourse, Field: number
+#, fuzzy
+msgid "FacultyStaffDirectory_label_number"
+msgstr "Numero"
+
+#. Default: "Office Street Address"\n#: Content Type: FSDPerson, Field: officeAddress
+#, fuzzy
+msgid "FacultyStaffDirectory_label_officeAddress"
+msgstr "Indirizzo ufficio"
+
+#. Default: "Office City"\n#: Content Type: FSDPerson, Field: officeCity
+#, fuzzy
+msgid "FacultyStaffDirectory_label_officeCity"
+msgstr "Comune"
+
+#. Default: "Work"
+#: ../skins/FacultyStaffDirectory/person_view.pt:52
+#, fuzzy
+msgid "FacultyStaffDirectory_label_officePhone"
+msgstr "Telefono"
+
+#. Default: "Office Postal Code"\n#: Content Type: FSDPerson, Field: officePostalCode
+#, fuzzy
+msgid "FacultyStaffDirectory_label_officePostalCode"
+msgstr "CAP"
+
+#. Default: "Office State"\n#: Content Type: FSDPerson, Field: officeState
+#, fuzzy
+msgid "FacultyStaffDirectory_label_officeState"
+msgstr "Provincia"
+
+#. Default: "Overview image (used for specialty overview view)"\n#: Content Type: FSDSpecialty, Field: overviewImage
+msgid "FacultyStaffDirectory_label_overview_image"
+msgstr ""
+
+#. Default: "Overview text (used for specialty overview view)"\n#: Content Type: FSDSpecialty, Field: overviewText
+msgid "FacultyStaffDirectory_label_overview_text"
+msgstr ""
+
+#. Default: "Password"\n#: Content Type: FSDPerson, Field: password
+#, fuzzy
+msgid "FacultyStaffDirectory_label_password"
+msgstr "Password"
+
+#. Default: "People"\n#: Content Type: FSDSpecialty, Field: people
+#, fuzzy
+msgid "FacultyStaffDirectory_label_people"
+msgstr "Membri"
+
+#. Default: "Width for thumbnails in classification view"\n#: Content Type: FSDFacultyStaffDirectory, Field: personClassificationViewThumbnailWidth
+#, fuzzy
+msgid "FacultyStaffDirectory_label_personClassificationViewThumbnailWidth"
+msgstr "Larghezza per le miniature nella vista classificazione"
+
+#. Default: "Position"\n#: Content Type: FSDDepartmentalMembership, Field: position
+#, fuzzy
+msgid "FacultyStaffDirectory_label_position"
+msgstr "Posizione"
+
+#. Default: "Research Interests:"
+#: ../skins/FacultyStaffDirectory/person_view.pt:88
+#, fuzzy
+msgid "FacultyStaffDirectory_label_researchInterests"
+msgstr "Interessi di ricerca"
+
+#. Default: "Research Topic"\n#: Content Type: FSDSpecialtyInformation, Field: researchTopic
+#, fuzzy
+msgid "FacultyStaffDirectory_label_researchTopic"
+msgstr "Area di ricerca"
+
+#. Default: "Specialties"\n#: Content Type: FSDPerson, Field: specialties
+#, fuzzy
+msgid "FacultyStaffDirectory_label_specialties"
+msgstr "Specializzazione"
+
+#. Default: "Suffix"\n#: Content Type: FSDCourse, Field: suffix
+#, fuzzy
+msgid "FacultyStaffDirectory_label_suffix"
+msgstr "Suffisso"
+
+#. Default: "Body Text"\n#: Content Type: FSDSpecialty, Field: text
+#, fuzzy
+msgid "FacultyStaffDirectory_label_text"
+msgstr "Testo principale"
+
+#. Default: "Title"\n#: Content Type: FSDSpecialtyInformation, Field: title
+#, fuzzy
+msgid "FacultyStaffDirectory_label_title"
+msgstr "Titolo"
+
+#. Default: "Course Website"\n#: Content Type: FSDCourse, Field: website
+#, fuzzy
+msgid "FacultyStaffDirectory_label_website"
+msgstr "Sito del corso"
+
+#. Default: "Websites:"
+#: ../skins/FacultyStaffDirectory/person_view.pt:60
+#, fuzzy
+msgid "FacultyStaffDirectory_label_websites"
+msgstr "Pagina web"
+
+#. Default: "More about ${more-about-person-title}..."
+#: ../skins/FacultyStaffDirectory/classification_standard_view.pt:74
+#: ../skins/FacultyStaffDirectory/department_standard_view.pt:35
+#: ../skins/FacultyStaffDirectory/department_textual_view.pt:77
+#, fuzzy
+msgid "FacultyStaffDirectory_moreAbout"
+msgstr "Maggiori informazioni..."
+
+#. Default: "Name"
+#: ../skins/FacultyStaffDirectory/classification_tabular_view.pt:50
+#: ../skins/FacultyStaffDirectory/department_tabular_view.pt:15
+#: ../skins/FacultyStaffDirectory/fsd_atoz_view.pt:32
+msgid "FacultyStaffDirectory_name"
+msgstr "Nome"
+
+#. Default: "People"
+#: ../skins/FacultyStaffDirectory/fsd_atoz_view.pt:11
+msgid "FacultyStaffDirectory_people"
+msgstr "Membri"
+
+#. Default: "Phone"
+#: ../skins/FacultyStaffDirectory/classification_tabular_view.pt:53
+#: ../skins/FacultyStaffDirectory/department_tabular_view.pt:18
+#: ../skins/FacultyStaffDirectory/fsd_atoz_view.pt:35
+msgid "FacultyStaffDirectory_phone"
+msgstr "Telefono"
+
+#. Default: "Research Topic"
+#: ../skins/FacultyStaffDirectory/department_tabular_view.pt:24
+#: ../skins/FacultyStaffDirectory/specialty_tabular_view.pt:24
+msgid "FacultyStaffDirectory_researchTopic"
+msgstr "Area di ricerca"
+
+#. Default: "People specializing in this area"
+#: ../skins/FacultyStaffDirectory/specialty_view.pt:41
+msgid "FacultyStaffDirectory_specialtyMembers"
+msgstr "Specializzandi in questa area"
+
+#. Default: "Subspecialties"
+#: ../skins/FacultyStaffDirectory/specialty_view.pt:27
+msgid "FacultyStaffDirectory_subspecialties"
+msgstr "Sub-specializzazioni"
+
+#: ../interfaces/configuration.py:49
+msgid "Format email addresses like "someone AT here DOT com" rather than using Plone's default spam armoring."
+msgstr ""
+
+#. Default: "Gallery View"
+#: dynamic view name template classification_standard_view on type FSDClassification
+#: dynamic view name template directory_standard_view on type FacultyStaffDirectory
+#: dynamic view name template specialty_standard_view on type FSDSpecialty
+msgid "Gallery View"
+msgstr ""
+
+#: ../interfaces/configuration.py:71
+msgid "Invalid user id"
+msgstr ""
+
+#: ../Specialty.py:42
+msgid "Overview"
+msgstr ""
+
+#. Default: "Ownership"
+#: ../Person.py
+msgid "Ownership"
+msgstr ""
+
+#: ../interfaces/configuration.py:62
+msgid "Person ID format"
+msgstr ""
+
+#: ../interfaces/configuration.py:69
+msgid "Person ID format error message"
+msgstr ""
+
+#: ../interfaces/configuration.py:55
+msgid "Person ID label"
+msgstr ""
+
+#: ../interfaces/configuration.py:82
+msgid "Person objects provide user passwords"
+msgstr ""
+
+#. Default: "Personnel Manager"
+msgid "Personnel Manager"
+msgstr ""
+
+#: ../interfaces/configuration.py:42
+msgid "Phone number example"
+msgstr ""
+
+#: ../interfaces/configuration.py:36
+msgid "Phone number format"
+msgstr ""
+
+#: ../Person.py:115
+msgid "Professional Information"
+msgstr ""
+
+#. Default: "Settings"
+#: ../Person.py
+msgid "Settings"
+msgstr ""
+
+#: ../interfaces/configuration.py:83
+msgid "Should user passwords be stored as part of the Person? To have a different PAS plugin handle authorization, turn this off."
+msgstr ""
+
+#. Default: "Specialites overview"
+#: dynamic view name template specialtiesfolder_overview on type FSDSpecialtiesFolder
+msgid "Specialites overview"
+msgstr ""
+
+#. Default: "Standard View"
+#: dynamic view name template person_view on type FSDPerson
+msgid "Standard View"
+msgstr ""
+
+#. Default: "Tabular View"
+#: dynamic view name template classification_tabular_view on type FSDClassification
+#: dynamic view name template directory_tabular_view on type FacultyStaffDirectory
+#: dynamic view name template specialty_tabular_view on type FSDSpecialty
+msgid "Tabular View"
+msgstr ""
+
+#: ../interfaces/configuration.py:70
+msgid "The error message returned when an entered Person ID does not match the above format"
+msgstr ""
+
+#: ../interfaces/configuration.py:56
+msgid "The name of the ID used by your organization"
+msgstr ""
+
+#: ../events/person.py:34
+msgid "User %s cannot be found."
+msgstr ""
+
+#. Default: "User Preferences Editor"
+msgid "User Preferences Editor"
+msgstr ""
+
+#: ../Person.py:373
+msgid "User Settings"
+msgstr ""
+
+#. Default: "Up one level"
+#: ../skins/FacultyStaffDirectory/classification_standard_view.pt:16
+#: ../skins/FacultyStaffDirectory/classification_tabular_view.pt:16
+#: ../skins/FacultyStaffDirectory/department_textual_view.pt:24
+msgid "go_to_parent_url"
+msgstr "Su ti un livello"
+
+#. Default: "General"
+#: ../browser/configuration.py:8
+msgid "label_fsd_general"
+msgstr ""
+
+#. Default: "Membership"
+#: ../browser/configuration.py:12
+msgid "label_fsd_membership"
+msgstr ""
+
+#. Default: "Can manage personnel"
+#: ../sharing.py:14
+msgid "title_can_manage_personnel"
+msgstr "Gestisce pesonale"
+
