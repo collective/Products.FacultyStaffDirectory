@@ -1,0 +1,278 @@
+# *****************************************************************************************
+# This file was generate with a "External method" called "i18n_TemplateGenerator" located 
+# on directory "instance/Extensions/" on your setup. More information check the bellow link
+# http://plone.org/documentation/kb/generating-pot-of-archetypes-based-products            
+# *****************************************************************************************
+
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-02-17 16:15+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: FacultyStaffDirectory\n"
+
+#. Default: "Description"
+#: Content Type: FSDCourse, Field: description
+msgid "FacultyStaffDirectory_label_description"
+msgstr ""
+
+#. Default: "Password"
+#: Content Type: FSDPerson, Field: password
+msgid "FacultyStaffDirectory_label_password"
+msgstr ""
+
+#. Default: "Middle Name"
+#: Content Type: FSDPerson, Field: middleName
+msgid "FacultyStaffDirectory_label_middleName"
+msgstr ""
+
+#. Default: "Research Topic"
+#: Content Type: FSDSpecialtyInformation, Field: researchTopic
+msgid "FacultyStaffDirectory_label_researchTopic"
+msgstr ""
+
+#. Default: "Number"
+#: Content Type: FSDCourse, Field: number
+msgid "FacultyStaffDirectory_label_number"
+msgstr ""
+
+#. Default: "Last Name"
+#: Content Type: FSDPerson, Field: lastName
+msgid "FacultyStaffDirectory_label_lastName"
+msgstr ""
+
+#. Default: "Office Phone"
+#: Content Type: FSDPerson, Field: officePhone
+msgid "FacultyStaffDirectory_label_officePhone"
+msgstr ""
+
+#. Default: "Full Name"
+#: Content Type: FSDPerson, Field: title
+msgid "FacultyStaffDirectory_label_fullName"
+msgstr ""
+
+#. Default: "Confirm password"
+#: Content Type: FSDPerson, Field: confirmPassword
+msgid "FacultyStaffDirectory_label_confirmPassword"
+msgstr ""
+
+#. Default: "Biography"
+#: Content Type: FSDPerson, Field: biography
+msgid "FacultyStaffDirectory_label_biography"
+msgstr ""
+
+#. Default: "Academic, professional, honorary, and social suffixes."
+#: Content Type: FSDPerson, Field: suffix
+msgid "FacultyStaffDirectory_description_suffix"
+msgstr ""
+
+#. Default: "Position"
+#: Content Type: FSDDepartmentalMembership, Field: position
+#: Content Type: FSDCommitteeMembership, Field: position
+msgid "FacultyStaffDirectory_label_position"
+msgstr ""
+
+#. Default: "Web Sites"
+#: Content Type: FSDPerson, Field: websites
+msgid "FacultyStaffDirectory_label_websites"
+msgstr ""
+
+#. Default: "Password for this person (Leave blank if you don't want to change the password.)"
+#: Content Type: FSDPerson, Field: password
+msgid "FacultyStaffDirectory_description_password"
+msgstr ""
+
+#. Default: "One per line. Example: http://www.example.com/"
+#: Content Type: FSDPerson, Field: websites
+msgid "FacultyStaffDirectory_description_websites"
+msgstr ""
+
+#. Default: "People"
+#: Content Type: FSDSpecialty, Field: people
+#: Content Type: FSDClassification, Field: people
+msgid "FacultyStaffDirectory_label_people"
+msgstr ""
+
+#. Default: "Show all person thumbnails with a fixed width (in pixels) within the classification view"
+#: Content Type: FSDFacultyStaffDirectory, Field: personClassificationViewThumbnailWidth
+msgid "FacultyStaffDirectory_description_personClassificationViewThumbnailWidth"
+msgstr ""
+
+#. Default: "Personal Assistant(s)"
+#: Content Type: FSDPerson, Field: assistants
+msgid "FacultyStaffDirectory_label_assistants"
+msgstr ""
+
+#. Default: "Roles"
+#: Content Type: FSDFacultyStaffDirectory, Field: roles_
+msgid "FacultyStaffDirectory_label_FacultyStaffDirectoryRoles"
+msgstr ""
+
+#. Default: "Classifications"
+#: Content Type: FSDPerson, Field: classifications
+msgid "FacultyStaffDirectory_label_classifications"
+msgstr ""
+
+#. Default: "Title"
+#: Content Type: FSDSpecialtyInformation, Field: title
+#: Content Type: FSDDepartmentalMembership, Field: title
+#: Content Type: FSDCommitteeMembership, Field: title
+msgid "FacultyStaffDirectory_label_title"
+msgstr ""
+
+#. Default: "Departments"
+#: Content Type: FSDPerson, Field: departments
+msgid "FacultyStaffDirectory_label_departments"
+msgstr ""
+
+#. Default: "Width for thumbnails in classification view"
+#: Content Type: FSDFacultyStaffDirectory, Field: personClassificationViewThumbnailWidth
+msgid "FacultyStaffDirectory_label_personClassificationViewThumbnailWidth"
+msgstr ""
+
+#. Default: "The roles all people in this directory will be granted site-wide"
+#: Content Type: FSDFacultyStaffDirectory, Field: roles_
+msgid "FacultyStaffDirectory_description_FacultyStaffDirectoryRoles"
+msgstr ""
+
+#. Default: "Abbreviation"
+#: Content Type: FSDCourse, Field: abbreviation
+msgid "FacultyStaffDirectory_label_abbreviation"
+msgstr ""
+
+#. Default: "Email"
+#: Content Type: FSDPerson, Field: email
+msgid "FacultyStaffDirectory_label_email"
+msgstr ""
+
+#. Default: "Please re-enter the password. (Leave blank if you don't want to change the password.)"
+#: Content Type: FSDPerson, Field: confirmPassword
+msgid "FacultyStaffDirectory_description_confirmPassword"
+msgstr ""
+
+#. Default: "Education"
+#: Content Type: FSDPerson, Field: education
+msgid "FacultyStaffDirectory_label_education"
+msgstr ""
+
+#. Default: "First Name"
+#: Content Type: FSDPerson, Field: firstName
+msgid "FacultyStaffDirectory_label_firstName"
+msgstr ""
+
+#. Default: "Suffix"
+#: Content Type: FSDCourse, Field: suffix
+#: Content Type: FSDPerson, Field: suffix
+msgid "FacultyStaffDirectory_label_suffix"
+msgstr ""
+
+#. Default: "Overview text (used for specialty overview view)"
+#: Content Type: FSDSpecialty, Field: overviewText
+msgid "FacultyStaffDirectory_label_overview_text"
+msgstr ""
+
+#. Default: "Image"
+#: Content Type: FSDPerson, Field: image
+msgid "FacultyStaffDirectory_label_image"
+msgstr ""
+
+#. Default: "Committees"
+#: Content Type: FSDPerson, Field: committees
+msgid "FacultyStaffDirectory_label_committees"
+msgstr ""
+
+#. Default: "Job Titles"
+#: Content Type: FSDPerson, Field: jobTitles
+msgid "FacultyStaffDirectory_label_jobTitles"
+msgstr ""
+
+#. Default: "Office Postal Code"
+#: Content Type: FSDPerson, Field: officePostalCode
+msgid "FacultyStaffDirectory_label_officePostalCode"
+msgstr ""
+
+#. Default: "Office State"
+#: Content Type: FSDPerson, Field: officeState
+msgid "FacultyStaffDirectory_label_officeState"
+msgstr ""
+
+#. Default: "Access Account ID"
+#: Content Type: FSDPerson, Field: id
+msgid "FacultyStaffDirectory_label_id"
+msgstr ""
+
+#. Default: "Office City"
+#: Content Type: FSDPerson, Field: officeCity
+msgid "FacultyStaffDirectory_label_officeCity"
+msgstr ""
+
+#. Default: "One per line"
+#: Content Type: FSDPerson, Field: jobTitles
+msgid "FacultyStaffDirectory_description_jobTitles"
+msgstr ""
+
+#. Default: "Specialties"
+#: Content Type: FSDPerson, Field: specialties
+msgid "FacultyStaffDirectory_label_specialties"
+msgstr ""
+
+#. Default: "Example: http://www.example.com/"
+#: Content Type: FSDCourse, Field: website
+msgid "FacultyStaffDirectory_help_website"
+msgstr ""
+
+#. Default: "Office Street Address"
+#: Content Type: FSDPerson, Field: officeAddress
+msgid "FacultyStaffDirectory_label_officeAddress"
+msgstr ""
+
+#. Default: "Body Text"
+#: Content Type: FSDSpecialty, Field: text
+#: Content Type: FSDDepartment, Field: text
+#: Content Type: FSDClassification, Field: text
+#: Content Type: FSDCommittee, Field: text
+#: Content Type: FSDPersonGrouping, Field: text
+msgid "FacultyStaffDirectory_label_text"
+msgstr ""
+
+#. Default: "Course Website"
+#: Content Type: FSDCourse, Field: website
+msgid "FacultyStaffDirectory_label_website"
+msgstr ""
+
+#. Default: "Overview image (used for specialty overview view)"
+#: Content Type: FSDSpecialty, Field: overviewImage
+msgid "FacultyStaffDirectory_label_overview_image"
+msgstr ""
+
+#. Default: "Members"
+#: Content Type: FSDDepartment, Field: people
+#: Content Type: FSDCommittee, Field: people
+msgid "FacultyStaffDirectory_label_members"
+msgstr ""
+
+#. Default: "Example: abc123"
+#: Content Type: FSDPerson, Field: id
+msgid "FacultyStaffDirectory_description_id"
+msgstr ""
+
+#. Default: "Personnel Manager"
+msgid "Personnel Manager"
+msgstr ""
+
+#. Default: "User Preferences Editor"
+msgid "User Preferences Editor"
+msgstr ""
+
