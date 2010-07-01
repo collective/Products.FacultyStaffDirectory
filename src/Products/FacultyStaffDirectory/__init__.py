@@ -38,6 +38,9 @@ DirectoryView.registerDirectory('skins', product_globals)
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.GenericSetup import EXTENSION, profile_registry
 
+from zope.i18nmessageid import MessageFactory
+FSDMessageFactory = MessageFactory('FacultyStaffDirectory')
+
 def initialize(context):
 
     # imports packages and types for registration
