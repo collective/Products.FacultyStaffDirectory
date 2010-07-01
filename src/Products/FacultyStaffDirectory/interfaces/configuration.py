@@ -46,7 +46,7 @@ class IGeneralConfiguration(Interface):
 
     obfuscateEmailAddresses = Bool(
         title=_(u"Custom email obfuscation"),
-        description=_(u"Format email addresses like \"someone AT here DOT com\" rather than using Plone's default spam armoring."),
+        description=_(u"Format email addresses like 'someone AT here DOT com' rather than using Plone's default spam armoring."),
         default=False,
         )
     
