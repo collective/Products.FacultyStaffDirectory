@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FacultyStaffDirectory\n"
-"POT-Creation-Date: 2010-07-01 16:24+0000\n"
+"POT-Creation-Date: 2010-07-01 18:31+0000\n"
 "PO-Revision-Date: 2010-07-01 11:58-0400\n"
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
@@ -33,10 +33,10 @@ msgstr "Un curso impartido por esta persona."
 msgid "A directory of faculty and staff members"
 msgstr "Un directorio de facultad y miembros del personal"
 
-#. Default: "A grouping of associated people eg \"Faculty\" or \"Staff\"."
+#. Default: "A grouping of associated people eg 'Faculty' or 'Staff'."
 #: ../profiles/default/types/FSDClassification.xml
-msgid "A grouping of associated people eg \"Faculty\" or \"Staff\"."
-msgstr "Una agrupación de gente asociadas ej. \"Facultad\" o \"Personal\"."
+msgid "A grouping of associated people eg 'Faculty' or 'Staff'."
+msgstr "Una agrupación de gente asociadas ej. 'Facultad' o 'Personal."
 
 #. Default: "A person's listed committees"
 #: ../profiles/default/portal_atct.xml
@@ -60,6 +60,11 @@ msgstr "Una expresión de un número de teléfono de la persona la cual debe coi
 #: ../profiles/default/types/FSDCommittee.xml
 msgid "A simple page describing a committee or working group with the associated committee members."
 msgstr "Una simple página que describe un comité o grupo de trabajo con los miembros del comité asociados."
+
+#. Default: "A-to-Z Listing"
+#: dynamic view name template fsd_atoz_view on type FacultyStaffDirectory
+msgid "A-to-Z Listing"
+msgstr "Listado de la A a la Z "
 
 #: ../interfaces/configuration.py:57
 msgid "Access Account ID"
@@ -91,9 +96,22 @@ msgstr "Un departamento académico."
 msgid "An area of academic study."
 msgstr "Área de estudio académico."
 
-#: ../Person.py:52
+#. Default: "Base View"
+#: dynamic view name template base_view on type FSDCommittee
+#: dynamic view name template base_view on type FSDCommitteesFolder
+#: dynamic view name template base_view on type Person
+msgid "Base View"
+msgstr "Vista base"
+
+#. Default: "Basic Information"
+#: ../Person.py
 msgid "Basic Information"
 msgstr "Información básica"
+
+#. Default: "Categorization"
+#: ../Person.py
+msgid "Categorization"
+msgstr "Categorización"
 
 #. Default: "Change State"
 #: ../profiles/uninstall/actions.xml
@@ -137,7 +155,8 @@ msgstr "Carpeta de comités"
 msgid "Contact"
 msgstr "Contacto"
 
-#: ../Person.py:101
+#. Default: "Contact Information"
+#: ../Person.py
 msgid "Contact Information"
 msgstr "Información de contacto"
 
@@ -179,6 +198,11 @@ msgstr "Personalizar ofuscación de correo electrónico"
 msgid "Cut"
 msgstr "Cortar"
 
+#. Default: "Dates"
+#: ../Person.py
+msgid "Dates"
+msgstr "Fechas"
+
 #. Default: "Delete"
 #: ../profiles/uninstall/actions.xml
 msgid "Delete"
@@ -204,7 +228,8 @@ msgstr "Departamentos"
 msgid "Describe the above phone number rule in a human-readable format: for example, (555) 555-5555."
 msgstr "Describir la regla sobre el número telefónico en un formato leíble por humanos: por ejemplo, (555) 555-5555."
 
-#: ../FacultyStaffDirectory.py:44
+#. Default: "Display"
+#: ../FacultyStaffDirectory.py
 msgid "Display"
 msgstr "Mostrar"
 
@@ -227,14 +252,17 @@ msgstr "Directorio de Facultad/Personal"
 msgid "Faculty/Staff Directory settings"
 msgstr "Configuración del directorio de Facultad/Personal"
 
-#: ../interfaces/configuration.py:49
-msgid "Format email addresses like \"someone AT here DOT com\" rather than using Plone's default spam armoring."
-msgstr "El formato de dirección de correo electrónico es como el siguiente ejemplo: \"usuario EN dominio PUNTO com\", el cual es raramente usado por defecto en el blindaje spam de Plone."
-
 #. Default: "Full Name"
 #: ../profiles/default/portal_atct.xml
 msgid "Full Name"
 msgstr "Nombre completo"
+
+#. Default: "Gallery View"
+#: dynamic view name template classification_standard_view on type FSDClassification
+#: dynamic view name template directory_standard_view on type FacultyStaffDirectory
+#: dynamic view name template specialty_standard_view on type FSDSpecialty
+msgid "Gallery View"
+msgstr "Vista galería"
 
 #. Default: "Holds and displays committees."
 #: ../profiles/default/types/FSDCommitteesFolder.xml
@@ -289,6 +317,11 @@ msgstr "Mi favoritos"
 msgid "Overview"
 msgstr "Información general"
 
+#. Default: "Ownership"
+#: ../Person.py
+msgid "Ownership"
+msgstr "Propietario"
+
 #. Default: "Paste"
 #: ../profiles/uninstall/actions.xml
 msgid "Paste"
@@ -325,6 +358,10 @@ msgstr "Etiqueta de identificador de persona"
 msgid "Person objects provide user passwords"
 msgstr "Los objetos Persona proporcionan contraseñas de usuario"
 
+#. Default: "Personnel Manager"
+msgid "Personnel Manager"
+msgstr "Administrador de Personal"
+
 #: ../interfaces/configuration.py:42
 msgid "Phone number example"
 msgstr "Ejemplo de número telefónico"
@@ -343,7 +380,8 @@ msgstr "Preferencias"
 msgid "Print this"
 msgstr "Imprimir esto"
 
-#: ../Person.py:115
+#. Default: "Professional Information"
+#: ../Person.py
 msgid "Professional Information"
 msgstr "Información profesional"
 
@@ -382,6 +420,11 @@ msgstr "Reglas"
 msgid "Send this"
 msgstr "Enviar esto"
 
+#. Default: "Settings"
+#: ../Person.py
+msgid "Settings"
+msgstr "Configuración"
+
 #. Default: "Sharing"
 #: ../profiles/uninstall/actions.xml
 msgid "Sharing"
@@ -400,6 +443,11 @@ msgstr "Mapa del sitio"
 #: ../profiles/uninstall/actions.xml
 msgid "Site Setup"
 msgstr "Configuración del sitio"
+
+#. Default: "Specialites overview"
+#: dynamic view name template specialtiesfolder_overview on type FSDSpecialtiesFolder
+msgid "Specialites overview"
+msgstr "Vista general especialidades"
 
 #. Default: "Specialties"
 #: ../profiles/default/portal_atct.xml
@@ -422,10 +470,22 @@ msgstr "Especialidad"
 msgid "Specialty Information"
 msgstr "Información de la especialidad"
 
+#. Default: "Standard View"
+#: dynamic view name template person_view on type FSDPerson
+msgid "Standard View"
+msgstr "Vista estandar"
+
 #. Default: "Syndication"
 #: ../profiles/uninstall/actions.xml
 msgid "Syndication"
 msgstr "Sindicación"
+
+#. Default: "Tabular View"
+#: dynamic view name template classification_tabular_view on type FSDClassification
+#: dynamic view name template directory_tabular_view on type FacultyStaffDirectory
+#: dynamic view name template specialty_tabular_view on type FSDSpecialty
+msgid "Tabular View"
+msgstr "Vista tabular"
 
 #. Default: "The classification assigned to a person"
 #: ../profiles/default/portal_atct.xml
@@ -494,7 +554,12 @@ msgstr "Deshacer"
 msgid "User %s cannot be found."
 msgstr "Usuario %s no fue encontrado."
 
-#: ../Person.py:373
+#. Default: "User Preferences Editor"
+msgid "User Preferences Editor"
+msgstr "Editor de preferencias de usuario"
+
+#. Default: "User Settings"
+#: ../Person.py
 msgid "User Settings"
 msgstr "Configuraciones de usuario"
 
