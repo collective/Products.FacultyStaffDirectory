@@ -15,7 +15,27 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: FacultyStaffDirectory\n"
+"Domain: plone\n"
+
+#. Default: "Basic Information"
+#: ../Person.py
+msgid "Basic Information"
+msgstr ""
+
+#. Default: "Contact Information"
+#: ../Person.py
+msgid "Contact Information"
+msgstr ""
+
+#. Default: "Professional Information"
+#: ../Person.py
+msgid "Professional Information"
+msgstr ""
+
+#. Default: "User Settings"
+#: ../Person.py
+msgid "User Settings"
+msgstr ""
 
 #. Default: "Categorization"
 #: ../Person.py
@@ -27,206 +47,27 @@ msgstr ""
 msgid "Dates"
 msgstr ""
 
-#. Default: "The roles all people in this directory will be granted site-wide"\n#: Content Type: FSDFacultyStaffDirectory, Field: roles_
-msgid "FacultyStaffDirectory_description_FacultyStaffDirectoryRoles"
-msgstr ""
-
-#. Default: "Please re-enter the password. (Leave blank if you don't want to change the password.)"\n#: Content Type: FSDPerson, Field: confirmPassword
-msgid "FacultyStaffDirectory_description_confirmPassword"
-msgstr ""
-
-#. Default: "Example: abc123"\n#: Content Type: FSDPerson, Field: id
-msgid "FacultyStaffDirectory_description_id"
-msgstr ""
-
-#. Default: "One per line"\n#: Content Type: FSDPerson, Field: jobTitles
-msgid "FacultyStaffDirectory_description_jobTitles"
-msgstr ""
-
-#. Default: "Password for this person (Leave blank if you don't want to change the password.)"\n#: Content Type: FSDPerson, Field: password
-msgid "FacultyStaffDirectory_description_password"
-msgstr ""
-
-#. Default: "Show all person thumbnails with a fixed width (in pixels) within the classification view"\n#: Content Type: FSDFacultyStaffDirectory, Field: personClassificationViewThumbnailWidth
-msgid "FacultyStaffDirectory_description_personClassificationViewThumbnailWidth"
-msgstr ""
-
-#. Default: "Academic, professional, honorary, and social suffixes."\n#: Content Type: FSDPerson, Field: suffix
-msgid "FacultyStaffDirectory_description_suffix"
-msgstr ""
-
-#. Default: "One per line. Example: http://www.example.com/"\n#: Content Type: FSDPerson, Field: websites
-msgid "FacultyStaffDirectory_description_websites"
-msgstr ""
-
-#. Default: "Example: http://www.example.com/"\n#: Content Type: FSDCourse, Field: website
-msgid "FacultyStaffDirectory_help_website"
-msgstr ""
-
-#. Default: "Roles"\n#: Content Type: FSDFacultyStaffDirectory, Field: roles_
-msgid "FacultyStaffDirectory_label_FacultyStaffDirectoryRoles"
-msgstr ""
-
-#. Default: "Abbreviation"\n#: Content Type: FSDCourse, Field: abbreviation
-msgid "FacultyStaffDirectory_label_abbreviation"
-msgstr ""
-
-#. Default: "Personal Assistant(s)"\n#: Content Type: FSDPerson, Field: assistants
-msgid "FacultyStaffDirectory_label_assistants"
-msgstr ""
-
-#. Default: "Biography"\n#: Content Type: FSDPerson, Field: biography
-msgid "FacultyStaffDirectory_label_biography"
-msgstr ""
-
-#. Default: "Classifications"\n#: Content Type: FSDPerson, Field: classifications
-msgid "FacultyStaffDirectory_label_classifications"
-msgstr ""
-
-#. Default: "Committees"\n#: Content Type: FSDPerson, Field: committees
-msgid "FacultyStaffDirectory_label_committees"
-msgstr ""
-
-#. Default: "Confirm password"\n#: Content Type: FSDPerson, Field: confirmPassword
-msgid "FacultyStaffDirectory_label_confirmPassword"
-msgstr ""
-
-#. Default: "Departments"\n#: Content Type: FSDPerson, Field: departments
-msgid "FacultyStaffDirectory_label_departments"
-msgstr ""
-
-#. Default: "Description"\n#: Content Type: FSDCourse, Field: description
-msgid "FacultyStaffDirectory_label_description"
-msgstr ""
-
-#. Default: "Education"\n#: Content Type: FSDPerson, Field: education
-msgid "FacultyStaffDirectory_label_education"
-msgstr ""
-
-#. Default: "Email"\n#: Content Type: FSDPerson, Field: email
-msgid "FacultyStaffDirectory_label_email"
-msgstr ""
-
-#. Default: "First Name"\n#: Content Type: FSDPerson, Field: firstName
-msgid "FacultyStaffDirectory_label_firstName"
-msgstr ""
-
-#. Default: "Full Name"\n#: Content Type: FSDPerson, Field: title
-msgid "FacultyStaffDirectory_label_fullName"
-msgstr ""
-
-#. Default: "Access Account ID"\n#: Content Type: FSDPerson, Field: id
-msgid "FacultyStaffDirectory_label_id"
-msgstr ""
-
-#. Default: "Image"\n#: Content Type: FSDPerson, Field: image
-msgid "FacultyStaffDirectory_label_image"
-msgstr ""
-
-#. Default: "Job Titles"\n#: Content Type: FSDPerson, Field: jobTitles
-msgid "FacultyStaffDirectory_label_jobTitles"
-msgstr ""
-
-#. Default: "Last Name"\n#: Content Type: FSDPerson, Field: lastName
-msgid "FacultyStaffDirectory_label_lastName"
-msgstr ""
-
-#. Default: "Members"\n#: Content Type: FSDDepartment, Field: people
-msgid "FacultyStaffDirectory_label_members"
-msgstr ""
-
-#. Default: "Middle Name"\n#: Content Type: FSDPerson, Field: middleName
-msgid "FacultyStaffDirectory_label_middleName"
-msgstr ""
-
-#. Default: "Number"\n#: Content Type: FSDCourse, Field: number
-msgid "FacultyStaffDirectory_label_number"
-msgstr ""
-
-#. Default: "Office Street Address"\n#: Content Type: FSDPerson, Field: officeAddress
-msgid "FacultyStaffDirectory_label_officeAddress"
-msgstr ""
-
-#. Default: "Office City"\n#: Content Type: FSDPerson, Field: officeCity
-msgid "FacultyStaffDirectory_label_officeCity"
-msgstr ""
-
-#. Default: "Office Phone"\n#: Content Type: FSDPerson, Field: officePhone
-msgid "FacultyStaffDirectory_label_officePhone"
-msgstr ""
-
-#. Default: "Office Postal Code"\n#: Content Type: FSDPerson, Field: officePostalCode
-msgid "FacultyStaffDirectory_label_officePostalCode"
-msgstr ""
-
-#. Default: "Office State"\n#: Content Type: FSDPerson, Field: officeState
-msgid "FacultyStaffDirectory_label_officeState"
-msgstr ""
-
-#. Default: "Overview image (used for specialty overview view)"\n#: Content Type: FSDSpecialty, Field: overviewImage
-msgid "FacultyStaffDirectory_label_overview_image"
-msgstr ""
-
-#. Default: "Overview text (used for specialty overview view)"\n#: Content Type: FSDSpecialty, Field: overviewText
-msgid "FacultyStaffDirectory_label_overview_text"
-msgstr ""
-
-#. Default: "Password"\n#: Content Type: FSDPerson, Field: password
-msgid "FacultyStaffDirectory_label_password"
-msgstr ""
-
-#. Default: "People"\n#: Content Type: FSDSpecialty, Field: people
-msgid "FacultyStaffDirectory_label_people"
-msgstr ""
-
-#. Default: "Width for thumbnails in classification view"\n#: Content Type: FSDFacultyStaffDirectory, Field: personClassificationViewThumbnailWidth
-msgid "FacultyStaffDirectory_label_personClassificationViewThumbnailWidth"
-msgstr ""
-
-#. Default: "Position"\n#: Content Type: FSDDepartmentalMembership, Field: position
-msgid "FacultyStaffDirectory_label_position"
-msgstr ""
-
-#. Default: "Research Topic"\n#: Content Type: FSDSpecialtyInformation, Field: researchTopic
-msgid "FacultyStaffDirectory_label_researchTopic"
-msgstr ""
-
-#. Default: "Specialties"\n#: Content Type: FSDPerson, Field: specialties
-msgid "FacultyStaffDirectory_label_specialties"
-msgstr ""
-
-#. Default: "Suffix"\n#: Content Type: FSDCourse, Field: suffix
-msgid "FacultyStaffDirectory_label_suffix"
-msgstr ""
-
-#. Default: "Body Text"\n#: Content Type: FSDSpecialty, Field: text
-msgid "FacultyStaffDirectory_label_text"
-msgstr ""
-
-#. Default: "Title"\n#: Content Type: FSDSpecialtyInformation, Field: title
-msgid "FacultyStaffDirectory_label_title"
-msgstr ""
-
-#. Default: "Course Website"\n#: Content Type: FSDCourse, Field: website
-msgid "FacultyStaffDirectory_label_website"
-msgstr ""
-
-#. Default: "Web Sites"\n#: Content Type: FSDPerson, Field: websites
-msgid "FacultyStaffDirectory_label_websites"
-msgstr ""
-
 #. Default: "Ownership"
 #: ../Person.py
 msgid "Ownership"
+msgstr ""
+
+#. Default: "Settings"
+#: ../Person.py
+msgid "Settings"
+msgstr ""
+
+#. Default: "Display"
+#: ../FacultyStaffDirectory.py
+msgid "Display"
 msgstr ""
 
 #. Default: "Personnel Manager"
 msgid "Personnel Manager"
 msgstr ""
 
-#. Default: "Settings"
-#: ../Person.py
-msgid "Settings"
+#. Default: "User Preferences Editor"
+msgid "User Preferences Editor"
 msgstr ""
 
 #. Default: "Standard View"
@@ -269,9 +110,5 @@ msgstr ""
 #: dynamic view name template specialty_tabular_view on type FSDSpecialty
 #: dynamic view name template classification_tabular_view on type FSDClassification
 msgid "Tabular View"
-msgstr ""
-
-#. Default: "User Preferences Editor"
-msgid "User Preferences Editor"
 msgstr ""
 
