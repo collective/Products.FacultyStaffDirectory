@@ -1,9 +1,7 @@
 from plone.app.controlpanel.form import ControlPanelForm
 from plone.fieldsets.fieldsets import FormFieldsets
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 from Products.FacultyStaffDirectory.interfaces import IGeneralConfiguration, IMembershipConfiguration
-from zope.i18nmessageid import MessageFactory
-
-_ = MessageFactory('FacultyStaffDirectory')
 
 general_fieldset = FormFieldsets(IGeneralConfiguration)
 general_fieldset.id = 'fsd_general'
