@@ -3,11 +3,11 @@ from Globals import InitializeClass
 from persistent import Persistent
 from zope.app.component.hooks import getSite
 from zope.event import notify
-from zope.i18nmessageid import MessageFactory
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 from Products.FacultyStaffDirectory.interfaces import IConfiguration, IMembraneIntegrationModifiedEvent
 
 class MembraneTypesModifiedEvent(object):
