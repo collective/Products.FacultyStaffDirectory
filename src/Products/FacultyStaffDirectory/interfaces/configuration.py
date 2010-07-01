@@ -1,15 +1,13 @@
 import re
 
 from zope.app.component.hooks import getSite
-from zope.i18nmessageid import MessageFactory
 from zope.interface import Interface
 from zope.schema import TextLine, Bool, Set, Choice
 from zope.schema.vocabulary import SimpleVocabulary
 from Products.CMFCore.utils import getToolByName
 
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 from Products.FacultyStaffDirectory.config import MEMBRANE_ABLE_TYPES, MEMBRANE_ABLE_TYPES_CHOICES
-
-_ = MessageFactory('FacultyStaffDirectory')
 
 class RegexLine(TextLine):
     """A regular expression with no newlines."""
