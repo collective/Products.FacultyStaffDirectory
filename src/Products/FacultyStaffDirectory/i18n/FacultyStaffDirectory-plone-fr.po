@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: FacultyStaffDirectory\n"
-"POT-Creation-Date: 2010-02-20 20:41+0000\n"
+"POT-Creation-Date: 2010-07-01 16:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Klups Benjamin <benjamin.klups@noveltys.fr>\n"
 "Language-Team: FRENCH <infos@noveltys.fr>\n"
@@ -30,7 +30,6 @@ msgstr ""
 msgid "A directory of faculty and staff members"
 msgstr ""
 
-#. Default: "A grouping of associated people eg \"Faculty\" or \"Staff\"."
 #: ../profiles/default/types/FSDClassification.xml
 msgid "A grouping of associated people eg \"Faculty\" or \"Staff\"."
 msgstr ""
@@ -45,11 +44,11 @@ msgstr ""
 msgid "A person's listed specialty areas"
 msgstr ""
 
-#: ../interfaces/configuration.py:65
+#: ../interfaces/configuration.py:63
 msgid "A regular expression that a Person's ID must match. Defaults to the expression Plone uses for user IDs."
 msgstr ""
 
-#: ../interfaces/configuration.py:39
+#: ../interfaces/configuration.py:37
 msgid "A regular expression that a Person's phone number must match. Leave blank to disable phone number validation."
 msgstr ""
 
@@ -58,7 +57,7 @@ msgstr ""
 msgid "A simple page describing a committee or working group with the associated committee members."
 msgstr ""
 
-#: ../interfaces/configuration.py:59
+#: ../interfaces/configuration.py:57
 msgid "Access Account ID"
 msgstr ""
 
@@ -86,6 +85,10 @@ msgstr ""
 #. Default: "An area of academic study."
 #: ../profiles/default/types/FSDSpecialty.xml
 msgid "An area of academic study."
+msgstr ""
+
+#: ../Person.py:52
+msgid "Basic Information"
 msgstr ""
 
 #. Default: "Change State"
@@ -130,6 +133,10 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
+#: ../Person.py:101
+msgid "Contact Information"
+msgstr ""
+
 #. Default: "Contains information pertaining to a person's membership in a committee."
 #: ../profiles/default/types/FSDCommitteeMembership.xml
 msgid "Contains information pertaining to a person's membership in a committee."
@@ -140,7 +147,7 @@ msgstr ""
 msgid "Contains information pertaining to a person's membership in a department."
 msgstr ""
 
-#: ../interfaces/configuration.py:78
+#: ../interfaces/configuration.py:76
 msgid "Content types to integrate with Plone's users and groups"
 msgstr ""
 
@@ -159,7 +166,7 @@ msgstr ""
 msgid "Course"
 msgstr ""
 
-#: ../interfaces/configuration.py:50
+#: ../interfaces/configuration.py:48
 msgid "Custom email obfuscation"
 msgstr ""
 
@@ -189,8 +196,12 @@ msgstr ""
 msgid "Departments"
 msgstr ""
 
-#: ../interfaces/configuration.py:45
+#: ../interfaces/configuration.py:43
 msgid "Describe the above phone number rule in a human-readable format: for example, (555) 555-5555."
+msgstr ""
+
+#: ../FacultyStaffDirectory.py:44
+msgid "Display"
 msgstr ""
 
 #. Default: "Edit with external application"
@@ -208,11 +219,11 @@ msgstr ""
 msgid "Faculty/Staff Directory"
 msgstr ""
 
-#: ../browser/configuration.py:18
+#: ../browser/configuration.py:16
 msgid "Faculty/Staff Directory settings"
 msgstr ""
 
-#: ../interfaces/configuration.py:51
+#: ../interfaces/configuration.py:49
 msgid "Format email addresses like \"someone AT here DOT com\" rather than using Plone's default spam armoring."
 msgstr ""
 
@@ -246,7 +257,7 @@ msgstr ""
 msgid "Information pertaining to a person's association with a specialty."
 msgstr ""
 
-#: ../interfaces/configuration.py:73
+#: ../interfaces/configuration.py:71
 msgid "Invalid user id"
 msgstr ""
 
@@ -270,6 +281,10 @@ msgstr ""
 msgid "My favorites"
 msgstr ""
 
+#: ../Specialty.py:42
+msgid "Overview"
+msgstr ""
+
 #. Default: "Paste"
 #: ../profiles/uninstall/actions.xml
 msgid "Paste"
@@ -290,27 +305,27 @@ msgstr ""
 msgid "Person Grouping"
 msgstr ""
 
-#: ../interfaces/configuration.py:64
+#: ../interfaces/configuration.py:62
 msgid "Person ID format"
 msgstr ""
 
-#: ../interfaces/configuration.py:71
+#: ../interfaces/configuration.py:69
 msgid "Person ID format error message"
 msgstr ""
 
-#: ../interfaces/configuration.py:57
+#: ../interfaces/configuration.py:55
 msgid "Person ID label"
 msgstr ""
 
-#: ../interfaces/configuration.py:84
+#: ../interfaces/configuration.py:82
 msgid "Person objects provide user passwords"
 msgstr ""
 
-#: ../interfaces/configuration.py:44
+#: ../interfaces/configuration.py:42
 msgid "Phone number example"
 msgstr ""
 
-#: ../interfaces/configuration.py:38
+#: ../interfaces/configuration.py:36
 msgid "Phone number format"
 msgstr ""
 
@@ -322,6 +337,10 @@ msgstr ""
 #. Default: "Print this"
 #: ../profiles/uninstall/actions.xml
 msgid "Print this"
+msgstr ""
+
+#: ../Person.py:115
+msgid "Professional Information"
 msgstr ""
 
 #. Default: "Published"
@@ -364,7 +383,7 @@ msgstr ""
 msgid "Sharing"
 msgstr ""
 
-#: ../interfaces/configuration.py:85
+#: ../interfaces/configuration.py:83
 msgid "Should user passwords be stored as part of the Person? To have a different PAS plugin handle authorization, turn this off."
 msgstr ""
 
@@ -429,11 +448,11 @@ msgstr ""
 msgid "The departments with which the person is associated"
 msgstr ""
 
-#: ../interfaces/configuration.py:72
+#: ../interfaces/configuration.py:70
 msgid "The error message returned when an entered Person ID does not match the above format"
 msgstr ""
 
-#: ../interfaces/configuration.py:58
+#: ../interfaces/configuration.py:56
 msgid "The name of the ID used by your organization"
 msgstr ""
 
@@ -467,8 +486,12 @@ msgstr ""
 msgid "Undo"
 msgstr ""
 
-#: ../events/person.py:36
+#: ../events/person.py:34
 msgid "User %s cannot be found."
+msgstr ""
+
+#: ../Person.py:373
+msgid "User Settings"
 msgstr ""
 
 #. Default: "[FacultyStaffDirectory] Person Grouping Descriptor workflow"
@@ -517,12 +540,12 @@ msgid "label_edit"
 msgstr ""
 
 #. Default: "General"
-#: ../browser/configuration.py:10
+#: ../browser/configuration.py:8
 msgid "label_fsd_general"
 msgstr ""
 
 #. Default: "Membership"
-#: ../browser/configuration.py:14
+#: ../browser/configuration.py:12
 msgid "label_fsd_membership"
 msgstr ""
 
