@@ -28,6 +28,9 @@ class YuppieExtender(object):
                 widget=StringWidget(
                     label=u"Mobile Phone",
                     description=u"Mobile Phone",
+                    label_msgid='FacultyStaffDirectory_label_mobilePhone',
+                    description_msgid="FacultyStaffDirectory_help_mobilePhone",
+                    i18n_domain='FacultyStaffDirectoryExtender',
                 )
             )
 			
