@@ -2,7 +2,20 @@ Version History
 
   ' ' 3.0 (unreleased) -- ' '
         
-        * 
+        * Added i18n hooks for all generic setup profiles fields
+          [macagua]
+          
+        * Added Portugues translation [ALEXANDRE PINHO]
+          [macagua]
+          
+        * Added Türkçe translation [Turgut Uyar]
+          [macagua]
+          
+        * Added Italian translation [Franco Milicchio]
+          [macagua]
+          
+        * Added Spanish translation [Leonardo J. Caballero G.]
+          [macagua]
         
   ' ' 2.1.1 -- ' '
         
