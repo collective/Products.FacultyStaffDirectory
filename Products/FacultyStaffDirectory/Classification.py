@@ -3,7 +3,8 @@
 __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
-from AccessControl import ClassSecurityInfo
+from AccessControl import ClassSecurityInfo, getSecurityManager
+from AccessControl.Permissions import view as View
 from Products.Archetypes.atapi import *
 from Products.FacultyStaffDirectory.PersonGrouping import PersonGrouping
 from Products.Relations.field import RelationField
@@ -18,6 +19,7 @@ from Products.FacultyStaffDirectory.interfaces.classification import IClassifica
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE
 from zope.i18nmessageid import MessageFactory
+from DateTime import now
 
 _ = MessageFactory('FacultyStaffDirectory')
 
@@ -59,11 +61,24 @@ class Classification(PersonGrouping):
         """ Return a list of people in this classification, filtered by the current context
         """
 
+        secman = getSecurityManager()
+        
         #There *has* to be a better way to do this...
         localPeople = self.getReferences()
 
-        #Return the intersection of people referenced to this classification and people within/referenced to the parent
-        return list(set(localPeople) & set(self.aq_parent.getPeople()))
+        #Get the intersection of people referenced to this classification and people within/referenced to the parent
+        classificationPeople = list(set(localPeople) & set(self.aq_parent.getPeople()))
+        
+        #Determine the valid people to show
+        visiblePeople = []
+        currentDateTime = now()
+        for person in classificationPeople:
+            if currentDateTime >= person.getEffectiveDate() and (currentDateTime < person.getExpirationDate() or person.getExpirationDate() is None):
+                if secman.checkPermission(View, person):
+                    visiblePeople.append(person)
+                
+        #Return only the visible people
+        return visiblePeople
 
     security.declareProtected(View, 'getSortedPeople')
     def getSortedPeople(self):
