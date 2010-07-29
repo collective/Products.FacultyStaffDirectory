@@ -42,7 +42,7 @@ from Products.FacultyStaffDirectory.validators import SequenceValidator
 _ = MessageFactory('FacultyStaffDirectory')
 
 def resolvedGetObjPositionInParent(obj):
-    """ since a chane was introduced in plone 3.3 via plone.indexer that causes
+    """ since a change was introduced in plone 3.3 via plone.indexer that causes
         the 'getObjPositionInParent function from Products.CMFPlone.CatalogTool
         to return a callable 'DelegatingIndexer' object instead of a nice, sensible
         integer, we need to create a little wrapper function to protect us against
@@ -452,6 +452,21 @@ schema = ATContentTypeSchema.copy() + Schema((
         relationship='people_assistants',
         allowed_types=('FSDPerson'),
     ),
+    
+    TextField(
+        name='terminationDetails',
+        allowable_content_types=ALLOWABLE_CONTENT_TYPES,
+        widget=RichWidget(
+            label=_(u"FacultyStaffDirectory_label_termination_details", default=u"Termination details"),
+            description=_(u"FacultyStaffDirectory_description_termination_details", default=u"Message displayed to site visitors when the person's termination date has passed. Can be used to provide forwarding information or a link to someone who has taken over their responsibilities."),
+            i18n_domain='FacultyStaffDirectory',
+        ),
+        schemata="Employment Information",
+        searchable=False,
+        validators=('isTidyHtmlWithCleanup',),
+        default_output_type='text/x-html-safe',
+        user_property='description'
+    ),
     ))
 
 Person_schema = OrderedBaseFolderSchema.copy() + schema.copy()  # + on Schemas does only a shallow copy
@@ -489,6 +504,18 @@ class Person(OrderedBaseFolder, ATCTContent):
     else:
         Person_schema.changeSchemataForField('description', 'metadata')
         Person_schema.changeSchemataForField('relatedItems', 'metadata')
+    
+    # reorder the fields to move the dates into the employment information schemata along with the 
+    # terminiation details field and rename the effective and expiration dates.
+    Person_schema['effectiveDate'].schemata = 'Employment Information'
+    Person_schema['effectiveDate'].widget.label = u'Hire Date'
+    Person_schema['effectiveDate'].widget.description = u'The date when the person will be hired. If no date is selected the person will be considered hired immediately.'
+    Person_schema['expirationDate'].schemata = 'Employment Information'
+    Person_schema['expirationDate'].widget.label = u'Termination Date'
+    Person_schema['expirationDate'].widget.description = u'The date when the person leaves the organization. This will automatically make the person invisible for others at the given date.'
+    Person_schema.moveField('effectiveDate', after='specialties')
+    Person_schema.moveField('expirationDate', after='effectiveDate')
+    Person_schema.moveField('terminationDetails', after='expirationDate')
     
     _at_rename_after_creation = True
     schema = Person_schema

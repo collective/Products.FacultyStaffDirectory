@@ -10,6 +10,20 @@ Version History
           from michael.lindig and updated tests accordingly
           (https://weblion.psu.edu/trac/weblion/ticket/1204).
           [cah190 (Craig Haynal)]
+          
+        * Fixed Classification's getPeople to account for effective/
+          expired, View permissions
+          (https://weblion.psu.edu/trac/weblion/ticket/2036)
+          [par117 (Paul Rentschler)]
+          
+        * Added a termination details field and put it and the effective/
+          expired dates in a new Employment Information schemata
+          [par117 (Paul Rentschler)]
+          
+        * Updated the person_view.pt file to hide all information except 
+          the person's name and termination details if they are expired 
+          unless the viewer has editing rights.
+          [par117 (Paul Rentschler)]
 
   ' ' 2.1.4 -- ' '
   
