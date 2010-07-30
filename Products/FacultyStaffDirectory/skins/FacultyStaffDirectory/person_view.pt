@@ -108,6 +108,10 @@
         <div tal:condition="python: not showExpired and context.getTerminationDetails()" class="biography">
           <span tal:content="structure context/getTerminationDetails" />
         </div>
+        <div tal:condition="python: showExpired and context.getTerminationDetails()" class="biography">
+          <h3 i18n:translate="FacultyStaffDirectory_label_termination_details">Termination details:</h3>
+          <span tal:content="structure context/getTerminationDetails" />
+        </div>
 
         <div class="specialties" 
              tal:define="specialtyTuples context/getSpecialties"
