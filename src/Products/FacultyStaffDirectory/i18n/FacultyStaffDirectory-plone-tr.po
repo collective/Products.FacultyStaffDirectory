@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-07-01 18:31+0000\n"
+"POT-Creation-Date: 2010-09-15 23:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: H. Turgut Uyar <uyar@itu.edu.tr>\n"
 "Language-Team: H. Turgut Uyar <uyar@itu.edu.tr>\n"
@@ -15,44 +15,12 @@ msgstr ""
 "Domain: plone\n"
 "X-Is-Fallback-For: tr-tr\n"
 
-#: ../profiles/default/types/FSDPersonGrouping.xml
-msgid "A FacultyStaffDirectory base class for groups of people."
-msgstr ""
-
 #: ../profiles/default/types/FSDCourse.xml
 msgid "A course taught by this person."
 msgstr ""
 
-#: ../profiles/default/types/FSDFacultyStaffDirectory.xml
-msgid "A directory of faculty and staff members"
-msgstr ""
-
-#: ../FacultyStaffDirectory.py:170
-msgid "A group with id '%s' already exists in the portal"
-msgstr ""
-
 #: ../profiles/default/types/FSDClassification.xml
-msgid "A grouping of associated people eg \"Faculty\" or \"Staff\"."
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "A person's listed committees"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "A person's listed specialty areas"
-msgstr ""
-
-#: ../interfaces/configuration.py:63
-msgid "A regular expression that a Person's ID must match. Defaults to the expression Plone uses for user IDs."
-msgstr ""
-
-#: ../interfaces/configuration.py:37
-msgid "A regular expression that a Person's phone number must match. Leave blank to disable phone number validation."
-msgstr ""
-
-#: ../profiles/default/types/FSDCommittee.xml
-msgid "A simple page describing a committee or working group with the associated committee members."
+msgid "A grouping of associated people eg 'Faculty' or 'Staff'."
 msgstr ""
 
 #. Default: "A-to-Z Listing"
@@ -60,33 +28,16 @@ msgstr ""
 msgid "A-to-Z Listing"
 msgstr ""
 
-#: ../interfaces/configuration.py:57
-msgid "Access Account ID"
-msgstr ""
-
 #: ../profiles/uninstall/actions.xml
 msgid "Accessibility"
 msgstr ""
 
-#: ../profiles/default/workflows/fsd_person_workflow/definition.xml
 #: ../profiles/default/workflows/fsd_persongrouping_workflow/definition.xml
 msgid "Active"
 msgstr ""
 
 #: ../profiles/uninstall/actions.xml
 msgid "Add to favorites"
-msgstr ""
-
-#: ../profiles/default/types/FSDDepartment.xml
-msgid "An academic department."
-msgstr ""
-
-#: ../profiles/default/types/FSDSpecialty.xml
-msgid "An area of academic study."
-msgstr ""
-
-#: ../FacultyStaffDirectory.py:166
-msgid "An object with id '%s' already exists in this folder"
 msgstr ""
 
 #. Default: "Base View"
@@ -110,16 +61,10 @@ msgstr ""
 msgid "Change State"
 msgstr ""
 
-#: ../profiles/default/portal_atct.xml
 #: ../profiles/default/types/FSDClassification.xml
 msgid "Classification"
 msgstr ""
 
-#: ../profiles/default/portal_atct.xml
-msgid "Classifications"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
 #: ../profiles/default/types/FSDCommittee.xml
 msgid "Committee"
 msgstr ""
@@ -128,7 +73,9 @@ msgstr ""
 msgid "Committee Membership Information"
 msgstr ""
 
-#: ../profiles/default/portal_atct.xml
+#. Default: "Committees"
+#: dynamic view name template committee_view on type FSDCommittee
+#: dynamic view name template committeesfolder_view on type FSDCommitteesFolder
 msgid "Committees"
 msgstr ""
 
@@ -153,10 +100,6 @@ msgstr ""
 msgid "Contains information pertaining to a person's membership in a department."
 msgstr ""
 
-#: ../interfaces/configuration.py:76
-msgid "Content types to integrate with Plone's users and groups"
-msgstr ""
-
 #: ../profiles/uninstall/actions.xml
 msgid "Contents"
 msgstr ""
@@ -169,10 +112,6 @@ msgstr ""
 msgid "Course"
 msgstr ""
 
-#: ../interfaces/configuration.py:48
-msgid "Custom email obfuscation"
-msgstr ""
-
 #: ../profiles/uninstall/actions.xml
 msgid "Cut"
 msgstr ""
@@ -182,25 +121,20 @@ msgstr ""
 msgid "Dates"
 msgstr ""
 
+#: ../profiles/default/workflows/fsd_persongrouping_workflow/definition.xml
+msgid "De-activate"
+msgstr ""
+
 #: ../profiles/uninstall/actions.xml
 msgid "Delete"
 msgstr ""
 
-#: ../profiles/default/portal_atct.xml
 #: ../profiles/default/types/FSDDepartment.xml
 msgid "Department"
 msgstr ""
 
 #: ../profiles/default/types/FSDDepartmentalMembership.xml
 msgid "Departmental Membership Information"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "Departments"
-msgstr ""
-
-#: ../interfaces/configuration.py:43
-msgid "Describe the above phone number rule in a human-readable format: for example, (555) 555-5555."
 msgstr ""
 
 #. Default: "Display"
@@ -212,24 +146,17 @@ msgstr ""
 msgid "Edit with external application"
 msgstr ""
 
-#: ../profiles/default/actionicons.xml
-msgid "FSD Settings"
+#. Default: "Employment Information"
+#: ../Person.py
+msgid "Employment Information"
 msgstr ""
 
 #: ../profiles/default/types/FSDFacultyStaffDirectory.xml
 msgid "Faculty/Staff Directory"
 msgstr ""
 
-#: ../browser/configuration.py:16
-msgid "Faculty/Staff Directory settings"
-msgstr ""
-
-#: ../interfaces/configuration.py:49
-msgid "Format email addresses like 'someone AT here DOT com' rather than using Plone's default spam armoring."
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "Full Name"
+#: ../skins/FacultyStaffDirectory/facultystaffdirectory_tool_edit.cpt:41
+msgid "Faculty/Staff Directory Configuration"
 msgstr ""
 
 #. Default: "Gallery View"
@@ -255,12 +182,16 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#: ../profiles/default/workflows/fsd_persongrouping_workflow/definition.xml
+msgid "Inactive"
+msgstr ""
+
 #: ../profiles/default/types/FSDSpecialtyInformation.xml
 msgid "Information pertaining to a person's association with a specialty."
 msgstr ""
 
-#: ../interfaces/configuration.py:71
-msgid "Invalid user id"
+#: ../profiles/default/workflows/fsd_person_workflow/definition.xml
+msgid "Invisible Member"
 msgstr ""
 
 #: ../profiles/uninstall/actions.xml
@@ -279,10 +210,6 @@ msgstr ""
 msgid "My favorites"
 msgstr ""
 
-#: ../Specialty.py:42
-msgid "Overview"
-msgstr ""
-
 #. Default: "Ownership"
 #: ../Person.py
 msgid "Ownership"
@@ -290,10 +217,6 @@ msgstr ""
 
 #: ../profiles/uninstall/actions.xml
 msgid "Paste"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "People"
 msgstr ""
 
 #: ../profiles/default/types/FSDPerson.xml
@@ -304,32 +227,8 @@ msgstr ""
 msgid "Person Grouping"
 msgstr ""
 
-#: ../interfaces/configuration.py:62
-msgid "Person ID format"
-msgstr ""
-
-#: ../interfaces/configuration.py:69
-msgid "Person ID format error message"
-msgstr ""
-
-#: ../interfaces/configuration.py:55
-msgid "Person ID label"
-msgstr ""
-
-#: ../interfaces/configuration.py:82
-msgid "Person objects provide user passwords"
-msgstr ""
-
 #. Default: "Personnel Manager"
 msgid "Personnel Manager"
-msgstr ""
-
-#: ../interfaces/configuration.py:42
-msgid "Phone number example"
-msgstr ""
-
-#: ../interfaces/configuration.py:36
-msgid "Phone number format"
 msgstr ""
 
 #: ../profiles/uninstall/actions.xml
@@ -346,6 +245,7 @@ msgid "Professional Information"
 msgstr ""
 
 #: ../profiles/default/workflows/fsd_persongrouping_descriptor_workflow/definition.xml
+#: ../profiles/default/workflows/fsd_tool_workflow/definition.xml
 msgid "Published"
 msgstr ""
 
@@ -359,10 +259,6 @@ msgstr ""
 
 #: ../profiles/uninstall/actions.xml
 msgid "Rename"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "Research Topics"
 msgstr ""
 
 #: ../profiles/uninstall/actions.xml
@@ -382,10 +278,6 @@ msgstr ""
 msgid "Sharing"
 msgstr ""
 
-#: ../interfaces/configuration.py:83
-msgid "Should user passwords be stored as part of the Person? To have a different PAS plugin handle authorization, turn this off."
-msgstr ""
-
 #: ../profiles/uninstall/actions.xml
 msgid "Site Map"
 msgstr ""
@@ -399,15 +291,10 @@ msgstr ""
 msgid "Specialites overview"
 msgstr ""
 
-#: ../profiles/default/portal_atct.xml
-msgid "Specialties"
-msgstr ""
-
 #: ../profiles/default/types/FSDSpecialtiesFolder.xml
 msgid "Specialties Folder"
 msgstr ""
 
-#: ../profiles/default/portal_atct.xml
 #: ../profiles/default/types/FSDSpecialty.xml
 msgid "Specialty"
 msgstr ""
@@ -432,60 +319,12 @@ msgstr ""
 msgid "Tabular View"
 msgstr ""
 
-#: ../profiles/default/portal_atct.xml
-msgid "The classification assigned to a person"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "The classifications with which the person is associated"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "The committees with which the person is associated"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "The departments assigned to a person"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "The departments with which the person is associated"
-msgstr ""
-
-#: ../interfaces/configuration.py:70
-msgid "The error message returned when an entered Person ID does not match the above format"
-msgstr ""
-
-#: ../interfaces/configuration.py:56
-msgid "The name of the ID used by your organization"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "The people assigned to a person grouping (ie committee, department, specialty, classification)"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "The person's name, last name first"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "The research topics with which the person is associated"
-msgstr ""
-
-#: ../profiles/default/portal_atct.xml
-msgid "The specialties with which the person is associated"
-msgstr ""
-
 #: ../profiles/uninstall/actions.xml
 msgid "Toggle full screen mode"
 msgstr ""
 
 #: ../profiles/uninstall/actions.xml
 msgid "Undo"
-msgstr ""
-
-#: ../events/person.py:34
-msgid "User %s cannot be found."
 msgstr ""
 
 #. Default: "User Preferences Editor"
@@ -495,6 +334,14 @@ msgstr ""
 #. Default: "User Settings"
 #: ../Person.py
 msgid "User Settings"
+msgstr ""
+
+#: ../profiles/default/workflows/fsd_person_workflow/definition.xml
+msgid "Visible Member"
+msgstr ""
+
+#: ../profiles/default/workflows/fsd_person_workflow/definition.xml
+msgid "Visible Non-member"
 msgstr ""
 
 #: ../profiles/default/workflows/fsd_persongrouping_descriptor_workflow/definition.xml
@@ -509,9 +356,38 @@ msgstr ""
 msgid "[FacultyStaffDirectory] Person workflow"
 msgstr ""
 
+#: ../profiles/default/workflows/fsd_tool_workflow/definition.xml
+msgid "[FacultyStaffDirectory] Tool workflow"
+msgstr ""
+
 #. Default: "If you want to contact this author, fill in the form below."
 #: ../skins/FacultyStaffDirectory/author.cpt:139
 msgid "description_author_feedback"
+msgstr ""
+
+#. Default: "An academic department."
+#: ../profiles/default/types/FSDDepartment.xml
+msgid "description_edit_academic_department"
+msgstr ""
+
+#. Default: "A simple page describing a committee or working group with the associated committee members."
+#: ../profiles/default/types/FSDCommittee.xml
+msgid "description_edit_committee"
+msgstr ""
+
+#. Default: "A directory of faculty and staff members"
+#: ../profiles/default/types/FSDFacultyStaffDirectory.xml
+msgid "description_edit_facultystaffdirectory"
+msgstr ""
+
+#. Default: "A FacultyStaffDirectory base class for groups of people."
+#: ../profiles/default/types/FSDPersonGrouping.xml
+msgid "description_edit_persongrouping"
+msgstr ""
+
+#. Default: "An area of academic study."
+#: ../profiles/default/types/FSDSpecialty.xml
+msgid "description_edit_specialty"
 msgstr ""
 
 #. Default: "All content created by ${user}…"
@@ -537,16 +413,6 @@ msgstr ""
 #. Default: "Edit"
 #: ../skins/FacultyStaffDirectory/author.cpt:53
 msgid "label_edit"
-msgstr ""
-
-#. Default: "General"
-#: ../browser/configuration.py:8
-msgid "label_fsd_general"
-msgstr ""
-
-#. Default: "Membership"
-#: ../browser/configuration.py:12
-msgid "label_fsd_membership"
 msgstr ""
 
 #. Default: "Log in to send feedback"
@@ -604,17 +470,12 @@ msgstr ""
 msgid "text_no_user_by_name"
 msgstr ""
 
-#. Default: "Can manage personnel"
-#: ../sharing.py:14
-msgid "title_can_manage_personnel"
-msgstr ""
-
 #. Default: "Required"
 #: ../skins/FacultyStaffDirectory/author.cpt:161
 msgid "title_required"
 msgstr ""
 
-#: ../profiles/default/actionicons.xml
-msgid "vCard export"
+#: ../profiles/default/types/FSDPerson.xml
+msgid "vCard"
 msgstr ""
 

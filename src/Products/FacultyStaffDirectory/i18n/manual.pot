@@ -17,6 +17,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone\n"
 
+#. Default: "Employment Information"
+#: ../Person.py
+msgid "Employment Information"
+msgstr ""
+
 #. Default: "Basic Information"
 #: ../Person.py
 msgid "Basic Information"
