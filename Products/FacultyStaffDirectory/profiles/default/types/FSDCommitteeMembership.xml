@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
-<object name="Person" meta_type="Factory-based Type Information"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Committee Membership Information</property>
- <property name="description">Contains information pertaining to a person's membership in a committee.</property>
+<object name="Person"
+   meta_type="Factory-based Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="plone">
+ <property name="title" i18n:translate="">Committee Membership Information</property>
+ <property name="description" i18n:translate="">Contains information pertaining to a person's membership in a committee.</property>
  <property name="content_meta_type">FSDCommitteeMembership</property>
  <property name="product">FacultyStaffDirectory</property>
  <property name="factory">addCommitteeMembership</property>

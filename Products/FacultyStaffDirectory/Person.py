@@ -508,11 +508,11 @@ class Person(OrderedBaseFolder, ATCTContent):
     # reorder the fields to move the dates into the employment information schemata along with the 
     # terminiation details field and rename the effective and expiration dates.
     Person_schema['effectiveDate'].schemata = 'Employment Information'
-    Person_schema['effectiveDate'].widget.label = u'Hire Date'
-    Person_schema['effectiveDate'].widget.description = u'The date when the person will be hired. If no date is selected the person will be considered hired immediately.'
+    Person_schema['effectiveDate'].widget.label = _(u"label_edit_hire_date", default=u"Hire Date")
+    Person_schema['effectiveDate'].widget.description = _(u"description_edit_hire_date", default=u"The date when the person will be hired. If no date is selected the person will be considered hired immediately.")
     Person_schema['expirationDate'].schemata = 'Employment Information'
-    Person_schema['expirationDate'].widget.label = u'Termination Date'
-    Person_schema['expirationDate'].widget.description = u'The date when the person leaves the organization. This will automatically make the person invisible for others at the given date.'
+    Person_schema['expirationDate'].widget.label = _(u"label_edit_termination_date", default=u"Termination Date")
+    Person_schema['expirationDate'].widget.description = _(u"description_edit_termination_date", default=u"The date when the person leaves the organization. This will automatically make the person invisible for others at the given date.")
     Person_schema.moveField('effectiveDate', after='specialties')
     Person_schema.moveField('expirationDate', after='effectiveDate')
     Person_schema.moveField('terminationDetails', after='expirationDate')

@@ -38,7 +38,7 @@
                         fieldset request/fieldset|options/fieldset|default_fieldset;
                         allow_tabbing python:True;
                         fields python:schematas[fieldset].editableFields(here);">
-                <h1>Faculty/Staff Directory Configuration</h1>
+                <h1 i18n:translate="">Faculty/Staff Directory Configuration</h1>
                 <div id="archetypes-schemata-links" 
                      tal:condition="fieldsets">
                   <tal:block repeat="set fieldsets">

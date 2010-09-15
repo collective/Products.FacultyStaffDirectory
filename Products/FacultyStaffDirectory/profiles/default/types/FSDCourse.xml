@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
-<object name="Person" meta_type="Factory-based Type Information"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Course</property>
- <property name="description">A course taught by this person.</property>
+<object name="Person"
+   meta_type="Factory-based Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="plone">
+ <property name="title" i18n:translate="">Course</property>
+ <property name="description" i18n:translate="">A course taught by this person.</property>
  <property name="content_meta_type">FSDCourse</property>
  <property name="product">FacultyStaffDirectory</property>
  <property name="factory">addCourse</property>

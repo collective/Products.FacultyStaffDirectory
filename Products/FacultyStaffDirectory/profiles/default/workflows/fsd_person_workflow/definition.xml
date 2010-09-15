@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="fsd_person_workflow"
+<dc-workflow xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+             i18n:domain="plone"
+             workflow_id="fsd_person_workflow"
              title="[FacultyStaffDirectory] Person workflow"
+             description=""
              state_variable="review_state"
-             initial_state="active">
+             initial_state="active"
+             i18n:attributes="title; description">
              
  <permission>Access contents information</permission>
  <permission>View</permission>
@@ -18,7 +22,7 @@
  <permission>FacultyStaffDirectory: Assign Specialties to People</permission>
  <permission>Relations: Manage content relations</permission> 
  
- <state state_id="active" title="Visible Member">
+ <state state_id="active" title="Visible Member" i18n:attributes="title">
   <exit-transition transition_id="deactivate"/>
   <exit-transition transition_id="hide"/>
   <permission-map name="Access contents information" acquired="True">
@@ -76,7 +80,7 @@
   </permission-map>
  </state>
  
- <state state_id="inactive" title="Visible Non-member">
+ <state state_id="inactive" title="Visible Non-member" i18n:attributes="title">
   <exit-transition transition_id="activate"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>
@@ -131,7 +135,7 @@
   </permission-map>  
  </state>
 
- <state state_id="hiddenactive" title="Invisible Member">
+ <state state_id="hiddenactive" title="Invisible Member" i18n:attributes="title">
   <exit-transition transition_id="show"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>

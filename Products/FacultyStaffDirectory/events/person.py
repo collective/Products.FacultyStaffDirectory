@@ -2,6 +2,7 @@ from Acquisition import aq_parent, aq_inner
 
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IUserRelated
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 def modifyPersonOwnership(event):
     """Let people own their own objects and modify their own user preferences.
@@ -29,7 +30,7 @@ def modifyPersonOwnership(event):
             userFolder = getattr(parent, 'acl_users', None)
         
         if user is None:
-            raise KeyError, "User %s cannot be found." % userId
+            raise KeyError, _(u"User %s cannot be found.") % userId
         
         context.changeOwnership(user, False)
 
@@ -58,7 +59,7 @@ def modifyPersonOwnership(event):
                 pid = assistant.id
                 user = userFolder.getUserById(pid)
                 if user is None:
-                    raise KeyError, "User %s cannot be found." % pid
+                    raise KeyError, _(u"User %s cannot be found.") % pid
                 roles = list(context.get_local_roles_for_userid(pid))
                 roles.append('Owner')
                 context.manage_setLocalRoles(pid, roles)

@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
-<object name="Person" meta_type="Factory-based Type Information"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Person</property>
- <property name="description">Holds information about a single person</property>
+<object name="Person"
+   meta_type="Factory-based Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="plone">
+ <property name="title" i18n:translate="">Person</property>
+ <property name="description" i18n:translate="">Holds information about a single person</property>
  <property name="content_icon">user_suit.png</property>
  <property name="content_meta_type">FSDPerson</property>
  <property name="product">FacultyStaffDirectory</property>
@@ -33,7 +35,7 @@
   <permission value="Modify portal content"/>
  </action>
  <action title="vCard" action_id="vcard" category="document_actions" condition_expr=""
-    url_expr="string:${object_url}/vCard" visible="True">
+    url_expr="string:${object_url}/vCard" visible="True" i18n:attributes="title">
   <permission value="View"/>
  </action>
  <action title="Kupu Preview" action_id="kupupreview" category="object" condition_expr="python:0"

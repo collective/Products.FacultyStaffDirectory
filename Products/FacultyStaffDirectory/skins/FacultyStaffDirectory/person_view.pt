@@ -41,16 +41,16 @@
           </div>
 
           <h1 class="fn n">
-            <span class="given-name" tal:content="context/getFirstName">[First Name]</span>
-            <span class="additional-name" tal:content="context/getMiddleName | nothing">[Middle Name]</span>
-            <span class="family-name" tal:content="context/getLastName">[Last Name]</span>
-            <span class="honorific-suffix" tal:content="context/getSuffix">[ suffix i.e. Dr]</span>
+            <span class="given-name" tal:content="context/getFirstName"><tal:comment replace="nothing">[First Name]</tal:comment></span>
+            <span class="additional-name" tal:content="context/getMiddleName | nothing"><tal:comment replace="nothing">[Middle Name]</tal:comment></span>
+            <span class="family-name" tal:content="context/getLastName"><tal:comment replace="nothing">[Last Name]</tal:comment></span>
+            <span class="honorific-suffix" tal:content="context/getSuffix"><tal:comment replace="nothing">[ suffix i.e. Dr]</tal:comment></span>
           </h1>
           <p tal:condition="python: showExpired and context.getJobTitles()" 
              class="title" 
              tal:repeat="jobTitle context/getJobTitles" 
-             tal:content="jobTitle">
-            [job title]</p>
+             tal:content="jobTitle"><tal:comment replace="nothing">[job title]</tal:comment>
+          </p>
           <p tal:condition="python:not showExpired"
              i18n:translate="FacultyStaffDirectory_expired_notice">
             This person is no longer associated with the organization.
@@ -59,12 +59,12 @@
           <span tal:condition="showExpired"
                 class="adr">
             <span class="street-address" tal:content="structure python:context.getOfficeAddress().replace('\n', '<br />')" /><br />
-            <span class="locality" tal:content="context/getOfficeCity" >[office city]</span>
+            <span class="locality" tal:content="context/getOfficeCity" ><tal:comment replace="nothing">[office city]</tal:comment></span>
             <tal:block tal:condition="context/getOfficeState">, </tal:block>
-            <span class="region" tal:content="context/getOfficeState">[office state]</span> 
-            <span class="postal-code" tal:content="context/getOfficePostalCode">[postal zip code]</span>
+            <span class="region" tal:content="context/getOfficeState"><tal:comment replace="nothing">[office state]</tal:comment></span> 
+            <span class="postal-code" tal:content="context/getOfficePostalCode"><tal:comment replace="nothing">[postal zip code]</tal:comment></span>
           </span>
-          <tal:comment tal:replace="nothing">
+          <tal:comment replace="nothing">
             ***** I put the class=email in a span before the a tag since the microformat spec doesn't say i can't do that
           </tal:comment>
           <div tal:condition="python: showExpired and context.getEmail()">
@@ -73,13 +73,13 @@
           </div>
           <span tal:condition="python: showExpired and context.getOfficePhone()"
                 class="tel officePhone">
-            <span class="type" i18n:translate="FacultyStaffDirectory_label_officePhone">Work</span>:
-            <span class="value" tal:content="context/getOfficePhone">[office phone number]</span>
+            <span class="type" i18n:translate="FacultyStaffDirectory_label_officePhone">Office Phone</span>:
+            <span class="value" tal:content="context/getOfficePhone"><tal:comment replace="nothing">[office phone number]</tal:comment></span>
           </span>
 
           <div tal:condition="python: showExpired and context.getWebsites()"
                class="websites">
-            <h3 i18n:translate="FacultyStaffDirectory_label_websites">Websites:</h3>
+            <h3 i18n:translate="FacultyStaffDirectory_label_websites_heading">Websites:</h3>
             <ul>
               <li tal:repeat="website context/getWebsites">
                 <a class='url' href="" 
@@ -93,7 +93,7 @@
         <div class="visualClear"><!-- --></div>
             
         <div tal:condition="python: showExpired and context.getEducation()" class="education">
-          <h3 i18n:translate="FacultyStaffDirectory_label_education">Education:</h3>
+          <h3 i18n:translate="FacultyStaffDirectory_label_education_heading">Education:</h3>
           <ol>
             <li tal:repeat="degree context/getEducation">
               <span tal:content="degree" />
@@ -102,14 +102,14 @@
         </div>
 
         <div tal:condition="python: showExpired and context.getBiography()" class="biography">
-          <h3 i18n:translate="FacultyStaffDirectory_label_biography">Biography:</h3>
+          <h3 i18n:translate="FacultyStaffDirectory_label_biography_heading">Biography:</h3>
           <span tal:content="structure context/getBiography" />
         </div>
         <div tal:condition="python: not showExpired and context.getTerminationDetails()" class="biography">
           <span tal:content="structure context/getTerminationDetails" />
         </div>
         <div tal:condition="python: showExpired and context.getTerminationDetails()" class="biography">
-          <h3 i18n:translate="FacultyStaffDirectory_label_termination_details">Termination details:</h3>
+          <h3 i18n:translate="FacultyStaffDirectory_label_termination_details_heading">Termination details:</h3>
           <span tal:content="structure context/getTerminationDetails" />
         </div>
 
@@ -148,7 +148,7 @@
         <div class="departments"
              tal:define="departmentsList context/getDepartments"
              tal:condition="python: showExpired and departmentsList">
-          <h3 i18n:translate="FacultyStaffDirectory_label_departments">Departments:</h3>
+          <h3 i18n:translate="FacultyStaffDirectory_label_departments_heading">Departments:</h3>
           <dl>
             <tal:block tal:repeat="eachDepartment departmentsList">
               <dt>
@@ -194,12 +194,12 @@
              tal:define="assistants context/getAssistants;
                          mtool python:context.portal_membership"
              tal:condition="python: showExpired and assistants and mtool.checkPermission('Add portal content', here)">
-          <h3 i18n:translate="FacultyStaffDirectory_label_assistants">Assistants:</h3> 
+          <h3 i18n:translate="FacultyStaffDirectory_label_assistants_heading">Assistants:</h3> 
           <ul tal:repeat="assistant assistants">
             <li tal:define="url assistant/absolute_url;
                             name assistant/Title">
               <a tal:attributes="href url"
-                 tal:content="name">Assistant's Full Name</a>
+                 tal:content="name"><tal:comment replace="nothing">Assistant's Full Name</tal:comment></a>
             </li>
           </ul>
         </div>
@@ -218,7 +218,7 @@
             <li tal:define="url boss/absolute_url;
                             name boss/Title">
               <a tal:attributes="href url"
-                 tal:content="name">Boss' Full Name</a>
+                 tal:content="name"><tal:comment replace="nothing">Boss' Full Name</tal:comment></a>
             </li>
           </ul>
         </div>

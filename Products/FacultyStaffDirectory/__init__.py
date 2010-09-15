@@ -39,6 +39,9 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.GenericSetup import EXTENSION, profile_registry
 from Products.FacultyStaffDirectory.tools.FacultyStaffDirectoryTool import FacultyStaffDirectoryTool
 
+from zope.i18nmessageid import MessageFactory
+FSDMessageFactory = MessageFactory('FacultyStaffDirectory')
+
 def initialize(context):
 
     # imports packages and types for registration
