@@ -5,6 +5,9 @@ from Products.GenericSetup import EXTENSION, profile_registry
 
 from Products.MobilePhoneExtender.person import PersonExtender
 
+from zope.i18nmessageid import MessageFactory
+MobilePhoneExtenderMF = MessageFactory('FSDMobilePhoneExtender')
+
 installExtenderGloballyIfLocallyIsNotSupported(PersonExtender, 'Products.MobilePhoneExtender')  # Put the name of your product here.
 
 registerDirectory('skins', globals())

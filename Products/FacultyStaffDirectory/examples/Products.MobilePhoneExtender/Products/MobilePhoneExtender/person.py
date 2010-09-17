@@ -5,6 +5,7 @@ from zope.interface import implements, Interface
 from zope.component import adapts, provideAdapter
 
 from Products.FacultyStaffDirectory.interfaces.person import IPerson
+from Products.MobilePhoneExtender import MobilePhoneExtenderMF as _
 
 
 # Any field you tack on must have ExtensionField as its first subclass:
@@ -26,8 +27,9 @@ class PersonExtender(object):
                 searchable=True,
                 schemata="Contact Information",
                 widget=StringWidget(
-                    label=u"Mobile Phone",
-                    description=u"Demo field added by the MobilePhoneExtender product.",
+                    label=_(u"FSDMobilePhoneExtender_label_MobilePhone", default=u"Mobile Phone"),
+                    description=_(u"FSDMobilePhoneExtender_description_MobilePhone", default=u"Demo field added by the MobilePhoneExtender product."),
+                    i18n_domain='FSDMobilePhoneExtender',
                 )
             )
         ]

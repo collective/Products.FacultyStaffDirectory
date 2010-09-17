@@ -86,6 +86,12 @@ Version History
   
   ' ' 2.1 -- ' '
     
+        * Added support for full i18n.
+    
+        * Added Spanish, French, Italian, Portugues, Türkçe localization.
+    
+        * Added a bash script which helps to update news strings for translation for l10n.
+    
         * Added egg packaging, since it's nice to declare a dependency on
           archetypes.schemaextender.
         

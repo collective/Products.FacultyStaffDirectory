@@ -1,0 +1,27 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FacultyStaffDirectory\n"
+"POT-Creation-Date: 2010-09-17 14:11+0000\n"
+"PO-Revision-Date: 2008-08-14 02:52+0000\n"
+"Last-Translator: H. Turgut Uyar <uyar@itu.edu.tr>\n"
+"Language-Team: H. Turgut Uyar <uyar@itu.edu.tr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: tr\n"
+"Language-Name: Türkçe\n"
+"Preferred-Encodings: utf-8 latin5\n"
+"Domain: FacultyStaffDirectory\n"
+"X-Is-Fallback-For: tr-tr\n"
+
+#. Default: "Demo field added by the MobilePhoneExtender product."
+#: ../person.py:31
+msgid "FSDMobilePhoneExtender_description_MobilePhone"
+msgstr ""
+
+#. Default: "Mobile Phone"
+#: ../person.py:30
+msgid "FSDMobilePhoneExtender_label_MobilePhone"
+msgstr ""
+
