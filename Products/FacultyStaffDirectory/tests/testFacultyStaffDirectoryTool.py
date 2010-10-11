@@ -29,7 +29,7 @@ class testFacultyStaffDirectoryTool(testPlone):
         self.mt = getToolByName(self.person,'portal_membership')
         
     def testUseInternalPasswordControlsAuth(self):
-        from Products.membrane.interfaces import IUserAuthentication
+        from Products.membrane.at.interfaces import IUserAuthentication
         
         u = IUserAuthentication(self.person)
         self.person.setPassword("chewy1")

@@ -12,7 +12,7 @@ from Products.CMFCore.permissions import View, ManageUsers
 from Products.CMFCore.utils import getToolByName
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
-from Products.membrane.interfaces import IPropertiesProvider
+from Products.membrane.at.interfaces import IPropertiesProvider
 from Products.membrane.utils import getFilteredValidRolesForPortal
 from Acquisition import aq_inner, aq_parent
 from zope.i18nmessageid import MessageFactory

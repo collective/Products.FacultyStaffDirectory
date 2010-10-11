@@ -1,7 +1,7 @@
 from Acquisition import aq_parent, aq_inner
 
 from Products.CMFCore.utils import getToolByName
-from Products.membrane.interfaces import IUserRelated
+from Products.membrane.interfaces import IMembraneUserObject
 from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 def modifyPersonOwnership(event):
@@ -17,7 +17,7 @@ def modifyPersonOwnership(event):
     if 'FSDPerson' in fsd_tool.getEnableMembraneTypes():
 
         catalog = getToolByName(context, 'portal_catalog')
-        userId = IUserRelated(context).getUserId()
+        userId = IMembraneUserObject(context).getUserId()
         userFolder = getToolByName(context, 'acl_users')
         
         user = None

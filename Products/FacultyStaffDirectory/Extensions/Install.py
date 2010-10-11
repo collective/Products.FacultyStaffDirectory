@@ -132,7 +132,7 @@ def install(self, reinstall=False):
     migrationTool = getToolByName(self, 'portal_migration')
     isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
     
-    profilesToImport = ('profile-membrane:default', 'profile-FacultyStaffDirectory:default')
+    profilesToImport = ('profile-Products.membrane:default', 'profile-FacultyStaffDirectory:default')
     if isPlone3OrBetter:
         profilesToImport += ('profile-Products.FacultyStaffDirectory:plone3-actions-fix',)
 

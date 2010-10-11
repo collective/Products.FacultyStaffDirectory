@@ -1,3 +1,4 @@
+import pdb; pdb.set_trace( )
 from archetypes.schemaextender.field import ExtensionField
 from archetypes.schemaextender.interfaces import ISchemaExtender
 from Products.Archetypes.atapi import *

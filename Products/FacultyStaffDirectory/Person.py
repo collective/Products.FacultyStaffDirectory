@@ -29,7 +29,7 @@ from plone.app.layout.navigation.navtree import buildFolderTree
 from Products.CMFPlone.CatalogTool import getObjPositionInParent
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import safe_unicode
-from Products.membrane.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
+from Products.membrane.at.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
 from Products.Relations.field import RelationField
 from Products.validation import validation
 from zope.i18nmessageid import MessageFactory

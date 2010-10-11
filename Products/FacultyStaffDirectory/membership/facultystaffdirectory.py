@@ -5,11 +5,11 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.membrane.interfaces import IGroup
 from Products.membrane.interfaces import IMembraneUserAuth
-from Products.membrane.interfaces import ICategoryMapper
+# from Products.membrane.at.interfaces import ICategoryMapper
 
-from Products.membrane.config import ACTIVE_STATUS_CATEGORY
+# from Products.membrane.config import ACTIVE_STATUS_CATEGORY
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
-from Products.membrane.utils import generateCategorySetIdForType
+# from Products.membrane.utils import generateCategorySetIdForType
 
 from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFacultyStaffDirectory
 
@@ -33,14 +33,14 @@ class Group(object):
         """
         mb = getToolByName(self.context, MEMBRANE_TOOL)
         wf = getToolByName(self.context, 'portal_workflow')
-        
-        reviewState = wf.getInfoFor(self.context, 'review_state')
-        wfmapper = ICategoryMapper(mb)
-        categories = generateCategorySetIdForType(self.context.portal_type)
-        if wfmapper.isInCategory(categories, ACTIVE_STATUS_CATEGORY, reviewState):
-            return self.context.getRoles()
-        else:
-            return ()
+        return self.context.getRoles()
+        # reviewState = wf.getInfoFor(self.context, 'review_state')
+        # wfmapper = ICategoryMapper(mb)
+        # categories = generateCategorySetIdForType(self.context.portal_type)
+        # if wfmapper.isInCategory(categories, ACTIVE_STATUS_CATEGORY, reviewState):
+        #     return self.context.getRoles()
+        # else:
+        #     return ()
     
     def getGroupId(self):
         return self.context.getId()

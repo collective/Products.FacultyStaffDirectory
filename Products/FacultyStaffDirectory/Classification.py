@@ -14,7 +14,7 @@ from Products.CMFCore.permissions import View, ManageProperties, ModifyPortalCon
 from Products.CMFCore.utils import getToolByName
 from zope.interface import implements
 from Products.CMFCore.permissions import ManageUsers
-from Products.membrane.interfaces import IPropertiesProvider
+from Products.membrane.at.interfaces import IPropertiesProvider
 from Products.FacultyStaffDirectory.interfaces.classification import IClassification
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE

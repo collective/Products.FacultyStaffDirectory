@@ -4,14 +4,15 @@
            i18n_domain="FacultyStaffDirectory">
 
   <adapter for="..interfaces.person.IPerson"
-           provides="Products.membrane.interfaces.IUserRelated"
+           provides="Products.membrane.interfaces.IMembraneUserObject"
            factory=".person.UserRelated" />
   <adapter for="..interfaces.person.IPerson"
            provides="Products.membrane.interfaces.IUserRoles"
            factory=".person.UserRoles" />
-  <adapter for="..interfaces.person.IPerson"
+  <!-- TODO: FIX THIS -->
+  <!-- <adapter for="..interfaces.person.IPerson"
            provides="Products.membrane.interfaces.IMembraneUserManagement"
-           factory=".person.UserManagement" />
+           factory=".person.UserManagement" /> -->
   <adapter for="..interfaces.person.IPerson"
            provides="Products.membrane.interfaces.IUserAuthentication"
            factory=".person.UserAuthentication" />
