@@ -1,6 +1,7 @@
 from Products.validation import validation
 from Products.validation.interfaces.IValidator import IValidator
 from zope.interface import implements
+from zope.interface import classImplements
 
 class SequenceValidator(object):
     """A wrapper that runs a validator on each item of a sequence-like Field.
@@ -9,8 +10,6 @@ class SequenceValidator(object):
         Person_schema['websites'].validators = SequenceValidator('isURLs', validation.validatorFor('isURL'))
     """
     
-    implements(IValidator)
-
     def __init__(self, name, validator, description='', **kw):
         """Constructor
         
@@ -29,6 +28,13 @@ class SequenceValidator(object):
         else:
             # Not sure why this needs to be True, but returning 1 (like RegexValidator) throws an Unsubscriptable Object exception. [Ed: It's because that's what the IValidator interface proclaims. The stock validators are just nonconformant.]
             return True
+
+try:
+    classImplements(SequenceValidator, IValidator)
+except TypeError:
+    SequenceValidator.__implements__ = (IValidator,)
+
+
 
 # Change some error messages to improve grammar
 validation.validatorFor('isURL').errmsg = 'is not a valid URL.'
