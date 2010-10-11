@@ -76,7 +76,6 @@ class Specialty(PersonGrouping):
     """
     """
     security = ClassSecurityInfo()
-    __implements__ = (getattr(PersonGrouping,'__implements__',()),)
     implements(ISpecialty)
     meta_type = portal_type = 'FSDSpecialty'
 

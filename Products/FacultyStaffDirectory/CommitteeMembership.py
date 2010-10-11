@@ -45,7 +45,6 @@ class CommitteeMembership(BaseContent, ATCTContent):
     """
     """
     security = ClassSecurityInfo()
-    __implements__ = (getattr(BaseContent,'__implements__',()),)
     implements(ICommitteeMembership)
     meta_type = portal_type = 'FSDCommitteeMembership'
 

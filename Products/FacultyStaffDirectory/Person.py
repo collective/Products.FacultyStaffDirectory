@@ -12,7 +12,10 @@ from sha import sha
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_inner, aq_parent
 from DateTime import DateTime
-from zope.app.annotation.interfaces import IAttributeAnnotatable, IAnnotations
+try:
+    from zope.annotation.interfaces import IAttributeAnnotatable, IAnnotations
+except ImportError:
+    from zope.app.annotation.interfaces import IAttributeAnnotatable, IAnnotations
 from zope.event import notify
 from zope.interface import implements, classImplements
 from Products.Archetypes.atapi import *
@@ -22,7 +25,7 @@ from Products.ATContentTypes.lib.calendarsupport import n2rn, foldLine
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFCore.permissions import View, ModifyPortalContent, SetOwnPassword, SetOwnProperties
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.browser.navtree import buildFolderTree
+from plone.app.layout.navigation.navtree import buildFolderTree
 from Products.CMFPlone.CatalogTool import getObjPositionInParent
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.CMFPlone.utils import safe_unicode
@@ -484,7 +487,6 @@ class Person(OrderedBaseFolder, ATCTContent):
     """A person in the Faculty/Staff directory"""
     meta_type = portal_type = "FSDPerson"
     security = ClassSecurityInfo()
-    __implements__ = (ATCTContent.__implements__, getattr(OrderedBaseFolder,'__implements__', ()),)
     # zope3 interfaces
     implements(IPerson,
                IUserAuthProvider,

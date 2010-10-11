@@ -39,10 +39,6 @@ PersonGrouping_schema = OrderedBaseFolderSchema.copy() + schema.copy()  # + on S
 class PersonGrouping(OrderedBaseFolder, ATCTContent):
     """"""
     security = ClassSecurityInfo()
-    __implements__ = (ATCTContent.__implements__,
-                      getattr(OrderedBaseFolder,'__implements__', ()),                      
-                     )
-
     meta_type = portal_type = 'FSDPersonGrouping'
 
     # moved schema setting after finalizeATCTSchema, so the order of the fieldsets

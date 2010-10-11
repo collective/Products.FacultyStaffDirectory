@@ -20,7 +20,6 @@ class SpecialtiesFolder(OrderedBaseFolder, ATCTContent):
     """
     """
     security = ClassSecurityInfo()
-    __implements__ = (getattr(OrderedBaseFolder,'__implements__',()),)
     implements(ISpecialtiesFolder)
     meta_type = portal_type = 'FSDSpecialtiesFolder'
     

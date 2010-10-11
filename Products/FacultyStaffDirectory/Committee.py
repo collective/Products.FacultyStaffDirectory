@@ -47,7 +47,6 @@ class Committee(PersonGrouping):
     """
     """
     security = ClassSecurityInfo()
-    __implements__ = (getattr(PersonGrouping,'__implements__',()),)
     # zope3 interfaces
     implements(ICommittee, IPropertiesProvider)
     meta_type = portal_type = 'FSDCommittee'

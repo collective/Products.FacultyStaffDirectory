@@ -78,7 +78,6 @@ class Course(BaseContent, ATCTContent):
     """
     """
     security = ClassSecurityInfo()
-    __implements__ = (BaseContent.__implements__ + ATCTContent.__implements__)
     implements(ICourse)
     meta_type = portal_type = 'FSDCourse'
 

@@ -158,7 +158,6 @@ class FacultyStaffDirectoryTool(UniqueObject, BaseContent):
     """
     """
     security = ClassSecurityInfo()
-    __implements__ = (getattr(UniqueObject,'__implements__',()),)
     # zope3 interfaces
     implements(IFacultyStaffDirectoryTool)
     # This name appears in the 'add' box

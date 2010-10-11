@@ -47,7 +47,6 @@ class SpecialtyInformation(BaseContent):
     """
     """
     security = ClassSecurityInfo()
-    __implements__ = (getattr(BaseContent,'__implements__',()),)
     implements(ISpecialtyInformation)
     meta_type = portal_type = 'FSDSpecialtyInformation'
     schema = SpecialtyInformation_schema

@@ -26,7 +26,6 @@ class CommitteesFolder(OrderedBaseFolder, ATCTContent):
     """
     """
     security = ClassSecurityInfo()
-    __implements__ = (getattr(OrderedBaseFolder,'__implements__',()),)
     implements(ICommitteesFolder)
     meta_type = portal_type = 'FSDCommitteesFolder'
 

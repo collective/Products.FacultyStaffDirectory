@@ -19,7 +19,7 @@ from Products.FacultyStaffDirectory.interfaces.classification import IClassifica
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE
 from zope.i18nmessageid import MessageFactory
-from DateTime import now
+from DateTime import DateTime
 
 _ = MessageFactory('FacultyStaffDirectory')
 
@@ -71,7 +71,7 @@ class Classification(PersonGrouping):
         
         #Determine the valid people to show
         visiblePeople = []
-        currentDateTime = now()
+        currentDateTime = DateTime()
         for person in classificationPeople:
             if currentDateTime >= person.getEffectiveDate() and (currentDateTime < person.getExpirationDate() or person.getExpirationDate() is None):
                 if secman.checkPermission(View, person):

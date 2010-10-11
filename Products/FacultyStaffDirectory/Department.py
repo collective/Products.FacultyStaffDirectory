@@ -46,7 +46,6 @@ class Department(PersonGrouping):
     """
     """
     security = ClassSecurityInfo()
-    __implements__ = (getattr(PersonGrouping,'__implements__',()),)
     implements(IDepartment)
     _at_rename_after_creation = True
     meta_type = portal_type="FSDDepartment"

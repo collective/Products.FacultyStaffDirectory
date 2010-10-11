@@ -55,9 +55,6 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
     """
     """
     security = ClassSecurityInfo()
-    __implements__ = (ATCTContent.__implements__,
-                      getattr(OrderedBaseFolder,'__implements__', ()),                      
-                     )
     implements(IFacultyStaffDirectory, IPropertiesProvider)
     meta_type = portal_type = 'FSDFacultyStaffDirectory'
 
