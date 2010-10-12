@@ -31,10 +31,14 @@ def checkKupuResourceList(tool, resourceType, portalTypeList):
 class testInstall(testPlone):
     def afterSetUp(self):
         migrationTool = getToolByName(self.portal, 'portal_migration')
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
         self.isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
         self.pc = getToolByName(self.portal, 'portal_catalog')
         self.atct_tool = getToolByName(self.portal, 'portal_atct')
-        self.ktool = getToolByName(self.portal, 'kupu_library_tool')
+        self.has_kupu = False
+        if installer.isProductInstalled('kupu'):
+            self.has_kupu = True
+            self.ktool = getToolByName(self.portal, 'kupu_library_tool')
         
     def testMyFolderSetup(self):
         if self.isPlone3OrBetter:
@@ -65,11 +69,6 @@ class testInstall(testPlone):
                 hasfsdmemberprofile = True
         self.failUnless(hasfsdmemberprofile, "New MemberPrefs action failed to install.")
 
-    def testPortalSetupImportWorks(self):
-        """Check for a regression of https://weblion.psu.edu/trac/weblion/ticket/386."""
-        ps = getToolByName(self.portal, 'portal_setup')
-        self.failUnless(ps.getImportContextID() or ps.getBaselineContextID())
-        
     def testCatalogIndexesAdded(self):
         missingindexes = []
         for indexName, indexType in ADDITIONAL_CATALOG_INDEXES:
@@ -130,29 +129,35 @@ class testInstall(testPlone):
         else:
             print "\n" + ("*" * 20) + "\nversioning not possible, testVersioningSetup passed\n" + ("*" * 20) + "\n"
             pass
-            
+
     def testKupuLinkableTypesSetup(self):
-        missingltypes = checkKupuResourceList(self.ktool, 'linkable', linkableKupuTypes)
-        self.failIf(missingltypes, '%s not listed as linkable by Kupu' % missingltypes)
+        if self.has_kupu:
+            missingltypes = checkKupuResourceList(self.ktool, 'linkable', linkableKupuTypes)
+            self.failIf(missingltypes, '%s not listed as linkable by Kupu' % missingltypes)
 
     def testKupuMediaTypesSetup(self):
-        missingmtypes = checkKupuResourceList(self.ktool, 'mediaobject', mediaKupuTypes)
-        self.failIf(missingmtypes, '%s not listed as media by Kupu' % missingmtypes)
+        if self.has_kupu:
+            missingmtypes = checkKupuResourceList(self.ktool, 'mediaobject', mediaKupuTypes)
+            self.failIf(missingmtypes, '%s not listed as media by Kupu' % missingmtypes)
 
     def testKupuCollectionTypesSetup(self):        
-        missingctypes = checkKupuResourceList(self.ktool, 'collection', collectionKupuTypes)
-        self.failIf(missingctypes, '%s not listed as collection by Kupu' % missingctypes)
-        
+        if self.has_kupu:
+            missingctypes = checkKupuResourceList(self.ktool, 'collection', collectionKupuTypes)
+            self.failIf(missingctypes, '%s not listed as collection by Kupu' % missingctypes)
+
         
 class testUninstall(testPlone):
     def afterSetUp(self):
         migrationTool = getToolByName(self.portal, 'portal_migration')
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
         self.isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
         self.pc = getToolByName(self.portal, 'portal_catalog')
         self.atct_tool = getToolByName(self.portal, 'portal_atct')
-        self.ktool = getToolByName(self.portal, 'kupu_library_tool')
+        self.has_kupu = False
+        if installer.isProductInstalled('kupu'):
+            self.has_kupu = True
+            self.ktool = getToolByName(self.portal, 'kupu_library_tool')
         self.loginAsPortalOwner()
-        installer = getToolByName(self.portal, 'portal_quickinstaller')
         installer.uninstallProducts(products=['FacultyStaffDirectory'])
         
     def testMyFolderTeardown(self):
@@ -255,16 +260,19 @@ class testUninstall(testPlone):
             pass
             
     def testKupuLinkableTypesSetup(self):
-        missingltypes = checkKupuResourceList(self.ktool, 'linkable', linkableKupuTypes)
-        self.failUnlessEqual(missingltypes, linkableKupuTypes, '%s not listed as linkable by Kupu' % missingltypes)
+        if self.has_kupu:
+            missingltypes = checkKupuResourceList(self.ktool, 'linkable', linkableKupuTypes)
+            self.failUnlessEqual(missingltypes, linkableKupuTypes, '%s not listed as linkable by Kupu' % missingltypes)
 
     def testKupuMediaTypesSetup(self):
-        missingmtypes = checkKupuResourceList(self.ktool, 'mediaobject', mediaKupuTypes)
-        self.failUnlessEqual(missingmtypes, mediaKupuTypes, '%s not listed as media by Kupu' % missingmtypes)
+        if self.has_kupu:
+            missingmtypes = checkKupuResourceList(self.ktool, 'mediaobject', mediaKupuTypes)
+            self.failUnlessEqual(missingmtypes, mediaKupuTypes, '%s not listed as media by Kupu' % missingmtypes)
 
     def testKupuCollectionTypesSetup(self):        
-        missingctypes = checkKupuResourceList(self.ktool, 'collection', collectionKupuTypes)
-        self.failUnlessEqual(missingctypes, collectionKupuTypes, '%s not listed as collection by Kupu' % missingctypes)
+        if self.has_kupu:
+            missingctypes = checkKupuResourceList(self.ktool, 'collection', collectionKupuTypes)
+            self.failUnlessEqual(missingctypes, collectionKupuTypes, '%s not listed as collection by Kupu' % missingctypes)
 
 
 class testReinstall(testPlone):
@@ -335,4 +343,5 @@ def test_suite():
     suite.addTest(makeSuite(testUninstall))
     suite.addTest(makeSuite(testReinstall))
     suite.addTest(makeSuite(testLargeDirectory))
+    
     return suite
