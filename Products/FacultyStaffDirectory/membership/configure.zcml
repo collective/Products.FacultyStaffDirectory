@@ -9,10 +9,9 @@
   <adapter for="..interfaces.person.IPerson"
            provides="Products.membrane.interfaces.IUserRoles"
            factory=".person.UserRoles" />
-  <!-- TODO: FIX THIS -->
-  <!-- <adapter for="..interfaces.person.IPerson"
+  <adapter for="..interfaces.person.IPerson"
            provides="Products.membrane.interfaces.IMembraneUserManagement"
-           factory=".person.UserManagement" /> -->
+           factory=".person.UserManagement" />
 
   <adapter for="..interfaces.person.IPerson"
            provides="Products.membrane.interfaces.IUserAuthentication"

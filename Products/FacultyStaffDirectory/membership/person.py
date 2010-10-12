@@ -13,7 +13,7 @@ except ImportError:
 from Products.membrane.interfaces import IMembraneUserObject
 from Products.membrane.at.interfaces import IUserAuthentication
 from Products.membrane.at.interfaces import IUserRoles
-# from Products.membrane.at.interfaces import IMembraneUserManagement
+from Products.membrane.interfaces import IMembraneUserManagement
 from Products.FacultyStaffDirectory.interfaces.person import IPerson
 from Products.FacultyStaffDirectory.config import PASSWORD_KEY
 from Products.FacultyStaffDirectory.config import TOOLNAME as FSD_TOOL
@@ -85,29 +85,28 @@ class UserRoles(object):
         # return self.context.getRoles()
         return ()
 
-# TODO: FIX THIS
-# class UserManagement(object):
-#     """Provides methods for adding deleting and changing users
-# 
-#     This is an implementation of IUserManagement from PlonePAS
-#     """
-#     implements(IMembraneUserManagement)
-#     adapts(IPerson)
-# 
-#     def __init__(self, context):
-#         self.context = context
-# 
-#     def doAddUser(self, login, password):
-#         """This can't be done unless we have a canonical place to store users
-#         some implementations may wish to define one and implement this.
-#         """
-#         raise NotImplementedError
-# 
-#     def doChangeUser(self, login, password, **kw):
-#         self.context.setPassword(password)
-#         if kw:
-#             self.context.edit(**kw)
-# 
-#     def doDeleteUser(self, login):
-#         parent = aq_parent(aq_inner(self.context))
-#         parent.manage_delObjects([self.context.getId()])
+class UserManagement(object):
+    """Provides methods for adding deleting and changing users
+
+    This is an implementation of IUserManagement from PlonePAS
+    """
+    implements(IMembraneUserManagement)
+    adapts(IPerson)
+
+    def __init__(self, context):
+        self.context = context
+
+    def doAddUser(self, login, password):
+        """This can't be done unless we have a canonical place to store users
+        some implementations may wish to define one and implement this.
+        """
+        raise NotImplementedError
+
+    def doChangeUser(self, login, password, **kw):
+        self.context.setPassword(password)
+        if kw:
+            self.context.edit(**kw)
+
+    def doDeleteUser(self, login):
+        parent = aq_parent(aq_inner(self.context))
+        parent.manage_delObjects([self.context.getId()])
