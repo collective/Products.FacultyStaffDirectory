@@ -88,13 +88,6 @@ class testPlone(PloneTestCase.PloneTestCase):
         directory.invokeFactory(type_name="FSDPerson", id=id, firstName=firstName, lastName=lastName)
         return directory[id]
 
-    # Commented out for now, it gets blasted at the moment anyway.
-    # Place it in the protected section if you need it.
-    #def afterSetup(self):
-    #    """
-    #    """
-    #    pass
-
     def interact(self, locals=None):
         """Provides an interactive shell aka console inside your testcase.
 
@@ -194,14 +187,10 @@ Note: You have the same locals available as in your test-case.
             directory.invokeFactory(type_name="FSDPerson", id=good_id, firstName=fn, lastName=ln)
             
         return generated_ids
-            
-            
-            
-            
 
 
 def test_suite():
     from unittest import TestSuite, makeSuite
     suite = TestSuite()
-    suite.addTest(makeSuite(testPlone))
+#    suite.addTest(makeSuite(testPlone))
     return suite
