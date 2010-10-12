@@ -130,12 +130,14 @@ def migrate(self):
     oldMediaKupuTypes = ['Person']
     oldCollectionKupuTypes = ['FacultyStaffDirectory']
 
-    for type in oldLinkableKupuTypes:
-        removeKupuResource(self, 'linkable', type)
-    for type in oldMediaKupuTypes:
-        removeKupuResource(self, 'mediaobject', type)
-    for type in oldCollectionKupuTypes:
-        removeKupuResource(self, 'collection', type)
+    quickinstaller = getToolByName(self,'portal_quickinstaller')
+    if quickinstaller.isProductInstalled('kupu'):
+        for type in oldLinkableKupuTypes:
+            removeKupuResource(self, 'linkable', type)
+        for type in oldMediaKupuTypes:
+            removeKupuResource(self, 'mediaobject', type)
+        for type in oldCollectionKupuTypes:
+            removeKupuResource(self, 'collection', type)
 
     portal_url = getToolByName(self, 'portal_url')
     portal = portal_url.getPortalObject()
@@ -168,14 +170,15 @@ def migrate(self):
     wf.updateRoleMappings()
 
     # Update Kupu settings
-    print >> out, "Applying Kupu customizations"
-    for type in linkableKupuTypes:
-        addKupuResource(self, 'linkable', type)
-    for type in mediaKupuTypes:
-        addKupuResource(self, 'mediaobject', type)        
-    for type in collectionKupuTypes:
-        addKupuResource(self, 'collection', type)
-    
-     
+    quickinstaller = getToolByName(self,'portal_quickinstaller')
+    if quickinstaller.isProductInstalled('kupu'):
+        print >> out, "Applying Kupu customizations"
+        for type in linkableKupuTypes:
+            addKupuResource(self, 'linkable', type)
+        for type in mediaKupuTypes:
+            addKupuResource(self, 'mediaobject', type)        
+        for type in collectionKupuTypes:
+            addKupuResource(self, 'collection', type)
+
     print >> out, "Migration finished"
     return out.getvalue()

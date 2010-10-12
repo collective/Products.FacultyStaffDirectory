@@ -38,10 +38,12 @@ class testMigration(testPlone):
             self.failIf('aaa111' not in [p.id for p in self.directory.faculty.getPeople()])
 
             # Make sure Kupu customizations are updated
-            kupu = getToolByName(self, 'kupu_library_tool')
-            resourceList = list(kupu.getPortalTypesForResourceType('linkable'))
-            self.failIf('Person' in resourceList)
-            self.failIf('FSDPerson' not in resourceList)
+            quickinstaller = getToolByName(self.portal,'portal_quickinstaller')
+            if quickinstaller.isProductInstalled('kupu'):
+                kupu = getToolByName(self, 'kupu_library_tool')
+                resourceList = list(kupu.getPortalTypesForResourceType('linkable'))
+                self.failIf('Person' in resourceList)
+                self.failIf('FSDPerson' not in resourceList)
             
         except ImportError, detail:
             # "contentmigration" product was not found, no migration performed.
