@@ -118,16 +118,8 @@ def install(self, reinstall=False):
     def importProfiles(self, importContexts):
         """Import all steps from the GenericSetup profiles listen in `importContexts`."""
         setupTool = getToolByName(self, 'portal_setup')
-        oldContext = setupTool.getImportContextID()
-        if oldContext:
-            for eachContext in importContexts:
-                setupTool.setImportContext(eachContext)
-                setupTool.runAllImportSteps()
-            setupTool.setImportContext(oldContext)
-        else:
-            for eachContext in importContexts:
-                setupTool.runAllImportStepsFromProfile(eachContext)  # doesn't exist in Plone 2.5
-
+        for eachContext in importContexts:
+            setupTool.runAllImportStepsFromProfile(eachContext)  # doesn't exist in Plone 2.5
 
     migrationTool = getToolByName(self, 'portal_migration')
     isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
@@ -302,21 +294,25 @@ def install(self, reinstall=False):
     #####
     # Set up Kupu:
     #   Does Kupu have a GS setup possibility?  If so, we should absolutely use it.
-    def addKupuResource(self, resourceType, portalType):
-        kupu = getToolByName(self, 'kupu_library_tool')
-        resourceList = list(kupu.getPortalTypesForResourceType(resourceType))
-        if portalType not in resourceList:
-            resourceList.append(portalType)
-            kupu.addResourceType(resourceType,tuple(resourceList))
-            #ems174: Do we actually need to updateResourceTypes? Kupu gets snippy if we try to add more than one linkable type.
-            #kupu.updateResourceTypes(resourceType)
-        
-    for type in linkableKupuTypes:
-        addKupuResource(self, 'linkable', type)
-    for type in mediaKupuTypes:
-        addKupuResource(self, 'mediaobject', type)        
-    for type in collectionKupuTypes:
-        addKupuResource(self, 'collection', type)
+    
+    if quickinstaller.isProductInstalled('kupu'):
+        #
+        # is Kupu available? if so, add resources
+        #
+        def addKupuResource(self, resourceType, portalType):
+            kupu = getToolByName(self, 'kupu_library_tool')
+            resourceList = list(kupu.getPortalTypesForResourceType(resourceType))
+            if portalType not in resourceList:
+                resourceList.append(portalType)
+                kupu.addResourceType(resourceType,tuple(resourceList))
+                #ems174: Do we actually need to updateResourceTypes? Kupu gets snippy if we try to add more than one linkable type.
+                #kupu.updateResourceTypes(resourceType)
+        for type in linkableKupuTypes:
+            addKupuResource(self, 'linkable', type)
+        for type in mediaKupuTypes:
+            addKupuResource(self, 'mediaobject', type)        
+        for type in collectionKupuTypes:
+            addKupuResource(self, 'collection', type)
             
     return out.getvalue()
 
@@ -324,10 +320,7 @@ def uninstall(self, reinstall=False):
     out = StringIO()
     def uninstallProfiles(portal):
         setup_tool = getToolByName(portal, 'portal_setup')
-        originalContext = setup_tool.getImportContextID()
-        setup_tool.setImportContext('profile-FacultyStaffDirectory:uninstall')
-        setup_tool.runAllImportSteps()
-        setup_tool.setImportContext(originalContext)
+        setupTool.runAllImportStepsFromProfile('profile-FacultyStaffDirectory:uninstall')  # doesn't exist in Plone 2.5
         
     # set tag for version greater than 3.0
     migrationTool = getToolByName(self, 'portal_migration')
