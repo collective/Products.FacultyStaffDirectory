@@ -68,13 +68,6 @@ class testPerson(testPlone):
     
 
 class testWithoutSpecialties(testPerson):
-#     def afterSetUp(self):
-#         testPerson.afterSetUp(self)
-#         FunctionalTestSetup().setUp()
-#
-#     def beforeTearDown(self):
-#         FunctionalTestSetup().tearDown()
-#         testPerson.beforeTearDown(self)
     
     def testCreatePerson(self):
         # Make sure the Title override is working
