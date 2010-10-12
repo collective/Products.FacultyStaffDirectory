@@ -66,16 +66,6 @@ class testDepartment(testPlone):
         if wf.getInfoFor(self.inDept, 'review_state') == 'active':
             wf.doActionFor(self.inDept,'deactivate')
         
-        #### Since roles are not relevant to this content type, this test is probably obsolete, kill it after talking with Erik/c
-        #roles are set on the object, but only available when object is active
-#         self.inDept.setRoles(('Reviewer',))
-#         # at first, object is 'visible', but not published, roles should be empty
-#         self.failIf('Reviewer' in ing.getRoles(),"roles are active, but content deactivated\nRoles: %s\nReviewState: %s" % (ing.getRoles(), wf.getInfoFor(self.inDept,'review_state')))
-#         #make object 'active'
-#         wf.doActionFor(self.inDept,'activate')
-#         # now check again, role should be there
-#         self.failUnless('Reviewer' in ing.getRoles(),"Roles not active, but content active\nRoles: %s\nReviewState: %s" % (ing.getRoles(), wf.getInfoFor(self.inDept,'review_state')))
-        
         # group id is set on content object, uniqueness is enforced elsewhere
         self.failUnless(ing.getGroupId()==self.inDept.getId(),"getGroupId returning incorrect value:\nExpected: %s\nReceived: %s" % (self.inDept.getId(), ing.getGroupId()))
         
