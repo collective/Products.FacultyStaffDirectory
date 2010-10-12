@@ -16,7 +16,9 @@
       <element value="FSDPerson" />
       <element value="FSDDepartment" />
       <element value="FSDCommitteesFolder" />
+      <element value="FSDCommittee" />
       <element value="FSDSpecialtiesFolder" />
+      <element value="FSDSpecialty" />
       <element value="FSDFacultyStaffDirectory" />
     </containsobjects>
   </resourcetypes>
