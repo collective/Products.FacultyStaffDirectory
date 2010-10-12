@@ -436,20 +436,22 @@ def uninstall(self, reinstall=False):
 
         #####
         # Remove Kupu customizations:
-        def removeKupuResource(self, resourceType, portalType):
-            kupu = getToolByName(self, 'kupu_library_tool')
-            resourceList = list(kupu.getPortalTypesForResourceType(resourceType))
-            if portalType in resourceList:
-                resourceList.remove(portalType)
-                kupu.addResourceType(resourceType,tuple(resourceList))
-                #kupu.updateResourceTypes(resourceType)    
-
-        for type in linkableKupuTypes:
-            removeKupuResource(self, 'linkable', type)
-        for type in mediaKupuTypes:
-            removeKupuResource(self, 'mediaobject', type)
-        for type in collectionKupuTypes:
-            removeKupuResource(self, 'collection', type)
+        quickinstaller = getToolByName(self,'portal_quickinstaller')
+        if quickinstaller.isProductInstalled('kupu'):
+            def removeKupuResource(self, resourceType, portalType):
+                kupu = getToolByName(self, 'kupu_library_tool')
+                resourceList = list(kupu.getPortalTypesForResourceType(resourceType))
+                if portalType in resourceList:
+                    resourceList.remove(portalType)
+                    kupu.addResourceType(resourceType,tuple(resourceList))
+                    #kupu.updateResourceTypes(resourceType)    
+                    
+            for type in linkableKupuTypes:
+                removeKupuResource(self, 'linkable', type)
+            for type in mediaKupuTypes:
+                removeKupuResource(self, 'mediaobject', type)
+            for type in collectionKupuTypes:
+                removeKupuResource(self, 'collection', type)
     
         # Okay, unregister the membrane_tool from the InstalledProduct.portalobjects property in the QI tool.
         # IMPORTANT!!!
