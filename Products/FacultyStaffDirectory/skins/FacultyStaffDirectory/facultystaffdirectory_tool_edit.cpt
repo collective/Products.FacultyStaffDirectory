@@ -22,16 +22,19 @@
                 Portal status message
               </div>
               
-              
+	                <!-- Iterator
+	                python:modules['Products.Archetypes'].IndexIterator; -->
+	      
               <tal:toolConfig condition="isTool"
                 define="view context/@@at_base_edit_view | nothing;
+	                lock_info context/@@plone_lock_info|nothing;
+	                isLocked isLocked | lock_info/is_locked_for_current_user | nothing;
                         dummy python:view and (view.isTemporaryObject() and request.set('disable_border', True)) or nothing;
                         lifecycle context/@@at_lifecycle_view | nothing;
                         lock_info context/@@plone_lock_info | nothing;
                         dummy lifecycle/begin_edit | nothing;
                         allow_tabbing python:True or not view.isMultiPageSchema();                
                         errors options/state/getErrors | nothing;
-                        Iterator python:modules['Products.Archetypes'].IndexIterator;
                         schematas here/Schemata;
                         fieldsets python:[key for key in schematas.keys() if (key != 'metadata') and (schematas[key].editableFields(here, visible_only=True))];
                         default_fieldset python:(not schematas or schematas.has_key('default')) and 'default' or fieldsets[0];
