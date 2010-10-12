@@ -13,6 +13,7 @@
   <!-- <adapter for="..interfaces.person.IPerson"
            provides="Products.membrane.interfaces.IMembraneUserManagement"
            factory=".person.UserManagement" /> -->
+
   <adapter for="..interfaces.person.IPerson"
            provides="Products.membrane.interfaces.IUserAuthentication"
            factory=".person.UserAuthentication" />
