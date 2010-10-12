@@ -1,11 +1,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL 
-# ACTIVE_STATUS_CATEGORY
-# from Products.membrane.utils import generateCategorySetIdForType
-# from Products.membrane.at.interfaces import ICategoryMapper
 from Products.FacultyStaffDirectory import MEMBRANE_ABLE_TYPES, MEMBRANE_TYPE_ACTIVE_STATES
 
-# TODO: FIX THIS
 def modifyMembraneTypes(event):
     """Check facultystaffdirectory_tool schemata,
        switch on/off membrane types based on the information we find there.
