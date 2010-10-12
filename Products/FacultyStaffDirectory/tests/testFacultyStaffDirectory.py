@@ -235,13 +235,7 @@ class testMultipleFacultyStaffDirectories(testPlone):
         base_query = self.getBaseQueryForWidget(self.person1, 'assistants')
         self.failUnless(self.executeBaseQueryAndCompare(base_query, 'person1'))
         self.failIf(self.executeBaseQueryAndCompare(base_query, 'person2'))
-        
-        # test the person classifications field (this one is different, should it be?)
-        ### For some reason, the following raises an attribute error.  Any thoughts on why,
-        ### or for that matter on why _classificationReferences doesn't fail when we are running?
-        # import pdb; pdb.set_trace()
-        # classifications = self.person1._classificationReferences()
-        
+       
     def testPersonGroupingRBWidgetBaseQuery(self):
         """ verify that the base query returned by the reference browser widget for the people
             field of a person grouping returns a query that results in the expected list of
@@ -250,9 +244,7 @@ class testMultipleFacultyStaffDirectories(testPlone):
         base_query = self.getBaseQueryForWidget(self.fsd1['a-department'], 'members')
         self.failUnless(self.executeBaseQueryAndCompare(base_query, 'person1'))
         self.failIf(self.executeBaseQueryAndCompare(base_query, 'person2'))
-        
 
-    # end tests for membrane integration
 
 def test_suite():
     from unittest import TestSuite, makeSuite
