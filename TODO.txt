@@ -1,0 +1,2 @@
+
+1) Need an upgrade step from 2.x to 3 which updates workflow for directory objects to fsd_directory_workflow.
