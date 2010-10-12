@@ -17,11 +17,17 @@
  <permission>FacultyStaffDirectory: Assign Committees to People</permission>
  <permission>FacultyStaffDirectory: Assign Classifications to People</permission>
  <permission>FacultyStaffDirectory: Assign Specialties to People</permission>
+ <permission>FacultyStaffDirectory: Provides Roles</permission>  
  <permission>Relations: Manage content relations</permission> 
  
  <state state_id="active" title="Active" i18n:attributes="title">
   <exit-transition transition_id="deactivate"/>
   <permission-map name="Access contents information" acquired="True">
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Provides Roles" acquired="False">
+   <permission-role>Anonymous</permission-role>
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Member</permission-role>
   </permission-map>
   <permission-map name="View" acquired="True">
    <permission-role>Anonymous</permission-role>
@@ -71,6 +77,8 @@
  <state state_id="inactive" title="Inactive" i18n:attributes="title">
   <exit-transition transition_id="activate"/>
   <permission-map name="Access contents information" acquired="True">
+  </permission-map>
+  <permission-map name="FacultyStaffDirectory: Provides Roles" acquired="False">
   </permission-map>
   <permission-map name="View" acquired="True">
    <permission-role>Anonymous</permission-role>
