@@ -18,5 +18,5 @@ def upgrade_2_to_3(context):
         logger.error(message)
         raise
 
-    mbtool = getToolByName(context, MEMBRANE_TOOL)
+    mbtool = getToolByName(portal, MEMBRANE_TOOL)
     mbtool.clearFindAndRebuild()
