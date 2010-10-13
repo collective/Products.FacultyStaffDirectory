@@ -1,5 +1,6 @@
 Description
-  
+===========
+
     FacultyStaffDirectory is a personnel directory, a provider of shared
     workspaces for committees, a way of keeping track of people's areas of
     expertise, a floor wax, and a dessert topping. It integrates with Plone's
@@ -8,6 +9,7 @@ Description
 
 
 Dependencies
+============
     
     Everything you need is included with the product bundle:
 
@@ -24,8 +26,9 @@ Dependencies
 
 
 Installation
+============
 
-    FacultyStaffDirectory requires Plone 3.3 or greater.
+    FacultyStaffDirectory 3 requires Plone 3.3 or greater.
        
     1.  Add the following to buildout.cfg::
           
@@ -44,32 +47,40 @@ Installation
         themselves automatically. (Membrane remains in the 'available'
         column, but is in fact installed.)
      	
-      
 Upgrading
+=========
     
-   To upgrade from 1.x, first upgrade to a 2.x release thusly:
+    To upgrade from 1.x, first upgrade to a 2.x release thusly:
 
-      Use the migration script in the Extensions folder of 
-      FacultyStaffDirectory. Follow the instructions inside 
-      migrate1dot0to2dot0.py. To perform the migration under Plone 3,
-      you'll need the "contentmigration product":http://svn.plone.org/svn/collective/contentmigration/.
+        Use the migration script in the Extensions folder of
+        FacultyStaffDirectory. Follow the instructions inside
+        migrate1dot0to2dot0.py. To perform the migration under Plone
+        3, you'll need the "contentmigration product":http://svn.plone.org/svn/collective/contentmigration/.
 
-   To upgrade from 2.x to 3.0:
+    To upgrade from 2.x to 3.0:
 
-      Use the "Upgrade" button on Add/Remove Products page.
-      (in Plone 4.0, this is called "Add-Ons").
+        Use the "Upgrade" button on Add/Remove Products page.  (in
+        Plone 4.0, this is called "Add-Ons").
       
-      MAKE SURE to check the workflow state of your Faculty/Staff
-      directory. It has probably been changed to 'private'.
+        MAKE SURE to check the workflow state of your Faculty/Staff
+        directory. It has probably been changed to 'private'.
 
-      If your Faculty/Staff directory was using a custom workflow, it
-      is now in a new workflow which comes with FacultyStaffDirectory
-      3.0. You'll need to change your custom workflow to manage the
-      "FacultyStaffDirectory: Provides Roles" permission before you
-      go back to it.
+        If your Faculty/Staff directory was using a custom workflow,
+      	it is now in a new workflow which comes with
+      	FacultyStaffDirectory 3.0. You'll need to change your custom
+      	workflow to manage the "FacultyStaffDirectory: Provides Roles"
+      	permission before you go back to it. Check out the
+      	'fsd_directory_workflow' to see how it's done.
 
+    Special Note for users upgrading to Plone 4:
 
+        Because FacultyStaffDirectory 2.x is not compatible with Plone
+        4, you must first upgrade FacultyStaffDirectory to version 3
+        then upgrade Plone.
+
+    
 Using FacultyStaffDirectory
+===========================
 
     Adding a Faculty/Staff Directory
     
@@ -212,6 +223,7 @@ Using FacultyStaffDirectory
 
 
 Design Rationale & Thoughts
+===========================
     
     Why the push for just one Directory in a site? Why not just add
     people to Departments? -- ' '
@@ -239,6 +251,7 @@ Design Rationale & Thoughts
 
 
 Possible Gotchas
+================
 
     Skinning plone 2.5.x with DIYPloneStyle 2.5
     
@@ -253,6 +266,7 @@ Possible Gotchas
 
 
 Authorship
+==========
 
     This product was developed by the WebLion group at Penn State University.
   
@@ -263,6 +277,7 @@ Authorship
 
 
 Support
+=======
 
     * Report bugs to the "WebLion issue tracker":https://weblion.psu.edu/trac/weblion/newticket?component=FacultyStaffDirectory&version=2.1.
     
@@ -280,6 +295,7 @@ Support
 
 
 License
+=======
 
     Copyright (c) 2006-2008 The Pennsylvania State University. WebLion is
     developed and maintained by the WebLion Project Team, its partners, and
