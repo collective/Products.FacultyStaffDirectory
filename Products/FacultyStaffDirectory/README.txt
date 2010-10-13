@@ -25,161 +25,48 @@ Dependencies
 
 Installation
 
-    FacultyStaffDirectory works with Plone 2.5.x and 3.x, though the
-    installation instructions differ. For each version of Plone, there are a few
-    choices of installation method, depending on how your Zope instance was
-    installed and on your personal preferences.
-
-    Plone 2.5
-    
-        Buildout (recommended)
-            
-            1.  Add the following to buildout.cfg::
-            
-             [buildout]
-             parts =
-                 . . .(other parts). . .
-                 facultystaffdirectory-core
-                 infrastructure
-             eggs =
-                 . . .(other eggs). . .
-                 Products.Relations
-                 archetypes.schemaextender == 1.0
-             
-             [infrastructure]
-             recipe = infrae.subversion
-             urls = http://svn.plone.org/svn/archetypes/Archetypes/branches/1.4-schemaextender-support Archetypes
-                    svn://svn.zope.org/repos/main/Products.Five/tags/1.4.4 Five
-             
-             [facultystaffdirectory-core]
-             recipe = infrae.subversion
-             urls =  https://weblion.psu.edu/svn/weblion/weblion/Products.FacultyStaffDirectory/tags/2.1/src/Products/FacultyStaffDirectory FacultyStaffDirectory
-                     http://svn.plone.org/svn/collective/membrane/tags/1.0 membrane
-                       
-             [instance]
-             . . .(other instance configuration). . .
-             products =
-                 ${buildout:directory}/parts/infrastructure
-                 ${buildout:directory}/parts/facultystaffdirectory-core
-                 . . .(other product locations). . .
-    
-            2.  Re-run buildout (typically 'bin/buildout').
-    
-            2.  Restart Zope.
-            
-            3.  Install the FacultyStaffDirectory product using
-                portal_quickinstaller or the Plone Add/Remove Products tool
-                under Site Setup. The necessary dependencies will install
-                themselves automatically.
-                
-                You will see a number of warnings about Syntax Errors.  These may be
-                safely ignored, as they are the result of a problem in setuptools, not
-                the FacultyStaffDirectory product.  
-            
-        Manual
-            
-            1.  Install the dependencies:
-            
-                1. Put membrane and Relations (included) into your Products
-                   folder.
-            
-                2. Put the included copy of Archetypes into your Products
-                   folder.
-            
-                3. Install archetypes.schemaextender:
-                   
-                   1. Open the archetypes.schemaextender-1.0 folder (included)
-                      and find the "archetypes" folder within.
-                   
-                   2. Place the archetypes folder in the lib/python folder
-                      within your Zope instance.
-    
-            2.  Put FacultyStaffDirectory into your Products folder.
-    
-            3.  Restart Zope.
-            
-            4.  Install the FacultyStaffDirectory product using
-                portal_quickinstaller or the Plone Add/Remove Products tool
-                under Site Setup. The dependencies that need to be installed
-                will install themselves automatically.
-
-    Plone 3.x
-        
-        Buildout (recommended)
-        
-            1.  Add the following to buildout.cfg::
-            
-                 [buildout]
-                 eggs =
-                     . . .(other eggs). . .
-                     Products.FacultyStaffDirectory
-    
-            2.  Re-run buildout (typically 'bin/buildout').
-    
-            2.  Restart Zope (typically 'bin/instance restart').
-            
-            3.  Install the FacultyStaffDirectory product using
-                portal_quickinstaller or the Plone Add/Remove Products tool
-                under Site Setup. The necessary dependencies will install
-                themselves automatically. (Membrane remains in the 'available'
-                column, but is in fact installed.)
-      
-        Egg-based without buildout
-    
-            1.  If you're using a non-buildout Plone installation, use
-                easy_install to install Products.FacultyStaffDirectory.
-                Dependencies will be installed automatically.
-    
-            2.  Restart Zope (typically 'bin/instance').
-            
-            3.  Install the FacultyStaffDirectory product using
-                portal_quickinstaller or the Plone Add/Remove Products tool
-                under Site Setup. The necessary dependencies will install
-                themselves automatically. (Membrane remains in the 'available'
-                column, but is in fact installed.)
-     
-        Manual
-            
-            Don't do this if you can help it.
-            
-            1.  Install the dependencies:
-    
-                1. Put membrane and Relations (included) into your Products
-                   folder.
-    
-                2. Install archetypes.schemaextender in the following disgusting
-                   way:
-
-                    1. Find the "archetypes" folder, somewhere in your Zope
-                       instance (lowercase "a", not uppercase "A").  It's often
-                       in lib/python and should have a "kss" folder in it.  On
-                       Windows, it's at C:\Program Files\Plone
-                       3\Python\Lib\site-packages\archetypes.kss-1.2.6-py2.4.egg
-                       \archetypes.
-
-                    2. Put the
-                       archetypes.schemaextender-1.0/archetypes/schemaextender
-                       folder (included) into the archetypes folder.
-    
-            2.  Put FacultyStaffDirectory into your Products folder.
-            
-            3.  Restart Zope.
-            
-            4.  Install the FacultyStaffDirectory using portal_quickinstaller or
-                the Plone Add/Remove Products tool under Site Setup. The
-                dependencies that need to be installed will install themselves
-                automatically. (Membrane remains in the 'available'
-                column, but is in fact installed.)
-
+    FacultyStaffDirectory requires Plone 3.3 or greater.
        
+    1.  Add the following to buildout.cfg::
+          
+        [buildout]
+        eggs =
+        . . .(other eggs). . .
+            Products.FacultyStaffDirectory
+    
+    2.  Re-run buildout (typically 'bin/buildout').
+   
+    3.  Restart Zope (typically 'bin/instance restart').
+            
+    4.  Install the FacultyStaffDirectory product using
+        portal_quickinstaller or the Plone Add/Remove Products tool
+        under Site Setup. The necessary dependencies will install
+        themselves automatically. (Membrane remains in the 'available'
+        column, but is in fact installed.)
+     	
+      
 Upgrading
     
-    To upgrade from 2.0, just follow the installation instructions above.
-    
-    To upgrade from 1.x, use the migration script in the Extensions folder of
-    FacultyStaffDirectory. Follow the instructions inside
-    migrate1dot0to2dot0.py. To perform the migration under Plone 3, you'll need
-    the "contentmigration product":http://svn.plone.org/svn/collective/contentmigration/.
+   To upgrade from 1.x, first upgrade to a 2.x release thusly:
+
+      Use the migration script in the Extensions folder of 
+      FacultyStaffDirectory. Follow the instructions inside 
+      migrate1dot0to2dot0.py. To perform the migration under Plone 3,
+      you'll need the "contentmigration product":http://svn.plone.org/svn/collective/contentmigration/.
+
+   To upgrade from 2.x to 3.0:
+
+      Use the "Upgrade" button on Add/Remove Products page.
+      (in Plone 4.0, this is called "Add-Ons").
+      
+      MAKE SURE to check the workflow state of your Faculty/Staff
+      directory. It has probably been changed to 'private'.
+
+      If your Faculty/Staff directory was using a custom workflow, it
+      is now in a new workflow which comes with FacultyStaffDirectory
+      3.0. You'll need to change your custom workflow to manage the
+      "FacultyStaffDirectory: Provides Roles" permission before you
+      go back to it.
 
 
 Using FacultyStaffDirectory
@@ -204,124 +91,138 @@ Using FacultyStaffDirectory
     
     Working with your directory
 
-        FacultyStaffDirectory provides content types for creating and organizing
-        details of people. It has principally been developed for personnel
-        directories in educational institutions but can be repurposed for use in
-        a variety of settings.
+        FacultyStaffDirectory provides content types for creating and
+        organizing details of people. It has principally been
+        developed for personnel directories in educational
+        institutions but can be repurposed for use in a variety of
+        settings.
 
-        The core content type is Person. This has a variety of fields (email,
-        telephone number, job title, and so on). You can also easily add your
-        own.
+        The core content type is Person. This has a variety of fields
+        (email, telephone number, job title, and so on). You can also
+        easily add your own.
 
-        Out of the box, FacultyStaffDirectory offers 3 Classifications that can
-        be assigned to Person objects: Faculty, Staff and Graduate Student. If
-        these don't work for you, you can add your own Classifications (e.g.
-        Administrators, Technicians, Board Members, or whatever you like).
+        Out of the box, FacultyStaffDirectory offers 3 Classifications
+        that can be assigned to Person objects: Faculty, Staff and
+        Graduate Student. If these don't work for you, you can add
+        your own Classifications (e.g.  Administrators, Technicians,
+        Board Members, or whatever you like).
 
-        FacultyStaffDirectory also provides several content types for grouping
-        people: Departments, Specialties and Committees. If these labels don't
-        make sense in your organization, you can easily relabel them. In each
-        case, the association between the Person and the grouping (e.g. the
-        Person-Specialty relationship) can be given a description. So, for
-        example, if Person Jane Doe is in the Artificial Intelligence Specialty,
-        you could give the Jane Doe-Artificial Intelligence relationship a
-        description (e.g. "Interested in the cultural impacts of machine
-        thinkers").
+        FacultyStaffDirectory also provides several content types for
+        grouping people: Departments, Specialties and Committees. If
+        these labels don't make sense in your organization, you can
+        easily relabel them. In each case, the association between the
+        Person and the grouping (e.g. the Person-Specialty
+        relationship) can be given a description. So, for example, if
+        Person Jane Doe is in the Artificial Intelligence Specialty,
+        you could give the Jane Doe-Artificial Intelligence
+        relationship a description (e.g. "Interested in the cultural
+        impacts of machine thinkers").
 
-        FacultyStaffDirectory can be configured so people added to the directory
-        automatically become Members of your Plone site and each person can edit
-        his or her own page. It also adds some new roles, to facilitate
-        management of people. For instance, the PersonnelManager role can create
-        new Specialties and assign people to them.
+        FacultyStaffDirectory can be configured so people added to the
+        directory automatically become Members of your Plone site and
+        each person can edit his or her own page. It also adds some
+        new roles, to facilitate management of people. For instance,
+        the PersonnelManager role can create new Specialties and
+        assign people to them.
 
     Membership integration
       
-        Out of the box, FacultyStaffDirectory offers the following integration
-        with Plone users and groups:
+        Out of the box, FacultyStaffDirectory offers the following
+        integration with Plone users and groups:
         
             The Faculty/Staff Directory itself acts as a group. -- ' '
             
-              All Person objects created in the Faculty/Staff Directory are
-              automatically considered members of this group.  This group also
-              provides the option of assigning a global role to all Persons in
-              the Directory.  This option should be handled with care.  It is
-              generally best to select only the 'Member' role, as this is the
+              All Person objects created in the Faculty/Staff
+              Directory are automatically considered members of this
+              group.  This group also provides the option of assigning
+              a global role to all Persons in the Directory.  This
+              option should be handled with care.  It is generally
+              best to select only the 'Member' role, as this is the
               most restrictive option.
               
             Departments, Classifications and Committees act as groups. -- ' '
             
-              Global role assignment is not available for these content types,
-              but the groups they define may be granted local roles throughout
-              the Plone site.  For complex academic units, this can be a great
-              time-saver, since personnel management can be tied closely to site
+              Global role assignment is not available for these
+              content types, but the groups they define may be granted
+              local roles throughout the Plone site.  For complex
+              academic units, this can be a great time-saver, since
+              personnel management can be tied closely to site
               security management.
             
             Person objects act as users. -- ' '
             
-              The Faculty/Staff Directory configlet in Site Setup allows you to
-              choose whether Person objects provide passwords for
-              authentication. If you are using some other PAS plugin for
-              authentication, such as PloneLDAP, WebServerAuth, PubcookiePAS or
-              CAS4PAS, you will want to disable password provision so that
-              authentication will cascade to these other systems.
+              The Faculty/Staff Directory configlet in Site Setup
+              allows you to choose whether Person objects provide
+              passwords for authentication. If you are using some
+              other PAS plugin for authentication, such as PloneLDAP,
+              WebServerAuth, PubcookiePAS or CAS4PAS, you will want to
+              disable password provision so that authentication will
+              cascade to these other systems.
         
-        Users defined by Person objects are automatically granted the Owner role
-        locally for that object and its contents.  This allows users to add to
-        and edit their own biographies, contact information, etc.  They also
-        control sharing rights to their object and can thus allow assistants to
-        edit content on their behalf without sharing their own passwords or user
+        Users defined by Person objects are automatically granted the
+        Owner role locally for that object and its contents.  This
+        allows users to add to and edit their own biographies, contact
+        information, etc.  They also control sharing rights to their
+        object and can thus allow assistants to edit content on their
+        behalf without sharing their own passwords or user
         preferences.
 
-        The 'My Folder' action, found on the personal toolbar, is altered by the
-        Faculty/Staff Directory product to take users defined by Person objects
-        directly to them. Users defined through the standard Plone UI will be
-        taken to the usual location (portal/Members/<userid>).  Likewise, the
-        personal preferences link found in the personal toolbar and on the
-        plone_memberprefs_panel or dashboard will take Person users to their
-        Person objects.
+        The 'My Folder' action, found on the personal toolbar, is
+        altered by the Faculty/Staff Directory product to take users
+        defined by Person objects directly to them. Users defined
+        through the standard Plone UI will be taken to the usual
+        location (portal/Members/<userid>).  Likewise, the personal
+        preferences link found in the personal toolbar and on the
+        plone_memberprefs_panel or dashboard will take Person users to
+        their Person objects.
 
-        Owners are not granted the rights to add or remove their Person object
-        from Departments, Committees, Classifications and Specialties, since
-        these collections are used as authorization groups. Instead, this right
-        is reserved for site managers and for the newly-created 'Personnel
-        Manager' role, installed with the Faculty/Staff Directory product. The
-        Personnel Manager is likewise not granted access to the ZMI or to
-        personal preferences for Persons. This allows for fine-grained
-        separation of management concerns.
+        Owners are not granted the rights to add or remove their
+        Person object from Departments, Committees, Classifications
+        and Specialties, since these collections are used as
+        authorization groups. Instead, this right is reserved for site
+        managers and for the newly-created 'Personnel Manager' role,
+        installed with the Faculty/Staff Directory product. The
+        Personnel Manager is likewise not granted access to the ZMI or
+        to personal preferences for Persons. This allows for
+        fine-grained separation of management concerns.
 
-        Membership integration for Person, Department, Classification and
-        Committee objects is configurable.  A switch to turn the function on or
-        off is in the Faculty/Staff Directory configuration panel in Site Setup.
-        It may be necessary to disable membership integration for Person objects
-        in systems that have established user bases built on LDAP systems, for
+        Membership integration for Person, Department, Classification
+        and Committee objects is configurable.  A switch to turn the
+        function on or off is in the Faculty/Staff Directory
+        configuration panel in Site Setup.  It may be necessary to
+        disable membership integration for Person objects in systems
+        that have established user bases built on LDAP systems, for
         instance.
     
     Configuring the product
         
-        Several global settings, such as phone number and user ID formats, can
-        be controlled through the Faculty/Staff Directory configuration panel
-        within Site Setup.
+        Several global settings, such as phone number and user ID
+        formats, can be controlled through the Faculty/Staff Directory
+        configuration panel within Site Setup.
 
     Extensibility
     
         Because every organization has a few unique requirements,
-        FacultyStaffDirectory supports an extension mechanism based on the
-        archetypes.schemaextender library. Using it, you can write plugin
-        products which add fields to or otherwise modify our content types. For
-        an example, see the FacultyStaffDirectoryExtender product and
-         "its readme":https://weblion.psu.edu/svn/weblion/weblion/Products.FacultyStaffDirectory/tags/2.1/src/Products/FacultyStaffDirectory/examples/FacultyStaffDirectoryExtender/README.txt.
+        FacultyStaffDirectory supports an extension mechanism based on
+        the archetypes.schemaextender library. Using it, you can write
+        plugin products which add fields to or otherwise modify our
+        content types. For an example, see the
+        FacultyStaffDirectoryExtender product and "its
+        readme":https://weblion.psu.edu/svn/weblion/weblion/Products.FacultyStaffDirectory/tags/2.1/src/Products/FacultyStaffDirectory/examples/FacultyStaffDirectoryExtender/README.txt.
 
 
 Design Rationale & Thoughts
     
-    Why the push for just one Directory in a site? Why not just add people to Departments? -- ' '
+    Why the push for just one Directory in a site? Why not just add
+    people to Departments? -- ' '
 
-        The main thought behind this was that People could be members of
-        multiple departments (i.e., faculty member John Smith teaches courses in
-        both MSIS and Computer Science). So where do we put the Person object?
-        We'd like to refrain from making two Persons if possible, and the
-        alternative of making a Department both a container and a referenced
-        object could be nightmarish.
+        The main thought behind this was that People could be members
+        of multiple departments (i.e., faculty member John Smith
+        teaches courses in both MSIS and Computer Science). So where
+        do we put the Person object?  We'd like to refrain from making
+        two Persons if possible, and the alternative of making a
+        Department both a container and a referenced object could be
+        nightmarish.
 
     Why add membrane? -- ' '
 
@@ -335,10 +236,6 @@ Design Rationale & Thoughts
         We wish we knew. We suspect it will have something to do with LDAP.
         Suggestions?
 
-
-Future Plans
-  
-    See the "3.0 roadmap":https://weblion.psu.edu/trac/weblion/milestone/FacultyStaffDirectory%203.0%20%E2%80%93%20Hateful%20Haberdasher.
 
 
 Possible Gotchas
