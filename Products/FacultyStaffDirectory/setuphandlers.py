@@ -1,5 +1,6 @@
 from Products.CMFCore.utils import getToolByName
 from plone.app.workflow.remap import remap_workflow
+from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL 
 
 def upgrade_2_to_3(context):
 
@@ -16,3 +17,6 @@ def upgrade_2_to_3(context):
     except Exception, message:
         logger.error(message)
         raise
+
+    mbtool = getToolByName(context, MEMBRANE_TOOL)
+    mbtool.clearFindAndRebuild()
