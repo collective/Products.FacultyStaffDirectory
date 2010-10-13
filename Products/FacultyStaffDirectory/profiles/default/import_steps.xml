@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<import-steps>
+  <import-step id="upgrade_2_to_3"
+               version="20101014-01"
+               handler="Products.FacultyStaffDirectory.setuphandlers.upgrade_2_to_3"
+               title="Import step for Products.FacultyStaffDirectory for 2.x to 3.0 migration">
+    <dependency step="workflow" />
+  </import-step>
+</import-steps>
+

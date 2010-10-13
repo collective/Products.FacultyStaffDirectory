@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="plone">
+
+<genericsetup:upgradeStep
+	source="1"
+	destination="2"
+    profile="Products.FacultyStaffDirectory:default"
+    title="Migrate from 2.x to 3.0"
+    description="Run the import step which updates FaculyStaffDirectory objects to new workflow"
+    handler="Products.FacultyStaffDirectory.migrations.from_2_x_to_3_0"
+/>
+
+</configure>
