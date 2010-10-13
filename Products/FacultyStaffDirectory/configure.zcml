@@ -13,7 +13,8 @@
     <include package=".membership" />
     <include file="profiles.zcml" />
     <include package="archetypes.schemaextender" />
-
+    <include file="upgrades.zcml" />
+    
     <i18n:registerTranslations directory="locales" />
 
     <utility name="Personnel Manager" factory=".sharing.PersonnelManagerRole" />
