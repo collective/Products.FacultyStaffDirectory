@@ -185,7 +185,7 @@ class testUninstall(testPlone):
                 self.failUnless(action.visible, "original MemberPrefs action is not visible")
             if action.id == newMyFolderActionId:
                 hasfsdmemberprofile = True
-        self.failIf(hasfsdmemberprofile, "KnownFailure: new MemberPrefs action failed to uninstall")
+        self.failIf(hasfsdmemberprofile, "new MemberPrefs action failed to uninstall")
 
     def testMembraneUninstall(self):
         """Test issue #397, where logging in after uninstalling results in an AttributeError."""
