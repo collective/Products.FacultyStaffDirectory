@@ -1,6 +1,11 @@
 Version History
 ===============
 
+3.0b1
+-----
+* Add Plone 4.0 compatibility.
+  [ems174, cah190, cewing, netropic]
+
 2.1.5
 -----
 * Italian translation merged
