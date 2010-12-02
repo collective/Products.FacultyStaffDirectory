@@ -241,21 +241,6 @@ How do I manage People across multiple Plone sites?
   Suggestions?
 
 
-
-Possible Gotchas
-================
-
-Skinning plone 2.5.x with DIYPloneStyle 2.5
-
-The implementation of Generic Setup installation in DIYPloneStyle 2.5 fails to
-include non-standard skin layers in its skins. Please note that installing a
-skin product built with this version will cause skin-based functionality in FSD
-to break and may cause site-wide template errors due to missing skin layers from
-the relations product. You can fix these problems by manually adding the layers
-'FacultyStaffDirectory', 'relations', and 'relations_images' to any skins
-defined in ZMI &rarr; plone &rarr; portal_skins &rarr; properties.
-
-
 Authorship
 ==========
 
