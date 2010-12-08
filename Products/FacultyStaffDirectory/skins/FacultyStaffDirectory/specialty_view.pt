@@ -7,23 +7,20 @@
         <body>
     <metal:fill fill-slot="main">
         <div class="facultyStaffDirectory">
-            <div metal:use-macro="here/document_actions/macros/document_actions">
-                Document actions (print, sendto etc)
-            </div>
-    
-            <h1 tal:content="object_title" class="documentFirstHeading">
+
+            <h1 tal:content="context/Title" class="documentFirstHeading">
               <tal:comment replace="nothing">Title or id</tal:comment>
             </h1>
-    
+
             <p class="documentDescription"
                tal:content="here/Description"
                tal:condition="here/Description">
                 Description
             </p>
-    
+
             <div tal:content="structure here/getText" />
-    
-            <div tal:condition="context/getFolderContents"> 
+
+            <div tal:condition="context/getFolderContents">
                 <h2 i18n:translate="FacultyStaffDirectory_subspecialties">Subspecialties</h2>
                 <dl>
                     <tal:block tal:repeat="subspecialty python:context.getFolderContents({'portal_type':'FSDSpecialty', 'sort_on':'sortable_title'})">
@@ -32,9 +29,9 @@
                                tal:content="subspecialty/Title">
                             </a>
                         </dt>
-                        <dd tal:content="subspecialty/Description">                    
+                        <dd tal:content="subspecialty/Description">
                         </dd>
-                    </tal:block>        
+                    </tal:block>
                 </dl>
             </div>
             <tal:block tal:condition="context/getPeople">
@@ -48,11 +45,11 @@
                                             ">
                         <tal:block tal:define="classificationBrains context/getClassifications" tal:repeat="classification classifications">
                             <metal:block define-slot="single_classification" />
-                        </tal:block>    
+                        </tal:block>
                     </metal:block>
                 </metal:block>
             </tal:block>
-      </div>  
+      </div>
     </metal:fill>
     </body>
     </html>

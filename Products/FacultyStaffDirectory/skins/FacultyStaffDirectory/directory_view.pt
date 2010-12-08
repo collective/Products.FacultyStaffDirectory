@@ -12,16 +12,13 @@
                             classifications python:classificationsInRequest and [directory[c] for c in isinstance(classificationsInRequest, basestring) and [classificationsInRequest] or classificationsInRequest] or allClassifications;
                             contextualClassifications python:[context.contextualClassification(c) for c in classifications];
                            ">
-    
+
         <div class="facultyStaffDirectory">
-            <div metal:use-macro="here/document_actions/macros/document_actions">
-                Document actions (print, sendto etc)
-            </div>
-    
-            <h1 tal:content="object_title" class="documentFirstHeading">
+
+            <h1 tal:content="context/Title" class="documentFirstHeading">
               <tal:comment replace="nothing">Title or id</tal:comment>
             </h1>
-    
+
             <p class="documentDescription"
                tal:content="here/Description"
                tal:condition="here/Description">
@@ -29,13 +26,13 @@
             </p>
 
             <metal:block define-slot="classification_links">
-                <ol tal:condition="nocall:contextualClassifications" class="classificationList"> 
+                <ol tal:condition="nocall:contextualClassifications" class="classificationList">
                     <tal:block tal:repeat="classification contextualClassifications">
-                    <li tal:condition="classification/getPeople"> 
-                        <a tal:content="classification/Title" tal:attributes="href python:'%s#%s' % (context.absolute_url(), normalizeString(classification.Title()));" /> 
-                    </li> 
+                    <li tal:condition="classification/getPeople">
+                        <a tal:content="classification/Title" tal:attributes="href python:'%s#%s' % (context.absolute_url(), normalizeString(classification.Title()));" />
+                    </li>
                     </tal:block>
-                </ol> 
+                </ol>
             </metal:block>
 
             <tal:block tal:condition="context/getPeople">
@@ -43,11 +40,11 @@
                     <metal:block define-macro="list_classifications">
                         <tal:block tal:define="classificationBrains context/getClassifications" tal:repeat="classification classifications">
                             <metal:block define-slot="single_classification" />
-                        </tal:block>    
+                        </tal:block>
                     </metal:block>
                 </metal:block>
             </tal:block>
-        </div>  
+        </div>
     </metal:fill>
     </body>
     </html>

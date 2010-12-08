@@ -1,6 +1,6 @@
 <metal:block define-macro="master">
 
-    <html xmlns="http://www.w3.org/1999/xhtml" 
+    <html xmlns="http://www.w3.org/1999/xhtml"
           xml:lang="en" lang="en"
           metal:use-macro="here/main_template/macros/master"
           xmlns:tal="http://xml.zope.org/namespaces/tal"
@@ -14,14 +14,11 @@
 
         <div class="facultyStaffDirectory">
 
-            <div metal:use-macro="here/document_actions/macros/document_actions">
-                Document actions (print, sendto etc)
-            </div>
-    
-            <h1 tal:content="object_title" class="documentFirstHeading">
+
+            <h1 tal:content="context/Title" class="documentFirstHeading">
               <tal:comment replace="nothing">Title or id</tal:comment>
             </h1>
-    
+
             <p class="documentDescription"
                tal:content="here/Description"
                tal:condition="here/Description">
@@ -30,16 +27,16 @@
 
             <dl>
                 <tal:loop repeat="speciality context/getFolderContents">
-                    <dt>    
+                    <dt>
                         <a tal:attributes="href speciality/getURL" tal:content="speciality/Title" />
                     </dt>
                     <dd>
                         <table tal:define="obj speciality/getObject">
                             <td tal:content="structure obj/getOverviewText" style="vertical-align: top"/>
-                            <td style="vertical-align: top; width: 200px" 
+                            <td style="vertical-align: top; width: 200px"
                                 tal:define="image obj/getOverviewImage">
                                 <img tal:condition="image"
-                                     tal:attributes="src string:${image/absolute_url}" 
+                                     tal:attributes="src string:${image/absolute_url}"
                                 />
 
                             </td>
@@ -49,7 +46,7 @@
             </dl>
 
         </div>
-       
+
       </metal:fill>
 
      </body>

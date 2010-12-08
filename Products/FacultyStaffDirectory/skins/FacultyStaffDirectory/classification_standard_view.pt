@@ -5,14 +5,11 @@
 	<body>
         <metal:block fill-slot="main">
             <div class="facultyStaffDirectory classification">
-                <div metal:use-macro="here/document_actions/macros/document_actions">
-                    Document actions (print, sendto etc)
-                </div>
-                
-                <h1 tal:content="object_title" class="documentFirstHeading">
+
+                <h1 tal:content="context/Title" class="documentFirstHeading">
                     <tal:comment replace="nothing">Title or id</tal:comment>
                 </h1>
-                
+
                 <a href=""
                    class="link-parent"
                    tal:define="parent_url python:here.navigationParent(here, template_id)"
@@ -21,7 +18,7 @@
                    i18n:translate="go_to_parent_url">
                     Up one level
                 </a>
-                
+
                 <p class="documentDescription"
                    tal:content="here/Description"
                    tal:condition="here/Description">
@@ -34,14 +31,14 @@
                                        width directory/getClassificationViewThumbnailWidth"
                            metal:define-macro="list_people"
                            class="standardView">
-                    <div class="classificationListing" tal:condition="people">   
+                    <div class="classificationListing" tal:condition="people">
                         <metal:block define-slot="classification_header" tal:condition="nocall:classificationExists">
                             <h2>
                             <metal:block define-macro="classification_header_link">
                                 <a tal:attributes="name python:normalizeString(classificationContext.Title()); href python:'%s?classification=%s' % (here.absolute_url(), classification.id)" tal:content="classificationContext/Title"><tal:comment replace="nothing">[classification]</tal:comment></a>
-                            </metal:block>    
+                            </metal:block>
                             </h2>
-                        </metal:block>                    
+                        </metal:block>
                         <div class="listing" tal:repeat="person people">
                             <div class="headshot">
                                 <metal:block define-slot="person_headshot">
@@ -54,34 +51,34 @@
                                     </a>
                                 </metal:block>
                             </div>
-                            
+
                             <div class="caption">
                                 <metal:block define-slot="person_caption">
                                     <h4 tal:content="person/Title" class="personName"><tal:comment replace="nothing">[Name]</tal:comment></h4>
                                     <ul tal:condition="person/getJobTitles" class="jobTitle">
-                                        <li tal:repeat="jobTitle person/getJobTitles" 
+                                        <li tal:repeat="jobTitle person/getJobTitles"
                                             tal:content="jobTitle" />
                                     </ul>
                                     <div tal:condition="person/getOfficePhone"
                                          tal:content="person/getOfficePhone"
                                          class="officePhone"/>
-                                    <div tal:condition="person/getEmail" 
-                                         tal:content="structure python:person.spamProtectFSD(person.getEmail())" 
+                                    <div tal:condition="person/getEmail"
+                                         tal:content="structure python:person.spamProtectFSD(person.getEmail())"
                                          class="emailAddress"/>
                                     <div class="moreInfo">
                                         <a tal:attributes="href person/absolute_url"
                                            i18n:translate="FacultyStaffDirectory_moreAbout">
-                                            More about 
+                                            More about
                                             <span i18n:name="more-about-person-title" tal:replace="person/Title">[Name]</span>...
                                         </a>
                                     </div>
                                 </metal:block>
                             </div>
-                            
+
                             <div class="visualClear"><!-- --></div>
 
-                        </div>   
-                    </div>		
+                        </div>
+                    </div>
                 </div>
             </div>
 		</metal:block>

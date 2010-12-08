@@ -10,11 +10,8 @@
 
   <body>
     <metal:fill fill-slot="main">
-        <div metal:use-macro="here/document_actions/macros/document_actions">
-            Document actions (print, sendto etc)
-        </div>
 
-        <h1 tal:content="object_title" class="documentFirstHeading">
+        <h1 tal:content="context/Title" class="documentFirstHeading">
           <tal:comment replace="nothing">Title or id</tal:comment>
         </h1>
 
@@ -23,7 +20,7 @@
            tal:condition="here/Description">
             Description
         </p>
-        
+
         <div tal:content="structure here/getText" />
 
         <h3><span i18n:translate="FacultyStaffDirectory_label_members">Members</span>:</h3>
@@ -34,7 +31,7 @@
                        tal:content="member/Title" />
                     <tal:block tal:condition="membershipData/getPosition">
                         -
-                        <span tal:replace="membershipData/getPosition" />               
+                        <span tal:replace="membershipData/getPosition" />
                     </tal:block>
                     <span tal:condition="python:checkPermission('Modify portal content', member)"
                           class="discreet">[

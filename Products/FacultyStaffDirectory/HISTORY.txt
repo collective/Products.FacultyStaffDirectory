@@ -1,6 +1,19 @@
 Version History
 ===============
 
+3.0b2
+-----
+* Removed document_action macros from FSD skin templates.
+  [lob5138 (Luke Brannon)]
+
+* Registered document_actions viewlet to abovecontentbody viewlet manager
+  for FSD types (in configure.zcml, since there is no browser package).
+  [lob5138 (Luke Brannon)]
+
+* Replaced object_title global definition with context/Title in FSD
+  skin templates.
+  [lob5138 (Luke Brannon)]
+
 3.0b1
 -----
 * Add Plone 4.0 compatibility.
@@ -16,25 +29,25 @@ Version History
   from michael.lindig and updated tests accordingly
   (https://weblion.psu.edu/trac/weblion/ticket/1204).
   [cah190 (Craig Haynal)]
-  
+
 * Fixed Classification's getPeople to account for effective/
   expired, View permissions
   (https://weblion.psu.edu/trac/weblion/ticket/2036)
   [par117 (Paul Rentschler)]
-  
+
 * Added a termination details field and put it and the effective/
   expired dates in a new Employment Information schemata
   [par117 (Paul Rentschler)]
-  
-* Updated the person_view.pt file to hide all information except 
-  the person's name and termination details if they are expired 
+
+* Updated the person_view.pt file to hide all information except
+  the person's name and termination details if they are expired
   unless the viewer has editing rights.
   [par117 (Paul Rentschler)]
 
 2.1.4
 -----
 
-* Owner role should be able to edit Persons in Hidden state. 
+* Owner role should be able to edit Persons in Hidden state.
   [ems174 (Eric Steele)]
 
 * Portuguese translation merged.
@@ -99,7 +112,7 @@ Version History
 -----
 
 * Corrected a problem with the reference browser widget popup not
-  displaying available items when used on a site using virtual 
+  displaying available items when used on a site using virtual
   hosting. [ems174 (Eric Steele)]
 
 2.1.1.1
@@ -122,10 +135,10 @@ Version History
   specialies folder view). [ajung]
 
 * A Specialty has an extra schemata "Overview" with an image and
-  richtext field. Both fields are used for the 
+  richtext field. Both fields are used for the
   speciality_overview view. [ajung]
 
-* Added microformats for person_view's address block. [robzonenet] 
+* Added microformats for person_view's address block. [robzonenet]
 
 * Added Spanish translation [Gildardo Bautista]
 
@@ -135,7 +148,7 @@ Version History
 
 * Corrected a problem with viewing departments located outside
   of a Directory object. [ems174 (Eric Steele)]
-        
+
 2.1
 ---
 * Corrected some CSS display issues with Person pictures.
@@ -175,20 +188,20 @@ Version History
 
 2.0
 ---
-        
+
 * Added an A-to-Z listing view for Directories and Departments.
 
 * Forced Previous/Next display in the Person editor.
 
 * Bug fixes
-        
+
 2.0a1
 -----
-  
+
 * Integrated with Plone users and groups.
 
 * Switched extensibility framework to archetypes.schemaextender.
-  More than one extender works at once now, and all content 
+  More than one extender works at once now, and all content
   types are extensible.
 
 * Added Department content type.
@@ -230,6 +243,6 @@ Version History
 
 1.0.1 -- Minor documentation tweaks
 -----------------------------------
-  
+
 1.0 -- Initial release
 ----------------------
