@@ -4,15 +4,15 @@ Version History
 3.0b2
 -----
 * Removed document_action macros from FSD skin templates.
-  [lob5138 (Luke Brannon)]
+  [lvb5153 (Luke Brannon)]
 
 * Registered document_actions viewlet to abovecontentbody viewlet manager
   for FSD types (in configure.zcml, since there is no browser package).
-  [lob5138 (Luke Brannon)]
+  [lvb5153 (Luke Brannon)]
 
 * Replaced object_title global definition with context/Title in FSD
   skin templates.
-  [lob5138 (Luke Brannon)]
+  [lvb5153 (Luke Brannon)]
 
 3.0b1
 -----
