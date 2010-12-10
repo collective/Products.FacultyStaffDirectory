@@ -3,6 +3,9 @@ Version History
 
 3.0b2
 -----
+* Defined global variables (template_id, normalizeString, member) in skin templates.
+  [lvb5153 (Luke Brannon)]
+
 * Removed document_action macros from FSD skin templates.
   [lvb5153 (Luke Brannon)]
 

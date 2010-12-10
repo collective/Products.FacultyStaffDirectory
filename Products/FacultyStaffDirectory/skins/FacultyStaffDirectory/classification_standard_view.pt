@@ -12,7 +12,7 @@
 
                 <a href=""
                    class="link-parent"
-                   tal:define="parent_url python:here.navigationParent(here, template_id)"
+                   tal:define="template_id template/getId; parent_url python:here.navigationParent(here, template_id)"
                    tal:condition="parent_url"
                    tal:attributes="href parent_url"
                    i18n:translate="go_to_parent_url">
@@ -35,7 +35,7 @@
                         <metal:block define-slot="classification_header" tal:condition="nocall:classificationExists">
                             <h2>
                             <metal:block define-macro="classification_header_link">
-                                <a tal:attributes="name python:normalizeString(classificationContext.Title()); href python:'%s?classification=%s' % (here.absolute_url(), classification.id)" tal:content="classificationContext/Title"><tal:comment replace="nothing">[classification]</tal:comment></a>
+                                <a tal:define="normalizeString nocall:context/@@plone/normalizeString" tal:attributes="name python:normalizeString(classificationContext.Title()); href python:'%s?classification=%s' % (here.absolute_url(), classification.id)" tal:content="classificationContext/Title"><tal:comment replace="nothing">[classification]</tal:comment></a>
                             </metal:block>
                             </h2>
                         </metal:block>
