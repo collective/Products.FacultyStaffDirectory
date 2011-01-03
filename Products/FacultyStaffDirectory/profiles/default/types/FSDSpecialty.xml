@@ -5,6 +5,7 @@
    i18n:domain="plone">
  <property name="title" i18n:translate="">Specialty</property>
  <property name="description" i18n:translate="description_edit_specialty">An area of academic study.</property>
+ <property name="content_icon">folder_icon.gif</property>
  <property name="content_meta_type">FSDSpecialty</property>
  <property name="product">FacultyStaffDirectory</property>
  <property name="factory">addSpecialty</property>

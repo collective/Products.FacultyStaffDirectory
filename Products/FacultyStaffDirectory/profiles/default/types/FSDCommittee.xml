@@ -5,6 +5,7 @@
    i18n:domain="plone">
  <property name="title" i18n:translate="">Committee</property>
  <property name="description" i18n:translate="description_edit_committee">A simple page describing a committee or working group with the associated committee members.</property>
+ <property name="content_icon">folder_icon.gif</property>
  <property name="content_meta_type">FSDCommittee</property>
  <property name="product">FacultyStaffDirectory</property>
  <property name="factory">addCommittee</property>
