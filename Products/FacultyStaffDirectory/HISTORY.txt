@@ -3,6 +3,16 @@ Version History
 
 3.0b2
 -----
+* Fixed author.cpt to work in Plone 4 by adding missing globals.
+  [cah190 (Craig Haynal)]
+
+* Replaced direct page template references to facultystaffdirectory_tool with 
+  getToolByName lookups to allow for anonymous viewing of listings.
+  [cah190 (Craig Haynal)]
+
+* Added missing icon references to GS type information.
+  [cah190 (Craig Haynal)]
+
 * Defined global variables (template_id, normalizeString, member) in skin templates.
   [lvb5153 (Luke Brannon)]
 
