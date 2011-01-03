@@ -62,10 +62,6 @@ class testDepartment(testPlone):
         self.inDept.setTitle('New Title')
         self.failUnless(ing.Title()=='New Title',"IGroup.getTitle is not finding the correct title:\nexpected: %s\nfound: %s" % (self.inDept.Title(),ing.Title()))
         
-        #Let's start off with a deactivated object since we may want to change the default state at some point.
-        if wf.getInfoFor(self.inDept, 'review_state') == 'active':
-            wf.doActionFor(self.inDept,'deactivate')
-        
         # group id is set on content object, uniqueness is enforced elsewhere
         self.failUnless(ing.getGroupId()==self.inDept.getId(),"getGroupId returning incorrect value:\nExpected: %s\nReceived: %s" % (self.inDept.getId(), ing.getGroupId()))
         
@@ -84,6 +80,12 @@ class testDepartment(testPlone):
         members = list(ing.getGroupMembers())
         members.sort()
         self.failUnless(members == ['abc123','def456'],"incorrect member list: %s" % members)
+        #deactivate group and verify emptiness
+        wf.doActionFor(self.inDept,'deactivate')
+        members = list(ing.getGroupMembers())
+        members.sort()
+        self.failUnless(members == [],"deactivated group has non-empty member list: %s" % members)
+        
         
     def testValidateId(self):
         """Test that the validate_id validator works properly

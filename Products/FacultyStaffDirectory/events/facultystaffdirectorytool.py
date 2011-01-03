@@ -1,6 +1,6 @@
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL 
-from Products.FacultyStaffDirectory import MEMBRANE_ABLE_TYPES, MEMBRANE_TYPE_ACTIVE_STATES
+from Products.FacultyStaffDirectory import MEMBRANE_ABLE_TYPES
 
 def modifyMembraneTypes(event):
     """Check facultystaffdirectory_tool schemata,

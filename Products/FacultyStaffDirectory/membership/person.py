@@ -56,6 +56,10 @@ class UserAuthentication(object):
         or pass authentication on to the next PAS plugin
         """
         fsd_tool = getToolByName(self.context,FSD_TOOL)
+        state = getToolByName(self.context, 'portal_workflow').getInfoFor(self.context, 'review_state')
+        if state not in (fsd_tool.getActiveMembraneStates()):
+            return False
+
         if (fsd_tool.getUseInternalPassword()):
             login = credentials.get('login', None)
             password = credentials.get('password', None)

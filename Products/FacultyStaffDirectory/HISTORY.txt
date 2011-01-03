@@ -3,6 +3,16 @@ Version History
 
 3.0b2
 -----
+* Added a lines field to the facultystaffdirectory_tool that contains the list of
+  active states.
+  [cah190 (Craig Haynal)]
+
+* Inactive users will now fail to authenticate.
+  [cah190 (Craig Haynal)]
+
+* Inactive groups will now appear as empty groups.
+  [cah190 (Craig Haynal)]
+
 * Fixed author.cpt to work in Plone 4 by adding missing globals.
   [cah190 (Craig Haynal)]
 

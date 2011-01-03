@@ -1,7 +1,8 @@
 from zope.interface import implements
 from zope.component import adapts
-
+from Products.CMFCore.utils import getToolByName
 from Products.membrane.interfaces import IGroup
+from Products.FacultyStaffDirectory.config import TOOLNAME as FSD_TOOL
 from Products.FacultyStaffDirectory.interfaces.classification import IClassification
 from Products.FacultyStaffDirectory.membership.person import UserRelated
 
@@ -27,6 +28,11 @@ class Group(object):
         return self.context.getId()
 
     def getGroupMembers(self):
+        fsd_tool = getToolByName(self.context,FSD_TOOL)
+        state = getToolByName(self.context, 'portal_workflow').getInfoFor(self.context, 'review_state')
+        if state not in (fsd_tool.getActiveMembraneStates()):
+            return ()
+
         members = self.context.getPeople()
         mlist = [UserRelated(m).getUserId() for m in members]
         return tuple(mlist)
