@@ -21,9 +21,14 @@
     tal:define="errors options/state/getErrors;">
     <tal:main-macro metal:define-macro="main"
                     tal:define="author python:(len(request.traverse_subpath) > 0 and request.traverse_subpath[0]) or request.get('author', None);
+                                mtool python:modules['Products.CMFCore.utils'].getToolByName(here, 'portal_membership');
                                 portrait python: mtool.getPersonalPortrait(author);
+                                portal context/@@plone_portal_state/portal;
                                 portal_types portal/portal_types;
-                                authorinfo python: mtool.getMemberInfo(author);">
+                                isAnon context/@@plone_portal_state/anonymous;
+                                member context/@@plone_portal_state/member;
+                                authorinfo python: mtool.getMemberInfo(author);
+                                fsdtool python:modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool');">
 
         <tal:noAuthor condition="not: authorinfo">
             <div class="visualClear"><!-- --></div>
@@ -51,7 +56,7 @@
           </li>
           <li>
             <a href=""
-               tal:attributes="href python:portal.facultystaffdirectory_tool.fsdMemberProfile()"
+               tal:attributes="href python:fsdtool.fsdMemberProfile()"
                i18n:translate="label_edit">Edit</a>
           </li>
         </ul>
@@ -110,12 +115,12 @@
 
             <div class="visualClear"><!-- --></div>
             
-            <p tal:condition="python:portal.facultystaffdirectory_tool.fsdShowMyFolder(id=author)">
-            <a href="#" tal:attributes="href python:portal.facultystaffdirectory_tool.fsdMyFolder(id=author)"
+            <p tal:condition="python:fsdtool.fsdShowMyFolder(id=author)">
+            <a href="#" tal:attributes="href python:fsdtool.fsdMyFolder(id=author)"
                i18n:translate="label_author_internal_home_page">Author's home page in this site&hellip;</a>
             </p>
 
-            <p tal:condition="python: not portal.facultystaffdirectory_tool.fsdShowMyFolder(id=author) and authorinfo['home_page']">
+            <p tal:condition="python: not fsdtool.fsdShowMyFolder(id=author) and authorinfo['home_page']">
             <a href="#" tal:attributes="href authorinfo/home_page"
                i18n:translate="label_author_external_home_page">Author's external home page&hellip;</a>
             </p>

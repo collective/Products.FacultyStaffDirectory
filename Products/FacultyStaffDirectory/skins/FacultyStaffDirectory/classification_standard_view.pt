@@ -27,7 +27,8 @@
                 <div tal:define="classificationExists nocall:classification | nothing;
                                        classificationContext python:classificationExists and context.contextualClassification(classification) or context;
                                        people classificationContext/getSortedPeople;
-                                       directory context/facultystaffdirectory_tool/getDirectoryRoot;
+                                       fsdtool python:modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool');
+                                       directory fsdtool/getDirectoryRoot;
                                        width directory/getClassificationViewThumbnailWidth"
                            metal:define-macro="list_people"
                            class="standardView">
