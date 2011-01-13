@@ -1,6 +1,12 @@
 Version History
 ===============
 
+3.0v3
+-----
+* Made FSD not installable when creating a Plone 4 site (our GS profiles are not
+  sufficient for a functional install).
+  [cah190 (Craig Haynal)]
+
 3.0b2
 -----
 * Added a lines field to the facultystaffdirectory_tool that contains the list of
