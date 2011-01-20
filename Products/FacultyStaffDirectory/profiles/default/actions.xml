@@ -5,9 +5,9 @@
   <object name="fsdmystuff" meta_type="CMF Action" i18n:domain="plone">
    <property name="title" i18n:translate="">My Folder</property>
    <property name="description" i18n:translate=""></property>
-   <property name="url_expr">python:portal.facultystaffdirectory_tool.fsdMyFolder()</property>
+   <property name="url_expr">python:modules['Products.CMFCore.utils'].getToolByName(portal, 'facultystaffdirectory_tool').fsdMyFolder()</property>
    <property
-      name="available_expr">python:member is not None and portal.facultystaffdirectory_tool.fsdShowMyFolder()</property>
+      name="available_expr">python:member is not None and modules['Products.CMFCore.utils'].getToolByName(portal, 'facultystaffdirectory_tool').fsdShowMyFolder()</property>
    <property name="permissions">
     <element value="View"/>
    </property>

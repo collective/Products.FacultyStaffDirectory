@@ -3,6 +3,9 @@ Version History
 
 3.0v3
 -----
+* Updates to facultystaffdirectory_tool access and security
+  [cah190 (Craig Haynal)]
+
 * Made FSD not installable when creating a Plone 4 site (our GS profiles are not
   sufficient for a functional install).
   [cah190 (Craig Haynal)]

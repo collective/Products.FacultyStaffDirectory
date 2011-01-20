@@ -3,7 +3,8 @@
 # Implement a different email obfuscating approach than the standard Plone spam
 # protection.  Dots, @ etc. will be replaced with a string representation.
 
-fsd = context.facultystaffdirectory_tool
+from Products.CMFCore.utils import getToolByName
+fsd = getToolByName(context, 'facultystaffdirectory_tool')
 
 if fsd.getObfuscateEmailAddresses():
     email = email.replace('.', ' [ DOT ] ')
