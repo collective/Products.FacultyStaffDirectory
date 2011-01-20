@@ -3,6 +3,10 @@ Version History
 
 3.0v3
 -----
+* Fixed schema conditions and fsdtool data to prevent authorization failures
+  for non-managers editing FSD objects.
+  [cah190 (Craig Haynal)]
+
 * Updates to facultystaffdirectory_tool access and security
   [cah190 (Craig Haynal)]
 

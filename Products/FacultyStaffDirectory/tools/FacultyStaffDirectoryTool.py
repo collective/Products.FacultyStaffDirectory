@@ -194,8 +194,10 @@ class FacultyStaffDirectoryTool(UniqueObject, BaseContent):
         self.setTitle('FacultyStaffDirectory Configuration')
         self.unindexObject()
 
-    # make the getter for obfuscateEmailAddresses public
+    # make the getters for settings public
     security.declarePublic('getObfuscateEmailAddresses')
+    security.declarePublic('getUseInternalPassword')
+    security.declarePublic('getEnableMembraneTypes')
 
     # tool should not appear in portal_catalog
     def at_post_edit_script(self):

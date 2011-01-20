@@ -351,7 +351,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=_(u"FacultyStaffDirectory_label_password", default=u"Password"),
             description=_(u"FacultyStaffDirectory_description_password", default=u"Password for this person (Leave blank if you don't want to change the password.)"),
             i18n_domain='FacultyStaffDirectory',
-            condition="python:here.facultystaffdirectory_tool.getUseInternalPassword() and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
+            condition="python: modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getUseInternalPassword() and 'FSDPerson' in modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getEnableMembraneTypes()"
         ),
         schemata="Basic Information",
     ),
@@ -365,7 +365,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=_(u"FacultyStaffDirectory_label_confirmPassword", default=u"Confirm password"),
             description=_(u"FacultyStaffDirectory_description_confirmPassword", default=u"Please re-enter the password. (Leave blank if you don't want to change the password.)"),
             i18n_domain='FacultyStaffDirectory',
-            condition="python:here.facultystaffdirectory_tool.getUseInternalPassword() and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
+            condition="python: modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getUseInternalPassword() and 'FSDPerson' in modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getEnableMembraneTypes()"
         ),
         schemata="Basic Information",
     ),
@@ -375,7 +375,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=_(u"label_language", default=u"Language"),
             description=_(u"help_preferred_language", default=u"Your preferred language."),
             i18n_domain='plone',
-            condition="python:'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
+            condition="python:'FSDPerson' in modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getEnableMembraneTypes()"
         ),
         write_permission=SetOwnProperties,
         schemata="User Settings",
@@ -389,7 +389,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             description=_(u"help_content_editor", default=u"Select the content editor that you would like to use. Note that content editors often have specific browser requirements."),
             i18n_domain='plone',
             format="select",
-            condition="python:'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
+            condition="python:'FSDPerson' in modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getEnableMembraneTypes()"
         ),
         write_permission=SetOwnProperties,
         schemata="User Settings",
@@ -402,7 +402,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=_(u"label_ext_editor", default=u"Enable external editing"),
             description=_(u"help_content_ext_editor", default=u"When checked, an icon will be made visible on each page which allows you to edit content with your favorite editor instead of using browser-based editors. This requires an additional application called ExternalEditor installed client-side. Ask your administrator for more information if needed."),
             i18n_domain='plone',
-            condition="python:here.portal_properties.site_properties.ext_editor and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()",
+            condition="python:here.portal_properties.site_properties.ext_editor and 'FSDPerson' in modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getEnableMembraneTypes()",
             ),
             write_permission=SetOwnProperties,
             schemata="User Settings",
@@ -415,7 +415,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             description=_(u"help_look", default=u"Appearance of the site."),
             i18n_domain='plone',
             format="select",
-            condition="python:here.portal_skins.allow_any and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()",
+            condition="python:here.portal_skins.allow_any and 'FSDPerson' in modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getEnableMembraneTypes()",
         ),
         write_permission=SetOwnProperties,
         schemata="User Settings",
@@ -428,7 +428,7 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=_(u"label_edit_short_names", default=u"Allow editing of Short Names"),
             description=_(u"help_display_names", default=u"Determines if Short Names (also known as IDs) are changable when editing items. If Short Names are not displayed, they will be generated automatically."),
             i18n_domain='plone',
-            condition="python:here.portal_properties.site_properties.visible_ids and 'FSDPerson' in here.facultystaffdirectory_tool.getEnableMembraneTypes()"
+            condition="python:here.portal_properties.site_properties.visible_ids and 'FSDPerson' in modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getEnableMembraneTypes()"
             ),
             write_permission=SetOwnProperties,
             schemata="User Settings",
