@@ -1,8 +1,12 @@
 Version History
 ===============
 
-3.0v3
+3.0b3
 -----
+* Pin to archetypes.schemaextender < 2.1 because 2.1 and higher use plone.uuid
+  which breaks Products.Relations and older versions of Archetypes.
+  [cah190 (Craig Haynal)]
+
 * Fixed schema conditions and fsdtool data to prevent authorization failures
   for non-managers editing FSD objects.
   [cah190 (Craig Haynal)]
