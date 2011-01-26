@@ -13,4 +13,5 @@
  <object name="FSDSpecialty" meta_type="Factory-based Type Information with dynamic views"/>
  <object name="FSDSpecialtyInformation" meta_type="Factory-based Type Information"/> 
  <object name="FSDCourse" meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="FSDFacultyStaffDirectoryTool" meta_type="Factory-based Type Information"/>
 </object>
