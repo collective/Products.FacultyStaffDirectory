@@ -3,6 +3,21 @@ Version History
 
 3.0b3
 -----
+* Don't call Products.Archetypes.Extensions.utils helpers, they seem to make
+  Archetypes move itself in the portal_skins lists in a way that breaks
+  TinyMCE.
+  [cah190 (Craig Haynal)]
+
+* Cleaned up GS profile types/*.xml so we can import our types directly
+  instead of relying on install_subskin.
+  [cah190 (Craig Haynal)]
+
+* Installer should not be installing ATReferenceBrowserWidget.
+  [cah190 (Craig Haynal)]
+
+* Register our skins directory the modern way (through ZCML and skins.xml)
+  [cah190 (Craig Haynal)]
+
 * Pin to archetypes.schemaextender < 2.1 because 2.1 and higher use plone.uuid
   which breaks Products.Relations and older versions of Archetypes.
   [cah190 (Craig Haynal)]

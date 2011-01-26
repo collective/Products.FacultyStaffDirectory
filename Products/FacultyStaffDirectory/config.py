@@ -29,7 +29,7 @@ setDefaultRoles('FacultyStaffDirectory: Add or Remove People', ('Manager','Owner
 product_globals = globals()
 
 # Dependencies of Products to be installed by quick-installer
-DEPENDENCIES = ["Relations", "ATReferenceBrowserWidget"]
+DEPENDENCIES = ["Relations"]
 
 # Dependend products - not quick-installed - used in testcase
 PRODUCT_DEPENDENCIES = []

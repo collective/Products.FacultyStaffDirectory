@@ -9,8 +9,6 @@ from sets import Set
 from App.Common import package_home
 from Products.CMFCore.utils import getToolByName
 
-from Products.Archetypes.Extensions.utils import installTypes
-from Products.Archetypes.Extensions.utils import install_subskin
 from Products.Archetypes.atapi import listTypes
 from Products.FacultyStaffDirectory.config import PROJECTNAME
 from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
@@ -63,11 +61,6 @@ def install(self, reinstall=False):
         quickinstaller.installProduct(dependency)
         import transaction 
         transaction.savepoint(optimistic=True) 
-    classes = listTypes(PROJECTNAME)
-    installTypes(self, out,
-                 classes,
-                 PROJECTNAME)
-    install_subskin(self, out, GLOBALS)
 
     # configuration for Relations
     relations_tool = getToolByName(self,'relations_library')

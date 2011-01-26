@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <object name="Committee"
-   meta_type="Factory-based Type Information"
+   meta_type="Factory-based Type Information with dynamic views"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
    i18n:domain="plone">
  <property name="title" i18n:translate="">Committee</property>
@@ -10,6 +10,9 @@
  <property name="product">FacultyStaffDirectory</property>
  <property name="factory">addCommittee</property>
  <property name="immediate_view">committee_view</property>
+ <property name="view_methods">
+    <element value="committee_view" />
+ </property>
  <property name="default_view">committee_view</property>
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
