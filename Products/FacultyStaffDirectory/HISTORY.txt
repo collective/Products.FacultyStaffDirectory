@@ -3,13 +3,13 @@ Version History
 
 3.0b3
 -----
+* Dropped the plone3 GS profile, paved over the types/*.xml with versions
+  from a working FSD Plone instance.
+  [cah190 (Craig Haynal)]
+
 * Don't call Products.Archetypes.Extensions.utils helpers, they seem to make
   Archetypes move itself in the portal_skins lists in a way that breaks
   TinyMCE.
-  [cah190 (Craig Haynal)]
-
-* Cleaned up GS profile types/*.xml so we can import our types directly
-  instead of relying on install_subskin.
   [cah190 (Craig Haynal)]
 
 * Installer should not be installing ATReferenceBrowserWidget.

@@ -70,30 +70,6 @@ def install(self, reinstall=False):
     f.close()
     relations_tool.importXML(xml)
     
-    # Install the product tool:
-    if not hasattr(self, 'facultystaffdirectory_tool'):
-        addTool = self.manage_addProduct['FacultyStaffDirectory'].manage_addTool
-        addTool('FSDFacultyStaffDirectoryTool')
-
-    # enable portal_factory for given types
-    factory_tool = getToolByName(self,'portal_factory')
-    factory_types=[
-        "FSDFacultyStaffDirectory",
-        "FSDClassification",
-        "FSDPerson",
-        "FSDCourse",
-        "FSDCommitteesFolder",
-        "FSDCommittee",
-        "FSDSpecialty",
-        "FSDSpecialtiesFolder",
-        "FSDPersonGrouping",
-        "FSDDepartment",
-        "FSDCommitteeMembership",
-        "FSDSpecialtyInformation",
-        "FSDDepartmentalMembership",
-        ] + factory_tool.getFactoryTypes().keys()
-    factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=factory_types)
-
     from Products.FacultyStaffDirectory.config import STYLESHEETS
     try:
         portal_css = getToolByName(portal, 'portal_css')
@@ -131,17 +107,36 @@ def install(self, reinstall=False):
         for eachContext in importContexts:
             setupTool.runAllImportStepsFromProfile(eachContext)  # doesn't exist in Plone 2.5
 
-    migrationTool = getToolByName(self, 'portal_migration')
-    isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
-    
     profilesToImport = ('profile-Products.membrane:default', 'profile-Products.FacultyStaffDirectory:default')
-    if isPlone3OrBetter:
-        profilesToImport += ('profile-Products.FacultyStaffDirectory:plone3-actions-fix',)
 
     importProfiles(self, profilesToImport)
 
     print >> out, "Ran all GS import steps." 
     
+    # enable portal_factory for given types
+    factory_tool = getToolByName(self,'portal_factory')
+    factory_types=[
+        "FSDFacultyStaffDirectory",
+        "FSDClassification",
+        "FSDPerson",
+        "FSDCourse",
+        "FSDCommitteesFolder",
+        "FSDCommittee",
+        "FSDSpecialty",
+        "FSDSpecialtiesFolder",
+        "FSDPersonGrouping",
+        "FSDDepartment",
+        "FSDCommitteeMembership",
+        "FSDSpecialtyInformation",
+        "FSDDepartmentalMembership",
+        ] + factory_tool.getFactoryTypes().keys()
+    factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=factory_types)
+    
+    # Install the product tool:
+    if not hasattr(self, 'facultystaffdirectory_tool'):
+        addTool = self.manage_addProduct['FacultyStaffDirectory'].manage_addTool
+        addTool('FSDFacultyStaffDirectoryTool')
+
     #####
     # Catalog Manipulations
     #  These could be places in a catalog.xml GenericSetup step, but doing so would
@@ -236,34 +231,15 @@ def install(self, reinstall=False):
     # Fixing the 'MyFolder' action
     # massage the membership tool actions to make 'mystuff' invisible,
     # This allows the one we added in GS to take its place silently.
-    if isPlone3OrBetter:
-        actionsTool = getToolByName(self, 'portal_actions')
-    else: 
-        actionsTool = getToolByName(self,'portal_membership')
+    actionsTool = getToolByName(self, 'portal_actions')
     actions = actionsTool.listActions()
     for action in actions:
         if action.id == originalMyFolderActionId:
             action.visible = False
     
     # now move the new my folder action up to the top of the list
-    if isPlone3OrBetter:
-        orderedFolder = actionsTool.user
-        orderedFolder.manage_move_objects_to_top(None,(newMyFolderActionId,))
-    else:
-        # set up a function for moving the action up in plone 2.5.
-        # This is a completely brutal hack, but I can't see a better way to do it.  Luckily, it only needs to happen once.
-        def getIndexOfActionInProvider(actionId, provider):
-            actions = provider.listActions()
-            idx = 0;
-            for action in actions:
-                if action.id == actionId:
-                    return idx
-                idx += 1
-            return -1
-        actionIndex = getIndexOfActionInProvider(newMyFolderActionId, actionsTool)
-        while(actionIndex is not 0):
-            actionsTool.moveUpActions([actionIndex])
-            actionIndex = getIndexOfActionInProvider(newMyFolderActionId, actionsTool)
+    orderedFolder = actionsTool.user
+    orderedFolder.manage_move_objects_to_top(None,(newMyFolderActionId,))
         
     # Fixing the 'MemberPrefs' action
     # massage the portal_controlpanel tool to make MemberPrefs invisible
@@ -324,10 +300,6 @@ def uninstall(self, reinstall=False):
     def uninstallProfiles(portal):
         setup_tool = getToolByName(portal, 'portal_setup')
         setupTool.runAllImportStepsFromProfile('profile-FacultyStaffDirectory:uninstall')  # doesn't exist in Plone 2.5
-        
-    # set tag for version greater than 3.0
-    migrationTool = getToolByName(self, 'portal_migration')
-    isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
         
     # don't do things we don't need to do on reinstall
     if not reinstall:
@@ -397,12 +369,8 @@ def uninstall(self, reinstall=False):
         
         # massage the membership tool actions to make 'mystuff' visible,
         # at the same time, remove the action we created via GS profile
-        if isPlone3OrBetter: # plone3 or better, use portal actions instead
-            tool = getToolByName(self, 'portal_actions')
-            currentActions = tool.listActions()
-        else: # plone2.5 or lower, use portal_membership
-            tool = getToolByName(self,'portal_membership')
-            currentActions = tool.listActions()
+        tool = getToolByName(self, 'portal_actions')
+        currentActions = tool.listActions()
         index = 0
         for action in currentActions:
             if action.id == originalMyFolderActionId:
