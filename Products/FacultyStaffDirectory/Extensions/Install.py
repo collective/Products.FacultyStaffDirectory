@@ -123,17 +123,6 @@ def install(self, reinstall=False):
     addSmartFolderMetadata("getResearchTopics", "Research Topics", "The research topics with which the person is associated", enabled=True)
     
     #####
-    # Set up the NavTree
-    #   can this be done through GS?  If so, move it there.
-    mtntl = list(self.portal_properties.navtree_properties.metaTypesNotToList)
-    metaTypes = ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']
-    for mType in metaTypes: 
-        if not mType in mtntl:
-            mtntl.append(mType)
-    self.portal_properties.navtree_properties._p_changed=1
-    self.portal_properties.navtree_properties.metaTypesNotToList=tuple(mtntl)
-    
-    #####
     # Action Manipulations
     #   These should probably also live in GS profiles, eventually.  Move them there if possible
     #   This should be movable after we drop support for plone 2.5
@@ -193,15 +182,6 @@ def uninstall(self, reinstall=False):
     # don't do things we don't need to do on reinstall
     if not reinstall:
     
-        # Remove classes from NavTree_properties:
-        mtntl = list(self.portal_properties.navtree_properties.metaTypesNotToList)
-        metaTypes = ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']
-        for mType in metaTypes: 
-            if mType in self.portal_properties.navtree_properties.metaTypesNotToList:
-                mtntl.remove(mType)
-        self.portal_properties.navtree_properties._p_changed=1
-        self.portal_properties.navtree_properties.metaTypesNotToList = tuple(mtntl)
-        
         # uninstall the vcard action icon
         ai=getToolByName(self, 'portal_actionicons')
         try:

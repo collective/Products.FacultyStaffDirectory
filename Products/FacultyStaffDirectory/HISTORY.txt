@@ -3,6 +3,9 @@ Version History
 
 3.0b4
 -----
+* Set up navtree properties via GenericSetup.
+  [esteele]
+  
 * Use an import step and GS profile to set up versioning and diffing,
   respectively.
   [esteele]
