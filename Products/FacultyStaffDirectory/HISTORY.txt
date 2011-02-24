@@ -7,6 +7,9 @@ Version History
   install code.
   [cah190 (Craig Haynal)]
   
+* Install dependencies via GS rather than through Install.py
+  [cah190 (Craig Haynal)]
+  
 3.0b3
 -----
 * Dropped the plone3 GS profile, paved over the types/*.xml with versions

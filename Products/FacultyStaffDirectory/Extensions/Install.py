@@ -47,21 +47,21 @@ def install(self, reinstall=False):
     out = StringIO()
     print >> out, "Installation log of %s:" % PROJECTNAME
 
-    # If the config contains a list of dependencies, try to install
-    # them.  Add a list called DEPENDENCIES to your custom
-    # AppConfig.py (imported by config.py) to use it.
-    try:
-        from Products.FacultyStaffDirectory.config import DEPENDENCIES
-    except:
-        DEPENDENCIES = []
     portal = getToolByName(self,'portal_url').getPortalObject()
     quickinstaller = portal.portal_quickinstaller
-    for dependency in DEPENDENCIES:
-        print >> out, "Installing dependency %s:" % dependency
-        quickinstaller.installProduct(dependency)
-        import transaction 
-        transaction.savepoint(optimistic=True) 
+    
+    def importProfiles(self, importContexts):
+        """Import all steps from the GenericSetup profiles listen in `importContexts`."""
+        setupTool = getToolByName(self, 'portal_setup')
+        for eachContext in importContexts:
+            setupTool.runAllImportStepsFromProfile(eachContext)
 
+    profilesToImport = ('profile-Products.FacultyStaffDirectory:default',)
+
+    importProfiles(self, profilesToImport)
+
+    print >> out, "Ran all GS import steps." 
+    
     # configuration for Relations
     relations_tool = getToolByName(self,'relations_library')
     xmlpath = os.path.join(package_home(GLOBALS),'relations.xml')
@@ -69,18 +69,6 @@ def install(self, reinstall=False):
     xml = f.read()
     f.close()
     relations_tool.importXML(xml)
-    
-    def importProfiles(self, importContexts):
-        """Import all steps from the GenericSetup profiles listen in `importContexts`."""
-        setupTool = getToolByName(self, 'portal_setup')
-        for eachContext in importContexts:
-            setupTool.runAllImportStepsFromProfile(eachContext)  # doesn't exist in Plone 2.5
-
-    profilesToImport = ('profile-Products.membrane:default', 'profile-Products.FacultyStaffDirectory:default')
-
-    importProfiles(self, profilesToImport)
-
-    print >> out, "Ran all GS import steps." 
     
     # enable portal_factory for given types
     factory_tool = getToolByName(self,'portal_factory')
