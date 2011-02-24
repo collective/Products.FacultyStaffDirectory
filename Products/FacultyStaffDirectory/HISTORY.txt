@@ -3,17 +3,17 @@ Version History
 
 3.0b4
 -----
+* Drop the 1.0-2.0 migration script. We'll no longer support a direct 1.0-3.0
+  migration.
+  [esteele]
+
 * Moved css registry manipulation to GS profile, dropped css and js registry
   install code.
   [cah190 (Craig Haynal)]
   
 * Install dependencies via GS rather than through Install.py
   [cah190 (Craig Haynal)]
-  
-* Drop the 1.0-2.0 migration script. We'll no longer support a direct 1.0-3.0
-  migration.
-  [esteele]
-  
+    
 * Factory tool registration is now via GS.
   [cah190 (Craig Haynal)]
 
