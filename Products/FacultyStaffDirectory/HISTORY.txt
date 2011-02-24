@@ -3,6 +3,10 @@ Version History
 
 3.0b4
 -----
+* Reinstall/Refresh is not a Plone supported updating mechanism. Use
+  portal_setup instead. Removing the code encouraging this sort of thing.
+  [esteele]
+  
 * Move kupu resource types registration to a GS import step. 
   [esteele]
   

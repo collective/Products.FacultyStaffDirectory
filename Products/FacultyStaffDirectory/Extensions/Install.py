@@ -185,12 +185,6 @@ def install(self, reinstall=False):
         new = existing + ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']
         cp.setVersionableContentTypes(new)
 
-    # Refresh the membrane_tool catalog. Otherwise, our content disappears from the user db on refresh
-    # however, rebuilding the entire catalog is a bit excessive, and kills installs on sites with large FSDs, let's do the reindex thing instead
-    membraneTool = getToolByName(self, 'membrane_tool')
-    membraneIndexes = membraneTool.indexes()
-    membraneTool.manage_reindexIndex(membraneIndexes)
-    
     # Unindex the FSD tool so it doesn't show up in our folder contents
     fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
     fsdTool.unindexObject()
