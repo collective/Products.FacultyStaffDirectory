@@ -70,25 +70,6 @@ def install(self, reinstall=False):
     f.close()
     relations_tool.importXML(xml)
     
-    # enable portal_factory for given types
-    factory_tool = getToolByName(self,'portal_factory')
-    factory_types=[
-        "FSDFacultyStaffDirectory",
-        "FSDClassification",
-        "FSDPerson",
-        "FSDCourse",
-        "FSDCommitteesFolder",
-        "FSDCommittee",
-        "FSDSpecialty",
-        "FSDSpecialtiesFolder",
-        "FSDPersonGrouping",
-        "FSDDepartment",
-        "FSDCommitteeMembership",
-        "FSDSpecialtyInformation",
-        "FSDDepartmentalMembership",
-        ] + factory_tool.getFactoryTypes().keys()
-    factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=factory_types)
-    
     # Install the product tool:
     if not hasattr(self, 'facultystaffdirectory_tool'):
         addTool = self.manage_addProduct['FacultyStaffDirectory'].manage_addTool
