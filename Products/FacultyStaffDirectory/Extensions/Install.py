@@ -20,26 +20,6 @@ originalMyFolderActionId = "mystuff"
 newMyFolderActionId = "fsdmystuff"
 originalProfileActionId = "MemberPrefs"
 newProfileActionId = "fsdMemberPrefs"
-linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDDepartment', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
-mediaKupuTypes = ['FSDPerson']
-collectionKupuTypes = ['FSDFacultyStaffDirectory']
-
-def addKupuResource(self, resourceType, portalType):
-    kupu = getToolByName(self, 'kupu_library_tool')
-    resourceList = list(kupu.getPortalTypesForResourceType(resourceType))
-    if portalType not in resourceList:
-        resourceList.append(portalType)
-        kupu.addResourceType(resourceType,tuple(resourceList))
-        #ems174: Do we actually need to updateResourceTypes? Kupu gets snippy if we try to add more than one linkable type.
-        #kupu.updateResourceTypes(resourceType)
-
-def removeKupuResource(self, resourceType, portalType):
-    kupu = getToolByName(self, 'kupu_library_tool')
-    resourceList = list(kupu.getPortalTypesForResourceType(resourceType))
-    if portalType in resourceList:
-        resourceList.remove(portalType)
-        kupu.addResourceType(resourceType,tuple(resourceList))
-        #kupu.updateResourceTypes(resourceType)    
 
 def install(self, reinstall=False):
     """ External Method to install FacultyStaffDirectory """
@@ -215,22 +195,6 @@ def install(self, reinstall=False):
     fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
     fsdTool.unindexObject()
     
-    #####
-    # Set up Kupu:
-    #   Does Kupu have a GS setup possibility?  If so, we should absolutely use it.
-    
-
-    if quickinstaller.isProductInstalled('kupu'):
-        #
-        # is Kupu available? if so, add resources
-        #
-        for type in linkableKupuTypes:
-            addKupuResource(self, 'linkable', type)
-        for type in mediaKupuTypes:
-            addKupuResource(self, 'mediaobject', type)        
-        for type in collectionKupuTypes:
-            addKupuResource(self, 'collection', type)
-            
     return out.getvalue()
 
 def uninstall(self, reinstall=False):
@@ -343,17 +307,6 @@ def uninstall(self, reinstall=False):
                     new.append(type)
             pr.setVersionableContentTypes(new)
 
-        #####
-        # Remove Kupu customizations:
-        quickinstaller = getToolByName(self,'portal_quickinstaller')
-        if quickinstaller.isProductInstalled('kupu'):
-            for type in linkableKupuTypes:
-                removeKupuResource(self, 'linkable', type)
-            for type in mediaKupuTypes:
-                removeKupuResource(self, 'mediaobject', type)
-            for type in collectionKupuTypes:
-                removeKupuResource(self, 'collection', type)
-    
         # Okay, unregister the membrane_tool from the InstalledProduct.portalobjects property in the QI tool.
         # IMPORTANT!!!
         # remember that this is all because of the way we are installing membrane in the 

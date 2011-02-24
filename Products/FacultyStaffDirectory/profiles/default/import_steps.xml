@@ -6,5 +6,13 @@
                title="Import step for Products.FacultyStaffDirectory for 2.x to 3.0 migration">
     <dependency step="workflow" />
   </import-step>
+
+  <import-step id="installKupuResources"
+               version="20110223-01"
+               handler="Products.FacultyStaffDirectory.setuphandlers.installKupuResources"
+               title="Add FacultyStaffDirectory types to Kupu's resource libraries">
+  </import-step>
+
+
 </import-steps>
 

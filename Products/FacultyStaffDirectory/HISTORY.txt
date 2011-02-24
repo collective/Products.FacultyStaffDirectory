@@ -3,6 +3,9 @@ Version History
 
 3.0b4
 -----
+* Move kupu resource types registration to a GS import step. 
+  [esteele]
+  
 * Drop the 1.0-2.0 migration script. We'll no longer support a direct 1.0-3.0
   migration.
   [esteele]
