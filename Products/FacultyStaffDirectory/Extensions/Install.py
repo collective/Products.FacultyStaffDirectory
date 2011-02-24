@@ -97,9 +97,9 @@ def install(self, reinstall=False):
 
 def uninstall(self, reinstall=False):
     out = StringIO()
-    def uninstallProfiles(portal):
-        setup_tool = getToolByName(portal, 'portal_setup')
-        setupTool.runAllImportStepsFromProfile('profile-FacultyStaffDirectory:uninstall')  # doesn't exist in Plone 2.5
+    
+    setup_tool = getToolByName(self, 'portal_setup')
+    setup_tool.runAllImportStepsFromProfile('profile-Products.FacultyStaffDirectory:uninstall')
         
     # don't do things we don't need to do on reinstall
     if not reinstall:
