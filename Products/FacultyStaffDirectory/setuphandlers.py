@@ -1,8 +1,10 @@
+from App.Common import package_home
 from Products.CMFCore.utils import getToolByName
 from Products.CMFEditions.setuphandlers import DEFAULT_POLICIES
+from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL 
 from plone.app.workflow.remap import remap_workflow
-
+import os.path
 
 def upgrade_2_to_3(context):
 
@@ -53,6 +55,15 @@ def installKupuResources(context):
             addKupuResource(portal, 'mediaobject', type)        
         for type in collectionKupuTypes:
             addKupuResource(portal, 'collection', type)
+
+def installRelationsRules(context):
+    portal = context.getSite()
+    relations_tool = getToolByName(portal,'relations_library')
+    xmlpath = os.path.join(package_home(GLOBALS),'relations.xml')
+    f = open(xmlpath)
+    xml = f.read()
+    f.close()
+    relations_tool.importXML(xml)
 
 def uninstallKupuResources(context):
     """Remove Kupu customizations"""

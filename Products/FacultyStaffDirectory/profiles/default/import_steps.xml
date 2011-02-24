@@ -19,5 +19,11 @@
                title="Set up versioning for FacultyStaffDirectory types">
   </import-step>
 
+  <import-step id="installRelationsRules"
+               version="20110223-01"
+               handler="Products.FacultyStaffDirectory.setuphandlers.installRelationsRules"
+               title="Install the ruleset for Relations">
+  </import-step>
+
 </import-steps>
 

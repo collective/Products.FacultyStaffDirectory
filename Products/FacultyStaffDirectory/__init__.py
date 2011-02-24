@@ -24,7 +24,7 @@ except ImportError:
 import Products.CMFPlone.interfaces
 import os
 import os.path
-from Globals import package_home
+from App.Common import package_home
 from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import *
 from Products.Archetypes.utils import capitalize

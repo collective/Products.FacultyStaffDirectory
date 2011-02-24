@@ -2,11 +2,9 @@
 
 __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
-import os.path
 import sys
 from StringIO import StringIO
 from sets import Set
-from App.Common import package_home
 from Products.CMFCore.utils import getToolByName
 
 from Products.Archetypes.atapi import listTypes
@@ -41,14 +39,6 @@ def install(self, reinstall=False):
     importProfiles(self, profilesToImport)
 
     print >> out, "Ran all GS import steps." 
-    
-    # configuration for Relations
-    relations_tool = getToolByName(self,'relations_library')
-    xmlpath = os.path.join(package_home(GLOBALS),'relations.xml')
-    f = open(xmlpath)
-    xml = f.read()
-    f.close()
-    relations_tool.importXML(xml)
     
     #####
     # Action Manipulations
