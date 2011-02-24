@@ -34,14 +34,6 @@ DEPENDENCIES = ["Relations"]
 # Dependend products - not quick-installed - used in testcase
 PRODUCT_DEPENDENCIES = []
 
-# You can overwrite these two in an AppConfig.py:
-# STYLESHEETS = [{'id': 'my_global_stylesheet.css'},
-#                {'id': 'my_contenttype.css',
-#                 'expression': 'python:object.getTypeInfo().getId() == "MyType"'}]
-# You can do the same with JAVASCRIPTS.
-STYLESHEETS = [{'id': 'facultyStaffDirectory.css', 'media': 'all'}]
-JAVASCRIPTS = []
-
 # membrane stuff, roles we don't want groups to be able to use
 INVALID_ROLES = ['Manager', 'Owner', 'Anonymous', 'Authenticated', 'User Preferences Editor']
 # Annotation key used for passwords

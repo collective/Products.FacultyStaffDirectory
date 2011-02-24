@@ -70,37 +70,6 @@ def install(self, reinstall=False):
     f.close()
     relations_tool.importXML(xml)
     
-    from Products.FacultyStaffDirectory.config import STYLESHEETS
-    try:
-        portal_css = getToolByName(portal, 'portal_css')
-        for stylesheet in STYLESHEETS:
-            try:
-                portal_css.unregisterResource(stylesheet['id'])
-            except:
-                pass
-            defaults = {'id': '',
-            'media': 'all',
-            'enabled': True}
-            defaults.update(stylesheet)
-            portal_css.registerStylesheet(**defaults)
-    except:
-        # No portal_css registry
-        pass
-    from Products.FacultyStaffDirectory.config import JAVASCRIPTS
-    try:
-        portal_javascripts = getToolByName(portal, 'portal_javascripts')
-        for javascript in JAVASCRIPTS:
-            try:
-                portal_javascripts.unregisterResource(javascript['id'])
-            except:
-                pass
-            defaults = {'id': ''}
-            defaults.update(javascript)
-            portal_javascripts.registerScript(**defaults)
-    except:
-        # No portal_javascripts registry
-        pass
-
     def importProfiles(self, importContexts):
         """Import all steps from the GenericSetup profiles listen in `importContexts`."""
         setupTool = getToolByName(self, 'portal_setup')
