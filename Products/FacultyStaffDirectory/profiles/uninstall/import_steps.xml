@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<import-steps>
+  <import-step id="removeNavTreeSettings"
+               version="20110223-01"
+               handler="Products.FacultyStaffDirectory.setuphandlers.removeNavTreeSettings"
+               title="Remove the FacultyStaffDirectory navigation tree settings">
+    <dependency step="workflow" />
+  </import-step>
+
+
+</import-steps>
+
