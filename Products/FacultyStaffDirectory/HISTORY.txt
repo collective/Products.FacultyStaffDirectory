@@ -3,6 +3,9 @@ Version History
 
 3.0b4
 -----
+* Register facultystaffdirectory_tool via GS.
+  [cah190 (Craig Haynal)]
+
 * Catalog indexes and metadata are now loaded via GS.
   [cah190 (Craig Haynal)]
 

@@ -50,11 +50,6 @@ def install(self, reinstall=False):
     f.close()
     relations_tool.importXML(xml)
     
-    # Install the product tool:
-    if not hasattr(self, 'facultystaffdirectory_tool'):
-        addTool = self.manage_addProduct['FacultyStaffDirectory'].manage_addTool
-        addTool('FSDFacultyStaffDirectoryTool')
-
     #####
     # Action Manipulations
     #   These should probably also live in GS profiles, eventually.  Move them there if possible
