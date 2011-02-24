@@ -3,6 +3,12 @@ Version History
 
 3.0b4
 -----
+* Catalog indexes and metadata are now loaded via GS.
+  [cah190 (Craig Haynal)]
+
+* Collection/SmartFolder indexes are now loaded via GS.
+  [cah190 (Craig Haynal)]
+
 * Register configlet via GenericSetup.
   [esteele]
   
