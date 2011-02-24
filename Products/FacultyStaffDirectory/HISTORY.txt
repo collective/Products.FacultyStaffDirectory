@@ -3,6 +3,10 @@ Version History
 
 3.0b4
 -----
+* Use an import step and GS profile to set up versioning and diffing,
+  respectively.
+  [esteele]
+  
 * Reinstall/Refresh is not a Plone supported updating mechanism. Use
   portal_setup instead. Removing the code encouraging this sort of thing.
   [esteele]

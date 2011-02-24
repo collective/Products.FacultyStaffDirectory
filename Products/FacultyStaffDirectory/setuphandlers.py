@@ -1,6 +1,8 @@
 from Products.CMFCore.utils import getToolByName
-from plone.app.workflow.remap import remap_workflow
+from Products.CMFEditions.setuphandlers import DEFAULT_POLICIES
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL 
+from plone.app.workflow.remap import remap_workflow
+
 
 def upgrade_2_to_3(context):
 
@@ -63,3 +65,20 @@ def uninstallKupuResources(context):
             removeKupuResource(portal, 'mediaobject', type)
         for type in collectionKupuTypes:
             removeKupuResource(portal, 'collection', type)
+
+
+
+TYPES_TO_VERSION = ('FSDPerson', 'FSDCommittee', 'FSDSpecialty')
+def setVersionedTypes(context):
+    portal = context.getSite()
+    portal_repository = getToolByName(portal, 'portal_repository')
+    versionable_types = list(portal_repository.getVersionableContentTypes())
+    for type_id in TYPES_TO_VERSION:
+        if type_id not in versionable_types:
+            # use append() to make sure we don't overwrite any
+            # content-types which may already be under version control
+            versionable_types.append(type_id)
+            # Add default versioning policies to the versioned type
+            for policy_id in DEFAULT_POLICIES:
+                portal_repository.addPolicyForContentType(type_id, policy_id)
+    portal_repository.setVersionableContentTypes(versionable_types)

@@ -178,13 +178,6 @@ def install(self, reinstall=False):
             appId="FacultyStaffDirectory",
             imageUrl="group.png")
         
-    # Set up revisioning, if available:
-    if hasattr(self,'portal_repository'):
-        cp = getToolByName(self, "portal_repository")
-        existing = cp.getVersionableContentTypes()
-        new = existing + ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']
-        cp.setVersionableContentTypes(new)
-
     # Unindex the FSD tool so it doesn't show up in our folder contents
     fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
     fsdTool.unindexObject()
@@ -290,16 +283,6 @@ def uninstall(self, reinstall=False):
         # remove the FSD configlet from the portal control panel
         if "FacultyStaffDirectory" in [ c.id for c in cp._actions ]:
             cp.unregisterConfiglet("FacultyStaffDirectory")
-
-        # Tear down revisioning, if available:
-        if hasattr(self,'portal_repository'):
-            pr = getToolByName(self, "portal_repository")
-            existing = pr.getVersionableContentTypes()
-            new = []
-            for type in existing:
-                if type not in ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']:
-                    new.append(type)
-            pr.setVersionableContentTypes(new)
 
         # Okay, unregister the membrane_tool from the InstalledProduct.portalobjects property in the QI tool.
         # IMPORTANT!!!
