@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <object name="portal_properties" meta_type="Plone Properties Tool">
  <object name="navtree_properties" meta_type="Plone Property Sheet">
-  <property name="metaTypesNotToList" type="lines">
+  <property name="metaTypesNotToList" type="lines" purge="false">
    <element value="FSDCourse"/>
    <element value="FSDPerson"/>
    <element value="FSDFacultyStaffDirectoryTool"/>
