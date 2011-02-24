@@ -156,17 +156,6 @@ def install(self, reinstall=False):
         if action.id == originalProfileActionId:
             action.visible = False
 
-    # Register a configlet to control some behaviors of the product:
-    if "FacultyStaffDirectory" not in [ c.id for c in cp._actions ]:
-        cp.registerConfiglet(
-            "FacultyStaffDirectory",
-            "Faculty/Staff Directory",
-            "string:${portal_url}/facultystaffdirectory_tool/",
-            category="Products",
-            permission="Manage portal",
-            appId="FacultyStaffDirectory",
-            imageUrl="group.png")
-        
     # Unindex the FSD tool so it doesn't show up in our folder contents
     fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
     fsdTool.unindexObject()
@@ -260,10 +249,6 @@ def uninstall(self, reinstall=False):
                 cp.deleteActions([index])
             index += 1
         
-        # remove the FSD configlet from the portal control panel
-        if "FacultyStaffDirectory" in [ c.id for c in cp._actions ]:
-            cp.unregisterConfiglet("FacultyStaffDirectory")
-
         # Okay, unregister the membrane_tool from the InstalledProduct.portalobjects property in the QI tool.
         # IMPORTANT!!!
         # remember that this is all because of the way we are installing membrane in the 

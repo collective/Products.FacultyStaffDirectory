@@ -3,6 +3,9 @@ Version History
 
 3.0b4
 -----
+* Register configlet via GenericSetup.
+  [esteele]
+  
 * Set up navtree properties via GenericSetup.
   [esteele]
   
