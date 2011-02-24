@@ -84,7 +84,6 @@ def setVersionedTypes(context):
 def removeNavTreeSettings(context):
     """Remove FSD classes from NavTree_properties since this isn't supported
        via GS."""
-    import pdb; pdb.set_trace( )
     portal = context.getSite()
     pprops = getToolByName(portal, 'portal_properties')
     navprops = pprops.navtree_properties

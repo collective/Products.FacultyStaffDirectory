@@ -10,6 +10,7 @@
       directory="profiles/default"
       description="Extension profile for FacultyStaffDirectory Product."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
       i18n:attributes="title gs_profiles_default_title;
                        description gs_profiles_default_description;"
       />
