@@ -50,7 +50,7 @@
   <permission value="Modify portal content"/>
   <permission value="Review portal content"/>
  </action>
- <action title="vCard" action_id="vcard" category="document_actions"
+ <action title="vCard" action_id="vcard" category="document_actions" icon_expr="string:vcard.png"
     condition_expr="" url_expr="string:${object_url}/vCard" visible="True">
   <permission value="View"/>
  </action>

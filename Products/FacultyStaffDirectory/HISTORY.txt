@@ -3,6 +3,9 @@ Version History
 
 3.0b4
 -----
+* Stop using deprecated actionicons_tool and put the icon directly on the action.
+  [cah190 (Craig Haynal)]
+
 * Register facultystaffdirectory_tool via GS.
   [cah190 (Craig Haynal)]
 

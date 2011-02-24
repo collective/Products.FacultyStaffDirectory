@@ -106,14 +106,6 @@ class testInstall(testPlone):
                 missingmetatypes.append(mType)
         self.failIf(missingmetatypes, "The following FSD Types are still visible in the navtree and shouldn't be %s" % missingmetatypes)
         
-    def testActionIconsSetup(self):
-        ai = getToolByName(self.portal, 'portal_actionicons')
-        try:
-            ai.getActionInfo('plone','vcard')
-        except KeyError:
-            # Action icon doesn't exist. Add it.
-            self.fail('FSD vcard action icon not present in portal_actionicons')
-    
     def testConfigletAdded(self):
         cp = getToolByName(self.portal, 'portal_controlpanel')
         self.failIf("FacultyStaffDirectory" not in [ c.id for c in cp._actions ], 'FacultyStaffDirectory configlet has not been registered with the portal controlpanel')

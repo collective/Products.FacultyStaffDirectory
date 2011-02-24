@@ -55,14 +55,6 @@ def install(self, reinstall=False):
     #   These should probably also live in GS profiles, eventually.  Move them there if possible
     #   This should be movable after we drop support for plone 2.5
         
-    # Add action icon for vCards:
-    ai=getToolByName(self, 'portal_actionicons')
-    try:
-        ai.getActionInfo('plone','vcard')
-    except KeyError:
-        # Action icon doesn't exist. Add it.
-        ai.addActionIcon('plone', 'vcard', 'vcard.png', 'vCard export')
-    
     # Fixing the 'MyFolder' action
     # massage the membership tool actions to make 'mystuff' invisible,
     # This allows the one we added in GS to take its place silently.
