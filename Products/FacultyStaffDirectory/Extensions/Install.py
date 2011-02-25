@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
-from Products.FacultyStaffDirectory.config import PROJECTNAME
 
 
 __author__ = """WebLion <support@weblion.psu.edu>"""
