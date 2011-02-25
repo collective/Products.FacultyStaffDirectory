@@ -90,20 +90,6 @@ def uninstall(self, reinstall=False):
             pass
         
         #####
-        # Undo Catalog Adjustments
-        catalogTool = getToolByName(self, 'portal_catalog')
-                
-        # remove additional indexes
-        for indexName, indexType in ADDITIONAL_CATALOG_INDEXES:
-            if indexName in catalogTool.indexes():
-                catalogTool.delIndex(indexName)
-                
-        # remove additional metadata fields
-        for fieldName in ADDITIONAL_CATALOG_METADATA:
-            if fieldName in catalogTool.schema():
-                catalogTool.delColumn(fieldName)
-                
-        #####
         # Undo Smart Folder Adjustments
         #  Note:  It appears that these steps do not need to be taken.  Apparently, removing
         #         the indexes and metadata from the catalog tool itself is enough to ensure 
