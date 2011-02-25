@@ -116,12 +116,12 @@ def uninstall(self, reinstall=False):
         # remember that this is all because of the way we are installing membrane in the 
         # first place, when the QI tool is improved in all versions to support installing 
         # via GS profile alone, this will be moot.  It shouldn't break even then, though, 
-        # because of the set stuff.
-        qt = getToolByName(self, 'portal_quickinstaller')
-        fsd_product = getattr(qt, 'FacultyStaffDirectory')
-        portal_objects_list = fsd_product.getPortalObjects()
-        pol_set = set(portal_objects_list)
-        removal_set = set([MEMBRANE_TOOL])
-        fsd_product.portalobjects = tuple(pol_set - removal_set)
+        # # because of the set stuff.
+        # qt = getToolByName(self, 'portal_quickinstaller')
+        # fsd_product = getattr(qt, 'FacultyStaffDirectory')
+        # portal_objects_list = fsd_product.getPortalObjects()
+        # pol_set = set(portal_objects_list)
+        # removal_set = set([MEMBRANE_TOOL])
+        # fsd_product.portalobjects = tuple(pol_set - removal_set)
 
     return out.getvalue()
