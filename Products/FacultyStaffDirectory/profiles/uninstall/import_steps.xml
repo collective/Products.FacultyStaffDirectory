@@ -18,6 +18,13 @@
                handler="Products.FacultyStaffDirectory.setuphandlers.uninstallConfiglet"
                title="Remove FacultyStaffDirectory configlet">
   </import-step>
+
+
+  <import-step id="restoreMemberPrefs"
+               version="20110223-01"
+               handler="Products.FacultyStaffDirectory.setuphandlers.restoreMemberPrefs"
+               title="Restore the default Member Preferences action.">
+  </import-step>
   
 </import-steps>
 

@@ -32,6 +32,12 @@
        <dependency step="types" />
   </import-step>
 
+  <import-step id="hideMemberPrefs"
+               version="20110223-01"
+               handler="Products.FacultyStaffDirectory.setuphandlers.hideMemberPrefs"
+               title="Use the FacultyStaffDirectory version of the Member Preferences action.">
+  </import-step>
+
 
 </import-steps>
 

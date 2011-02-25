@@ -137,3 +137,35 @@ def unindexFSDTool(context):
     fsdTool = getToolByName(portal, 'facultystaffdirectory_tool')
     fsdTool.unindexObject()
     
+
+
+originalProfileActionId = "MemberPrefs"
+newProfileActionId = "fsdMemberPrefs"
+def hideMemberPrefs(context):
+       # Fixing the 'MemberPrefs' action
+       # massage the portal_controlpanel tool to make MemberPrefs invisible
+       if context.readDataFile('hideMemberPrefs.txt') is None:
+           return
+       portal = context.getSite()
+       cp = getToolByName(portal, 'portal_controlpanel')
+       currentActions = cp.listActions()
+       for action in currentActions:
+           if action.id == originalProfileActionId:
+               action.visible = False
+               
+
+def restoreMemberPrefs(context):
+    """Massage the portal_controlpanel tool to make MemberPrefs visible
+    at the same time, delete the action we created via GS Profile"""
+    if context.readDataFile('restoreMemberPrefs.txt') is None:
+        return
+    portal = context.getSite()
+    cp = getToolByName(portal, 'portal_controlpanel')
+    currentActions = cp.listActions()
+    index = 0
+    for action in currentActions:
+        if action.id == originalProfileActionId:
+            action.visible = True
+        if action.id == newProfileActionId:
+            cp.deleteActions([index])
+        index += 1
