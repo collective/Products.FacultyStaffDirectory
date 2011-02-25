@@ -13,9 +13,9 @@
                title="Add FacultyStaffDirectory types to Kupu's resource libraries">
   </import-step>
 
-  <import-step id="setVersionedTypes"
+  <import-step id="installVersionedTypes"
                version="20110223-01"
-               handler="Products.FacultyStaffDirectory.setuphandlers.setVersionedTypes"
+               handler="Products.FacultyStaffDirectory.setuphandlers.installVersionedTypes"
                title="Set up versioning for FacultyStaffDirectory types">
   </import-step>
 

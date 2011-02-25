@@ -78,7 +78,7 @@ def uninstallKupuResources(context):
             removeKupuResource(portal, 'collection', type)
 
 TYPES_TO_VERSION = ('FSDPerson', 'FSDCommittee', 'FSDSpecialty')
-def setVersionedTypes(context):
+def installVersionedTypes(context):
     portal = context.getSite()
     portal_repository = getToolByName(portal, 'portal_repository')
     versionable_types = list(portal_repository.getVersionableContentTypes())
@@ -92,7 +92,8 @@ def setVersionedTypes(context):
                 portal_repository.addPolicyForContentType(type_id, policy_id)
     portal_repository.setVersionableContentTypes(versionable_types)
 
-def removeNavTreeSettings(context):
+
+def uninstallNavTreeSettings(context):
     """Remove FSD classes from NavTree_properties since this isn't supported
        via GS."""
     portal = context.getSite()
