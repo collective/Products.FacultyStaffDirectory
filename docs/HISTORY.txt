@@ -4,6 +4,9 @@ Version History
 3.0b4
 -----
 
+* Drop the icon for the vCard action.
+  [esteele]
+  
 * Slightly rearrange package layout.
   [esteele]
   

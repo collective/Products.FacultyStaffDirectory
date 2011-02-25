@@ -58,15 +58,6 @@ def uninstall(self, reinstall=False):
         
     # don't do things we don't need to do on reinstall
     if not reinstall:
-    
-        # uninstall the vcard action icon
-        ai=getToolByName(self, 'portal_actionicons')
-        try:
-            ai.removeActionIcon('plone', 'vcard')
-        except KeyError:
-            #Icon doesn't exist, problem solved.
-            pass
-        
         # massage the portal_controlpanel tool to make MemberPrefs visible
         # at the same time, delete the action we created via GS Profile
         cp = getToolByName(self, 'portal_controlpanel')
