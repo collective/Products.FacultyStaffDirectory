@@ -25,5 +25,13 @@
                title="Install the ruleset for Relations">
   </import-step>
 
+  <import-step id="unindexFSDTool"
+               version="20110223-01"
+               handler="Products.FacultyStaffDirectory.setuphandlers.unindexFSDTool"
+               title="Prevent the FacultyStaffDirectory Tool from appearing in folder listings">
+       <dependency step="types" />
+  </import-step>
+
+
 </import-steps>
 

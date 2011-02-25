@@ -30,11 +30,6 @@ def install(self, reinstall=False):
     importProfiles(self, profilesToImport)
 
     print >> out, "Ran all GS import steps." 
-    
-    #####
-    # Action Manipulations
-    #   These should probably also live in GS profiles, eventually.  Move them there if possible
-    #   This should be movable after we drop support for plone 2.5
         
     # Fixing the 'MemberPrefs' action
     # massage the portal_controlpanel tool to make MemberPrefs invisible
@@ -43,11 +38,7 @@ def install(self, reinstall=False):
     for action in currentActions:
         if action.id == originalProfileActionId:
             action.visible = False
-
-    # Unindex the FSD tool so it doesn't show up in our folder contents
-    fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
-    fsdTool.unindexObject()
-    
+                
     return out.getvalue()
 
 def uninstall(self, reinstall=False):

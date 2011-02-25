@@ -126,3 +126,14 @@ def uninstallConfiglet(context):
     portal = context.getSite()
     cp = getToolByName(portal, 'portal_controlpanel')
     cp.unregisterApplication('FacultyStaffDirectory')
+    
+
+def unindexFSDTool(context):
+    """ Unindex the FSD tool so it doesn't show up in folder contents"""
+
+    if context.readDataFile('unindexFSDTool.txt') is None:
+        return
+    portal = context.getSite()
+    fsdTool = getToolByName(portal, 'facultystaffdirectory_tool')
+    fsdTool.unindexObject()
+    
