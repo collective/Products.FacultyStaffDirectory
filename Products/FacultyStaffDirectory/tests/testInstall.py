@@ -40,24 +40,6 @@ class testInstall(testPlone):
             self.has_kupu = True
             self.ktool = getToolByName(self.portal, 'kupu_library_tool')
         
-    def testMyFolderSetup(self):
-        if self.isPlone3OrBetter:
-            at = getToolByName(self.portal, 'portal_actions')
-            actions = at.listActions()
-        else:
-            mt = getToolByName(self.portal, 'portal_membership')
-            actions = mt.listActions()
-        
-        hasfsdmystuff = False
-        index = 0
-        for action in actions:
-            if action.id == originalMyFolderActionId:
-                self.failIf(action.visible, "Original My Folder action is still visible.")
-            if action.id == newMyFolderActionId:
-                hasfsdmystuff = True
-            index += 1
-        self.failUnless(hasfsdmystuff, "New My Folder action failed to install on portal_membership.")
-        
     def testMemberProfileSetup(self):
         cp = getToolByName(self.portal, 'portal_controlpanel')
         actions = cp.listActions()
@@ -152,22 +134,6 @@ class testUninstall(testPlone):
         self.loginAsPortalOwner()
         installer.uninstallProducts(products=['FacultyStaffDirectory'])
         
-    def testMyFolderTeardown(self):
-        if self.isPlone3OrBetter:
-            at = getToolByName(self.portal, 'portal_actions')
-            actions = at.listActions()
-        else:
-            mt = getToolByName(self.portal, 'portal_membership')
-            actions = mt.listActions()
-        
-        hasfsdmystuff = False
-        for action in actions:
-            if action.id == originalMyFolderActionId:
-                self.failUnless(action.visible, "original My Folder action is not visible")
-            if action.id == newMyFolderActionId:
-                hasfsdmystuff = True
-        self.failIf(hasfsdmystuff, "new My Folder action failed to uninstall on portal_membership")
-    
     def testMemberProfileTeardown(self):
         cp = getToolByName(self.portal, 'portal_controlpanel')
         actions = cp.listActions()

@@ -3,6 +3,9 @@ Version History
 
 3.0b4
 -----
+* Stop creating a 'my folder' action. This went away in Plone 3.
+  [esteele]
+  
 * Stop using deprecated actionicons_tool and put the icon directly on the action.
   [cah190 (Craig Haynal)]
 

@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
+from StringIO import StringIO
+
+from Products.CMFCore.utils import getToolByName
+
+from Products.FacultyStaffDirectory.config import PROJECTNAME
+
 
 __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
-import sys
-from StringIO import StringIO
-from sets import Set
-from Products.CMFCore.utils import getToolByName
 
-from Products.Archetypes.atapi import listTypes
-from Products.FacultyStaffDirectory.config import PROJECTNAME
-from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
-from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 
-originalMyFolderActionId = "mystuff"
-newMyFolderActionId = "fsdmystuff"
 originalProfileActionId = "MemberPrefs"
 newProfileActionId = "fsdMemberPrefs"
 
@@ -23,9 +19,6 @@ def install(self, reinstall=False):
     out = StringIO()
     print >> out, "Installation log of %s:" % PROJECTNAME
 
-    portal = getToolByName(self,'portal_url').getPortalObject()
-    quickinstaller = portal.portal_quickinstaller
-    
     def importProfiles(self, importContexts):
         """Import all steps from the GenericSetup profiles listen in `importContexts`."""
         setupTool = getToolByName(self, 'portal_setup')
@@ -42,19 +35,6 @@ def install(self, reinstall=False):
     # Action Manipulations
     #   These should probably also live in GS profiles, eventually.  Move them there if possible
     #   This should be movable after we drop support for plone 2.5
-        
-    # Fixing the 'MyFolder' action
-    # massage the membership tool actions to make 'mystuff' invisible,
-    # This allows the one we added in GS to take its place silently.
-    actionsTool = getToolByName(self, 'portal_actions')
-    actions = actionsTool.listActions()
-    for action in actions:
-        if action.id == originalMyFolderActionId:
-            action.visible = False
-    
-    # now move the new my folder action up to the top of the list
-    orderedFolder = actionsTool.user
-    orderedFolder.manage_move_objects_to_top(None,(newMyFolderActionId,))
         
     # Fixing the 'MemberPrefs' action
     # massage the portal_controlpanel tool to make MemberPrefs invisible
@@ -86,18 +66,6 @@ def uninstall(self, reinstall=False):
         except KeyError:
             #Icon doesn't exist, problem solved.
             pass
-        
-        # massage the membership tool actions to make 'mystuff' visible,
-        # at the same time, remove the action we created via GS profile
-        tool = getToolByName(self, 'portal_actions')
-        currentActions = tool.listActions()
-        index = 0
-        for action in currentActions:
-            if action.id == originalMyFolderActionId:
-                action.visible = True
-            if action.id == newMyFolderActionId:
-                tool.deleteActions([index])
-            index += 1
         
         # massage the portal_controlpanel tool to make MemberPrefs visible
         # at the same time, delete the action we created via GS Profile
