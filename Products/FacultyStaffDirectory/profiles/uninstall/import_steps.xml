@@ -7,5 +7,12 @@
                title="Remove the FacultyStaffDirectory navigation tree settings">
   </import-step>
 
+  <import-step id="uninstallKupuResources"
+               version="20110223-01"
+               handler="Products.FacultyStaffDirectory.setuphandlers.uninstallKupuResources"
+               title="Remove FacultyStaffDirectory types from Kupu's resource libraries">
+  </import-step>
+
+
 </import-steps>
 

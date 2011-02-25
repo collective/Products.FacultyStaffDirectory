@@ -46,6 +46,8 @@ def removeKupuResource(portal, resourceType, portalType):
 
 def installKupuResources(context):
     """ Add kupu resource types. Kupu's GS handling is broken/nonexistant."""
+    if context.readDataFile('installKupuResources.txt') is None:
+        return
     portal = context.getSite()
     quickinstaller = getToolByName(portal, 'portal_quickinstaller')
     if quickinstaller.isProductInstalled('kupu'):
@@ -57,6 +59,8 @@ def installKupuResources(context):
             addKupuResource(portal, 'collection', type)
 
 def installRelationsRules(context):
+    if context.readDataFile('installRelationsRules.txt') is None:
+        return
     portal = context.getSite()
     relations_tool = getToolByName(portal,'relations_library')
     xmlpath = os.path.join(package_home(GLOBALS),'relations.xml')
@@ -67,6 +71,8 @@ def installRelationsRules(context):
 
 def uninstallKupuResources(context):
     """Remove Kupu customizations"""
+    if context.readDataFile('uninstallKupuResources.txt') is None:
+        return
     portal = context.getSite()
     quickinstaller = getToolByName(portal, 'portal_quickinstaller')
     if quickinstaller.isProductInstalled('kupu'):
@@ -79,6 +85,8 @@ def uninstallKupuResources(context):
 
 TYPES_TO_VERSION = ('FSDPerson', 'FSDCommittee', 'FSDSpecialty')
 def installVersionedTypes(context):
+    if context.readDataFile('installVersionedTypes.txt') is None:
+        return
     portal = context.getSite()
     portal_repository = getToolByName(portal, 'portal_repository')
     versionable_types = list(portal_repository.getVersionableContentTypes())
@@ -96,6 +104,9 @@ def installVersionedTypes(context):
 def uninstallNavTreeSettings(context):
     """Remove FSD classes from NavTree_properties since this isn't supported
        via GS."""
+      
+    if context.readDataFile('uninstallNavTreeSettings.txt') is None:
+        return
     portal = context.getSite()
     pprops = getToolByName(portal, 'portal_properties')
     navprops = pprops.navtree_properties
