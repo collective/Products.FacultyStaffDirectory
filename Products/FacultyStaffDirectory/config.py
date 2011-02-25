@@ -48,6 +48,3 @@ MEMBRANE_ACTIVE_STATES = ('active','hiddenactive',)
 # content-types
 ALLOWABLE_CONTENT_TYPES = ('text/plain', 'text/structured', 'text/html', 'application/msword', 'text/x-rst')
 
-#catalog stuff
-ADDITIONAL_CATALOG_INDEXES = [('getSortableName', 'FieldIndex'), ('getRawClassifications', 'KeywordIndex'), ('getRawSpecialties', 'KeywordIndex'), ('getRawCommittees', 'KeywordIndex'), ('getRawDepartments', 'KeywordIndex'), ('getRawPeople', 'KeywordIndex')]
-ADDITIONAL_CATALOG_METADATA = ["UID", "getCommitteeNames", "getDepartmentNames", "getSpecialtyNames", "getClassificationNames", "getResearchTopics"]

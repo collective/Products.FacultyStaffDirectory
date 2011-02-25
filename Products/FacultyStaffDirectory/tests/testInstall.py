@@ -71,14 +71,14 @@ class testInstall(testPlone):
 
     def testCatalogIndexesAdded(self):
         missingindexes = []
-        for indexName, indexType in ADDITIONAL_CATALOG_INDEXES:
+        for indexName in ['getSortableName', 'getRawClassifications', 'getRawSpecialties', 'getRawCommittees', 'getRawDepartments', 'getRawPeople']:
             if indexName not in self.pc.indexes():
                 missingindexes.append(indexName)
         self.failIf(missingindexes, 'Catalog is missing the following indexes: %s' % missingindexes)
         
     def testCatalogMetadataAdded(self):
         missingmetadata = []
-        for fieldName in ADDITIONAL_CATALOG_METADATA:
+        for fieldName in ["getCommitteeNames", "getDepartmentNames", "getSpecialtyNames", "getClassificationNames", "getResearchTopics"]:
             if fieldName not in self.pc.schema():
                 missingmetadata.append(fieldName)
         self.failIf(missingmetadata, 'Catalog is missing the following metadata fields: %s' % missingmetadata)
@@ -204,17 +204,17 @@ class testUninstall(testPlone):
             self.fail('FSD vcard action icon still present in portal_actionicons')
         except KeyError:
             pass
-        
+
     def testCatalogIndexesTeardown(self):
         presentindexes = []
-        for indexName, indexType in ADDITIONAL_CATALOG_INDEXES:
+        for indexName in ['getSortableName', 'getRawClassifications', 'getRawSpecialties', 'getRawCommittees', 'getRawDepartments', 'getRawPeople']:
             if indexName in self.pc.indexes():
                 presentindexes.append(indexName)
         self.failIf(presentindexes, 'Catalog still holds the following indexes: %s' % presentindexes)
         
     def testCatalogMetadataTeardown(self):
         presentmetadata = []
-        for fieldName in ADDITIONAL_CATALOG_METADATA:
+        for fieldName in ["getCommitteeNames", "getDepartmentNames", "getSpecialtyNames", "getClassificationNames", "getResearchTopics"]:
             if fieldName in self.pc.schema():
                 presentmetadata.append(fieldName)
         self.failIf(presentmetadata, 'Catalog still holds the following metadata fields: %s' % presentmetadata)

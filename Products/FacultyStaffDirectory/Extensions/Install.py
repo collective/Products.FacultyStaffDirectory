@@ -10,8 +10,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.atapi import listTypes
 from Products.FacultyStaffDirectory.config import PROJECTNAME
 from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
-from Products.FacultyStaffDirectory.config import ADDITIONAL_CATALOG_INDEXES
-from Products.FacultyStaffDirectory.config import ADDITIONAL_CATALOG_METADATA
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 
 originalMyFolderActionId = "mystuff"
