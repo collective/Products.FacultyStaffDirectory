@@ -13,6 +13,11 @@
                title="Remove FacultyStaffDirectory types from Kupu's resource libraries">
   </import-step>
 
-
+  <import-step id="uninstallConfiglet"
+               version="20110223-01"
+               handler="Products.FacultyStaffDirectory.setuphandlers.uninstallConfiglet"
+               title="Remove FacultyStaffDirectory configlet">
+  </import-step>
+  
 </import-steps>
 

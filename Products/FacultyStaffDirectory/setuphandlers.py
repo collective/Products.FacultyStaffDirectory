@@ -116,3 +116,13 @@ def uninstallNavTreeSettings(context):
             mtntl.remove(mType)
     navprops._p_changed=1
     navprops.metaTypesNotToList = tuple(mtntl)
+
+
+def uninstallConfiglet(context):
+    """ Remove the FSD control panel item"""
+
+    if context.readDataFile('uninstallNavTreeSettings.txt') is None:
+        return
+    portal = context.getSite()
+    cp = getToolByName(portal, 'portal_controlpanel')
+    cp.unregisterApplication('FacultyStaffDirectory')
