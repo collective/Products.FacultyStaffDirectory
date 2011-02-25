@@ -239,14 +239,6 @@ class testUninstall(testPlone):
         cp = getToolByName(self.portal, 'portal_controlpanel')
         self.failIf("FacultyStaffDirectory" in [ c.id for c in cp._actions ], 'FacultyStaffDirectory configlet is still registered with the portal controlpanel')
         
-    def testVersioningTeardown(self):
-        presentversionable = []
-        pr = getToolByName(self.portal, "portal_repository")
-        for t in ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']:
-            if t in pr.getVersionableContentTypes():
-                presentversionable.append(t)
-        self.failIf(presentversionable, "%s are still listed as versionable and they should not be" % presentversionable)
-            
     def testKupuLinkableTypesSetup(self):
         if self.has_kupu:
             missingltypes = checkKupuResourceList(self.ktool, 'linkable', linkableKupuTypes)
