@@ -89,38 +89,6 @@ def uninstall(self, reinstall=False):
             #Icon doesn't exist, problem solved.
             pass
         
-        #####
-        # Undo Smart Folder Adjustments
-        #  Note:  It appears that these steps do not need to be taken.  Apparently, removing
-        #         the indexes and metadata from the catalog tool itself is enough to ensure 
-        #         that they are also removed from the smart folder tool.
-        #  Update: It turns out that this code is needed in plone 3.x  If it is missing, 
-        #          the indexes and metadata do not get removed.  there must be some change in 
-        #          the relationship between the smart folder tool and the portal catalog
-        smart_folder_tool = getToolByName(self, 'portal_atct')           
-
-        # Remove SmartFolder indexes
-        def removeSmartFolderIndex(indexName):
-            try:
-                smart_folder_tool.removeIndex(indexName)
-            except:
-                pass
-        
-        for i in ['getSortableName', 'getRawClassifications', 'getRawCommittees', 'getRawSpecialties', 'getRawDepartments', 'getRawPeople']:
-            removeSmartFolderIndex(i)
-        
-        # remove SmartFolder metadata too
-        def removeSmartFolderMetadata(columnName):
-            # Remove existing indexes if there are some
-            try:
-                smart_folder_tool.removeMetadata(columnName)
-            except:
-                pass
-                
-        for f in ["getCommitteeNames", "getDepartmentNames", "getSpecialtyNames", "getClassificationNames", "getResearchTopics"]:
-            removeSmartFolderMetadata(f)
-
-        
         # massage the membership tool actions to make 'mystuff' visible,
         # at the same time, remove the action we created via GS profile
         tool = getToolByName(self, 'portal_actions')
