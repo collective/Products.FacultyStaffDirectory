@@ -3,6 +3,10 @@ Version History
 
 3.0b4
 -----
+
+* Slightly rearrange package layout.
+  [esteele]
+  
 * Stop creating a 'my folder' action. This went away in Plone 3.
   [esteele]
   
