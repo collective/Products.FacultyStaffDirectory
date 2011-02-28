@@ -602,7 +602,7 @@ class Person(OrderedBaseFolder, ATCTContent):
     security.declarePrivate('_classificationReferences')
     def _classificationReferences(self):
         """Return a list of Classifications this Person can be referenced to."""
-        return [(c.UID, safe_unicode(c.Title)) for c in self.aq_parent.getFolderContents({'portal_type': 'FSDClassification'})]
+        return [(c.UID(), safe_unicode(c.Title)) for c in self.aq_parent.getFolderContents({'portal_type': 'FSDClassification'})]
     
     security.declarePrivate('_availableEditors')
     def _availableEditors(self):
