@@ -11,6 +11,7 @@ def install(self, reinstall=False):
     setup_tool.runAllImportStepsFromProfile('profile-Products.FacultyStaffDirectory:default')
 
 def uninstall(self, reinstall=False):
-    setup_tool = getToolByName(self, 'portal_setup')
-    setup_tool.runAllImportStepsFromProfile('profile-Products.FacultyStaffDirectory:uninstall')
+    if not reinstall:
+        setup_tool = getToolByName(self, 'portal_setup')
+        setup_tool.runAllImportStepsFromProfile('profile-Products.FacultyStaffDirectory:uninstall')
 
