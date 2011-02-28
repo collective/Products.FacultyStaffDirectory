@@ -8,7 +8,10 @@
       name="default"
       title="FacultyStaffDirectory"
       directory="profiles/default"
-      description="Extension profile for FacultyStaffDirectory Product."
+      description="Provides content types for creating and organizing
+      personnel directories within educational institutions. Integrates with
+      Plone's users and groups infrastructure and supports an extensibility
+      framework for custom requirements."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
       i18n:attributes="title gs_profiles_default_title;
