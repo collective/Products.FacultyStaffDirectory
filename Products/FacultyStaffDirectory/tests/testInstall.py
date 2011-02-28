@@ -225,6 +225,13 @@ class testUninstall(testPlone):
         for layerName in skins.getSkinSelections():
             self.failIf('FacultyStaffDirectory' in skins.selections[layerName], 'Skin layer not unregistered in layer %s' % layerName)
         
+    def testStepsUnregistered(self):
+        setup = getToolByName(self.portal, 'portal_setup')
+        registry = setup.getImportStepRegistry()
+        remainingIds = [a['id'] for a in registry.listStepMetadata() if 'Products.FacultyStaffDirectory' in a['handler']]
+        self.failIf(remainingIds, "The following import steps were not unregistered: %s" % remainingIds)
+
+        
 class testReinstall(testPlone):
     def afterSetUp(self):
         migrationTool = getToolByName(self.portal, 'portal_migration')
