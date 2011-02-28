@@ -220,7 +220,11 @@ class testUninstall(testPlone):
             missingctypes = checkKupuResourceList(self.ktool, 'collection', collectionKupuTypes)
             self.failUnlessEqual(missingctypes, collectionKupuTypes, '%s not listed as collection by Kupu' % missingctypes)
 
-
+    def testSkinLayerTeardown(self):
+        skins = getToolByName(self.portal, 'portal_skins')
+        for layerName in skins.getSkinSelections():
+            self.failIf('FacultyStaffDirectory' in skins.selections[layerName], 'Skin layer not unregistered in layer %s' % layerName)
+        
 class testReinstall(testPlone):
     def afterSetUp(self):
         migrationTool = getToolByName(self.portal, 'portal_migration')
