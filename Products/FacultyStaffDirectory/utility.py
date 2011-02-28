@@ -6,5 +6,4 @@ class FSDNonInstallable(object):
 
     def getNonInstallableProfiles(self):
         return [u'Products.FacultyStaffDirectory:plone3-actions-fix',
-                u'Products.FacultyStaffDirectory:default',
                 u'Products.FacultyStaffDirectory:uninstall']
