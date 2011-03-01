@@ -176,11 +176,11 @@ class testWithoutSpecialties(testPerson):
         
         pm = getToolByName(self.portal, 'portal_membership')
         #make sure the person's member portrait isn't defined
-        self.failUnlessEqual(pm.getPersonalPortrait('abc123').__name__, 'defaultUser.gif')
+        self.failUnless(pm.getPersonalPortrait('abc123').__name__ in ['defaultUser.gif', 'defaultUser.png'])
         
         # Delete the (nonexistant) image, make sure the portrait stays undefined
         self.person.setImage('DELETE_IMAGE')
-        self.failUnlessEqual(pm.getPersonalPortrait('abc123').__name__, 'defaultUser.gif')
+        self.failUnless(pm.getPersonalPortrait('abc123').__name__ in ['defaultUser.gif', 'defaultUser.png'])
         
         self.person.setImage(TEST_GIF, content_type="image/gif")
         #self.failUnlessEqual(self.person.getImage().data, TEST_GIF)
@@ -195,7 +195,7 @@ class testWithoutSpecialties(testPerson):
         
         # Delete the image, make sure the portrait is deleted as well
         self.person.setImage('DELETE_IMAGE')
-        self.failUnlessEqual(pm.getPersonalPortrait('abc123').__name__, 'defaultUser.gif')
+        self.failUnless(pm.getPersonalPortrait('abc123').__name__ in ['defaultUser.gif', 'defaultUser.png'])
         
         #self.person.setImage(TEST_JPEG, content_type="image/jpeg")
         #self.failUnlessEqual(self.person.getImage().data, TEST_JPEG)
