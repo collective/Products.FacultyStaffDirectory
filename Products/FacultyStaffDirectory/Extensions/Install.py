@@ -118,7 +118,7 @@ def install(self, reinstall=False):
     def importProfiles(self, importContexts):
         """Import all steps from the GenericSetup profiles listen in `importContexts`."""
         setupTool = getToolByName(self, 'portal_setup')
-        oldContext = setupTool.getImportContextID()
+        oldContext = setupTool.getBaselineContextID()
         if oldContext:
             for eachContext in importContexts:
                 setupTool.setImportContext(eachContext)
@@ -324,7 +324,7 @@ def uninstall(self, reinstall=False):
     out = StringIO()
     def uninstallProfiles(portal):
         setup_tool = getToolByName(portal, 'portal_setup')
-        originalContext = setup_tool.getImportContextID()
+        originalContext = setup_tool.getBaselineContextID()
         setup_tool.setImportContext('profile-FacultyStaffDirectory:uninstall')
         setup_tool.runAllImportSteps()
         setup_tool.setImportContext(originalContext)
