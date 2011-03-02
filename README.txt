@@ -255,12 +255,11 @@ reminding us that, yes, people do live outside the United States.
 Support
 =======
 
-* Report bugs to the `WebLion issue tracker`_.
+* Report bugs to support@weblion.psu.edu
 
 * More documentation at the `WebLion wiki`_.
 
 .. _weblion wiki: https://weblion.psu.edu/trac/weblion/wiki/FacultyStaffDirectory
-.. _WebLion issue tracker: https://weblion.psu.edu/trac/weblion/newticket?component=FacultyStaffDirectory
 
 
 * Contact us::
