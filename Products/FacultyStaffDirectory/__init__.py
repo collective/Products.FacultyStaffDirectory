@@ -2,24 +2,6 @@
 
 __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
-# There are three ways to inject custom code here:
-#
-#   - To set global configuration variables, create a file AppConfig.py.
-#       This will be imported in config.py, which in turn is imported in
-#       each generated class and in this file.
-#   - To perform custom initialisation after types have been registered,
-#       use the protected code section at the bottom of initialize().
-#   - To register a customisation policy, create a file CustomizationPolicy.py
-#       with a method register(context) to register the policy.
-
-import logging
-logger = logging.getLogger('FacultyStaffDirectory')
-logger.info('Installing Product')
-
-try:
-    import CustomizationPolicy
-except ImportError:
-    CustomizationPolicy = None
 
 import Products.CMFPlone.interfaces
 import os
