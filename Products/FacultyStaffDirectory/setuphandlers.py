@@ -3,28 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFEditions.setuphandlers import DEFAULT_POLICIES
 from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL 
-from plone.app.workflow.remap import remap_workflow
 import os.path
-
-def upgrade_2_to_3(context):
-
-    if context.readDataFile('upgrade_2_to_3.txt') is None:
-        return
-
-    portal = context.getSite()
-    logger = context.getLogger('FacultyStaffDirectory')
-    try:
-        remap_workflow(portal,
-                       ('FSDFacultyStaffDirectory',),
-                       ('fsd_directory_workflow',),
-                       {})
-    except Exception, message:
-        logger.error(message)
-        raise
-
-    mbtool = getToolByName(portal, MEMBRANE_TOOL)
-    mbtool.clearFindAndRebuild()
-
 
 linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDDepartment', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
 mediaKupuTypes = ['FSDPerson']
@@ -138,7 +117,6 @@ def unindexFSDTool(context):
     fsdTool.unindexObject()
     
 
-
 originalProfileActionId = "MemberPrefs"
 newProfileActionId = "fsdMemberPrefs"
 def hideMemberPrefs(context):
@@ -169,3 +147,17 @@ def restoreMemberPrefs(context):
         if action.id == newProfileActionId:
             cp.deleteActions([index])
         index += 1
+
+def reindexFSDObjects(context):
+    """Update indexes relevant to FSD objects"""    
+    if context.readDataFile('reindexFSDObjects.txt') is None:
+        return
+    portal = context.getSite()
+    catalog = getToolByName(portal, 'portal_catalog')    
+
+    INDEX_LIST = ['getSortableName', 'getRawClassifications', 'getRawSpecialties', 'getRawCommittees', 'getRawDepartments', 'getRawPeople']
+    for index in INDEX_LIST:
+        catalog.reindexIndex(index, None)
+        
+    membrane = getToolByName(portal, MEMBRANE_TOOL)    
+    membrane.refreshCatalog()

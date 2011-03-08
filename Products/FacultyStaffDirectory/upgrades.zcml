@@ -7,9 +7,27 @@
     source="1"
     destination="2"
     profile="Products.FacultyStaffDirectory:default"
-    title="Migrate from 2.x to 3.0"
-    description="Run the import step which updates FaculyStaffDirectory objects to new workflow"
+    title="Migrate from 2.x to 3.0b1"
+    description="Update the workflow on FSDFacultyStaffDirectory objects."
     handler="Products.FacultyStaffDirectory.migrations.from_2_x_to_3_0"
+/>
+
+<genericsetup:upgradeStep
+    source="2"
+    destination="3"
+    profile="Products.FacultyStaffDirectory:default"
+    title="Migrate from 3.0b1 to 3.0b3"
+    description="???"
+    handler="Products.FacultyStaffDirectory.migrations.from_3_0b1_to_3_0b3"
+/>
+
+<genericsetup:upgradeStep
+    source="3"
+    destination="4"
+    profile="Products.FacultyStaffDirectory:default"
+    title="Migrate from 3.0b3 to 3.0b4"
+    description="???"
+    handler="Products.FacultyStaffDirectory.migrations.from_3_0b3_to_3_0b4"
 />
 
 </configure>

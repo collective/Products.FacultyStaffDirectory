@@ -1,43 +1,41 @@
 <?xml version="1.0"?>
 <import-steps>
-  <import-step id="upgrade_2_to_3"
-               version="20101014-01"
-               handler="Products.FacultyStaffDirectory.setuphandlers.upgrade_2_to_3"
-               title="Import step for Products.FacultyStaffDirectory for 2.x to 3.0 migration">
-    <dependency step="workflow" />
-  </import-step>
-
-  <import-step id="installKupuResources"
-               version="20110223-01"
+  <import-step id="FacultyStaffDirectory-installKupuResources"
+               version="20110303-01"
                handler="Products.FacultyStaffDirectory.setuphandlers.installKupuResources"
                title="Add FacultyStaffDirectory types to Kupu's resource libraries">
   </import-step>
 
-  <import-step id="installVersionedTypes"
-               version="20110223-01"
+  <import-step id="FacultyStaffDirectory-installVersionedTypes"
+               version="20110303-01"
                handler="Products.FacultyStaffDirectory.setuphandlers.installVersionedTypes"
                title="Set up versioning for FacultyStaffDirectory types">
   </import-step>
 
-  <import-step id="installRelationsRules"
-               version="20110223-01"
+  <import-step id="FacultyStaffDirectory-installRelationsRules"
+               version="20110303-01"
                handler="Products.FacultyStaffDirectory.setuphandlers.installRelationsRules"
                title="Install the ruleset for Relations">
   </import-step>
 
-  <import-step id="unindexFSDTool"
-               version="20110223-01"
+  <import-step id="FacultyStaffDirectory-unindexFSDTool"
+               version="20110303-01"
                handler="Products.FacultyStaffDirectory.setuphandlers.unindexFSDTool"
                title="Prevent the FacultyStaffDirectory Tool from appearing in folder listings">
-       <dependency step="types" />
+    <dependency step="types" />
   </import-step>
 
-  <import-step id="hideMemberPrefs"
-               version="20110223-01"
+  <import-step id="FacultyStaffDirectory-hideMemberPrefs"
+               version="20110303-01"
                handler="Products.FacultyStaffDirectory.setuphandlers.hideMemberPrefs"
                title="Use the FacultyStaffDirectory version of the Member Preferences action.">
   </import-step>
-
-
+  
+  <import-step id="FacultyStaffDirectory-reindexFSDObjects"
+               version="20110308-01"
+               handler="Products.FacultyStaffDirectory.setuphandlers.reindexFSDObjects"
+               title="Index existing FSD objects">
+    <dependency step="catalog" />
+  </import-step>
 </import-steps>
 
