@@ -11,7 +11,7 @@
 <div metal:fill-slot="prefs_configlet_content">
 
     <script type="text/javascript"
-            tal:condition="exists: portal/widgets/js/inandout.js"
+            tal:condition="exists: context/widgets/js/inandout.js"
             tal:attributes="src string:$portal_url/widgets/js/inandout.js">
     </script>
 
