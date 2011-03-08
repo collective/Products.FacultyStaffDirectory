@@ -3,6 +3,8 @@ from plone.app.workflow.remap import remap_workflow
 
 def from_2_x_to_3_0(context):
     log = logging.getLogger('FacultyStaffDirectory')
+    
+    context.runImportStepFromProfile('profile-Products.FacultyStaffDirectory:default','workflow')
     try:
         remap_workflow(context,
                        ('FSDFacultyStaffDirectory',),
@@ -17,8 +19,13 @@ def from_2_x_to_3_0(context):
     log.info("Upgraded version 2 to version 3.0b1")
 
 def from_3_0b1_to_3_0b3(context):
-    context.runImportStepFromProfile('profile-Products.FacultyStaffDirectory:default','FacultyStaffDirectory-reindexFSDObjects')
     log = logging.getLogger("FacultyStaffDirectory")
+    membrane_upgrade = context.upgradeInfo('membrane')
+    if membrane_upgrade['required'] == True and membrane_upgrade['available'] == True:
+        log.info("Upgrading membrane")
+        context.upgradeProduct('membrane')
+        
+    context.runImportStepFromProfile('profile-Products.FacultyStaffDirectory:default','FacultyStaffDirectory-reindexFSDObjects')
     log.info("Upgraded version 3.0b1 to version 3.0b3")
     
 def from_3_0b3_to_3_0b4(context):
