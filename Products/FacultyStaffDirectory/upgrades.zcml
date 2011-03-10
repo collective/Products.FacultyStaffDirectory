@@ -17,7 +17,7 @@
     destination="3"
     profile="Products.FacultyStaffDirectory:default"
     title="Migrate from 3.0b1 to 3.0b3"
-    description="???"
+    description="Trigger a membrane upgrade then reindex FSD objects."
     handler="Products.FacultyStaffDirectory.migrations.from_3_0b1_to_3_0b3"
 />
 
@@ -26,7 +26,7 @@
     destination="4"
     profile="Products.FacultyStaffDirectory:default"
     title="Migrate from 3.0b3 to 3.0b4"
-    description="???"
+    description="Clean up legacy import steps and import typeinfo."
     handler="Products.FacultyStaffDirectory.migrations.from_3_0b3_to_3_0b4"
 />
 

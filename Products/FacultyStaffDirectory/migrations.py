@@ -38,5 +38,7 @@ def from_3_0b3_to_3_0b4(context):
         if step in registry.listSteps() and registry.getStepMetadata(step)['handler'] == ('Products.FacultyStaffDirectory.setuphandlers.%s' % step):
             registry.unregisterStep(step)        
             log.info("Unregistered import step: %s" % step)
+
+    context.runImportStepFromProfile('profile-Products.FacultyStaffDirectory:default','typeinfo')
     
     log.info("Upgraded version 3.0b3 to version 3.0b4")
