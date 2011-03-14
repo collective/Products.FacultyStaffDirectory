@@ -4,6 +4,17 @@ Version History
 3.0b4
 -----
 
+* No longer support extenderInstallation install methods.  installExtender and
+  installExtenderGloballyIfLocallyIsNotSupported will now throw exceptions.
+  uninstallExtender will stay around for at least the 3.0 releases to permit
+  easy cleanup of old extender installs.
+  [cah190]
+
+* Extender developers should use IBrowserLayerAwareExtender to register their
+  extender against a browserlayer to make it possible to activate the extender
+  per Plone site.  MobilePhoneExtender has been updated as an example.
+  [cah190]
+
 * Drop the icon for the vCard action.
   [esteele]
   
