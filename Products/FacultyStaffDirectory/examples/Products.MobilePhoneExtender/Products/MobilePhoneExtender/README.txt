@@ -2,9 +2,7 @@ MobilePhoneExtender
 
 Versions
 
-  Works fine in Plone 2.5 but will extend all Plone sites. Works even better in
-  Plone 3, where it can be installed or uninstalled on individual Plone sites
-  independently.
+  For Plone 3 and up.
 
 Dependencies
 
@@ -72,8 +70,6 @@ Installing the Example Extender
   
   4. If you're using Plone 3 or later, go to your-plone-site &rarr; site setup
      &rarr; Add/Remove Products, and install MobilePhoneExtender.
-     In Plone 2.5, it will be installed simply by virtue of being in the
-     Products folder.
     
 Using the Example Extender
     
@@ -83,7 +79,15 @@ Using the Example Extender
      section. You should see a Mobile Phone field. Tada!
 
 Version History
-  
+
+  ' ' 3.0 -- ' '
+
+        * Switch to a IBrowserLayerAwareExtender
+
+        * Modernize code (proper metadata for GS profiles, zcml registration of profiles, etc.)
+
+        * Drop Plone 2.5 support.  
+
   ' ' 2.1 -- ' '
     
         * Added support for full i18n.
@@ -106,26 +110,15 @@ Version History
   
   ' ' 1.0 -- Initial release
 
-Future Plans
-  
-  * FacultyStaffDirectory 3.0 will have viewlet-based views, which means you'll
-    no longer need to replace, for example, the entire person_view.pt just to
-    add a field.
-  
-  * Consider providing for finer granularity of extender activation: finer than
-    per-Plone-site. There's no reason you can't do it now by manually
-    registering local adapters, though.
-     
 Authorship
 
-  This product was developed by the WebLion group at Penn State University.
+  This product was developed by the WebLion group at Penn State.
   
   Many thanks to those who worked on archetypes.schemaextender.
 
 Support
 
-  * Please report bugs to the
-    "WebLion issue tracker":https://weblion.psu.edu/trac/weblion/newticket?component=FacultyStaffDirectory&version=2.1.2.
+  * Please report bugs to support@weblion.psu.edu
 
   * More documentation:https://weblion.psu.edu/trac/weblion/wiki/FacultyStaffDirectory
 
@@ -140,7 +133,7 @@ Support
 
 License
 
-    Copyright (c) 2006-2009 The Pennsylvania State University. WebLion is
+    Copyright (c) 2006-2011 The Pennsylvania State University. WebLion is
     developed and maintained by the WebLion Project Team, its partners, and
     members of the Penn State Zope Users Group.
 
