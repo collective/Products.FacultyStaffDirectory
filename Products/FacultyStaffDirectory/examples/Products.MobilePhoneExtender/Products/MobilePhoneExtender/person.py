@@ -1,12 +1,12 @@
 from archetypes.schemaextender.field import ExtensionField
-from archetypes.schemaextender.interfaces import ISchemaExtender
+from archetypes.schemaextender.interfaces import ISchemaExtender, IBrowserLayerAwareExtender
 from Products.Archetypes.atapi import *
 from zope.interface import implements, Interface
 from zope.component import adapts, provideAdapter
 
 from Products.FacultyStaffDirectory.interfaces.person import IPerson
 from Products.MobilePhoneExtender import MobilePhoneExtenderMF as _
-
+from Products.MobilePhoneExtender.interfaces import IMobilePhoneExtenderLayer
 
 # Any field you tack on must have ExtensionField as its first subclass:
 class _StringExtensionField(ExtensionField, StringField):
@@ -19,7 +19,9 @@ class PersonExtender(object):
     You could also change or delete existing fields (though you might violate assumptions made in other code). To do that, implement ISchemaModifier instead of ISchemaExtender.
     """
     adapts(IPerson)
-    implements(ISchemaExtender)
+    implements(ISchemaExtender, IBrowserLayerAwareExtender)
+
+    layer = IMobilePhoneExtenderLayer
     
     _fields = [
             _StringExtensionField('mobilePhone',

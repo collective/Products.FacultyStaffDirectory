@@ -25,7 +25,7 @@ setup(name='Products.MobilePhoneExtender',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'archetypes.schemaextender',
+          'archetypes.schemaextender>=1.0',
           'Products.FacultyStaffDirectory'
       ],
       entry_points="""
