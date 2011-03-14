@@ -275,7 +275,7 @@ Support
 License
 =======
 
-Copyright (c) 2006-2008 The Pennsylvania State University. WebLion is developed
+Copyright (c) 2006-2011 The Pennsylvania State University. WebLion is developed
 and maintained by the WebLion Project Team, its partners, and members of the
 Penn State Zope Users Group.
 

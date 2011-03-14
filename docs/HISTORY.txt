@@ -69,7 +69,7 @@ Version History
 
 3.0b3
 -----
-* Dropped the plone3 GS profile, paved over the types/*.xml with versions
+* Dropped the plone3 GS profile, paved over the types/\*.xml with versions
   from a working FSD Plone instance.
   [cah190 (Craig Haynal)]
 
