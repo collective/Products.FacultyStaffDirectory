@@ -23,7 +23,7 @@
 
     <utility name="Personnel Manager" factory=".sharing.PersonnelManagerRole" />
 
-    <utility factory=".utility.FSDNonInstallable" zcml:condition="have plone-4" />
+    <utility factory=".utility.FSDNonInstallable" name="FacultyStaffDirectory" zcml:condition="have plone-4" />
 
     <!-- These should be unnecessary once BaseContent and BaseFolder stop using manage_afterAdd(): -->
     <five:deprecatedManageAddDelete class=".FacultyStaffDirectory.FacultyStaffDirectory" />
