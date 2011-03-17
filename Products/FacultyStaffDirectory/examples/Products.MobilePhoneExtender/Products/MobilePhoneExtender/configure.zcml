@@ -23,4 +23,8 @@
    
   <cmf:registerDirectory name="MobilePhoneExtender"/>
 
+  <include package="archetypes.schemaextender" />
+  <adapter factory=".person.PersonExtender"
+           provides="archetypes.schemaextender.interfaces.ISchemaExtender" />
+
 </configure>
