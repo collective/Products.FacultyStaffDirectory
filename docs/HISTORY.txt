@@ -4,6 +4,10 @@ Version History
 3.0b5
 -----
 
+* Update person.pt in MobilePhoneExtender to be consistent with FSD's person.pt
+  (to fix Plone 4 compatibility).
+  [cah190]
+
 * Added missing adapter registration to MobilePhoneExtender.
   [cah190]
   
