@@ -132,12 +132,13 @@ Tool_schema = BaseSchema.copy() +Schema((
 
     LinesField(
         name='activeMembraneStates',
-        widget=LinesWidget(
+        widget=MultiSelectionWidget(
             label=_(u"FacultyStaffDirectory_label_activeMembraneStates", default=u"List the workflow states which indicate membership and/or group behavior"),
             description=_(u"FacultyStaffDirectory_description_activeMembraneStates", default=u"List one workflow state per line; the states listed below will indicate membership behavior should be enabled for Person objects or group behavior should be enabled for Classification, Committee, and Department objects."),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Membership",
+        vocabulary_factory="plone.app.vocabularies.WorkflowStates",
         multiValued=True,
         default=MEMBRANE_ACTIVE_STATES,
     ),
