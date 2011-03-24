@@ -1,8 +1,8 @@
 Version History
 ===============
 
-3.0b5
------
+3.0
+---
 
 * Update person.pt in MobilePhoneExtender to be consistent with FSD's person.pt
   (to fix Plone 4 compatibility).
