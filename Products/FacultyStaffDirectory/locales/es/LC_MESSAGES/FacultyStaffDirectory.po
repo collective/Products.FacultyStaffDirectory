@@ -530,7 +530,7 @@ msgstr "Usuario %s no fue encontrado."
 #. Default: "The date when the person will be hired. If no date is selected the person will be considered hired immediately."
 #: ../Person.py:512
 msgid "description_edit_hire_date"
-msgstr "La fecha en que la persona va a estar contratada. En caso no hay ninguna fecha seleccionado a la persona se considerará contratado de inmediato."
+msgstr "La fecha en que la persona va a estar contratada. En caso de no seleccionar ninguna fecha, la persona se considerará contratada de inmediato."
 
 #. Default: "The date when the person leaves the organization. This will automatically make the person invisible for others at the given date."
 #: ../Person.py:515
@@ -587,7 +587,7 @@ msgstr "Permitir edición de Nombres Cortos"
 #. Default: "Termination Date"
 #: ../Person.py:514
 msgid "label_edit_termination_date"
-msgstr "Fecha de Vencimiento"
+msgstr "Fecha de vencimiento del contrato"
 
 #. Default: "Enable external editing"
 #: ../Person.py:399
