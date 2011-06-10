@@ -9,7 +9,7 @@ from Products.Archetypes.atapi import *
 from Products.FacultyStaffDirectory.PersonGrouping import PersonGrouping
 from Products.Relations.field import RelationField
 from Products.FacultyStaffDirectory.config import *
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.CMFCore.permissions import View, ManageProperties, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from zope.interface import implements

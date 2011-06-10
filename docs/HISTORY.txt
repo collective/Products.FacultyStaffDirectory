@@ -5,6 +5,8 @@ Version History
 -----
 
 * Upgraded the installation procedure for Products.CMFEditions. [pumazi]
+* Upgraded from Products.ATReferenceBrowserWidget to
+  archetypes.referencebrowserwidget. [pumazi]
 
 3.0
 ---
