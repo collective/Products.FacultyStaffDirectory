@@ -1,6 +1,11 @@
 Version History
 ===============
 
+3.1a1
+-----
+
+* Upgraded the installation procedure for Products.CMFEditions. [pumazi]
+
 3.0
 ---
 
