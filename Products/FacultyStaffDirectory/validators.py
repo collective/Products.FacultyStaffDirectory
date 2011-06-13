@@ -2,6 +2,7 @@ from Products.validation import validation
 from Products.validation.interfaces.IValidator import IValidator
 from zope.interface import implements
 from zope.interface import classImplements
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 class SequenceValidator(object):
     """A wrapper that runs a validator on each item of a sequence-like Field.
@@ -37,5 +38,5 @@ except TypeError:
 
 
 # Change some error messages to improve grammar
-validation.validatorFor('isURL').errmsg = 'is not a valid URL.'
+validation.validatorFor('isURL').errmsg = _(u'is not a valid URL.'),
 
