@@ -18,10 +18,8 @@ from Products.membrane.at.interfaces import IPropertiesProvider
 from Products.FacultyStaffDirectory.interfaces.classification import IClassification
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE
-from zope.i18nmessageid import MessageFactory
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 from DateTime import DateTime
-
-_ = MessageFactory('FacultyStaffDirectory')
 
 schema = Schema((
 

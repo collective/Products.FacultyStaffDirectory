@@ -32,7 +32,6 @@ from Products.CMFPlone.utils import safe_unicode
 from Products.membrane.at.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
 from Products.Relations.field import RelationField
 from Products.validation import validation
-from zope.i18nmessageid import MessageFactory
 from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
@@ -42,7 +41,7 @@ from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFac
 from Products.FacultyStaffDirectory.permissions import ASSIGN_CLASSIFICATIONS_TO_PEOPLE, ASSIGN_DEPARTMENTS_TO_PEOPLE, ASSIGN_COMMITTIES_TO_PEOPLE, ASSIGN_SPECIALTIES_TO_PEOPLE, CHANGE_PERSON_IDS
 from Products.FacultyStaffDirectory.validators import SequenceValidator
 
-_ = MessageFactory('FacultyStaffDirectory')
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 def resolvedGetObjPositionInParent(obj):
     """ since a change was introduced in plone 3.3 via plone.indexer that causes
@@ -851,7 +850,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         if value != self.getId():
             parent = aq_parent(aq_inner(self))
             if value in parent.objectIds():
-                return "An object with ID '%s' already exists in this folder" % value
+                return _(u"An object with ID '%s' already exists in this folder") % value
         
         # Make sure the ID fits the regex defined in the configuration:
         fsd_tool = getToolByName(self, TOOLNAME)
@@ -866,7 +865,7 @@ class Person(OrderedBaseFolder, ATCTContent):
             fsd_tool = getToolByName(self, TOOLNAME)
             regexString = fsd_tool.getPhoneNumberRegex()
             if regexString and not re.match(regexString, value):
-                return "Please provide the phone number in the format %s" % fsd_tool.getPhoneNumberDescription()
+                return _(u"Please provide the phone number in the format %s") % fsd_tool.getPhoneNumberDescription()
 
     
     security.declarePrivate('post_validate')
@@ -881,11 +880,11 @@ class Person(OrderedBaseFolder, ATCTContent):
             
             if not passwordDigest:
                 if not password and not confirm:
-                    errors['password'] = u'An initial password must be set'
+                    errors['password'] = _(u'An initial password must be set')
                     return
             if password or confirm:
                 if password != confirm:
-                    errors['password'] = errors['confirmPassword'] = u'Passwords do not match'
+                    errors['password'] = errors['confirmPassword'] = _(u'Passwords do not match')
                     
     ###
     # Methods to limit the referenceBrowserWidget start directory and search results    

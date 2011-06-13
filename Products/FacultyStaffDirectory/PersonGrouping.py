@@ -13,9 +13,7 @@ from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFac
 from Products.CMFCore.permissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from zope.i18nmessageid import MessageFactory
-
-_ = MessageFactory('FacultyStaffDirectory')
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 schema =  ATContentTypeSchema.copy() + Schema((
 

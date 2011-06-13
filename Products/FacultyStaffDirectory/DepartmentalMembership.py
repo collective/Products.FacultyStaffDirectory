@@ -8,9 +8,7 @@ from Products.Archetypes.atapi import *
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces.departmentalmembership import IDepartmentalMembership
 from zope.interface import implements
-from zope.i18nmessageid import MessageFactory
-
-_ = MessageFactory('FacultyStaffDirectory')
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 schema = Schema((
 

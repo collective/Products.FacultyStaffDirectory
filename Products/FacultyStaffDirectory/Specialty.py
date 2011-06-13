@@ -16,9 +16,9 @@ from Products.FacultyStaffDirectory.interfaces.specialty import ISpecialty
 from Products.FacultyStaffDirectory.permissions import ASSIGN_SPECIALTIES_TO_PEOPLE
 
 from zope.interface import implements
-from zope.i18nmessageid import MessageFactory
-
-_ = MessageFactory('FacultyStaffDirectory')
+#from zope.i18nmessageid import MessageFactory
+#_ = MessageFactory('FacultyStaffDirectory')
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 schema = Schema((
 

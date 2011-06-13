@@ -15,9 +15,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.FacultyStaffDirectory.interfaces.department import IDepartment
 from zope.interface import implements
 from Products.FacultyStaffDirectory.permissions import ASSIGN_DEPARTMENTS_TO_PEOPLE
-from zope.i18nmessageid import MessageFactory
-
-_ = MessageFactory('FacultyStaffDirectory')
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 schema = Schema((
 

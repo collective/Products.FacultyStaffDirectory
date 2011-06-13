@@ -15,9 +15,7 @@ from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finali
 from Products.membrane.at.interfaces import IPropertiesProvider
 from Products.membrane.utils import getFilteredValidRolesForPortal
 from Acquisition import aq_inner, aq_parent
-from zope.i18nmessageid import MessageFactory
-
-_ = MessageFactory('FacultyStaffDirectory')
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 schema = ATContentTypeSchema.copy() + Schema((
     LinesField('roles_',
@@ -153,10 +151,10 @@ class FacultyStaffDirectory(OrderedBaseFolder, ATCTContent):
         if value != self.getId():
             parent = aq_parent(aq_inner(self))
             if value in parent.objectIds():
-                return "An object with id '%s' already exists in this folder" % value
+                return _(u"An object with id '%s' already exists in this folder") % value
         
             groups = getToolByName(self, 'portal_groups')
             if groups.getGroupById(value) is not None:
-                return "A group with id '%s' already exists in the portal" % value
+                return _(u"A group with id '%s' already exists in the portal") % value
                 
 registerType(FacultyStaffDirectory, PROJECTNAME)

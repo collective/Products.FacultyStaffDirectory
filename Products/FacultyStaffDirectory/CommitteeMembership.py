@@ -10,9 +10,7 @@ from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finali
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces.committeemembership import ICommitteeMembership
 from zope.interface import implements
-from zope.i18nmessageid import MessageFactory
-
-_ = MessageFactory('FacultyStaffDirectory')
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 schema = ATContentTypeSchema.copy() + Schema((
 

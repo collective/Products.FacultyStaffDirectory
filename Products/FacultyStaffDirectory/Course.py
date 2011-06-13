@@ -11,9 +11,7 @@ from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
 from Products.FacultyStaffDirectory.interfaces.course import ICourse
 from zope.interface import implements
-from zope.i18nmessageid import MessageFactory
-
-_ = MessageFactory('FacultyStaffDirectory')
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 schema = ATContentTypeSchema.copy() + Schema((
 

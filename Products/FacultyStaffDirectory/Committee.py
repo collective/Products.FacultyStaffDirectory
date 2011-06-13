@@ -16,9 +16,7 @@ from Products.membrane.at.interfaces import IPropertiesProvider
 from Products.FacultyStaffDirectory.interfaces.committee import ICommittee
 from Acquisition import aq_inner, aq_parent
 from Products.FacultyStaffDirectory.permissions import ASSIGN_COMMITTIES_TO_PEOPLE
-from zope.i18nmessageid import MessageFactory
-
-_ = MessageFactory('FacultyStaffDirectory')
+from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
 schema = Schema((
 
