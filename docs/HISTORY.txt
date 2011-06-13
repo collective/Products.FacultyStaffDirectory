@@ -4,6 +4,17 @@ Version History
 3.1a1
 -----
 
+
+* Updated Spanish translation for plone and FacultyStaffDirectory domain
+  [macagua (Leonardo J. Caballero G.)]
+
+* Moved the Python import of zope.i18nmessageid to __init__.py and import 
+  the MessageFactory for FacultyStaffDirectory domain as FSDMessageFactory
+  [macagua (Leonardo J. Caballero G.)]
+
+* Added more support for i18n to "default" profile generic setup.
+  [macagua (Leonardo J. Caballero G.)]
+
 * Upgraded the installation procedure for Products.CMFEditions. [pumazi]
 * Upgraded from Products.ATReferenceBrowserWidget to
   archetypes.referencebrowserwidget. [pumazi]
