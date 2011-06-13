@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <object name="FSDSpecialty"
    meta_type="Factory-based Type Information with dynamic views"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Specialty</property>
- <property name="description">
-  An area of academic study.</property>
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
+
+ <property name="title" i18n:translate="">Specialty</property>
+ <property name="description" i18n:translate="">An area of academic study.</property>
  <property name="content_icon">folder_icon.gif</property>
  <property name="content_meta_type">FSDSpecialty</property>
  <property name="product">FacultyStaffDirectory</property>

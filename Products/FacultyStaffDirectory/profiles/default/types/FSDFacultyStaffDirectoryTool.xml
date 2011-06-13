@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <object name="FSDFacultyStaffDirectoryTool"
    meta_type="Factory-based Type Information"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">FacultyStaffDirectory Tool</property>
- <property name="description">
-      </property>
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
+
+ <property name="title" i18n:translate="">FacultyStaffDirectory Tool</property>
+ <property name="description" i18n:translate=""></property>
  <property name="content_icon">document_icon.gif</property>
  <property name="content_meta_type">FSDFacultyStaffDirectoryTool</property>
  <property name="product">FacultyStaffDirectory</property>

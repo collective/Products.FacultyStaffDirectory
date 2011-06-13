@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <object name="FSDSpecialtiesFolder"
    meta_type="Factory-based Type Information with dynamic views"
-   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">Specialties Folder</property>
- <property name="description">Holds and displays specialties.</property>
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="plone">
+
+ <property name="title" i18n:translate="">Specialties Folder</property>
+ <property name="description" i18n:translate="">Holds and displays specialties.</property>
  <property name="content_icon">folder_icon.gif</property>
  <property name="content_meta_type">FSDSpecialtiesFolder</property>
  <property name="product">FacultyStaffDirectory</property>
