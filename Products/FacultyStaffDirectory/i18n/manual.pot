@@ -32,14 +32,29 @@ msgstr ""
 msgid "Professional Information"
 msgstr ""
 
+#. Default: "Employment Information"
+#: ../Person.py
+msgid "Employment Information"
+msgstr ""
+
 #. Default: "User Settings"
 #: ../Person.py
 msgid "User Settings"
 msgstr ""
 
-#. Default: "Categorization"
+#. Default: "categorization"
 #: ../Person.py
-msgid "Categorization"
+msgid "categorization"
+msgstr ""
+
+#. Default: "ownership"
+#: ../Person.py
+msgid "ownership"
+msgstr ""
+
+#. Default: "settings"
+#: ../Person.py
+msgid "settings"
 msgstr ""
 
 #. Default: "Dates"
@@ -47,19 +62,14 @@ msgstr ""
 msgid "Dates"
 msgstr ""
 
-#. Default: "Ownership"
-#: ../Person.py
-msgid "Ownership"
-msgstr ""
-
-#. Default: "Settings"
-#: ../Person.py
-msgid "Settings"
-msgstr ""
-
 #. Default: "Display"
 #: ../FacultyStaffDirectory.py
-msgid "Display"
+msgid "display"
+msgstr ""
+
+#. Default: "Overview"
+#: ../Specialty.py
+msgid "Overview"
 msgstr ""
 
 #. Default: "Personnel Manager"
@@ -110,5 +120,10 @@ msgstr ""
 #: dynamic view name template specialty_tabular_view on type FSDSpecialty
 #: dynamic view name template classification_tabular_view on type FSDClassification
 msgid "Tabular View"
+msgstr ""
+
+#. Default: "Textual View"
+#: dynamic view name template department_textual_view on type FacultyStaffDirectory
+msgid "Textual View"
 msgstr ""
 
