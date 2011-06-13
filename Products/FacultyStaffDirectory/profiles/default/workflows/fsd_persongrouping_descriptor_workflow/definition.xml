@@ -14,6 +14,7 @@
  <permission>Add portal content</permission>
  
  <state state_id="published" title="Published" i18n:attributes="title">
+  <description i18n:translate="">Published this element</description>
   <permission-map name="Access contents information" acquired="True">
    <permission-role>Anonymous</permission-role>
    <permission-role>Authenticated</permission-role>
@@ -29,4 +30,5 @@
    <permission-role>Personnel Manager</permission-role>
   </permission-map>
  </state> 
+
 </dc-workflow>

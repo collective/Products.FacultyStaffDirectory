@@ -136,6 +136,7 @@
    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
+
  <transition transition_id="reject"  new_state="private"
              title="Reviewer send content back for re-drafting"
              trigger="USER"
@@ -151,6 +152,7 @@
    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
+
  <transition transition_id="retract" new_state="private" 
              title="Member retracts submission"
              trigger="USER"
@@ -166,6 +168,7 @@
    <guard-permission>Request review</guard-permission>
   </guard>
  </transition>
+
  <transition transition_id="submit"  new_state="pending" 
              title="Member submits content for publication"
              trigger="USER"

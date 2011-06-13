@@ -21,6 +21,7 @@
  <permission>Relations: Manage content relations</permission> 
  
  <state state_id="active" title="Active" i18n:attributes="title">
+  <description i18n:translate="">Active this Person</description>
   <exit-transition transition_id="deactivate"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>
@@ -75,6 +76,7 @@
  </state>
  
  <state state_id="inactive" title="Inactive" i18n:attributes="title">
+  <description i18n:translate="">Inactive this Person</description>
   <exit-transition transition_id="activate"/>
   <permission-map name="Access contents information" acquired="True">
   </permission-map>
@@ -129,7 +131,9 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="" category="workflow">De-activate</action>
+  <description i18n:translate="">De-activate a person</description>
+  <action url="" category="workflow"
+          i18n:translate="title_fsd_wf_deactivate">De-activate</action>
   <guard>
    <guard-permission>FacultyStaffDirectory: Change roles</guard-permission>
   </guard>
@@ -139,8 +143,11 @@
              title="Activate"
              new_state="active" trigger="USER"
              before_script=""
-             after_script="">
-  <action url="" category="workflow">Activate</action>
+             after_script=""
+             i18n:attributes="title">
+  <description i18n:translate="">Activate a person</description>
+  <action url="" category="workflow"
+          i18n:translate="title_fsd_wf_activate">Activate</action>
   <guard>
    <guard-permission>FacultyStaffDirectory: Change roles</guard-permission>
   </guard>
