@@ -134,7 +134,7 @@ Tool_schema = BaseSchema.copy() +Schema((
         name='activeMembraneStates',
         widget=MultiSelectionWidget(
             label=_(u"FacultyStaffDirectory_label_activeMembraneStates", default=u"Select the workflow states which indicate membership and/or group behavior"),
-            description=_(u"FacultyStaffDirectory_description_activeMembraneStates", default=u"Select the workflow states below for which membership behavior should be enabled for Person objects or group behavior should be enabled for Classification, Committee, and Department objects."),
+            description=_(u"FacultyStaffDirectory_description_activeMembraneStates", default=u"Select the workflow states below for which membership behavior should be enabled for Person objects or group behavior should be enabled for FacultyStaffDirectory, Classification, Committee, and Department objects."),
             i18n_domain='FacultyStaffDirectory',
         ),
         schemata="Membership",
