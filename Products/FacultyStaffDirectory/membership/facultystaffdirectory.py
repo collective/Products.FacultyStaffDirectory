@@ -15,6 +15,8 @@ from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 
 from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFacultyStaffDirectory
 from Products.FacultyStaffDirectory.permissions import PROVIDES_ROLES
+from Products.FacultyStaffDirectory.config import TOOLNAME as FSD_TOOL
+
 
 class Group(object):
     """Allow a FacultyStaffDirectory to act as a group for contained people
@@ -34,11 +36,11 @@ class Group(object):
         Return an empty list of roles if the directory is in a workflow state
         that is not active in membrane_tool.
         """
-        pm = getToolByName(self.context, 'portal_membership')
-        if pm.checkPermission(PROVIDES_ROLES,self.context):
-            return self.context.getRoles()
-        else:
+        fsd_tool = getToolByName(self.context,FSD_TOOL)
+        state = getToolByName(self.context, 'portal_workflow').getInfoFor(self.context, 'review_state')
+        if state not in (fsd_tool.getActiveMembraneStates()):
             return ()
+        return self.context.getRoles()
     
     def getGroupId(self):
         return self.context.getId()

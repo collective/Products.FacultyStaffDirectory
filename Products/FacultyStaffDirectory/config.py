@@ -43,7 +43,7 @@ TOOLNAME = 'facultystaffdirectory_tool'
 # what content types are available for membrane functionality?
 MEMBRANE_ABLE_TYPES_VOCAB = [('FSDPerson','People'),('FSDDepartment','Departments'),('FSDClassification','Classifications'),('FSDCommittee','Committees'),]
 MEMBRANE_ABLE_TYPES = ('FSDPerson','FSDDepartment','FSDClassification','FSDCommittee')
-MEMBRANE_ACTIVE_STATES = ('active','hiddenactive',)
+MEMBRANE_ACTIVE_STATES = ('published','active','hiddenactive',)
 
 # content-types
 ALLOWABLE_CONTENT_TYPES = ('text/plain', 'text/structured', 'text/html', 'application/msword', 'text/x-rst')
