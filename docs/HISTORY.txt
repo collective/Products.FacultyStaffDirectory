@@ -1,9 +1,13 @@
 Version History
 ===============
 
-3.1a1
+3.0.1
 -----
 
+* Add FacultyStaffDirectory to the content types controlled by the FSD Tool's
+  activeMembraneStates field. Corrects an issue with customized viewlets 
+  failing their permission checks.
+  [esteele, pumazi]
 
 * Updated Spanish translation for plone and FacultyStaffDirectory domain
   [macagua (Leonardo J. Caballero G.)]
@@ -14,8 +18,6 @@ Version History
 
 * Added more support for i18n to "default" profile generic setup.
   [macagua (Leonardo J. Caballero G.)]
-
-* Upgraded the installation procedure for Products.CMFEditions. [pumazi]
 
 3.0
 ---
