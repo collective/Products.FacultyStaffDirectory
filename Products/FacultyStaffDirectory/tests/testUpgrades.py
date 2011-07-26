@@ -46,7 +46,7 @@ class testUpgrades(testPlone):
         except Exception,detail:
             print detail
         self.runUpgradeStep('1', '2')
-        self.assertEquals(self.wf.getInfoFor(self.directory,'review_state'),'public')
+        self.assertEquals(self.wf.getInfoFor(self.directory,'review_state'),'private')
 
     def test_2_to_3_upgrade_draft(self):
         try:
@@ -54,7 +54,7 @@ class testUpgrades(testPlone):
         except Exception,detail:
             print detail
         self.runUpgradeStep('1', '2')
-        self.assertEquals(self.wf.getInfoFor(self.directory,'review_state'),'draft')
+        self.assertEquals(self.wf.getInfoFor(self.directory,'review_state'),'private')
         
     def test_30_to_301_upgrade(self):
         tool = getToolByName(self.portal, 'facultystaffdirectory_tool')
