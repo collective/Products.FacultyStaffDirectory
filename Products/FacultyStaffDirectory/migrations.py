@@ -1,5 +1,8 @@
 import logging
+
+from Products.CMFCore.utils import getToolByName
 from plone.app.workflow.remap import remap_workflow
+
 
 def from_2_x_to_3_0(context):
     log = logging.getLogger('FacultyStaffDirectory')
@@ -44,6 +47,12 @@ def from_3_0b3_to_3_0b4(context):
     log.info("Upgraded version 3.0b3 to version 3.0b4")
 
 def from_3_0_to_3_0_1(context):
+    log = logging.getLogger("FacultyStaffDirectory")
+
+    tool = getToolByName(context, 'facultystaffdirectory_tool')
+    states = list(tool.getActiveMembraneStates())
+    states.append('published')
+    tool.setActiveMembraneStates(tuple(states))
     
-    pass
+    log.info("Upgraded version 3.0 to version 3.0.1")
     

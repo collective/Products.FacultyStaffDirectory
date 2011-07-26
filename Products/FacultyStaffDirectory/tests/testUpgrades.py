@@ -26,10 +26,9 @@ class testUpgrades(testPlone):
         self.portal._importObjectFromFile(filename, verify=0)
         self.directory = self.portal['personnel']
         
-    def upgradeDir(self):
-        pwu = tuple(self.ps.listProfilesWithUpgrades())
+    def runUpgradeStep(self, source, dest):
         usd = listUpgradeSteps(self.ps,'Products.FacultyStaffDirectory:default',None)
-        ourstepdict = [step for step in usd if '1' in step['source'] and '2' in step['dest']][0]
+        ourstepdict = [step for step in usd if source in step['source'] and dest in step['dest']][0]
         ourstep = ourstepdict['step']
         ourstep.doStep(self.ps)
 
@@ -38,7 +37,7 @@ class testUpgrades(testPlone):
             self.installZexp('FSD2dot1dot4_private.zexp')
         except Exception,detail:
             print detail
-        self.upgradeDir()
+        self.runUpgradeStep('1', '2')
         self.assertEquals(self.wf.getInfoFor(self.directory,'review_state'),'private')
         
     def test_2_to_3_upgrade_public(self):
@@ -46,17 +45,24 @@ class testUpgrades(testPlone):
             self.installZexp('FSD2dot1dot4_public.zexp')
         except Exception,detail:
             print detail
-        self.upgradeDir()
-        self.assertEquals(self.wf.getInfoFor(self.directory,'review_state'),'private')
+        self.runUpgradeStep('1', '2')
+        self.assertEquals(self.wf.getInfoFor(self.directory,'review_state'),'public')
 
     def test_2_to_3_upgrade_draft(self):
         try:
             self.installZexp('FSD2dot1dot4_draft.zexp')
         except Exception,detail:
             print detail
-        self.upgradeDir()
-        self.assertEquals(self.wf.getInfoFor(self.directory,'review_state'),'private')
+        self.runUpgradeStep('1', '2')
+        self.assertEquals(self.wf.getInfoFor(self.directory,'review_state'),'draft')
         
+    def test_30_to_301_upgrade(self):
+        tool = getToolByName(self.portal, 'facultystaffdirectory_tool')
+        tool.setActiveMembraneStates([])
+
+        self.runUpgradeStep('4', '5')
+
+        self.assertTrue('published' in tool.getActiveMembraneStates())
             
 def test_suite():
     from unittest import TestSuite, makeSuite
