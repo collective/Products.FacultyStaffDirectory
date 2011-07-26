@@ -5,7 +5,7 @@ __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFCore.permissions import View
 from Products.FacultyStaffDirectory.PersonGrouping import PersonGrouping
 from Products.Relations.field import RelationField
