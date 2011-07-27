@@ -25,21 +25,6 @@
 
     <utility factory=".utility.FSDNonInstallable" name="FacultyStaffDirectory" zcml:condition="have plone-4" />
 
-    <!-- These should be unnecessary once BaseContent and BaseFolder stop using manage_afterAdd(): -->
-    <five:deprecatedManageAddDelete class=".FacultyStaffDirectory.FacultyStaffDirectory" />
-    <five:deprecatedManageAddDelete class=".Classification.Classification" />
-    <five:deprecatedManageAddDelete class=".Committee.Committee" />
-    <five:deprecatedManageAddDelete class=".CommitteesFolder.CommitteesFolder" />
-    <five:deprecatedManageAddDelete class=".CommitteeMembership.CommitteeMembership" />
-    <five:deprecatedManageAddDelete class=".Department.Department" />
-    <five:deprecatedManageAddDelete class=".DepartmentalMembership.DepartmentalMembership" />
-    <five:deprecatedManageAddDelete class=".Course.Course" />
-    <five:deprecatedManageAddDelete class=".Person.Person" />
-    <five:deprecatedManageAddDelete class=".Specialty.Specialty" />
-    <five:deprecatedManageAddDelete class=".SpecialtiesFolder.SpecialtiesFolder" />
-    <five:deprecatedManageAddDelete class=".SpecialtyInformation.SpecialtyInformation" />
-    <five:deprecatedManageAddDelete class=".tools.FacultyStaffDirectoryTool.FacultyStaffDirectoryTool" />
-
     <!-- Register document_actions viewlet to abovecontent viewlet manager -->
     <browser:viewlet
        name="plone.abovecontenttitle.documentactions"
