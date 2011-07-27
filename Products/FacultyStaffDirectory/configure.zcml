@@ -10,9 +10,7 @@
 
     <cmf:registerDirectory name="FacultyStaffDirectory"/>
 
-    <include zcml:condition="have zope.app.annotation" package="zope.app.annotation" files="configur?.zcml" />
-    <include zcml:condition="have zope.annotation" package="zope.annotation" files="configur?.zcml" />
-    <!-- The glob is so it doesn't freak out if configure.zcml is absent, like it is in Plone 3.0. -->
+    <include package="zope.annotation" />
     <include package=".events" />
     <include package=".membership" />
     <include file="profiles.zcml" />

@@ -5,10 +5,7 @@ from sha import sha
 
 from Products.CMFCore.utils import getToolByName
 
-try:
-    from zope.annotation.interfaces import IAttributeAnnotatable, IAnnotations
-except ImportError:
-    from zope.app.annotation.interfaces import IAttributeAnnotatable, IAnnotations
+from zope.annotation.interfaces import IAttributeAnnotatable, IAnnotations
 
 from Products.membrane.interfaces import IMembraneUserObject
 from Products.membrane.at.interfaces import IUserAuthentication
