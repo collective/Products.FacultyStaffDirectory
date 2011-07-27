@@ -752,21 +752,8 @@ class Person(OrderedBaseFolder, ATCTContent):
     
     security.declareProtected(ModifyPortalContent, 'pre_edit_setup')
     def pre_edit_setup(self):
-        """ I hate myself for doing this, but until we can get
-            ReferenceBrowserWidget to accept proper relative paths (../../) or
-            functions, this is what we get.  Can't do it on __init__ since it
-            doesn't recognize any of the portal tools for some reason.
+        """ Some schema tweaking that needs to happen before viewing the edit page.
         """
-        # # Set the startup directory for the specialties field to the SpecialtiesFolder or, failing
-        # # that, the root of the FacultyStaffDirectory:
-        # urlTool = getToolByName(self, 'portal_url')
-        # fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
-        # fsd = self.getDirectoryRoot()
-        # if fsd and fsd.getSpecialtiesFolder():
-        #     url = urlTool.getRelativeContentURL(fsd.getSpecialtiesFolder())
-        # else:
-        #     url = ""
-        # self.schema['specialties'].widget.startup_directory = '/%s' % url
         
         fsd_tool = getToolByName(self,TOOLNAME)
         if (fsd_tool.getPhoneNumberRegex()):
