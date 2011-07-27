@@ -29,7 +29,6 @@ from Products.CMFPlone.utils import safe_unicode
 from Products.membrane.at.interfaces import IUserAuthProvider, IPropertiesProvider, IGroupsProvider, IGroupAwareRolesProvider, IUserChanger
 from Products.Relations.field import RelationField
 from Products.validation import validation
-from ZPublisher.HTTPRequest import HTTPRequest
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.interfaces.person import IPerson
