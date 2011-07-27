@@ -23,7 +23,7 @@
 
     <utility name="Personnel Manager" factory=".sharing.PersonnelManagerRole" />
 
-    <utility factory=".utility.FSDNonInstallable" name="FacultyStaffDirectory" zcml:condition="have plone-4" />
+    <utility factory=".utility.FSDNonInstallable" name="FacultyStaffDirectory" />
 
     <!-- Register document_actions viewlet to abovecontent viewlet manager -->
     <browser:viewlet
