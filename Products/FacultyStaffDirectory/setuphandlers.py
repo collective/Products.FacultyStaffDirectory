@@ -1,6 +1,5 @@
 from App.Common import package_home
 from Products.CMFCore.utils import getToolByName
-from Products.CMFEditions.setuphandlers import DEFAULT_POLICIES
 from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL 
 import os.path
@@ -74,9 +73,6 @@ def installVersionedTypes(context):
             # use append() to make sure we don't overwrite any
             # content-types which may already be under version control
             versionable_types.append(type_id)
-            # Add default versioning policies to the versioned type
-            for policy_id in DEFAULT_POLICIES:
-                portal_repository.addPolicyForContentType(type_id, policy_id)
     portal_repository.setVersionableContentTypes(versionable_types)
 
 

@@ -4,5 +4,6 @@
     <dependencies>
         <dependency>profile-Products.membrane:default</dependency>
         <dependency>profile-Products.Relations:default</dependency>
+	<dependency>profile-Products.CMFEditions:CMFEditions</dependency>
     </dependencies>
 </metadata>
