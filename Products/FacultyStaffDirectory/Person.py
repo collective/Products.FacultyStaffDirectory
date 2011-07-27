@@ -16,6 +16,7 @@ from zope.annotation.interfaces import IAttributeAnnotatable, IAnnotations
 from zope.event import notify
 from zope.interface import implements, classImplements
 from Products.Archetypes.atapi import *
+from Products.Archetypes.interfaces import IMultiPageSchema
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
 from Products.ATContentTypes.lib.calendarsupport import n2rn, foldLine
@@ -943,12 +944,6 @@ class Person(OrderedBaseFolder, ATCTContent):
 # with actual links at the top of the page instead of Javascript tabs. This allows us to direct people
 # immediately to a specific fieldset with a ?fieldset=somethingorother query string. Plus, it also
 # gives the next/previous links at the bottom of the form.
-try:
-    from Products.Archetypes.interfaces import IMultiPageSchema
-except ImportError:
-    # It doesn't exist, do nothing
-    pass
-else:
-    classImplements(Person, IMultiPageSchema)
+classImplements(Person, IMultiPageSchema)
 
 registerType(Person, PROJECTNAME)  # generates accessor and mutators, among other things
