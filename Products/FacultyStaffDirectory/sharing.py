@@ -1,13 +1,6 @@
 from zope.interface import implements, Interface
 from Products.CMFPlone import PloneMessageFactory as _
-
-try:
-    from plone.app.workflow.interfaces import ISharingPageRole as interfaceToImplement
-except ImportError:
-    # Fail nicely, this version of Plone doesn't know anything about @@sharing page roles.
-    class IDoNothing(Interface):
-        pass
-    interfaceToImplement = IDoNothing
+from plone.app.workflow.interfaces import ISharingPageRole as interfaceToImplement
 
 class PersonnelManagerRole(object):
     implements(interfaceToImplement)
