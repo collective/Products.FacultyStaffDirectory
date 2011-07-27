@@ -12,7 +12,7 @@ from sha import sha
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_inner, aq_parent
 from DateTime import DateTime
-from zope.app.annotation.interfaces import IAttributeAnnotatable, IAnnotations
+from zope.annotation.interfaces import IAttributeAnnotatable, IAnnotations
 from zope.event import notify
 from zope.interface import implements, classImplements
 from Products.Archetypes.atapi import *
