@@ -9,7 +9,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '3.0.1'
+version = '3.1'
 
 setup(name='Products.FacultyStaffDirectory',
       version=version,
@@ -34,7 +34,7 @@ setup(name='Products.FacultyStaffDirectory',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
-          'archetypes.schemaextender<2.1',
+          'archetypes.schemaextender',
           'Products.Relations>=0.9b1',
           'Products.membrane>=2.0',
       ],
