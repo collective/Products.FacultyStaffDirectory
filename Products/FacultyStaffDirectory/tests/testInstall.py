@@ -93,16 +93,12 @@ class testInstall(testPlone):
         self.failIf("FacultyStaffDirectory" not in [ c.id for c in cp._actions ], 'FacultyStaffDirectory configlet has not been registered with the portal controlpanel')
         
     def testVersioningSetup(self):
-        if hasattr(self.portal, 'portal_repository'):
-            missingversionable = []
-            pr = getToolByName(self.portal, "portal_repository")
-            for t in ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']:
-                if t not in pr.getVersionableContentTypes():
-                    missingversionable.append(t)
-            self.failIf(missingversionable, "%s are not listed as versionable and they should be" % missingversionable)
-        else:
-            print "\n" + ("*" * 20) + "\nversioning not possible, testVersioningSetup passed\n" + ("*" * 20) + "\n"
-            pass
+        missingversionable = []
+        pr = getToolByName(self.portal, "portal_repository")
+        for t in ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']:
+            if t not in pr.getVersionableContentTypes():
+                missingversionable.append(t)
+        self.failIf(missingversionable, "%s are not listed as versionable and they should be" % missingversionable)
 
     def testKupuLinkableTypesSetup(self):
         if self.has_kupu:
