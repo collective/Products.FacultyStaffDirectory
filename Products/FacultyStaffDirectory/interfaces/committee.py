@@ -4,8 +4,10 @@ __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
 from zope.interface import Interface, Attribute
+from facultystaffdirectory import IFacultyStaffDirectoryContent
 
-class ICommittee(Interface):
+
+class ICommittee(IFacultyStaffDirectoryContent):
     """a committee
     """
     

@@ -1,6 +1,23 @@
 Version History
 ===============
 
+3.1
+---
+
+* All FSD content type interfaces now subclass IFacultyStaffDirectoryContent. 
+  Q: Why didn't they do so previously?
+  A: I have no idea.
+  [esteele]
+
+* Drop support for Plone releases below 4.0.
+  [esteele]
+  
+* Remove the reliance on the documentactions viewlet (not shown by default in 
+  Plone 4+). vCard link now appears below the contact information in
+  person_view.
+  [esteele]
+  
+  
 3.0.1
 -----
 

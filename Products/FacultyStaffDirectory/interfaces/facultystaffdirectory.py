@@ -6,7 +6,7 @@ from zope import schema
 class IFacultyStaffDirectoryContent(Interface):
     """Marker interface for FacultyStaffDirectory content objects"""
     
-class IFacultyStaffDirectory(Interface):
+class IFacultyStaffDirectory(IFacultyStaffDirectoryContent):
     """A FacultyStaffDirectory.
     """
                                

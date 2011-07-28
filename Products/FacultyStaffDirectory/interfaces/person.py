@@ -2,13 +2,14 @@
 
 from zope.interface import Interface, Attribute
 from zope import schema
+from facultystaffdirectory import IFacultyStaffDirectoryContent
 
 
-class IPerson(Interface):
+class IPerson(IFacultyStaffDirectoryContent):
     """A person.
     """
                                
-class IPersonMembership(Interface):
+class IPersonMembership(IFacultyStaffDirectoryContent):
     """An person, which is also a user.
     """
     

@@ -3,8 +3,8 @@
 __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
-from zope.interface import Interface
+from facultystaffdirectory import IFacultyStaffDirectoryContent
 
-class ICourse(Interface):
+class ICourse(IFacultyStaffDirectoryContent):
     """A course
     """
