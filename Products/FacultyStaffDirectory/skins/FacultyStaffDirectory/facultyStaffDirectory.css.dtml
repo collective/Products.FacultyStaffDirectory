@@ -109,11 +109,6 @@
 
 .facultyStaffDirectory .atozView .alphabetLinks ol li { display: inline; }
 
-/* Fix things so ATReferenceBrowserWidget doesn't hide the "insert" link
-   outside of the viewable area of the popup window
-*/
-body.popup.atrefbrowser { min-width: 0; }
-
 /* We'd like things like the address fields to display on the same line, yet still be inline-editable. */
 .facultyStaffDirectory .inlineFields .inlineEditable { display: inline; }
 
