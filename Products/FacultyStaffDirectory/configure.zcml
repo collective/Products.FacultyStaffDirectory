@@ -2,10 +2,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:cmf="http://namespaces.zope.org/cmf"
-    xmlns:five="http://namespaces.zope.org/five"
     xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
-    xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="FacultyStaffDirectory">
 
     <cmf:registerDirectory name="FacultyStaffDirectory"/>
@@ -22,54 +19,5 @@
     <utility name="Personnel Manager" factory=".sharing.PersonnelManagerRole" />
 
     <utility factory=".utility.FSDNonInstallable" name="FacultyStaffDirectory" />
-
-    <!-- Register document_actions viewlet to abovecontent viewlet manager -->
-    <browser:viewlet
-       name="plone.abovecontenttitle.documentactions"
-       manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-       class="plone.app.layout.viewlets.content.DocumentActionsViewlet"
-       permission="zope2.View"
-       for="Products.FacultyStaffDirectory.interfaces.facultystaffdirectory.IFacultyStaffDirectory"
-    />
-
-    <browser:viewlet
-       name="plone.abovecontenttitle.documentactions"
-       manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-       class="plone.app.layout.viewlets.content.DocumentActionsViewlet"
-       permission="zope2.View"
-       for="Products.FacultyStaffDirectory.interfaces.facultystaffdirectory.IFacultyStaffDirectoryContent"
-    />
-
-    <browser:viewlet
-       name="plone.abovecontenttitle.documentactions"
-       manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-       class="plone.app.layout.viewlets.content.DocumentActionsViewlet"
-       permission="zope2.View"
-       for="Products.FacultyStaffDirectory.interfaces.person.IPerson"
-    />
-
-    <browser:viewlet
-       name="plone.abovecontenttitle.documentactions"
-       manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-       class="plone.app.layout.viewlets.content.DocumentActionsViewlet"
-       permission="zope2.View"
-       for="Products.FacultyStaffDirectory.interfaces.classification.IClassification"
-    />
-
-    <browser:viewlet
-       name="plone.abovecontenttitle.documentactions"
-       manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-       class="plone.app.layout.viewlets.content.DocumentActionsViewlet"
-       permission="zope2.View"
-       for="Products.FacultyStaffDirectory.interfaces.committee.ICommittee"
-    />
-
-    <browser:viewlet
-       name="plone.abovecontenttitle.documentactions"
-       manager="plone.app.layout.viewlets.interfaces.IAboveContent"
-       class="plone.app.layout.viewlets.content.DocumentActionsViewlet"
-       permission="zope2.View"
-       for="Products.FacultyStaffDirectory.interfaces.department.IDepartment"
-    />
 
 </configure>
