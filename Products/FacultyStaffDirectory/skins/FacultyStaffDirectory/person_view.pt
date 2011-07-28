@@ -36,13 +36,13 @@
             </div>
           </tal:block>
 
-
           <h1 class="fn n">
             <span class="given-name" tal:content="context/getFirstName"><tal:comment replace="nothing">[First Name]</tal:comment></span>
             <span class="additional-name" tal:content="context/getMiddleName | nothing"><tal:comment replace="nothing">[Middle Name]</tal:comment></span>
             <span class="family-name" tal:content="context/getLastName"><tal:comment replace="nothing">[Last Name]</tal:comment></span>
             <span class="honorific-suffix" tal:content="context/getSuffix"><tal:comment replace="nothing">[ suffix i.e. Dr]</tal:comment></span>
           </h1>
+          
           <p tal:condition="python: showExpired and context.getJobTitles()"
              class="title"
              tal:repeat="jobTitle context/getJobTitles"
@@ -61,9 +61,6 @@
             <span class="region" tal:content="context/getOfficeState"><tal:comment replace="nothing">[office state]</tal:comment></span>
             <span class="postal-code" tal:content="context/getOfficePostalCode"><tal:comment replace="nothing">[postal zip code]</tal:comment></span>
           </span>
-          <tal:comment replace="nothing">
-            ***** I put the class=email in a span before the a tag since the microformat spec doesn't say i can't do that
-          </tal:comment>
           <div tal:condition="python: showExpired and context.getEmail()">
             <span i18n:translate="FacultyStaffDirectory_label_email">Email</span>:
             <span tal:attributes="class string:email" tal:content="structure python:context.spamProtectFSD(context.getEmail())" />
@@ -85,6 +82,11 @@
               </li>
             </ul>
           </div>
+          <div class="vcard">
+              <a tal:attributes="href string:${context/absolute_url}/vCard" title="Download as vCard">Download as vCard</a>
+          </div>
+          
+          
         </div>
 
         <div class="visualClear"><!-- --></div>

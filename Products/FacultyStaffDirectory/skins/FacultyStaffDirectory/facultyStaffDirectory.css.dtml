@@ -11,6 +11,13 @@
    min-width: 0; /* peekaboo bug fix for IE7 */
    }
 
+
+.facultyStaffDirectory.personView .vcard a
+{
+    background:url('vcard.png') 0 50% no-repeat;
+    padding-left: 20px;
+}
+
 .facultyStaffDirectory ul.jobTitle
 {
     margin: 0 0 1em 0;
