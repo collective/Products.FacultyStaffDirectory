@@ -95,11 +95,17 @@ class testInstall(testPlone):
     def testVersioningSetup(self):
         missingversionable = []
         pr = getToolByName(self.portal, "portal_repository")
-        for t in ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']:
+        versionedTypes = ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']
+        for t in versionedTypes:
             if t not in pr.getVersionableContentTypes():
                 missingversionable.append(t)
         self.failIf(missingversionable, "%s are not listed as versionable and they should be" % missingversionable)
-
+        
+        pMap = pr.getPolicyMap()
+        for t in versionedTypes:
+            self.failUnless(t in pMap)
+            self.failUnless(pMap[t], [u'at_edit_autoversion', u'version_on_revert'])
+            
     def testKupuLinkableTypesSetup(self):
         if self.has_kupu:
             missingltypes = checkKupuResourceList(self.ktool, 'linkable', linkableKupuTypes)
