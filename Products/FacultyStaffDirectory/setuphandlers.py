@@ -65,6 +65,7 @@ TYPES_TO_VERSION = ('FSDPerson', 'FSDCommittee', 'FSDSpecialty')
 def installVersionedTypes(context):
     if context.readDataFile('installVersionedTypes.txt') is None:
         return
+    from Products.CMFEditions.setuphandlers import DEFAULT_POLICIES
     portal = context.getSite()
     portal_repository = getToolByName(portal, 'portal_repository')
     versionable_types = list(portal_repository.getVersionableContentTypes())
@@ -73,6 +74,8 @@ def installVersionedTypes(context):
             # use append() to make sure we don't overwrite any
             # content-types which may already be under version control
             versionable_types.append(type_id)
+            for policy_id in DEFAULT_POLICIES:
+                portal_repository.addPolicyForContentType(type_id, policy_id)
     portal_repository.setVersionableContentTypes(versionable_types)
 
 
