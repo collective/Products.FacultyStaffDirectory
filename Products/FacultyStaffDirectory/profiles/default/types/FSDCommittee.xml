@@ -22,7 +22,7 @@
  <property name="allow_discussion">False</property>
  <property name="default_view">committee_view</property>
  <property name="view_methods">
-  <element value="base_view"/>
+  <element value="committee_view"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>

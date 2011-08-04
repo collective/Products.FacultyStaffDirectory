@@ -18,7 +18,7 @@
  <property name="allow_discussion">False</property>
  <property name="default_view">specialtiesfolder_view</property>
  <property name="view_methods">
-  <element value="base_view"/>
+  <element value="specialtiesfolder_view"/>
   <element value="specialtiesfolder_overview"/>
  </property>
  <property name="default_view_fallback">False</property>

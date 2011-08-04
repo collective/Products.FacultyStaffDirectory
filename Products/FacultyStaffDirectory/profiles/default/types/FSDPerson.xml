@@ -19,7 +19,7 @@
  <property name="allow_discussion">False</property>
  <property name="default_view">person_view</property>
  <property name="view_methods">
-  <element value="base_view"/>
+  <element value="person_view"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="person_view"/>
