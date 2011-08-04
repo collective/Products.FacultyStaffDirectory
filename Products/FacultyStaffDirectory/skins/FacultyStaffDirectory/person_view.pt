@@ -28,7 +28,7 @@
                            isEditor python:checkPermission('Modify portal content', context);
                            showExpired python: not isExpired or (isExpired and isEditor)" >
 
-            <div class="caption">
+            <div class="caption row">
               <dl class="portalMessage info"
                   tal:condition="python: isExpired and isEditor">
                 <dt i18n:translate="FacultyStaffDirectory_expired_notice_editor_label">Note</dt>
@@ -40,7 +40,7 @@
               </dl>
 
               <tal:block tal:condition="showExpired">
-                <div class="headshot"
+                <div class="headshot cell width-4 position-12"
                      tal:condition="context/image_normal|nothing">
                   <img src="" alt=""
                        tal:replace="structure python:context.getWrappedField('image').tag(context, scale='normal',  css_class='photo')" />
