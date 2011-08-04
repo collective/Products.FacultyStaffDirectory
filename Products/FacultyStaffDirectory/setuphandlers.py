@@ -68,6 +68,7 @@ def installVersionedTypes(context):
     try:
         from Products.CMFEditions.setuphandlers import DEFAULT_POLICIES
     except ImportError:
+        
         # Use repositorytool.xml instead (Plone 4.1 and above)
         pass
     else:

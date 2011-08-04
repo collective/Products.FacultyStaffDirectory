@@ -55,4 +55,27 @@ def from_3_0_to_3_0_1(context):
     tool.setActiveMembraneStates(tuple(states))
     
     log.info("Upgraded version 3.0 to version 3.0.1")
+
+
+def from_3_0_1_to_3_1(context):
+    log = logging.getLogger("FacultyStaffDirectory")
+
+    context.runImportStepFromProfile('profile-Products.FacultyStaffDirectory:default','typeinfo')
+    try:
+        context.runImportStepFromProfile('profile-Products.FacultyStaffDirectory:default','repositorytool')
+    except ValueError:
+        context.runImportStepFromProfile('profile-Products.FacultyStaffDirectory:default','FacultyStaffDirectory-installVersionedTypes')
+    
+    # Remove the vCard action
+    ttool = getToolByName(context, 'portal_types')
+    personType = ttool['FSDPerson']
+    actions = personType.listActions()
+    try:
+        vcardindex = actions.index(personType.getActionObject('document_actions/vcard'))
+    except ValueError:
+        pass
+    else:
+        personType.deleteActions([vcardindex])
+    
+    log.info("Upgraded version 3.0.1 to version 3.1")
     

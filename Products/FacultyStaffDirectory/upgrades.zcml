@@ -39,4 +39,14 @@
     handler="Products.FacultyStaffDirectory.migrations.from_3_0_to_3_0_1"
 />
 
+<genericsetup:upgradeStep
+    source="5"
+    destination="10"
+    profile="Products.FacultyStaffDirectory:default"
+    title="Migrate from 3.0.1 to 3.1"
+    description="Clean up legacy import steps and import typeinfo."
+    handler="Products.FacultyStaffDirectory.migrations.from_3_0_1_to_3_1"
+/>
+
+
 </configure>
