@@ -6,19 +6,19 @@
 
 #contactInformation { margin-left: 0px; }
 
-.facultyStaffDirectory { 
+#content .facultyStaffDirectory { 
    position: relative; /* peekaboo bug fix for IE6 */
    min-width: 0; /* peekaboo bug fix for IE7 */
    }
 
 
-.facultyStaffDirectory.personView .vcard a
+#content .facultyStaffDirectory.personView .vcard a
 {
     background:url('vcard.png') 0 50% no-repeat;
     padding-left: 20px;
 }
 
-.facultyStaffDirectory ul.jobTitle
+#content .facultyStaffDirectory ul.jobTitle
 {
     margin: 0 0 1em 0;
     list-style: none !important;
@@ -27,19 +27,19 @@
     list-style-type: none !important;
 }
 
-.facultyStaffDirectory ul.jobTitle li, .facultyStaffDirectory .websites li { margin: 0; padding: 0; }
+#content .facultyStaffDirectory ul.jobTitle li, #content .facultyStaffDirectory .websites li { margin: 0; padding: 0; }
 
-.facultyStaffDirectory .listing { margin: 1em 0 1.5em 0; border: none; font-size: 1em; }
+#content .facultyStaffDirectory .listing { margin: 1em 0 1.5em 0; border: none; font-size: 1em; }
 
-.facultyStaffDirectory .standardView .headshot { float: left; width: 120px; margin-top: 3px; padding: 0; }
+#content .facultyStaffDirectory .standardView .headshot { float: left; width: 120px; margin-top: 3px; padding: 0; }
 
-.facultyStaffDirectory .standardView .headshot img { border: 2px solid #000; padding:0; }
+#content .facultyStaffDirectory .standardView .headshot img { border: 2px solid #000; padding:0; }
 
-.facultyStaffDirectory .standardView .caption { margin-left: 120px; padding-left: 11px; }
-.facultyStaffDirectory .standardView .caption .moreInfo { margin: 1em 0 0 0; }
+#content .facultyStaffDirectory .standardView .caption { margin-left: 120px; padding-left: 11px; }
+#content .facultyStaffDirectory .standardView .caption .moreInfo { margin: 1em 0 0 0; }
 
-.facultyStaffDirectory.personView .headshot { float: right; width: 180px; margin: 5em 2em 0 0; }
-.facultyStaffDirectory.personView .headshot img { margin-right: 5px; border: 1px solid #000; }
+#content .facultyStaffDirectory.personView .headshot { float: right; width: 180px; margin: 5em 2em 0 0; }
+#content .facultyStaffDirectory.personView .headshot img { margin-right: 5px; border: 1px solid #000; }
 
 .personView div.caption {
     border-bottom: 0;
@@ -47,11 +47,11 @@
     padding-left: 0 !important;
 }
 
-.facultyStaffDirectory.personView ul.jobTitle { font-weight: bold; }
+#content .facultyStaffDirectory.personView ul.jobTitle { font-weight: bold; }
 
-.facultyStaffDirectory.personView .websites h3 { margin: 1em 0; }
+#content .facultyStaffDirectory.personView .websites h3 { margin: 1em 0; }
 
-.facultyStaffDirectory.personView .websites ul
+#content .facultyStaffDirectory.personView .websites ul
 {
     margin: 1em 0;
     list-style-image:none;
@@ -60,28 +60,28 @@
     list-style: none;
 }
 
-.facultyStaffDirectory.personView .education ol { list-style: none; margin: 0 0 1em 0; }
-.facultyStaffDirectory.personView .education li { margin: 0; }
+#content .facultyStaffDirectory.personView .education ol { list-style: none; margin: 0 0 1em 0; }
+#content .facultyStaffDirectory.personView .education li { margin: 0; }
 
-.facultyStaffDirectory.personView .courselisting dl,
-.facultyStaffDirectory.personView .specialties dl { margin: 0 0 0 1em; }
-.facultyStaffDirectory.personView .departments dl { margin: 0 0 0 1em; }
-
-
-.facultyStaffDirectory.personView .courselisting dd,
-.facultyStaffDirectory.personView .specialties dd { font-size: .85em; margin-left: 0; }
-.facultyStaffDirectory.personView .departments dd { font-size: .85em; margin-left: 0; }
-
-.facultyStaffDirectory.personView .courselisting dd p,
-.facultyStaffDirectory.personView .specialties dd p { margin:0 0 .25em 0; }
-.facultyStaffDirectory.personView .departments dd p { margin:0 0 .25em 0; }
+#content .facultyStaffDirectory.personView .courselisting dl,
+#content .facultyStaffDirectory.personView .specialties dl { margin: 0 0 0 1em; }
+#content .facultyStaffDirectory.personView .departments dl { margin: 0 0 0 1em; }
 
 
-.facultyStaffDirectory .tabularView table.listing { border-left: none; }
+#content .facultyStaffDirectory.personView .courselisting dd,
+#content .facultyStaffDirectory.personView .specialties dd { font-size: .85em; margin-left: 0; }
+#content .facultyStaffDirectory.personView .departments dd { font-size: .85em; margin-left: 0; }
 
-.facultyStaffDirectory .tabularView td, .facultyStaffDirectory .tabularView th { border-left: 1px solid #8CACBB; }
+#content .facultyStaffDirectory.personView .courselisting dd p,
+#content .facultyStaffDirectory.personView .specialties dd p { margin:0 0 .25em 0; }
+#content .facultyStaffDirectory.personView .departments dd p { margin:0 0 .25em 0; }
 
-.facultyStaffDirectory .tabularView th.classification
+
+#content .facultyStaffDirectory .tabularView table.listing { border-left: none; }
+
+#content .facultyStaffDirectory .tabularView td, #content .facultyStaffDirectory .tabularView th { border-left: 1px solid #8CACBB; }
+
+#content .facultyStaffDirectory .tabularView th.classification
 {
     font-size: 160%;
     border-bottom: none;
@@ -93,10 +93,10 @@
     padding-left: 0;
     text-transform: none;
 }
-.facultyStaffDirectory .tabularView th.classification a {color:#000; text-decoration: none; }
-.facultyStaffDirectory .tabularView tbody:first-child tr:first-child th { border-top: none; padding-top: 0; }
-.facultyStaffDirectory.classification .tabularView tbody:first-child tr:first-child th { border-top: 1px solid #8CACBB; padding-top: 0; }
-.facultyStaffDirectory ol.classificationList
+#content .facultyStaffDirectory .tabularView th.classification a {color:#000; text-decoration: none; }
+#content .facultyStaffDirectory .tabularView tbody:first-child tr:first-child th { border-top: none; padding-top: 0; }
+#content .facultyStaffDirectory.classification .tabularView tbody:first-child tr:first-child th { border-top: 1px solid #8CACBB; padding-top: 0; }
+#content .facultyStaffDirectory ol.classificationList
 {
     margin-left: 0;
     margin-bottom: 1.4em;
@@ -105,12 +105,12 @@
     background-color: #eef3f5;
 }
 
-.facultyStaffDirectory ol.classificationList li { display: inline; margin-right: 1em; }
+#content .facultyStaffDirectory ol.classificationList li { display: inline; margin-right: 1em; }
 
-.facultyStaffDirectory .atozView .alphabetLinks ol li { display: inline; }
+#content .facultyStaffDirectory .atozView .alphabetLinks ol li { display: inline; }
 
 /* We'd like things like the address fields to display on the same line, yet still be inline-editable. */
-.facultyStaffDirectory .inlineFields .inlineEditable { display: inline; }
+#content .facultyStaffDirectory .inlineFields .inlineEditable { display: inline; }
 
 h4.personName { margin-top: 0px !important; }
 h4.personName a { text-decoration: underline; color: &dtml-linkColor; !important;}
