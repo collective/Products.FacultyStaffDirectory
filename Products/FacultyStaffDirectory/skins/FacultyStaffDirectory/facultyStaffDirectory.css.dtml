@@ -29,7 +29,7 @@
 
 #content .facultyStaffDirectory ul.jobTitle li, #content .facultyStaffDirectory .websites li { margin: 0; padding: 0; }
 
-#content .facultyStaffDirectory .listing { margin: 1em 0 1.5em 0; border: none; font-size: 1em; }
+#content .facultyStaffDirectory .listing { margin: 1em 0 1.5em 0; font-size: 1em; }
 
 #content .facultyStaffDirectory .standardView .headshot { float: left; width: 120px; margin-top: 3px; padding: 0; }
 
@@ -71,25 +71,19 @@
 #content .facultyStaffDirectory.personView .departments dd p { margin:0 0 .25em 0; }
 
 
-#content .facultyStaffDirectory .tabularView table.listing { border-left: none; }
+#content .facultyStaffDirectory table.listing { border: none; }
+#content .facultyStaffDirectory table.listing tbody { 
+    border-bottom: 1px solid #DDDDDD;
+    border-left: 1px solid #DDDDDD;
+    }
 
-#content .facultyStaffDirectory .tabularView td, #content .facultyStaffDirectory .tabularView th { border-left: 1px solid #8CACBB; }
-
-#content .facultyStaffDirectory .tabularView th.classification
-{
-    font-size: 160%;
-    border-bottom: none;
-    border-left: none;
-    border-right: none;
-    background-color: transparent;
-    text-align: left;
-    padding-top: 2em;
+#content .facultyStaffDirectory .tabularView thead th { 
+    font-size: 1.5em;
+    background-color: transparent; 
+    border: none; 
     padding-left: 0;
-    text-transform: none;
-}
-#content .facultyStaffDirectory .tabularView th.classification a {color:#000; text-decoration: none; }
-#content .facultyStaffDirectory .tabularView tbody:first-child tr:first-child th { border-top: none; padding-top: 0; }
-#content .facultyStaffDirectory.classification .tabularView tbody:first-child tr:first-child th { border-top: 1px solid #8CACBB; padding-top: 0; }
+    }
+#content .facultyStaffDirectory .tabularView thead a {color:#000; text-decoration: none; }
 #content .facultyStaffDirectory ol.classificationList
 {
     margin-left: 0;
