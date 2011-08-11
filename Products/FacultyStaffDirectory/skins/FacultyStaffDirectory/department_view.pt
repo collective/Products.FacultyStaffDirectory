@@ -28,7 +28,6 @@
                  tal:condition="not:classificationsInRequest" />
 
             <tal:block tal:condition="context/getPeople">
-                <h2 tal:condition="not:classificationsInRequest" i18n:translate="FacultyStaffDirectory_label_people">People</h2>
                 <metal:block define-slot="listing_section">
                     <metal:block define-macro="list_classifications">
                         <tal:block tal:define="classificationBrains context/getClassifications" tal:repeat="classification classifications">
