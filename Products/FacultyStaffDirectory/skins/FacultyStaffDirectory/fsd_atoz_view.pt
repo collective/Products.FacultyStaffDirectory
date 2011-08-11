@@ -8,7 +8,6 @@
             <div tal:content="structure here/getText"
                  tal:condition="here/getText|nothing" />
 
-            <h2 tal:condition="not:classificationsInRequest" i18n:translate="FacultyStaffDirectory_people">People</h2>
             <div class="atozView">
                 <div tal:define="allLetters string:ABCDEFGHIJKLMNOPQRSTUVWXYZ;
                                  usedLetters python:[person.getLastName().upper()[0] for person in context.getSortedPeople()]"
