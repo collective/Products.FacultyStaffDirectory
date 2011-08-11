@@ -37,8 +37,8 @@
                     </h2>
 
                        <div tal:condition="python:item_type =='FSDPerson'" class="facultyStaffDirectory" >
-                        <div tal:condition="item_object/getJobTitles" class="jobTitle">
-                            <ul>
+                        <div tal:condition="item_object/getJobTitles">
+                            <ul class="jobTitle">
 		                    <li tal:repeat="jobTitle item_object/getJobTitles" tal:content="jobTitle"></li>
 		                    </ul>
 			            </div>
