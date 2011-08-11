@@ -28,7 +28,7 @@
                            isEditor python:checkPermission('Modify portal content', context);
                            showExpired python: not isExpired or (isExpired and isEditor)" >
 
-            <div class="caption row">
+            <div class="row">
               <dl class="portalMessage info"
                   tal:condition="python: isExpired and isEditor">
                 <dt i18n:translate="FacultyStaffDirectory_expired_notice_editor_label">Note</dt>
@@ -58,14 +58,14 @@
                 This person is no longer associated with the organization.
               </p>
 
-              <span tal:condition="showExpired"
+              <div tal:condition="showExpired"
                     class="adr">
                 <span class="street-address" tal:content="structure python:context.getOfficeAddress().replace('\n', '<br />')" /><br />
                 <span class="locality" tal:content="context/getOfficeCity" ><tal:comment replace="nothing">[office city]</tal:comment></span>
                 <tal:block tal:condition="context/getOfficeState">, </tal:block>
                 <span class="region" tal:content="context/getOfficeState"><tal:comment replace="nothing">[office state]</tal:comment></span>
                 <span class="postal-code" tal:content="context/getOfficePostalCode"><tal:comment replace="nothing">[postal zip code]</tal:comment></span>
-              </span>
+              </div>
               <div tal:condition="python: showExpired and context.getEmail()">
                 <span i18n:translate="FacultyStaffDirectory_label_email">Email</span>:
                 <span tal:attributes="class string:email" tal:content="structure python:context.spamProtectFSD(context.getEmail())" />

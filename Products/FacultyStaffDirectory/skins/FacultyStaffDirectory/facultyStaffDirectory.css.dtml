@@ -33,17 +33,17 @@
 
 #content .facultyStaffDirectory .standardView .headshot img { border: 2px solid #000; padding:0; }
 
-#content .facultyStaffDirectory .standardView .caption { margin-left: 120px; padding-left: 11px; }
-#content .facultyStaffDirectory .standardView .caption .moreInfo { margin: 1em 0 0 0; }
+#content .personView p.title { margin-bottom: 0; }
+#content .personView .adr { margin-top: 1em; }
 
-#content .facultyStaffDirectory.personView .headshot { text-align: right; }
-#content .facultyStaffDirectory.personView .headshot img { border: 1px solid #555; }
+#content .personView .headshot { text-align: right; }
+#content .personView .headshot img { border: 1px solid #555; }
 
-#content .facultyStaffDirectory.personView ul.jobTitle { font-weight: bold; }
+#content .personView ul.jobTitle { font-weight: bold; }
 
-#content .facultyStaffDirectory.personView .websites h3 { margin: 1em 0; }
+#content .personView .websites h3 { margin: 1em 0; }
 
-#content .facultyStaffDirectory.personView .websites ul
+#content .personView .websites ul
 {
     margin: 1em 0;
     list-style-image:none;
@@ -52,22 +52,25 @@
     list-style: none;
 }
 
-#content .facultyStaffDirectory.personView .education ol { list-style: none; margin: 0 0 1em 0; }
-#content .facultyStaffDirectory.personView .education li { margin: 0; }
+#content .personView .education ol { list-style: none; margin: 0 0 1em 0; }
+#content .personView .education li { margin: 0; }
 
-#content .facultyStaffDirectory.personView .courselisting dl,
-#content .facultyStaffDirectory.personView .specialties dl { margin: 0 0 0 1em; }
-#content .facultyStaffDirectory.personView .departments dl { margin: 0 0 0 1em; }
+#content .personView .courselisting dl,
+#content .personView .specialties dl { margin: 0 0 0 1em; }
+#content .personView .departments dl { margin: 0 0 0 1em; }
+         
+         
+#content .personView .courselisting dd,
+#content .personView .specialties dd { font-size: .85em; margin-left: 0; }
+#content .personView .departments dd { font-size: .85em; margin-left: 0; }
+         
+#content .personView .courselisting dd p,
+#content .personView .specialties dd p { margin:0 0 .25em 0; }
+#content .personView .departments dd p { margin:0 0 .25em 0; }
 
-
-#content .facultyStaffDirectory.personView .courselisting dd,
-#content .facultyStaffDirectory.personView .specialties dd { font-size: .85em; margin-left: 0; }
-#content .facultyStaffDirectory.personView .departments dd { font-size: .85em; margin-left: 0; }
-
-#content .facultyStaffDirectory.personView .courselisting dd p,
-#content .facultyStaffDirectory.personView .specialties dd p { margin:0 0 .25em 0; }
-#content .facultyStaffDirectory.personView .departments dd p { margin:0 0 .25em 0; }
-
+#content .facultyStaffDirectory .listing {
+    margin: 1em 0 1.5em; 
+}
 
 #content .facultyStaffDirectory table.listing { border: none; }
 #content .facultyStaffDirectory table.listing tbody { 
@@ -93,7 +96,10 @@
 
 #content .facultyStaffDirectory ol.classificationList li { display: inline; margin-right: 1em; }
 
-#content .facultyStaffDirectory .atozView .alphabetLinks ol li { display: inline; }
+#content .facultyStaffDirectory .atozView .alphabetLinks { text-align: center; }
+#content .facultyStaffDirectory .atozView .alphabetLinks ol li { 
+    display: inline;
+    font-size: 1.4em; }
 
 /* We'd like things like the address fields to display on the same line, yet still be inline-editable. */
 #content .facultyStaffDirectory .inlineFields .inlineEditable { display: inline; }
