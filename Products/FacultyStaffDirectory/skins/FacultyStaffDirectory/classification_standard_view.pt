@@ -35,7 +35,7 @@
                                     </metal:block>
                                 </div>
 
-                                <div class="cell width-13 position-3">
+                                <div class="cell width-13 position-4">
                                     <metal:block define-slot="person_caption">
                                         <h4 tal:content="person/Title" class="personName"><tal:comment replace="nothing">[Name]</tal:comment></h4>
                                         <ul tal:condition="person/getJobTitles" class="jobTitle">
