@@ -9,7 +9,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '3.1b1'
+version = '3.1b2dev'
 
 setup(name='Products.FacultyStaffDirectory',
       version=version,

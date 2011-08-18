@@ -1,6 +1,12 @@
 Version History
 ===============
 
+3.1b2 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 3.1b1 (2011-08-18)
 ------------------
 
