@@ -18,7 +18,7 @@ FacultyStaffDirectory depends on Products.membrane and Products.Relations
 Installation
 ============
 
-FacultyStaffDirectory 3 requires Plone 3.3 or greater.
+FacultyStaffDirectory 3 requires Plone 4.0 or greater.
 
 1.  Add the following to buildout.cfg
 
