@@ -1,10 +1,11 @@
 Version History
 ===============
 
-3.1b2 (unreleased)
-------------------
+3.1 (2012-03-16)
+----------------
 
-- Nothing changed yet.
+* Retagging as 3.1.
+  [cah190]
 
 
 3.1b1 (2011-08-18)
