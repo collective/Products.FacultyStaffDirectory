@@ -1,12 +1,15 @@
+import os.path
+import logging
 from App.Common import package_home
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import _createObjectByType
 from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
-import os.path
 
 linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDDepartment', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
 mediaKupuTypes = ['FSDPerson']
 collectionKupuTypes = ['FSDFacultyStaffDirectory']
+logger = logging.getLogger("Products.FacultyStaffDirectory")
 
 def addKupuResource(portal, resourceType, portalType):
     kupu = getToolByName(portal, 'kupu_library_tool')
@@ -167,7 +170,18 @@ def reindexFSDObjects(context):
 # ################## #
 
 def addSampleContent(portal):
-    pass
+    logger.info("Starting to add %s sample-content." % GLOBALS['PROJECTNAME'])
+    # Gather up all our tools.
+    portal_workflow = getToolByName(portal, 'portal_workflow')
+    # Add a Directory.
+    directory_id = 'directory'
+    if not directory_id in portal:
+        directory = _createObjectByType(
+            'FSDFacultyStaffDirectory', portal,
+            id=directory_id,
+            title="Faculty and Staff Directory",
+            )
+        portal_workflow.doActionFor(directory, 'publish')
 
 def importSampleContent(context):
     # Only run step if a flag file is present
