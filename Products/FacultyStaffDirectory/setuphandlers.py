@@ -264,6 +264,7 @@ def addSampleContent(portal):
              password='abe',
              email='abe@example.com',
              classifications=(classifications['faculty'].UID(),),
+             committees=(committees['climate-and-diversity'].UID(),),
              ),
         )
     for person_info in people_info:
