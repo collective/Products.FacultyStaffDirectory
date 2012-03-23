@@ -173,15 +173,28 @@ def addSampleContent(portal):
     logger.info("Starting to add %s sample-content." % GLOBALS['PROJECTNAME'])
     # Gather up all our tools.
     portal_workflow = getToolByName(portal, 'portal_workflow')
-    # Add a Directory.
+    # Add a directory.
     directory_id = 'directory'
-    if not directory_id in portal:
+    if directory_id not in portal:
         directory = _createObjectByType(
             'FSDFacultyStaffDirectory', portal,
             id=directory_id,
             title="Faculty and Staff Directory",
             )
         portal_workflow.doActionFor(directory, 'publish')
+    else:
+        directory = portal[directory_id]
+    # Add classifications.
+    for classification_id in ('faculty', 'staff', 'graduate-students',):
+        if classification_id not in directory:
+            title = classification_id.replace('-', ' ').title()
+            classification = _createObjectByType(
+                'FSDClassification', directory,
+                id=classification_id,
+                title=title,
+                )
+            # NOTE classifications are defaulted to an active state,
+            #      therefore no workflow transition is necessary here.
 
 def importSampleContent(context):
     # Only run step if a flag file is present
