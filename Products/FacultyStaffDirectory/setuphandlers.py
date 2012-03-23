@@ -244,6 +244,7 @@ def addSampleContent(portal):
         dict(id='abc123',
              firstName='Abe', middleName='Bob', lastName='Crumpt',
              suffix='Ph.D. EPT',
+             password='abe',
              email='abe@example.com',
              classifications=(classifications['faculty'].UID(),),
              ),
