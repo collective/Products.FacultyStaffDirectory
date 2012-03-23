@@ -1,12 +1,15 @@
+import os.path
+import logging
 from App.Common import package_home
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import _createObjectByType
 from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
-from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL 
-import os.path
+from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 
 linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDDepartment', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
 mediaKupuTypes = ['FSDPerson']
 collectionKupuTypes = ['FSDFacultyStaffDirectory']
+logger = logging.getLogger("Products.FacultyStaffDirectory")
 
 def addKupuResource(portal, resourceType, portalType):
     kupu = getToolByName(portal, 'kupu_library_tool')
@@ -32,7 +35,7 @@ def installKupuResources(context):
         for type in linkableKupuTypes:
             addKupuResource(portal, 'linkable', type)
         for type in mediaKupuTypes:
-            addKupuResource(portal, 'mediaobject', type)        
+            addKupuResource(portal, 'mediaobject', type)
         for type in collectionKupuTypes:
             addKupuResource(portal, 'collection', type)
 
@@ -68,7 +71,6 @@ def installVersionedTypes(context):
     try:
         from Products.CMFEditions.setuphandlers import DEFAULT_POLICIES
     except ImportError:
-        
         # Use repositorytool.xml instead (Plone 4.1 and above)
         pass
     else:
@@ -84,7 +86,6 @@ def installVersionedTypes(context):
                     portal_repository.addPolicyForContentType(type_id, policy_id)
         portal_repository.setVersionableContentTypes(versionable_types)
 
-
 def uninstallNavTreeSettings(context):
     """Remove FSD classes from NavTree_properties since this isn't supported
        via GS."""
@@ -95,7 +96,7 @@ def uninstallNavTreeSettings(context):
     pprops = getToolByName(portal, 'portal_properties')
     navprops = pprops.navtree_properties
     mtntl = list(navprops.metaTypesNotToList)
-    for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']: 
+    for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']:
         if mType in list(navprops.metaTypesNotToList):
             mtntl.remove(mType)
     navprops._p_changed=1
@@ -110,17 +111,14 @@ def uninstallConfiglet(context):
     portal = context.getSite()
     cp = getToolByName(portal, 'portal_controlpanel')
     cp.unregisterApplication('FacultyStaffDirectory')
-    
 
 def unindexFSDTool(context):
     """ Unindex the FSD tool so it doesn't show up in folder contents"""
-
     if context.readDataFile('unindexFSDTool.txt') is None:
         return
     portal = context.getSite()
     fsdTool = getToolByName(portal, 'facultystaffdirectory_tool')
     fsdTool.unindexObject()
-    
 
 originalProfileActionId = "MemberPrefs"
 newProfileActionId = "fsdMemberPrefs"
@@ -135,7 +133,6 @@ def hideMemberPrefs(context):
        for action in currentActions:
            if action.id == originalProfileActionId:
                action.visible = False
-               
 
 def restoreMemberPrefs(context):
     """Massage the portal_controlpanel tool to make MemberPrefs visible
@@ -154,15 +151,140 @@ def restoreMemberPrefs(context):
         index += 1
 
 def reindexFSDObjects(context):
-    """Update indexes relevant to FSD objects"""    
+    """Update indexes relevant to FSD objects"""
     if context.readDataFile('reindexFSDObjects.txt') is None:
         return
     portal = context.getSite()
-    catalog = getToolByName(portal, 'portal_catalog')    
+    catalog = getToolByName(portal, 'portal_catalog')
 
-    INDEX_LIST = ['getSortableName', 'getRawClassifications', 'getRawSpecialties', 'getRawCommittees', 'getRawDepartments', 'getRawPeople']
+    INDEX_LIST = ['getSortableName', 'getRawClassifications',
+                  'getRawSpecialties', 'getRawCommittees',
+                  'getRawDepartments', 'getRawPeople']
     for index in INDEX_LIST:
         catalog.reindexIndex(index, None)
-        
-    membrane = getToolByName(portal, MEMBRANE_TOOL)    
+    membrane = getToolByName(portal, MEMBRANE_TOOL)
     membrane.refreshCatalog()
+
+# ################## #
+#   sample-content   #
+# ################## #
+
+def _getOrCreateObjectByType(id, type, container, **kwargs):
+    """Gets the object by the given id and container. If the object doesn't
+    exist, it will use the id, container and type as well as any keyword
+    to create the object."""
+    if id not in container:
+        obj = _createObjectByType(type, container, id=id, **kwargs)
+        info_msg = "Added a directory (%s)."
+    else:
+        obj = container[id]
+        info_msg = "Using existing directory (%s)."
+    logger.info(info_msg % obj)
+    return obj
+
+def _transitionWorkflowIfNecessary(obj, transition, end_state):
+    """Transition the workflow to the given transition if it is not already
+    in that state. Normally, calling portal_workflow.doActionFor will raise
+    a WorkflowException if the object is already in the given state. This
+    function is used to encapsulate the wrapping logic."""
+    portal_workflow = getToolByName(obj, 'portal_workflow')
+    if not portal_workflow.getInfoFor(obj, 'review_state') == end_state:
+        portal_workflow.doActionFor(obj, transition)
+
+def addSampleContent(portal):
+    logger.info("Starting to add %s sample-content." % GLOBALS['PROJECTNAME'])
+    # Gather up all our tools.
+    portal_workflow = getToolByName(portal, 'portal_workflow')
+    id_to_title = lambda id: id.replace('-', ' ').title()
+    # Add a directory.
+    directory_id = 'directory'
+    directory = _getOrCreateObjectByType(
+        directory_id,
+        'FSDFacultyStaffDirectory', portal,
+        title="Faculty and Staff Directory",
+        )
+    _transitionWorkflowIfNecessary(directory, 'publish', 'published')
+
+    # Add classifications.
+    classifications = {}
+    classification_ids = ('faculty', 'staff', 'graduate-students',)
+    for classification_id in classification_ids:
+        classification = _getOrCreateObjectByType(
+            classification_id,
+            'FSDClassification', directory,
+            title=id_to_title(classification_id),
+            )
+        # NOTE classifications are defaulted to an active state,
+        #      therefore no workflow transition is necessary here.
+        # Capture classification for later use with people.
+        classifications[classification_id] = classification
+
+    # Add a committees container.
+    committees_container_id = 'committees'
+    committees_container = _getOrCreateObjectByType(
+        committees_container_id,
+        'FSDCommitteesFolder', directory,
+        title=id_to_title(committees_container_id),
+        )
+    # Add committees to the committee container.
+    committees = {}
+    committee_ids = ('climate-and-diversity', 'technology-roundtable',)
+    for committee_id in committee_ids:
+        committee = _getOrCreateObjectByType(
+            committee_id,
+            'FSDCommittee', committees_container,
+            title=id_to_title(committee_id),
+            )
+        # Capture committee for later use with people.
+        committees[committee_id] = committee
+
+    # Add a specialties folder.
+    specialties_container_id = 'specialties'
+    specialties_container = _getOrCreateObjectByType(
+        specialties_container_id,
+        'FSDSpecialtiesFolder', directory,
+        title=id_to_title(specialties_container_id),
+        )
+    specialties_container = directory[specialties_container_id]
+    # Add specialties to the specialties container.
+    specialties = {}
+    specialty_ids = ('home-brewer', 'snobbery', 'sql-junky', 'oop-guru',)
+    for specialty_id in specialty_ids:
+        specialty = _getOrCreateObjectByType(
+            specialty_id,
+            'FSDSpecialty', specialties_container,
+            title=id_to_title(specialty_id),
+            )
+        # Capture specialty for later use with people.
+        specialties[specialty_id] = specialty
+
+    # Add people to the directory.
+    people_info = (
+        ('abc123',
+         dict(firstName='Abe', middleName='Bob', lastName='Crumpt',
+              suffix='Ph.D. EPT',
+              password='abe',
+              email='abe@example.com',
+              classifications=(classifications['faculty'].UID(),),
+              committees=(committees['climate-and-diversity'].UID(),),
+              specialties=(specialties['home-brewer'].UID(),
+                           specialties['snobbery'].UID(),
+                           ),
+              ),
+         ),
+        )
+    for person_id, person_info in people_info:
+        person = _getOrCreateObjectByType(
+            person_id,
+            'FSDPerson', directory,
+            **person_info)
+        # NOTE There is no reason to transition workflow on a person.
+        #      By default people are initialized to a visable state.
+
+    logger.info("Finished adding %s sample content." % GLOBALS['PROJECTNAME'])
+
+def importSampleContent(context):
+    # Only run step if a flag file is present
+    if context.readDataFile('Products.FacultyStaffDirectory-sample-content.txt') is None:
+        return
+    addSampleContent(context.getSite())

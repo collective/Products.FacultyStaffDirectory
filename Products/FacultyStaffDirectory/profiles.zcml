@@ -17,7 +17,7 @@
       i18n:attributes="title gs_profiles_default_title;
                        description gs_profiles_default_description;"
       />
- 
+
   <genericsetup:registerProfile
       name="uninstall"
       title="FacultyStaffDirectory Uninstall Profile"
@@ -27,6 +27,15 @@
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       i18n:attributes="title gs_profiles_uninstall_title;
                        description gs_profiles_uninstall_description;"
+      />
+
+  <genericsetup:registerProfile
+      name="sample-content"
+      title="FacultyStaffDirectory Sample Content Profile"
+      directory="profiles/sample-content"
+      description="Adds sample FacultyStaffDirectory content."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       />
 
 </configure>
