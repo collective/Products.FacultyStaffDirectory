@@ -173,6 +173,7 @@ def addSampleContent(portal):
     logger.info("Starting to add %s sample-content." % GLOBALS['PROJECTNAME'])
     # Gather up all our tools.
     portal_workflow = getToolByName(portal, 'portal_workflow')
+    id_to_title = lambda id: id.replace('-', ' ').title()
     # Add a directory.
     directory_id = 'directory'
     if directory_id not in portal:
@@ -193,7 +194,7 @@ def addSampleContent(portal):
     classification_ids = ('faculty', 'staff', 'graduate-students',)
     for classification_id in classification_ids:
         if classification_id not in directory:
-            title = classification_id.replace('-', ' ').title()
+            title = id_to_title(classification_id)
             classification = _createObjectByType(
                 'FSDClassification', directory,
                 id=classification_id,
@@ -212,7 +213,7 @@ def addSampleContent(portal):
     # Add a committees container.
     committees_container_id = 'committees'
     if committees_container_id not in directory:
-        title = committees_container_id.title()
+        title = id_to_title(committees_container_id)
         committees_container = _createObjectByType(
             'FSDCommitteesFolder', directory,
             id=committees_container_id,
@@ -228,7 +229,7 @@ def addSampleContent(portal):
     committee_ids = ('climate-and-diversity', 'technology-roundtable',)
     for committee_id in committee_ids:
         if committee_id not in committees_container:
-            title = committee_id.replace('-', ' ').title()
+            title = id_to_title(committee_id)
             committee = _createObjectByType(
                 'FSDCommittee', committees_container,
                 id=committee_id,
@@ -244,7 +245,7 @@ def addSampleContent(portal):
     # Add a specialties folder.
     specialties_container_id = 'specialties'
     if specialties_container_id not in directory:
-        title = specialties_container_id.title()
+        title = id_to_title(specialties_container_id)
         specialties_container = _createObjectByType(
             'FSDSpecialtiesFolder', directory,
             id=specialties_container_id,
@@ -260,7 +261,7 @@ def addSampleContent(portal):
     specialty_ids = ('home-brewer', 'snobbery', 'sql-junky', 'oop-guru',)
     for specialty_id in specialty_ids:
         if specialty_id not in specialties_container:
-            title = specialty_id.replace('-', ' ').title()
+            title = id_to_title(specialty_id)
             specialty = _createObjectByType(
                 'FSDSpecialty', specialties_container,
                 id=specialty_id,
