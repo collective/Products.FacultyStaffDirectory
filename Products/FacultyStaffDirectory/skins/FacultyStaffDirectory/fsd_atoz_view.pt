@@ -4,12 +4,12 @@
 	  i18n:domain="FacultyStaffDirectory">
 	<body>
         <metal:block fill-slot="classification_links" />
-		<metal:block fill-slot="listing_section">
+		<metal:block fill-slot="listing_section" tal:define="people context/getSortedPeople">
             <div tal:content="structure here/getText"
                  tal:condition="here/getText|nothing" />
 
             <div class="atozView">
-                <div tal:define="usedLetters python:[unicode(person.getLastName(), 'utf-8').upper()[0] for person in context.getSortedPeople()];
+                <div tal:define="usedLetters python:[unicode(person.getLastName(), 'utf-8').upper()[0] for person in people];
                     cleanUsedLetters python:modules['Products.Archetypes.utils'].unique(usedLetters);
                     dummy python:cleanUsedLetters.sort()"
                      class="alphabetLinks">
@@ -24,8 +24,7 @@
                 <table class="listing" id="sortable">
                     <tbody>
                         <metal:block define-macro="list_people">
-                            <tal:block tal:define="people context/getSortedPeople;"
-                                       tal:condition="people">     
+                            <tal:block tal:condition="people">     
                                 <metal:block define-slot="table_headings">
                                     <tr>
                                         <th class="column" i18n:translate="FacultyStaffDirectory_name">
