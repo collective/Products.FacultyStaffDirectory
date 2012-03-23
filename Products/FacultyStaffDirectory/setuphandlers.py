@@ -223,6 +223,23 @@ def addSampleContent(portal):
         committees_container = directory[committees_container_id]
         info_msg = "Using existing committees folder (%s)."
     logger.info(info_msg % committees_container)
+    # Add committees to the committee container.
+    committees = {}
+    committee_ids = ('climate-and-diversity', 'technology-roundtable',)
+    for committee_id in committee_ids:
+        if committee_id not in committees_container:
+            title = committee_id.replace('-', ' ').title()
+            committee = _createObjectByType(
+                'FSDCommittee', committees_container,
+                id=committee_id,
+                title=title,
+                )
+            info_msg = "Added committee (%s)."
+        else:
+            committee = committees_container[committee_id]
+            info_msg = "Using existing committee (%s)."
+        committees[committee_id] = committee
+        logger.info(info_msg % committee)
 
     # Add a specialties folder.
     specialties_container_id = 'specialties'
