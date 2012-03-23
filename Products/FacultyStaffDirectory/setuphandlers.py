@@ -182,8 +182,12 @@ def addSampleContent(portal):
             title="Faculty and Staff Directory",
             )
         portal_workflow.doActionFor(directory, 'publish')
+        info_msg = "Added a directory (%s)."
     else:
         directory = portal[directory_id]
+        info_msg = "Using existing directory (%s)."
+    logger.info(info_msg % directory)
+
     # Add classifications.
     for classification_id in ('faculty', 'staff', 'graduate-students',):
         if classification_id not in directory:
@@ -195,6 +199,26 @@ def addSampleContent(portal):
                 )
             # NOTE classifications are defaulted to an active state,
             #      therefore no workflow transition is necessary here.
+            info_msg = "Added a classification (%s)."
+        else:
+            classification = directory[classification_id]
+            info_msg = "Using existing classification (%s)."
+        logger.info(info_msg % classification)
+
+    # Add a committees container.
+    committees_container_id = 'committees'
+    if committees_container_id not in directory:
+        title = committees_container_id.title()
+        committees_container = _createObjectByType(
+            'FSDCommitteesFolder', directory,
+            id=committees_container_id,
+            title=title,
+            )
+        info_msg = "Adding a committees folder (%s)."
+    else:
+        committees_container = directory[committees_container_id]
+        info_msg = "Using existing committees folder (%s)."
+    logger.info(info_msg % committees_container)
 
 def importSampleContent(context):
     # Only run step if a flag file is present
