@@ -220,6 +220,21 @@ def addSampleContent(portal):
         info_msg = "Using existing committees folder (%s)."
     logger.info(info_msg % committees_container)
 
+    # Add a specialties folder.
+    specialties_container_id = 'specialties'
+    if specialties_container_id not in directory:
+        title = specialties_container_id.title()
+        specialties_container = _createObjectByType(
+            'FSDSpecialtiesFolder', directory,
+            id=specialties_container_id,
+            title=title,
+            )
+        info_msg = "Adding a specialties folder (%s)."
+    else:
+        specialties_container = directory[specialties_container_id]
+        info_msg = "Using existing specialties folder (%s)."
+    logger.info(info_msg % specialties_container)
+
 def importSampleContent(context):
     # Only run step if a flag file is present
     if context.readDataFile('Products.FacultyStaffDirectory-sample-content.txt') is None:
