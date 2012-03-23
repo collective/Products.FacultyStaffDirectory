@@ -1,7 +1,7 @@
 from App.Common import package_home
 from Products.CMFCore.utils import getToolByName
 from Products.FacultyStaffDirectory.config import product_globals as GLOBALS
-from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL 
+from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 import os.path
 
 linkableKupuTypes = ['FSDPerson', 'FSDCourse', 'FSDClassification', 'FSDDepartment', 'FSDCommittee', 'FSDCommitteesFolder', 'FSDSpecialty', 'FSDSpecialtiesFolder']
@@ -32,7 +32,7 @@ def installKupuResources(context):
         for type in linkableKupuTypes:
             addKupuResource(portal, 'linkable', type)
         for type in mediaKupuTypes:
-            addKupuResource(portal, 'mediaobject', type)        
+            addKupuResource(portal, 'mediaobject', type)
         for type in collectionKupuTypes:
             addKupuResource(portal, 'collection', type)
 
@@ -68,7 +68,6 @@ def installVersionedTypes(context):
     try:
         from Products.CMFEditions.setuphandlers import DEFAULT_POLICIES
     except ImportError:
-        
         # Use repositorytool.xml instead (Plone 4.1 and above)
         pass
     else:
@@ -84,7 +83,6 @@ def installVersionedTypes(context):
                     portal_repository.addPolicyForContentType(type_id, policy_id)
         portal_repository.setVersionableContentTypes(versionable_types)
 
-
 def uninstallNavTreeSettings(context):
     """Remove FSD classes from NavTree_properties since this isn't supported
        via GS."""
@@ -95,7 +93,7 @@ def uninstallNavTreeSettings(context):
     pprops = getToolByName(portal, 'portal_properties')
     navprops = pprops.navtree_properties
     mtntl = list(navprops.metaTypesNotToList)
-    for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']: 
+    for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']:
         if mType in list(navprops.metaTypesNotToList):
             mtntl.remove(mType)
     navprops._p_changed=1
@@ -110,17 +108,14 @@ def uninstallConfiglet(context):
     portal = context.getSite()
     cp = getToolByName(portal, 'portal_controlpanel')
     cp.unregisterApplication('FacultyStaffDirectory')
-    
 
 def unindexFSDTool(context):
     """ Unindex the FSD tool so it doesn't show up in folder contents"""
-
     if context.readDataFile('unindexFSDTool.txt') is None:
         return
     portal = context.getSite()
     fsdTool = getToolByName(portal, 'facultystaffdirectory_tool')
     fsdTool.unindexObject()
-    
 
 originalProfileActionId = "MemberPrefs"
 newProfileActionId = "fsdMemberPrefs"
@@ -135,7 +130,6 @@ def hideMemberPrefs(context):
        for action in currentActions:
            if action.id == originalProfileActionId:
                action.visible = False
-               
 
 def restoreMemberPrefs(context):
     """Massage the portal_controlpanel tool to make MemberPrefs visible
@@ -154,17 +148,18 @@ def restoreMemberPrefs(context):
         index += 1
 
 def reindexFSDObjects(context):
-    """Update indexes relevant to FSD objects"""    
+    """Update indexes relevant to FSD objects"""
     if context.readDataFile('reindexFSDObjects.txt') is None:
         return
     portal = context.getSite()
-    catalog = getToolByName(portal, 'portal_catalog')    
+    catalog = getToolByName(portal, 'portal_catalog')
 
-    INDEX_LIST = ['getSortableName', 'getRawClassifications', 'getRawSpecialties', 'getRawCommittees', 'getRawDepartments', 'getRawPeople']
+    INDEX_LIST = ['getSortableName', 'getRawClassifications',
+                  'getRawSpecialties', 'getRawCommittees',
+                  'getRawDepartments', 'getRawPeople']
     for index in INDEX_LIST:
         catalog.reindexIndex(index, None)
-        
-    membrane = getToolByName(portal, MEMBRANE_TOOL)    
+    membrane = getToolByName(portal, MEMBRANE_TOOL)
     membrane.refreshCatalog()
 
 # ################## #
