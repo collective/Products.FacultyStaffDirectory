@@ -214,7 +214,7 @@ def addSampleContent(portal):
             id=committees_container_id,
             title=title,
             )
-        info_msg = "Adding a committees folder (%s)."
+        info_msg = "Added a committees folder (%s)."
     else:
         committees_container = directory[committees_container_id]
         info_msg = "Using existing committees folder (%s)."
@@ -229,11 +229,34 @@ def addSampleContent(portal):
             id=specialties_container_id,
             title=title,
             )
-        info_msg = "Adding a specialties folder (%s)."
+        info_msg = "Added a specialties folder (%s)."
     else:
         specialties_container = directory[specialties_container_id]
         info_msg = "Using existing specialties folder (%s)."
     logger.info(info_msg % specialties_container)
+
+    # Add people to the directory.
+    people_info = (
+        dict(id='abc123',
+             firstName='Abe', middleName='Bob', lastName='Crumpt',
+             suffix='Ph.D. EPT',
+             email='abe@example.com',
+             ),
+        )
+    for person_info in people_info:
+        id = person_info['id']
+        if id not in directory:
+            pass
+            person = _createObjectByType(
+                'FSDPerson', directory,
+                **person_info)
+            info_msg = "Added a person (%s)."
+        else:
+            person = directory[id]
+            info_msg = "Using existing person (%s)."
+        logger.info(info_msg % person)
+        # NOTE There is no reason to transition workflow on a person.
+        #      By default people are initialized to a visable state.
 
 def importSampleContent(context):
     # Only run step if a flag file is present
