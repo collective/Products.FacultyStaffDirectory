@@ -20,4 +20,5 @@ syntax: glob
 *.html.py
 *.egg
 .Trashes
+*.mo
 
