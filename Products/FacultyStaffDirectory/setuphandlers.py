@@ -166,3 +166,16 @@ def reindexFSDObjects(context):
         
     membrane = getToolByName(portal, MEMBRANE_TOOL)    
     membrane.refreshCatalog()
+
+# ################## #
+#   sample-content   #
+# ################## #
+
+def addSampleContent(portal):
+    pass
+
+def importSampleContent(context):
+    # Only run step if a flag file is present
+    if context.readDataFile('Products.FacultyStaffDirectory-sample-content.txt') is None:
+        return
+    addSampleContent(context.getSite())
