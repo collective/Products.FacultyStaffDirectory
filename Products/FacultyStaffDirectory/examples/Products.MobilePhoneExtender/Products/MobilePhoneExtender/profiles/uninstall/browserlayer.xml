@@ -1,0 +1,5 @@
+<layers>
+    <layer name="Products.MobilePhoneExtender"
+           purge="true"
+           interface="Products.MobilePhoneExtender.interfaces.IMobilePhoneExtenderLayer" />
+</layers>

@@ -1,0 +1,30 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+           xmlns:cmf="http://namespaces.zope.org/cmf"
+           i18n_domain="FSDMobilePhoneExtender">
+           
+  <genericsetup:registerProfile
+    name="default"
+    title="MobilePhoneExtender"
+    directory="profiles/default"
+    description="Adds a Mobile Phone field to Faculty/Staff Directory's Person type."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    />
+    
+  <genericsetup:registerProfile
+    name="uninstall"
+    title="MobilePhoneExtender Uninstall"
+    directory="profiles/uninstall"
+    description="Removes the Mobile Phone field from the Person type."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    />
+   
+  <cmf:registerDirectory name="MobilePhoneExtender"/>
+
+  <include package="archetypes.schemaextender" />
+  <adapter factory=".person.PersonExtender"
+           provides="archetypes.schemaextender.interfaces.ISchemaExtender" />
+
+</configure>
