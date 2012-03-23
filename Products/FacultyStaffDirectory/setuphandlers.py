@@ -303,6 +303,8 @@ def addSampleContent(portal):
         # NOTE There is no reason to transition workflow on a person.
         #      By default people are initialized to a visable state.
 
+    logger.info("Finished adding %s sample content." % GLOBALS['PROJECTNAME'])
+
 def importSampleContent(context):
     # Only run step if a flag file is present
     if context.readDataFile('Products.FacultyStaffDirectory-sample-content.txt') is None:
