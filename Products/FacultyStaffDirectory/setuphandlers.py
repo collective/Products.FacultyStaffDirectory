@@ -255,6 +255,23 @@ def addSampleContent(portal):
         specialties_container = directory[specialties_container_id]
         info_msg = "Using existing specialties folder (%s)."
     logger.info(info_msg % specialties_container)
+    # Add specialties to the specialties container.
+    specialties = {}
+    specialty_ids = ('home-brewer', 'snobbery', 'sql-junky', 'oop-guru',)
+    for specialty_id in specialty_ids:
+        if specialty_id not in specialties_container:
+            title = specialty_id.replace('-', ' ').title()
+            specialty = _createObjectByType(
+                'FSDSpecialty', specialties_container,
+                id=specialty_id,
+                title=title,
+                )
+            info_msg = "Added specialty (%s)."
+        else:
+            specialty = specialties_container[specialty_id]
+            info_msg = "Using existing specialty (%s)."
+        specialties[specialty_id] = specialty
+        logger.info(info_msg % specialty)
 
     # Add people to the directory.
     people_info = (
