@@ -189,7 +189,9 @@ def addSampleContent(portal):
     logger.info(info_msg % directory)
 
     # Add classifications.
-    for classification_id in ('faculty', 'staff', 'graduate-students',):
+    classifications = {}
+    classification_ids = ('faculty', 'staff', 'graduate-students',)
+    for classification_id in classification_ids:
         if classification_id not in directory:
             title = classification_id.replace('-', ' ').title()
             classification = _createObjectByType(
@@ -203,6 +205,8 @@ def addSampleContent(portal):
         else:
             classification = directory[classification_id]
             info_msg = "Using existing classification (%s)."
+        # Capture classification for later use with people.
+        classifications[classification_id] = classification
         logger.info(info_msg % classification)
 
     # Add a committees container.
@@ -241,6 +245,7 @@ def addSampleContent(portal):
              firstName='Abe', middleName='Bob', lastName='Crumpt',
              suffix='Ph.D. EPT',
              email='abe@example.com',
+             classifications=(classifications['faculty'].UID(),),
              ),
         )
     for person_info in people_info:
