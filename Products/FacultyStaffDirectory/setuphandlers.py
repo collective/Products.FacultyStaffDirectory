@@ -169,6 +169,28 @@ def reindexFSDObjects(context):
 #   sample-content   #
 # ################## #
 
+def _getOrCreateObjectByType(id, type, container, **kwargs):
+    """Gets the object by the given id and container. If the object doesn't
+    exist, it will use the id, container and type as well as any keyword
+    to create the object."""
+    if id not in container:
+        obj = _createObjectByType(type, container, id=id, **kwargs)
+        info_msg = "Added a directory (%s)."
+    else:
+        obj = container[id]
+        info_msg = "Using existing directory (%s)."
+    logger.info(info_msg % obj)
+    return obj
+
+def _transitionWorkflowIfNecessary(obj, transition, end_state):
+    """Transition the workflow to the given transition if it is not already
+    in that state. Normally, calling portal_workflow.doActionFor will raise
+    a WorkflowException if the object is already in the given state. This
+    function is used to encapsulate the wrapping logic."""
+    portal_workflow = getToolByName(obj, 'portal_workflow')
+    if not portal_workflow.getInfoFor(obj, 'review_state') == end_state:
+        portal_workflow.doActionFor(obj, transition)
+
 def addSampleContent(portal):
     logger.info("Starting to add %s sample-content." % GLOBALS['PROJECTNAME'])
     # Gather up all our tools.
@@ -176,130 +198,86 @@ def addSampleContent(portal):
     id_to_title = lambda id: id.replace('-', ' ').title()
     # Add a directory.
     directory_id = 'directory'
-    if directory_id not in portal:
-        directory = _createObjectByType(
-            'FSDFacultyStaffDirectory', portal,
-            id=directory_id,
-            title="Faculty and Staff Directory",
-            )
-        portal_workflow.doActionFor(directory, 'publish')
-        info_msg = "Added a directory (%s)."
-    else:
-        directory = portal[directory_id]
-        info_msg = "Using existing directory (%s)."
-    logger.info(info_msg % directory)
+    directory = _getOrCreateObjectByType(
+        directory_id,
+        'FSDFacultyStaffDirectory', portal,
+        title="Faculty and Staff Directory",
+        )
+    _transitionWorkflowIfNecessary(directory, 'publish', 'published')
 
     # Add classifications.
     classifications = {}
     classification_ids = ('faculty', 'staff', 'graduate-students',)
     for classification_id in classification_ids:
-        if classification_id not in directory:
-            title = id_to_title(classification_id)
-            classification = _createObjectByType(
-                'FSDClassification', directory,
-                id=classification_id,
-                title=title,
-                )
-            # NOTE classifications are defaulted to an active state,
-            #      therefore no workflow transition is necessary here.
-            info_msg = "Added a classification (%s)."
-        else:
-            classification = directory[classification_id]
-            info_msg = "Using existing classification (%s)."
+        classification = _getOrCreateObjectByType(
+            classification_id,
+            'FSDClassification', directory,
+            title=id_to_title(classification_id),
+            )
+        # NOTE classifications are defaulted to an active state,
+        #      therefore no workflow transition is necessary here.
         # Capture classification for later use with people.
         classifications[classification_id] = classification
-        logger.info(info_msg % classification)
 
     # Add a committees container.
     committees_container_id = 'committees'
-    if committees_container_id not in directory:
-        title = id_to_title(committees_container_id)
-        committees_container = _createObjectByType(
-            'FSDCommitteesFolder', directory,
-            id=committees_container_id,
-            title=title,
-            )
-        info_msg = "Added a committees folder (%s)."
-    else:
-        committees_container = directory[committees_container_id]
-        info_msg = "Using existing committees folder (%s)."
-    logger.info(info_msg % committees_container)
+    committees_container = _getOrCreateObjectByType(
+        committees_container_id,
+        'FSDCommitteesFolder', directory,
+        title=id_to_title(committees_container_id),
+        )
     # Add committees to the committee container.
     committees = {}
     committee_ids = ('climate-and-diversity', 'technology-roundtable',)
     for committee_id in committee_ids:
-        if committee_id not in committees_container:
-            title = id_to_title(committee_id)
-            committee = _createObjectByType(
-                'FSDCommittee', committees_container,
-                id=committee_id,
-                title=title,
-                )
-            info_msg = "Added committee (%s)."
-        else:
-            committee = committees_container[committee_id]
-            info_msg = "Using existing committee (%s)."
+        committee = _getOrCreateObjectByType(
+            committee_id,
+            'FSDCommittee', committees_container,
+            title=id_to_title(committee_id),
+            )
+        # Capture committee for later use with people.
         committees[committee_id] = committee
-        logger.info(info_msg % committee)
 
     # Add a specialties folder.
     specialties_container_id = 'specialties'
-    if specialties_container_id not in directory:
-        title = id_to_title(specialties_container_id)
-        specialties_container = _createObjectByType(
-            'FSDSpecialtiesFolder', directory,
-            id=specialties_container_id,
-            title=title,
-            )
-        info_msg = "Added a specialties folder (%s)."
-    else:
-        specialties_container = directory[specialties_container_id]
-        info_msg = "Using existing specialties folder (%s)."
-    logger.info(info_msg % specialties_container)
+    specialties_container = _getOrCreateObjectByType(
+        specialties_container_id,
+        'FSDSpecialtiesFolder', directory,
+        title=id_to_title(specialties_container_id),
+        )
+    specialties_container = directory[specialties_container_id]
     # Add specialties to the specialties container.
     specialties = {}
     specialty_ids = ('home-brewer', 'snobbery', 'sql-junky', 'oop-guru',)
     for specialty_id in specialty_ids:
-        if specialty_id not in specialties_container:
-            title = id_to_title(specialty_id)
-            specialty = _createObjectByType(
-                'FSDSpecialty', specialties_container,
-                id=specialty_id,
-                title=title,
-                )
-            info_msg = "Added specialty (%s)."
-        else:
-            specialty = specialties_container[specialty_id]
-            info_msg = "Using existing specialty (%s)."
+        specialty = _getOrCreateObjectByType(
+            specialty_id,
+            'FSDSpecialty', specialties_container,
+            title=id_to_title(specialty_id),
+            )
+        # Capture specialty for later use with people.
         specialties[specialty_id] = specialty
-        logger.info(info_msg % specialty)
 
     # Add people to the directory.
     people_info = (
-        dict(id='abc123',
-             firstName='Abe', middleName='Bob', lastName='Crumpt',
-             suffix='Ph.D. EPT',
-             password='abe',
-             email='abe@example.com',
-             classifications=(classifications['faculty'].UID(),),
-             committees=(committees['climate-and-diversity'].UID(),),
-             specialties=(specialties['home-brewer'].UID(),
-                          specialties['snobbery'].UID(),
-                          ),
-             ),
+        ('abc123',
+         dict(firstName='Abe', middleName='Bob', lastName='Crumpt',
+              suffix='Ph.D. EPT',
+              password='abe',
+              email='abe@example.com',
+              classifications=(classifications['faculty'].UID(),),
+              committees=(committees['climate-and-diversity'].UID(),),
+              specialties=(specialties['home-brewer'].UID(),
+                           specialties['snobbery'].UID(),
+                           ),
+              ),
+         ),
         )
-    for person_info in people_info:
-        id = person_info['id']
-        if id not in directory:
-            pass
-            person = _createObjectByType(
-                'FSDPerson', directory,
-                **person_info)
-            info_msg = "Added a person (%s)."
-        else:
-            person = directory[id]
-            info_msg = "Using existing person (%s)."
-        logger.info(info_msg % person)
+    for person_id, person_info in people_info:
+        person = _getOrCreateObjectByType(
+            person_id,
+            'FSDPerson', directory,
+            **person_info)
         # NOTE There is no reason to transition workflow on a person.
         #      By default people are initialized to a visable state.
 
