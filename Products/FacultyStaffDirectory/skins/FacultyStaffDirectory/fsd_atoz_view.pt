@@ -9,14 +9,14 @@
                  tal:condition="here/getText|nothing" />
 
             <div class="atozView">
-                <div tal:define="allLetters string:ABCDEFGHIJKLMNOPQRSTUVWXYZ;
-                                 usedLetters python:[person.getLastName().upper()[0] for person in context.getSortedPeople()]"
+                <div tal:define="usedLetters python:[unicode(person.getLastName(), 'utf-8').upper()[0] for person in context.getSortedPeople()];
+                    cleanUsedLetters python:modules['Products.Archetypes.utils'].unique(usedLetters);
+                    dummy python:cleanUsedLetters.sort()"
                      class="alphabetLinks">
                     <ol>
-                        <li tal:repeat="letter allLetters">
+                        <li tal:repeat="letter cleanUsedLetters">
                             <a tal:content="letter"
-                               tal:omit-tag="python:letter not in usedLetters"
-                               tal:attributes="href python:'%s#%s' % (context.absolute_url(), letter);" />
+                               tal:attributes="href python:u'%s#%s' % (context.absolute_url(), letter);" />
                         </li>     
                     </ol>                                 
                 </div>
@@ -44,7 +44,7 @@
                                         tal:attributes="class python:test(oddrow, 'even', 'odd')">
                                         <metal:block define-slot="table_cells">
                                             <td class="personName">
-                                                <a href="" tal:attributes="href person/absolute_url; name python:person.getLastName().upper()[0];"><span tal:content="string:${person/getLastName}" class="emphasis"><tal:comment replace="nothing">[last name]</tal:comment></span>, <span tal:content="string:${person/getFirstName}"><tal:comment replace="nothing">[first-name]</tal:comment></span> </a>
+                                                <a href="" tal:attributes="href person/absolute_url; name python:unicode(person.getLastName(), 'utf-8').upper()[0];"><span tal:content="string:${person/getLastName}" class="emphasis"><tal:comment replace="nothing">[last name]</tal:comment></span>, <span tal:content="string:${person/getFirstName}"><tal:comment replace="nothing">[first-name]</tal:comment></span> </a>
                                             </td>
                                             <td class="officePhone">
                                                 <span tal:condition="person/getOfficePhone" tal:content="person/getOfficePhone">[phone number]</span>
