@@ -1,10 +1,18 @@
 Version History
 ===============
 
-3.2 (unreleased)
-----------------
+3.1.1 (unreleased)
+------------------
 
-* No changes yet
+* Fixes to author.cpt to support Plone 4.x.  Thanks to Paul Roeland for reporting
+  this problem and supplying a patch.
+  [cah190]
+
+* Fixed fsd_atoz_view to work with last names having first characters outside the
+  A to Z range.  We now allow for any valid unicode character.  Thanks to
+  Toni Haka-Risku for reporting this problem and supplying a patch which served
+  as a starting point for this fix.
+  [cah190]
 
 
 3.1 (2012-03-16)
