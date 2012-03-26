@@ -219,6 +219,20 @@ def addSampleContent(portal):
         # Capture classification for later use with people.
         classifications[classification_id] = classification
 
+    # Add departments.
+    departments = {}
+    department_ids = ('biological-research', 'mechanical-engineering',
+                      'human-resources', 'information-technology-services',
+                      )
+    for department_id in department_ids:
+        department = _getOrCreateObjectByType(
+            department_id,
+            'FSDDepartment', directory,
+            title=id_to_title(department_id),
+            )
+        # Capture departments for later use with people.
+        departments[department_id] = department
+
     # Add a committees container.
     committees_container_id = 'committees'
     committees_container = _getOrCreateObjectByType(
@@ -270,6 +284,7 @@ def addSampleContent(portal):
               email='abe@example.com',
               classifications=(classifications['faculty'].UID(),),
               committees=(committees['climate-and-diversity'].UID(),),
+              departments=(departments['biological-research'].UID(),),
               specialties=(specialties['home-brewer'].UID(),
                            specialties['snobbery'].UID(),
                            ),
