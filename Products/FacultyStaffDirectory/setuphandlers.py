@@ -272,6 +272,7 @@ def addSampleContent(portal):
             'FSDSpecialty', specialties_container,
             title=id_to_title(specialty_id),
             )
+        _transitionWorkflowIfNecessary(specialty, 'publish', 'published')
         # Capture specialty for later use with people.
         specialties[specialty_id] = specialty
 
