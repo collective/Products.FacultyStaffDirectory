@@ -4,6 +4,14 @@ Version History
 3.1.1 (unreleased)
 ------------------
 
+* fsd_atoz_view and department_textual_view should now work on Department objects
+  living outside the FacultyStaffDirectory root on a site.  Warning: external
+  Departments will only work reliably for situations where there is a single
+  FacultyStaffDirectory object in a site.  If there are multiple
+  FacultyStaffDirectory objects, then use of external Departments will have
+  undefined behavior.
+  [cah190]
+
 * Fixes to author.cpt to support Plone 4.x.  Thanks to Paul Roeland for reporting
   this problem and supplying a patch.
   [cah190]
