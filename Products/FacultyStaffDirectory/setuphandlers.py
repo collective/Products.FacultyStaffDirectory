@@ -276,7 +276,22 @@ def addSampleContent(portal):
         # Capture specialty for later use with people.
         specialties[specialty_id] = specialty
 
+    # Person Groupings functions...
+    def abc123_person_groupings(person):
+        # Specialties 
+        specialties = dict([(b.getId, ref.getContentObject()) for b, ref in person.getSpecialties()])
+        specialties['home-brewer'].setResearchTopic("<p>Analyzing the Yeast between Thor's Toes</p>")
+        specialties['snobbery'].setResearchTopic("<p>Snubbing the neighbors</p>")
+        # Departments
+        departments = dict([(dept.getId(), dept) for dept in person.getDepartments()])
+        departments['biological-research'].getMembershipInformation(person).setPosition('Schmoozer')
+        # Committees
+        committees = dict([(c.getId(), c) for c in person.getCommittees()])
+        committees['climate-and-diversity'].getMembershipInformation(person).setPosition('Big Cheese')        
+
     # Add people to the directory.
+    # A three part tuple containing an id, dictionary of person information,
+    # and a person grouping callable.
     people_info = (
         ('abc123',
          dict(firstName='Abe', middleName='Bob', lastName='Crumpt',
@@ -290,15 +305,17 @@ def addSampleContent(portal):
                            specialties['snobbery'].UID(),
                            ),
               ),
+         abc123_person_groupings,
          ),
         )
-    for person_id, person_info in people_info:
+    for person_id, person_info, person_groupings_func in people_info:
         person = _getOrCreateObjectByType(
             person_id,
             'FSDPerson', directory,
             **person_info)
         # NOTE There is no reason to transition workflow on a person.
         #      By default people are initialized to a visable state.
+        person_groupings_func(person)
 
     logger.info("Finished adding %s sample content." % GLOBALS['PROJECTNAME'])
 
