@@ -288,6 +288,11 @@ def addSampleContent(portal):
         # Committees
         committees = dict([(c.getId(), c) for c in person.getCommittees()])
         committees['climate-and-diversity'].getMembershipInformation(person).setPosition('Big Cheese')        
+    def def456_person_groupings(person):
+        directory = person.getParentNode()  # Assumes the parent is the directory.
+        # Assign def456 as abc123's assistant.
+        abc123 = directory.abc123
+        abc123.setAssistants([person.UID()])
 
     # Add people to the directory.
     # A three part tuple containing an id, dictionary of person information,
@@ -307,6 +312,15 @@ def addSampleContent(portal):
               ),
          abc123_person_groupings,
          ),
+        ('def456',
+         dict(firstName='Dublin', middleName='Ender', lastName='Fondu',
+              suffix='B.C.',
+              password='dublin',
+              email='dublin@example.com',
+              classifications=(classifications['staff'].UID(),),
+              ),
+         def456_person_groupings,
+         )
         )
     for person_id, person_info, person_groupings_func in people_info:
         person = _getOrCreateObjectByType(
