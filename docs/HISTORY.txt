@@ -4,7 +4,7 @@ Version History
 3.2 (unreleased)
 ----------------
 
-* No changes yet
+* Added a sample-content profile. [pumazi]
 
 
 3.1 (2012-03-16)
