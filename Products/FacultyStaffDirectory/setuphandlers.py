@@ -339,6 +339,18 @@ def addSampleContent(portal):
               ),
          lambda p: None,
          ),
+        ('mno111',
+         dict(firstName=u'Mi', middleName=u'Nylon', lastName='O\'catta',
+              password='mi',
+              email='mi@example.com',
+              classifications=(classifications['faculty'].UID(),
+                               classifications['staff'].UID(),
+                               ),
+              committees=[c.UID() for c in committees.values()],
+              departments=(departments['human-resources'].UID(),),
+              ),
+         lambda p: None,
+         ),
         )
     for person_id, person_info, person_groupings_func in people_info:
         person = _getOrCreateObjectByType(
