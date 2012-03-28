@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os.path
 import logging
 from App.Common import package_home
@@ -320,7 +321,24 @@ def addSampleContent(portal):
               classifications=(classifications['staff'].UID(),),
               ),
          def456_person_groupings,
-         )
+         ),
+        ('ghi789',
+         dict(firstName=u'G\'oldë', middleName=u'Hatterǩ', lastName='Itoppi',
+              password='itoppi',
+              email='ghi789@example.com',
+              classifications=(classifications['graduate-students'].UID(),),
+              ),
+         lambda p: None,
+         ),
+        # Arabic Name translation done by http://www.languages-of-the-world.us/YourNameIn/Arabic.html
+        ('jkl110',
+         dict(firstName=u'تخطط', middleName=u'نخا', lastName=u'جي',  # Ji Noa Touu
+              password='110jkl',
+              email='jkl110@example.com',
+              classifications=(classifications['faculty'].UID(),),
+              ),
+         lambda p: None,
+         ),
         )
     for person_id, person_info, person_groupings_func in people_info:
         person = _getOrCreateObjectByType(
