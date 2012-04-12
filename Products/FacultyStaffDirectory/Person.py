@@ -365,11 +365,12 @@ schema = ATContentTypeSchema.copy() + Schema((
             label=_(u"label_ext_editor", default=u"Enable external editing"),
             description=_(u"help_content_ext_editor", default=u"When checked, an icon will be made visible on each page which allows you to edit content with your favorite editor instead of using browser-based editors. This requires an additional application called ExternalEditor installed client-side. Ask your administrator for more information if needed."),
             i18n_domain='plone',
-            condition="python:here.portal_properties.site_properties.ext_editor and 'FSDPerson' in modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getEnableMembraneTypes()",
+            condition="python:'FSDPerson' in modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getEnableMembraneTypes()",
             ),
-            write_permission=SetOwnProperties,
-            schemata="User Settings",
-            user_property='ext_editor',
+        write_permission=SetOwnProperties,
+        schemata="User Settings",
+        user_property='ext_editor',
+        default=False,
     ),
     
     StringField('userpref_portal_skin',
@@ -393,9 +394,9 @@ schema = ATContentTypeSchema.copy() + Schema((
             i18n_domain='plone',
             condition="python:here.portal_properties.site_properties.visible_ids and 'FSDPerson' in modules['Products.CMFCore.utils'].getToolByName(here, 'facultystaffdirectory_tool').getEnableMembraneTypes()"
             ),
-            write_permission=SetOwnProperties,
-            schemata="User Settings",
-            user_property='invisible_ids',
+        write_permission=SetOwnProperties,
+        schemata="User Settings",
+        user_property='invisible_ids',
     ),
     
     RelationField(
@@ -571,7 +572,10 @@ class Person(OrderedBaseFolder, ATCTContent):
     def _availableEditors(self):
         """ Return a list of the available WYSIWYG editors for the site. """
         props = getToolByName(self, 'portal_properties')
-        return props['site_properties'].available_editors
+        editors = [('', 'Use site default')] + [
+                   (e, e) for e in props['site_properties'].available_editors
+                  ]
+        return editors
     
     security.declarePrivate('_availableLanguages')
     def _availableLanguages(self):

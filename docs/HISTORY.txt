@@ -1,6 +1,14 @@
 Version History
 ===============
 
+3.1.2 (unreleased)
+------------------
+
+* Added a 'use site default' option to the available editors list.  Thanks to
+  David Carter for reporting this issue and supplying a patch.
+  [cah190]
+
+
 3.1.1 (2012-03-28)
 ------------------
 
