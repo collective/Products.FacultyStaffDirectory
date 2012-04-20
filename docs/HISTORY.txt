@@ -8,6 +8,10 @@ Version History
   David Carter for reporting this issue and supplying a patch.
   [cah190]
 
+* Require Products.membrane >= 2.1.4 to get the property sheet typing fix which
+  affects the ext_editor field.
+  [cah190]
+
 
 3.1.1 (2012-03-28)
 ------------------
