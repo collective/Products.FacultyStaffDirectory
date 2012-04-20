@@ -1,7 +1,7 @@
 Version History
 ===============
 
-3.1.2 (unreleased)
+3.1.2 (2012-04-20)
 ------------------
 
 * Added a 'use site default' option to the available editors list.  Thanks to
