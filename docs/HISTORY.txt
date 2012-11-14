@@ -9,6 +9,11 @@ Version History
   FSD via buildout on Windows systems.
   [cah190]
 
+* Work around membrane shortcoming which caused group property providers to
+  be enumerated as users, raising an error and preventing further user
+  enumeration.
+  [Laurence Rowe]
+
 
 3.1.2 (2012-04-20)
 ------------------
