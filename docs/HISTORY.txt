@@ -1,7 +1,7 @@
 Version History
 ===============
 
-3.1.3 (unreleased)
+3.1.3 (2012-11-14)
 ------------------
 
 * Added a MANIFEST.in to exclude the examples folder from being packaged with
