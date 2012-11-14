@@ -1,6 +1,15 @@
 Version History
 ===============
 
+3.1.3 (unreleased)
+------------------
+
+* Added a MANIFEST.in to exclude the examples folder from being packaged with
+  the egg to work around the SandboxViolation from EasyInstall when installing
+  FSD via buildout on Windows systems.
+  [cah190]
+
+
 3.1.2 (2012-04-20)
 ------------------
 
