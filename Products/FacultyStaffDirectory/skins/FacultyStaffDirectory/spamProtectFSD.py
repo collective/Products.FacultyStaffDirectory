@@ -6,7 +6,7 @@
 from Products.CMFCore.utils import getToolByName
 fsd = getToolByName(context, 'facultystaffdirectory_tool')
 
-if fsd.getObfuscateEmailAddresses():
+if true: #fsd.getObfuscateEmailAddresses():
     email = email.replace('.', ' [ DOT ] ')
     email = email.replace('@', ' [ AT ] ')
     email = email.replace('-', ' [ DASH ] ')

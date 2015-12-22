@@ -472,7 +472,7 @@ class Person(OrderedBaseFolder, ATCTContent):
         Person_schema.changeSchemataForField('relatedItems', 'metadata')
     
     # reorder the fields to move the dates into the employment information schemata along with the 
-    # terminiation details field and rename the effective and expiration dates.
+    # termination details field and rename the effective and expiration dates.
     Person_schema['effectiveDate'].schemata = 'Employment Information'
     Person_schema['effectiveDate'].widget.label = _(u"label_edit_hire_date", default=u"Hire Date")
     Person_schema['effectiveDate'].widget.description = _(u"description_edit_hire_date", default=u"The date when the person will be hired. If no date is selected the person will be considered hired immediately.")
@@ -820,6 +820,17 @@ class Person(OrderedBaseFolder, ATCTContent):
             if regexString and not re.match(regexString, value):
                 return _(u"Please provide the phone number in the format %s") % fsd_tool.getPhoneNumberDescription()
 
+    def spamProtectFSD(self, email):
+        """ Implement a different email obfuscating approach than the standard Plone spam protection.  Dots, @ etc. will be replaced with a string representation. """
+        fsd = getToolByName(self, 'facultystaffdirectory_tool')
+        if True: #fsd.getObfuscateEmailAddresses():
+            email = email.replace('.', ' [ DOT ] ')
+            email = email.replace('@', ' [ AT ] ')
+            email = email.replace('-', ' [ DASH ] ')
+            email = email.replace('_', ' [ UNDERSCORE ] ')
+            return email
+        else:
+            return self.spamProtect(email)
     
     security.declarePrivate('post_validate')
     def post_validate(self, REQUEST, errors):
