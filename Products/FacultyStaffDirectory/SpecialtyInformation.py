@@ -4,8 +4,8 @@ __author__ = """WebLion <support@weblion.psu.edu>"""
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
-from Products.Archetypes.atapi import *
-from Products.FacultyStaffDirectory.config import *
+from Products.Archetypes import atapi
+from Products.FacultyStaffDirectory import config
 
 from Products.FacultyStaffDirectory.interfaces.specialtyinformation import ISpecialtyInformation
 from zope.interface import implements
@@ -14,11 +14,11 @@ from Products.FacultyStaffDirectory import FSDMessageFactory as _
 try:
     from Products.Archetypes.Widget import TinyMCEWidget
 except ImportError:
-    TinyMCEWidget = RichWidget
+    TinyMCEWidget = atapi.RichWidget
 
-schema = Schema((
+schema = atapi.Schema((
 
-    TextField(
+    atapi.TextField(
         name='researchTopic',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',),
         widget=TinyMCEWidget(
@@ -30,10 +30,10 @@ schema = Schema((
         default_output_type='text/x-html-safe'
     ),
 
-    StringField(
+    atapi.StringField(
         name='title',
         default="Research Topic",
-        widget=StringWidget(
+        widget=atapi.StringWidget(
             visible={'edit': 'invisible', 'view': 'visible'},
             label=_(u"FacultyStaffDirectory_label_title", default=u"Title"),
             i18n_domain='FacultyStaffDirectory',
@@ -44,13 +44,15 @@ schema = Schema((
 ),
 )
 
-SpecialtyInformation_schema = BaseSchema.copy() + schema.copy()
+SpecialtyInformation_schema = atapi.BaseSchema.copy() + schema.copy()
 
-class SpecialtyInformation(BaseContent):
+
+class SpecialtyInformation(atapi.BaseContent):
     """
     """
     security = ClassSecurityInfo()
     implements(ISpecialtyInformation)
     meta_type = portal_type = 'FSDSpecialtyInformation'
     schema = SpecialtyInformation_schema
-registerType(SpecialtyInformation, PROJECTNAME)
+
+atapi.registerType(SpecialtyInformation, config.PROJECTNAME)
