@@ -5,22 +5,28 @@ __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_inner, aq_parent
-from Products.Archetypes.atapi import *
+from Products.Archetypes import atapi
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema
-from Products.FacultyStaffDirectory.config import *
+from Products.FacultyStaffDirectory import config
 from Products.FacultyStaffDirectory.interfaces.facultystaffdirectory import IFacultyStaffDirectory
 from Products.CMFCore.permissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
-schema =  ATContentTypeSchema.copy() + Schema((
+try:
+    from Products.Archetypes.Widget import TinyMCEWidget
+except ImportError:
+    TinyMCEWidget = atapi.RichWidget
 
-    TextField(
+
+schema = ATContentTypeSchema.copy() + atapi.Schema((
+
+    atapi.TextField(
         name='text',
-        allowable_content_types=ALLOWABLE_CONTENT_TYPES,
-        widget=RichWidget(
+        allowable_content_types=config.ALLOWABLE_CONTENT_TYPES,
+        widget=TinyMCEWidget(
             label=_(u"FacultyStaffDirectory_label_text", default=u"Body Text"),
             i18n_domain='FacultyStaffDirectory',
         ),
@@ -32,32 +38,37 @@ schema =  ATContentTypeSchema.copy() + Schema((
 ),
 )
 
-PersonGrouping_schema = OrderedBaseFolderSchema.copy() + schema.copy()  # + on Schemas does only a shallow copy
+# + on Schemas does only a shallow copy
+PersonGrouping_schema = atapi.OrderedBaseFolderSchema.copy() + schema.copy()
 
-class PersonGrouping(OrderedBaseFolder, ATCTContent):
+
+class PersonGrouping(atapi.OrderedBaseFolder, ATCTContent):
     """"""
     security = ClassSecurityInfo()
     meta_type = portal_type = 'FSDPersonGrouping'
 
     # moved schema setting after finalizeATCTSchema, so the order of the fieldsets
-    # is preserved. Also after updateActions is called since it seems to overwrite the schema changes.
-    # Move the description field, but not in Plone 2.5 since it's already in the metadata tab. Although, 
+    # is preserved. Also after updateActions is called since it seems to overwrite the
+    # schema changes.
+    # Move the description field, but not in Plone 2.5 since it's already in the metadata tab.
+    # Although,
     # decription and relateditems are occasionally showing up in the "default" schemata. Move them
     # to "metadata" just to be safe.
     if 'categorization' not in PersonGrouping_schema.getSchemataNames():
         PersonGrouping_schema.changeSchemataForField('relatedItems', 'metadata')
-        
+
     _at_rename_after_creation = True
     schema = PersonGrouping_schema
 
     security.declareProtected(View, 'getClassifications')
     def getClassifications(self):
         """ Ignore the default FacultyStaffDirectory getClassifications so that we can use
-            PersonGrouping subclasses outside of a FacultyStaffDirectory object. Making the assumption that there
+            PersonGrouping subclasses outside of a FacultyStaffDirectory object. Making the
+            assumption that there
             will only be one FacultyStaffDirectory and that all Person objects will be created
             inside of it (see the README for some justification for this).
         """
-        
+
         if self.getPeople():
             fsdTool = getToolByName(self, 'facultystaffdirectory_tool')
             return fsdTool.getDirectoryRoot().getClassifications()
@@ -69,7 +80,7 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
         """ Return a list of peoplele, sorted by SortableName
         """
         people = self.getPeople()
-        return sorted(people, cmp=lambda x,y: cmp(x.getSortableName(), y.getSortableName()))
+        return sorted(people, cmp=lambda x, y: cmp(x.getSortableName(), y.getSortableName()))
 
     security.declareProtected(ModifyPortalContent, '_get_parent_fsd_path')
     def _get_parent_fsd_path(self, relative=True):
@@ -101,5 +112,4 @@ class PersonGrouping(OrderedBaseFolder, ATCTContent):
                 'sort_on': 'sortable_title',
                 'path': {'query': path}}
 
-registerType(PersonGrouping, PROJECTNAME)
-
+atapi.registerType(PersonGrouping, config.PROJECTNAME)
