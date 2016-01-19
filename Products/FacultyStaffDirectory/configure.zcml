@@ -7,6 +7,7 @@
 
     <cmf:registerDirectory name="FacultyStaffDirectory"/>
 
+    <include package="archetypes.referencebrowserwidget" />
     <include package="zope.annotation" />
     <include package=".events" />
     <include package=".membership" />

@@ -4,7 +4,8 @@ Version History
 3.2 (unreleased)
 ----------------
 
-* Nothing yet.
+* Update to not use Products.ATReferenceBrowserWidget
+  [vangheem]
 
 
 3.1.3 (2012-11-14)

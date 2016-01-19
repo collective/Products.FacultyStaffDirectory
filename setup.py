@@ -38,6 +38,7 @@ setup(name='Products.FacultyStaffDirectory',
           'archetypes.schemaextender',
           'Products.Relations>=0.9b1',
           'Products.membrane>=2.1.4',
+          'archetypes.referencebrowserwidget'
       ],
       entry_points="""
       # -*- Entry points: -*-
