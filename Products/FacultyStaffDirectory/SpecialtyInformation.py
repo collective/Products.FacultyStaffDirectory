@@ -11,12 +11,17 @@ from Products.FacultyStaffDirectory.interfaces.specialtyinformation import ISpec
 from zope.interface import implements
 from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
+try:
+    from Products.Archetypes.Widget import TinyMCEWidget
+except ImportError:
+    TinyMCEWidget = RichWidget
+
 schema = Schema((
 
     TextField(
         name='researchTopic',
         allowable_content_types=('text/plain', 'text/structured', 'text/html',),
-        widget=RichWidget(
+        widget=TinyMCEWidget(
             label=_(u"FacultyStaffDirectory_label_researchTopic", default=u"Research Topic"),
             i18n_domain='FacultyStaffDirectory',
             allow_file_upload=False,

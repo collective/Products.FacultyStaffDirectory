@@ -15,12 +15,18 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
+try:
+    from Products.Archetypes.Widget import TinyMCEWidget
+except ImportError:
+    TinyMCEWidget = RichWidget
+
+
 schema =  ATContentTypeSchema.copy() + Schema((
 
     TextField(
         name='text',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
-        widget=RichWidget(
+        widget=TinyMCEWidget(
             label=_(u"FacultyStaffDirectory_label_text", default=u"Body Text"),
             i18n_domain='FacultyStaffDirectory',
         ),

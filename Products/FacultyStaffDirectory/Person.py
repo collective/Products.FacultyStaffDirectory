@@ -40,6 +40,12 @@ from Products.FacultyStaffDirectory.validators import SequenceValidator
 
 from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
+try:
+    from Products.Archetypes.Widget import TinyMCEWidget
+except ImportError:
+    TinyMCEWidget = RichWidget
+
+
 logger = logging.getLogger('FacultyStaffDirectory')
 
 schema = ATContentTypeSchema.copy() + Schema((
@@ -178,7 +184,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     TextField(
         name='biography',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
-        widget=RichWidget(
+        widget=TinyMCEWidget(
             label=_(u"FacultyStaffDirectory_label_biography", default=u"Biography"),
             i18n_domain='FacultyStaffDirectory',
         ),
@@ -423,7 +429,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     TextField(
         name='terminationDetails',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
-        widget=RichWidget(
+        widget=TinyMCEWidget(
             label=_(u"FacultyStaffDirectory_label_termination_details", default=u"Termination details"),
             description=_(u"FacultyStaffDirectory_description_termination_details", default=u"Message displayed to site visitors when the person's termination date has passed. Can be used to provide forwarding information or a link to someone who has taken over their responsibilities."),
             i18n_domain='FacultyStaffDirectory',
@@ -571,10 +577,14 @@ class Person(OrderedBaseFolder, ATCTContent):
     security.declarePrivate('_availableEditors')
     def _availableEditors(self):
         """ Return a list of the available WYSIWYG editors for the site. """
-        props = getToolByName(self, 'portal_properties')
-        editors = [('', 'Use site default')] + [
-                   (e, e) for e in props['site_properties'].available_editors
-                  ]
+        try:
+            props = getToolByName(self, 'portal_properties')
+            editors = [('', 'Use site default')] + [
+                       (e, e) for e in props['site_properties'].available_editors
+                      ]
+        except (AttributeError, KeyError):
+            # plone 5
+            editors = ['tinymce']
         return editors
     
     security.declarePrivate('_availableLanguages')

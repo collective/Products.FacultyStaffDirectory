@@ -13,6 +13,12 @@ from Products.FacultyStaffDirectory.interfaces.course import ICourse
 from zope.interface import implements
 from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
+try:
+    from Products.Archetypes.Widget import TinyMCEWidget
+except ImportError:
+    TinyMCEWidget = RichWidget
+
+
 schema = ATContentTypeSchema.copy() + Schema((
 
     StringField(
@@ -37,7 +43,7 @@ schema = ATContentTypeSchema.copy() + Schema((
     TextField(
         name='description',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
-        widget=RichWidget(
+        widget=TinyMCEWidget(
             label=_(u"FacultyStaffDirectory_label_description", default=u"Description"),
             i18n_domain='FacultyStaffDirectory',
         ),

@@ -20,6 +20,12 @@ from zope.interface import implements
 #_ = MessageFactory('FacultyStaffDirectory')
 from Products.FacultyStaffDirectory import FSDMessageFactory as _
 
+try:
+    from Products.Archetypes.Widget import TinyMCEWidget
+except ImportError:
+    TinyMCEWidget = RichWidget
+
+
 schema = Schema((
 
     RelationField(
@@ -58,7 +64,7 @@ schema = Schema((
         name='overviewText',
         schemata='Overview',
         allowable_content_types=ALLOWABLE_CONTENT_TYPES,
-        widget=RichWidget(
+        widget=TinyMCEWidget(
             label=_(u"FacultyStaffDirectory_label_overview_text", default=u"Overview text (used for specialty overview view)"),
             i18n_domain='FacultyStaffDirectory',
         ),
