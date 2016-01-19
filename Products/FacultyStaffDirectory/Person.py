@@ -20,7 +20,7 @@ from Products.Archetypes.interfaces import IMultiPageSchema
 from Products.ATContentTypes.content.base import ATCTContent
 from Products.ATContentTypes.content.schemata import ATContentTypeSchema, finalizeATCTSchema
 from Products.ATContentTypes.lib.calendarsupport import n2rn, foldLine
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.CMFCore.permissions import View, ModifyPortalContent, SetOwnPassword, SetOwnProperties
 from Products.CMFCore.utils import getToolByName
 from plone.app.layout.navigation.navtree import buildFolderTree
