@@ -9,7 +9,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '3.2'
+version = '5.0'
 
 setup(name='Products.FacultyStaffDirectory',
       version=version,
@@ -19,13 +19,19 @@ setup(name='Products.FacultyStaffDirectory',
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
+        "Framework :: Plone :: 4.0",
+        "Framework :: Plone :: 4.1",
+        "Framework :: Plone :: 4.2",
+        "Framework :: Plone :: 4.3",
+        "Framework :: Plone :: 5.0",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
+        "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)"
         ],
       keywords='',
-      author='WebLion Group, The Pennsylvania State University',
-      author_email='support@weblion.psu.edu',
-      url='https://weblion.psu.edu/svn/weblion/weblion/Products.FacultyStaffDirectory',
+      author='originally by WebLion Group, The Pennsylvania State University',
+      author_email='',
+      url='https://github.com/collective/Products.FacultyStaffDirectory',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['Products'],
@@ -35,9 +41,11 @@ setup(name='Products.FacultyStaffDirectory',
           'setuptools',
           # -*- Extra requirements: -*-
           'Plone>=4.0',
+          'Products.ATContentTypes',
           'archetypes.schemaextender',
           'Products.Relations>=0.9b1',
           'Products.membrane>=2.1.4',
+          'archetypes.referencebrowserwidget'
       ],
       entry_points="""
       # -*- Entry points: -*-

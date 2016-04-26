@@ -1,0 +1,4 @@
+*.pyc
+Products.FacultyStaffDirectory.egg-info/
+*.mo
+*~

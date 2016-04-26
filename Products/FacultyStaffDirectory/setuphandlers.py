@@ -12,34 +12,6 @@ mediaKupuTypes = ['FSDPerson']
 collectionKupuTypes = ['FSDFacultyStaffDirectory']
 logger = logging.getLogger("Products.FacultyStaffDirectory")
 
-def addKupuResource(portal, resourceType, portalType):
-    kupu = getToolByName(portal, 'kupu_library_tool')
-    resourceList = list(kupu.getPortalTypesForResourceType(resourceType))
-    if portalType not in resourceList:
-        resourceList.append(portalType)
-        kupu.addResourceType(resourceType,tuple(resourceList))
-
-def removeKupuResource(portal, resourceType, portalType):
-    kupu = getToolByName(portal, 'kupu_library_tool')
-    resourceList = list(kupu.getPortalTypesForResourceType(resourceType))
-    if portalType in resourceList:
-        resourceList.remove(portalType)
-        kupu.addResourceType(resourceType,tuple(resourceList))
-
-def installKupuResources(context):
-    """ Add kupu resource types. Kupu's GS handling is broken/nonexistant."""
-    if context.readDataFile('installKupuResources.txt') is None:
-        return
-    portal = context.getSite()
-    quickinstaller = getToolByName(portal, 'portal_quickinstaller')
-    if quickinstaller.isProductInstalled('kupu'):
-        for type in linkableKupuTypes:
-            addKupuResource(portal, 'linkable', type)
-        for type in mediaKupuTypes:
-            addKupuResource(portal, 'mediaobject', type)
-        for type in collectionKupuTypes:
-            addKupuResource(portal, 'collection', type)
-
 def installRelationsRules(context):
     if context.readDataFile('installRelationsRules.txt') is None:
         return

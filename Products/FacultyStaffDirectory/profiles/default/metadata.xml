@@ -2,7 +2,9 @@
 <metadata>
     <version>10</version>
     <dependencies>
+        <dependency>profile-Products.ATContentTypes:default</dependency>
         <dependency>profile-Products.membrane:default</dependency>
         <dependency>profile-Products.Relations:default</dependency>
+	<dependency>profile-archetypes.referencebrowserwidget:default</dependency>
     </dependencies>
 </metadata>
