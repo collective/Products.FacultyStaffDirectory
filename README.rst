@@ -12,13 +12,18 @@ infrastructure and supports an extensibility framework for custom requirements.
 Dependencies
 ============
     
-FacultyStaffDirectory depends on Products.membrane and Products.Relations
+FacultyStaffDirectory depends on:
+
+- Products.membrane
+- Products.Relations
+- Products.ATContentTypes
 
 
 Installation
 ============
 
-FacultyStaffDirectory 3 requires Plone 4.0 or greater.
+FacultyStaffDirectory 5.0 has been updated to work with Plone 5.0 or
+greater. It *may* work with but has not been tested with Plone 4.x.
 
 1.  Add the following to buildout.cfg
 
@@ -33,9 +38,8 @@ FacultyStaffDirectory 3 requires Plone 4.0 or greater.
 
 3.  Restart Zope (typically 'bin/instance restart').
 
-4.  Install the FacultyStaffDirectory product using
-    portal_quickinstaller or the Plone Add/Remove Products tool
-    under Site Setup. The necessary dependencies will install
+4.  Install the FacultyStaffDirectory product using the Plone Add-ons
+    panel under Site Setup. The necessary dependencies will install
     themselves automatically. (Membrane remains in the 'available'
     column, but is in fact installed.)
 
@@ -77,6 +81,10 @@ Special Note for users upgrading to Plone 4:
 Because FacultyStaffDirectory 2.x is not compatible with Plone 4, you must first
 upgrade FacultyStaffDirectory to version 3 then upgrade Plone.
 
+Upgrading to Plone 5:
+---------------------
+
+Use FacultyStaffDirectory 5.0 with Plone 5.
 
 
 Using FacultyStaffDirectory
@@ -110,7 +118,7 @@ educational institutions but can be repurposed for use in a variety of settings.
 The core content type is Person. This has a variety of fields (email, telephone
 number, job title, and so on). You can also easily add your own.
 
-Out of the box, FacultyStaffDirectory offers 3 Classifications that can be
+Out of the box, FacultyStaffDirectory 3 offers Classifications that can be
 assigned to Person objects: Faculty, Staff and Graduate Student. If these don't
 work for you, you can add your own Classifications (e.g. Administrators,
 Technicians, Board Members, or whatever you like).
@@ -211,12 +219,7 @@ Extensibility
 Because every organization has a few unique requirements, FacultyStaffDirectory
 supports an extension mechanism based on the archetypes.schemaextender library.
 Using it, you can write plugin products which add fields to or otherwise modify
-our content types. For an example, see the FacultyStaffDirectoryExtender product
-and `its readme`_.
-
-.. _its readme:
-   https://weblion.psu.edu/svn/weblion/weblion/Products.FacultyStaffDirectory/tags/3.0/src/Products/FacultyStaffDirectory/examples/FacultyStaffDirectoryExtender/README.txt.
-
+our content types. 
 
 Design Rationale & Thoughts
 ===========================
@@ -244,50 +247,16 @@ How do I manage People across multiple Plone sites?
 Authorship
 ==========
 
-This product was developed by the WebLion group at Penn State University.
+This product was originally developed and maintained by the WebLion
+group at Penn State University.
 
-membrane integration by Cris Ewing at the University of Washington.
+membrane integration by Cris Ewing.
 
-Special thanks to Andreas Jung for his early testing, code contributions, and
-reminding us that, yes, people do live outside the United States.
+Special thanks to Andreas Jung for his early testing and code contributions.
 
 
 Support
 =======
 
-* Report bugs to support@weblion.psu.edu
+* Report bugs by filing tickets at https://github.com/collective/Products.FacultyStaffDirectory/issues 
 
-* More documentation at the `WebLion wiki`_.
-
-.. _weblion wiki: https://weblion.psu.edu/trac/weblion/wiki/FacultyStaffDirectory
-
-
-* Contact us::
-
-    WebLion Project Team
-    Penn State University
-    304 The 300 Building
-    University Park, PA 16802
-    support@weblion.psu.edu
-    814-863-4574
-
-
-License
-=======
-
-Copyright (c) 2006-2011 The Pennsylvania State University. WebLion is developed
-and maintained by the WebLion Project Team, its partners, and members of the
-Penn State Zope Users Group.
-
-This program is free software; you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any later
-version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with
-this program; if not, write to the Free Software Foundation, Inc., 59 Temple
-Place, Suite 330, Boston, MA 02111-1307 USA.

@@ -1,4 +1,3 @@
-/* <dtml-with base_properties> */
 /* <dtml-call "REQUEST.set('portal_url', portal_url())">*/
 /* fix the peekaboo issue for IE 6 + 7 */
 
@@ -105,5 +104,4 @@
 #content .facultyStaffDirectory .inlineFields .inlineEditable { display: inline; }
 
 h4.personName { margin-top: 0px !important; }
-h4.personName a { text-decoration: underline; color: &dtml-linkColor; !important;}
-/* </dtml-with> */
+h4.personName a { text-decoration: underline; !important;}

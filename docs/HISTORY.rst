@@ -1,8 +1,10 @@
 Version History
 ===============
 
-3.2 (unreleased)
+4.0 (unreleased)
 ----------------
+
+* Works with Plone 5.0 [vangheem, tkimnguyen]
 
 * Update to not use Products.ATReferenceBrowserWidget
   [vangheem]
