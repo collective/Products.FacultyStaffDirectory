@@ -8,6 +8,10 @@ Version History
 
 * Update to not use Products.ATReferenceBrowserWidget
   [vangheem]
+  
+* Avoid finding extraneous people in classification query
+  (e.g. graduate students) by looking up only classifications_people
+  relationships [tkimnguyen]
 
 
 3.1.3 (2012-11-14)
