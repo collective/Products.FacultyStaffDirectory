@@ -62,7 +62,7 @@ class Classification(PersonGrouping):
         secman = getSecurityManager()
         
         #There *has* to be a better way to do this...
-        localPeople = self.getReferences()
+        localPeople = self.getReferences(relationship='classifications_people')
 
         #Get the intersection of people referenced to this classification and people within/referenced to the parent
         classificationPeople = list(set(localPeople) & set(self.aq_parent.getPeople()))
