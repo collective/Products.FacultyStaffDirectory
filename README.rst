@@ -118,7 +118,7 @@ educational institutions but can be repurposed for use in a variety of settings.
 The core content type is Person. This has a variety of fields (email, telephone
 number, job title, and so on). You can also easily add your own.
 
-Out of the box, FacultyStaffDirectory 3 offers Classifications that can be
+Out of the box, FacultyStaffDirectory 5.0 offers Classifications that can be
 assigned to Person objects: Faculty, Staff and Graduate Student. If these don't
 work for you, you can add your own Classifications (e.g. Administrators,
 Technicians, Board Members, or whatever you like).
