@@ -32,10 +32,11 @@ class Fixture(PloneSandboxLayer):
         self.loadZCML(package=Products.FacultyStaffDirectory)
         z2.installProduct(app, 'Products.membrane')
         z2.installProduct(app, 'Products.Relations')
-        # z2.installProduct(app, 'Products.FacultyStaffDirectory')
+        z2.installProduct(app, 'Products.FacultyStaffDirectory')
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'Products.FacultyStaffDirectory:default')
+        self.applyProfile(portal, 'Products.FacultyStaffDirectory:sample-content')
 
 
 FIXTURE = Fixture()
