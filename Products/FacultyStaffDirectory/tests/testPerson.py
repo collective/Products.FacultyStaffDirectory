@@ -13,6 +13,11 @@ from Products.membrane.at.interfaces import IUserAuthentication
 from Products.Relations.processor import process
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone, PACKAGE_HOME
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
+from plone.app.testing import login
+from plone.app.testing import logout
 
 def loadImage(name, size=0):
     """Load image from testing directory."""
@@ -31,8 +36,9 @@ TEST_TIFF = loadImage('testUserPhoto.tif')
 TEST_TIFF_LEN = len(TEST_TIFF)
 
 class testPerson(testPlone):
+
     def afterSetUp(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Owner'])
         self.directory = self.getPopulatedDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
     
@@ -77,9 +83,9 @@ class testWithoutSpecialties(testPerson):
         self.failUnlessEqual(self.person.getSortableName(), ('person', 'test'))
         
         # Check that Personnel Managers can add a Person.
-        self.logout()
-        self.login()
-        self.setRoles(['Personnel Manager'])
+        logout()
+        login(self.portal, TEST_USER_NAME)
+        setRoles(self.portal, TEST_USER_ID, ['Personnel Manager'])
         try:
             self.getPerson(id='zif572', firstName="Test", lastName="Person")
         except 'Unauthorized': 

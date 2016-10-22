@@ -11,12 +11,15 @@ import code
 from random import choice, sample
 
 from Globals import package_home
-from Products.PloneTestCase import PloneTestCase
-from Testing import ZopeTestCase
+from Products.FacultyStaffDirectory.testing import INTEGRATION_TESTING
+
+import unittest
 
 from Products.FacultyStaffDirectory.config import PRODUCT_DEPENDENCIES, DEPENDENCIES
 PACKAGE_HOME = package_home(globals())
-    
+
+
+
 # Add common dependencies
 DEPENDENCIES.append('Archetypes')
 PRODUCT_DEPENDENCIES.append('MimetypesRegistry')
@@ -47,21 +50,16 @@ PRODUCTS = list()
 PRODUCTS += DEPENDENCIES
 PRODUCTS.append('FacultyStaffDirectory')
 
-def load_package_products():
-    # Install all (product-) dependencies, install them too
-    for dependency in PRODUCT_DEPENDENCIES + DEPENDENCIES:
-        ZopeTestCase.installProduct(dependency)
-        
-    ZopeTestCase.installProduct('membrane')
-    ZopeTestCase.installProduct('FacultyStaffDirectory')
-    
-    PloneTestCase.setupPloneSite(products=PRODUCTS)
-    
-load_package_products()
 
-class testPlone(PloneTestCase.PloneTestCase):
+class testPlone(unittest.TestCase):
     """Base TestCase for FacultyStaffDirectory."""
-    
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.afterSetUp()
+
     #Utility methods
     def getEmptyDirectory(self, id="facstaffdirectory", portal=None):
         """Return a FacultyStaffDirectory (creating it first if necessary)."""
@@ -187,10 +185,3 @@ Note: You have the same locals available as in your test-case.
             directory.invokeFactory(type_name="FSDPerson", id=good_id, firstName=fn, lastName=ln)
             
         return generated_ids
-
-
-def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-#    suite.addTest(makeSuite(testPlone))
-    return suite
