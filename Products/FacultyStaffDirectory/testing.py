@@ -36,7 +36,6 @@ class Fixture(PloneSandboxLayer):
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'Products.FacultyStaffDirectory:default')
-        self.applyProfile(portal, 'Products.FacultyStaffDirectory:sample-content')
 
 
 FIXTURE = Fixture()
@@ -48,4 +47,3 @@ INTEGRATION_TESTING = IntegrationTesting(
 FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(FIXTURE,),
     name='Products.FacultyStaffDirectory:Functional')
-

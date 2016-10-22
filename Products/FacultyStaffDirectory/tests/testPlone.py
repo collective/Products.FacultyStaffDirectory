@@ -7,15 +7,16 @@ __docformat__ = 'plaintext'
 # Base TestCase for FacultyStaffDirectory
 #
 
-import code
+from Globals import package_home
+from plone.app.testing import applyProfile
+from Products.FacultyStaffDirectory.config import DEPENDENCIES
+from Products.FacultyStaffDirectory.config import PRODUCT_DEPENDENCIES
+from Products.FacultyStaffDirectory.testing import INTEGRATION_TESTING
 from random import choice, sample
 
-from Globals import package_home
-from Products.FacultyStaffDirectory.testing import INTEGRATION_TESTING
-
+import code
 import unittest
 
-from Products.FacultyStaffDirectory.config import PRODUCT_DEPENDENCIES, DEPENDENCIES
 PACKAGE_HOME = package_home(globals())
 
 
@@ -58,6 +59,7 @@ class testPlone(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+        applyProfile(self.portal, 'Products.FacultyStaffDirectory:sample-content')
         self.afterSetUp()
 
     #Utility methods
