@@ -27,7 +27,7 @@ setup(name='Products.FacultyStaffDirectory',
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)"
-        ],
+      ],
       keywords='',
       author='originally by WebLion Group, The Pennsylvania State University',
       author_email='',
@@ -47,6 +47,12 @@ setup(name='Products.FacultyStaffDirectory',
           'Products.membrane>=2.1.4',
           'archetypes.referencebrowserwidget'
       ],
+      extras_require={
+        'test': [
+            'plone.app.robotframework',
+            'plone.app.testing [robot]',
+        ],
+      },
       entry_points="""
       # -*- Entry points: -*-
       """,
