@@ -48,16 +48,16 @@ class testInstall(unittest.TestCase):
             self.has_kupu = True
             self.ktool = getToolByName(self.portal, 'kupu_library_tool')
         
-#     def testMemberProfileSetup(self):
-#         cp = getToolByName(self.portal, 'portal_controlpanel')
-#         actions = cp.listActions()
-#         hasfsdmemberprofile = False
-#         for action in actions:
-#             if action.id == originalProfileActionId:
-#                 self.failIf(action.visible, "Original MemberPrefs action is still visible.")
-#             if action.id == newProfileActionId:
-#                 hasfsdmemberprofile = True
-#         self.failUnless(hasfsdmemberprofile, "New MemberPrefs action failed to install.")
+    def testMemberProfileSetup(self):
+        cp = getToolByName(self.portal, 'portal_controlpanel')
+        actions = cp.listActions()
+        hasfsdmemberprofile = False
+        for action in actions:
+            if action.id == originalProfileActionId:
+                self.failIf(action.visible, "Original MemberPrefs action is still visible.")
+            if action.id == newProfileActionId:
+                hasfsdmemberprofile = True
+        self.failUnless(hasfsdmemberprofile, "New MemberPrefs action failed to install.")
 
     def testCatalogIndexesAdded(self):
         missingindexes = []
@@ -66,68 +66,68 @@ class testInstall(unittest.TestCase):
                 missingindexes.append(indexName)
         self.failIf(missingindexes, 'Catalog is missing the following indexes: %s' % missingindexes)
 
-#     def testCatalogMetadataAdded(self):
-#         missingmetadata = []
-#         for fieldName in ["getCommitteeNames", "getDepartmentNames", "getSpecialtyNames", "getClassificationNames", "getResearchTopics"]:
-#             if fieldName not in self.pc.schema():
-#                 missingmetadata.append(fieldName)
-#         self.failIf(missingmetadata, 'Catalog is missing the following metadata fields: %s' % missingmetadata)
+    def testCatalogMetadataAdded(self):
+        missingmetadata = []
+        for fieldName in ["getCommitteeNames", "getDepartmentNames", "getSpecialtyNames", "getClassificationNames", "getResearchTopics"]:
+            if fieldName not in self.pc.schema():
+                missingmetadata.append(fieldName)
+        self.failIf(missingmetadata, 'Catalog is missing the following metadata fields: %s' % missingmetadata)
         
-#     def testTopicIndexesAdded(self):
-#         missingindexes = []
-#         for index in ["getRawClassifications","getRawSpecialties","getRawCommittees","getRawPeople","getRawDepartments","getSortableName"]:
-#             idx = self.atct_tool.getIndex(index)
-#             if not idx or not idx.enabled:
-#                 missingindexes.append(index)
-#         self.failIf(missingindexes, 'ATCT Tool is missing the following indexes: %s' % missingindexes)
+    def testTopicIndexesAdded(self):
+        missingindexes = []
+        for index in ["getRawClassifications","getRawSpecialties","getRawCommittees","getRawPeople","getRawDepartments","getSortableName"]:
+            idx = self.atct_tool.getIndex(index)
+            if not idx or not idx.enabled:
+                missingindexes.append(index)
+        self.failIf(missingindexes, 'ATCT Tool is missing the following indexes: %s' % missingindexes)
         
-#     def testTopicMetadataAdded(self):
-#         missingmetadata = []
-#         for fieldName in ["getCommitteeNames","getDepartmentNames","getSpecialtyNames","getClassificationNames","getResearchTopics"]:
-#             md = self.atct_tool.getMetadata(fieldName)
-#             if not md or not md.enabled:
-#                 missingmetadata.append(fieldName)
-#         self.failIf(missingmetadata, 'ATCT Tool is missing the following metadata fields: %s' % missingmetadata)
+    def testTopicMetadataAdded(self):
+        missingmetadata = []
+        for fieldName in ["getCommitteeNames","getDepartmentNames","getSpecialtyNames","getClassificationNames","getResearchTopics"]:
+            md = self.atct_tool.getMetadata(fieldName)
+            if not md or not md.enabled:
+                missingmetadata.append(fieldName)
+        self.failIf(missingmetadata, 'ATCT Tool is missing the following metadata fields: %s' % missingmetadata)
         
-#     def testNavTreeSetup(self):
-#         missingmetatypes = []
-#         for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']:
-#             if not mType in list(self.portal.portal_properties.navtree_properties.metaTypesNotToList):
-#                 missingmetatypes.append(mType)
-#         self.failIf(missingmetatypes, "The following FSD Types are still visible in the navtree and shouldn't be %s" % missingmetatypes)
+    def testNavTreeSetup(self):
+        missingmetatypes = []
+        for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']:
+            if not mType in list(self.portal.portal_properties.navtree_properties.metaTypesNotToList):
+                missingmetatypes.append(mType)
+        self.failIf(missingmetatypes, "The following FSD Types are still visible in the navtree and shouldn't be %s" % missingmetatypes)
         
-#     def testConfigletAdded(self):
-#         cp = getToolByName(self.portal, 'portal_controlpanel')
-#         self.failIf("FacultyStaffDirectory" not in [ c.id for c in cp._actions ], 'FacultyStaffDirectory configlet has not been registered with the portal controlpanel')
+    def testConfigletAdded(self):
+        cp = getToolByName(self.portal, 'portal_controlpanel')
+        self.failIf("FacultyStaffDirectory" not in [ c.id for c in cp._actions ], 'FacultyStaffDirectory configlet has not been registered with the portal controlpanel')
         
-#     def testVersioningSetup(self):
-#         missingversionable = []
-#         pr = getToolByName(self.portal, "portal_repository")
-#         versionedTypes = ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']
-#         for t in versionedTypes:
-#             if t not in pr.getVersionableContentTypes():
-#                 missingversionable.append(t)
-#         self.failIf(missingversionable, "%s are not listed as versionable and they should be" % missingversionable)
+    def testVersioningSetup(self):
+        missingversionable = []
+        pr = getToolByName(self.portal, "portal_repository")
+        versionedTypes = ['FSDPerson', 'FSDCommittee', 'FSDSpecialty']
+        for t in versionedTypes:
+            if t not in pr.getVersionableContentTypes():
+                missingversionable.append(t)
+        self.failIf(missingversionable, "%s are not listed as versionable and they should be" % missingversionable)
         
-#         pMap = pr.getPolicyMap()
-#         for t in versionedTypes:
-#             self.failUnless(t in pMap)
-#             self.failUnless(pMap[t], [u'at_edit_autoversion', u'version_on_revert'])
+        pMap = pr.getPolicyMap()
+        for t in versionedTypes:
+            self.failUnless(t in pMap)
+            self.failUnless(pMap[t], [u'at_edit_autoversion', u'version_on_revert'])
             
-#     def testKupuLinkableTypesSetup(self):
-#         if self.has_kupu:
-#             missingltypes = checkKupuResourceList(self.ktool, 'linkable', linkableKupuTypes)
-#             self.failIf(missingltypes, '%s not listed as linkable by Kupu' % missingltypes)
+    def testKupuLinkableTypesSetup(self):
+        if self.has_kupu:
+            missingltypes = checkKupuResourceList(self.ktool, 'linkable', linkableKupuTypes)
+            self.failIf(missingltypes, '%s not listed as linkable by Kupu' % missingltypes)
 
-#     def testKupuMediaTypesSetup(self):
-#         if self.has_kupu:
-#             missingmtypes = checkKupuResourceList(self.ktool, 'mediaobject', mediaKupuTypes)
-#             self.failIf(missingmtypes, '%s not listed as media by Kupu' % missingmtypes)
+    def testKupuMediaTypesSetup(self):
+        if self.has_kupu:
+            missingmtypes = checkKupuResourceList(self.ktool, 'mediaobject', mediaKupuTypes)
+            self.failIf(missingmtypes, '%s not listed as media by Kupu' % missingmtypes)
 
-#     def testKupuCollectionTypesSetup(self):
-#         if self.has_kupu:
-#             missingctypes = checkKupuResourceList(self.ktool, 'collection', collectionKupuTypes)
-#             self.failIf(missingctypes, '%s not listed as collection by Kupu' % missingctypes)
+    def testKupuCollectionTypesSetup(self):
+        if self.has_kupu:
+            missingctypes = checkKupuResourceList(self.ktool, 'collection', collectionKupuTypes)
+            self.failIf(missingctypes, '%s not listed as collection by Kupu' % missingctypes)
 
         
 # class testUninstall(testPlone):
