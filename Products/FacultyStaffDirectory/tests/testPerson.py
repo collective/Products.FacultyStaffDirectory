@@ -38,7 +38,7 @@ TEST_TIFF_LEN = len(TEST_TIFF)
 class testPerson(testPlone):
 
     def afterSetUp(self):
-        setRoles(self.portal, TEST_USER_ID, ['Owner'])
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.directory = self.getPopulatedDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
     
@@ -449,8 +449,9 @@ class testWithSpecialties(testPerson):
         workflowTool = getToolByName(self.portal, 'portal_workflow')
         for o in [self.directory, self.directory['specialties']]:
             workflowTool.doActionFor(o, 'publish')
+
         
-        self.logout()  # Run as Anonymous to make sure getResearchTopics is anonymously callable. (bug #384)
+        logout()  # Run as Anonymous to make sure getResearchTopics is anonymously callable. (bug #384)
     
     def _makeAndAssignSpecialties(self):
         """Make a bunch of specialties, publish them, and assign them all to the test person."""
