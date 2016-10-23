@@ -7,7 +7,11 @@ __docformat__ = 'plaintext'
 # Test-cases for product install/uninstall/reinstall
 #
 
+from plone.app.testing import applyProfile
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from Products.CMFCore.utils import getToolByName
+from Products.FacultyStaffDirectory.tests.testPlone import testPlone
 from Products.FacultyStaffDirectory.testing import INTEGRATION_TESTING
 
 import unittest
@@ -128,123 +132,130 @@ class testInstall(unittest.TestCase):
             self.failIf(missingctypes, '%s not listed as collection by Kupu' % missingctypes)
 
 
-# class testUninstall(testPlone):
-#     def afterSetUp(self):
-#         migrationTool = getToolByName(self.portal, 'portal_migration')
-#         installer = getToolByName(self.portal, 'portal_quickinstaller')
-#         self.isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
-#         self.pc = getToolByName(self.portal, 'portal_catalog')
-#         self.atct_tool = getToolByName(self.portal, 'portal_atct')
-#         self.has_kupu = False
-#         if installer.isProductInstalled('kupu'):
-#             self.has_kupu = True
-#             self.ktool = getToolByName(self.portal, 'kupu_library_tool')
-#         self.loginAsPortalOwner()
-#         installer.uninstallProducts(products=['FacultyStaffDirectory'])
+class testUninstall(unittest.TestCase):
 
-#     def testMemberProfileTeardown(self):
-#         cp = getToolByName(self.portal, 'portal_controlpanel')
-#         actions = cp.listActions()
-#         hasfsdmemberprofile = False
-#         for action in actions:
-#             if action.id == originalProfileActionId:
-#                 self.failUnless(action.visible, "original MemberPrefs action is not visible")
-#             if action.id == newMyFolderActionId:
-#                 hasfsdmemberprofile = True
-#         self.failIf(hasfsdmemberprofile, "new MemberPrefs action failed to uninstall")
+    layer = INTEGRATION_TESTING
 
-#     def testMembraneUninstall(self):
-#         """Test issue #397, where logging in after uninstalling results in an AttributeError."""
-#         username = 'joe'
-#         try:
-#             # Make a user:
-#             self.portal.acl_users._doAddUser(username, 'passw0rd', ['Member'], [])
-#             # Log in:
-#             self.login(name=username)  # Oddly enough, during testing, it fails as soon as you make a user, so this is unnecessary. *shrug*
-#         except AttributeError:
-#             self.fail(msg="Had the membrane crash described at https://weblion.psu.edu/trac/weblion/ticket/397.")
+    def setUp(self):
+        self.portal = self.layer['portal']
+        migrationTool = getToolByName(self.portal, 'portal_migration')
+        installer = getToolByName(self.portal, 'portal_quickinstaller')
+        self.isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
+        self.pc = getToolByName(self.portal, 'portal_catalog')
+        self.atct_tool = getToolByName(self.portal, 'portal_atct')
+        self.has_kupu = False
+        if installer.isProductInstalled('kupu'):
+            self.has_kupu = True
+            self.ktool = getToolByName(self.portal, 'kupu_library_tool')
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        installer.uninstallProducts(products=['FacultyStaffDirectory'])
 
-#     def testNavTreeTeardown(self):
-#         presentmetatypes = []
-#         for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']:
-#             if mType in list(self.portal.portal_properties.navtree_properties.metaTypesNotToList):
-#                 presentmetatypes.append(mType)
-#         self.failIf(presentmetatypes, "The following FSD Types are still listed in the navtree metatypesNotToList and they shouldn't be" % presentmetatypes)
+    def testMemberProfileTeardown(self):
+        cp = getToolByName(self.portal, 'portal_controlpanel')
+        actions = cp.listActions()
+        hasfsdmemberprofile = False
+        for action in actions:
+            if action.id == originalProfileActionId:
+                self.failUnless(action.visible, "original MemberPrefs action is not visible")
+            if action.id == newMyFolderActionId:
+                hasfsdmemberprofile = True
+        self.failIf(hasfsdmemberprofile, "new MemberPrefs action failed to uninstall")
 
-#     def testActionIconsTeardown(self):
-#         ai = getToolByName(self.portal, 'portal_actionicons')
-#         try:
-#             ai.getActionInfo('plone','vcard')
-#             self.fail('FSD vcard action icon still present in portal_actionicons')
-#         except KeyError:
-#             pass
+    def testMembraneUninstall(self):
+        """Test issue #397, where logging in after uninstalling results in an AttributeError."""
+        username = 'joe'
+        try:
+            # Make a user:
+            self.portal.acl_users._doAddUser(username, 'passw0rd', ['Member'], [])
+            # Log in:
+            self.login(name=username)  # Oddly enough, during testing, it fails as soon as you make a user, so this is unnecessary. *shrug*
+        except AttributeError:
+            self.fail(msg="Had the membrane crash described at https://weblion.psu.edu/trac/weblion/ticket/397.")
 
-#     def testCatalogIndexesTeardown(self):
-#         presentindexes = []
-#         for indexName in ['getSortableName', 'getRawClassifications', 'getRawSpecialties', 'getRawCommittees', 'getRawDepartments', 'getRawPeople']:
-#             if indexName in self.pc.indexes():
-#                 presentindexes.append(indexName)
-#         self.failIf(presentindexes, 'Catalog still holds the following indexes: %s' % presentindexes)
+    def testNavTreeTeardown(self):
+        presentmetatypes = []
+        for mType in ['FSDCourse', 'FSDPerson', 'FSDFacultyStaffDirectoryTool']:
+            if mType in list(self.portal.portal_properties.navtree_properties.metaTypesNotToList):
+                presentmetatypes.append(mType)
+        self.failIf(presentmetatypes, "The following FSD Types are still listed in the navtree metatypesNotToList and they shouldn't be" % presentmetatypes)
 
-#     def testCatalogMetadataTeardown(self):
-#         presentmetadata = []
-#         for fieldName in ["getCommitteeNames", "getDepartmentNames", "getSpecialtyNames", "getClassificationNames", "getResearchTopics"]:
-#             if fieldName in self.pc.schema():
-#                 presentmetadata.append(fieldName)
-#         self.failIf(presentmetadata, 'Catalog still holds the following metadata fields: %s' % presentmetadata)
+    def testActionIconsTeardown(self):
+        ai = getToolByName(self.portal, 'portal_actionicons')
+        try:
+            ai.getActionInfo('plone','vcard')
+            self.fail('FSD vcard action icon still present in portal_actionicons')
+        except KeyError:
+            pass
 
-#     def testTopicIndexesTeardown(self):
-#         presentindexes = []
-#         allindexes = self.atct_tool.getIndexes()
-#         for index in ["getRawClassifications","getRawSpecialties","getRawCommittees","getRawPeople","getRawDepartments","getSortableName"]:
-#             if index in allindexes:
-#                 presentindexes.append(index)
-#         self.failIf(presentindexes, 'ATCT Tool still has the following indexes: %s' % presentindexes)
+    def testCatalogIndexesTeardown(self):
+        presentindexes = []
+        for indexName in ['getSortableName', 'getRawClassifications', 'getRawSpecialties', 'getRawCommittees', 'getRawDepartments', 'getRawPeople']:
+            if indexName in self.pc.indexes():
+                presentindexes.append(indexName)
+        self.failIf(presentindexes, 'Catalog still holds the following indexes: %s' % presentindexes)
 
-#     def testTopicMetadataTeardown(self):
-#         presentmetadata = []
-#         allmetadata = self.atct_tool.getAllMetadata()
-#         for fieldName in ["getCommitteeNames","getDepartmentNames","getSpecialtyNames","getClassificationNames","getResearchTopics"]:
-#             if fieldName in allmetadata:
-#                 presentmetadata.append(fieldName)
-#         self.failIf(presentmetadata, 'ATCT Tool is missing the following metadata fields: %s' % presentmetadata)
+    def testCatalogMetadataTeardown(self):
+        presentmetadata = []
+        for fieldName in ["getCommitteeNames", "getDepartmentNames", "getSpecialtyNames", "getClassificationNames", "getResearchTopics"]:
+            if fieldName in self.pc.schema():
+                presentmetadata.append(fieldName)
+        self.failIf(presentmetadata, 'Catalog still holds the following metadata fields: %s' % presentmetadata)
 
-#     def testConfigletTeardown(self):
-#         cp = getToolByName(self.portal, 'portal_controlpanel')
-#         self.failIf("FacultyStaffDirectory" in [ c.id for c in cp._actions ], 'FacultyStaffDirectory configlet is still registered with the portal controlpanel')
+    def testTopicIndexesTeardown(self):
+        presentindexes = []
+        allindexes = self.atct_tool.getIndexes()
+        for index in ["getRawClassifications","getRawSpecialties","getRawCommittees","getRawPeople","getRawDepartments","getSortableName"]:
+            if index in allindexes:
+                presentindexes.append(index)
+        self.failIf(presentindexes, 'ATCT Tool still has the following indexes: %s' % presentindexes)
 
-#     def testKupuLinkableTypesSetup(self):
-#         if self.has_kupu:
-#             missingltypes = checkKupuResourceList(self.ktool, 'linkable', linkableKupuTypes)
-#             self.failUnlessEqual(missingltypes, linkableKupuTypes, '%s not listed as linkable by Kupu' % missingltypes)
+    def testTopicMetadataTeardown(self):
+        presentmetadata = []
+        allmetadata = self.atct_tool.getAllMetadata()
+        for fieldName in ["getCommitteeNames","getDepartmentNames","getSpecialtyNames","getClassificationNames","getResearchTopics"]:
+            if fieldName in allmetadata:
+                presentmetadata.append(fieldName)
+        self.failIf(presentmetadata, 'ATCT Tool is missing the following metadata fields: %s' % presentmetadata)
 
-#     def testKupuMediaTypesSetup(self):
-#         if self.has_kupu:
-#             missingmtypes = checkKupuResourceList(self.ktool, 'mediaobject', mediaKupuTypes)
-#             self.failUnlessEqual(missingmtypes, mediaKupuTypes, '%s not listed as media by Kupu' % missingmtypes)
+    def testConfigletTeardown(self):
+        cp = getToolByName(self.portal, 'portal_controlpanel')
+        self.failIf("FacultyStaffDirectory" in [ c.id for c in cp._actions ], 'FacultyStaffDirectory configlet is still registered with the portal controlpanel')
 
-#     def testKupuCollectionTypesSetup(self):
-#         if self.has_kupu:
-#             missingctypes = checkKupuResourceList(self.ktool, 'collection', collectionKupuTypes)
-#             self.failUnlessEqual(missingctypes, collectionKupuTypes, '%s not listed as collection by Kupu' % missingctypes)
+    def testKupuLinkableTypesSetup(self):
+        if self.has_kupu:
+            missingltypes = checkKupuResourceList(self.ktool, 'linkable', linkableKupuTypes)
+            self.failUnlessEqual(missingltypes, linkableKupuTypes, '%s not listed as linkable by Kupu' % missingltypes)
 
-#     def testSkinLayerTeardown(self):
-#         skins = getToolByName(self.portal, 'portal_skins')
-#         for layerName in skins.getSkinSelections():
-#             self.failIf('FacultyStaffDirectory' in skins.selections[layerName], 'Skin layer not unregistered in layer %s' % layerName)
+    def testKupuMediaTypesSetup(self):
+        if self.has_kupu:
+            missingmtypes = checkKupuResourceList(self.ktool, 'mediaobject', mediaKupuTypes)
+            self.failUnlessEqual(missingmtypes, mediaKupuTypes, '%s not listed as media by Kupu' % missingmtypes)
 
-#     def testStepsUnregistered(self):
-#         setup = getToolByName(self.portal, 'portal_setup')
-#         registry = setup.getImportStepRegistry()
-#         remainingIds = [a['id'] for a in registry.listStepMetadata() if 'Products.FacultyStaffDirectory' in a['handler']]
-#         self.failIf(remainingIds, "The following import steps were not unregistered: %s" % remainingIds)
+    def testKupuCollectionTypesSetup(self):
+        if self.has_kupu:
+            missingctypes = checkKupuResourceList(self.ktool, 'collection', collectionKupuTypes)
+            self.failUnlessEqual(missingctypes, collectionKupuTypes, '%s not listed as collection by Kupu' % missingctypes)
+
+    def testSkinLayerTeardown(self):
+        skins = getToolByName(self.portal, 'portal_skins')
+        for layerName in skins.getSkinSelections():
+            self.failIf('FacultyStaffDirectory' in skins.selections[layerName], 'Skin layer not unregistered in layer %s' % layerName)
+
+    def testStepsUnregistered(self):
+        setup = getToolByName(self.portal, 'portal_setup')
+        registry = setup.getImportStepRegistry()
+        remainingIds = [a['id'] for a in registry.listStepMetadata() if 'Products.FacultyStaffDirectory' in a['handler']]
+        self.failIf(remainingIds, "The following import steps were not unregistered: %s" % remainingIds)
 
 
 # class testReinstall(testPlone):
-#     def afterSetUp(self):
+
+#     def setUp(self):
+#         self.portal = self.layer['portal']
+#         applyProfile(self.portal, 'Products.FacultyStaffDirectory:sample-content')
 #         migrationTool = getToolByName(self.portal, 'portal_migration')
 #         self.isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
-#         self.loginAsPortalOwner()
+#         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 #         self.directory = self.getPopulatedDirectory()
 #         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
 
