@@ -11,6 +11,9 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import logout
 
 
 class SampleContentTestCase(testPlone):
@@ -20,15 +23,15 @@ class SampleContentTestCase(testPlone):
 
 
     def testRun(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal_setup.runAllImportStepsFromProfile('profile-Products.FacultyStaffDirectory:sample-content')
-        self.logout()
+        logout()
 
     def testRunTwice(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal_setup.runAllImportStepsFromProfile('profile-Products.FacultyStaffDirectory:sample-content')
         self.portal_setup.runAllImportStepsFromProfile('profile-Products.FacultyStaffDirectory:sample-content')
-        self.logout()
+        logout()
 
 def test_suite():
     from unittest import TestSuite, makeSuite

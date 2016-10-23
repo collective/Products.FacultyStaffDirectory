@@ -9,12 +9,16 @@ __docformat__ = 'plaintext'
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+
 
 class testSpecialty(testPlone):
     """Test-cases for class(es) Specialty."""
 
     def afterSetUp(self):
-        self.loginAsPortalOwner()
+        # self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.directory = self.getPopulatedDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
         self.sf = self.directory.getSpecialtiesFolder()

@@ -10,12 +10,15 @@ __docformat__ = 'plaintext'
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
 from Products.CMFCore.utils import getToolByName
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+
 
 class testDepartment(testPlone):
     """Test-cases for class(es) Department."""
 
     def afterSetUp(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.directory = self.getPopulatedDirectory()
         self.directory.invokeFactory(type_name="FSDDepartment", id="test-department-inside", title="Inside Department") 
         self.portal.invokeFactory(type_name="FSDDepartment", id="test-department-outside", title="Outside Department") 

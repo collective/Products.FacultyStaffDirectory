@@ -9,12 +9,15 @@ import os
 from Products.ExternalMethod.ExternalMethod import manage_addExternalMethod
 from Products.CMFCore.utils import getToolByName
 from Products.GenericSetup.upgrade import listUpgradeSteps
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+
 
 class testUpgrades(testPlone):
     """Test-cases for FacultyStaffDirectory migration."""
 
     def afterSetUp(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.qi = getToolByName(self.portal,'portal_quickinstaller')
         self.ps = getToolByName(self.portal,'portal_setup')
         self.wf = getToolByName(self.portal,'portal_workflow')

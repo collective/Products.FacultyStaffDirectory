@@ -9,12 +9,16 @@ __docformat__ = 'plaintext'
 
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+
 
 class testSpecialtiesFolder(testPlone):
     """Test-cases for class(es) SpecialtiesFolder."""
 
     def afterSetUp(self):
-        self.loginAsPortalOwner()
+        # self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def testFTISetup(self):
         """ Make sure the FTI is pulling info from the GS types profile """
