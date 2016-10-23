@@ -248,30 +248,28 @@ class testUninstall(unittest.TestCase):
         self.failIf(remainingIds, "The following import steps were not unregistered: %s" % remainingIds)
 
 
-# class testReinstall(testPlone):
+class testReinstall(testPlone):
 
-#     def setUp(self):
-#         self.portal = self.layer['portal']
-#         applyProfile(self.portal, 'Products.FacultyStaffDirectory:sample-content')
-#         migrationTool = getToolByName(self.portal, 'portal_migration')
-#         self.isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
-#         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-#         self.directory = self.getPopulatedDirectory()
-#         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
+    def afterSetUp(self):
+        migrationTool = getToolByName(self.portal, 'portal_migration')
+        self.isPlone3OrBetter = migrationTool.getInstanceVersion() >= '3.0'
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.directory = self.getPopulatedDirectory()
+        self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
 
-#     def testUsersExistOnReinstall(self):
+    def testUsersExistOnReinstall(self):
 
-#         # Person/Member abc123 should exist in acl_users as a membrane user object
-#         acl = getToolByName(self.portal, 'acl_users')
-#         self.failUnless(acl.getUserById(id='abc123'))
+        # Person/Member abc123 should exist in acl_users as a membrane user object
+        acl = getToolByName(self.portal, 'acl_users')
+        self.failUnless(acl.getUserById(id='abc123'))
 
-#         # Reinstall the product
-#         qi = getToolByName(self.portal, 'portal_quickinstaller')
-#         #qi.installProduct('FacultyStaffDirectory', reinstall=True)
-#         qi.reinstallProducts(products='FacultyStaffDirectory')
+        # Reinstall the product
+        qi = getToolByName(self.portal, 'portal_quickinstaller')
+        # qi.installProduct('FacultyStaffDirectory', reinstall=True)
+        qi.reinstallProducts(products='FacultyStaffDirectory')
 
-#         # abc123 should still exist in acl_users
-#         self.failUnless(acl.getUserById(id='abc123'))
+        # abc123 should still exist in acl_users
+        self.failUnless(acl.getUserById(id='abc123'))
 
 # class testLargeDirectory(testPlone):
 #     def afterSetUp(self):

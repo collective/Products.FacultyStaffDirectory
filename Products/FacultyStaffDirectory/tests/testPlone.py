@@ -59,7 +59,6 @@ class testPlone(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        applyProfile(self.portal, 'Products.FacultyStaffDirectory:sample-content')
         self.afterSetUp()
 
     #Utility methods
