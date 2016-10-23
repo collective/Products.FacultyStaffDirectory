@@ -26,27 +26,6 @@ DEPENDENCIES.append('Archetypes')
 PRODUCT_DEPENDENCIES.append('MimetypesRegistry')
 PRODUCT_DEPENDENCIES.append('PortalTransforms')
 
-# from Products.Five import zcml, fiveconfigure
-# from Products.PloneTestCase.layer import onsetup
-# from Testing.ZopeTestCase import installPackage
-# 
-# @onsetup
-# def setupPackage():
-#     """ set up the package and its dependencies """
-#     # Install all (product-) dependencies, install them too
-#     for dependency in PRODUCT_DEPENDENCIES + DEPENDENCIES:
-#         ZopeTestCase.installProduct(dependency)
-#         
-#     ZopeTestCase.installProduct('membrane')
-#     ZopeTestCase.installProduct('FacultyStaffDirectory')
-#     
-#     fiveconfigure.debug_mode = True
-#     import Products.FacultyStaffDirectory
-#     zcml.load_config('configure.zcml', Products.FacultyStaffDirectory)
-#     fiveconfigure.debug_mode = False
-#     #installPackage('Products.FacultyStaffDirectory')  # Should be unnecessary for a Zope 2-style product
-# setupPackage()
-
 PRODUCTS = list()
 PRODUCTS += DEPENDENCIES
 PRODUCTS.append('FacultyStaffDirectory')

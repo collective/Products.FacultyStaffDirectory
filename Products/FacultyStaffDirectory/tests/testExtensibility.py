@@ -9,7 +9,6 @@ import sys
 
 import Products
 from Products.CMFCore.utils import getToolByName
-from Products.PloneTestCase import PloneTestCase
 
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone, PRODUCTS
 from Products.FacultyStaffDirectory.extenderInstallation import localAdaptersAreSupported

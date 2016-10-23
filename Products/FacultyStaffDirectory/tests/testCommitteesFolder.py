@@ -6,7 +6,8 @@ __docformat__ = 'plaintext'
 #
 # Test-cases for class(es) CommitteesFolder
 #
-
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
 
@@ -14,7 +15,7 @@ class testCommitteesFolder(testPlone):
     """Test-cases for class(es) CommitteesFolder."""
 
     def afterSetUp(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def testFTISetup(self):
         """ Make sure the FTI is pulling info from the GS types profile """

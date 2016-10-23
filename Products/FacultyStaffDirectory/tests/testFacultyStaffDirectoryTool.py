@@ -6,7 +6,9 @@ __docformat__ = 'plaintext'
 #
 # Test-cases for Faculty/Staff Directory portal tool
 #
-
+from plone.app.testing import login
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
 from Products.FacultyStaffDirectory.membership.person import UserAuthentication
@@ -20,7 +22,7 @@ class testFacultyStaffDirectoryTool(testPlone):
         from Products.CMFCore.utils import getToolByName
         from Products.FacultyStaffDirectory.config import TOOLNAME
         
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.directory = self.getPopulatedDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
         self.fsd_tool = getToolByName(self.person,TOOLNAME)
@@ -103,11 +105,11 @@ class testFacultyStaffDirectoryTool(testPlone):
         """fsdMyFolder method should return the appropriate url for non-fsd users or 
         for fsd users
         """
-        self.login(self.person.id)
+        login(self.portal, self.person.id)
         # logged in as an fsd user, the substring <directory_id/user_id> should be in the  return value for the function
         self.failUnless(self.fsd_tool.fsdMyFolder().find(self.directory.id + '/' + self.person.id), "bad url returned for %s: %s" % (self.person.id, self.fsd_tool.fsdMyFolder()))
         
-        self.login('user1')
+        login(self.portal, 'user1')
         # set up a memberarea
         if (not self.mt.getMemberareaCreationFlag()):
             self.mt.setMemberareaCreationFlag()
@@ -121,12 +123,13 @@ class testFacultyStaffDirectoryTool(testPlone):
         """fsdMemberProfile should return the location of the editor for member profile information.
         This will change depending on whether the member is an fsd person or an acl_users member
         """
-        self.login(self.person.id)
+
+        login(self.portal, self.person.id)
         # logged in as an fsd user, the substring <directory_id/user_id/edit> should be in the return value for the function
         self.failUnless(self.fsd_tool.fsdMemberProfile().find(self.directory.id + '/' + self.person.id), "bad url returned for %s: %s" % (self.person.id, self.fsd_tool.fsdMemberProfile()))
         
         # now as an acl_users user
-        self.login('user1')
+        login(self.portal, 'user1')
         try:
             self.failUnless(self.fsd_tool.fsdMemberProfile().find('/personalize_form'), "bad url returned for user1: %s" % self.fsd_tool.fsdMyFolder())
         except IndexError:
@@ -136,12 +139,12 @@ class testFacultyStaffDirectoryTool(testPlone):
         """fsdShowMyFolder tries to intelligently decide whether to show the 'my folder' action
         button or not.  It tests to see if a member is an fsd person, and acts accordingly
         """
-        self.login(self.person.id)
+        login(self.portal, self.person.id)
         # logged in as an fsd user, the method should always return true
         self.failUnless(self.fsd_tool.fsdShowMyFolder(), "fsdShowMyFolder returning false for fsd user")
         
         # now as acl_users user
-        self.login('user1')
+        login(self.portal, 'user1')
         try:
             if (self.mt.getMemberareaCreationFlag() and (self.mt.getHomeFolder() is not None)):
                 self.failUnless(self.fsd_tool.fsdShowMyFolder(), "should be showing my folder for acl_users, but we aren't")

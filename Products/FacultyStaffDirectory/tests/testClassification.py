@@ -6,16 +6,18 @@ __docformat__ = 'plaintext'
 #
 # Test-cases for class(es) Classification
 #
-
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
 from Products.CMFCore.utils import getToolByName
+
 
 class testClassification(testPlone):
     """Test-cases for class(es) Classification."""
 
     def afterSetUp(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.directory = self.getPopulatedDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
         self.person2 = self.getPerson(id='def456', firstName="Testy", lastName="Person")
@@ -31,25 +33,25 @@ class testClassification(testPlone):
         """
         cls = self.classification
         self.failUnless(self.portal.portal_groups.getGroupById(cls.id),"unable to find group with id of this fsd: %s" % cls.id)
-        
+
     def testIGroupAdapter(self):
         """Verify all methods of the IGroup adapter to the Classification content type
         """
         from Products.membrane.interfaces import IGroup
         from Products.CMFCore.utils import getToolByName
-        
+
         wf = getToolByName(self.classification,'portal_workflow')
-        
+
         #adapt to IGroup
         g = IGroup(self.classification)
-        
+
         #group title is the content object title
         self.classification.setTitle('New Title')
         self.failUnless(g.Title()=='New Title',"IGroup.getTitle is not finding the correct title:\nexpected: %s\nfound: %s" % (self.classification.Title(),g.Title()))
-        
+
         # group id is set on content object, uniqueness is enforced elsewhere
         self.failUnless(g.getGroupId()==self.classification.getId(),"getGroupId returning incorrect value:\nExpected: %s\nReceived: %s" % (self.classification.getId(), g.getGroupId()))
-        
+
         #members are obtained correctly, regardless of how the classification was added
         #added from person object
         self.person.setClassifications((self.classification,))
@@ -69,18 +71,18 @@ class testClassification(testPlone):
         wf.doActionFor(self.classification,'deactivate')
         members = list(g.getGroupMembers())
         members.sort()
-        self.failUnless(members == [],"deactivated group has non-empty member list: %s" % members)        
-        
+        self.failUnless(members == [],"deactivated group has non-empty member list: %s" % members)
+
     def testValidateId(self):
         """Test that the validate_id validator works properly
         """
         from Products.CMFCore.utils import getToolByName
-        
+
         # setup some content to test against
         self.directory.invokeFactory('Document','doc1')
         pg = getToolByName(self.directory,'portal_groups')
-        pg.addGroup('group1');
-        
+        pg.addGroup('group1')
+
         #allow unused id
         self.failUnless(self.classification.validate_id('foo')==None,"failed to validate_id 'foo': %s" % self.classification.validate_id('foo'))
         # allow current object id
@@ -93,9 +95,9 @@ class testClassification(testPlone):
     def testInvalidRolesUnavailable(self):
         from Products.FacultyStaffDirectory.config import INVALID_ROLES
         my_roles = self.classification.getRoleSet()
-        
+
         intersection = set(INVALID_ROLES).intersection(set(my_roles))
-        
+
         self.failIf(intersection, "some invalid roles are available to classification: %s" % intersection)
 
     # def testGroupTitle(self):
@@ -104,7 +106,7 @@ class testClassification(testPlone):
     #     acl = getToolByName(self.portal, 'acl_users')
     #     fac = acl.getGroupById('faculty')
     #     self.failUnless(fac.getGroupName() == 'Faculty', "KnownFailure: Unexpected value for Title for group 'faculty'. Got '%s', expected 'Faculty'." % fac.Title())
-        
+
     ## end membrane tests
 def test_suite():
     from unittest import TestSuite, makeSuite

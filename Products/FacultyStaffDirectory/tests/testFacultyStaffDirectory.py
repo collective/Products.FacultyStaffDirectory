@@ -7,6 +7,8 @@ __docformat__ = 'plaintext'
 # Test-cases for class(es) 
 #
 
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
 from Products.CMFCore.utils import getToolByName
@@ -15,7 +17,7 @@ class testFacultyStaffDirectory(testPlone):
     """Test-cases for class(es) ."""
 
     def afterSetUp(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
     def testFTISetup(self):
         """ Make sure the FTI is pulling info from the GS types profile """
@@ -165,7 +167,7 @@ class testMultipleFacultyStaffDirectories(testPlone):
     """
 
     def afterSetUp(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         # set up two directories
         self.fsd1 = self.getPopulatedDirectory(id="fsd1")
         self.fsd2 = self.getPopulatedDirectory(id="fsd2")
@@ -244,11 +246,3 @@ class testMultipleFacultyStaffDirectories(testPlone):
         base_query = self.getBaseQueryForWidget(self.fsd1['a-department'], 'members')
         self.failUnless(self.executeBaseQueryAndCompare(base_query, 'person1'))
         self.failIf(self.executeBaseQueryAndCompare(base_query, 'person2'))
-
-
-def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(testFacultyStaffDirectory))
-    suite.addTest(makeSuite(testMultipleFacultyStaffDirectories))
-    return suite

@@ -6,7 +6,8 @@ __docformat__ = 'plaintext'
 #
 # Test-cases for class(es) Committee
 #
-
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from Products.FacultyStaffDirectory.config import *
 from Products.FacultyStaffDirectory.tests.testPlone import testPlone
 
@@ -14,7 +15,7 @@ class testCommittee(testPlone):
     """Test-cases for class(es) Committee."""
 
     def afterSetUp(self):
-        self.loginAsPortalOwner()
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.directory = self.getPopulatedDirectory()
         self.person = self.getPerson(id='abc123', firstName="Test", lastName="Person")
         self.person2 = self.getPerson(id='def456', firstName="Testy", lastName="Person")
