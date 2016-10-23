@@ -59,6 +59,7 @@ class testPlone(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
+        self.app = self.layer['app']
         self.afterSetUp()
 
     #Utility methods
