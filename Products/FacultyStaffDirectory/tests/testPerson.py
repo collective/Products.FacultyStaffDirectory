@@ -278,8 +278,8 @@ class testWithoutSpecialties(testPerson):
     def testLogin(self):
         """Test that a Person can log in."""
         mt = self.portal.portal_membership
-        self.logout()
-        self.login('abc123')
+        logout()
+        login(self.portal, 'abc123')
         member = mt.getAuthenticatedMember()
         self.failUnlessEqual(member.id, 'abc123', msg="incorrect user logged in: %s" % member)
     
@@ -353,17 +353,17 @@ class testWithoutSpecialties(testPerson):
         return user.checkPermission(perm, self.person)
     
     def testIdWriteAccessForManager(self):
-        self.logout()
-        self.loginAsPortalOwner()
+        logout()
+        login(self.portal, TEST_USER_NAME)
         self.failUnless(self._testIdWriteAccess(), 'Manager does not have write access to ID property of FSDPerson object')
     
     def testIdWriteAccessForOwner(self):
-        self.logout()
-        self.login(self.person.id)
+        logout()
+        login(self.portal, self.person.id)
         self.failIf(self._testIdWriteAccess(), 'Owner has write access to ID property of FSDPerson object')
     
     def testIdWriteAccessForAnonymous(self):
-        self.logout()
+        logout()
         self.failIf(self._testIdWriteAccess(), 'Anonymous has write access to ID property of FSDPerson object')
 
     def testIMembraneUserManagement(self):
@@ -401,7 +401,7 @@ class testWithoutSpecialties(testPerson):
         self.failIf(hasattr(self.directory,'abc123'), "directory still contains person")
         
         # we should not be able to log in as this person anymore
-        self.logout()
+        logout()
         try:
             self.login('abc123')
         except AttributeError:
