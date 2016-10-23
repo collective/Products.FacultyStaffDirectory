@@ -271,51 +271,41 @@ class testReinstall(testPlone):
         # abc123 should still exist in acl_users
         self.failUnless(acl.getUserById(id='abc123'))
 
-# class testLargeDirectory(testPlone):
-#     def afterSetUp(self):
-#         self.loginAsPortalOwner()
-#         self.numPeople = 60
-#         self.directory = self.getPopulatedDirectory()
-#         self.person_ids = self.getLargeDirectory(self.directory, self.numPeople)
+class testLargeDirectory(testPlone):
 
-#     def testLargeDirSetup(self):
-#         numPeople = len(self.directory.getPeople())
-#         self.failUnlessEqual(numPeople, self.numPeople, "wrong number of people in the directory (%d), something is wrong" % numPeople)
+    def afterSetUp(self):
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.numPeople = 60
+        self.directory = self.getPopulatedDirectory()
+        self.person_ids = self.getLargeDirectory(self.directory, self.numPeople)
 
-#     def testLargeDirReinstall(self):
-#         """Benchmark and test reinstalling FSD with a directory holding a large number of people"""
-#         from time import time
-#         from random import choice
+    def testLargeDirSetup(self):
+        numPeople = len(self.directory.getPeople())
+        self.failUnlessEqual(numPeople, self.numPeople, "wrong number of people in the directory (%d), something is wrong" % numPeople)
 
-#         qi = getToolByName(self.portal, 'portal_quickinstaller')
-#         acl = getToolByName(self.portal, 'acl_users')
+    def testLargeDirReinstall(self):
+        """Benchmark and test reinstalling FSD with a directory holding a large number of people"""
+        from time import time
+        from random import choice
 
-#         # pick a user and make sure they exist in acl_users before we start
-#         user_id = choice(self.person_ids)
-#         person = self.directory[user_id]
-#         self.failUnless(acl.getUserById(id=user_id),"Problem:  person is not listed in acl_users")
-#         self.failUnless(person.UID(),"Problem: expected person object %s to have a UID.  It does not" % person)
+        qi = getToolByName(self.portal, 'portal_quickinstaller')
+        acl = getToolByName(self.portal, 'acl_users')
 
-#         # how long does it take to reinstall FSD?
-#         import time
-#         start_time = time.time()
-#         qi.reinstallProducts(products='FacultyStaffDirectory')
-#         end_time = time.time()
-#         elapsed_time = end_time-start_time
-#         reinstall_report = "\nreinstalling FSD with a directory containing %s people took %s seconds\n" % (self.numPeople, elapsed_time)
-#         print "\n" + ("*" * 20) + reinstall_report + ("*" * 20)
+        # pick a user and make sure they exist in acl_users before we start
+        user_id = choice(self.person_ids)
+        person = self.directory[user_id]
+        self.failUnless(acl.getUserById(id=user_id),"Problem:  person is not listed in acl_users")
+        self.failUnless(person.UID(),"Problem: expected person object %s to have a UID.  It does not" % person)
 
-#         # test that a person in the FSD is still a user
-#         self.failUnless(acl.getUserById(id=user_id),"Problem:  after reinstall person is not listed in acl_users")
-#         self.failUnless(person.UID(),"Problem: after reinstall expected person object %s to have a UID.  It does not" % person)
+        # how long does it take to reinstall FSD?
+        import time
+        start_time = time.time()
+        qi.reinstallProducts(products='FacultyStaffDirectory')
+        end_time = time.time()
+        elapsed_time = end_time-start_time
+        reinstall_report = "\nreinstalling FSD with a directory containing %s people took %s seconds\n" % (self.numPeople, elapsed_time)
+        print "\n" + ("*" * 20) + reinstall_report + ("*" * 20)
 
-
-# def test_suite():
-#     from unittest import TestSuite, makeSuite
-#     suite = TestSuite()
-#     suite.addTest(makeSuite(testInstall))
-#     suite.addTest(makeSuite(testUninstall))
-#     suite.addTest(makeSuite(testReinstall))
-#     suite.addTest(makeSuite(testLargeDirectory))
-
-#     return suite
+        # test that a person in the FSD is still a user
+        self.failUnless(acl.getUserById(id=user_id),"Problem:  after reinstall person is not listed in acl_users")
+        self.failUnless(person.UID(),"Problem: after reinstall expected person object %s to have a UID.  It does not" % person)
