@@ -1,7 +1,7 @@
 Version History
 ===============
 
-4.0 (unreleased)
+5.0 (unreleased)
 ----------------
 
 * Works with Plone 5.0 [vangheem, tkimnguyen]
@@ -12,6 +12,10 @@ Version History
 * Avoid finding extraneous people in classification query
   (e.g. graduate students) by looking up only classifications_people
   relationships [tkimnguyen]
+
+* Load only Products.ATContentTypes:base profile. Fixes 
+  https://github.com/collective/Products.FacultyStaffDirectory/issues/4 
+  [gil-cano]
 
 
 3.1.3 (2012-11-14)
