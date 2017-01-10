@@ -1,1 +1,21 @@
 prune Products/FacultyStaffDirectory/examples
+recursive-include Products *.cpt
+recursive-include Products *.cpy
+recursive-include Products *.dtml
+recursive-include Products *.gif
+recursive-include Products *.jpg
+recursive-include Products *.metadata
+recursive-include Products *.png
+recursive-include Products *.po
+recursive-include Products *.pot
+recursive-include Products *.pt
+recursive-include Products *.py
+recursive-include Products *.sh
+recursive-include Products *.tif
+recursive-include Products *.txt
+recursive-include Products *.xml
+recursive-include Products *.zcml
+recursive-include Products *.zexp
+recursive-include docs *.GPL
+recursive-include docs *.rst
+recursive-include docs *.txt
