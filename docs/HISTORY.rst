@@ -1,6 +1,12 @@
 Version History
 ===============
 
+5.1 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+
 5.0 (2017-01-09)
 ----------------
 
