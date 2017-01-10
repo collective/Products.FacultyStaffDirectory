@@ -8,6 +8,13 @@ for committees, a way of keeping track of people's areas of expertise, a floor
 wax, and a dessert topping. It integrates with Plone's users and groups
 infrastructure and supports an extensibility framework for custom requirements.
 
+Plone version compatibility
+===========================
+
+Works with Plone 5.0.
+
+Older version of FacultyStaffDirectory will work with Plone 4.x, 3.x.
+
 
 Dependencies
 ============
@@ -244,8 +251,8 @@ How do I manage People across multiple Plone sites?
   Suggestions?
 
 
-Authorship
-==========
+Acknowledgements
+================
 
 This product was originally developed and maintained by the WebLion
 group at Penn State University.
@@ -253,6 +260,8 @@ group at Penn State University.
 membrane integration by Cris Ewing.
 
 Special thanks to Andreas Jung for his early testing and code contributions.
+
+Plone 5 compatibility updates courtesy of the Department of Meteorology and Atmospheric Science, http://www.met.psu.edu
 
 
 Support

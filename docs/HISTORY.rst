@@ -1,7 +1,7 @@
 Version History
 ===============
 
-5.0 (unreleased)
+5.0 (2017-01-09)
 ----------------
 
 * Works with Plone 5.0 [vangheem, tkimnguyen]
