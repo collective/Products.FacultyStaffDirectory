@@ -13,7 +13,9 @@ Plone version compatibility
 
 Works with Plone 5.0.
 
-Older version of FacultyStaffDirectory will work with Plone 4.x, 3.x.
+Older versions of FacultyStaffDirectory will work with Plone 4.x, 3.x.
+
+Has been reported to work with Plone 5.1rc2.
 
 
 Dependencies
